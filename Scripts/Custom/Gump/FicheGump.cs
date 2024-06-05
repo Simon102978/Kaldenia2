@@ -251,6 +251,17 @@ namespace Server.Gumps
 			{
 				AddHtmlTexte(x + 261, y + 493 + line * 25, 150, item.Key.ToString() );
 				AddLabel(x + 525, y + 493 + line * 25, 150, item.Value.ToString());
+
+				if (m_From.CanDecreaseAffinity(item.Key))
+				{
+					AddButton(x + 495, y + 492+ line * 25, 5603, 5607, 400 + (int)item.Key , GumpButtonType.Reply, 0);
+				}
+
+				if (m_From.CanIncreaseAffinity(item.Key))
+				{
+					AddButton(x + 555, y + 492+ line * 25, 5601, 5605, 500 + (int)item.Key, GumpButtonType.Reply, 0);
+				}
+
 				line++;
 			}
 
@@ -302,6 +313,18 @@ namespace Server.Gumps
 			else if (info.ButtonID == 305)
 			{
 				m_From.IncreaseStat(StatType.Int);
+				m_From.SendGump(new FicheGump(m_From, m_GM));
+			}
+			else if(info.ButtonID >= 400 && info.ButtonID < 500)
+			{
+
+				m_From.DecreaseAffinity((MagieType)(info.ButtonID - 400));
+				m_From.SendGump(new FicheGump(m_From, m_GM));
+
+			}
+			else if(info.ButtonID >= 500 && info.ButtonID < 600)
+			{
+				m_From.IncreaseAffinity((MagieType)(info.ButtonID - 500));
 				m_From.SendGump(new FicheGump(m_From, m_GM));
 			}
 

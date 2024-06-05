@@ -123,6 +123,13 @@ namespace Server.Gumps
 
 							description = description + "\nArmure: " + Classe.Armor;
 
+							description = description + "\n\nDévotions: \n" ;
+
+							foreach (KeyValuePair<MagieType, int> item in Classe.Magie)
+							{
+								description = description + "  -" + item.Key.ToString() + ": " + item.Value.ToString() + "\n";
+							}
+
 							return description;
 						}
 						else
@@ -145,6 +152,13 @@ namespace Server.Gumps
 							}
 
 							description = description + "\nArmure: " + Classe.Armor;
+
+							description = description + "\n\nDévotions: \n" ;
+
+							foreach (KeyValuePair<MagieType, int> item in Classe.Magie)
+							{
+								description = description + "  -" + item.Key.ToString() + ": " + item.Value.ToString() + "\n";
+							}
 
 							return description;
 						}

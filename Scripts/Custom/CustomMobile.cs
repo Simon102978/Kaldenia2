@@ -281,7 +281,7 @@ namespace Server.Mobiles
 			set
 			{
 
-				MagicAfinity.ChangeGod(value);
+				//MagicAfinity.ChangeGod(value);
 
 
 				m_God = value; // S'assurer que le metier, soit un metier...
@@ -455,20 +455,6 @@ namespace Server.Mobiles
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public Mobile JailBy { get; set; }
-
-
-
-
-	
-
-
-
-
-
-
-
-
-
 
 		public DateTime NextFaimMessage { get; set; }
 
@@ -1474,6 +1460,8 @@ namespace Server.Mobiles
 			return MagicAfinity.GetValue(affinity);
 		}
 
+		
+
 		public int GetTribeValue(TribeType tribe)
 		{
 			return TribeRelation.GetValue(tribe);
@@ -1629,12 +1617,17 @@ namespace Server.Mobiles
 		public void RecalculeClasse(Classe NewClass, int type)
 		{
 
+
+
+
 			switch (type)
 			{
 				case 1:
 					{
 						if (ClassePrimaire != null)
 						{
+							ChangeAffinity(NewClass, ClassePrimaire);
+
 							foreach (SkillName item in ClassePrimaire.Skill)
 							{
 								if (Metier.ContainSkill(item))
@@ -1696,6 +1689,9 @@ namespace Server.Mobiles
 
 						if (ClasseSecondaire != null)
 						{
+
+							ChangeAffinity(NewClass, ClasseSecondaire);
+
 							foreach (SkillName item in ClasseSecondaire.Skill)
 							{
 								if (ClassePrimaire.ContainSkill(item))
@@ -1792,9 +1788,6 @@ namespace Server.Mobiles
 										m_feAttente += (int)Math.Round(Skills[item].Base) - 100;
 										Skills[item].Base = 100;
 									}
-
-
-
 								}
 								else
 								{
@@ -1812,6 +1805,58 @@ namespace Server.Mobiles
 				default:
 					break;
 			}
+		}
+
+
+		public void ChangeAffinity(Classe NewClass, Classe OldClass)
+		{
+			int feAredonner = 0; 
+				
+				
+				foreach (KeyValuePair<MagieType, int> item in OldClass.Magie)
+				{
+					if (MagicAfinity.ContainsKey(item.Key))
+					{
+						MagicAfinity[item.Key] -= item.Value;
+					}
+					else
+					{
+						MagicAfinity.Add(item.Key, -item.Value);
+					}
+
+					if (!NewClass.ContainAffinity(item.Key))
+					{
+		
+
+						int affValue = GetAffinityValue(item.Key);
+
+						if (affValue > 0)
+						{
+							feAredonner += affValue * 5;
+
+							MagicAfinity[item.Key] = 0;						
+						}
+							
+					}
+				}
+
+				foreach (KeyValuePair<MagieType, int> item in NewClass.Magie)
+				{
+					if (MagicAfinity.ContainsKey(item.Key))
+					{
+						MagicAfinity[item.Key] += item.Value;
+					}
+					else
+					{
+						MagicAfinity.Add(item.Key, item.Value);
+					}
+					
+				}
+
+				m_feAttente += feAredonner;
+
+
+
 		}
 
 		public void SetClasseSkills(double skills)
@@ -2031,9 +2076,6 @@ namespace Server.Mobiles
 				return false;
 			}
 
-
-
-
 			foreach (SkillName item in ClassePrimaire.Skill)
 			{
 
@@ -2070,6 +2112,86 @@ namespace Server.Mobiles
 			}
 			return true;
 		}
+
+		#endregion
+
+
+		#region Affinity 
+
+		public bool CanIncreaseAffinity(MagieType mtype)
+		{
+			if (m_fe < 5)
+			{
+				return false;
+			}
+			else if (MagicAfinity[mtype] == 16)
+			{
+				return false;
+			}
+			if (!ClassAffinity(mtype))
+			{
+				return false;
+			}
+			return true;
+		}
+		public void IncreaseAffinity(MagieType mtype)
+		{
+			if (CanIncreaseAffinity(mtype))
+			{
+				MagicAfinity[mtype] += 1;
+				m_fe -= 5;
+			}
+		}
+
+		public bool CanDecreaseAffinity(MagieType mtype)
+		{
+
+			if (MagicAfinity[mtype] <= 8) 
+			{
+				return false;
+			}
+
+			return true;
+		}
+
+		public void DecreaseAffinity(MagieType mtype)
+		{
+			if (CanDecreaseAffinity(mtype))
+			{
+				MagicAfinity[mtype] -= 1;
+
+				m_feAttente += 5;
+			}
+		}
+
+
+
+		public bool ClassAffinity(MagieType mtype)
+		{
+
+			foreach (KeyValuePair<MagieType, int> item in ClassePrimaire.Magie)
+			{
+				if (item.Key == mtype)
+				{
+					return true;
+				}
+			}
+
+			foreach (KeyValuePair<MagieType, int> item in ClasseSecondaire.Magie)
+			{
+				if (item.Key == mtype)
+				{
+					return true;
+				}
+			}
+
+
+			return false;
+
+		}
+
+
+
 
 		#endregion
 

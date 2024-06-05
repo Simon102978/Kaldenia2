@@ -45,7 +45,7 @@ namespace Server
     {
       return this.ContainsKey(Affinity) ? this[Affinity] : 0;
     }
-
+/*
 	public void ChangeGod(God newGod)
 	{
 			if (m_owner.God != null)
@@ -79,18 +79,18 @@ namespace Server
 
 				}
 			}
-		}
+		}*/
 
 	public void SetValue(MagieType Affinity, int value)
 	{
 
-	  if (m_owner.God.CheckAffinity(Affinity))
+	/*  if (m_owner.God.CheckAffinity(Affinity))
 	  { 
-		if(m_owner.God.Magie[Affinity] > value)
-		{
-		  return;
-		}
-	  }
+      if(m_owner.God.Magie[Affinity] > value)
+      {
+        return;
+      }
+	  }*/
 
 	  if (this.ContainsKey(Affinity))
       {

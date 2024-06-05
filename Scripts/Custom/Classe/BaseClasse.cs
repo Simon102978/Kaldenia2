@@ -21,6 +21,10 @@ namespace Server
 		private int m_Armor;
 		private ClasseType m_ClasseType;
 
+		private Dictionary<MagieType, int> m_Magie = new Dictionary<MagieType, int>();
+
+		public Dictionary<MagieType, int> Magie { get => m_Magie; set => m_Magie = value; }
+
 
 		public static Classe GetClasse(int Id)
 		{
@@ -48,21 +52,31 @@ namespace Server
 			List<SkillName> skill,
 			int armor
 			)
+			: this(ClasseID,name,type,skill,armor, new Dictionary<MagieType, int>())
+		
+		{
+		}
+		public Classe(
+			int ClasseID,
+			string name,
+			ClasseType type,
+			List<SkillName> skill,
+			int armor,
+			Dictionary<MagieType, int> magie
+			)
 		{
 			m_ClasseID = ClasseID;
 			m_ClasseType = type;
 			m_Name = name;
 			m_Skill = skill;
 			m_Armor = armor;
+			m_Magie = magie;
 		}
 		public static void RegisterClasse(Classe Classe)
 		{
 			Classe.AllClasse.Add(Classe);
 		}
-		public virtual void AddClasse(Mobile m)
-		{
 
-		}
 
 		public bool IsMetier()
 		{
@@ -85,6 +99,19 @@ namespace Server
 					return true;
 				}
 			}
+
+			return false;
+
+		}
+
+		public virtual bool ContainAffinity(MagieType magieType)
+		{
+				
+					if (Magie.ContainsKey(magieType) && Magie[magieType] > 0)
+					{
+						return true;
+					}
+				
 
 			return false;
 
