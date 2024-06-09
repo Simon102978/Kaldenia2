@@ -908,7 +908,19 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LivreMassier), "Livre de Classe", "livre de Massier", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreSorcier), "Livre de Classe", "livre de sorcier", 99.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+			index = AddCraft(typeof(LivreHeraut), "Livre de Classe", "livre d'hérault", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+			index = AddCraft(typeof(LivreNecromancien), "Livre de Classe", "livre de Nécromancien", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+			index = AddCraft(typeof(LivreChaman), "Livre de Classe", "livre de Chaman", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+			index = AddCraft(typeof(LivreDevoue), "Livre de Classe", "livre de Dévoué", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+			index = AddCraft(typeof(LivreAnarchiste), "Livre de Classe", "livre d'Anarchiste", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
 			index = AddCraft(typeof(LivreEpicier), "Livre de Classe", "livre d'épicier", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
