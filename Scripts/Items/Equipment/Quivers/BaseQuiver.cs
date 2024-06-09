@@ -523,7 +523,7 @@ namespace Server.Items
 		{
 
 
-			if (Ammo != null)
+			if (Ammo != null && GetUser() != null)
 			{
 				GetUser().AddToBackpack(Ammo);				
 			}
