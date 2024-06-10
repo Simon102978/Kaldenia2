@@ -169,7 +169,7 @@ namespace Server.Misc
 			
 
 
-			newChar.MoveToWorld(new Point3D(6135,3200,55), Map.Felucca);
+			newChar.MoveToWorld(new Point3D(6131,2624,55), Map.Felucca);
 			newChar.Blessed = true;
 
 

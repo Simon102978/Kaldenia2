@@ -476,7 +476,7 @@ namespace Server
 
 			
 
-			m_Player.MoveToWorld(new Point3D(1183, 3725, 37), Map.Felucca);
+			m_Player.MoveToWorld(new Point3D(6132, 2566, 55), Map.Felucca);
 			m_Player.Blessed = false;
 			Robe robe = new Robe();
 

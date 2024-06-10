@@ -121,7 +121,7 @@ namespace Server.Gumps
 
 
 
-				from.MoveToWorld(new Point3D(6135, 3200, 55), Map.Felucca);
+				from.MoveToWorld(new Point3D(6131, 2624, 55), Map.Felucca);
 			}
 
 		}
