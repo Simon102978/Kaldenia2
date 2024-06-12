@@ -42,9 +42,14 @@ namespace Server.Mobiles
 		private int m_TotalNormalFE;
 		private int m_TotalRPFE;
 
+		private int m_feDay;
+
 		private DateTime m_lastLoginTime;
 		private TimeSpan m_nextFETime;
 		private DateTime m_LastFERP;
+
+		private DateTime m_LastNormalFE;
+
 
 		private DateTime m_LastPay;
 		private int m_Salaire;
@@ -251,7 +256,17 @@ namespace Server.Mobiles
 		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
+		public DateTime LastNormalFE
+		{
+			get { return m_LastNormalFE; }
+			set { m_LastNormalFE = value; }
+		}
+
+		[CommandProperty(AccessLevel.GameMaster)]
 		public int FE { get { return m_fe; } set { m_fe = value; } }
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int FEDay { get { return m_feDay; } set { m_feDay = value; } }
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int FENormalTotal { get { return m_TotalNormalFE; } set { m_TotalNormalFE = value; } }
@@ -2564,6 +2579,12 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+				case 30:
+				{
+					LastNormalFE = reader.ReadDateTime();
+					FEDay = reader.ReadInt();
+					goto case 29;
+				}
 				case 29:
 					{
 						JailLocation = reader.ReadPoint3D();
@@ -2779,27 +2800,16 @@ namespace Server.Mobiles
                     }
             }
 
-			if (version <= 27)
-			{
-				foreach (Mobile item in m_Esclaves)
-				{
-					if (item == null)
-					{
-						RemoveEsclave(item);
-					}
-
-				}
-			}
-
-
-
 		}
 
 		public override void Serialize(GenericWriter writer)
         {        
             base.Serialize(writer);
 
-            writer.Write(29); // version
+            writer.Write(30); // version
+
+			writer.Write(LastNormalFE);
+			writer.Write(FEDay);
 
 			writer.Write(JailLocation);
 			writer.Write(JailMap);

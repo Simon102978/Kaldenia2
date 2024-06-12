@@ -50,7 +50,7 @@ namespace Server
 
 			if (pm.NextFETime <= TimeSpan.FromMinutes(10))
 			{
-				if (pm.FENormalTotal >= day * 5)
+				if (pm.FENormalTotal >= day * 3)
 				{
 					if (pm.FEAttente > 0)
 					{
@@ -68,7 +68,7 @@ namespace Server
 			}		  
 		    else
 		    {
-				  if (pm.LastLoginTime < DateTime.Now - TimeSpan.FromMinutes(10))
+				if (pm.LastLoginTime < DateTime.Now - TimeSpan.FromMinutes(10))
 				  {
 					pm.NextFETime -= TimeSpan.FromMinutes(10);
 				  }
@@ -132,10 +132,31 @@ namespace Server
       if (pm == null)
         return;
 
-      pm.FE++;
-	  pm.FENormalTotal++;
+	  if (pm.LastNormalFE.Day != DateTime.Now.Day)
+	  {
+		pm.FEDay = 0;
+	  }
 
-	  pm.SendMessage("Vous obtenez une nouvelle FE !");
+	  pm.LastNormalFE = DateTime.Now;
+
+	  if (pm.FEDay >= 9)
+	  {
+		 pm.SendMessage("Vous avez atteint la limite quotidienne de FE.");
+		 
+	  }
+	  else
+	  {
+
+		 pm.FE++;
+		 pm.FEDay++;
+		 pm.FENormalTotal++;
+
+
+		 pm.SendMessage("Vous obtenez une nouvelle FE !");
+	  }
+
+
+     
 
 			if (pm.FEAttente > 0)
 			{
