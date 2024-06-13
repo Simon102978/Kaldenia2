@@ -16,6 +16,8 @@ namespace Server.Items
         public override int DefHitSound => 0x234;
         public override int DefMissSound => 0x238;
 
+        public virtual bool SkipArrow => false;
+
         public override SkillName DefSkill => SkillName.Archery;
         public override WeaponType DefType => WeaponType.Ranged;
         public override WeaponAnimation DefAnimation => WeaponAnimation.ShootXBow;
@@ -126,6 +128,12 @@ namespace Server.Items
 
 		public override void OnHit(Mobile attacker, IDamageable damageable, double damageBonus)
         {
+            if(SkipArrow)
+            {
+                 base.OnHit(attacker, damageable, damageBonus);
+                 return;
+            }
+
             if (AmmoType != null && attacker.Player && damageable is Mobile && !((Mobile)damageable).Player && (((Mobile)damageable).Body.IsAnimal || ((Mobile)damageable).Body.IsMonster) &&
                 0.4 >= Utility.RandomDouble())
             {
@@ -142,6 +150,12 @@ namespace Server.Items
 
         public override void OnMiss(Mobile attacker, IDamageable damageable)
         {
+             if (SkipArrow)
+            {
+                base.OnMiss(attacker, damageable);
+                return;
+            }
+
             if (attacker.Player && 0.4 >= Utility.RandomDouble())
             {
                 PlayerMobile p = attacker as PlayerMobile;
@@ -213,7 +227,11 @@ namespace Server.Items
                 }
             }
 
-            attacker.MovingEffect(damageable, EffectID, 18, 1, false, false);
+            if (!SkipArrow)
+            {
+                attacker.MovingEffect(damageable, EffectID, 18, 1, false, false);
+            }
+
 
             return true;
         }

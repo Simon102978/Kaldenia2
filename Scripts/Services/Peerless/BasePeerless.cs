@@ -48,7 +48,7 @@ namespace Server.Mobiles
         {
             base.OnDeath(c);
 
-            if (DropPrimer)
+       /*     if (DropPrimer)
             {
                 SkillMasteryPrimer primer = SkillMasteryPrimer.GetRandom();
                 List<DamageStore> rights = GetLootingRights();
@@ -120,7 +120,7 @@ namespace Server.Mobiles
                     }
                 }
             }
-
+*/
             if (m_Altar != null)
                 m_Altar.OnPeerlessDeath();
         }
