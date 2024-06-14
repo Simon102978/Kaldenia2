@@ -53,7 +53,7 @@ namespace Server.Mobiles
 			Title = "Fille de Medusa";
 		    Body = 85;
             BaseSoundID = 639;
-			Hue = 1198;
+			Hue = 1327;
 
             SetStr(281, 305);
             SetDex(191, 215);
@@ -75,8 +75,9 @@ namespace Server.Mobiles
             SetSkill(SkillName.EvalInt, 95.1, 100.0);
             SetSkill(SkillName.Magery, 95.1, 100.0);
             SetSkill(SkillName.MagicResist, 75.0, 97.5);
-            SetSkill(SkillName.Tactics, 65.0, 87.5);
-            SetSkill(SkillName.Wrestling, 20.2, 60.0);
+            SetSkill(SkillName.Tactics, 90.0, 100.5);
+            SetSkill(SkillName.Wrestling, 90.2, 100.0);
+			SetSkill(SkillName.Anatomy, 90.2, 100.0);
 
             Fame = 11500;
             Karma = -11500;
