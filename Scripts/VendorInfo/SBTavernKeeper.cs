@@ -57,14 +57,14 @@ namespace Server.Mobiles
 
                 Add(new GenericBuyInfo(typeof(ApplePie), 7, 20, 0x1041, 0, true)); //OSI just has Pie, not Apple/Fruit/Meat
 
-                Add(new GenericBuyInfo("1016450", typeof(ChessRegularBoard), 2, 20, 0xFA6, 0));
-                Add(new GenericBuyInfo("1016449", typeof(CheckerRegularBoard), 2, 20, 0xFA6, 0));
+                Add(new GenericBuyInfo("1016450", typeof(Chessboard), 2, 20, 0xFA6, 0));
+                Add(new GenericBuyInfo("1016449", typeof(CheckerBoard), 2, 20, 0xFA6, 0));
 				Add(new GenericBuyInfo(typeof(YahtzeeDice), 2, 20, 0xFA7, 1150));
 				Add(new GenericBuyInfo(typeof(Backgammon), 2, 20, 0xE1C, 0));
                 Add(new GenericBuyInfo(typeof(Dices), 2, 20, 0xFA7, 0));
-                Add(new GenericBuyInfo("1041243", typeof(ContractOfEmployment), 1252, 20, 0x14F0, 0));
-                Add(new GenericBuyInfo("a barkeep contract", typeof(BarkeepContract), 1252, 20, 0x14F0, 0));
-                Add(new GenericBuyInfo("1062332", typeof(VendorRentalContract), 1252, 20, 0x14F0, 0x672));
+               // Add(new GenericBuyInfo("1041243", typeof(ContractOfEmployment), 1252, 20, 0x14F0, 0));
+             //   Add(new GenericBuyInfo("a barkeep contract", typeof(BarkeepContract), 1252, 20, 0x14F0, 0));
+             //   Add(new GenericBuyInfo("1062332", typeof(VendorRentalContract), 1252, 20, 0x14F0, 0x672));
             }
         }
 
@@ -97,8 +97,8 @@ namespace Server.Mobiles
                 Add(typeof(Apple), 1);
                 Add(typeof(Banana), 1);
                 Add(typeof(Candle), 3);
-                Add(typeof(ChessRegularBoard), 1);
-                Add(typeof(CheckerRegularBoard), 1);
+                Add(typeof(Chessboard), 1);
+                Add(typeof(CheckerBoard), 1);
                 Add(typeof(Backgammon), 1);
                 Add(typeof(Dices), 1);
                 Add(typeof(ContractOfEmployment), 626);

@@ -44,21 +44,21 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(BreadLoaf), 7, 10, 0x103B, 0, true));
                 Add(new GenericBuyInfo(typeof(Backpack), 15, 20, 0x9B2, 0));
 
-                Type[] types = Loot.MageryScrollTypes;
+                //Type[] types = Loot.MageryScrollTypes;
 
-                int circles = 3;
+                //int circles = 3;
 
-                for (int i = 0; i < circles * 8 && i < types.Length; ++i)
-                {
-                    int itemID = 0x1F2E + i;
+                //for (int i = 0; i < circles * 8 && i < types.Length; ++i)
+                //{
+                //    int itemID = 0x1F2E + i;
 
-                    if (i == 6)
-                        itemID = 0x1F2D;
-                    else if (i > 6)
-                        --itemID;
+                //    if (i == 6)
+                //        itemID = 0x1F2D;
+                //    else if (i > 6)
+                //        --itemID;
 
-                    Add(new GenericBuyInfo(types[i], 12 + ((i / 8) * 10), 20, itemID, 0, true));
-                }
+                //    Add(new GenericBuyInfo(types[i], 12 + ((i / 8) * 10), 20, itemID, 0, true));
+                //}
 
                 Add(new GenericBuyInfo(typeof(BatWing), 3, 999, 0xF78, 0));
                 Add(new GenericBuyInfo(typeof(GraveDust), 3, 999, 0xF8F, 0));

@@ -32,7 +32,7 @@ namespace Server.Mobiles
 				Add(typeof(Fish), 3);
 				Add(typeof(SmallFish), 1);
 				Add(typeof(FishingPole), 7);
-				Add(typeof(LobsterTrap), 10);
+				Add(typeof(LobsterTrap), 1);
 				Add(typeof(Crab), 3);
 				Add(typeof(AppleCrab), 3);
 				Add(typeof(BlueCrab), 5);

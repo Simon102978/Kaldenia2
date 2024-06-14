@@ -50,6 +50,7 @@ namespace Server.Items
 		{
 			Weight = 2.0;
 			Name ="Pipe Courbée";
+			Layer = Layer.Neck;
 		}
 
 		public PipeCourbee(Serial serial)
@@ -87,6 +88,7 @@ namespace Server.Items
 		{
 			Weight = 2.0;
 			Name ="Pipe Courte";
+			Layer = Layer.Neck;
 		}
 
 		public PipeCourte (Serial serial)
@@ -122,6 +124,7 @@ namespace Server.Items
 		{
 			Weight = 2.0;
 			Name ="Pipe Longue";
+			Layer = Layer.Neck;
 		}
 
 		public PipeLongue(Serial serial)
@@ -320,7 +323,6 @@ namespace Server.Items
 
 		}
 
-
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
@@ -368,26 +370,21 @@ namespace Server.Items
 		}
 	}
 
-	public class Foulard :  BaseFoulards
+	public class Foulard : BaseFoulards
 	{
-
-
 		[Constructable]
-		public Foulard()
-				: this(0)
+		public Foulard() : this(0)
 		{
 		}
 
 		[Constructable]
-		public Foulard(int hue)
-				: base(41798, hue)
+		public Foulard(int hue) : base(41798, hue)
 		{
 			Weight = 2.0;
-			Name ="Foulard";
+			Name = "Foulard";
 		}
 
-		public Foulard(Serial serial)
-				: base(serial)
+		public Foulard(Serial serial) : base(serial)
 		{
 
 		}
@@ -408,181 +405,129 @@ namespace Server.Items
     }
 
 	public class Foulard2 :  BaseFoulards
+	{
+//		public override bool Anonymous => ItemID ==  41800 ? true : false;
+
+		[Constructable]
+		public Foulard2() : this(0)
 		{
-
-			public override bool Disguise { get { return ItemID ==  41800 ? true : false; } }
-
-
-				[Constructable]
-				public Foulard2()
-						: this(0)
-				{
-				}
-
-				[Constructable]
-				public Foulard2(int hue)
-						: base(41799, hue)
-
-				{
-					Weight = 2.0;
-					Name = "Foulard Épaule";
-				}
-
-				public Foulard2(Serial serial)
-						: base(serial)
-				{
-				}
-
-
-				public override void Serialize(GenericWriter writer)
-				{
-					base.Serialize(writer);
-
-					writer.Write(0); // version
-				}
-
-				public override void Deserialize(GenericReader reader)
-				{
-					base.Deserialize(reader);
-
-					int version = reader.ReadInt();
-				}
 		}
-/*	public class Foulard3 :  BaseFoulards
-			{
-				[Constructable]
-				public Foulard3()
-						: this(0)
-				{
-				}
 
-				[Constructable]
-				public Foulard3(int hue)
-						: base(41800, hue)
-				{
-					Weight = 2.0;
-					Name ="Foulard3";
-				}
+		[Constructable]
+		public Foulard2(int hue) : base(41799, hue)
 
-				public Foulard3(Serial serial)
-							: base(serial)
+		{
+			Weight = 2.0;
+			Name = "Foulard Épaule";
+		}
 
-				{
-				}
+		public Foulard2(Serial serial) : base(serial)
+		{
+		}
 
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
 
-				public override void Serialize(GenericWriter writer)
-				{
-					base.Serialize(writer);
+			writer.Write(0); // version
+		}
 
-					writer.Write(0); // version
-				}
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-				public override void Deserialize(GenericReader reader)
-				{
-					base.Deserialize(reader);
-
-					int version = reader.ReadInt();
-				}
-			}*/
-
+			int version = reader.ReadInt();
+		}
+	}
 
 	public class Foulard4 :  BaseFoulards
-			{
+	{
+	//	public override bool Anonymous => true;
 
-				public override bool Disguise { get { return true; } }
-
-				[Constructable]
-				public Foulard4()
-						: this(0)
-				{
-				}
-
-			[Constructable]
-			public Foulard4(int hue)
-					: base(41801, hue)
-			{
-				Weight = 2.0;
-				Name = "Cache-Visage";
-			}
-
-			public Foulard4(Serial serial)
-					: base(serial)
-			{
-			}
-
-
-			public override void Serialize(GenericWriter writer)
-			{
-				base.Serialize(writer);
-
-				writer.Write(0); // version
-			}
-
-			public override void Deserialize(GenericReader reader)
-			{
-				base.Deserialize(reader);
-
-				int version = reader.ReadInt();
-			}
+		[Constructable]
+		public Foulard4() : this(0)
+		{
 		}
+
+		[Constructable]
+		public Foulard4(int hue) : base(41801, hue)
+		{
+			Weight = 2.0;
+			Name = "Cache-Visage";
+		}
+
+		public Foulard4(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
 
 	public class Cocarde :  BaseWaist
-			{
-			[Constructable]
-			public Cocarde()
-					: this(0)
-			{
-
-			}
-
-			[Constructable]
-			public Cocarde(int hue)
-					: base(41802, hue)
-			{
-				Weight = 2.0;
-				Name ="Cocarde";
-			}
-
-			public Cocarde(Serial serial)
-					: base(serial)
-			{
-			}
-
-			public override void Serialize(GenericWriter writer)
-			{
-				base.Serialize(writer);
-
-				writer.Write(0); // version
-			}
-
-			public override void Deserialize(GenericReader reader)
-			{
-				base.Deserialize(reader);
-
-				int version = reader.ReadInt();
-			}
-		}
-
-	public class BandagesPieds : BaseWaist
 	{
 		[Constructable]
-		public BandagesPieds()
+		public Cocarde()
 				: this(0)
 		{
 
 		}
 
 		[Constructable]
-		public BandagesPieds(int hue)
-				: base(0xA412, hue)
+		public Cocarde(int hue)
+				: base(41802, hue)
+		{
+			Weight = 2.0;
+			Name = "Cocarde";
+		}
+
+		public Cocarde(Serial serial)
+				: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class BandagesPieds : BaseWaist
+	{
+		[Constructable]
+		public BandagesPieds() : this(0)
+		{
+
+		}
+
+		[Constructable]
+		public BandagesPieds(int hue) : base(0xA412, hue)
 		{
 			Weight = 2.0;
 			Name = "Bandages Pieds";
 		}
 
-		public BandagesPieds(Serial serial)
-				: base(serial)
+		public BandagesPieds(Serial serial) : base(serial)
 		{
 		}
 

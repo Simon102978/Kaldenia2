@@ -97,7 +97,7 @@ namespace Server.Items
 			: base(41629)
 		{
 			Weight = 5.0;
-			Name = "Bouclier Rond2";
+			Name = "Bouclier Rond";
 		}
 
 		public BouclierRond2(Serial serial)
@@ -203,7 +203,7 @@ namespace Server.Items
 			: base(41632)
 		{
 			Weight = 8.0;
-			Name = "Pavois2";
+			Name = "Pavois Décoratif";
 		}
 
 		public Pavois2(Serial serial)
@@ -282,7 +282,7 @@ namespace Server.Items
 			: base(41634)
 		{
 			Weight = 5.0;
-			Name = "Targe";
+			Name = "Targe Bicolore";
 		}
 
 		public Targe(Serial serial)
@@ -321,7 +321,7 @@ namespace Server.Items
 			: base(41635)
 		{
 			Weight = 5.0;
-			Name = "Targe2";
+			Name = "Rondache Colimaçon";
 		}
 
 		public Targe2(Serial serial)
@@ -360,7 +360,7 @@ namespace Server.Items
 			: base(41636)
 		{
 			Weight = 5.0;
-			Name = "Targe3";
+			Name = "Targe renforcée";
 		}
 
 		public Targe3(Serial serial)

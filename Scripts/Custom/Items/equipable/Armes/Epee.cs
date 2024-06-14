@@ -421,9 +421,10 @@ namespace Server.Items
 		public override WeaponAbility PrimaryAbility => WeaponAbility.InfectiousStrike;
 		public override WeaponAbility SecondaryAbility => WeaponAbility.WhirlwindAttack;
 		public override int StrengthReq => 40;
-		public override int MinDamage => 15;
+		public override int MinDamage => 16;
 		public override int MaxDamage => 19;
-		public override float Speed => 3.75f;
+		public override float Speed => 3.50f;
+
 
 		public override int DefHitSound => 0x237;
 		public override int DefMissSound => 0x23A;
@@ -435,7 +436,7 @@ namespace Server.Items
 			: base(41577)
 		{
 
-			Name = "Épée Longue";
+			Name = "Épée Afuitée";
 			Weight = 8.0;
 	//		Layer = Layer.TwoHanded;
 		}
@@ -528,7 +529,7 @@ namespace Server.Items
 			: base(41579)
 		{
 
-			Name = "Sabre Dorée de Luxe";
+			Name = "Sabre de Luxe";
 			Weight = 8.0;
 	//		Layer = Layer.TwoHanded;
 		}
@@ -561,7 +562,7 @@ namespace Server.Items
 		public override int StrengthReq => 30;
 		public override int MinDamage => 13;
 		public override int MaxDamage => 17;
-		public override float Speed => 3.25f;
+		public override float Speed => 2.5f;
 
 		public override int DefHitSound => 0x237;
 		public override int DefMissSound => 0x23A;
@@ -575,7 +576,7 @@ namespace Server.Items
 
 			Name = "Wakizashi Long";
 			Weight = 8.0;
-		//	Layer = Layer.TwoHanded;
+			Layer = Layer.TwoHanded;
 		}
 
 		public WakizashiLong(Serial serial)

@@ -6,7 +6,6 @@ using Server.Mobiles;
 
 namespace Server.Items
 {
-
 	public class DoubleEpee : BaseSword
 	{
 		public override WeaponAbility PrimaryAbility => WeaponAbility.DefenseMastery;
@@ -21,10 +20,8 @@ namespace Server.Items
 		public override int InitMaxHits => 65;
 
 		[Constructable]
-		public DoubleEpee()
-			: base(41558) 
+		public DoubleEpee() : base(41558) 
 		{
-		
 			Name = "Double Épée";
 			Weight = 8.0;
 			Layer = Layer.TwoHanded;
@@ -64,10 +61,8 @@ namespace Server.Items
 		public override int InitMaxHits => 65;
 
 		[Constructable]
-		public DoubleHachette()
-			: base(41559) 
+		public DoubleHachette() : base(41559) 
 		{
-
 			Name = "Double Hachette";
 			Weight = 8.0;
 			Layer = Layer.TwoHanded;
@@ -107,8 +102,7 @@ namespace Server.Items
 		public override int InitMaxHits => 65;
 
 		[Constructable]
-		public DoubleLames()
-			: base(41560) 
+		public DoubleLames() : base(41560) 
 		{
 
 			Name = "Double Lames de poing";
@@ -136,7 +130,7 @@ namespace Server.Items
 		}
 	}
 
-	public class 	AnneauxCombat : BaseKatar
+	public class AnneauxCombat : BaseKatar
 	{
 		public override WeaponAbility PrimaryAbility => WeaponAbility.PsychicAttack;
 		public override WeaponAbility SecondaryAbility => WeaponAbility.BleedAttack;
@@ -151,10 +145,8 @@ namespace Server.Items
 		public override int InitMaxHits => 65;
 
 		[Constructable]
-		public AnneauxCombat()
-			: base(0xA3DF)
+		public AnneauxCombat() : base(0xA3DF)
 		{
-
 			Name = "Anneaux de Combat";
 			Weight = 8.0;
 			Layer = Layer.TwoHanded;
@@ -180,10 +172,8 @@ namespace Server.Items
 		}
 	}
 
-	public class GriffesCombat  : BaseKatar
+	public class GriffesCombat : BaseKatar
 	{
-
-
 		public override WeaponAbility PrimaryAbility => WeaponAbility.BleedAttack;
 		public override WeaponAbility SecondaryAbility => WeaponAbility.DoubleStrike;
 		public override int StrengthReq => 10;

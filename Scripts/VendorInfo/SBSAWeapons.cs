@@ -17,14 +17,14 @@ namespace Server.Mobiles
             {
                 Add(new GenericBuyInfo(typeof(DualShortAxes), 83, 20, 0x8FD, 0));
                 Add(new GenericBuyInfo(typeof(BloodBlade), 47, 20, 0x8FE, 0));
-                Add(new GenericBuyInfo(typeof(Boomerang), 28, 20, 0x8FF, 0));
-                Add(new GenericBuyInfo(typeof(Cyclone), 47, 20, 0x901, 0));
+                Add(new GenericBuyInfo(typeof(BatonNature), 28, 20, 0x8FF, 0));
+                Add(new GenericBuyInfo(typeof(BatonNature), 47, 20, 0x901, 0));
                 Add(new GenericBuyInfo(typeof(Dagger), 20, 20, 0x902, 0));
-                Add(new GenericBuyInfo(typeof(DiscMace), 62, 20, 0x903, 0));
+                Add(new GenericBuyInfo(typeof(BatonNature), 62, 20, 0x903, 0));
                 Add(new GenericBuyInfo(typeof(GlassStaff), 11, 20, 0x905, 0));
                 Add(new GenericBuyInfo(typeof(SerpentStoneStaff), 30, 20, 0x906, 0));
-                Add(new GenericBuyInfo(typeof(Shortblade), 57, 20, 0x907, 0));
-                Add(new GenericBuyInfo(typeof(SoulGlaive), 68, 20, 0x090A, 0));
+                Add(new GenericBuyInfo(typeof(BatonNature), 57, 20, 0x907, 0));
+                Add(new GenericBuyInfo(typeof(BatonNature), 68, 20, 0x090A, 0));
                 Add(new GenericBuyInfo(typeof(Cleaver), 8, 20, 0x48AE, 0));
                 Add(new GenericBuyInfo(typeof(BattleAxe), 22, 20, 0x48B0, 0));
                 Add(new GenericBuyInfo(typeof(Axe), 23, 20, 0x48B2, 0));
@@ -54,14 +54,14 @@ namespace Server.Mobiles
             {
                 Add(typeof(DualShortAxes), 41);
                 Add(typeof(BloodBlade), 23);
-                Add(typeof(Boomerang), 14);
-                Add(typeof(Cyclone), 23);
+                Add(typeof(BatonNature), 14);
+                Add(typeof(BatonNature), 23);
                 Add(typeof(Dagger), 10);
-                Add(typeof(DiscMace), 31);
+                Add(typeof(BatonNature), 31);
                 Add(typeof(GlassStaff), 5);
                 Add(typeof(SerpentStoneStaff), 15);
-                Add(typeof(Shortblade), 28);
-                Add(typeof(SoulGlaive), 34);
+                Add(typeof(BatonNature), 28);
+                Add(typeof(BatonNature), 34);
             
                 Add(typeof(Cleaver), 4);
                 Add(typeof(BattleAxe), 11);

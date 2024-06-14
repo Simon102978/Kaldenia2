@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Server.ContextMenus;
 using Server.Items;
 using Xanthos.ShrinkSystem;
 
@@ -18,30 +19,30 @@ namespace Server.Mobiles
         {
             public InternalBuyInfo()
             {
-                Add(new AnimalBuyInfo(1, typeof(Cat), 132, 10, 201, 0));
-                Add(new AnimalBuyInfo(1, typeof(Dog), 170, 10, 217, 0));
-                Add(new AnimalBuyInfo(1, typeof(Horse), 650, 10, 204, 0));
-				//Add(new AnimalBuyInfo(1, typeof(RidableLlama), 650, 10, 220, 0));
-				//Add(new AnimalBuyInfo(1, typeof(PackHorse), 650, 10, 291, 0));
-                Add(new AnimalBuyInfo(1, typeof(PackLlama), 650, 10, 292, 0));
+                
+                Add(new AnimalBuyInfo(1, typeof(Horse), 1000, 10, 204, 0));
+				Add(new AnimalBuyInfo(1, typeof(RidableLlama), 1000, 10, 220, 0));
+				Add(new AnimalBuyInfo(1, typeof(PackHorse), 800, 10, 291, 0));
+                Add(new AnimalBuyInfo(1, typeof(PackLlama), 800, 10, 292, 0));
+				
                 
 
-				Add(new AnimalBuyInfo(1, typeof(FarmBull), 500, 10, 233, 0));
-				Add(new AnimalBuyInfo(1, typeof(FarmChicken), 50, 10, 208, 0));
-				Add(new AnimalBuyInfo(1, typeof(FarmCow), 400, 10, 231, 0));
-				Add(new AnimalBuyInfo(1, typeof(FarmGoat), 300, 10, 209, 0));
-				Add(new AnimalBuyInfo(1, typeof(FarmHen), 300, 10, 208, 0));
-				Add(new AnimalBuyInfo(1, typeof(FarmPig), 200, 10, 203, 0));
-				Add(new AnimalBuyInfo(1, typeof(FarmSheep), 100, 10, 207, 0));
+				//Add(new AnimalBuyInfo(1, typeof(FarmBull), 500, 10, 233, 0));
+				//Add(new AnimalBuyInfo(1, typeof(FarmChicken), 50, 10, 208, 0));
+				//Add(new AnimalBuyInfo(1, typeof(FarmCow), 400, 10, 231, 0));
+				//Add(new AnimalBuyInfo(1, typeof(FarmGoat), 300, 10, 209, 0));
+				//Add(new AnimalBuyInfo(1, typeof(FarmHen), 300, 10, 208, 0));
+				//Add(new AnimalBuyInfo(1, typeof(FarmPig), 200, 10, 203, 0));
+				//Add(new AnimalBuyInfo(1, typeof(FarmSheep), 100, 10, 207, 0));
 	
 
-				Add(new GenericBuyInfo("2001111", typeof(HitchingPostSouthDeed), 10000, 10, 0x14F0, 0));
-				Add(new GenericBuyInfo(typeof(HitchingRope), 500, 20, 0x14F8, 0));
+				//Add(new GenericBuyInfo("2001111", typeof(HitchingPostSouthDeed), 10000, 10, 0x14F0, 0));
+				Add(new GenericBuyInfo(typeof(Saddlebag), 500, 20, 0x14F8, 0));
 			}
         }
 
         public class InternalSellInfo : GenericSellInfo
         {
         }
-    }
+	}
 }

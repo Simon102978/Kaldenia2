@@ -18,7 +18,7 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(Bag), 6, 20, 0xE76, 0));
                 Add(new GenericBuyInfo(typeof(Pouch), 6, 20, 0xE79, 0));
                 Add(new GenericBuyInfo(typeof(Backpack), 15, 20, 0x9B2, 0));
-                Add(new GenericBuyInfo(typeof(Leather), 6, 20, 0x1081, 0, true));
+                Add(new GenericBuyInfo(typeof(LupusLeather), 6, 20, 0x1081, 0, true));
                 Add(new GenericBuyInfo(typeof(Dagger), 20, 20, 0x902, 0));
                 Add(new GenericBuyInfo(typeof(TaxidermyKit), 1000, 20, 0x1EBA, 0));
 
@@ -38,7 +38,7 @@ namespace Server.Mobiles
                 Add(typeof(Bag), 3);
                 Add(typeof(Pouch), 3);
                 Add(typeof(Backpack), 7);
-                Add(typeof(Leather), 5);
+                Add(typeof(LupusLeather), 5);
                 Add(typeof(Dagger), 10);
 
 

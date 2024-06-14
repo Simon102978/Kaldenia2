@@ -359,7 +359,7 @@ namespace Server.Multis
 
         private readonly Type[] _NoDecayItems = new Type[]
         {
-            typeof(BaseRegularBoard),              typeof(Aquarium),
+            typeof(BaseBoard),              typeof(Aquarium),
             typeof(FishBowl),               typeof(BaseSpecialScrollBook),
             typeof(Engines.Plants.SeedBox), typeof(JewelryBox),
             typeof(FermentationBarrel)
@@ -1244,7 +1244,7 @@ namespace Server.Multis
         private readonly Type[] _AccessibleToAll =
         {
             typeof(TenthAnniversarySculpture), typeof(RewardBrazier), typeof(VendorRentalContract), typeof(Dyes), typeof(DyeTub),
-            typeof(BaseInstrument), typeof(Clock), typeof(TreasureMap), typeof(RecallRune), typeof(Dices), typeof(BaseRegularBoard),
+            typeof(BaseInstrument), typeof(Clock), typeof(TreasureMap), typeof(RecallRune), typeof(Dices), typeof(BaseBoard),
             typeof(Runebook)
         };
 

@@ -302,7 +302,77 @@ public override void Deserialize(GenericReader reader)
 	int version = reader.ReadInt();
 }
     }
-public class Mohawk1 : Hair
+
+	public class BazCheveuxcourt1 : Hair
+
+	{
+		public BazCheveuxcourt1(Serial serial)
+				: base(serial)
+
+		{
+		}
+
+		private BazCheveuxcourt1()
+				: this(0)
+
+		{
+		}
+
+		private BazCheveuxcourt1(int hue)
+				: base(0xA4AA, hue)
+
+		{
+		}
+
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class BazCheveuxcourt2 : Hair
+
+	{
+		public BazCheveuxcourt2(Serial serial)
+				: base(serial)
+
+		{
+		}
+
+		private BazCheveuxcourt2()
+				: this(0)
+
+		{
+		}
+
+		private BazCheveuxcourt2(int hue)
+				: base(0xA4A9, hue)
+
+		{
+		}
+
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+	public class Mohawk1 : Hair
 
 	{
 	public Mohawk1(Serial serial)
@@ -1222,6 +1292,76 @@ public override void Deserialize(GenericReader reader)
 	int version = reader.ReadInt();
 }
     }
+
+	public class CheveuxLong13 : Hair
+
+	{
+		public CheveuxLong13(Serial serial)
+				: base(serial)
+
+		{
+		}
+
+		private CheveuxLong13()
+				: this(0)
+
+		{
+		}
+
+		private CheveuxLong13(int hue)
+				: base(0xA4A8, hue)
+
+		{
+		}
+
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class CheveuxLong14 : Hair
+
+	{
+		public CheveuxLong14(Serial serial)
+				: base(serial)
+
+		{
+		}
+
+		private CheveuxLong14()
+				: this(0)
+
+		{
+		}
+
+		private CheveuxLong14(int hue)
+				: base(0xA4A7, hue)
+
+		{
+		}
+
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
 
 
 }

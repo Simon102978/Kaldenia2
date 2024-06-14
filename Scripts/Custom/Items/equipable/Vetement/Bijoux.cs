@@ -1,3 +1,4 @@
+using System;
 using Server.Engines.Craft;
 
 namespace Server.Items
@@ -766,7 +767,7 @@ public override void Deserialize(GenericReader reader)
 
 		{
 			Weight = 1.0;
-			Name = "Lunettes";
+			Name = "Lunettes de soleil";
 		}
 
 		public Lunettes1(Serial serial)
@@ -801,7 +802,7 @@ public override void Deserialize(GenericReader reader)
 
 		{
 			Weight = 1.0;
-			Name = "Lunettes";
+			Name = "Lunettes de navigateur";
 		}
 
 		public Lunettes2(Serial serial)
@@ -836,7 +837,8 @@ public override void Deserialize(GenericReader reader)
 
 		{
 			Weight = 1.0;
-			Name = "Lunettes";
+			Name = "Lunettes De vision";
+			Attributes.NightSight = 1;
 		}
 
 		public Lunettes3(Serial serial)

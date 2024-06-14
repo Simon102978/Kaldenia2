@@ -39,19 +39,19 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(RecallRune), 25, 10, 0x1f14, 0));
                 Add(new GenericBuyInfo(typeof(Spellbook), 50, 10, 0xEFA, 0));
 
-                Type[] types = Loot.MageryScrollTypes;
+                //Type[] types = Loot.MageryScrollTypes;
 
-                for (int i = 0; i < types.Length && i < 8; ++i)
-                {
-                    int itemID = 0x1F2E + i;
+                //for (int i = 0; i < types.Length && i < 8; ++i)
+                //{
+                //    int itemID = 0x1F2E + i;
 
-                    if (i == 6)
-                        itemID = 0x1F2D;
-                    else if (i > 6)
-                        --itemID;
+                //    if (i == 6)
+                //        itemID = 0x1F2D;
+                //    else if (i > 6)
+                //        --itemID;
 
-                    Add(new GenericBuyInfo(types[i], 12 + ((i / 8) * 10), 20, itemID, 0, true));
-                }
+                //    Add(new GenericBuyInfo(types[i], 12 + ((i / 8) * 10), 20, itemID, 0, true));
+                //}
             }
         }
 
@@ -78,10 +78,10 @@ namespace Server.Mobiles
                 Add(typeof(BatWing), 1);
                 Add(typeof(GraveDust), 1);
 
-                Type[] types = Loot.MageryScrollTypes;
+                //Type[] types = Loot.MageryScrollTypes;
 
-                for (int i = 0; i < types.Length; ++i)
-                    Add(types[i], ((i / 8) + 2) * 2);
+                //for (int i = 0; i < types.Length; ++i)
+                //    Add(types[i], ((i / 8) + 2) * 2);
             }
         }
     }

@@ -23,13 +23,15 @@ namespace Server.Items
 
 		public override WeaponAbility PrimaryAbility => WeaponAbility.CrushingBlow;
 		public override WeaponAbility SecondaryAbility => WeaponAbility.BleedAttack;
-		public override int StrengthReq => 80;
-		public override int MinDamage => 16;
-		public override int MaxDamage => 20;
-		public override float Speed => 4.00f;
-
+		public override int StrengthReq => 45;
+		public override int MinDamage => 19;
+		public override int MaxDamage => 22;
+		public override float Speed => 2.00f;
 		public override int InitMinHits => 31;
-		public override int InitMaxHits => 110;
+		public override int InitMaxHits => 70;
+
+		
+		
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
@@ -50,7 +52,7 @@ namespace Server.Items
 			: base(41594)
 		{
 			Weight = 17.0;
-			Name = "Marteau à Pointes";
+			Name = "Étoile du Matin";
 		}
 
 		public MarteauPointes(Serial serial)
@@ -100,9 +102,9 @@ namespace Server.Items
 		public override WeaponAbility PrimaryAbility => WeaponAbility.DoubleStrike;
 		public override WeaponAbility SecondaryAbility => WeaponAbility.ConcussionBlow;
 		public override int StrengthReq => 45;
-		public override int MinDamage => 14;
-		public override int MaxDamage => 18;
-		public override float Speed => 3.50f;
+		public override int MinDamage => 19;
+		public override int MaxDamage => 22;
+		public override float Speed => 2.00f;
 		public override int InitMinHits => 31;
 		public override int InitMaxHits => 70;
 

@@ -2,7 +2,7 @@ namespace Server.Items
 {
     public class PieceWhiteKing : BasePiece
     {
-        public PieceWhiteKing(BaseRegularBoard RegularBoard)
+        public PieceWhiteKing(BaseBoard RegularBoard)
             : base(0x3587, RegularBoard)
         {
         }
@@ -28,7 +28,7 @@ namespace Server.Items
 
     public class PieceBlackKing : BasePiece
     {
-        public PieceBlackKing(BaseRegularBoard RegularBoard)
+        public PieceBlackKing(BaseBoard RegularBoard)
             : base(0x358E, RegularBoard)
         {
         }
@@ -54,7 +54,7 @@ namespace Server.Items
 
     public class PieceWhiteQueen : BasePiece
     {
-        public PieceWhiteQueen(BaseRegularBoard RegularBoard)
+        public PieceWhiteQueen(BaseBoard RegularBoard)
             : base(0x358A, RegularBoard)
         {
         }
@@ -80,7 +80,7 @@ namespace Server.Items
 
     public class PieceBlackQueen : BasePiece
     {
-        public PieceBlackQueen(BaseRegularBoard RegularBoard)
+        public PieceBlackQueen(BaseBoard RegularBoard)
             : base(0x3591, RegularBoard)
         {
         }
@@ -106,7 +106,7 @@ namespace Server.Items
 
     public class PieceWhiteRook : BasePiece
     {
-        public PieceWhiteRook(BaseRegularBoard RegularBoard)
+        public PieceWhiteRook(BaseBoard RegularBoard)
             : base(0x3586, RegularBoard)
         {
         }
@@ -132,7 +132,7 @@ namespace Server.Items
 
     public class PieceBlackRook : BasePiece
     {
-        public PieceBlackRook(BaseRegularBoard RegularBoard)
+        public PieceBlackRook(BaseBoard RegularBoard)
             : base(0x358D, RegularBoard)
         {
         }
@@ -158,7 +158,7 @@ namespace Server.Items
 
     public class PieceWhiteBishop : BasePiece
     {
-        public PieceWhiteBishop(BaseRegularBoard RegularBoard)
+        public PieceWhiteBishop(BaseBoard RegularBoard)
             : base(0x3585, RegularBoard)
         {
         }
@@ -184,7 +184,7 @@ namespace Server.Items
 
     public class PieceBlackBishop : BasePiece
     {
-        public PieceBlackBishop(BaseRegularBoard RegularBoard)
+        public PieceBlackBishop(BaseBoard RegularBoard)
             : base(0x358C, RegularBoard)
         {
         }
@@ -210,7 +210,7 @@ namespace Server.Items
 
     public class PieceWhiteKnight : BasePiece
     {
-        public PieceWhiteKnight(BaseRegularBoard RegularBoard)
+        public PieceWhiteKnight(BaseBoard RegularBoard)
             : base(0x3588, RegularBoard)
         {
         }
@@ -236,7 +236,7 @@ namespace Server.Items
 
     public class PieceBlackKnight : BasePiece
     {
-        public PieceBlackKnight(BaseRegularBoard RegularBoard)
+        public PieceBlackKnight(BaseBoard RegularBoard)
             : base(0x358F, RegularBoard)
         {
         }
@@ -262,7 +262,7 @@ namespace Server.Items
 
     public class PieceWhitePawn : BasePiece
     {
-        public PieceWhitePawn(BaseRegularBoard RegularBoard)
+        public PieceWhitePawn(BaseBoard RegularBoard)
             : base(0x3589, RegularBoard)
         {
         }
@@ -288,7 +288,7 @@ namespace Server.Items
 
     public class PieceBlackPawn : BasePiece
     {
-        public PieceBlackPawn(BaseRegularBoard RegularBoard)
+        public PieceBlackPawn(BaseBoard RegularBoard)
             : base(0x3590, RegularBoard)
         {
         }

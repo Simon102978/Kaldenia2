@@ -2,7 +2,7 @@ namespace Server.Items
 {
     public class PieceWhiteChecker : BasePiece
     {
-        public PieceWhiteChecker(BaseRegularBoard RegularBoard)
+        public PieceWhiteChecker(BaseBoard RegularBoard)
             : base(0x3584, RegularBoard)
         {
         }
@@ -28,7 +28,7 @@ namespace Server.Items
 
     public class PieceBlackChecker : BasePiece
     {
-        public PieceBlackChecker(BaseRegularBoard RegularBoard)
+        public PieceBlackChecker(BaseBoard RegularBoard)
             : base(0x358B, RegularBoard)
         {
         }

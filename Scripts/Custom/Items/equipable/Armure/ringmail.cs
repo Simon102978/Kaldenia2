@@ -10,7 +10,7 @@ namespace Server.Items
 			: base(41660)
 		{
 			Weight = 15.0;
-			Name = "Brassard de Maille";
+			Name = "Brassard d'anneaux fins";
 		}
 
 		public BrassardMaille(Serial serial)
@@ -47,7 +47,7 @@ namespace Server.Items
 			: base(41662)
 		{
 			Weight = 15.0;
-			Name = "Plastron de Maille2";
+			Name = "Torse d'anneaux fins";
 		}
 
 		public PlastronMaille2(Serial serial)
@@ -84,7 +84,7 @@ namespace Server.Items
 			: base(41661)
 		{
 			Weight = 15.0;
-			Name = "Jambière de Maille2";
+			Name = "Jambière d'anneaux fins";
 		}
 
 		public JambiereMaille2(Serial serial)

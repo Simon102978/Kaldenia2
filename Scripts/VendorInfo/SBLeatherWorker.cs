@@ -15,7 +15,7 @@ namespace Server.Mobiles
         {
             public InternalBuyInfo()
             {
-                Add(new GenericBuyInfo(typeof(Hides), 4, 999, 0x1078, 0, true));
+                Add(new GenericBuyInfo(typeof(LupusHides), 4, 999, 0x1078, 0, true));
                 Add(new GenericBuyInfo(typeof(ThighBoots), 56, 10, 0x1711, 0));
             }
         }
@@ -24,7 +24,7 @@ namespace Server.Mobiles
         {
             public InternalSellInfo()
             {
-                Add(typeof(Hides), 2);
+                Add(typeof(LupusHides), 2);
                 Add(typeof(ThighBoots), 2);
             }
         }

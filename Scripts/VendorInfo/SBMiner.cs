@@ -36,8 +36,9 @@ namespace Server.Mobiles
                 Add(typeof(Torch), 3);
                 Add(typeof(Bag), 3);
                 Add(typeof(Candle), 3);
-				Add(typeof(IronIngot), 2);
+				//Add(typeof(IronIngot), 2);
+				Add(typeof(IronIngotResourceCrate), 100);
 			}
-        }
+		}
     }
 }

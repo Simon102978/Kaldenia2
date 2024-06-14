@@ -848,6 +848,8 @@ public override void Deserialize(GenericReader reader)
 	public class MasqueEpouvantail : BaseHat
 
 	{
+	//	public override bool Anonymous => true;
+
 		[Constructable]
 		public MasqueEpouvantail()
 				: this(0)

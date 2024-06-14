@@ -126,7 +126,7 @@ namespace Server.Engines.Craft
 			if (!contains && !type.IsSubclassOf(typeof(BaseIngot)))
 				return false;
 
-			if (type.IsSubclassOf(typeof(BaseRegularBoard)))
+			if (type.IsSubclassOf(typeof(BaseBoard)))
 				return true;
 
 			return contains;

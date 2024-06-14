@@ -24,41 +24,33 @@ namespace Server.Mobiles
         {
             public InternalBuyInfo(Mobile m)
             {
-                Add(new GenericBuyInfo(typeof(RefreshPotion), 15, 10, 0xF0B, 0, true));
-                Add(new GenericBuyInfo(typeof(AgilityPotion), 15, 10, 0xF08, 0, true));
-                Add(new GenericBuyInfo(typeof(NightSightPotion), 15, 10, 0xF06, 0, true));
-                Add(new GenericBuyInfo(typeof(LesserHealPotion), 15, 10, 0xF0C, 0, true));
-                Add(new GenericBuyInfo(typeof(StrengthPotion), 15, 10, 0xF09, 0, true));
-                Add(new GenericBuyInfo(typeof(LesserPoisonPotion), 15, 10, 0xF0A, 0, true));
-                Add(new GenericBuyInfo(typeof(LesserCurePotion), 15, 10, 0xF07, 0, true));
-                Add(new GenericBuyInfo(typeof(LesserExplosionPotion), 21, 10, 0xF0D, 0, true));
-                Add(new GenericBuyInfo(typeof(MortarPestle), 8, 10, 0xE9B, 0));
+    
+                Add(new GenericBuyInfo(typeof(MortarPestle), 8, 20, 0xE9B, 0));
+				Add(new GenericBuyInfo(typeof(MortarPestlePoisoning), 8, 20, 0xE9B, 0));
+				Add(new GenericBuyInfo(typeof(Bottle), 5, 999, 0xF0E, 0));
 
-                Add(new GenericBuyInfo(typeof(BlackPearl), 5, 999, 0xF7A, 0));
-                Add(new GenericBuyInfo(typeof(Bloodmoss), 5, 999, 0xF7B, 0));
-                Add(new GenericBuyInfo(typeof(Garlic), 5, 999, 0xF84, 0));
-                Add(new GenericBuyInfo(typeof(Ginseng), 5, 999, 0xF85, 0));
-                Add(new GenericBuyInfo(typeof(MandrakeRoot), 5, 999, 0xF86, 0));
-                Add(new GenericBuyInfo(typeof(Nightshade), 5, 999, 0xF88, 0));
-                Add(new GenericBuyInfo(typeof(SpidersSilk), 5, 999, 0xF8D, 0));
-                Add(new GenericBuyInfo(typeof(SulfurousAsh), 5, 999, 0xF8C, 0));
 
-                Add(new GenericBuyInfo(typeof(Bottle), 5, 100, 0xF0E, 0, true));
-                Add(new GenericBuyInfo(typeof(HeatingStand), 2, 100, 0x1849, 0));
-                
 
-                if (m.Map != Map.TerMur)
-                {
-					Add(new GenericBuyInfo(typeof(Bottle), 5, 100, 0xF0E, 0, true));
-				}
-                else if (m is Zosilem)
-                {
-                    Add(new GenericBuyInfo(typeof(GlassblowingBook), 10637, 30, 0xFF4, 0));
-                    Add(new GenericBuyInfo(typeof(SandMiningBook), 10637, 30, 0xFF4, 0));
-                    Add(new GenericBuyInfo(typeof(Blowpipe), 21, 100, 0xE8A, 0x3B9));
-                }
-            }
-        }
+				Add(new GenericBuyInfo(typeof(BlackPearl), 5, 999, 0xF7A, 0));
+				Add(new GenericBuyInfo(typeof(Bloodmoss), 5, 999, 0xF7B, 0));
+				Add(new GenericBuyInfo(typeof(Garlic), 5, 999, 0xF84, 0));
+				Add(new GenericBuyInfo(typeof(Ginseng), 5, 999, 0xF85, 0));
+				Add(new GenericBuyInfo(typeof(MandrakeRoot), 5, 999, 0xF86, 0));
+				Add(new GenericBuyInfo(typeof(Nightshade), 5, 999, 0xF88, 0));
+				Add(new GenericBuyInfo(typeof(SpidersSilk), 5, 999, 0xF8D, 0));
+				Add(new GenericBuyInfo(typeof(SulfurousAsh), 5, 999, 0xF8C, 0));
+
+				Add(new GenericBuyInfo(typeof(BatWing), 5, 999, 0xF78, 0));
+				Add(new GenericBuyInfo(typeof(DaemonBlood), 5, 999, 0xF7D, 0));
+				Add(new GenericBuyInfo(typeof(PigIron), 5, 999, 0xF8A, 0));
+				Add(new GenericBuyInfo(typeof(NoxCrystal), 5, 999, 0xF8E, 0));
+				Add(new GenericBuyInfo(typeof(GraveDust), 5, 999, 0xF8F, 0));
+
+
+
+
+			}
+		}
 
         public class InternalSellInfo : GenericSellInfo
         {

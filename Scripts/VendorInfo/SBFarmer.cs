@@ -39,7 +39,9 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(Apple), 3, 20, 0x9D0, 0, true));
                 Add(new GenericBuyInfo(typeof(SheafOfHay), 2, 20, 0xF36, 0));
                 Add(new GenericBuyInfo(typeof(Hoe), 5, 20, 3897, 0));
-            }
+				Add(new GenericBuyInfo(typeof(JarHoney), 3, 20, 0x9EC, 0));
+				Add(new GenericBuyInfo(typeof(Beeswax), 2, 20, 0x1422, 0));
+			}
         }
 
         public class InternalSellInfo : GenericSellInfo
@@ -66,7 +68,9 @@ namespace Server.Mobiles
                 Add(typeof(Peach), 1);
                 Add(typeof(Pear), 1);
                 Add(typeof(SheafOfHay), 1);
-            }
+				Add(typeof(JarHoney), 1);
+				Add(typeof(Beeswax), 1);
+			}
         }
     }
 }

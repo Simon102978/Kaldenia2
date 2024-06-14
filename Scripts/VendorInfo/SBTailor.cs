@@ -16,7 +16,8 @@ namespace Server.Mobiles
             public InternalBuyInfo()
             {
                 Add(new GenericBuyInfo(typeof(SewingKit), 5, 20, 0xF9D, 0));
-                Add(new GenericBuyInfo(typeof(Scissors), 10, 20, 0xF9F, 0));
+				Add(new GenericBuyInfo(typeof(LeatherSewingKit), 5, 20, 0xF9D, 0xF9D));
+				Add(new GenericBuyInfo(typeof(Scissors), 10, 20, 0xF9F, 0));
                 Add(new GenericBuyInfo(typeof(DyeTub), 8, 50, 0xFAB, 0));
                 Add(new GenericBuyInfo(typeof(Dyes), 8, 50, 0xFA9, 0));
 	
@@ -56,10 +57,9 @@ namespace Server.Mobiles
 				Add(new GenericBuyInfo(typeof(Bandana), 6, 20, 0x1540, 0));
 				Add(new GenericBuyInfo(typeof(SkullCap), 7, 20, 0x1544, 0));
 
-				Add(new GenericBuyInfo(typeof(BoltOfCloth), 100, 20, 0xf95, Utility.RandomDyedHue(), true));
+				Add(new GenericBuyInfo(typeof(BoltOfCloth), 100, 20, 0xf95, 0, true));
 
-                Add(new GenericBuyInfo(typeof(Cloth), 2, 20, 0x1766, 0, true));
-                Add(new GenericBuyInfo(typeof(UncutCloth), 2, 20, 0x1767, 0, true));
+                
 
                
             }

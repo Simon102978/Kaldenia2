@@ -15,7 +15,7 @@ namespace Server.Items
 			: base(41581)
 		{
 			Weight = 4.0;
-			Name = "Grande Hache Double";
+			Name = "Francisque";
 		}
 
 		public GrandeHacheDouble(Serial serial)
@@ -52,7 +52,7 @@ namespace Server.Items
 			: base(41582)
 		{
 			Weight = 4.0;
-			Name = "Grande Hache";
+			Name = "Éventreuse";
 		}
 
 		public GrandeHache(Serial serial)
@@ -64,8 +64,8 @@ namespace Server.Items
 		public override WeaponAbility SecondaryAbility => WeaponAbility.ForceOfNature;
 
 		public override int StrengthReq => 35;
-		public override int MinDamage => 12;
-		public override int MaxDamage => 16;
+		public override int MinDamage => 16;
+		public override int MaxDamage => 19;
 		public override float Speed => 3.00f;
 
 		public override int DefHitSound => 0x233;
@@ -93,7 +93,8 @@ namespace Server.Items
 			: base(41583)
 		{
 			Weight = 4.0;
-			Name = "Hache à Double Piques";
+			Name = "Exécutrice";
+			Layer = Layer.TwoHanded;
 		}
 
 		public HacheDoublePiques(Serial serial)
@@ -130,7 +131,7 @@ namespace Server.Items
 			: base(41584)
 		{
 			Weight = 4.0;
-			Name = "Hache à Pique";
+			Name = "Barbelé";
 		}
 
 		public HAchePique(Serial serial)
@@ -171,7 +172,7 @@ namespace Server.Items
 			: base(41585)
 		{
 			Weight = 4.0;
-			Name = "Hache Double";
+			Name = "Trombe";
 		}
 
 		public HacheDouble(Serial serial)
@@ -210,7 +211,7 @@ namespace Server.Items
 			: base(41586)
 		{
 			Weight = 4.0;
-			Name = "Hache Double Naine";
+			Name = "Gardienne";
 		}
 
 		public HacheDoubleNaine(Serial serial)
@@ -223,7 +224,7 @@ namespace Server.Items
 		public override int StrengthReq => 35;
 		public override int MinDamage => 12;
 		public override int MaxDamage => 16;
-		public override float Speed => 3.00f;
+		public override float Speed => 3.50f;
 
 		public override int DefHitSound => 0x233;
 		public override int DefMissSound => 0x239;

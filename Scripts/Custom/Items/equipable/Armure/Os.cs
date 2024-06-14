@@ -123,6 +123,86 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
+	public class GorgetOS : BaseArmor
+	{
+		public override int BasePhysicalResistance => 3;
+		public override int BaseFireResistance => 3;
+		public override int BaseColdResistance => 4;
+		public override int BasePoisonResistance => 2;
+		public override int BaseEnergyResistance => 4;
+		public override int InitMinHits => 25;
+		public override int InitMaxHits => 30;
+		public override int StrReq => 55;
+		public override ArmorMaterialType MaterialType => ArmorMaterialType.Bone;
+		public override CraftResource DefaultResource => CraftResource.RegularBone;
+
+		public override ArmorMeditationAllowance DefMedAllowance => ArmorMeditationAllowance.Half;
+
+		[Constructable]
+		public GorgetOS()
+			: base(0xA447)
+		{
+			Weight = 2.0;
+			Name = "Gorgerin d'Os";
+		}
+
+		public GorgetOS(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+	public class GorgetOS1 : BaseArmor
+	{
+		public override int BasePhysicalResistance => 3;
+		public override int BaseFireResistance => 3;
+		public override int BaseColdResistance => 4;
+		public override int BasePoisonResistance => 2;
+		public override int BaseEnergyResistance => 4;
+		public override int InitMinHits => 25;
+		public override int InitMaxHits => 30;
+		public override int StrReq => 55;
+		public override ArmorMaterialType MaterialType => ArmorMaterialType.Bone;
+		public override CraftResource DefaultResource => CraftResource.RegularBone;
+
+		public override ArmorMeditationAllowance DefMedAllowance => ArmorMeditationAllowance.Half;
+
+		[Constructable]
+		public GorgetOS1()
+			: base(0xA447)
+		{
+			Weight = 2.0;
+			Name = "Gorgerin épaule d'os";
+		}
+
+		public GorgetOS1(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
 
 	public class JambiereOs : BaseArmor
 	{

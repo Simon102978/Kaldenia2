@@ -1,19 +1,19 @@
 namespace Server.Items
 {
-    public class ChessRegularBoard : BaseRegularBoard
+    public class Chessboard : BaseBoard
     {
         [Constructable]
-        public ChessRegularBoard()
+        public Chessboard()
             : base(0xFA6)
         {
         }
 
-        public ChessRegularBoard(Serial serial)
+        public Chessboard(Serial serial)
             : base(serial)
         {
         }
 
-        public override int LabelNumber => 1016450;// a chessRegularBoard
+        public override int LabelNumber => 1016450;// a chessboard
         public override void CreatePieces()
         {
             for (int i = 0; i < 8; i++)

@@ -41,8 +41,7 @@ namespace Server.Items
 
 	public class CasqueChaos : BaseArmor
 	{
-
-		public override bool Disguise { get { return true; } }
+	//	public override bool Anonymous => true;
 
 		[Constructable]
 		public CasqueChaos()
@@ -155,7 +154,7 @@ namespace Server.Items
 
 	public class CasqueDecoratif : BaseArmor
 	{
-		public override bool Disguise { get { return true; } }
+	//	public override bool Anonymous => true;
 
 		[Constructable]
 		public CasqueDecoratif()

@@ -15,7 +15,7 @@ namespace Server.Mobiles
         {
             public InternalBuyInfo()
             {
-                Add(new GenericBuyInfo(typeof(Hides), 3, 40, 0x1079, 0, true));
+                Add(new GenericBuyInfo(typeof(LupusHides), 3, 40, 0x1079, 0, true));
             }
         }
 

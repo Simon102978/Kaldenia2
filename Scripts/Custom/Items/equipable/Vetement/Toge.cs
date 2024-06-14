@@ -281,8 +281,7 @@ public override void Deserialize(GenericReader reader)
 public class Toge8 :  BaseOuterTorso
 
 	{
-
-		public override bool Disguise { get { return true; } }
+	//	public override bool Anonymous => true;
 
 		[Constructable]
 	public Toge8()
@@ -337,7 +336,7 @@ public override void Deserialize(GenericReader reader)
 
 		{
 			Weight = 2.0;
-			Name = "Toge Sparte";
+			Name = "Toge Stylée";
 		}
 
 		public TogeSparte(Serial serial)
@@ -458,7 +457,7 @@ public override void Deserialize(GenericReader reader)
 
 		{
 			Weight = 2.0;
-			Name = "Toge Koraine";
+			Name = "Toge Évasée";
 		}
 
 		public TogeKoraine(Serial serial)
