@@ -14,7 +14,6 @@ namespace Server.Engines.Quests
             : base()
         {
             AddObjective(new ObtainObjective(typeof(HoneyComb), "Honey Combs", 50, 0x1762));
-            AddObjective(new SlayObjective(typeof(HoneyBear), "Honey Bears", 10));
             AddReward(new BaseReward(typeof(HoneycombProcessingKettle), "Honeycomb Processing Kettle"));
         }
 

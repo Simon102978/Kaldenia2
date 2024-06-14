@@ -60,10 +60,12 @@ namespace Server.Items
 
     public enum ItemQuality
     {
-        Low,
-        Normal,
-        Exceptional
-    }
+		Low,
+		Normal,
+		Exceptional,
+		Epic,
+		Legendary
+	}
 
     public enum DirectionType
     {

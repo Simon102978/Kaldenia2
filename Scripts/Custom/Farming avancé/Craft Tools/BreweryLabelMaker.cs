@@ -25,7 +25,7 @@ namespace Server.Items
 		[Constructable]
 		public BreweryLabelMaker() : base( 0xFC0 )
 		{
-			Name = "Brewery Label Maker";
+			Name = "Marqueur de bière";
 			Hue = 0x2E;
 		}
 

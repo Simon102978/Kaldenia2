@@ -11,7 +11,7 @@ namespace Server.Items
 		public EmptyAleBottle( int amount ) : base( 0x99B )
 		{
 			Stackable = true;
-			Name = "Empty Ale Bottle";
+			Name = "Bouteille de bière vide";
 			Amount = amount;
 		}
 

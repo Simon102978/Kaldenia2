@@ -209,8 +209,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LapHarp), "Instruments", "Petite harpe", 63.1, 88.1, typeof(RegularBoard), 1044041, 20, 1044351);
 			// AddSkill(index, SkillName.Musicianship, 45.0, 50.0);
 			AddRes(index, typeof(Cloth), 1044286, 10, 1044287);
-			index = AddCraft(typeof(RuneLute), "Instruments", "Luth fin", 55.0, 70.0, typeof(RegularBoard), 1044041, 6, 1044351);
-			AddRes(index, typeof(Cloth), "Cloth", 6, "You do not have enough cloth to make that.");
+		//	index = AddCraft(typeof(RuneLute), "Instruments", "Luth fin", 55.0, 70.0, typeof(RegularBoard), 1044041, 6, 1044351);
+		//	AddRes(index, typeof(Cloth), "Cloth", 6, "You do not have enough cloth to make that.");
 			index = AddCraft(typeof(Harp), "Instruments", "Harpe", 78.9, 103.9, typeof(RegularBoard), 1044041, 35, 1044351);
 			// AddSkill(index, SkillName.Musicianship, 45.0, 50.0);
 			AddRes(index, typeof(Cloth), 1044286, 15, 1044287);

@@ -11,7 +11,7 @@ namespace Server.Items
 		[Constructable]
 		public Trotters( int amount ) : base( amount, 7820 )
 		{
-			Name = "pig's feet";
+			Name = "Pattes de porc";
 			Stackable = true;
 			Weight = 0.5;
 			Hue = 1831;

@@ -14,7 +14,7 @@ namespace Server.Items
 		[Constructable]
 		public MatchLight( int amount ) : base( 0x1044 )
 		{
-            Name = "une allumette";
+            Name = "Allumette";
             Amount = amount;
             Stackable = true;
             Hue = 1150;

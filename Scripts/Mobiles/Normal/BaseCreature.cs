@@ -3723,12 +3723,12 @@ namespace Server.Mobiles
             switch (NewAI)
             {
 				case AIType.AI_WildAnimal:
-					if (!(this is BaseAnimal))
+					if (!(this is BaseCreature))
 					{
 						m_AI = new AnimalAI(this);
 						m_CurrentAI = AIType.AI_Animal;
 					}
-					else m_AI = new WildAnimalAI(this);
+					else m_AI = new AnimalAI(this);
 					break;
 				case AIType.AI_Melee:
                     m_AI = new MeleeAI(this);

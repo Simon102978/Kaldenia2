@@ -9,10 +9,6 @@ namespace Server.Mobiles
 		private List<SBInfo> m_SBInfos = new List<SBInfo>();
 		protected override List<SBInfo> SBInfos{ get { return m_SBInfos; } }
 
-		public override StatutSocialEnum MinBuyClasse => StatutSocialEnum.Equite;
-
-
-
 		[Constructable]
 		public RuneCrafter() : base( "the rune crafter" )
 		{

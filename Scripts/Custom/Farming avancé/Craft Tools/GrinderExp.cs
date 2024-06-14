@@ -4,24 +4,24 @@ using Server.Engines.Craft;
 
 namespace Server.Items
 {
-    [FlipableAttribute(0x9950, 0x9951)]
+    [FlipableAttribute(0x9A97, 0x9A98)]
 	public class GrinderExp : BaseTool
 	{
         public override CraftSystem CraftSystem { get { return DefGrinding.CraftSystem; } }
 
 		[Constructable]
         public GrinderExp()
-            : base(0x9950)
+            : base(0x9A97)
 		{
-			Name = "Grinder";
+			Name = "Broyeur à café";
 			Weight = 2.0;
 		}
 
 		[Constructable]
         public GrinderExp(int uses)
-            : base(uses, 0x9950)
+            : base(uses, 0x9A97)
 		{
-            Name = "Grinder";
+            Name = "Broyeur à café";
 			Weight = 2.0;
 		}
 

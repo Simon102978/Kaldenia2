@@ -39,6 +39,8 @@ namespace Server.Items
 		public new virtual int GetUsesScalar()
 		{
 			if ( Quality == ItemQuality.Exceptional ) return 100;
+			else if (Quality == ItemQuality.Epic) return 150;
+			else if (Quality == ItemQuality.Legendary) return 150;
 			return 50;
 		}
 
@@ -65,6 +67,7 @@ namespace Server.Items
 			m_UsesRemaining = usesremaining;
 			ShowUsesRemaining = true;
 			Hue = 2372;
+			Name = "Serpe";
 		}
 
 		public override void OnDoubleClick( Mobile from )

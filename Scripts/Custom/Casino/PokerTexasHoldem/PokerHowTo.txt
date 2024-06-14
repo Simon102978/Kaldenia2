@@ -1,0 +1,9 @@
+After you .add PokerDealer
+You need to .props the dealer and set the options.
+Then .addpokerseat x y z (where x y z is the location you want your seat)
+
+pss: if you can figure out how to make [addpokerseat use a target instead of using co-ordinates please let me know where to make edits.
+
+http://www.runuo.com/community/threads/texas-holdem.104304/
+
+By Phr3d13

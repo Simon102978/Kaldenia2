@@ -9,7 +9,7 @@ namespace Server.Mobiles
 {
     public class PackageMaker : BaseVendor
     {
-		private Type m_Currency = typeof(Marchandise);
+		private Type m_Currency = typeof(Materiaux);
 
 		[CommandProperty(AccessLevel.Seer)]
 		public Type Currency { get { return m_Currency; } set { m_Currency = value; } }

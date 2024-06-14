@@ -95,6 +95,9 @@ namespace Server.Mobiles
 		#endregion
 
 		[CommandProperty(AccessLevel.GameMaster)]
+		public bool Journaliste { get; set; }
+
+		[CommandProperty(AccessLevel.GameMaster)]
 		public DateTime LastDeathTime { get; private set; }
 		public double DeathDuration => 1; //minutes
 
@@ -2579,6 +2582,13 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+
+				case 31:
+					{
+						Journaliste = reader.ReadBool();
+						goto case 0;
+					}
+
 				case 30:
 				{
 					LastNormalFE = reader.ReadDateTime();
@@ -2806,7 +2816,10 @@ namespace Server.Mobiles
         {        
             base.Serialize(writer);
 
-            writer.Write(30); // version
+            writer.Write(31); // version
+
+			
+			writer.Write(Journaliste);
 
 			writer.Write(LastNormalFE);
 			writer.Write(FEDay);

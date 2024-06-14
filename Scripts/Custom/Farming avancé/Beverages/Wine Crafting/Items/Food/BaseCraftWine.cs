@@ -210,10 +210,7 @@ namespace Server.Items
 		static public bool Thirsty( Mobile from, int fillFactor )
 		{
 			if ( from.Thirst >= 20 )
-			{
-				from.SendMessage( "You are simply too full to drink any more!" );
-				return false;
-			}
+				return true;
 
 			int iThirst = from.Thirst + fillFactor;
 			if ( iThirst >= 20 )

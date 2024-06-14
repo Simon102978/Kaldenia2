@@ -22,18 +22,11 @@ namespace Server.Items
         {
             Stackable = true;
             Amount = amount;
+			Name = "Pièces en argent";
 
-			if (amount != 1)
-			{
-				Name = "Pièces d'Argents";
-			}
-			else
-			{
-				Name = "Pièce d'Argent";
-			}
+		}
 
-			
-        }
+		
 
         public PieceArgent(Serial serial)
             : base(serial)

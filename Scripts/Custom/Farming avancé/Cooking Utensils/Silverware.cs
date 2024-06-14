@@ -8,6 +8,7 @@ namespace Server.Items
 		{
 			Weight = 5.0;
 			Stackable = false;
+			Name = "Argenterie";
 		}
 
 		[Constructable]

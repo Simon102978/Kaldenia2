@@ -25,7 +25,7 @@ namespace Server.Items
 		[Constructable]
 		public VinyardLabelMaker() : base( 0xFC0 )
 		{
-            this.Name = "Vinyard Label Maker";
+            this.Name = "Marqueur de vin";
             this.Hue = 0x218;
 		}
 
