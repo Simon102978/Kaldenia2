@@ -22,7 +22,7 @@ namespace Server.Engines.Harvest
 
         protected override void OnTarget(Mobile from, object targeted)
         {
-            if (m_System is Mining)
+            if (m_System is CustomMining)
             {
                 if (targeted is StaticTarget)
                 {
@@ -59,9 +59,9 @@ namespace Server.Engines.Harvest
                 }
             }
 
-            if (m_System is Lumberjacking && targeted is IChopable)
+            if (m_System is CustomLumberjacking && targeted is IChopable)
                 ((IChopable)targeted).OnChop(from);
-            else if (m_System is Lumberjacking && targeted is IAxe && m_Tool is BaseAxe)
+            else if (m_System is CustomLumberjacking && targeted is IAxe && m_Tool is BaseAxe)
             {
                 IAxe obj = (IAxe)targeted;
                 Item item = (Item)targeted;
@@ -71,24 +71,24 @@ namespace Server.Engines.Harvest
                 else if (obj.Axe(from, (BaseAxe)m_Tool))
                     from.PlaySound(0x13E);
             }
-            else if (m_System is Lumberjacking && targeted is ICarvable)
+            else if (m_System is CustomLumberjacking && targeted is ICarvable)
                 ((ICarvable)targeted).Carve(from, m_Tool);
-            else if (m_System is Lumberjacking && FurnitureAttribute.Check(targeted as Item))
+            else if (m_System is CustomLumberjacking && FurnitureAttribute.Check(targeted as Item))
                 DestroyFurniture(from, (Item)targeted);
-            else if (m_System is Mining && targeted is TreasureMap)
+            else if (m_System is CustomMining && targeted is TreasureMap)
                 ((TreasureMap)targeted).OnBeginDig(from);
             #region High Seas
-            else if (m_System is Mining && targeted is NiterDeposit)
+            else if (m_System is CustomMining && targeted is NiterDeposit)
                 ((NiterDeposit)targeted).OnMine(from, m_Tool);
-            else if (m_System is Lumberjacking && targeted is CrackedLavaRockEast)
+            else if (m_System is CustomLumberjacking && targeted is CrackedLavaRockEast)
                 ((CrackedLavaRockEast)targeted).OnCrack(from);
-            else if (m_System is Lumberjacking && targeted is CrackedLavaRockSouth)
+            else if (m_System is CustomLumberjacking && targeted is CrackedLavaRockSouth)
                 ((CrackedLavaRockSouth)targeted).OnCrack(from);
             #endregion
             else
             {
                 // If we got here and we're lumberjacking then we didn't target something that can be done from the pack
-                if (m_System is Lumberjacking && m_Tool.Parent != from)
+                if (m_System is CustomLumberjacking && m_Tool.Parent != from)
                 {
                     from.SendLocalizedMessage(500487); // The axe must be equipped for any serious wood chopping.
                     return;

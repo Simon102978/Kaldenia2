@@ -7,10 +7,10 @@ using Server.Network;
 namespace Server.Items
 {
 	[Flipable( 0x1E5E, 0x1E5F )]
-	public class JackpotBoard : Item
+	public class JackpotRegularBoard : Item
 	{
 		[Constructable]
-		public JackpotBoard()
+		public JackpotRegularBoard()
 			: base( 0x1E5E )
 		{
 			Movable = false;
@@ -69,7 +69,7 @@ namespace Server.Items
 			from.NetState.Send( new AsciiMessage( Serial, ItemID, MessageType.Regular, Hue, 3, Name, text ) );
 		}
 
-		public JackpotBoard( Serial serial )
+		public JackpotRegularBoard( Serial serial )
 			: base( serial )
 		{
 		}

@@ -2,11 +2,11 @@ namespace Server.Items
 {
     public class BasePiece : Item
     {
-        private BaseBoard m_Board;
-        public BasePiece(int itemID, BaseBoard board)
+        private BaseRegularBoard m_RegularBoard;
+        public BasePiece(int itemID, BaseRegularBoard RegularBoard)
             : base(itemID)
         {
-            m_Board = board;
+            m_RegularBoard = RegularBoard;
         }
 
         public BasePiece(Serial serial)
@@ -14,15 +14,15 @@ namespace Server.Items
         {
         }
 
-        public BaseBoard Board
+        public BaseRegularBoard RegularBoard
         {
             get
             {
-                return m_Board;
+                return m_RegularBoard;
             }
             set
             {
-                m_Board = value;
+                m_RegularBoard = value;
             }
         }
         public override bool IsVirtualItem => true;
@@ -32,7 +32,7 @@ namespace Server.Items
             base.Serialize(writer);
 
             writer.Write(0);
-            writer.Write(m_Board);
+            writer.Write(m_RegularBoard);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -45,9 +45,9 @@ namespace Server.Items
             {
                 case 0:
                     {
-                        m_Board = (BaseBoard)reader.ReadItem();
+                        m_RegularBoard = (BaseRegularBoard)reader.ReadItem();
 
-                        if (m_Board == null || Parent == null)
+                        if (m_RegularBoard == null || Parent == null)
                             Delete();
 
                         break;
@@ -57,14 +57,14 @@ namespace Server.Items
 
         public override bool OnDragLift(Mobile from)
         {
-            if (m_Board == null || m_Board.Deleted)
+            if (m_RegularBoard == null || m_RegularBoard.Deleted)
             {
                 Delete();
                 return false;
             }
-            else if (!IsChildOf(m_Board))
+            else if (!IsChildOf(m_RegularBoard))
             {
-                m_Board.DropItem(this);
+                m_RegularBoard.DropItem(this);
                 return false;
             }
             else
@@ -80,7 +80,7 @@ namespace Server.Items
 
         public override bool DropToItem(Mobile from, Item target, Point3D p)
         {
-            return (target == m_Board && p.X != -1 && p.Y != -1 && base.DropToItem(from, target, p));
+            return (target == m_RegularBoard && p.X != -1 && p.Y != -1 && base.DropToItem(from, target, p));
         }
 
         public override bool DropToWorld(Mobile from, Point3D p)

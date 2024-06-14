@@ -57,7 +57,7 @@ namespace Server.Items
 
                 if (puzzleItem1 != null || puzzleItem2 != null)
                 {
-                    from.SendMessage("You already have a puzzle board.");
+                    from.SendMessage("You already have a puzzle RegularBoard.");
                     return;
                 }
 
@@ -84,10 +84,10 @@ namespace Server.Items
                     if (!from.Backpack.TryDropItem(from, puzzle, true))
                         puzzle.Delete();
                     else
-                        from.SendMessage("You recieve a puzzle board.");
+                        from.SendMessage("You recieve a puzzle RegularBoard.");
                 }
                 else
-                    from.SendMessage("You do not have the required key to get that puzzle board.");
+                    from.SendMessage("You do not have the required key to get that puzzle RegularBoard.");
             }
         }
 

@@ -73,7 +73,7 @@ namespace Server.Regions
             List<PlayerMobile> pms = new List<PlayerMobile>();
             bool hasMap = false;
 
-            foreach (PlayerMobile i in boat.GetEntitiesOnBoard().OfType<PlayerMobile>().Where(pm => pm.NetState != null))
+            foreach (PlayerMobile i in boat.GetEntitiesOnRegularBoard().OfType<PlayerMobile>().Where(pm => pm.NetState != null))
             {
                 pms.Add(i);
                 PlayerMobile pm = i;
@@ -115,7 +115,7 @@ namespace Server.Regions
                 else
                 {
                     boat.StopMove(true);
-                    boat.SendMessageToAllOnBoard("The boat has struck a coral reef!");
+                    boat.SendMessageToAllOnRegularBoard("The boat has struck a coral reef!");
                 }
 
             }

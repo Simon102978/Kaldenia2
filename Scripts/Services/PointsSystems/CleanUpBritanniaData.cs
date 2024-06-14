@@ -211,7 +211,7 @@ namespace Server.Engines.Points
             Entries[typeof(SmallPieceofBlackrock)] = 10.0;
 
             //Lumberjacking
-            Entries[typeof(Board)] = 0.05;
+            Entries[typeof(RegularBoard)] = 0.05;
             Entries[typeof(OakBoard)] = 0.10;
             Entries[typeof(AshBoard)] = 0.25;
             Entries[typeof(YewBoard)] = 0.50;

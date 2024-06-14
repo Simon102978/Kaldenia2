@@ -33,7 +33,7 @@ namespace Server.Items
 
             if (boat == null || Galleon == null || boat != Galleon)
             {
-                from.SendLocalizedMessage(1116724); // You cannot pilot a ship unless you are aboard it!
+                from.SendLocalizedMessage(1116724); // You cannot pilot a ship unless you are aRegularBoard it!
             }
             else if (Galleon.GetSecurityLevel(from) < SecurityLevel.Crewman)
             {

@@ -37,7 +37,7 @@ namespace Server.Engines.Quests
             m_Galleon = galleon;
 
             AddObjective(new BountyQuestObjective());
-            AddReward(new BaseReward(1116712)); //The gold listed on the bulletin board and a special reward from the officer if captured alive.
+            AddReward(new BaseReward(1116712)); //The gold listed on the bulletin RegularBoard and a special reward from the officer if captured alive.
         }
 
         public override void OnAccept()
@@ -274,7 +274,7 @@ namespace Server.Engines.Quests
 
             int offset = 172;
 
-            g.AddHtmlLocalized(98, offset, 312, 16, 1116710, 0x2710, false, false);  // Capture or kill a pirate listed on the bulletin board.
+            g.AddHtmlLocalized(98, offset, 312, 16, 1116710, 0x2710, false, false);  // Capture or kill a pirate listed on the bulletin RegularBoard.
 
             offset += 16;
 
@@ -282,7 +282,7 @@ namespace Server.Engines.Quests
 
             offset += 32;
 
-            g.AddHtmlLocalized(98, offset, 312, 32, 1116712, 0x15F90, false, false); //The gold listed on the bulletin board and a special reward from the officer if captured alive.
+            g.AddHtmlLocalized(98, offset, 312, 32, 1116712, 0x15F90, false, false); //The gold listed on the bulletin RegularBoard and a special reward from the officer if captured alive.
 
             return true;
         }
@@ -337,7 +337,7 @@ namespace Server.Engines.Quests
             else
                 AddPole();
 
-            AddReward(new BaseReward(1116712)); //The gold listed on the bulletin board and a special reward from the officer if captured alive.
+            AddReward(new BaseReward(1116712)); //The gold listed on the bulletin RegularBoard and a special reward from the officer if captured alive.
         }
 
         public bool HasQuest(PlayerMobile pm)

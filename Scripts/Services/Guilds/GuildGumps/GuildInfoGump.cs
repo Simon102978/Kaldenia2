@@ -75,7 +75,7 @@ namespace Server.Guilds
 
                     AddBackground(255, 370, 170, 26, 0x2486);
                     AddButton(257, 375, 0x4B9, 0x4BA, 10, GumpButtonType.Reply, 0);
-                    AddHtmlLocalized(282, 373, 150, 26, 1114982, false, false); // Leaderboards
+                    AddHtmlLocalized(282, 373, 150, 26, 1114982, false, false); // LeaderRegularBoards
                 }
                 else
                 {
@@ -169,7 +169,7 @@ namespace Server.Guilds
                     }
                     break;
                 case 10:
-                    pm.SendGump(new Engines.VvV.ViceVsVirtueLeaderboardGump(pm));
+                    pm.SendGump(new Engines.VvV.ViceVsVirtueLeaderRegularBoardGump(pm));
                     break;
             }
         }

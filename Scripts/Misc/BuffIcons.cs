@@ -341,7 +341,7 @@ namespace Server
         UnknownTomato,
         PlayingTheOddsDebuff,
         DragonTurtleDebuff,
-        Boarding,
+        RegularBoarding,
         Potency,
         ThrustDebuff,
         FistsOfFury, // 1169

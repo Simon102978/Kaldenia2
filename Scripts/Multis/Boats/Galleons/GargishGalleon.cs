@@ -98,60 +98,60 @@ namespace Server.Multis
                     if (x == X && y < Y)
                         return ShipPosition.Bow;
                     if (x > X && y < Y)
-                        return ShipPosition.BowStarboard;
+                        return ShipPosition.BowStarRegularBoard;
                     if (x < X && y < Y)
                         return ShipPosition.BowPort;
                     if (x > X && y - 2 == Y)
-                        return ShipPosition.AmidShipStarboard;
+                        return ShipPosition.AmidShipStarRegularBoard;
                     else if (x < X && y - 2 == Y)
                         return ShipPosition.AmidShipPort;
                     else if (x > X && y > Y)
-                        return ShipPosition.AftStarboard;
+                        return ShipPosition.AftStarRegularBoard;
                     else
                         return ShipPosition.AftPort;
                 case Direction.West:
                     if (x < X && y == Y)
                         return ShipPosition.Bow;
                     else if (x < X && y < Y)
-                        return ShipPosition.BowStarboard;
+                        return ShipPosition.BowStarRegularBoard;
                     else if (x < X && y > Y)
                         return ShipPosition.BowPort;
                     else if (x - 2 == X && y < Y)
-                        return ShipPosition.AmidShipStarboard;
+                        return ShipPosition.AmidShipStarRegularBoard;
                     else if (x - 2 == X && y > Y)
                         return ShipPosition.AmidShipPort;
                     else if (x > X && y < Y)
-                        return ShipPosition.AftStarboard;
+                        return ShipPosition.AftStarRegularBoard;
                     else
                         return ShipPosition.AftPort;
                 case Direction.South:
                     if (x == X && y > Y)
                         return ShipPosition.Bow;
                     else if (x < X && y > Y)
-                        return ShipPosition.BowStarboard;
+                        return ShipPosition.BowStarRegularBoard;
                     else if (x > X && y > Y)
                         return ShipPosition.BowPort;
                     else if (x < X && y + 2 == Y)
-                        return ShipPosition.AmidShipStarboard;
+                        return ShipPosition.AmidShipStarRegularBoard;
                     else if (x > X && y + 2 == Y)
                         return ShipPosition.AmidShipPort;
                     else if (x < X && y < Y)
-                        return ShipPosition.AftStarboard;
+                        return ShipPosition.AftStarRegularBoard;
                     else
                         return ShipPosition.AftPort;
                 case Direction.East:
                     if (x > X && y == Y)
                         return ShipPosition.Bow;
                     else if (x > X && y > Y)
-                        return ShipPosition.BowStarboard;
+                        return ShipPosition.BowStarRegularBoard;
                     else if (x > X && y < Y)
                         return ShipPosition.BowPort;
                     else if (x + 2 == X && y > Y)
-                        return ShipPosition.AmidShipStarboard;
+                        return ShipPosition.AmidShipStarRegularBoard;
                     else if (x + 2 == X && y < Y)
                         return ShipPosition.AmidShipPort;
                     else if (x < X && y > Y)
-                        return ShipPosition.AftStarboard;
+                        return ShipPosition.AftStarRegularBoard;
                     else
                         return ShipPosition.AftPort;
             }

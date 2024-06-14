@@ -248,7 +248,7 @@ namespace Server.Engines.CityLoyalty
                 case 2:
                     switch (Utility.Random(7))
                     {
-                        case 0: return new Board(amount);
+                        case 0: return new RegularBoard(amount);
                         case 1: return new OakBoard(amount);
                         case 2: return new AshBoard(amount);
                         case 3: return new YewBoard(amount);

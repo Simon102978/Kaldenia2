@@ -25,7 +25,7 @@ namespace Server.Items
 
         private static Type[] _Dyables = new[]
 {
-            typeof(MongbatDartboard), typeof(FelineBlessedStatue)
+            typeof(MongbatDartRegularBoard), typeof(FelineBlessedStatue)
         };
 
         public override Type[] ForcedDyables => _Dyables;

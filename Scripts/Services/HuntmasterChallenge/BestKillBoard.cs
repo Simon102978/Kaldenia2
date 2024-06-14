@@ -4,12 +4,12 @@ using System.Collections.Generic;
 
 namespace Server.Items
 {
-    public class BestKillBoard : Item
+    public class BestKillRegularBoard : Item
     {
-        public override string DefaultName => "Top 10 Kill Board";
+        public override string DefaultName => "Top 10 Kill RegularBoard";
 
         [Constructable]
-        public BestKillBoard() : base(7775)
+        public BestKillRegularBoard() : base(7775)
         {
             Movable = false;
         }
@@ -23,7 +23,7 @@ namespace Server.Items
             }
         }
 
-        public BestKillBoard(Serial serial) : base(serial)
+        public BestKillRegularBoard(Serial serial) : base(serial)
         {
         }
 

@@ -1050,11 +1050,11 @@ namespace Server.Engines.CityLoyalty
         }
     }
 
-    public class CityMessageBoardGump : BaseGump
+    public class CityMessageRegularBoardGump : BaseGump
     {
         private readonly int _Red = 0x8B0000;
 
-        public CityMessageBoardGump(PlayerMobile pm)
+        public CityMessageRegularBoardGump(PlayerMobile pm)
             : base(pm, 100, 100)
         {
         }

@@ -2,21 +2,21 @@ using Server.Network;
 
 namespace Server.Items
 {
-    public class DartBoard : AddonComponent
+    public class DartRegularBoard : AddonComponent
     {
         [Constructable]
-        public DartBoard()
+        public DartRegularBoard()
             : this(true)
         {
         }
 
         [Constructable]
-        public DartBoard(bool east)
+        public DartRegularBoard(bool east)
             : base(east ? 0x1E2F : 0x1E2E)
         {
         }
 
-        public DartBoard(Serial serial)
+        public DartRegularBoard(Serial serial)
             : base(serial)
         {
         }
@@ -100,19 +100,19 @@ namespace Server.Items
         }
     }
 
-    public class DartBoardEastAddon : BaseAddon
+    public class DartRegularBoardEastAddon : BaseAddon
     {
-        public DartBoardEastAddon()
+        public DartRegularBoardEastAddon()
         {
-            AddComponent(new DartBoard(true), 0, 0, 0);
+            AddComponent(new DartRegularBoard(true), 0, 0, 0);
         }
 
-        public DartBoardEastAddon(Serial serial)
+        public DartRegularBoardEastAddon(Serial serial)
             : base(serial)
         {
         }
 
-        public override BaseAddonDeed Deed => new DartBoardEastDeed();
+        public override BaseAddonDeed Deed => new DartRegularBoardEastDeed();
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -128,20 +128,20 @@ namespace Server.Items
         }
     }
 
-    public class DartBoardEastDeed : BaseAddonDeed
+    public class DartRegularBoardEastDeed : BaseAddonDeed
     {
         [Constructable]
-        public DartBoardEastDeed()
+        public DartRegularBoardEastDeed()
         {
         }
 
-        public DartBoardEastDeed(Serial serial)
+        public DartRegularBoardEastDeed(Serial serial)
             : base(serial)
         {
         }
 
-        public override BaseAddon Addon => new DartBoardEastAddon();
-        public override int LabelNumber => 1044326;// dartboard (east)
+        public override BaseAddon Addon => new DartRegularBoardEastAddon();
+        public override int LabelNumber => 1044326;// dartRegularBoard (east)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -157,19 +157,19 @@ namespace Server.Items
         }
     }
 
-    public class DartBoardSouthAddon : BaseAddon
+    public class DartRegularBoardSouthAddon : BaseAddon
     {
-        public DartBoardSouthAddon()
+        public DartRegularBoardSouthAddon()
         {
-            AddComponent(new DartBoard(false), 0, 0, 0);
+            AddComponent(new DartRegularBoard(false), 0, 0, 0);
         }
 
-        public DartBoardSouthAddon(Serial serial)
+        public DartRegularBoardSouthAddon(Serial serial)
             : base(serial)
         {
         }
 
-        public override BaseAddonDeed Deed => new DartBoardSouthDeed();
+        public override BaseAddonDeed Deed => new DartRegularBoardSouthDeed();
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -185,20 +185,20 @@ namespace Server.Items
         }
     }
 
-    public class DartBoardSouthDeed : BaseAddonDeed
+    public class DartRegularBoardSouthDeed : BaseAddonDeed
     {
         [Constructable]
-        public DartBoardSouthDeed()
+        public DartRegularBoardSouthDeed()
         {
         }
 
-        public DartBoardSouthDeed(Serial serial)
+        public DartRegularBoardSouthDeed(Serial serial)
             : base(serial)
         {
         }
 
-        public override BaseAddon Addon => new DartBoardSouthAddon();
-        public override int LabelNumber => 1044325;// dartboard (south)
+        public override BaseAddon Addon => new DartRegularBoardSouthAddon();
+        public override int LabelNumber => 1044325;// dartRegularBoard (south)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

@@ -54,7 +54,7 @@ namespace Server.Items
             Donations.Add(new CollectionItem(typeof(ScribesPen), 0x0FBF, 1044352, 0x0, 1));
             Donations.Add(new CollectionItem(typeof(BlankScroll), 0xEF3, 1044377, 0x0, 1));
             Donations.Add(new CollectionItem(typeof(FertileDirt), 0xF81, 1023969, 0x0, 1));
-            Donations.Add(new CollectionItem(typeof(Board), 0x1BD7, 1015101, 0, 1));
+            Donations.Add(new CollectionItem(typeof(RegularBoard), 0x1BD7, 1015101, 0, 1));
             Donations.Add(new CollectionItem(typeof(OakBoard), 0x1BD7, 1075052, 0x7DA, 3));
             Donations.Add(new CollectionItem(typeof(AshBoard), 0x1BD7, 1075053, 0x4A7, 6));
             Donations.Add(new CollectionItem(typeof(YewBoard), 0x1BD7, 1075054, 0x4A8, 9));

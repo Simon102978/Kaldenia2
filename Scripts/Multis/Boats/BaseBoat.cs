@@ -35,7 +35,7 @@ namespace Server.Multis
         private static readonly Rectangle2D[] m_IlshWrap = new Rectangle2D[] { new Rectangle2D(16, 16, 2304 - 32, 1600 - 32) };
         private static readonly Rectangle2D[] m_TokunoWrap = new Rectangle2D[] { new Rectangle2D(16, 16, 1448 - 32, 1448 - 32) };
 
-        private static readonly Type[] WoodTypes = new Type[] { typeof(Board),  typeof(OakBoard), typeof(AshBoard), typeof(YewBoard), typeof(HeartwoodBoard), typeof(BloodwoodBoard), typeof(FrostwoodBoard),
+        private static readonly Type[] WoodTypes = new Type[] { typeof(RegularBoard),  typeof(OakBoard), typeof(AshBoard), typeof(YewBoard), typeof(HeartwoodBoard), typeof(BloodwoodBoard), typeof(FrostwoodBoard),
                                                 typeof(Log), typeof(OakLog), typeof(AshLog), typeof(YewLog), typeof(HeartwoodLog), typeof(BloodwoodLog), typeof(FrostwoodLog), };
 
         private static readonly Type[] ClothTypes = new Type[] { typeof(Cloth), typeof(UncutCloth) };
@@ -306,9 +306,9 @@ namespace Server.Multis
         [CommandProperty(AccessLevel.GameMaster)]
         public Direction Facing { get { return m_Facing; } set { SetFacing(value); } }
 
-        public IEnumerable<Item> ItemsOnBoard => GetEntitiesOnBoard().OfType<Item>();
+        public IEnumerable<Item> ItemsOnRegularBoard => GetEntitiesOnRegularBoard().OfType<Item>();
 
-        public IEnumerable<Mobile> MobilesOnBoard => GetEntitiesOnBoard().OfType<Mobile>();
+        public IEnumerable<Mobile> MobilesOnRegularBoard => GetEntitiesOnRegularBoard().OfType<Mobile>();
 
         public override bool HandlesOnSpeech => true;
 
@@ -342,7 +342,7 @@ namespace Server.Multis
         [CommandProperty(AccessLevel.GameMaster)]
         public BoatOrder Order { get; set; }
 
-        public int PlayerCount => MobilesOnBoard.Where(m => m is PlayerMobile).Count();
+        public int PlayerCount => MobilesOnRegularBoard.Where(m => m is PlayerMobile).Count();
 
         [CommandProperty(AccessLevel.GameMaster)]
         public Mobile Pilot { get; set; }
@@ -536,7 +536,7 @@ namespace Server.Multis
 
         public virtual int HoldDistance => 0;
         public virtual int TillerManDistance => 0;
-        public virtual Point2D StarboardOffset => Point2D.Zero;
+        public virtual Point2D StarRegularBoardOffset => Point2D.Zero;
         public virtual Point2D PortOffset => Point2D.Zero;
         public virtual Point3D MarkOffset => Point3D.Zero;
         public virtual BaseDockedBoat DockedBoat => null;
@@ -579,10 +579,10 @@ namespace Server.Multis
             {
                 TillerMan = new TillerMan(this);
                 PPlank = new Plank(this, PlankSide.Port, 0);
-                SPlank = new Plank(this, PlankSide.Starboard, 0);
+                SPlank = new Plank(this, PlankSide.StarRegularBoard, 0);
 
                 PPlank.MoveToWorld(new Point3D(X + PortOffset.X, Y + PortOffset.Y, Z), Map);
-                SPlank.MoveToWorld(new Point3D(X + StarboardOffset.X, Y + StarboardOffset.Y, Z), Map);
+                SPlank.MoveToWorld(new Point3D(X + StarRegularBoardOffset.X, Y + StarRegularBoardOffset.Y, Z), Map);
 
                 Hold = new Hold(this);
 
@@ -1058,7 +1058,7 @@ namespace Server.Multis
             return entity is Blood;
         }
 
-        protected virtual bool CheckOnBoard(IEntity e)
+        protected virtual bool CheckOnRegularBoard(IEntity e)
         {
             if (e is Item && ((Item)e).IsVirtualItem)
                 return false;
@@ -1158,7 +1158,7 @@ namespace Server.Multis
             return false;
         }
 
-        public virtual IEnumerable<IEntity> GetEntitiesOnBoard()
+        public virtual IEnumerable<IEntity> GetEntitiesOnRegularBoard()
         {
             Map map = Map;
 
@@ -1170,7 +1170,7 @@ namespace Server.Multis
 
             foreach (IEntity ent in eable)
             {
-                if (Contains(ent) && CheckOnBoard(ent))
+                if (Contains(ent) && CheckOnRegularBoard(ent))
                 {
                     yield return ent;
                 }
@@ -1265,7 +1265,7 @@ namespace Server.Multis
 
             if (SPlank != null)
             {
-                SPlank.MoveToWorld(GetRotatedLocation(StarboardOffset.X, StarboardOffset.Y), Map);
+                SPlank.MoveToWorld(GetRotatedLocation(StarRegularBoardOffset.X, StarRegularBoardOffset.Y), Map);
                 SPlank.SetFacing(m_Facing);
             }
 
@@ -1455,7 +1455,7 @@ namespace Server.Multis
 
             DryDockResult res = DryDockResult.Valid;
 
-            foreach (IEntity o in GetEntitiesOnBoard())
+            foreach (IEntity o in GetEntitiesOnRegularBoard())
             {
                 if (o == this || IsComponentItem(o) || o is EffectItem || o == TillerMan)
                     continue;
@@ -1506,7 +1506,7 @@ namespace Server.Multis
             else if (result == DryDockResult.NoKey)
                 from.SendLocalizedMessage(502494); // You must have a key to the ship to dock the boat.
             else if (result == DryDockResult.Mobiles)
-                from.SendLocalizedMessage(502495); // You cannot dock the ship with beings on board!
+                from.SendLocalizedMessage(502495); // You cannot dock the ship with beings on RegularBoard!
             else if (result == DryDockResult.Items || result == DryDockResult.Addons)
                 from.SendLocalizedMessage(502496); // You cannot dock the ship with a cluttered deck.
             else if (result == DryDockResult.Hold)
@@ -1535,7 +1535,7 @@ namespace Server.Multis
             //else if ( result == DryDockResult.NotAnchored )
             //	from.SendLocalizedMessage( 1010570 ); // You must lower the anchor to dock the boat.
             else if (result == DryDockResult.Mobiles)
-                from.SendLocalizedMessage(502495); // You cannot dock the ship with beings on board!
+                from.SendLocalizedMessage(502495); // You cannot dock the ship with beings on RegularBoard!
             else if (result == DryDockResult.Items || result == DryDockResult.Addons)
                 from.SendLocalizedMessage(502496); // You cannot dock the ship with a cluttered deck.
             else if (result == DryDockResult.Hold)
@@ -1752,7 +1752,7 @@ namespace Server.Multis
             Container hold = this is BaseGalleon ? ((BaseGalleon)this).GalleonHold : null;
             TimeSpan ts = EmergencyRepairSpan;
 
-            int wood1 = pack.GetAmount(typeof(Board));
+            int wood1 = pack.GetAmount(typeof(RegularBoard));
             int wood2 = pack.GetAmount(typeof(Log));
             int wood3 = 0; int wood4 = 0;
 
@@ -1762,7 +1762,7 @@ namespace Server.Multis
 
             if (hold != null)
             {
-                wood3 = hold.GetAmount(typeof(Board));
+                wood3 = hold.GetAmount(typeof(RegularBoard));
                 wood4 = hold.GetAmount(typeof(Log));
                 cloth3 = hold.GetAmount(typeof(Cloth));
                 cloth4 = hold.GetAmount(typeof(UncutCloth));
@@ -1778,7 +1778,7 @@ namespace Server.Multis
                 if (woodNeeded > 0 && wood1 > 0)
                 {
                     toConsume = Math.Min(woodNeeded, wood1);
-                    pack.ConsumeTotal(typeof(Board), toConsume);
+                    pack.ConsumeTotal(typeof(RegularBoard), toConsume);
                     woodNeeded -= toConsume;
                 }
                 if (woodNeeded > 0 && wood2 > 0)
@@ -1790,7 +1790,7 @@ namespace Server.Multis
                 if (hold != null && woodNeeded > 0 && wood3 > 0)
                 {
                     toConsume = Math.Min(woodNeeded, wood3);
-                    hold.ConsumeTotal(typeof(Board), toConsume);
+                    hold.ConsumeTotal(typeof(RegularBoard), toConsume);
                     woodNeeded -= toConsume;
                 }
                 if (hold != null && woodNeeded > 0 && wood4 > 0)
@@ -1834,7 +1834,7 @@ namespace Server.Multis
         {
             m_EmergencyRepairTimer = null;
 
-            SendMessageToAllOnBoard(1116765);  // The emergency repairs have given out!
+            SendMessageToAllOnRegularBoard(1116765);  // The emergency repairs have given out!
         }
 
         public void TryRepairs(Mobile from)
@@ -2643,7 +2643,7 @@ namespace Server.Multis
             }
             else
             {
-                IEnumerable<IEntity> toMove = GetEntitiesOnBoard();
+                IEnumerable<IEntity> toMove = GetEntitiesOnRegularBoard();
 
                 // entities/boat block move packet
                 NoMoveHS = true;
@@ -2909,7 +2909,7 @@ namespace Server.Multis
 
         public void Teleport(int xOffset, int yOffset, int zOffset)
         {
-            foreach (IEntity ent in GetEntitiesOnBoard().Where(e => !IsComponentItem(e) && !CanMoveOver(e) && e != TillerMan))
+            foreach (IEntity ent in GetEntitiesOnRegularBoard().Where(e => !IsComponentItem(e) && !CanMoveOver(e) && e != TillerMan))
             {
                 ent.Location = new Point3D(ent.X + xOffset, ent.Y + yOffset, ent.Z + zOffset);
             }
@@ -2989,12 +2989,12 @@ namespace Server.Multis
 
                 state.Send(RemovePacket);
 
-                foreach (Item item in ItemsOnBoard)
+                foreach (Item item in ItemsOnRegularBoard)
                 {
                     state.Send(item.RemovePacket);
                 }
 
-                state.Send(GetPacketContainer(GetEntitiesOnBoard()));
+                state.Send(GetPacketContainer(GetEntitiesOnRegularBoard()));
             }
 
             eable.Free();
@@ -3047,7 +3047,7 @@ namespace Server.Multis
 
                 m_Stream.Write(length);
 
-                foreach (IEntity ent in boat.GetEntitiesOnBoard().Where(e => e != boat))
+                foreach (IEntity ent in boat.GetEntitiesOnRegularBoard().Where(e => e != boat))
                 {
                     m_Stream.Write(ent.Serial);
                     m_Stream.Write((short)(ent.X + xOffset));
@@ -3188,7 +3188,7 @@ namespace Server.Multis
 
             Refresh(pilot);
 
-            GetEntitiesOnBoard().OfType<PlayerMobile>().Where(x => x != pilot).ToList().ForEach(y =>
+            GetEntitiesOnRegularBoard().OfType<PlayerMobile>().Where(x => x != pilot).ToList().ForEach(y =>
             {
                 y.SendLocalizedMessage(1149664, pilot.Name); // ~1_NAME~ has assumed control of the ship.
             });
@@ -3209,7 +3209,7 @@ namespace Server.Multis
 
             Refresh(from);
 
-            GetEntitiesOnBoard().OfType<PlayerMobile>().Where(x => x != Pilot).ToList().ForEach(y =>
+            GetEntitiesOnRegularBoard().OfType<PlayerMobile>().Where(x => x != Pilot).ToList().ForEach(y =>
             {
                 y.SendLocalizedMessage(1149668, Pilot.Name); // ~1_NAME~ has relinquished control of the ship.
             });
@@ -3219,7 +3219,7 @@ namespace Server.Multis
 
         public void RowBoat_Tick_Callback()
         {
-            if (!MobilesOnBoard.Any())
+            if (!MobilesOnRegularBoard.Any())
                 Delete();
         }
 
@@ -3253,9 +3253,9 @@ namespace Server.Multis
             }
         }
 
-        public void SendMessageToAllOnBoard(object message)
+        public void SendMessageToAllOnRegularBoard(object message)
         {
-            foreach (Mobile m in MobilesOnBoard.OfType<PlayerMobile>().Where(pm => pm.NetState != null))
+            foreach (Mobile m in MobilesOnRegularBoard.OfType<PlayerMobile>().Where(pm => pm.NetState != null))
             {
                 if (message is int)
                     m.SendLocalizedMessage((int)message);

@@ -51,7 +51,7 @@ namespace Server.Engines.Harvest
                 from.SendMessage((string)message);
         }
 
-        public HarvestBank GetBank(Mobile from, Map map, int x, int y)
+        public HarvestBank GetBank(Map map, int x, int y)
         {
             if (map == null || map == Map.Internal)
                 return null;
@@ -68,130 +68,31 @@ namespace Server.Engines.Harvest
             banks.TryGetValue(key, out HarvestBank bank);
 
             if (bank == null)
-            {
-                HarvestZone zone = GetZoneAt(from, map, x * BankWidth, y * BankHeight);
-
-                if (zone != null)
-                {
-                    banks[key] = bank = new HarvestBank(this, zone);
-                }
-                else
-                {
-                    banks[key] = bank = new HarvestBank(this);  
-                }
-
-           
-            }
-                
+                banks[key] = bank = new HarvestBank(this, GetVeinAt(map, x, y));
 
             return bank;
         }
 
-        public HarvestZone GetZoneAt(Mobile from, Map map, int x, int y)
-        {
-
-            if (Skill == SkillName.Fishing)
-            {
-                return null;
-            }
-
-            
-
-            HarvestZone zone;
-
-            for (int i = 0; i < HarvestZone.HarvestZones.Count; ++i)
-            {
-                zone = (HarvestZone)HarvestZone.HarvestZones[i];
-
-
-           
-                    if (zone != null && zone.CheckValide(Skill) && zone.Map == map)
-                    {
-                        foreach (Rectangle3D rect in zone.Area)
-                        {
-                            Rectangle2D rectangle = new Rectangle2D((IPoint2D)(rect.Start), (IPoint2D)(rect.End));
-
-                            if (rectangle.Contains(new Point2D(x, y)))
-                            {
-								if (from.AccessLevel > AccessLevel.Player)
-								{
-								from.SendMessage("Zone : " + zone.GetType().Name);
-								}
-                  
-                                return zone;
-                            }
-                        }
-                    }
-                
-
-              
-            }
-
-			if (from.AccessLevel > AccessLevel.Player)
-			{
-				from.SendMessage("Zone : Sans Zone");
-
-			}
-
-      
-
-            return null;
-
-
-        }
-
-
-/*
         public HarvestVein GetVeinAt(Map map, int x, int y)
         {
-            if (Skill == SkillName.Mining || Skill == SkillName.Lumberjacking || Skill == SkillName.Fishing)
-            {
-                HarvestZone zone =   GetZoneAt(map, x, y);
-
-                if (zone != null)
-                {
-                    return zone.RandomVein();
-                }
-
+            if (Veins.Length == 1)
                 return Veins[0];
 
+            double randomValue;
+
+            if (RandomizeVeins)
+            {
+                randomValue = Utility.RandomDouble();
+            }
+            else
+            {
+                Random random = new Random((x * 17) + (y * 11) + (map.MapID * 3));
+                randomValue = random.NextDouble();
             }
 
-
-
-            
-                if (Veins.Length == 1)
-                    return Veins[0];
-
-                double randomValue;
-
-                if (RandomizeVeins)
-                {
-                    randomValue = Utility.RandomDouble();
-                }
-                else
-                {
-                    Random random = new Random((x * 17) + (y * 11) + (map.MapID * 3));
-                    randomValue = random.NextDouble();
-                }
-
-                return GetVeinFrom(randomValue); 
-            
-
-
-
-
-
-
-
-
-
-
-
-
-           
+            return GetVeinFrom(randomValue);
         }
-*/
+
         public HarvestVein GetVeinFrom(double randomValue)
         {
             if (Veins.Length == 1)
@@ -230,30 +131,25 @@ namespace Server.Engines.Harvest
 
         public bool Validate(int tileID)
         {
-            if (RangedTiles)
-            {
-                bool contains = false;
+			//if (RangedTiles)
+			//{
+			//	bool contains = false;
 
-                //  for (int i = 0; !contains && i < Tiles.Length; i += 2)
-                //    contains = tileID >= Tiles[i] && tileID <= Tiles[i + 1];
+			//	for (int i = 0; !contains && i <= Tiles.Length; i += 2)
+			//		contains = tileID >= Tiles[i] && tileID <= Tiles[i + 1];
 
-                for (int i = 0; !contains && i < Tiles.Length; i++)
-                {
-                    contains = tileID == Tiles[i];
-                }
+			//	return contains;
+			//}
+			//else
+			//{
+				int dist = -1;
 
-                return contains;
-            }
-            else
-            {
-                int dist = -1;
+				for (int i = 0; dist < 0 && i < Tiles.Length; ++i)
+					dist = Tiles[i] - tileID;
 
-                for (int i = 0; dist < 0 && i < Tiles.Length; ++i)
-                    dist = Tiles[i] - tileID;
-
-                return dist == 0;
-            }
-        }
+				return dist == 0;
+			//}
+		}
 
         #region High Seas
         public bool ValidateSpecial(int tileID)

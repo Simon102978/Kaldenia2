@@ -9,7 +9,7 @@ namespace Server.Items
         public UnderworldPuzzleSolution Solution { get; }
         public UnderworldPuzzleSolution CurrentSolution { get; set; }
 
-        public override int LabelNumber => 1113379;  // Puzzle Board
+        public override int LabelNumber => 1113379;  // Puzzle RegularBoard
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int Attempts { get; set; }
@@ -80,9 +80,9 @@ namespace Server.Items
         private readonly Type[] m_Rewards =
         {
             typeof(VoidEssence),        typeof(SilverSerpentVenom), typeof(ScouringToxin),
-            typeof(ToxicVenomSac),      typeof(MouldingBoard),      typeof(DoughBowl),
+            typeof(ToxicVenomSac),      typeof(MouldingRegularBoard),      typeof(DoughBowl),
             typeof(HornedTotemPole),    typeof(LargeSquarePillow),  typeof(LargeDiamondPillow),
-            typeof(DustyPillow),        typeof(StatuePedestal),		typeof(FlouredBreadBoard),
+            typeof(DustyPillow),        typeof(StatuePedestal),		typeof(FlouredBreadRegularBoard),
             typeof(LuckyCoin),
         };
 

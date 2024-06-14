@@ -52,18 +52,18 @@ namespace Server.Engines.Craft
 		public override void InitCraftList()
 		{
 			int index = -1;
-            index = AddCraft(typeof(Fence), "Fence", "a Fence", 30.5, 70.5, typeof(Board), "Board", 4, "You don't have enough Boards.");
+            index = AddCraft(typeof(Fence), "Fence", "a Fence", 30.5, 70.5, typeof(RegularBoard), "RegularBoard", 4, "You don't have enough RegularBoards.");
             AddRes(index, typeof(FencePost), "Fence Post", 2, "You need Fence Posts");
 
-            index = AddCraft(typeof(FenceCorner), "Fence", "a Corner Fence", 35.0, 75.0, typeof(Board), "Board", 8, "You don't have enough Boards.");
+            index = AddCraft(typeof(FenceCorner), "Fence", "a Corner Fence", 35.0, 75.0, typeof(RegularBoard), "RegularBoard", 8, "You don't have enough RegularBoards.");
             AddRes(index, typeof(FencePost), "Fence Post", 1, "You need a Fence Post");
 
             index = AddCraft(typeof(FencePost), "Fence", "a Fence Post", 10.0, 25.0, typeof(Log), "Log", 1, "You need a log.");
 
-            index = AddCraft(typeof(NorthGate), "Fence", "a North Gate", 50.0, 90.0, typeof(Board), "Board", 7, "You don't have enough Boards.");
+            index = AddCraft(typeof(NorthGate), "Fence", "a North Gate", 50.0, 90.0, typeof(RegularBoard), "RegularBoard", 7, "You don't have enough RegularBoards.");
             AddRes(index, typeof(Hinge), "Hinge", 2, "You need Hinges");
 
-            index = AddCraft(typeof(WestGate), "Fence", "a West Gate", 50.0, 90.0, typeof(Board), "Board", 7, "You don't have enough Boards.");
+            index = AddCraft(typeof(WestGate), "Fence", "a West Gate", 50.0, 90.0, typeof(RegularBoard), "RegularBoard", 7, "You don't have enough RegularBoards.");
             AddRes(index, typeof(Hinge), "Hinge", 2, "You need Hinges");
 
 			MarkOption = true;

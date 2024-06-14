@@ -92,7 +92,7 @@ namespace Server.Spells.Seventh
             }
             else if (!galleon.HasAccess(Caster))
             {
-                Caster.SendLocalizedMessage(1116617); // You do not have permission to board this ship.
+                Caster.SendLocalizedMessage(1116617); // You do not have permission to RegularBoard this ship.
             }
             else
             {
@@ -226,7 +226,7 @@ namespace Server.Spells.Seventh
 
                         if (boat != null && !boat.HasAccess(m))
                         {
-                            m.SendLocalizedMessage(1116617); // You do not have permission to board this ship.
+                            m.SendLocalizedMessage(1116617); // You do not have permission to RegularBoard this ship.
                             return;
                         }
                     }

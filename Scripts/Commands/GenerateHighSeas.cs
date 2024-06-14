@@ -51,15 +51,15 @@ namespace Server.Items
             altar.MoveToWorld(new Point3D(2453, 865, 0), Map.Trammel);
             WeakEntityCollection.Add(name, altar);
 
-            ProfessionalBountyBoard board;
+            ProfessionalBountyRegularBoard RegularBoard;
 
-            board = new ProfessionalBountyBoard();
-            board.MoveToWorld(new Point3D(4544, 2298, -1), Map.Trammel);
-            WeakEntityCollection.Add(name, board);
+            RegularBoard = new ProfessionalBountyRegularBoard();
+            RegularBoard.MoveToWorld(new Point3D(4544, 2298, -1), Map.Trammel);
+            WeakEntityCollection.Add(name, RegularBoard);
 
-            board = new ProfessionalBountyBoard();
-            board.MoveToWorld(new Point3D(4544, 2298, -1), Map.Felucca);
-            WeakEntityCollection.Add(name, board);
+            RegularBoard = new ProfessionalBountyRegularBoard();
+            RegularBoard.MoveToWorld(new Point3D(4544, 2298, -1), Map.Felucca);
+            WeakEntityCollection.Add(name, RegularBoard);
 
             LocalizedSign sign;
 

@@ -7,14 +7,14 @@ using System.Linq;
 
 namespace Server.Engines.VvV
 {
-    public class GuildLeaderboardGump : Gump
+    public class GuildLeaderRegularBoardGump : Gump
     {
         public static int PerPage = 10;
 
         public PlayerMobile User { get; set; }
         public Filter Filter { get; set; }
 
-        public GuildLeaderboardGump(PlayerMobile pm, Filter filter = Filter.Score) : base(50, 50)
+        public GuildLeaderRegularBoardGump(PlayerMobile pm, Filter filter = Filter.Score) : base(50, 50)
         {
             User = pm;
             Filter = filter;
@@ -114,10 +114,10 @@ namespace Server.Engines.VvV
                 case 2:
                 case 3:
                     Filter f = (Filter)info.ButtonID - 1;
-                    User.SendGump(new GuildLeaderboardGump(User, f));
+                    User.SendGump(new GuildLeaderRegularBoardGump(User, f));
                     break;
                 case 4:
-                    User.SendGump(new ViceVsVirtueLeaderboardGump(User));
+                    User.SendGump(new ViceVsVirtueLeaderRegularBoardGump(User));
                     break;
             }
         }

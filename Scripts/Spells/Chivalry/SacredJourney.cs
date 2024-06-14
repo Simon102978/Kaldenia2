@@ -106,7 +106,7 @@ namespace Server.Spells.Chivalry
             }
             else if (!galleon.HasAccess(Caster))
             {
-                Caster.SendLocalizedMessage(1116617); // You do not have permission to board this ship.
+                Caster.SendLocalizedMessage(1116617); // You do not have permission to RegularBoard this ship.
             }
             else
             {

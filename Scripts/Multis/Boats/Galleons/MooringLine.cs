@@ -55,7 +55,7 @@ namespace Server.Items
                 if (Boat.HasAccess(from))
                     canMove = true;
                 else
-                    from.SendLocalizedMessage(1116617); //You do not have permission to board this ship.
+                    from.SendLocalizedMessage(1116617); //You do not have permission to RegularBoard this ship.
             }
 
             if (canMove)

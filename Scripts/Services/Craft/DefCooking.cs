@@ -1129,7 +1129,7 @@ namespace Server.Engines.Craft
 			SetRequireResTarget(index);
 			index = AddCraft(typeof(WoodPulp), "Teinture", "Pulpe de bois", 60.0, 100.0, typeof(BarkFragment), "Morceau d’écorce", 1, 1044253);
 			AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
-			index = AddCraft(typeof(Charcoal), "Teinture", "Charbon", 0.0, 50.0, typeof(Board), "Planche", 1, 1044351);
+			index = AddCraft(typeof(Charcoal), "Teinture", "Charbon", 0.0, 50.0, typeof(RegularBoard), "Planche", 1, 1044351);
 			SetUseAllRes(index, true);
 			SetNeedHeat(index, true);
 			#endregion

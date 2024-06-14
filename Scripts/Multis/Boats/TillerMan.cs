@@ -82,7 +82,7 @@ namespace Server.Items
 
             if (boat == null || Boat == null || Boat != boat)
             {
-                from.SendLocalizedMessage(1116724); // You cannot pilot a ship unless you are aboard it!
+                from.SendLocalizedMessage(1116724); // You cannot pilot a ship unless you are aRegularBoard it!
             }
             else if (Pilot != null && Pilot != from && Pilot == Boat.Owner)
             {

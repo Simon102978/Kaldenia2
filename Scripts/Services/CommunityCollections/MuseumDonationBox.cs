@@ -27,7 +27,7 @@ namespace Server.Items
             base.Init();
 
             Donations.Add(new CollectionItem(typeof(Gold), 0xEEF, 1073116, 0x0, 0.06666));
-            Donations.Add(new CollectionItem(typeof(Board), 0x1BD7, 1015101, 0, 1));
+            Donations.Add(new CollectionItem(typeof(RegularBoard), 0x1BD7, 1015101, 0, 1));
             Donations.Add(new CollectionItem(typeof(OakBoard), 0x1BD7, 1075052, 0x7DA, 3));
             Donations.Add(new CollectionItem(typeof(AshBoard), 0x1BD7, 1075053, 0x4A7, 6));
             Donations.Add(new CollectionItem(typeof(YewBoard), 0x1BD7, 1075054, 0x4A8, 9));

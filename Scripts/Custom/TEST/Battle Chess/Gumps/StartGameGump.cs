@@ -70,7 +70,7 @@ namespace Arya.Chess
 
 				int bid = m_AllowSpectators ? 2153 : 2151;
 				this.AddButton( 10, 75, bid, bid, 3, GumpButtonType.Reply, 0 );
-				this.AddLabel( 45, 80, LabelHue, "Allow spectators on the Chessboard" );
+				this.AddLabel( 45, 80, LabelHue, "Allow spectators on the ChessRegularBoard" );
 			}
 			else
 			{

@@ -90,7 +90,7 @@ namespace Server.Gumps
 
             if (e.Type == RecallRuneType.Ship)
             {
-                loc = string.Format("Aboard {0}", e.Description.Substring(e.Description.IndexOf(",") + 2));
+                loc = string.Format("ARegularBoard {0}", e.Description.Substring(e.Description.IndexOf(",") + 2));
             }
             else if (Sextant.Format(e.Location, e.Map, ref xLong, ref yLat, ref xMins, ref yMins, ref xEast, ref ySouth))
             {

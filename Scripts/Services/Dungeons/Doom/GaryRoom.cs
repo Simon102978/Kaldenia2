@@ -426,9 +426,9 @@ namespace Server.Engines.Doom
             GetDoor1();
             GetDoor2();
 
-            if (!FindObject(typeof(UOBoard), _RulesLoc))
+            if (!FindObject(typeof(UORegularBoard), _RulesLoc))
             {
-                UOBoard rules = new UOBoard
+                UORegularBoard rules = new UORegularBoard
                 {
                     Movable = false
                 };
@@ -609,7 +609,7 @@ namespace Server.Engines.Doom
         }
     }
 
-    public class UOBoard : Item
+    public class UORegularBoard : Item
     {
         private int _Index;
 
@@ -632,7 +632,7 @@ namespace Server.Engines.Doom
         public override int LabelNumber => 1080085;  // The Rulebook
 
         [Constructable]
-        public UOBoard() : base(0xFAA)
+        public UORegularBoard() : base(0xFAA)
         {
         }
 
@@ -673,7 +673,7 @@ namespace Server.Engines.Doom
             list.Add(1062703); // Spectator Vision
         }
 
-        public UOBoard(Serial serial)
+        public UORegularBoard(Serial serial)
             : base(serial)
         {
         }

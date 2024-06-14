@@ -15,14 +15,14 @@ namespace Server.Engines.VvV
         ReturnedSigils
     }
 
-    public class ViceVsVirtueLeaderboardGump : Gump
+    public class ViceVsVirtueLeaderRegularBoardGump : Gump
     {
         public static int PerPage = 10;
 
         public PlayerMobile User { get; set; }
         public Filter Filter { get; set; }
 
-        public ViceVsVirtueLeaderboardGump(PlayerMobile pm, Filter filter = Filter.Score) : base(50, 50)
+        public ViceVsVirtueLeaderRegularBoardGump(PlayerMobile pm, Filter filter = Filter.Score) : base(50, 50)
         {
             User = pm;
             Filter = filter;
@@ -137,10 +137,10 @@ namespace Server.Engines.VvV
                 case 2:
                 case 3:
                     Filter f = (Filter)info.ButtonID - 1;
-                    User.SendGump(new ViceVsVirtueLeaderboardGump(User, f));
+                    User.SendGump(new ViceVsVirtueLeaderRegularBoardGump(User, f));
                     break;
                 case 4:
-                    User.SendGump(new GuildLeaderboardGump(User));
+                    User.SendGump(new GuildLeaderRegularBoardGump(User));
                     break;
             }
         }

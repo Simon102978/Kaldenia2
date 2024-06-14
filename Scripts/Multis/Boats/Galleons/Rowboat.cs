@@ -96,7 +96,7 @@ namespace Server.Multis
         /// This must be overriden due to the tillerman not being in the MCL bounds
         /// </summary>
         /// <returns></returns>
-        public override IEnumerable<IEntity> GetEntitiesOnBoard()
+        public override IEnumerable<IEntity> GetEntitiesOnRegularBoard()
         {
             Map map = Map;
 
@@ -108,7 +108,7 @@ namespace Server.Multis
 
             foreach (IEntity ent in eable)
             {
-                if (Contains(ent) && CheckOnBoard(ent))
+                if (Contains(ent) && CheckOnRegularBoard(ent))
                 {
                     yield return ent;
                 }

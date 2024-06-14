@@ -22,7 +22,7 @@ namespace Arya.Chess
 		}
 
 
-		public Knight( BChessboard board, ChessColor color, Point2D position ) : base( board, color, position )
+		public Knight( BChessRegularBoard RegularBoard, ChessColor color, Point2D position ) : base( RegularBoard, color, position )
 		{
 		}
 
@@ -31,7 +31,7 @@ namespace Arya.Chess
 			m_Piece = new ChessMobile( this );
 			m_Piece.Name = string.Format( "Knight [{0}]", m_Color.ToString() );
 
-			switch ( m_BChessboard.ChessSet )
+			switch ( m_BChessRegularBoard.ChessSet )
 			{
 				case ChessSet.Classic : CreateClassic();
 					break;
@@ -106,11 +106,11 @@ namespace Arya.Chess
 			m_Piece.Female = false;
 			m_Piece.BodyValue = 0x190;
 
-			if ( m_BChessboard.OverrideMinorHue )
+			if ( m_BChessRegularBoard.OverrideMinorHue )
 				m_Piece.Hue = Hue;
 			else
-				m_Piece.Hue = m_BChessboard.SkinHue;
-			m_Piece.AddItem( new PonyTail( m_BChessboard.OverrideMinorHue ? Hue : m_BChessboard.HairHue ) );
+				m_Piece.Hue = m_BChessRegularBoard.SkinHue;
+			m_Piece.AddItem( new PonyTail( m_BChessRegularBoard.OverrideMinorHue ? Hue : m_BChessRegularBoard.HairHue ) );
 
 			Item item = null;
 
@@ -166,7 +166,7 @@ namespace Arya.Chess
 			}
             
 			// Verify target piece
-			BaseChessPiece piece = m_BChessboard[ newLocation ];
+			BaseChessPiece piece = m_BChessRegularBoard[ newLocation ];
 
 			if ( piece == null || piece.Color != m_Color )
 				return true;
@@ -190,10 +190,10 @@ namespace Arya.Chess
 
 					Point2D p = new Point2D( m_Position.X + dx, m_Position.Y + dy );
 
-					if ( ! m_BChessboard.IsValid( p ) )
+					if ( ! m_BChessRegularBoard.IsValid( p ) )
 						continue;
 
-					BaseChessPiece piece = m_BChessboard[ p ];
+					BaseChessPiece piece = m_BChessRegularBoard[ p ];
 
 					if ( piece == null )
 						moves.Add( p );

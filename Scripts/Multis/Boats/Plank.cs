@@ -6,7 +6,7 @@ using System.Collections.Generic;
 
 namespace Server.Items
 {
-    public enum PlankSide { Port, Starboard }
+    public enum PlankSide { Port, StarRegularBoard }
 
     public class Plank : Item, ILockable
     {
@@ -83,7 +83,7 @@ namespace Server.Items
         public bool IsOpen => ItemID == 0x3ED5 || ItemID == 0x3ED4 || ItemID == 0x3E84 || ItemID == 0x3E89;
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool Starboard => Side == PlankSide.Starboard;
+        public bool StarRegularBoard => Side == PlankSide.StarRegularBoard;
 
         public void SetFacing(Direction dir)
         {
@@ -91,20 +91,20 @@ namespace Server.Items
             {
                 switch (dir)
                 {
-                    case Direction.North: ItemID = Starboard ? 0x3ED4 : 0x3ED5; break;
-                    case Direction.East: ItemID = Starboard ? 0x3E84 : 0x3E89; break;
-                    case Direction.South: ItemID = Starboard ? 0x3ED5 : 0x3ED4; break;
-                    case Direction.West: ItemID = Starboard ? 0x3E89 : 0x3E84; break;
+                    case Direction.North: ItemID = StarRegularBoard ? 0x3ED4 : 0x3ED5; break;
+                    case Direction.East: ItemID = StarRegularBoard ? 0x3E84 : 0x3E89; break;
+                    case Direction.South: ItemID = StarRegularBoard ? 0x3ED5 : 0x3ED4; break;
+                    case Direction.West: ItemID = StarRegularBoard ? 0x3E89 : 0x3E84; break;
                 }
             }
             else
             {
                 switch (dir)
                 {
-                    case Direction.North: ItemID = Starboard ? 0x3EB2 : 0x3EB1; break;
-                    case Direction.East: ItemID = Starboard ? 0x3E85 : 0x3E8A; break;
-                    case Direction.South: ItemID = Starboard ? 0x3EB1 : 0x3EB2; break;
-                    case Direction.West: ItemID = Starboard ? 0x3E8A : 0x3E85; break;
+                    case Direction.North: ItemID = StarRegularBoard ? 0x3EB2 : 0x3EB1; break;
+                    case Direction.East: ItemID = StarRegularBoard ? 0x3E85 : 0x3E8A; break;
+                    case Direction.South: ItemID = StarRegularBoard ? 0x3EB1 : 0x3EB2; break;
+                    case Direction.West: ItemID = StarRegularBoard ? 0x3E8A : 0x3E85; break;
                 }
             }
         }

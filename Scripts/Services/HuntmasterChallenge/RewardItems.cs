@@ -251,7 +251,7 @@ namespace Server.Items
         public override void AddWeightProperty(ObjectPropertyList list)
         {
             base.AddWeightProperty(list);
-            list.Add(1158775);  // * Magically Chops Logs into Boards *
+            list.Add(1158775);  // * Magically Chops Logs into RegularBoards *
             list.Add(1060741, _Charges.ToString()); // charges: 
         }
 

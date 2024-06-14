@@ -41,20 +41,13 @@ namespace Server.Items
             Hue = CraftResources.GetHue(resource);
         }
 
-        public override void GetProperties(ObjectPropertyList list)
+		public override void GetProperties(ObjectPropertyList list)
         {
             base.GetProperties(list);
 
-            if (!CraftResources.IsStandard(m_Resource))
-            {
-                int num = CraftResources.GetLocalizationNumber(m_Resource);
+			list.Add(CraftResources.GetName(m_Resource));
+		}
 
-                if (num > 0)
-                    list.Add(num);
-                else
-                    list.Add(CraftResources.GetName(m_Resource));
-            }
-        }
         public BaseLog(Serial serial) : base(serial)
         {
         }
@@ -102,20 +95,38 @@ namespace Server.Items
                 item.AttachSocket(new Caddellite());
             }
 
-            base.ScissorHelper(from, item, 1, false);
+            base.ScissorHelper(from, item, 2, false);
             return true;
         }
 
         public virtual bool Axe(Mobile from, BaseAxe axe)
         {
-            if (!TryCreateBoards(from, 0, new Board()))
+			Item item;
+
+			switch(Resource)
+			{
+				default:
+				case CraftResource.RegularWood:		{ item = new RegularBoard();	break; }
+				case CraftResource.PlainoisWood:	{ item = new PlainoisBoard();	break; }
+				case CraftResource.ForestierWood:	{ item = new ForestierBoard();	break; }
+				case CraftResource.CollinoisWood:	{ item = new CollinoisBoard();	break; }
+				case CraftResource.DesertiqueWood:	{ item = new DesertiqueBoard(); break; }
+				case CraftResource.SavanoisWood:	{ item = new SavanoisBoard();	break; }
+				case CraftResource.MontagnardWood:	{ item = new MontagnardBoard(); break; }
+				case CraftResource.VolcaniqueWood:	{ item = new VolcaniqueBoard(); break; }
+				case CraftResource.TropicauxWood:	{ item = new TropicauxBoard();	break; }
+				case CraftResource.ToundroisWood:	{ item = new ToundroisBoard();	break; }
+				case CraftResource.AncienWood:		{ item = new AncienBoard();		break; }
+			}
+
+			if (item != null && !TryCreateBoards(from, 0, item))
                 return false;
 
             return true;
         }
     }
 
-    public class Log : BaseLog
+	public class Log : BaseLog
     {
         [Constructable]
         public Log()
@@ -152,14 +163,58 @@ namespace Server.Items
 
         public override bool Axe(Mobile from, BaseAxe axe)
         {
-            if (!TryCreateBoards(from, 0, new Board()))
+            if (!TryCreateBoards(from, 0, new RegularBoard()))
                 return false;
 
             return true;
         }
     }
 
-    public class HeartwoodLog : BaseLog
+	public class PlainoisLog : BaseLog
+	{
+		[Constructable]
+		public PlainoisLog()
+			: this(1)
+		{
+		}
+
+		[Constructable]
+		public PlainoisLog(int amount)
+			: base(CraftResource.PlainoisWood, amount)
+		{
+		}
+
+		public PlainoisLog(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			//don't deserialize anything on update
+			if (UpdatingBaseLogClass)
+				return;
+
+			int version = reader.ReadInt();
+		}
+
+		public override bool Axe(Mobile from, BaseAxe axe)
+		{
+			if (!TryCreateBoards(from, 0, new PlainoisBoard()))
+				return false;
+
+			return true;
+		}
+	}
+
+	public class HeartwoodLog : BaseLog
     {
         [Constructable]
         public HeartwoodLog()
@@ -410,4 +465,365 @@ namespace Server.Items
             return true;
         }
     }
+
+	public class ForestierLog : BaseLog
+	{
+		[Constructable]
+		public ForestierLog()
+			: this(1)
+		{
+		}
+
+		[Constructable]
+		public ForestierLog(int amount)
+			: base(CraftResource.ForestierWood, amount)
+		{
+		}
+
+		public ForestierLog(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+		public override bool Axe(Mobile from, BaseAxe axe)
+		{
+			if (!TryCreateBoards(from, 0, new ForestierBoard()))
+				return false;
+
+			return true;
+		}
+	}
+	public class CollinoisLog : BaseLog
+	{
+		[Constructable]
+		public CollinoisLog()
+			: this(1)
+		{
+		}
+
+		[Constructable]
+		public CollinoisLog(int amount)
+			: base(CraftResource.CollinoisWood, amount)
+		{
+		}
+
+		public CollinoisLog(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+		public override bool Axe(Mobile from, BaseAxe axe)
+		{
+			if (!TryCreateBoards(from, 0, new CollinoisBoard()))
+				return false;
+
+			return true;
+		}
+	}
+	public class DesertiqueLog : BaseLog
+	{
+		[Constructable]
+		public DesertiqueLog()
+			: this(1)
+		{
+		}
+
+		[Constructable]
+		public DesertiqueLog(int amount)
+			: base(CraftResource.DesertiqueWood, amount)
+		{
+		}
+
+		public DesertiqueLog(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+		public override bool Axe(Mobile from, BaseAxe axe)
+		{
+			if (!TryCreateBoards(from, 0, new DesertiqueBoard()))
+				return false;
+
+			return true;
+		}
+	}
+	public class MontagnardLog : BaseLog
+	{
+		[Constructable]
+		public MontagnardLog()
+			: this(1)
+		{
+		}
+
+		[Constructable]
+		public MontagnardLog(int amount)
+			: base(CraftResource.MontagnardWood, amount)
+		{
+		}
+
+		public MontagnardLog(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+		public override bool Axe(Mobile from, BaseAxe axe)
+		{
+			if (!TryCreateBoards(from, 0, new MontagnardBoard()))
+				return false;
+
+			return true;
+		}
+	}
+	public class SavanoisLog : BaseLog
+	{
+		[Constructable]
+		public SavanoisLog()
+			: this(1)
+		{
+		}
+
+		[Constructable]
+		public SavanoisLog(int amount)
+			: base(CraftResource.SavanoisWood, amount)
+		{
+		}
+
+		public SavanoisLog(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+		public override bool Axe(Mobile from, BaseAxe axe)
+		{
+			if (!TryCreateBoards(from, 0, new SavanoisBoard()))
+				return false;
+
+			return true;
+		}
+	}
+	public class VolcaniqueLog : BaseLog
+	{
+		[Constructable]
+		public VolcaniqueLog()
+			: this(1)
+		{
+		}
+
+		[Constructable]
+		public VolcaniqueLog(int amount)
+			: base(CraftResource.VolcaniqueWood, amount)
+		{
+		}
+
+		public VolcaniqueLog(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+		public override bool Axe(Mobile from, BaseAxe axe)
+		{
+			if (!TryCreateBoards(from, 0, new VolcaniqueBoard()))
+				return false;
+
+			return true;
+		}
+	}
+	public class ToundroisLog : BaseLog
+	{
+		[Constructable]
+		public ToundroisLog()
+			: this(1)
+		{
+		}
+
+		[Constructable]
+		public ToundroisLog(int amount)
+			: base(CraftResource.ToundroisWood, amount)
+		{
+		}
+
+		public ToundroisLog(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+		public override bool Axe(Mobile from, BaseAxe axe)
+		{
+			if (!TryCreateBoards(from, 0, new ToundroisBoard()))
+				return false;
+
+			return true;
+		}
+	}
+	public class TropicauxLog : BaseLog
+	{
+		[Constructable]
+		public TropicauxLog()
+			: this(1)
+		{
+		}
+
+		[Constructable]
+		public TropicauxLog(int amount)
+			: base(CraftResource.TropicauxWood, amount)
+		{
+		}
+
+		public TropicauxLog(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+		public override bool Axe(Mobile from, BaseAxe axe)
+		{
+			if (!TryCreateBoards(from, 0, new TropicauxBoard()))
+				return false;
+
+			return true;
+		}
+	}
+	public class AncienLog : BaseLog
+	{
+		[Constructable]
+		public AncienLog()
+			: this(1)
+		{
+		}
+
+		[Constructable]
+		public AncienLog(int amount)
+			: base(CraftResource.AncienWood, amount)
+		{
+		}
+
+		public AncienLog(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+
+		public override bool Axe(Mobile from, BaseAxe axe)
+		{
+			if (!TryCreateBoards(from, 0, new AncienBoard()))
+				return false;
+
+			return true;
+		}
+	}
 }

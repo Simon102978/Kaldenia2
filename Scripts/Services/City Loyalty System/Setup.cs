@@ -57,7 +57,7 @@ namespace Server.Engines.CityLoyalty
             CityItemDonation itemdonation;
             CityPetDonation petdonation;
             BoxOfRopes box;
-            CityMessageBoard board;
+            CityMessageRegularBoard RegularBoard;
 
             foreach (int c in Enum.GetValues(typeof(City)))
             {
@@ -86,7 +86,7 @@ namespace Server.Engines.CityLoyalty
                     itemdonation = new CityItemDonation(sys.City, minister);
                     petdonation = new CityPetDonation(sys.City, minister);
                     box = new BoxOfRopes(sys.City);
-                    board = new CityMessageBoard(sys.City, 0xA0C5);
+                    RegularBoard = new CityMessageRegularBoard(sys.City, 0xA0C5);
 
                     if (!HasType(sys, minister.GetType()))
                     {
@@ -135,13 +135,13 @@ namespace Server.Engines.CityLoyalty
                     else
                         box.Delete();
 
-                    if (!HasType(sys, board.GetType()))
+                    if (!HasType(sys, RegularBoard.GetType()))
                     {
-                        board.MoveToWorld(sys.Definition.BoardLocation, CityLoyaltySystem.SystemMap);
-                        sys.Board = board;
+                        RegularBoard.MoveToWorld(sys.Definition.RegularBoardLocation, CityLoyaltySystem.SystemMap);
+                        sys.RegularBoard = RegularBoard;
                     }
                     else
-                        board.Delete();
+                        RegularBoard.Delete();
 
                     sys.CanUtilize = true;
 

@@ -32,7 +32,7 @@ namespace Arya.Chess
 
 		private bool m_EnPassantRisk = false;
 
-		public Pawn( BChessboard board, ChessColor color, Point2D position ) : base( board, color, position )
+		public Pawn( BChessRegularBoard RegularBoard, ChessColor color, Point2D position ) : base( RegularBoard, color, position )
 		{
 		}
 
@@ -41,7 +41,7 @@ namespace Arya.Chess
 			m_Piece = new ChessMobile( this );
 			m_Piece.Name = string.Format( "Pawn [{0}]", m_Color.ToString() );
 
-			switch ( m_BChessboard.ChessSet )
+			switch ( m_BChessRegularBoard.ChessSet )
 			{
 				case ChessSet.Classic : CreateClassic();
 					break;
@@ -109,11 +109,11 @@ namespace Arya.Chess
 			m_Piece.Female = false;
 			m_Piece.BodyValue = 0x190;
 
-			if ( m_BChessboard.OverrideMinorHue )
+			if ( m_BChessRegularBoard.OverrideMinorHue )
 				m_Piece.Hue = Hue;
 			else
-				m_Piece.Hue = m_BChessboard.SkinHue;
-			m_Piece.AddItem( new ShortHair( m_BChessboard.OverrideMinorHue ? Hue : m_BChessboard.HairHue ) );
+				m_Piece.Hue = m_BChessRegularBoard.SkinHue;
+			m_Piece.AddItem( new ShortHair( m_BChessRegularBoard.OverrideMinorHue ? Hue : m_BChessRegularBoard.HairHue ) );
 
 			Item item = null;
 
@@ -173,7 +173,7 @@ namespace Arya.Chess
 				{
 					int offset = m_Color == ChessColor.Black ? i : -i;
 
-					if ( m_BChessboard[ m_Position.X, m_Position.Y + offset ] != null )
+					if ( m_BChessRegularBoard[ m_Position.X, m_Position.Y + offset ] != null )
 					{
 						err = "Pawns can't move over other pieces, and capture in diagonal";
 						return false;
@@ -207,7 +207,7 @@ namespace Arya.Chess
 				}
 
 				// Verify if there's a piece to capture
-				BaseChessPiece piece = m_BChessboard[ newLocation ];
+				BaseChessPiece piece = m_BChessRegularBoard[ newLocation ];
 
 				if ( piece != null && piece.Color != m_Color )
 					return true;
@@ -216,7 +216,7 @@ namespace Arya.Chess
 					// Verify for an en passant capture
 					Point2D passant = new Point2D( m_Position.X + dx, m_Position.Y );
 
-					BaseChessPiece target = m_BChessboard[ passant ];
+					BaseChessPiece target = m_BChessRegularBoard[ passant ];
 
 					if ( target != null && target.AllowEnPassantCapture && target.Color != m_Color )
 						return true;
@@ -237,14 +237,14 @@ namespace Arya.Chess
 
 			Point2D step = new Point2D( m_Position.X, m_Position.Y + direction );
 
-			if ( m_BChessboard.IsValid( step ) && m_BChessboard[ step ] == null )
+			if ( m_BChessRegularBoard.IsValid( step ) && m_BChessRegularBoard[ step ] == null )
 			{
 				moves.Add( step );
 
 				// Verify if this pawn can make a second step
 				step.Y += direction;
 
-				if ( ! m_HasMoved && m_BChessboard[ step ] == null )
+				if ( ! m_HasMoved && m_BChessRegularBoard[ step ] == null )
 					moves.Add( step ); // Point2D is a value type
 			}
 
@@ -254,36 +254,36 @@ namespace Arya.Chess
 				Point2D p1 = new Point2D( m_Position.X + 1, m_Position.Y + direction );
 				Point2D p2 = new Point2D( m_Position.X - 1, m_Position.Y + direction );
 
-				if ( m_BChessboard.IsValid( p1 ) )
+				if ( m_BChessRegularBoard.IsValid( p1 ) )
 				{
-					BaseChessPiece piece1 = m_BChessboard[ p1 ];
+					BaseChessPiece piece1 = m_BChessRegularBoard[ p1 ];
 					if ( piece1 != null && piece1.Color != m_Color )
 						moves.Add( p1 );
 					else
 					{
 						Point2D pass1 = new Point2D( m_Position.X - 1, m_Position.Y );
 
-						if ( m_BChessboard.IsValid( pass1 ) )
+						if ( m_BChessRegularBoard.IsValid( pass1 ) )
 						{
-							BaseChessPiece passpiece1 = m_BChessboard[ pass1 ];
+							BaseChessPiece passpiece1 = m_BChessRegularBoard[ pass1 ];
 							if ( passpiece1 != null && passpiece1.Color != m_Color && passpiece1.AllowEnPassantCapture )
 								moves.Add( p1 );
 						}
 					}
 				}
 
-				if ( m_BChessboard.IsValid( p2 ) )
+				if ( m_BChessRegularBoard.IsValid( p2 ) )
 				{
-					BaseChessPiece piece2 = m_BChessboard[ p2 ];
+					BaseChessPiece piece2 = m_BChessRegularBoard[ p2 ];
 					if ( piece2 != null && piece2.Color != m_Color )
 						moves.Add( p2 );
 					else
 					{
 						Point2D pass2 = new	 Point2D( m_Position.X + 1, m_Position.Y );
 
-						if ( m_BChessboard.IsValid( p2 ) )
+						if ( m_BChessRegularBoard.IsValid( p2 ) )
 						{
-							BaseChessPiece passpiece2 = m_BChessboard[ pass2 ];
+							BaseChessPiece passpiece2 = m_BChessRegularBoard[ pass2 ];
 							if ( passpiece2 != null && passpiece2.AllowEnPassantCapture && passpiece2.Color != m_Color )
 								moves.Add( pass2 );
 						}
@@ -295,7 +295,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// States whether this pawn has reached the other side of the board and should be promoted
+		/// States whether this pawn has reached the other side of the RegularBoard and should be promoted
 		/// </summary>
 		public bool ShouldBePromoted
 		{
@@ -334,7 +334,7 @@ namespace Arya.Chess
 				return null; // Straight movement
 
 			Point2D p = new Point2D( at.X, m_Position.Y );
-			basePiece = m_BChessboard[ p ];
+			basePiece = m_BChessRegularBoard[ p ];
 
 			if ( basePiece != null && basePiece.Color != m_Color )
 			{

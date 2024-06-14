@@ -56,7 +56,7 @@ namespace Server.Engines.BulkOrders
                 {
                     Type typeRes = item.Resources.GetAt(0).ItemType;
 
-                    if (typeRes == typeof(Board) || typeRes == typeof(Log))
+                    if (typeRes == typeof(RegularBoard) || typeRes == typeof(Log))
                         return BulkGenericType.Wood;
                 }
             }

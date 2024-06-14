@@ -11,7 +11,7 @@ namespace Server.Items
 {
     public class PlayerBBSouth : BasePlayerBB
     {
-		public override int LabelNumber => 1062421;// bulletin board (south)
+		public override int LabelNumber => 1062421;// bulletin RegularBoard (south)
 		
         [Constructable]
         public PlayerBBSouth()
@@ -40,7 +40,7 @@ namespace Server.Items
 
     public class PlayerBBEast : BasePlayerBB
     {
-		public override int LabelNumber => 1062420;// bulletin board (east)
+		public override int LabelNumber => 1062420;// bulletin RegularBoard (east)
 		
         [Constructable]
         public PlayerBBEast()
@@ -152,7 +152,7 @@ namespace Server.Items
 
         public virtual bool CanPostGreeting(BaseHouse house, Mobile m)
         {
-            // Public boards, such as CityLoyaltySystem board will need to override this
+            // Public RegularBoards, such as CityLoyaltySystem RegularBoard will need to override this
             return house != null && CheckAccess(house, m) && house.IsOwner(m);
         }
 
@@ -228,7 +228,7 @@ namespace Server.Items
             BaseHouse house = BaseHouse.FindHouseAt(this);
 
             if (!CheckUse(house, from))
-                from.SendLocalizedMessage(1062396); // This bulletin board must be locked down in a house to be usable.
+                from.SendLocalizedMessage(1062396); // This bulletin RegularBoard must be locked down in a house to be usable.
             else if (!from.InRange(GetWorldLocation(), 2) || !from.InLOS(this))
                 from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
             else if (CheckAccess(house, from))
@@ -239,14 +239,14 @@ namespace Server.Items
         {
             private readonly int m_Page;
             private readonly BaseHouse m_House;
-            private readonly BasePlayerBB m_Board;
+            private readonly BasePlayerBB m_RegularBoard;
             private readonly bool m_Greeting;
 
-            public PostPrompt(int page, BaseHouse house, BasePlayerBB board, bool greeting)
+            public PostPrompt(int page, BaseHouse house, BasePlayerBB RegularBoard, bool greeting)
             {
                 m_Page = page;
                 m_House = house;
-                m_Board = board;
+                m_RegularBoard = RegularBoard;
                 m_Greeting = greeting;
             }
 
@@ -259,24 +259,24 @@ namespace Server.Items
             {
                 int page = m_Page;
                 BaseHouse house = m_House;
-                BasePlayerBB board = m_Board;
+                BasePlayerBB RegularBoard = m_RegularBoard;
 
-                if (!board.CheckUse(house, from))
+                if (!RegularBoard.CheckUse(house, from))
                 {
-                    from.SendLocalizedMessage(1062396); // This bulletin board must be locked down in a house to be usable.
+                    from.SendLocalizedMessage(1062396); // This bulletin RegularBoard must be locked down in a house to be usable.
                     return;
                 }
-                else if (!from.InRange(board.GetWorldLocation(), 2) || !from.InLOS(board))
+                else if (!from.InRange(RegularBoard.GetWorldLocation(), 2) || !from.InLOS(RegularBoard))
                 {
                     from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
                     return;
                 }
-                else if (!board.CheckAccess(house, from))
+                else if (!RegularBoard.CheckAccess(house, from))
                 {
-                    from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin board.
+                    from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin RegularBoard.
                     return;
                 }
-                else if (m_Greeting && !board.CanPostGreeting(house, from))
+                else if (m_Greeting && !RegularBoard.CanPostGreeting(house, from))
                 {
                     return;
                 }
@@ -292,15 +292,15 @@ namespace Server.Items
 
                     if (m_Greeting)
                     {
-                        board.Greeting = message;
+                        RegularBoard.Greeting = message;
                     }
                     else
                     {
-                        board.Messages.Add(message);
+                        RegularBoard.Messages.Add(message);
 
-                        if (board.Messages.Count > 50)
+                        if (RegularBoard.Messages.Count > 50)
                         {
-                            board.Messages.RemoveAt(0);
+                            RegularBoard.Messages.RemoveAt(0);
 
                             if (page > 0)
                                 --page;
@@ -308,7 +308,7 @@ namespace Server.Items
                     }
                 }
 
-                from.SendGump(new PlayerBBGump(from, house, board, page));
+                from.SendGump(new PlayerBBGump(from, house, RegularBoard, page));
             }
         }
 
@@ -317,13 +317,13 @@ namespace Server.Items
             public override int MessageCliloc => 1062402;
             private readonly int m_Page;
             private readonly BaseHouse m_House;
-            private readonly BasePlayerBB m_Board;
+            private readonly BasePlayerBB m_RegularBoard;
 
-            public SetTitlePrompt(int page, BaseHouse house, BasePlayerBB board)
+            public SetTitlePrompt(int page, BaseHouse house, BasePlayerBB RegularBoard)
             {
                 m_Page = page;
                 m_House = house;
-                m_Board = board;
+                m_RegularBoard = RegularBoard;
             }
 
             public override void OnCancel(Mobile from)
@@ -335,21 +335,21 @@ namespace Server.Items
             {
                 int page = m_Page;
                 BaseHouse house = m_House;
-                BasePlayerBB board = m_Board;
+                BasePlayerBB RegularBoard = m_RegularBoard;
 
-                if (!board.CheckUse(house, from))
+                if (!RegularBoard.CheckUse(house, from))
                 {
-                    from.SendLocalizedMessage(1062396); // This bulletin board must be locked down in a house to be usable.
+                    from.SendLocalizedMessage(1062396); // This bulletin RegularBoard must be locked down in a house to be usable.
                     return;
                 }
-                else if (!from.InRange(board.GetWorldLocation(), 2) || !from.InLOS(board))
+                else if (!from.InRange(RegularBoard.GetWorldLocation(), 2) || !from.InLOS(RegularBoard))
                 {
                     from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
                     return;
                 }
-                else if (!board.CheckAccess(house, from))
+                else if (!RegularBoard.CheckAccess(house, from))
                 {
-                    from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin board.
+                    from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin RegularBoard.
                     return;
                 }
 
@@ -359,9 +359,9 @@ namespace Server.Items
                     text = text.Substring(0, 255);
 
                 if (text.Length > 0)
-                    board.Title = text;
+                    RegularBoard.Title = text;
 
-                from.SendGump(new PlayerBBGump(from, house, board, page));
+                from.SendGump(new PlayerBBGump(from, house, RegularBoard, page));
             }
         }
     }
@@ -449,9 +449,9 @@ namespace Server.Items
         private readonly int m_Page;
         private readonly Mobile m_From;
         private readonly BaseHouse m_House;
-        private readonly BasePlayerBB m_Board;
+        private readonly BasePlayerBB m_RegularBoard;
 
-        public PlayerBBGump(Mobile from, BaseHouse house, BasePlayerBB board, int page)
+        public PlayerBBGump(Mobile from, BaseHouse house, BasePlayerBB RegularBoard, int page)
             : base(50, 10)
         {
             from.CloseGump(typeof(PlayerBBGump));
@@ -459,7 +459,7 @@ namespace Server.Items
             m_Page = page;
             m_From = from;
             m_House = house;
-            m_Board = board;
+            m_RegularBoard = RegularBoard;
 
             AddPage(0);
 
@@ -470,7 +470,7 @@ namespace Server.Items
 
             AddButton(32, 183, 5412, 5413, 1, GumpButtonType.Reply, 0); // Post message
 
-            if (board.CanPostGreeting(house, from))
+            if (RegularBoard.CanPostGreeting(house, from))
             {
                 AddButton(63, 90, 5601, 5605, 2, GumpButtonType.Reply, 0);
                 AddHtmlLocalized(81, 89, 230, 20, 1062400, LabelColor, false, false); // Set title
@@ -479,7 +479,7 @@ namespace Server.Items
                 AddHtmlLocalized(81, 108, 230, 20, 1062401, LabelColor, false, false); // Post greeting
             }
 
-            string title = board.Title;
+            string title = RegularBoard.Title;
 
             if (title != null)
                 AddHtml(183, 68, 180, 23, title, false, false);
@@ -488,12 +488,12 @@ namespace Server.Items
 
             AddLabel(440, 89, LabelHue, page.ToString());
             AddLabel(455, 89, LabelHue, "/");
-            AddLabel(470, 89, LabelHue, board.Messages.Count.ToString());
+            AddLabel(470, 89, LabelHue, RegularBoard.Messages.Count.ToString());
 
-            PlayerBBMessage message = board.Greeting;
+            PlayerBBMessage message = RegularBoard.Greeting;
 
-            if (page >= 1 && page <= board.Messages.Count)
-                message = board.Messages[page - 1];
+            if (page >= 1 && page <= RegularBoard.Messages.Count)
+                message = RegularBoard.Messages[page - 1];
 
             AddImageTiled(150, 220, 240, 1, 2700); // Separator
 
@@ -519,7 +519,7 @@ namespace Server.Items
 
                 AddHtml(150, 240, 250, 100, body, false, false);
 
-                if (board.CanPostGreeting(house, from))
+                if (RegularBoard.CanPostGreeting(house, from))
                 {
                     if (house != null && poster != from)
                     {
@@ -541,21 +541,21 @@ namespace Server.Items
             int page = m_Page;
             Mobile from = m_From;
             BaseHouse house = m_House;
-            BasePlayerBB board = m_Board;
+            BasePlayerBB RegularBoard = m_RegularBoard;
 
-            if (!board.CheckUse(house, from))
+            if (!RegularBoard.CheckUse(house, from))
             {
-                from.SendLocalizedMessage(1062396); // This bulletin board must be locked down in a house to be usable.
+                from.SendLocalizedMessage(1062396); // This bulletin RegularBoard must be locked down in a house to be usable.
                 return;
             }
-            else if (!from.InRange(board.GetWorldLocation(), 2) || !from.InLOS(board))
+            else if (!from.InRange(RegularBoard.GetWorldLocation(), 2) || !from.InLOS(RegularBoard))
             {
                 from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
                 return;
             }
-            else if (!board.CheckAccess(house, from))
+            else if (!RegularBoard.CheckAccess(house, from))
             {
-                from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin board.
+                from.SendLocalizedMessage(1062398); // You are not allowed to post to this bulletin RegularBoard.
                 return;
             }
 
@@ -563,16 +563,16 @@ namespace Server.Items
             {
                 case 1: // Post message
                     {
-                        from.Prompt = new BasePlayerBB.PostPrompt(page, house, board, false);
+                        from.Prompt = new BasePlayerBB.PostPrompt(page, house, RegularBoard, false);
                         from.SendLocalizedMessage(1062397); // Please enter your message:
 
                         break;
                     }
                 case 2: // Set title
                     {
-                        if (board.CanPostGreeting(house, from))
+                        if (RegularBoard.CanPostGreeting(house, from))
                         {
-                            from.Prompt = new BasePlayerBB.SetTitlePrompt(page, house, board);
+                            from.Prompt = new BasePlayerBB.SetTitlePrompt(page, house, RegularBoard);
                             from.SendLocalizedMessage(1062402); // Enter new title:
                         }
 
@@ -580,9 +580,9 @@ namespace Server.Items
                     }
                 case 3: // Post greeting
                     {
-                        if (board.CanPostGreeting(house, from))
+                        if (RegularBoard.CanPostGreeting(house, from))
                         {
-                            from.Prompt = new BasePlayerBB.PostPrompt(page, house, board, true);
+                            from.Prompt = new BasePlayerBB.PostPrompt(page, house, RegularBoard, true);
                             from.SendLocalizedMessage(1062404); // Enter new greeting (this will always be the first post):
                         }
 
@@ -591,20 +591,20 @@ namespace Server.Items
                 case 4: // Scroll up
                     {
                         if (page == 0)
-                            page = board.Messages.Count;
+                            page = RegularBoard.Messages.Count;
                         else
                             page -= 1;
 
-                        from.SendGump(new PlayerBBGump(from, house, board, page));
+                        from.SendGump(new PlayerBBGump(from, house, RegularBoard, page));
 
                         break;
                     }
                 case 5: // Scroll down
                     {
                         page += 1;
-                        page %= board.Messages.Count + 1;
+                        page %= RegularBoard.Messages.Count + 1;
 
-                        from.SendGump(new PlayerBBGump(from, house, board, page));
+                        from.SendGump(new PlayerBBGump(from, house, RegularBoard, page));
 
                         break;
                     }
@@ -612,14 +612,14 @@ namespace Server.Items
                     {
                         if (house != null && house.IsOwner(from))
                         {
-                            if (page >= 1 && page <= board.Messages.Count)
+                            if (page >= 1 && page <= RegularBoard.Messages.Count)
                             {
-                                PlayerBBMessage message = board.Messages[page - 1];
+                                PlayerBBMessage message = RegularBoard.Messages[page - 1];
                                 Mobile poster = message.Poster;
 
                                 if (poster == null)
                                 {
-                                    from.SendGump(new PlayerBBGump(from, house, board, page));
+                                    from.SendGump(new PlayerBBGump(from, house, RegularBoard, page));
                                     return;
                                 }
 
@@ -654,24 +654,24 @@ namespace Server.Items
 
                                     from.SendLocalizedMessage(1062417); // That person has been banned from this house.
 
-                                    if (house.IsInside(poster) && !board.CheckAccess(house, poster))
+                                    if (house.IsInside(poster) && !RegularBoard.CheckAccess(house, poster))
                                         poster.MoveToWorld(house.BanLocation, house.Map);
                                 }
                             }
 
-                            from.SendGump(new PlayerBBGump(from, house, board, page));
+                            from.SendGump(new PlayerBBGump(from, house, RegularBoard, page));
                         }
 
                         break;
                     }
                 case 7: // Delete message
                     {
-                        if (board.CanPostGreeting(house, from))
+                        if (RegularBoard.CanPostGreeting(house, from))
                         {
-                            if (page >= 1 && page <= board.Messages.Count)
-                                board.Messages.RemoveAt(page - 1);
+                            if (page >= 1 && page <= RegularBoard.Messages.Count)
+                                RegularBoard.Messages.RemoveAt(page - 1);
 
-                            from.SendGump(new PlayerBBGump(from, house, board, 0));
+                            from.SendGump(new PlayerBBGump(from, house, RegularBoard, 0));
                         }
 
                         break;
@@ -680,12 +680,12 @@ namespace Server.Items
                     {
                         if (from.AccessLevel >= AccessLevel.GameMaster)
                         {
-                            PlayerBBMessage message = board.Greeting;
+                            PlayerBBMessage message = RegularBoard.Greeting;
 
-                            if (page >= 1 && page <= board.Messages.Count)
-                                message = board.Messages[page - 1];
+                            if (page >= 1 && page <= RegularBoard.Messages.Count)
+                                message = RegularBoard.Messages[page - 1];
 
-                            from.SendGump(new PlayerBBGump(from, house, board, page));
+                            from.SendGump(new PlayerBBGump(from, house, RegularBoard, page));
                             from.SendGump(new PropertiesGump(from, message));
                         }
 

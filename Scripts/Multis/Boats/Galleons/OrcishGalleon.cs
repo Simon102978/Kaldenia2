@@ -99,66 +99,66 @@ namespace Server.Multis
                     if (x == X && y < Y)
                         return ShipPosition.Bow;
                     if (x > X && y < Y)
-                        return ShipPosition.BowStarboard;
+                        return ShipPosition.BowStarRegularBoard;
                     if (x < X && y < Y)
                         return ShipPosition.BowPort;
                     if (x > X && y + 2 == Y)
-                        return ShipPosition.AmidShipStarboard;
+                        return ShipPosition.AmidShipStarRegularBoard;
                     else if (x < X && y + 2 == Y)
                         return ShipPosition.AmidShipPort;
                     else if (x > X && y > Y)
-                        return ShipPosition.AftStarboard;
+                        return ShipPosition.AftStarRegularBoard;
                     else
                         return ShipPosition.AftPort;
                 case Direction.West:
                     if (x < X && y == Y)
                         return ShipPosition.Bow;
                     else if (x < X && y < Y)
-                        return ShipPosition.BowStarboard;
+                        return ShipPosition.BowStarRegularBoard;
                     else if (x < X && y > Y)
                         return ShipPosition.BowPort;
                     else if (x + 2 == X && y < Y)
-                        return ShipPosition.AmidShipStarboard;
+                        return ShipPosition.AmidShipStarRegularBoard;
                     else if (x + 2 == X && y > Y)
                         return ShipPosition.AmidShipPort;
                     else if (x > X && y < Y)
-                        return ShipPosition.AftStarboard;
+                        return ShipPosition.AftStarRegularBoard;
                     else
                         return ShipPosition.AftPort;
                 case Direction.South:
                     if (x == X && y > Y)
                         return ShipPosition.Bow;
                     else if (x < X && y > Y)
-                        return ShipPosition.BowStarboard;
+                        return ShipPosition.BowStarRegularBoard;
                     else if (x > X && y > Y)
                         return ShipPosition.BowPort;
                     else if (x < X && y - 2 == Y)
-                        return ShipPosition.AmidShipStarboard;
+                        return ShipPosition.AmidShipStarRegularBoard;
                     else if (x > X && y - 2 == Y)
                         return ShipPosition.AmidShipPort;
                     else if (x < X && y < Y)
-                        return ShipPosition.AftStarboard;
+                        return ShipPosition.AftStarRegularBoard;
                     else
                         return ShipPosition.AftPort;
                 case Direction.East:
                     if (x > X && y == Y)
                         return ShipPosition.Bow;
                     else if (x > X && y > Y)
-                        return ShipPosition.BowStarboard;
+                        return ShipPosition.BowStarRegularBoard;
                     else if (x > X && y < Y)
                         return ShipPosition.BowPort;
                     else if (x - 2 == X && y > Y)
-                        return ShipPosition.AmidShipStarboard;
+                        return ShipPosition.AmidShipStarRegularBoard;
                     else if (x - 2 == X && y < Y)
                         return ShipPosition.AmidShipPort;
                     else if (x < X && y > Y)
-                        return ShipPosition.AftStarboard;
+                        return ShipPosition.AftStarRegularBoard;
                     else
                         return ShipPosition.AftPort;
             }
         }
 
-        private readonly int PortAndStarboardOffset = 3;
+        private readonly int PortAndStarRegularBoardOffset = 3;
         private readonly int AftOffset = 12; //TODO: Get this
         private readonly int BowOffset = 9;
 
@@ -174,13 +174,13 @@ namespace Server.Multis
                 switch (Facing)
                 {
                     case Direction.North:
-                        if (x > boatX + PortAndStarboardOffset || x < boatX - PortAndStarboardOffset)
+                        if (x > boatX + PortAndStarRegularBoardOffset || x < boatX - PortAndStarRegularBoardOffset)
                             return false;
                         if (y > boatY + AftOffset || y < boatY - BowOffset)
                             return false;
                         return true;
                     case Direction.South:
-                        if (x > boatX + PortAndStarboardOffset || x < boatX - PortAndStarboardOffset)
+                        if (x > boatX + PortAndStarRegularBoardOffset || x < boatX - PortAndStarRegularBoardOffset)
                             return false;
                         if (y > boatY + BowOffset || y < boatY - AftOffset)
                             return false;
@@ -188,13 +188,13 @@ namespace Server.Multis
                     case Direction.East:
                         if (x > boatX + BowOffset || x < boatX - AftOffset)
                             return false;
-                        if (y > boatY + PortAndStarboardOffset || y < boatY - PortAndStarboardOffset)
+                        if (y > boatY + PortAndStarRegularBoardOffset || y < boatY - PortAndStarRegularBoardOffset)
                             return false;
                         return true;
                     case Direction.West:
                         if (x > boatX + AftOffset || x < boatX - BowOffset)
                             return false;
-                        if (y > boatY + PortAndStarboardOffset || y < boatY - PortAndStarboardOffset)
+                        if (y > boatY + PortAndStarRegularBoardOffset || y < boatY - PortAndStarRegularBoardOffset)
                             return false;
                         return true;
                 }
@@ -216,7 +216,7 @@ namespace Server.Multis
                 case 0x1E:
                 case 0x20:
                 case 0x22:
-                    if (x > newPnt.X + PortAndStarboardOffset || x < newPnt.X - PortAndStarboardOffset)
+                    if (x > newPnt.X + PortAndStarRegularBoardOffset || x < newPnt.X - PortAndStarRegularBoardOffset)
                         return true;
                     break;
                 case 0x19: //East/West ID's
@@ -225,7 +225,7 @@ namespace Server.Multis
                 case 0x1F:
                 case 0x21:
                 case 0x23:
-                    if (y > newPnt.Y + PortAndStarboardOffset || y < newPnt.Y - PortAndStarboardOffset)
+                    if (y > newPnt.Y + PortAndStarRegularBoardOffset || y < newPnt.Y - PortAndStarRegularBoardOffset)
                         return true;
                     break;
             }

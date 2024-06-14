@@ -22,7 +22,7 @@ namespace Server.Spells.SkillMasteries
         SavingThrow,
         Potency,
         Knockout,
-        Boarding,
+        RegularBoarding,
         AnticipateHit
     }
 
@@ -113,7 +113,7 @@ namespace Server.Spells.SkillMasteries
 
             Infos.Add(new MasteryInfo(null, 738, SkillName.Poisoning, PassiveSpell.Potency));         // Potency
             Infos.Add(new MasteryInfo(null, 741, SkillName.Wrestling, PassiveSpell.Knockout));         // Knockout
-            Infos.Add(new MasteryInfo(null, 744, SkillName.AnimalTaming, PassiveSpell.Boarding));      // Boarding
+            Infos.Add(new MasteryInfo(null, 744, SkillName.AnimalTaming, PassiveSpell.RegularBoarding));      // RegularBoarding
 
 		*/
         }
@@ -318,8 +318,8 @@ namespace Server.Spells.SkillMasteries
                     case PassiveSpell.Knockout:
                         BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Knockout, 1155931, 1156030, string.Format("{0}\t{1}", GetKnockoutModifier(m).ToString(), GetKnockoutModifier(m, true).ToString(), true))); // Wrestling Damage Bonus:<br>+~1_VAL~% PvM<br>+~2_VAL~% PvP
                         break;
-                    case PassiveSpell.Boarding:
-                        BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.Boarding, 1155934, 1156194, BoardingSlotIncrease(m).ToString(), true)); // Your number of stable slots has been increased by ~1_VAL~.
+                    case PassiveSpell.RegularBoarding:
+                        BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.RegularBoarding, 1155934, 1156194, RegularBoardingSlotIncrease(m).ToString(), true)); // Your number of stable slots has been increased by ~1_VAL~.
                         break;
                 }
 
@@ -381,7 +381,7 @@ namespace Server.Spells.SkillMasteries
             BuffInfo.RemoveBuff(m, BuffIcon.SavingThrow);
             BuffInfo.RemoveBuff(m, BuffIcon.Potency);
             BuffInfo.RemoveBuff(m, BuffIcon.Knockout);
-            BuffInfo.RemoveBuff(m, BuffIcon.Boarding);
+            BuffInfo.RemoveBuff(m, BuffIcon.RegularBoarding);
         }
 
         public static void OnLogin(LoginEventArgs e)
@@ -402,7 +402,7 @@ namespace Server.Spells.SkillMasteries
                 case PassiveSpell.SavingThrow: return 732;
                 case PassiveSpell.Potency: return 738;
                 case PassiveSpell.Knockout: return 741;
-                case PassiveSpell.Boarding: return 744;
+                case PassiveSpell.RegularBoarding: return 744;
             }
 
             return -1;
@@ -519,9 +519,9 @@ namespace Server.Spells.SkillMasteries
             return 0;
         }
 
-        public static int BoardingSlotIncrease(Mobile m)
+        public static int RegularBoardingSlotIncrease(Mobile m)
         {
-            if (IsActivePassive(m, PassiveSpell.Boarding))
+            if (IsActivePassive(m, PassiveSpell.RegularBoarding))
             {
                 return GetMasteryLevel(m, SkillName.AnimalTaming);
             }

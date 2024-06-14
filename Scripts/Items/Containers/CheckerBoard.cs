@@ -1,19 +1,19 @@
 namespace Server.Items
 {
-    public class CheckerBoard : BaseBoard
+    public class CheckerRegularBoard : BaseRegularBoard
     {
         [Constructable]
-        public CheckerBoard()
+        public CheckerRegularBoard()
             : base(0xFA6)
         {
         }
 
-        public CheckerBoard(Serial serial)
+        public CheckerRegularBoard(Serial serial)
             : base(serial)
         {
         }
 
-        public override int LabelNumber => 1016449;// a checker board
+        public override int LabelNumber => 1016449;// a checker RegularBoard
         public override void CreatePieces()
         {
             for (int i = 0; i < 4; i++)

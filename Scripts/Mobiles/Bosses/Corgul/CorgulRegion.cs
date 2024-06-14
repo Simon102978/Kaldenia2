@@ -186,7 +186,7 @@ namespace Server.Regions
                 if (boat.CanFit(ePnt, Map, boat.ItemID))
                 {
                     boat.Teleport(offsetX, offsetY, -5);
-                    boat.SendMessageToAllOnBoard("A rough patch of sea has disoriented the crew!");
+                    boat.SendMessageToAllOnRegularBoard("A rough patch of sea has disoriented the crew!");
 
                     //int z = this.Map.GetAverageZ(boat.X, boat.Y);
                     if (boat.Z != -5)

@@ -440,7 +440,7 @@ namespace Server.Items
             if (from == null)
                 return;
 
-            Galleon.GetEntitiesOnBoard().OfType<PlayerMobile>().Where(x => x != from && Galleon.GetSecurityLevel(x) > SecurityLevel.Denied)
+            Galleon.GetEntitiesOnRegularBoard().OfType<PlayerMobile>().Where(x => x != from && Galleon.GetSecurityLevel(x) > SecurityLevel.Denied)
                 .ToList().ForEach(y =>
                 {
                     if (from != null)
@@ -842,7 +842,7 @@ namespace Server.Items
                         Point3D loc = new Point3D(hit.X + Utility.RandomMinMax(0, 4), hit.Y + Utility.RandomMinMax(0, 4), hit.Z);
                         Effects.SendPacket(loc, target.Map, new GraphicalEffect(EffectType.FixedXYZ, Serial.Zero, Serial.Zero, 0x36CB, loc, loc, 15, 15, true, true));
                         target.OnTakenDamage(shooter, damage);
-                        MobileOnBoardDamage(shooter, loc, ammoInfo);
+                        MobileOnRegularBoardDamage(shooter, loc, ammoInfo);
                     }
                 }
                 else
@@ -869,7 +869,7 @@ namespace Server.Items
             }
         }
 
-        public void MobileOnBoardDamage(Mobile shooter, Point3D pnt, AmmoInfo info)
+        public void MobileOnRegularBoardDamage(Mobile shooter, Point3D pnt, AmmoInfo info)
         {
             List<IDamageable> list = new List<IDamageable>();
 

@@ -362,7 +362,7 @@ namespace Server.Items
                         List<Mobile> candidates = new List<Mobile>();
                         SecurityLevel highest = SecurityLevel.Passenger;
 
-                        foreach (PlayerMobile mob in target.MobilesOnBoard.OfType<PlayerMobile>().Where(pm => Operator.CanBeHarmful(pm, false)))
+                        foreach (PlayerMobile mob in target.MobilesOnRegularBoard.OfType<PlayerMobile>().Where(pm => Operator.CanBeHarmful(pm, false)))
                         {
                             if (target is BaseGalleon && ((BaseGalleon)target).GetSecurityLevel(mob) > highest)
                             {

@@ -75,9 +75,9 @@ namespace Arya.Chess
 		/// </summary>
 		private TimeSpan m_BlackTime = TimeSpan.Zero;
 		/// <summary>
-		/// The BChessboard object providing game logic
+		/// The BChessRegularBoard object providing game logic
 		/// </summary>
-		private BChessboard m_Board;
+		private BChessRegularBoard m_RegularBoard;
 		/// <summary>
 		/// The piece that is performing a move
 		/// </summary>
@@ -91,11 +91,11 @@ namespace Arya.Chess
 		/// </summary>
 		private DateTime m_MoveTime;
 		/// <summary>
-		/// The bounds of the BChessboard
+		/// The bounds of the BChessRegularBoard
 		/// </summary>
 		private Rectangle2D m_Bounds;
 		/// <summary>
-		/// The height of the BChessboard
+		/// The height of the BChessRegularBoard
 		/// </summary>
 		private int m_Z;
 		/// <summary>
@@ -115,11 +115,11 @@ namespace Arya.Chess
 		/// </summary>
 		private ChessControl m_Parent;
 		/// <summary>
-		/// The region for the BChessboard
+		/// The region for the BChessRegularBoard
 		/// </summary>
 		private ChessRegion m_Region;
 		/// <summary>
-		/// Specifies if other players can get on the board or not
+		/// Specifies if other players can get on the RegularBoard or not
 		/// </summary>
 		private bool m_AllowSpectators;
 
@@ -203,7 +203,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Sets the attack effect on the BChessboard
+		/// Sets the attack effect on the BChessRegularBoard
 		/// </summary>
 		public int AttackEffect
 		{
@@ -217,7 +217,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Sets the capture effect on the BChessboard
+		/// Sets the capture effect on the BChessRegularBoard
 		/// </summary>
 		public int CaptureEffect
 		{
@@ -231,7 +231,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Sets the BoltOnDeath property on the BChessboard
+		/// Sets the BoltOnDeath property on the BChessRegularBoard
 		/// </summary>
 		public bool BoltOnDeath
 		{
@@ -245,21 +245,21 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Gets the orientation of the BChessboard
+		/// Gets the orientation of the BChessRegularBoard
 		/// </summary>
-		public BoardOrientation Orientation
+		public RegularBoardOrientation Orientation
 		{
 			get
 			{
 				if ( m_Parent != null )
 					return m_Parent.Orientation;
 				else
-					return BoardOrientation.NorthSouth;
+					return RegularBoardOrientation.NorthSouth;
 			}
 		}
 		
 		/// <summary>
-		/// States whether other players can get on the board
+		/// States whether other players can get on the RegularBoard
 		/// </summary>
 		public bool AllowSpectators
 		{
@@ -268,7 +268,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Gets the BChessboard region
+		/// Gets the BChessRegularBoard region
 		/// </summary>
 		public ChessRegion Region
 		{
@@ -357,7 +357,7 @@ namespace Arya.Chess
 
 			Owner.CloseGump( typeof( Arya.Chess.StartGameGump ) );
 
-			m_Board = new BChessboard( m_Black, m_White, m_Z, m_Bounds, this, m_Parent.ChessSet, m_Parent.WhiteHue, m_Parent.BlackHue, m_Parent.WhiteMinorHue, m_Parent.BlackMinorHue, m_Parent.OverrideMinorHue );
+			m_RegularBoard = new BChessRegularBoard( m_Black, m_White, m_Z, m_Bounds, this, m_Parent.ChessSet, m_Parent.WhiteHue, m_Parent.BlackHue, m_Parent.WhiteMinorHue, m_Parent.BlackMinorHue, m_Parent.OverrideMinorHue );
 
 			m_MoveTime = DateTime.Now;
 
@@ -536,7 +536,7 @@ namespace Arya.Chess
 				return;
 			}
 
-			BaseChessPiece piece = m_Board[ m_Board.WorldToBoard( new Point2D( targeted as IPoint2D ) ) ];
+			BaseChessPiece piece = m_RegularBoard[ m_RegularBoard.WorldToRegularBoard( new Point2D( targeted as IPoint2D ) ) ];
 			
 			if ( piece == null || piece.Color != GetColor( from ) )
 			{
@@ -570,7 +570,7 @@ namespace Arya.Chess
 				return;
 			}
 
-			if ( ! m_Board.TryMove( ref err, m_MovingPiece, new Point2D( targeted as IPoint2D ) ) )
+			if ( ! m_RegularBoard.TryMove( ref err, m_MovingPiece, new Point2D( targeted as IPoint2D ) ) )
 			{
 				m_MovingPiece = null;
 
@@ -649,7 +649,7 @@ namespace Arya.Chess
 		/// <param name="type">The piece the pawn should promote to</param>
 		public void OnPawnPromoted( PawnPromotion type )
 		{
-			m_Board.OnPawnPromoted( m_PromotedPawn, type );
+			m_RegularBoard.OnPawnPromoted( m_PromotedPawn, type );
 
 			m_PromotedPawn = null;
 		}
@@ -698,10 +698,10 @@ namespace Arya.Chess
 				! m_Pending && m_Status == GameStatus.WhiteToMove,
 				m_Status == GameStatus.WhiteMoving ) );
 
-			int[] white = m_Board.GetCaptured( ChessColor.White );
-			int[] black = m_Board.GetCaptured( ChessColor.Black );
-			int ws = m_Board.GetScore( ChessColor.White );
-			int bs = m_Board.GetScore( ChessColor.Black );
+			int[] white = m_RegularBoard.GetCaptured( ChessColor.White );
+			int[] black = m_RegularBoard.GetCaptured( ChessColor.Black );
+			int ws = m_RegularBoard.GetScore( ChessColor.White );
+			int bs = m_RegularBoard.GetScore( ChessColor.Black );
 
 			m_White.SendGump( new ScoreGump( m_White, this, white, black, ws, bs ) );
 			m_Black.SendGump( new ScoreGump( m_Black, this, white, black, ws, bs ) );
@@ -725,9 +725,9 @@ namespace Arya.Chess
 			EventSink.Disconnected -= new DisconnectedEventHandler( OnPlayerDisconnected );
 			EventSink.Login -= new LoginEventHandler( OnPlayerLogin );
 
-			if ( m_Board != null )
+			if ( m_RegularBoard != null )
 			{
-				m_Board.Delete();
+				m_RegularBoard.Delete();
 			}
 
 			if ( m_Timer != null )
@@ -847,16 +847,16 @@ namespace Arya.Chess
 				looser = m_White;
 				looseTime = m_WhiteTime;
 				winTime = m_BlackTime;
-				winnerScore = m_Board.GetScore( ChessColor.Black );
-				looserScore = m_Board.GetScore( ChessColor.White );
+				winnerScore = m_RegularBoard.GetScore( ChessColor.Black );
+				looserScore = m_RegularBoard.GetScore( ChessColor.White );
 			}
 			else
 			{
 				looser = m_Black;
 				looseTime = m_BlackTime;
 				winTime = m_WhiteTime;
-				winnerScore = m_Board.GetScore( ChessColor.White );
-				looserScore = m_Board.GetScore( ChessColor.Black );
+				winnerScore = m_RegularBoard.GetScore( ChessColor.White );
+				looserScore = m_RegularBoard.GetScore( ChessColor.Black );
 			}
 
 			if ( winner == null || looser == null )
@@ -873,12 +873,12 @@ namespace Arya.Chess
 		#region Appearance
 
 		/// <summary>
-		/// Changes the board's chess set
+		/// Changes the RegularBoard's chess set
 		/// </summary>
 		public void SetChessSet( ChessSet chessset )
 		{
-			if ( m_Board != null )
-				m_Board.ChessSet = chessset;
+			if ( m_RegularBoard != null )
+				m_RegularBoard.ChessSet = chessset;
 			else
 				m_Parent.SetChessSet( chessset );  // This allows players to choose their own set
 		}
@@ -890,23 +890,23 @@ namespace Arya.Chess
 		/// <param name="black"></param>
 		public void SetHues( int white, int black, int whiteMinor, int blackMinor )
 		{
-			if ( m_Board != null )
+			if ( m_RegularBoard != null )
 			{
-				m_Board.WhiteHue = white;
-				m_Board.BlackHue = black;
-				m_Board.WhiteMinorHue = whiteMinor;
-				m_Board.BlackMinorHue = blackMinor;
+				m_RegularBoard.WhiteHue = white;
+				m_RegularBoard.BlackHue = black;
+				m_RegularBoard.WhiteMinorHue = whiteMinor;
+				m_RegularBoard.BlackMinorHue = blackMinor;
 			}
 		}
 
 		/// <summary>
-		/// Sets the orientation of the board
+		/// Sets the orientation of the RegularBoard
 		/// </summary>
 		/// <param name="orientation"></param>
-		public void SetOrientation( BoardOrientation orientation )
+		public void SetOrientation( RegularBoardOrientation orientation )
 		{
-			if ( m_Board != null )
-				m_Board.Orientation = orientation;
+			if ( m_RegularBoard != null )
+				m_RegularBoard.Orientation = orientation;
 		}
 
 		/// <summary>
@@ -915,8 +915,8 @@ namespace Arya.Chess
 		/// <param name="doOverride"></param>
 		public void SetMinorHueOverride( bool doOverride )
 		{
-			if ( m_Board != null )
-				m_Board.OverrideMinorHue = doOverride;
+			if ( m_RegularBoard != null )
+				m_RegularBoard.OverrideMinorHue = doOverride;
 		}
 
 		#endregion

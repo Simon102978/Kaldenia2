@@ -31,8 +31,8 @@ namespace Server.Mobiles
 				Add(new GenericBuyInfo(typeof(BreadLoaf), 6, 10, 0x103B, 0, true));                                                 
                                             
                 Add(new GenericBuyInfo(typeof(Backpack), 15, 20, 0x9B2, 0));
-                Add(new GenericBuyInfo("1016450", typeof(Chessboard), 2, 20, 0xFA6, 0));
-                Add(new GenericBuyInfo("1016449", typeof(CheckerBoard), 2, 20, 0xFA6, 0));
+                Add(new GenericBuyInfo("1016450", typeof(ChessRegularBoard), 2, 20, 0xFA6, 0));
+                Add(new GenericBuyInfo("1016449", typeof(CheckerRegularBoard), 2, 20, 0xFA6, 0));
                 Add(new GenericBuyInfo(typeof(Backgammon), 2, 20, 0xE1C, 0));
                 Add(new GenericBuyInfo(typeof(Dices), 2, 20, 0xFA7, 0));
                
@@ -57,8 +57,8 @@ namespace Server.Mobiles
                 Add(typeof(Banana), 1);
                 Add(typeof(Torch), 3);
                 Add(typeof(Candle), 3);
-                Add(typeof(Chessboard), 1);
-                Add(typeof(CheckerBoard), 1);
+                Add(typeof(ChessRegularBoard), 1);
+                Add(typeof(CheckerRegularBoard), 1);
                 Add(typeof(Backgammon), 1);
                 Add(typeof(Dices), 1);
                 Add(typeof(ContractOfEmployment), 626);

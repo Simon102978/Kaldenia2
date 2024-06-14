@@ -6,21 +6,21 @@ using System.Collections.Generic;
 
 namespace Server.Items
 {
-    public class ProfessionalBountyBoard : Item
+    public class ProfessionalBountyRegularBoard : Item
     {
         [Constructable]
-        public ProfessionalBountyBoard() : base(7774)
+        public ProfessionalBountyRegularBoard() : base(7774)
         {
             Movable = false;
         }
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (!from.HasGump(typeof(BountyBoardGump)))
-                BaseGump.SendGump(new BountyBoardGump(from));
+            if (!from.HasGump(typeof(BountyRegularBoardGump)))
+                BaseGump.SendGump(new BountyRegularBoardGump(from));
         }
 
-        public ProfessionalBountyBoard(Serial serial) : base(serial) { }
+        public ProfessionalBountyRegularBoard(Serial serial) : base(serial) { }
 
         public override void Serialize(GenericWriter writer)
         {
@@ -35,14 +35,14 @@ namespace Server.Items
         }
     }
 
-    public class BountyBoardGump : BaseGump
+    public class BountyRegularBoardGump : BaseGump
     {
         public int Index { get; set; }
 
         private readonly int darkHue = 19686;
         private readonly int lightHue = 19884;
 
-        public BountyBoardGump(Mobile from, int index = 0)
+        public BountyRegularBoardGump(Mobile from, int index = 0)
             : base(from as PlayerMobile, 20, 20)
         {
             Index = index;

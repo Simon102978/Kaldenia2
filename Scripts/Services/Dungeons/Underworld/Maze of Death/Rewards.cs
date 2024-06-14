@@ -1,15 +1,15 @@
 namespace Server.Items
 {
     [Flipable(5353, 5354)]
-    public class MouldingBoard : Item
+    public class MouldingRegularBoard : Item
     {
         [Constructable]
-        public MouldingBoard()
+        public MouldingRegularBoard()
             : base(5353)
         {
         }
 
-        public MouldingBoard(Serial serial) : base(serial)
+        public MouldingRegularBoard(Serial serial) : base(serial)
         {
         }
 
@@ -500,18 +500,18 @@ namespace Server.Items
         }
     }
 
-    public class FlouredBreadBoard : Item
+    public class FlouredBreadRegularBoard : Item
     {
-        public override int LabelNumber => 1113639;  // floured bread board
+        public override int LabelNumber => 1113639;  // floured bread RegularBoard
 
         [Constructable]
-        public FlouredBreadBoard()
+        public FlouredBreadRegularBoard()
             : base(0x14E9)
         {
             Weight = 3.0;
         }
 
-        public FlouredBreadBoard(Serial serial)
+        public FlouredBreadRegularBoard(Serial serial)
             : base(serial)
         {
         }

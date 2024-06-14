@@ -658,8 +658,8 @@ namespace Server.Items
                                 item = Activator.CreateInstance(type) as Item;
                         }
 
-                        if (item is Board)
-                            from.SendLocalizedMessage(1075000); // You have been given some wooden boards.
+                        if (item is RegularBoard)
+                            from.SendLocalizedMessage(1075000); // You have been given some wooden RegularBoards.
                         else if (item is IronIngot)
                             from.SendLocalizedMessage(1075001); // You have been given some ingots.
                         else if (item is Bandage)
@@ -1258,7 +1258,7 @@ namespace Server.Items
             typeof(SummonedWailingBanshee),
             typeof(SummonedChicken),
             typeof(SummonedVorpalBunny),
-            typeof(Board),
+            typeof(RegularBoard),
             typeof(IronIngot),
             typeof(Bandage),
         };
@@ -1284,7 +1284,7 @@ namespace Server.Items
             1072459, // Chicken
             1072401, // Vorpal Bunny
 
-            1015101, // Boards
+            1015101, // RegularBoards
             1044036, // Ingots
             1023817, // clean bandage
         };

@@ -548,14 +548,14 @@ namespace Server.Commands
                                 item = new TrainingDummySouthAddon();
                             }
                             break;
-                        case "DartBoard":
+                        case "DartRegularBoard":
                             if (m_ItemID == 0x1E2F)
                             {
-                                item = new DartBoardEastAddon();
+                                item = new DartRegularBoardEastAddon();
                             }
                             else
                             {
-                                item = new DartBoardSouthAddon();
+                                item = new DartRegularBoardSouthAddon();
                             }
                             break;
                     }

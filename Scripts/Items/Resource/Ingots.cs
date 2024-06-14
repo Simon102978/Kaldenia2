@@ -41,7 +41,7 @@ namespace Server.Items
                 InvalidateProperties();
             }
         }
-        public override double DefaultWeight => 0.5;
+        public override double DefaultWeight => 1;
         public override int LabelNumber
         {
             get
@@ -55,8 +55,6 @@ namespace Server.Items
         TextDefinition ICommodity.Description => LabelNumber;
         bool ICommodity.IsDeedable => true;
 
-
-
 		public override void AddNameProperty(ObjectPropertyList list)
 		{
 			var name = CraftResources.GetName(m_Resource);
@@ -67,11 +65,12 @@ namespace Server.Items
 				list.Add(String.Format("{0}{1}{2}", "Lingot [", name, "]")); // ingots
 		}
 
+		public override void GetProperties(ObjectPropertyList list)
+		{
+			base.GetProperties(list);
 
-
-
-
-
+			list.Add(CraftResources.GetName(m_Resource));
+		}
 
 		public override void Serialize(GenericWriter writer)
         {
@@ -144,22 +143,6 @@ namespace Server.Items
                         break;
                     }
             }
-        }
-
-    
-        public override void GetProperties(ObjectPropertyList list)
-        {
-            base.GetProperties(list);
-
-       /*     if (!CraftResources.IsStandard(m_Resource))
-            {
-                int num = CraftResources.GetLocalizationNumber(m_Resource);
-
-                if (num > 0)
-                    list.Add(num);
-                else
-                    list.Add(CraftResources.GetName(m_Resource));
-            }*/
         }
     }
 
@@ -507,6 +490,719 @@ namespace Server.Items
 		}
 
 		public MytherilIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class SonneIngot : BaseIngot
+	{
+		[Constructable]
+		public SonneIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public SonneIngot(int amount) : base(CraftResource.Sonne, amount)
+		{
+		}
+
+		public SonneIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class ArgentIngot : BaseIngot
+	{
+		[Constructable]
+		public ArgentIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public ArgentIngot(int amount) : base(CraftResource.Argent, amount)
+		{
+		}
+
+		public ArgentIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class BorealeIngot : BaseIngot
+	{
+		[Constructable]
+		public BorealeIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public BorealeIngot(int amount) : base(CraftResource.Boreale, amount)
+		{
+		}
+
+		public BorealeIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class ChrysteliarIngot : BaseIngot
+	{
+		[Constructable]
+		public ChrysteliarIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public ChrysteliarIngot(int amount) : base(CraftResource.Chrysteliar, amount)
+		{
+		}
+
+		public ChrysteliarIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class GlaciasIngot : BaseIngot
+	{
+		[Constructable]
+		public GlaciasIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public GlaciasIngot(int amount) : base(CraftResource.Glacias, amount)
+		{
+		}
+
+		public GlaciasIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class LithiarIngot : BaseIngot
+	{
+		[Constructable]
+		public LithiarIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public LithiarIngot(int amount) : base(CraftResource.Lithiar, amount)
+		{
+		}
+
+		public LithiarIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class AcierIngot : BaseIngot
+	{
+		[Constructable]
+		public AcierIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public AcierIngot(int amount) : base(CraftResource.Acier, amount)
+		{
+		}
+
+		public AcierIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class DurianIngot : BaseIngot
+	{
+		[Constructable]
+		public DurianIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public DurianIngot(int amount) : base(CraftResource.Durian, amount)
+		{
+		}
+
+		public DurianIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class EquilibrumIngot : BaseIngot
+	{
+		[Constructable]
+		public EquilibrumIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public EquilibrumIngot(int amount) : base(CraftResource.Equilibrum, amount)
+		{
+		}
+
+		public EquilibrumIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class JolinarIngot : BaseIngot
+	{
+		[Constructable]
+		public JolinarIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public JolinarIngot(int amount) : base(CraftResource.Jolinar, amount)
+		{
+		}
+
+		public JolinarIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class JusticiumIngot : BaseIngot
+	{
+		[Constructable]
+		public JusticiumIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public JusticiumIngot(int amount) : base(CraftResource.Justicium, amount)
+		{
+		}
+
+		public JusticiumIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class AbyssiumIngot : BaseIngot
+	{
+		[Constructable]
+		public AbyssiumIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public AbyssiumIngot(int amount) : base(CraftResource.Abyssium, amount)
+		{
+		}
+
+		public AbyssiumIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class BloodiriumIngot : BaseIngot
+	{
+		[Constructable]
+		public BloodiriumIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public BloodiriumIngot(int amount) : base(CraftResource.Bloodirium, amount)
+		{
+		}
+
+		public BloodiriumIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class HerbrositeIngot : BaseIngot
+	{
+		[Constructable]
+		public HerbrositeIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public HerbrositeIngot(int amount) : base(CraftResource.Herbrosite, amount)
+		{
+		}
+
+		public HerbrositeIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class KhandariumIngot : BaseIngot
+	{
+		[Constructable]
+		public KhandariumIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public KhandariumIngot(int amount) : base(CraftResource.Khandarium, amount)
+		{
+		}
+
+		public KhandariumIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class SombralirIngot : BaseIngot
+	{
+		[Constructable]
+		public SombralirIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public SombralirIngot(int amount) : base(CraftResource.Sombralir, amount)
+		{
+		}
+
+		public SombralirIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class DraconyrIngot : BaseIngot
+	{
+		[Constructable]
+		public DraconyrIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public DraconyrIngot(int amount) : base(CraftResource.Draconyr, amount)
+		{
+		}
+
+		public DraconyrIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class HeptazionIngot : BaseIngot
+	{
+		[Constructable]
+		public HeptazionIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public HeptazionIngot(int amount) : base(CraftResource.Heptazion, amount)
+		{
+		}
+
+		public HeptazionIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class OceanisIngot : BaseIngot
+	{
+		[Constructable]
+		public OceanisIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public OceanisIngot(int amount) : base(CraftResource.Oceanis, amount)
+		{
+		}
+
+		public OceanisIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class BraziumIngot : BaseIngot
+	{
+		[Constructable]
+		public BraziumIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public BraziumIngot(int amount) : base(CraftResource.Brazium, amount)
+		{
+		}
+
+		public BraziumIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class LuneriumIngot : BaseIngot
+	{
+		[Constructable]
+		public LuneriumIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public LuneriumIngot(int amount) : base(CraftResource.Lunerium, amount)
+		{
+		}
+
+		public LuneriumIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class MarinarIngot : BaseIngot
+	{
+		[Constructable]
+		public MarinarIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public MarinarIngot(int amount) : base(CraftResource.Marinar, amount)
+		{
+		}
+
+		public MarinarIngot(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	[FlipableAttribute(0x1BF2, 0x1BEF)]
+	public class NostalgiumIngot : BaseIngot
+	{
+		[Constructable]
+		public NostalgiumIngot() : this(1)
+		{
+		}
+
+		[Constructable]
+		public NostalgiumIngot(int amount) : base(CraftResource.Nostalgium, amount)
+		{
+		}
+
+		public NostalgiumIngot(Serial serial) : base(serial)
 		{
 		}
 

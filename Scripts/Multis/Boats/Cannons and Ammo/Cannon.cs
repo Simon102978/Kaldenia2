@@ -13,11 +13,11 @@ namespace Server.Items
     {
         Bow,
         BowPort,
-        BowStarboard,
+        BowStarRegularBoard,
         AmidShipPort,
-        AmidShipStarboard,
+        AmidShipStarRegularBoard,
         AftPort,
-        AftStarboard,
+        AftStarRegularBoard,
         Aft
     }
 
@@ -595,7 +595,7 @@ namespace Server.Items
                     List<Mobile> candidates = new List<Mobile>();
                     SecurityLevel highest = SecurityLevel.Passenger;
 
-                    foreach (PlayerMobile mob in target.MobilesOnBoard.OfType<PlayerMobile>().Where(pm => shooter.CanBeHarmful(pm, false)))
+                    foreach (PlayerMobile mob in target.MobilesOnRegularBoard.OfType<PlayerMobile>().Where(pm => shooter.CanBeHarmful(pm, false)))
                     {
                         if (m_Galleon.GetSecurityLevel(mob) > highest)
                             candidates.Insert(0, mob);

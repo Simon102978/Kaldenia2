@@ -6,10 +6,10 @@ using System.Collections.Generic;
 
 namespace Server.Items
 {
-    public abstract class BaseBoard : Container, ISecurable
+    public abstract class BaseRegularBoard : Container, ISecurable
     {
         private SecureLevel m_Level;
-        public BaseBoard(int itemID)
+        public BaseRegularBoard(int itemID)
             : base(itemID)
         {
             CreatePieces();
@@ -17,7 +17,7 @@ namespace Server.Items
             Weight = 5.0;
         }
 
-        public BaseBoard(Serial serial)
+        public BaseRegularBoard(Serial serial)
             : base(serial)
         {
         }
@@ -39,7 +39,7 @@ namespace Server.Items
 
         public override bool IsDecoContainer => false;
 
-        public static bool ValidateDefault(Mobile from, BaseBoard board)
+        public static bool ValidateDefault(Mobile from, BaseRegularBoard RegularBoard)
         {
             if (from.AccessLevel >= AccessLevel.GameMaster)
                 return true;
@@ -47,18 +47,18 @@ namespace Server.Items
             if (!from.Alive)
                 return false;
 
-            if (board.IsChildOf(from.Backpack))
+            if (RegularBoard.IsChildOf(from.Backpack))
                 return true;
 
-            object root = board.RootParent;
+            object root = RegularBoard.RootParent;
 
             if (root is Mobile && root != from)
                 return false;
 
-            if (board.Deleted || board.Map != from.Map || !from.InRange(board.GetWorldLocation(), 1))
+            if (RegularBoard.Deleted || RegularBoard.Map != from.Map || !from.InRange(RegularBoard.GetWorldLocation(), 1))
                 return false;
 
-            BaseHouse house = BaseHouse.FindHouseAt(board);
+            BaseHouse house = BaseHouse.FindHouseAt(RegularBoard);
 
             return (house != null && house.IsOwner(from));
         }
@@ -103,14 +103,14 @@ namespace Server.Items
         {
             BasePiece piece = dropped as BasePiece;
 
-            return (piece != null && piece.Board == this && base.OnDragDrop(from, dropped));
+            return (piece != null && piece.RegularBoard == this && base.OnDragDrop(from, dropped));
         }
 
         public override bool OnDragDropInto(Mobile from, Item dropped, Point3D point)
         {
             BasePiece piece = dropped as BasePiece;
 
-            if (piece != null && piece.Board == this && base.OnDragDropInto(from, dropped, point))
+            if (piece != null && piece.RegularBoard == this && base.OnDragDropInto(from, dropped, point))
             {
                 Packet p = new PlaySound(0x127, GetWorldLocation());
 
@@ -149,18 +149,18 @@ namespace Server.Items
         public class DefaultEntry : ContextMenuEntry
         {
             private readonly Mobile m_From;
-            private readonly BaseBoard m_Board;
-            public DefaultEntry(Mobile from, BaseBoard board)
+            private readonly BaseRegularBoard m_RegularBoard;
+            public DefaultEntry(Mobile from, BaseRegularBoard RegularBoard)
                 : base(6162, from.AccessLevel >= AccessLevel.GameMaster ? -1 : 1)
             {
                 m_From = from;
-                m_Board = board;
+                m_RegularBoard = RegularBoard;
             }
 
             public override void OnClick()
             {
-                if (ValidateDefault(m_From, m_Board))
-                    m_Board.Reset();
+                if (ValidateDefault(m_From, m_RegularBoard))
+                    m_RegularBoard.Reset();
             }
         }
     }
