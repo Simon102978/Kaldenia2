@@ -2586,7 +2586,7 @@ namespace Server.Mobiles
 				case 31:
 					{
 						Journaliste = reader.ReadBool();
-						goto case 0;
+						goto case 30;
 					}
 
 				case 30:
