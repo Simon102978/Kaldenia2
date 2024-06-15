@@ -919,20 +919,21 @@ namespace Server.Items
             }
         }
 
-        public override void AddCraftedProperties(ObjectPropertyList list)
-        {
-            if (_Crafter != null)
-            {
-                list.Add(1050043, _Crafter.TitleName); // crafted by ~1_NAME~
-            }
+		public override void AddCraftedProperties(ObjectPropertyList list)
+		{
+			if (_Crafter != null)
+				list.Add(1050043, _Crafter.TitleName); // crafted by ~1_NAME~
 
-            if (_Quality == ItemQuality.Exceptional)
-            {
-                list.Add(1060636); // Exceptional
-            }
-        }
+			if (_Quality == ItemQuality.Exceptional)
+				list.Add("Exceptionnelle");
+			else if (_Quality == ItemQuality.Epic)
+				list.Add("Épique");
+			else if (_Quality == ItemQuality.Legendary)
+				list.Add("Légendaire");
 
-        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
+		}
+
+		public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
             Quality = (ItemQuality)quality;
 
