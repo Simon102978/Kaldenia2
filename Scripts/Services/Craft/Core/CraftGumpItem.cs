@@ -62,10 +62,7 @@ namespace Server.Engines.Craft
             AddHtmlLocalized(10, 217, 150, 22, 1044055, LabelColor, false, false); // <CENTER>MATERIALS</CENTER>
             AddHtmlLocalized(10, 302, 150, 22, 1044056, LabelColor, false, false); // <CENTER>OTHER</CENTER>
 
-     /*       if (craftSystem.GumpTitleNumber > 0)
-                AddHtmlLocalized(10, 12, 510, 20, craftSystem.GumpTitleNumber, LabelColor, false, false);
-            else*/
-                AddHtml(10, 12, 510, 20, "<h3><basefont color=#FFFFFF><center>" + craftSystem.GumpTitleString+ "</center><basefont></h3>", false, false);
+            AddHtml(10, 12, 510, 20, "<h3><basefont color=#FFFFFF><center>" + craftSystem.GumpTitleString+ "</center><basefont></h3>", false, false);
 
             bool needsRecipe = (craftItem.Recipe != null && from is PlayerMobile && !((PlayerMobile)from).HasRecipe(craftItem.Recipe));
 
@@ -187,15 +184,44 @@ namespace Server.Engines.Craft
         {
             for (int i = 0; i < m_CraftItem.Skills.Count; i++)
             {
-                CraftSkill skill = m_CraftItem.Skills.GetAt(i);
-                double minSkill = skill.MinSkill, maxSkill = skill.MaxSkill;
+				CraftSkill skill = m_CraftItem.Skills.GetAt(i);
+				double minSkill = m_CraftItem.AdjustSkill(skill.MinSkill, m_From, m_CraftSystem);
 
-                if (minSkill < 0)
+				if (minSkill < 0)
                     minSkill = 0;
 
-                AddHtmlLocalized(170, 132 + (i * 20), 200, 18, AosSkillBonuses.GetLabel(skill.SkillToMake), LabelColor, false, false);
-                AddLabel(430, 132 + (i * 20), LabelHue, string.Format("{0:F1}", minSkill));
-            }
+				if (skill.SkillToMake != SkillName.Cooking)
+				{
+					AddLabel(170, 132, LabelHue, $"Niveau d'aptitude:");
+					if (minSkill >= 50)
+						AddLabel(430, 132, LabelHue, $"{(int)((minSkill - 45) / 5)}");
+					else
+						AddLabel(430, 132, LabelHue, "0");
+				}
+
+			//	if (m_CraftItem.ItemType.BaseType == typeof(BaseSouvenirPotion))
+			//	{
+			//		AddLabel(170, 152, LabelHue, $"Niveau d'expertise:");
+			//		AddLabel(430, 152, LabelHue, "5");
+			//	}
+				else if (m_CraftItem.ItemType.BaseType.BaseType == typeof(BasePotion))
+				{
+					AddLabel(170, 152, LabelHue, $"Niveau d'expertise:");
+					if (minSkill < 25)
+						AddLabel(430, 152, LabelHue, "1");
+					else if (minSkill < 50)
+						AddLabel(430, 152, LabelHue, "2");
+					else if (minSkill < 75)
+						AddLabel(430, 152, LabelHue, "3");
+					else if (minSkill < 100)
+						AddLabel(430, 152, LabelHue, "4");
+					else if (minSkill < 100)
+						AddLabel(430, 152, LabelHue, "5");
+				}
+
+				AddHtmlLocalized(170, 172 + (i * 20), 200, 18, AosSkillBonuses.GetLabel(skill.SkillToMake), LabelColor, false, false);
+                AddLabel(430, 172 + (i * 20), LabelHue, string.Format("{0:F1}", minSkill));
+			}
 
             CraftSubResCol res = (m_CraftItem.UseSubRes2 ? m_CraftSystem.CraftSubRes2 : m_CraftSystem.CraftSubRes);
             int resIndex = -1;
@@ -207,29 +233,49 @@ namespace Server.Engines.Craft
 
             bool allRequiredSkills = true;
             double chance = m_CraftItem.GetSuccessChance(m_From, resIndex > -1 ? res.GetAt(resIndex).ItemType : null, m_CraftSystem, false, ref allRequiredSkills);
-            double excepChance = m_CraftItem.GetExceptionalChance(m_CraftSystem, chance, m_From);
 
             if (chance < 0.0)
                 chance = 0.0;
             else if (chance > 1.0)
                 chance = 1.0;
 
-            AddHtmlLocalized(170, 80, 250, 18, 1044057, LabelColor, false, false); // Success Chance:
-            AddLabel(430, 80, LabelHue, string.Format("{0:F1}%", chance * 100));
-
-            if (m_ShowExceptionalChance)
+			if (!m_ShowExceptionalChance)
+			{
+				AddHtmlLocalized(170, 80, 100, 18, 1044057, LabelColor, false, false); // Success Chance:
+				AddLabel(430, 80, LabelHue, string.Format("{0:F1}%", chance * 100));
+			}
+			else
             {
-                if (excepChance < 0.0)
-                    excepChance = 0.0;
-                else if (excepChance > 1.0)
-                    excepChance = 1.0;
+				AddLabel(170, 80, LabelHue, "Success Chance:");
+				AddLabel(300, 80, LabelHue, string.Format("{0:F1}%", chance * 100));
 
-                AddHtmlLocalized(170, 100, 250, 18, 1044058, 32767, false, false); // Exceptional Chance:
-                AddLabel(430, 100, LabelHue, string.Format("{0:F1}%", excepChance * 100));
+				double excepChance = m_CraftItem.GetExceptionalChance(m_CraftSystem, chance, m_From);
+
+				if (excepChance < 0.0) excepChance = 0.0;
+				else if (excepChance > 100.0) excepChance = 100.0;
+
+				AddLabel(170, 100, LabelHue, "Exceptional Chance:");
+				AddLabel(300, 100, LabelHue, string.Format("{0:F3}%", excepChance));
+
+				double epicChance = m_CraftItem.GetEpicChance(m_CraftSystem, chance, m_From);
+
+				if (epicChance < 0.0) epicChance = 0.0;
+				else if (epicChance > 100.0) epicChance = 100.0;
+
+				AddLabel(350, 80, LabelHue, "Epic Chance");
+				AddLabel(465, 80, LabelHue, string.Format("{0:F3}%", epicChance));
+
+				double legendaryChance = m_CraftItem.GetLegendaryChance(m_CraftSystem, chance, m_From);
+
+				if (legendaryChance < 0.0) legendaryChance = 0.0;
+				else if (legendaryChance > 100.0) legendaryChance = 100.0;
+
+				AddLabel(350, 100, LabelHue, "Legendary Chance:");
+				AddLabel(465, 100, LabelHue, string.Format("{0:F3}%", legendaryChance));
             }
-        }
+		}
 
-        public void DrawResource()
+		public void DrawResource()
         {
             bool retainedColor = false;
 

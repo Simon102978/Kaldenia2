@@ -2210,7 +2210,23 @@ namespace Server.Items
 
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            int oreType;
+			var name = Name ?? String.Empty;
+
+			if (String.IsNullOrWhiteSpace(name))
+				name = System.Text.RegularExpressions.Regex.Replace(GetType().Name, "[A-Z]", " $0");
+
+			else if (Quality == ItemQuality.Legendary)
+				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Epic)
+				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Exceptional)
+				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
+			else
+				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
+
+			var desc = Description ?? String.Empty;
+
+			int oreType;
 
             switch (m_Resource)
             {
