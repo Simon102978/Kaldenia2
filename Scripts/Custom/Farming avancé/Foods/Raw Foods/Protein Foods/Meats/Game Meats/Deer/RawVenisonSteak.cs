@@ -47,7 +47,7 @@ namespace Server.Items
 			Weight = 1.0;
 			Stackable = true;
 			Amount = amount;
-			Name = "Steak de Cerf Cru";
+			Name = "raw venison steak";
             Raw = true;
 		}
 

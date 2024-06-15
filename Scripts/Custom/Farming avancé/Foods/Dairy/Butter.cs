@@ -13,7 +13,7 @@ namespace Server.Items
 			Weight = 0.5;
 			Amount = amount;
 			Stackable = true;
-			Name = "Beurre";
+			Name = "Butter";
 			Hue = 55;
 			FillFactor = 0;
 		}

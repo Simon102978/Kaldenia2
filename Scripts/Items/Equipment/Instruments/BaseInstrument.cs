@@ -232,15 +232,19 @@ namespace Server.Items
             UsesRemaining = (UsesRemaining * 100) / GetUsesScalar();
         }
 
-        public int GetUsesScalar()
-        {
-            if (m_Quality == ItemQuality.Exceptional)
-                return 200;
+		public int GetUsesScalar()
+		{
+			if (m_Quality == ItemQuality.Exceptional)
+				return 200;
+			else if (m_Quality == ItemQuality.Epic)
+				return 300;
+			else if (m_Quality == ItemQuality.Legendary)
+				return 400;
 
-            return 100;
-        }
+			return 100;
+		}
 
-        public void ConsumeUse(Mobile from)
+		public void ConsumeUse(Mobile from)
         {
             // TODO: Confirm what must happen here?
             if (UsesRemaining > 1)

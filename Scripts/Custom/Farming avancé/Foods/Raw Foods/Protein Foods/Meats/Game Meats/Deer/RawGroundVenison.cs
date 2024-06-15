@@ -19,7 +19,7 @@ namespace Server.Items
 			Stackable = true;
 			Amount = amount;
 			Hue = 2117;
-			Name = "Viande Hachée de cerf crue";
+			Name = "raw ground venison";
 		}
 
 		public RawGroundVenison( Serial serial ) : base( serial )

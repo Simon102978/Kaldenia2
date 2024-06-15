@@ -883,25 +883,29 @@ namespace Server.Items
                 list.Add(Name);
         }
 
-        public override void AddCraftedProperties(ObjectPropertyList list)
-        {
-            if (OwnerName != null)
-                list.Add(1153213, OwnerName);
+		public override void AddCraftedProperties(ObjectPropertyList list)
+		{
+			if (OwnerName != null)
+				list.Add(1153213, OwnerName);
 
-            if (m_Crafter != null)
-                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+			if (m_Crafter != null)
+				list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
 
-            if (m_Quality == ItemQuality.Exceptional)
-                list.Add(1018303); // Exceptional
+			if (m_Quality == ItemQuality.Exceptional)
+				list.Add("Exceptionnelle");
+			else if (m_Quality == ItemQuality.Epic)
+				list.Add("Épique");
+			else if (m_Quality == ItemQuality.Legendary)
+				list.Add("Légendaire");
 
-            if (IsImbued == true)
-                list.Add(1080418); // (Imbued)
+			if (IsImbued == true)
+				list.Add(1080418); // (Imbued)
 
-            if (m_Altered)
-                list.Add(1111880); // Altered
-        }
+			if (m_Altered)
+				list.Add(1111880); // Altered
+		}
 
-        public override void AddWeightProperty(ObjectPropertyList list)
+		public override void AddWeightProperty(ObjectPropertyList list)
         {
             base.AddWeightProperty(list);
 
@@ -914,11 +918,48 @@ namespace Server.Items
             }
         }
 
-        public override void AddNameProperties(ObjectPropertyList list)
-        {
-            base.AddNameProperties(list);
+      
+		
 
-            if (m_GorgonLenseCharges > 0)
+	public override void AddNameProperties(ObjectPropertyList list)
+		{
+
+			//  base.AddNameProperties(list);
+
+			var name = Name ?? String.Empty;
+
+			if (Quality == ItemQuality.Legendary)
+				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Epic)
+				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Exceptional)
+				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
+			else
+				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
+
+			var desc = Description ?? String.Empty;
+
+			if (!String.IsNullOrWhiteSpace(desc))
+				list.Add(desc);
+
+			if (IsSecure)
+				AddSecureProperty(list);
+			else if (IsLockedDown)
+				AddLockedDownProperty(list);
+
+			AddCraftedProperties(list);
+			AddLootTypeProperty(list);
+			AddUsesRemainingProperties(list);
+			AddWeightProperty(list);
+
+			AppendChildNameProperties(list);
+
+			if (QuestItem)
+				AddQuestItemProperty(list);
+
+			//	base.AddNameProperties(list);
+
+			if (m_GorgonLenseCharges > 0)
                 list.Add(1112590, m_GorgonLenseCharges.ToString()); //Gorgon Lens Charges: ~1_val~
 
             if (IsSetItem)

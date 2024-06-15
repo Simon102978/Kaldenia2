@@ -1,181 +1,249 @@
-﻿using System;
-using static Server.Items.Crops.CropHelper;
+using System;
+using Server.Items;
 
-namespace Server.Items.Crops
+namespace Server.Items
 {
-	public class BaseCrop : Item
-	{
-		public virtual bool CanGrowFarm { get { return Config.Get("Farming.CanGrowFarm", true); } }
-		public virtual bool CanGrowHouseTiles { get { return Config.Get("Farming.CanGrowHouseTiles", true); } }
-		public virtual bool CanGrowDirt { get { return Config.Get("Farming.CanGrowDirt", true); } }
-		public virtual bool CanGrowGround { get { return Config.Get("Farming.CanGrowGround", false); } }
-		public virtual bool CanGrowSwamp { get { return Config.Get("Farming.CanGrowSwamp", false); } }
-		public virtual bool CanGrowSand { get { return Config.Get("Farming.CanGrowSand", false); } }
-		public virtual bool CanGrowGarden { get { return Config.Get("Farming.CanGrowGarden", true); } }
+ 	public abstract class BaseCrop : Item
+ 	{
+ 		public int version;
+ 		private DateTime m_NextAgeCheck;
+ 		private TimeSpan m_AgeDelay;
+ 		private int m_MinAgeTime, m_MaxAgeTime;
+ 		private int m_NumAges;
+ 		private int m_CurrentAge = 0;
+ 		private int[] IdList;
+ 		private bool m_FullGrown = false;
+ 		private bool m_Harvestable;
+ 		private bool m_DeleteWhenDone;
+ 		private int m_MinHarvest, m_MaxHarvest;
+ 		private CropTimer m_CropTimer;
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public DateTime NextAgeCheck{ get{ return m_NextAgeCheck; } set{ m_NextAgeCheck = value; } }
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public TimeSpan AgeDelay{ get{ return m_AgeDelay; } set{ m_AgeDelay = value; } }
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public int MinAgeTime{ get{ return m_MinAgeTime; } set{ m_MinAgeTime = value; } }
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public int MaxAgeTime{ get{ return m_MaxAgeTime; } set{ m_MaxAgeTime = value; } }
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public int NumAges{ get{ return m_NumAges; } set{ m_NumAges = value; } }
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public int CurrentAge{ get{ return m_CurrentAge; } set{ m_CurrentAge = value; } }
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public bool FullGrown{ get{ return m_FullGrown; } set{ m_FullGrown = value; } }
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public bool Harvestable{ get{ return m_Harvestable; } set{ m_Harvestable = value; } }
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public int MinHarvest{ get{ return m_MinHarvest; } set{ m_MinHarvest = value; } }
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public int MaxHarvest{ get{ return m_MaxHarvest; } set{ m_MaxHarvest = value; } }
+ 		
+ 		[CommandProperty( AccessLevel.GameMaster )]
+ 		public bool DeleteWhenDone{ get{ return m_DeleteWhenDone; } set{ m_DeleteWhenDone = value; } }
+ 		
+ 		public int[] AllId { get{ return IdList; } set{ IdList = value; } }
+ 		
+ 		public BaseCrop( int ItemID, int MinDelay, int MaxDelay ) : base ( ItemID )
+ 		{
+ 			MinAgeTime = MinDelay;
+ 			MaxAgeTime = MaxDelay;
+ 			Movable = false;
+ 			
+ 			Start( this, TimeSpan.FromMinutes( Utility.RandomMinMax( MinDelay, MaxDelay )));
+ 		}
+ 		
+ 		public BaseCrop( Serial serial ) : base( serial )
+ 		{
+ 		}
+ 		
+ 		public override void Serialize(GenericWriter writer)
+ 		{
+ 			base.Serialize( writer );
+ 			
+ 			writer.Write( (int)version );  // version
+ 			
+ 			writer.Write ( (int)m_MinAgeTime );
+ 			writer.Write ( (int)m_MaxAgeTime );
+ 			writer.Write ( (TimeSpan)m_AgeDelay );
+ 			writer.Write ( (int)m_NumAges );
+ 			writer.Write ( (int)m_CurrentAge );
+ 			writer.Write ( (int)m_MinHarvest );
+ 			writer.Write ( (int)m_MaxHarvest );
+ 			writer.Write ( (bool)m_Harvestable );
+ 			writer.Write ( (bool)m_DeleteWhenDone );
+ 			
+ 			for ( int i = 0;i < NumAges;i++ )
+ 				writer.Write ( IdList[ i ] );
+ 		}
+ 		
+ 		public override void Deserialize(GenericReader reader)
+ 		{
+ 			base.Deserialize(reader);
+			
+ 			version = reader.ReadInt();
+			
+ 			m_MinAgeTime = reader.ReadInt();
+ 			m_MaxAgeTime = reader.ReadInt();
+ 			m_AgeDelay = reader.ReadTimeSpan();
+ 			m_NumAges = reader.ReadInt();
+ 			m_CurrentAge = reader.ReadInt();
+ 			m_MinHarvest = reader.ReadInt();
+ 			m_MaxHarvest = reader.ReadInt();
+ 			m_Harvestable = reader.ReadBool();
+ 			m_DeleteWhenDone = reader.ReadBool();
+			
+ 			int[] IdList = new int[m_NumAges];
+			
+ 			for ( int i = 0;i < m_NumAges;i++ )
+ 			{
+ 				IdList[i] = reader.ReadInt();
+ 			}
+			
+ 			AllId = IdList;
+			
+ 			Start( this, m_AgeDelay );
+ 		}
+		
+		public virtual void Start( BaseCrop item, TimeSpan AgeDelay )
+ 		{
+ 			m_AgeDelay = AgeDelay;
+ 			
+ 			NextAgeCheck = DateTime.UtcNow + AgeDelay;
+ 			
+ 			if( m_CropTimer == null )
+ 				m_CropTimer = new CropTimer( this, AgeDelay );
+ 			
+ 			m_CropTimer.Start();
+ 		}
+ 		
+ 		public void OnTick()
+ 		{
+ 			NextAgeCheck = DateTime.UtcNow + AgeDelay;
+ 			
+ 			if ( m_CropTimer != null )
+				m_CropTimer.Stop();
+ 			
+ 			if ( !FullGrown )
+ 			{
+ 				m_CropTimer = new CropTimer( this, m_AgeDelay );
+ 				m_CropTimer.Start();
+ 			}
+ 			else if ( !Harvestable  )
+ 			{
+                if (DeleteWhenDone)
+                {
+                    Delete();
+                }
+                else  // Start it over.
+                {
+                    CurrentAge = 0;
+                    FullGrown = false;
+                }
+ 			}
 
-		public virtual TimeSpan SowerPickTime { get { return TimeSpan.FromDays(Config.Get("Farming.SowerPickTime", (14))); } }
-
-		public virtual bool PlayerCanDestroy { get { return Config.Get("Farming.PlayerCanDestroy", true); } }
-		private bool i_bumpZ = false;
-
-		public bool BumpZ { get { return i_bumpZ; } set { i_bumpZ = value; } }
-
-		private static Mobile m_Sower;
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public Mobile Sower { get { return m_Sower; } set { m_Sower = value; } }
-
-		public Timer GrowingTimer;
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public DateTime LastSowerVisit { get; set; }
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public bool Growing { get { return GrowingTimer.Running; } }
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public int Yield { get; set; }
-
-		public int Capacity { get; set; }
-		public int FullGraphic { get; set; }
-		public int PickGraphic { get; set; }
-		public DateTime LastPick { get; set; }
-
-		public BaseCrop(int itemID) : base(itemID)
-		{
-		}
-
-		public BaseCrop(Serial serial) : base(serial)
-		{
-		}
-
-		private class CropTimer : Timer
-		{
-			private BaseCrop i_plant;
-			public CropTimer(BaseCrop plant) : base(TimeSpan.FromSeconds(450), TimeSpan.FromSeconds(15))
-			{
-				Priority = TimerPriority.OneSecond;
-				i_plant = plant;
-			}
-			protected override void OnTick()
-			{
-				if (Utility.RandomBool())
-				{
-					if ((i_plant != null) && (!i_plant.Deleted))
-					{
-						int current = i_plant.Yield;
-						if (++current >= i_plant.Capacity)
-						{
-							current = i_plant.Capacity;
-							((Item)i_plant).ItemID = i_plant.FullGraphic;
-							Stop();
-						}
-						else if (current <= 0) current = 1;
-						i_plant.Yield = current;
-					}
-					else Stop();
-				}
-			}
-		}
-
-		public static void Init(BaseCrop plant, int capacity, int pickGraphic, int fullGraphic, bool full)
-		{
-			plant.Capacity = capacity;
-			plant.LastSowerVisit = DateTime.UtcNow;
-			plant.PickGraphic = pickGraphic;
-			plant.FullGraphic = fullGraphic;
-			plant.LastPick = DateTime.UtcNow;
-			plant.GrowingTimer = new CropTimer(plant);
-
-			if (full) 
-			{ 
-				plant.Yield = plant.Capacity; 
-				plant.ItemID = plant.FullGraphic; 
-			}
-			else 
-			{ 
-				plant.Yield = 0; 
-				plant.ItemID = plant.PickGraphic; 
-				plant.GrowingTimer.Start(); 
-			}
-		}
-
-		public void Gather(Mobile from, Type result)
-		{
-			if (Sower == null || Sower.Deleted) 
-				Sower = from;
-
-			if (from.Mounted && !CanWorkMounted) 
-			{ 
-				from.SendMessage("Vous ne pouvez récolter sur une monture."); 
-				return; 
-			}
-
-			if (DateTime.UtcNow > LastPick.AddSeconds(3))
-			{
-				LastPick = DateTime.UtcNow;
-
-				int cookValue = (int)from.Skills[SkillName.Cooking].Value / 20;
-
-				if (cookValue == 0) 
-				{ 
-					from.SendMessage("Vous ignorez comment récolter cette pousse."); 
-					return; 
-				}
-
-				if (!from.InRange(GetWorldLocation(), 1))
-				{
-					from.SendMessage("Vous êtes trop loin pour récolter quelque chose.");
-					return;
-				}
-
-				if (Yield < 1) 
-				{ 
-					from.SendMessage("Il n'y a rien à récolter ici.");
-					return;
-				}
+            if (CurrentAge > NumAges - 1)
+            {
+                FullGrown = true;
+            }
+            else ItemID = IdList[CurrentAge];
+ 			
+ 			CurrentAge++;
+ 		}
+ 		
+ 		public override void OnDoubleClick( Mobile from )
+ 		{
+ 			Item m_Crop;
+ 			int i, HarvestCount =  Utility.RandomMinMax( m_MinHarvest, m_MaxHarvest );
+ 			
+ 			if ( !Harvestable ) return;
+ 			
+ 			if ( !CheckRange (from, 3, this, this.Location ) ) return;
+ 			
+ 			if ( FullGrown == true )
+ 			{
+ 				m_Crop = this.FinalItem( HarvestCount );
+ 				
+ 				if ( m_Crop.Stackable )
+ 				{
+ 					from.AddToBackpack( m_Crop );
+ 				}
+ 				else
+ 				{
+					// should fix item leakage for non-stackable harvests
+					m_Crop.Delete();
 					
-				from.Direction = from.GetDirectionTo(this);
-				from.Animate(from.Mounted ? 29 : 32, 5, 1, true, false, 0);
-				LastSowerVisit = DateTime.UtcNow;
-
-				if (cookValue > Yield) 
-					cookValue = Yield + 1;
-
-				int amount = Utility.RandomMinMax(cookValue - 4, cookValue);
-
-				if (amount <= 0)
+ 					for (i = 0;i < HarvestCount;i++)
+ 					{
+ 						m_Crop = this.FinalItem( 1 );
+ 						from.AddToBackpack( m_Crop );
+ 					}
+ 				}
+ 				
+ 				if ( DeleteWhenDone )
 				{
-					from.SendMessage("Votre récolte ne porte pas fruit.");
-					return;
+					this.Delete();
 				}
-
-				Yield -= amount;
-
-				Item item = (Item)Activator.CreateInstance(result);
-				item.Amount = amount;
-				from.AddToBackpack(item);
-				from.SendMessage("Vous récoltez {0} {1}{2}!", amount, item.Name, amount == 1 ? "" : "s");
-
-				if (Yield < 1)
-					Delete();
-			}
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-			writer.Write((int)0);
-
-			writer.Write(Sower);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-			int version = reader.ReadInt();
-
-			Sower = reader.ReadMobile();
-		}
-	}
+ 				else
+ 				{
+ 					CurrentAge = 0;
+ 					FullGrown = false;
+ 				}
+ 			}
+ 			else
+ 				from.SendMessage( "The crop is too young to harvest." );
+ 		}
+ 		
+ 		private class CropTimer : Timer
+ 		{
+ 			private BaseCrop m_Crop;
+ 			
+ 			public CropTimer( BaseCrop item, TimeSpan Delay ): base ( Delay )
+ 			{
+ 				m_Crop = item;
+ 				Priority = TimerPriority.OneMinute;
+ 			}
+ 			
+ 			protected override void OnTick()
+			{
+ 				m_Crop.NextAgeCheck = DateTime.UtcNow + m_Crop.AgeDelay;
+				
+ 				if (m_Crop.Deleted)
+					Stop();
+				
+ 				if (m_Crop == null)
+ 				{
+ 					m_Crop.Delete();
+ 					Stop();
+ 				}
+				
+ 				m_Crop.OnTick();
+ 			}
+ 		}
+ 		
+ 		public virtual bool CheckRange( Mobile from, int Range, BaseCrop m_Crop, Point3D loc )
+ 		{
+ 			bool inRange = ( from.Map == m_Crop.Map && from.InRange( loc, Range ) );
+ 			
+ 			if ( !inRange ) from.SendLocalizedMessage( 500446 ); // that is too far away.
+ 			
+ 			return inRange;
+ 		}
+ 		
+ 		public virtual Item FinalItem ( int Count )
+ 		{
+ 			return null;
+ 		}
+ 		
+ 	}
 }
+

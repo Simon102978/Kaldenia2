@@ -8,7 +8,7 @@ namespace Server.Items
 			Weight = 5.0;
 			Stackable = true;
 			Hue = 0x430;
-			Name = "Sac de Sucre";
+			Name = "Bag of Sugar";
 		}
 
 		public BagOfSugar( Serial serial ) : base( serial ) { }

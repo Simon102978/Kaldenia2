@@ -89,15 +89,19 @@ namespace Server.Items
             m_UsesRemaining = (m_UsesRemaining * 100) / GetUsesScalar();
         }
 
-        public int GetUsesScalar()
-        {
-            if (m_Quality == ItemQuality.Exceptional)
-                return 200;
+		public int GetUsesScalar()
+		{
+			if (m_Quality == ItemQuality.Exceptional)
+				return 150;
+			else if (m_Quality == ItemQuality.Epic)
+				return 300;
+			else if (m_Quality == ItemQuality.Legendary)
+				return 500;
 
-            return 100;
-        }
+			return 100;
+		}
 
-        public bool ShowUsesRemaining
+		public bool ShowUsesRemaining
         {
             get { return true; }
             set { }
@@ -124,21 +128,61 @@ namespace Server.Items
         {
         }
 
-        public override void AddCraftedProperties(ObjectPropertyList list)
-        {
-            if (m_Crafter != null)
-                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+		public override void AddCraftedProperties(ObjectPropertyList list)
+		{
+			if (m_Crafter != null)
+				list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
 
-            if (m_Quality == ItemQuality.Exceptional)
-                list.Add(1060636); // exceptional
-        }
+			if (m_Quality == ItemQuality.Exceptional)
+				list.Add("Exceptionnelle");
+			else if (m_Quality == ItemQuality.Epic)
+				list.Add("Épique");
+			else if (m_Quality == ItemQuality.Legendary)
+				list.Add("Légendaire");
+		}
 
-        public override void AddUsesRemainingProperties(ObjectPropertyList list)
-        {
-            list.Add(1060584, UsesRemaining.ToString()); // uses remaining: ~1_val~
-        }
+		public override void AddNameProperties(ObjectPropertyList list)
+		{
+			var name = Name ?? String.Empty;
 
-        public virtual void DisplayDurabilityTo(Mobile m)
+			if (Quality == ItemQuality.Legendary)
+				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Epic)
+				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Exceptional)
+				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
+			else
+				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
+
+			var desc = Description ?? String.Empty;
+
+			if (!String.IsNullOrWhiteSpace(desc))
+				list.Add(desc);
+
+			if (IsSecure)
+				AddSecureProperty(list);
+			else if (IsLockedDown)
+				AddLockedDownProperty(list);
+
+			AddCraftedProperties(list);
+			AddLootTypeProperty(list);
+			AddUsesRemainingProperties(list);
+			AddWeightProperty(list);
+
+			AppendChildNameProperties(list);
+
+			if (QuestItem)
+				AddQuestItemProperty(list);
+
+			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
+		}
+
+		public override void AddUsesRemainingProperties(ObjectPropertyList list)
+		{
+			list.Add("Utilisation restante: {0}", UsesRemaining.ToString()); // uses remaining: ~1_val~
+		}
+
+		public virtual void DisplayDurabilityTo(Mobile m)
         {
             LabelToAffix(m, 1017323, AffixType.Append, ": " + m_UsesRemaining.ToString()); // Durability
         }

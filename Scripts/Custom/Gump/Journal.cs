@@ -66,8 +66,12 @@ namespace JournalCommand
 
 			foreach (var entry in temp)
 			{
+				 void AddParcheminSection(int x, int y, int largeur, int hauteur, string titre)
+				{
+					AddBackground(x, y, largeur, hauteur, 9300);
+					AddHtml(x, y + 1, largeur, 20, String.Concat("<h3><center><basefont color=#000000>", titre, "</basefont></center></h3>"), false, false);
+				}
 
-	//			public void AddParcheminSection(int x, int y, int largeur, int hauteur, string titre);
 
 				AddParcheminSection(100, 80 + count * 200, 770, 180, $"{entry.Title}");
 

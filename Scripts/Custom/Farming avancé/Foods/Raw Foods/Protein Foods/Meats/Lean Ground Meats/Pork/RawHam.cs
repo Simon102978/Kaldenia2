@@ -41,7 +41,7 @@ namespace Server.Items
         public RawHam(int amount)
             : base(amount, 0x9C9)
 		{
-			Name = "Jambon cru";
+			Name = "raw ham";
 			Stackable = true;
 			Weight = 1.0;
 			Hue = 41;

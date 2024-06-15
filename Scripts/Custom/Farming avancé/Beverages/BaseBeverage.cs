@@ -1005,11 +1005,12 @@ namespace Server.Items
 
 				from.SendLocalizedMessage( 1010089 );
 			}
-            else if (targ is Cow)
+            else if (targ is Cow1 || targ is Cow)
             {
+                Cow1 cow1 = (Cow1)targ;
                 Cow cow = (Cow)targ;
 
-                if (cow.TryMilk(from))
+                if (cow1.TryMilk(from) || cow.TryMilk(from))
                 {
                     Content = BaseBeverageType.Milk;
                     Quantity = MaxQuantity;

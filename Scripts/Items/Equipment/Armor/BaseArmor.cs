@@ -1040,7 +1040,21 @@ namespace Server.Items
         public override int PoisonResistance => BasePoisonResistance + m_PoisonBonus;
         public override int EnergyResistance => BaseEnergyResistance + m_EnergyBonus;
 
-        public virtual int InitMinHits => 0;
+		public int GetBonusByQuality()
+		{
+			switch (Quality)
+			{
+				case ItemQuality.Low: return -1;
+				case ItemQuality.Normal: return 0;
+				case ItemQuality.Exceptional: return 1;
+				case ItemQuality.Epic: return 3;
+				case ItemQuality.Legendary: return 5;
+			}
+
+			return 0;
+		}
+
+		public virtual int InitMinHits => 0;
         public virtual int InitMaxHits => 0;
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -1101,19 +1115,22 @@ namespace Server.Items
             InvalidateProperties();
         }
 
-        public virtual int GetDurabilityBonus()
-        {
-            int bonus = 0;
+		public virtual int GetDurabilityBonus()
+		{
+			int bonus = 0;
 
-            if (m_Quality == ItemQuality.Exceptional)
-                bonus += 20;
+			if (m_Quality == ItemQuality.Legendary)
+				bonus += 500;
+			else if (m_Quality == ItemQuality.Epic)
+				bonus += 250;
+			else if (m_Quality == ItemQuality.Exceptional)
+				bonus += 125;
+			else
+				bonus += 100;
 
-            bonus += m_AosArmorAttributes.DurabilityBonus;
+			bonus += m_AosArmorAttributes.DurabilityBonus;
 
-            if (m_Resource == CraftResource.Heartwood)
-                return bonus;
-
-            CraftResourceInfo resInfo = CraftResources.GetInfo(m_Resource);
+			CraftResourceInfo resInfo = CraftResources.GetInfo(m_Resource);
             CraftAttributeInfo attrInfo = null;
 
             if (resInfo != null)
@@ -2273,25 +2290,29 @@ namespace Server.Items
             return attrInfo.ArmorLuck;
         }
 
-        public override void AddCraftedProperties(ObjectPropertyList list)
-        {
-            if (OwnerName != null)
-                list.Add(1153213, OwnerName);
+		public override void AddCraftedProperties(ObjectPropertyList list)
+		{
+			if (OwnerName != null)
+				list.Add(1153213, OwnerName);
 
-            if (m_Crafter != null)
-                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+			if (m_Crafter != null)
+				list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
 
-            if (m_Quality == ItemQuality.Exceptional)
-                list.Add(1060636); // Exceptional
+			if (m_Quality == ItemQuality.Exceptional)
+				list.Add("Exceptionnelle");
+			else if (m_Quality == ItemQuality.Epic)
+				list.Add("Épique");
+			else if (m_Quality == ItemQuality.Legendary)
+				list.Add("Légendaire");
 
-            if (IsImbued)
-                list.Add(1080418); // (Imbued)
+			if (IsImbued)
+				list.Add(1080418); // (Imbued)
 
-            if (m_Altered)
-                list.Add(1111880); // Altered
-        }
+			if (m_Altered)
+				list.Add(1111880); // Altered
+		}
 
-        public override void AddWeightProperty(ObjectPropertyList list)
+		public override void AddWeightProperty(ObjectPropertyList list)
         {
             base.AddWeightProperty(list);
 
@@ -2303,11 +2324,41 @@ namespace Server.Items
         {
         }
 
-        public override void AddNameProperties(ObjectPropertyList list)
-        {
-            base.AddNameProperties(list);
+		public override void AddNameProperties(ObjectPropertyList list)
+		{
+			var name = Name ?? String.Empty;
 
-			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
+			if (String.IsNullOrWhiteSpace(name))
+				name = System.Text.RegularExpressions.Regex.Replace(GetType().Name, "[A-Z]", " $0");
+
+			else if (Quality == ItemQuality.Legendary)
+				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Epic)
+				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Exceptional)
+				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
+			else
+				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
+
+			var desc = Description ?? String.Empty;
+
+			if (!String.IsNullOrWhiteSpace(desc))
+				list.Add(desc);
+
+			if (IsSecure)
+				AddSecureProperty(list);
+			else if (IsLockedDown)
+				AddLockedDownProperty(list);
+
+			AddCraftedProperties(list);
+			AddLootTypeProperty(list);
+			AddUsesRemainingProperties(list);
+			AddWeightProperty(list);
+
+			AppendChildNameProperties(list);
+
+			if (QuestItem)
+				AddQuestItemProperty(list);
 
 
 

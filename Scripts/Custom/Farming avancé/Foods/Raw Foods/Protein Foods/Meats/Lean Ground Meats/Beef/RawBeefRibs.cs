@@ -19,7 +19,7 @@ namespace Server.Items
 			Weight = 1.0;
 			Stackable = true;
 			Amount = amount;
-			Name = "Côte de boeuf crue";
+			Name = "raw beef ribs";
             Raw = true;
 		}
 

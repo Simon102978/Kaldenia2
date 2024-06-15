@@ -19,7 +19,7 @@ namespace Server.Items
         public RawBaconSlab(int amount)
             : base(amount, 0x976)
 		{
-			Name = "Paquet de Bacon cru";
+			Name = "raw slab of bacon";
 			Stackable = true;
             Amount = amount;
             Weight = 1.0;

@@ -1,12 +1,23 @@
+using System;
 using System.Collections.Generic;
-using Server.Items;
+using Server;
 
 namespace Server.Mobiles
 {
 	public class BeerBrewer : BaseVendor
 	{
-		private List<SBInfo> m_SBInfos = new List<SBInfo>();
-		protected override List<SBInfo> SBInfos { get { return m_SBInfos; } }
+
+      private static bool m_Talked; // flag to prevent spam 
+
+      string[] kfcsay = new string[] // things to say while greating 
+      { 
+         "I'm brewing up some fun in a bottle", 
+         "Would you like to learn how to brew fun in a bottle?",   
+         "Have a nice day",
+      };
+
+      private List<SBInfo> m_SBInfos = new List<SBInfo>();
+      protected override List<SBInfo> SBInfos { get { return m_SBInfos; } }
 
 		public override NpcGuild NpcGuild{ get{ return NpcGuild.TinkersGuild; } }
 
@@ -19,6 +30,7 @@ namespace Server.Mobiles
 			SetSkill( SkillName.Anatomy, 60.0, 183.0 );
 			SetSkill( SkillName.Archery, 85.0, 150.0 );
 			SetSkill( SkillName.Hiding, 60.0, 183.0 );
+
 		}
 
 		public override void InitSBInfo()
@@ -30,10 +42,45 @@ namespace Server.Mobiles
 		{
 			base.InitOutfit();
 
-			AddItem( new Shirt() );
-			AddItem( new LongPants() );
-			AddItem( new Boots() );
+			AddItem( new Server.Items.Shirt() );
+			AddItem( new Server.Items.LongPants() );
+			AddItem( new Server.Items.Boots() );
 		}
+
+		
+		public override void OnMovement( Mobile m, Point3D oldLocation ) 
+               {                                                    
+         if( m_Talked == false ) 
+         { 
+            if ( m.InRange( this, 4 ) ) 
+            {                
+               m_Talked = true; 
+               SayRandom( kfcsay, this ); 
+               this.Move( GetDirectionTo( m.Location ) ); 
+                  // Start timer to prevent spam 
+               SpamTimer t = new SpamTimer(); 
+               t.Start(); 
+            } 
+         } 
+      } 
+
+      private class SpamTimer : Timer 
+      { 
+         public SpamTimer() : base( TimeSpan.FromSeconds( 8 ) ) 
+         { 
+            Priority = TimerPriority.OneSecond; 
+         } 
+
+         protected override void OnTick() 
+         { 
+            m_Talked = false; 
+         } 
+      } 
+
+      private static void SayRandom( string[] say, Mobile m ) 
+      { 
+         m.Say( say[Utility.Random( say.Length )] ); 
+      } 
 
 		public BeerBrewer( Serial serial ) : base( serial )
 		{

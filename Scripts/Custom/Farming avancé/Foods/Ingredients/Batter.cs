@@ -8,7 +8,7 @@ namespace Server.Items
         {
             Weight = 0.5;
             Stackable = true;
-            Name = "Mélange à crêpe";
+            Name = "Batter";
             Hue = 0x227;
         }
         public Batter(Serial serial) : base(serial) { }

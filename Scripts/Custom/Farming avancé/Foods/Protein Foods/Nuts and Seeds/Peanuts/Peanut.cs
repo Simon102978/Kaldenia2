@@ -16,7 +16,7 @@ namespace Server.Items
 			Weight = 0.1;
 			FillFactor = 1;
 			Hue = 0x224;
-			Name = "Arachide";
+			Name = "Peanut";
 		}
 
 		public Peanut( Serial serial ) : base( serial )

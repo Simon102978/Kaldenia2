@@ -5,7 +5,7 @@ namespace Server.Items
 	public class Wheat : Item
 	{
 		[Constructable]
-		public Wheat() : this(Utility.RandomMinMax(3, 7))
+		public Wheat() : this( 1 )
 		{
 		}
 

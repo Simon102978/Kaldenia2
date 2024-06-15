@@ -7,7 +7,7 @@ namespace Server.Items
 		{
 		      	Weight = 1.0;
 			Stackable = true;
-			Name = "Crème";
+			Name = "Cream";
 			Hue = 0x0;
 		}
 

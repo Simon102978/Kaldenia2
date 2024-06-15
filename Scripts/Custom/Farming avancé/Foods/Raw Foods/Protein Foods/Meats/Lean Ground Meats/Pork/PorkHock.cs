@@ -14,7 +14,7 @@ namespace Server.Items
 			Stackable = true;
 			Weight = 2.0;
 			Amount = amount;
-			Name = "Jarret de Porc Cru";
+			Name = "Pork Hock";
 			Hue = 0x457;
             Raw = true;
 		}

@@ -12,7 +12,7 @@ namespace Server.Items
         public BeerBreweringTools()
             : base(0x1F81)
 		{
-			Name = "Outil fabrication de bière";
+			Name = "a Beer Brewers Tools";
 			Weight = 2.0;
 		}
 
@@ -21,7 +21,6 @@ namespace Server.Items
             : base(uses, 0x1F81)
 		{
 			Weight = 2.0;
-			Name = "Outil fabrication de bière";
 		}
 
 		public BeerBreweringTools( Serial serial ) : base( serial )

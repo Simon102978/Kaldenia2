@@ -14,7 +14,7 @@ namespace Server.Items
 			Stackable = true;
 			Amount = amount;
 			FillFactor = 2;
-			Name = "Escalope de Porc";
+			Name = "pork chop";
 		}
 
 		public PorkChop( Serial serial ) : base( serial )

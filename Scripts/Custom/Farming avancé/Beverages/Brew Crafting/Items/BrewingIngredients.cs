@@ -42,7 +42,7 @@ namespace Server.Items
         [Constructable]
         public BrewersYeast(int amount) : base(0x1039)
         {
-            Name = "Levure à fermentation";
+            Name = "Brewers Yeast";
             Stackable = true;
             Weight = 6.0;
             Amount = amount;

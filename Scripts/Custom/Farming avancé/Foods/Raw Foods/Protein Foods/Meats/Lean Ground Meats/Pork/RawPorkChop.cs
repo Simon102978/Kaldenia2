@@ -38,15 +38,13 @@ namespace Server.Items
 		}
 
 		[Constructable]
-        public RawPorkChop(int amount) : base(amount, 0x1E1F)
+        public RawPorkChop(int amount)
+            : base(amount, 0x09F1)
 		{
 			Weight = 1.0;
 			Stackable = true;
 			Amount = amount;
-			Name = "Chop de porc crue";
-			ItemID = 0x1E1F;
-			Hue = 1831;
-
+			Name = "raw pork chop";
 		}
 
 		public RawPorkChop( Serial serial ) : base( serial )

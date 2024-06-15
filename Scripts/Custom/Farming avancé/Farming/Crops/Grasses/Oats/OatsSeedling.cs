@@ -1,30 +1,47 @@
+using System;
+using System.Collections;
+using Server.Network;
+using Server.Mobiles;
+using Server.Items;
+using Server.Gumps;
 namespace Server.Items.Crops
 {
-	public class OatsSeedling : BaseSeedling
+	public class OatsSeedling : BaseCrop
 	{
+		private static Mobile m_sower;
+		public Timer thisTimer;
+
+		[CommandProperty( AccessLevel.GameMaster )]
+		public Mobile Sower{ get{ return m_sower; } set{ m_sower = value; } }
+
 		[Constructable]
 		public OatsSeedling( Mobile sower ) : base( Utility.RandomList ( 0xDAE, 0xDAF ) )
 		{
 			Movable = false;
 			Name = "Oats Seedling";
-			Sower = sower;
-			Init(this, typeof(OatsCrop));
+			m_sower = sower;
+			init( this );
 		}
-		
-		public OatsSeedling(Serial serial) : base(serial) { }
-
-		public override void Serialize(GenericWriter writer)
+		public static void init( OatsSeedling plant )
 		{
-			base.Serialize(writer);
-			writer.Write((int)0);
+			plant.thisTimer = new CropHelper.GrowTimer( plant, typeof(OatsCrop), plant.Sower );
+			plant.thisTimer.Start();
 		}
-
-		public override void Deserialize(GenericReader reader)
+		public override void OnDoubleClick( Mobile from )
 		{
-			base.Deserialize(reader);
+			if ( from.Mounted && !CropHelper.CanWorkMounted ) { from.SendMessage( "Le plant est trop petit pour pouvoir être récolté sur votre monture." ); return; }
+			else from.SendMessage( "Votre pousse est trop jeune pour être récoltée." );
+		}
+		public OatsSeedling( Serial serial ) : base( serial ) { }
+
+		public override void Serialize( GenericWriter writer ) { base.Serialize( writer ); writer.Write( (int) 0 ); writer.Write( m_sower ); }
+
+		public override void Deserialize( GenericReader reader )
+		{
+			base.Deserialize( reader );
 			int version = reader.ReadInt();
-
-			Init(this, typeof(OatsCrop));
+			m_sower = reader.ReadMobile();
+			init( this );
 		}
 	}
 }

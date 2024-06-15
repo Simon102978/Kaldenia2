@@ -15,7 +15,7 @@ namespace Server.Items
         public RawGoatRoast(int amount)
             : base(amount, 0x9C9)
 		{
-			Name = "Rôti de chèvre cru";
+			Name = "raw goat roast";
 			Stackable = true;
 			Weight = 1.0;
 			Hue = 1194;

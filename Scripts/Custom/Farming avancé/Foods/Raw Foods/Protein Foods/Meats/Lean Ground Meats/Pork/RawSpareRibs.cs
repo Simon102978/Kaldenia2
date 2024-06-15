@@ -15,7 +15,7 @@ namespace Server.Items
         public RawSpareRibs(int amount)
             : base(amount, 0x9F1)
 		{
-			Name = "Côtelette de porc crue";
+			Name = "raw spare ribs";
 			Weight = 1.0;
             Stackable = true;
             Amount = amount;

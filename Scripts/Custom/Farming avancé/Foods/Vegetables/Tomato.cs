@@ -13,7 +13,7 @@ namespace Server.Items
 		[Constructable]
 		public Tomato( int amount ) : base( amount, 0x9D0 )
 		{
-                        Name = "Tomate";
+                        Name = "a tomato";
                         Hue = 0x8F;
 			FillFactor = 1;
 		}

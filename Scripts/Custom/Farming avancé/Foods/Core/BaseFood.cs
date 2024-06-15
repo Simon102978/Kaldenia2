@@ -487,7 +487,10 @@ namespace Server.Items
         public static bool FillHunger(Mobile from, int fillFactor)
         {
             if (from.Hunger >= 20)
-                return true;
+            {
+                from.SendLocalizedMessage(500867); // You are simply too full to eat any more!
+                return false;
+            }
 
             int iHunger = from.Hunger + fillFactor;
 

@@ -9,7 +9,7 @@ namespace Server.Items
 		public WhiteRose2( int amount ) : base( 0x234B )
 		{
 			Name = "Rose Blanche";
-			Hue = 2077;
+			Hue = 1972;
 		}
 
 		public WhiteRose2( Serial serial ) : base( serial ) { }

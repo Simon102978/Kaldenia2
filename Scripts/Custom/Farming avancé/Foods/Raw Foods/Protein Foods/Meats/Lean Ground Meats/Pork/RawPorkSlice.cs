@@ -15,7 +15,7 @@ namespace Server.Items
 		[Constructable]
 		public RawPorkSlice( int amount ) : base( 0x979 )
 		{
-			Name = "Tranche de Porc crue";
+			Name = "raw slice of pork";
 			Weight = 1.0;
 			Stackable = true;
 			Amount = amount;

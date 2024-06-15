@@ -63,16 +63,20 @@ namespace Server.Items
             m_UsesRemaining = (m_UsesRemaining * 100) / GetUsesScalar();
         }
 
-        public int GetUsesScalar()
-        {
-            if (m_Quality == ItemQuality.Exceptional)
-                return 200;
+		public int GetUsesScalar()
+		{
+			if (m_Quality == ItemQuality.Exceptional)
+				return 200;
+			else if (m_Quality == ItemQuality.Epic)
+				return 300;
+			else if (m_Quality == ItemQuality.Legendary)
+				return 400;
 
-            return 100;
-        }
-        #endregion
+			return 100;
+		}
+		#endregion
 
-        private bool _VvVItem;
+		private bool _VvVItem;
         private Mobile _Owner;
         private string _OwnerName;
 
@@ -655,10 +659,27 @@ namespace Server.Items
             m_Hits = ((m_Hits * 100) + (scale - 1)) / scale;
             m_MaxHits = ((m_MaxHits * 100) + (scale - 1)) / scale;
 
-            InvalidateProperties();
+           InvalidateProperties();
         }
+	
+		public void ScaleWeaponDamage()
+		{
+			if (m_Quality == ItemQuality.Legendary)
+				Attributes.WeaponDamage = 100;
+			else if (m_Quality == ItemQuality.Epic)
+				Attributes.WeaponDamage = 60;
+			else if (m_Quality == ItemQuality.Exceptional)
+				Attributes.WeaponDamage = 30;
 
-        public virtual void ScaleDurability()
+			CraftResourceInfo info = CraftResources.GetInfo(m_Resource);
+
+			if (info != null)
+				Attributes.WeaponDamage += info.Level * 5;
+
+			InvalidateProperties();
+		}
+
+		public virtual void ScaleDurability()
         {
             int scale = 100 + GetDurabilityBonus();
 
@@ -674,39 +695,34 @@ namespace Server.Items
             InvalidateProperties();
         }
 
-        public int GetDurabilityBonus()
-        {
-            int bonus = 0;
+		public int GetDurabilityBonus()
+		{
+			int bonus = 0;
 
-            if (m_Quality == ItemQuality.Exceptional)
-            {
-                bonus += 20;
-            }
+			if (m_Quality == ItemQuality.Legendary)
+				bonus += 1000;
+			else if (m_Quality == ItemQuality.Epic)
+				bonus += 500;
+			else if (m_Quality == ItemQuality.Exceptional)
+				bonus += 250;
+			else
+				bonus += 100;
 
-            bonus += m_AosWeaponAttributes.DurabilityBonus;
+			bonus += m_AosWeaponAttributes.DurabilityBonus;
 
-            if (m_Resource == CraftResource.Heartwood)
-            {
-                return bonus;
-            }
+			CraftResourceInfo resInfo = CraftResources.GetInfo(m_Resource);
+			CraftAttributeInfo attrInfo = null;
 
-            CraftResourceInfo resInfo = CraftResources.GetInfo(m_Resource);
-            CraftAttributeInfo attrInfo = null;
+			if (resInfo != null)
+				attrInfo = resInfo.AttributeInfo;
 
-            if (resInfo != null)
-            {
-                attrInfo = resInfo.AttributeInfo;
-            }
+			if (attrInfo != null)
+				bonus += attrInfo.WeaponDurability;
 
-            if (attrInfo != null)
-            {
-                bonus += attrInfo.WeaponDurability;
-            }
+			return bonus;
+		}
 
-            return bonus;
-        }
-
-        public int GetLowerStatReq()
+		public int GetLowerStatReq()
         {
             int v = m_AosWeaponAttributes.LowerStatReq;
 
@@ -4574,35 +4590,29 @@ namespace Server.Items
             return attrInfo.WeaponLuck;
         }
 
-        public override void AddCraftedProperties(ObjectPropertyList list)
-        {
-            if (OwnerName != null)
-            {
-                list.Add(1153213, OwnerName);
-            }
+		public override void AddCraftedProperties(ObjectPropertyList list)
+		{
+			if (OwnerName != null)
+				list.Add(1153213, OwnerName);
 
-            if (m_Crafter != null)
-            {
-                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
-            }
+			if (m_Crafter != null)
+				list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
 
-            if (m_Quality == ItemQuality.Exceptional)
-            {
-                list.Add(1060636); // Exceptional
-            }
+			if (m_Quality == ItemQuality.Exceptional)
+				list.Add("Exceptionnelle");
+			else if (m_Quality == ItemQuality.Epic)
+				list.Add("Épique");
+			else if (m_Quality == ItemQuality.Legendary)
+				list.Add("Légendaire");
 
-            if (IsImbued)
-            {
-                list.Add(1080418); // (Imbued)
-            }
+			if (IsImbued)
+				list.Add(1080418); // (Imbued)
 
-            if (m_Altered)
-            {
-                list.Add(1111880); // Altered
-            }
-        }
+			if (m_Altered)
+				list.Add(1111880); // Altered
+		}
 
-        public override void AddWeightProperty(ObjectPropertyList list)
+		public override void AddWeightProperty(ObjectPropertyList list)
         {
             base.AddWeightProperty(list);
 
@@ -4618,12 +4628,48 @@ namespace Server.Items
             }
         }
 
-        public override void AddNameProperties(ObjectPropertyList list)
-        {
-            base.AddNameProperties(list);
+		public override void AddNameProperties(ObjectPropertyList list)
+		{
+			var name = Name ?? String.Empty;
 
-            #region Mondain's Legacy Sets
-            if (IsSetItem)
+			if (String.IsNullOrWhiteSpace(name))
+				name = System.Text.RegularExpressions.Regex.Replace(GetType().Name, "[A-Z]", " $0");
+
+			if (IsSetItem)
+				list.Add($"<BASEFONT COLOR=#00FF00>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Legendary)
+				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Epic)
+				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Exceptional)
+				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
+			else
+				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
+
+			var desc = Description ?? String.Empty;
+
+			if (!String.IsNullOrWhiteSpace(desc))
+				list.Add(desc);
+
+			if (IsSecure)
+				AddSecureProperty(list);
+			else if (IsLockedDown)
+				AddLockedDownProperty(list);
+
+			AddCraftedProperties(list);
+			AddLootTypeProperty(list);
+			AddUsesRemainingProperties(list);
+			AddWeightProperty(list);
+
+			AppendChildNameProperties(list);
+
+			if (QuestItem)
+				AddQuestItemProperty(list);
+
+			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
+
+			#region Mondain's Legacy Sets
+			if (IsSetItem)
             {
                 list.Add(1073491, Pieces.ToString()); // Part of a Weapon/Armor Set (~1_val~ pieces)
 
