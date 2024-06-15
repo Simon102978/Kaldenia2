@@ -59,7 +59,7 @@ namespace Server.Mobiles
             SetDex(191, 215);
             SetInt(226, 250);
 
-            SetHits(169, 183);
+            SetHits(400, 600);
             SetStam(36, 45);
 
             SetDamage(10, 15);
@@ -439,7 +439,7 @@ namespace Server.Mobiles
 				Movable = false;
 				ItemID = Utility.RandomList(2274, 2275, 2272, 2273, 2279, 2280);
 				Name = "Morceau de glace";
-				Hue = 1199;
+				Hue = 1972;
 				MoveToWorld(loc, map);
 
 

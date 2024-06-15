@@ -33,9 +33,7 @@ namespace Server.Mobiles
 		public override Poison PoisonImmune => Poison.Deadly;
 		public override bool CanRummageCorpses => true;
 
-      //  public override TribeType Tribe => TribeType.Undead;
-
-  		public override TribeType Tribe => TribeType.Terathan;
+        public override TribeType Tribe => TribeType.Undead;
 
         public override bool BleedImmune => true;
 		
@@ -62,7 +60,7 @@ namespace Server.Mobiles
             SetDex(98, 132);
             SetInt(45, 91);
 
-            SetHits(616, 884);
+            SetHits(200, 300);
 
             SetDamage(8, 13);
 
@@ -206,25 +204,7 @@ namespace Server.Mobiles
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
 			base.OnDamage(amount, from, willKill);
-			
-		 if (from is BaseCreature)
-			{
-				BaseCreature creature = (BaseCreature)from;
-
-				if (creature.Controlled || creature.Summoned)
-				{
-
 				
-
-					if (Hits < HitsMax)
-						Hits = HitsMax;
-
-					creature.Kill();
-
-					Effects.PlaySound(Location, Map, 0x574);
-				}
-			}
-			
 			Parole();
 		}
 
