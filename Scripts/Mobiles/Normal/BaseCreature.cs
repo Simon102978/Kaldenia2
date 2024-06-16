@@ -3778,6 +3778,9 @@ namespace Server.Mobiles
 				case AIType.MaritimeMageAI:
 					m_AI = new MaritimeMageAI(this);
 					break;
+                case AIType.ArcherMageAI:
+                    m_AI = new ArcherMageAI(this);
+                    break;
 					
             }
         }

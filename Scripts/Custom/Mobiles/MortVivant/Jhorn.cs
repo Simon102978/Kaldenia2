@@ -281,12 +281,10 @@ namespace Server.Mobiles
 			: base(serial)
 		{
 		}
-		public override int Meat => 4;
-		public override int TreasureMapLevel => 5;
-		public override int Hides => 8;
-		public override HideType HideType => HideType.Ancien;
+
+		public override int TreasureMapLevel => 2;
 		public override int Bones => 8;
-		public override BoneType BoneType => BoneType.Ancien;
+		public override BoneType BoneType => BoneType.Regular;
 
 
 		public void CoupVentre()

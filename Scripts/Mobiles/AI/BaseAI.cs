@@ -38,7 +38,8 @@ namespace Server.Mobiles
         AI_Paladin,
         AI_Necro,
 		MaritimeMeleeAI,
-		MaritimeMageAI
+		MaritimeMageAI,
+        ArcherMageAI
 
 	}
 
