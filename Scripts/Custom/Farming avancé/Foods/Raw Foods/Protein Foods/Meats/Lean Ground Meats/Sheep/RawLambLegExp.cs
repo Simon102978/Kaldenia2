@@ -20,6 +20,7 @@ namespace Server.Items
 			Stackable = true;
 			Amount = amount;
             Raw = true;
+			Name = "Jarret de mouton cru";
 		}
 
 		public RawLambLegExp( Serial serial ) : base( serial )

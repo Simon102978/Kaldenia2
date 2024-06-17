@@ -5,7 +5,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-	[FlipableAttribute( 0xEC5, 0xEC4 )]
+	[FlipableAttribute(0x26BB, 0x26BB)]
 	public class Boline : BaseBoline
 	{
 		public override WeaponAbility PrimaryAbility{ get{ return WeaponAbility.InfectiousStrike; } }
@@ -21,21 +21,24 @@ namespace Server.Items
 		public override WeaponAnimation DefAnimation{ get{ return WeaponAnimation.Pierce1H; } }
 
 		[Constructable]
-		public Boline() : this( 0xEC5, 50 )
+		public Boline() : this( 0x26BB, 50 )
 		{
-            this.Name = "boline";
+            this.Name = "Serpe";
+			Hue = 1940;
 		}
 
 		[Constructable]
-		public Boline(int usesremaining) : this( 0xEC5, usesremaining )
+		public Boline(int usesremaining) : this(0x26BB, usesremaining )
 		{
-            this.Name = "boline";
+            this.Name = "Serpe";
+			Hue = 1940;
 		}
 
 		[Constructable]
 		public Boline(int itemid, int usesremaining) : base( itemid, usesremaining )
 		{
-            this.Name = "boline";
+            this.Name = "Serpe";
+			Hue = 1940;
 		}
 
 		public Boline( Serial serial ) : base( serial ) { }

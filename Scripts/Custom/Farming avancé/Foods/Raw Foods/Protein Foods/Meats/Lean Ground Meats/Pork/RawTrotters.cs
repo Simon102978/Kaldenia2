@@ -16,7 +16,7 @@ namespace Server.Items
         public RawTrotters(int amount)
             : base(amount, 7820)
 		{
-			Name = "pig's feet";
+			Name = "Patte de Cochon crue";
 			Stackable = true;
             Amount = amount;
 			Weight = 0.5;

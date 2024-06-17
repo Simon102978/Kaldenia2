@@ -6,7 +6,8 @@ namespace Server.Items
         public ParasiticPotion()
             : base(PotionEffect.Parasitic)
         {
-            Hue = 0x17C;
+			Name = "Potion de poison parasitique";
+			Hue = 0x17C;
         }
 
         public ParasiticPotion(Serial serial)

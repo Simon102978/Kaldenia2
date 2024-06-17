@@ -6,7 +6,9 @@ namespace Server.Items
         public GreaterConflagrationPotion()
             : base(PotionEffect.ConflagrationGreater)
         {
-        }
+			Name = "Potion incendière majeure";
+
+		}
 
         public GreaterConflagrationPotion(Serial serial)
             : base(serial)

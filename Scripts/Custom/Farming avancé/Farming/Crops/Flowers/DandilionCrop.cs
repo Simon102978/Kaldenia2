@@ -1,12 +1,8 @@
 using System;
-using System.Collections;
-using Server.Network;
-using Server.Mobiles;
-using Server.Items;
-using Server.Gumps;
+
 namespace Server.Items.Crops
 {
-	public class DandelionSeed : BaseCrop
+	public class DandelionSeed : BaseSeed
 	{
 		public override bool CanGrowGarden{ get{ return true; } }
 
@@ -26,22 +22,7 @@ namespace Server.Items.Crops
 
 		public override void OnDoubleClick( Mobile from )
 		{
-			if ( from.Mounted && !CropHelper.CanWorkMounted ) { from.SendMessage( "Vous ne pouvez pas planter une graine lorsque vous êtes sur votre monture." ); return; }
-			Point3D m_pnt = from.Location;
-			Map m_map = from.Map;
-			if ( !IsChildOf( from.Backpack ) ) { from.SendLocalizedMessage( 1042010 ); return; }
-			else if ( !CropHelper.CheckCanGrow( this, m_map, m_pnt.X, m_pnt.Y ) ) { from.SendMessage( "Cette graine ne poussera pas ici." ); return; }
-			ArrayList cropshere = CropHelper.CheckCrop( m_pnt, m_map, 0 );
-			if ( cropshere.Count > 0 ) { from.SendMessage( "Il y a déjà un plant qui pousse ici." ); return; }
-			ArrayList cropsnear = CropHelper.CheckCrop( m_pnt, m_map, 1 );
-			if ( ( cropsnear.Count > 8 ) ) { from.SendMessage( "Il y a trop de plants à proximité." ); return; }
-			if ( this.BumpZ ) ++m_pnt.Z;
-			if ( !from.Mounted ) from.Animate( 32, 5, 1, true, false, 0 );
-			from.SendMessage("Vous plantez la graine.");
-			this.Consume();
-			Item item = new DandelionSeedling( from );
-			item.Location = m_pnt;
-			item.Map = m_map;
+			Sow(from, typeof(DandelionSeedling));
 		}
 
 		public DandelionSeed( Serial serial ) : base( serial ) { }
@@ -51,42 +32,31 @@ namespace Server.Items.Crops
 		public override void Deserialize( GenericReader reader ) { base.Deserialize( reader ); int version = reader.ReadInt(); }
 	}
 
-	public class DandelionSeedling : BaseCrop
+	public class DandelionSeedling : BaseSeedling
 	{
-		private static Mobile m_sower;
-		public Timer thisTimer;
-
-		[CommandProperty( AccessLevel.GameMaster )]
-		public Mobile Sower{ get{ return m_sower; } set{ m_sower = value; } }
-
 		[Constructable]
 		public DandelionSeedling( Mobile sower ) : base( 0xCB5 )
 		{
 			Movable = false;
 			Name = "Dandelion Seedling";
-			m_sower = sower;
-			init( this );
+			Sower = sower;
+            Init(this, typeof(DandelionCrop));
 		}
-		public static void init( DandelionSeedling plant )
-		{
-			plant.thisTimer = new CropHelper.GrowTimer( plant, typeof(DandelionCrop), plant.Sower );
-			plant.thisTimer.Start();
-		}
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( from.Mounted && !CropHelper.CanWorkMounted ) { from.SendMessage( "Le plant est trop petit pour pouvoir être récolté sur votre monture." ); return; }
-			else from.SendMessage( "Votre pousse est trop jeune pour être récoltée." );
-		}
+		
 		public DandelionSeedling( Serial serial ) : base( serial ) { }
 
-		public override void Serialize( GenericWriter writer ) { base.Serialize( writer ); writer.Write( (int) 0 ); writer.Write( m_sower ); }
-
-		public override void Deserialize( GenericReader reader )
+		public override void Serialize(GenericWriter writer)
 		{
-			base.Deserialize( reader );
+			base.Serialize(writer);
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 			int version = reader.ReadInt();
-			m_sower = reader.ReadMobile();
-			init( this );
+
+			Init(this, typeof(DandelionCrop));
 		}
 	}
 
@@ -127,133 +97,29 @@ namespace Server.Items.Crops
 			Movable = false;
 			Name = "Dandelion Plant";
 			Hue = 2979;
-			m_sower = sower;
-			m_lastvisit = DateTime.UtcNow;
-			init( this, false );
+			Sower = sower;
+			Init(this, 1, 0x234C, 0x234D, false);
 		}
 
-		public static void init ( DandelionCrop plant, bool full )
+		public override void OnDoubleClick(Mobile from)
 		{
-			plant.PickGraphic = ( 0x234C );
-			plant.FullGraphic = ( 0x234D );
-			plant.LastPick = DateTime.UtcNow;
-			plant.regrowTimer = new CropTimer( plant );
-			if ( full ) { plant.Yield = plant.Capacity; ((Item)plant).ItemID = plant.FullGraphic; }
-			else { plant.Yield = 0; ((Item)plant).ItemID = plant.PickGraphic; plant.regrowTimer.Start(); }
+			Gather(from, typeof(Dandelion));
 		}
 
-		public override void OnDoubleClick( Mobile from )
-		{
-			if ( m_sower == null || m_sower.Deleted ) m_sower = from;
-		
+		public DandelionCrop(Serial serial) : base(serial) { }
 
-			if ( from.Mounted && !CropHelper.CanWorkMounted ) { from.SendMessage( "Vous ne pouvez récolter sur une monture." ); return; }
-			if ( DateTime.UtcNow > lastpicked.AddSeconds(3) )
-			{
-				lastpicked = DateTime.UtcNow;
-				int cookValue = (int)from.Skills[SkillName.Cooking].Value / 20;
-				if ( cookValue == 0 ) { from.SendMessage( "Vous ignorez comment récolter cette pousse." ); return; }
-				if ( from.InRange( this.GetWorldLocation(), 1 ) )
-				{
-					if ( m_yield < 1 ) { from.SendMessage( "Il n'y a rien à récolter ici." ); }
-					else
-					{
-						from.Direction = from.GetDirectionTo( this );
-						from.Animate( from.Mounted ? 29:32, 5, 1, true, false, 0 );
-						m_lastvisit = DateTime.UtcNow;
-						if ( cookValue > m_yield ) cookValue = m_yield + 1;
-						int pick = Utility.RandomMinMax( cookValue - 4, cookValue );
-						if (pick < 0 ) pick = 0;
-						if ( pick == 0 ) { from.SendMessage( "Votre récolte ne porte pas fruit." ); return; }
-						m_yield -= pick;
-						from.SendMessage( "Vous récoltez {0} crop{1}!", pick, ( pick == 1 ? "" : "s" ) );
-						if (m_yield < 1) ((Item)this).ItemID = pickedGraphic;
-						Dandelion crop = new Dandelion();
-						from.AddToBackpack( crop );
-						if (pick == 2)
-						{
-							Dandelion crop2 = new Dandelion();
-							from.AddToBackpack( crop2 );
-						}
-						if ( !regrowTimer.Running ) { regrowTimer.Start(); }
-					}
-				}
-				else { from.SendMessage( "Vous êtes trop loin pour récolter quelque chose." ); }
-			}
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0);
 		}
 
-		private class CropTimer : Timer
+		public override void Deserialize(GenericReader reader)
 		{
-			private DandelionCrop i_plant;
-			public CropTimer( DandelionCrop plant ) : base( TimeSpan.FromSeconds( 450 ), TimeSpan.FromSeconds( 15 ) )
-			{
-				Priority = TimerPriority.OneSecond;
-				i_plant = plant;
-			}
-			protected override void OnTick()
-			{
-				if ( Utility.RandomBool() )
-				{
-					if ( ( i_plant != null ) && ( !i_plant.Deleted ) )
-					{
-						int current = i_plant.Yield;
-						if ( ++current >= i_plant.Capacity )
-						{
-							current = i_plant.Capacity;
-							((Item)i_plant).ItemID = i_plant.FullGraphic;
-							Stop();
-						}
-						else if ( current <= 0 ) current = 1;
-						i_plant.Yield = current;
-					}
-					else Stop();
-				}
-			}
-		}
-
-		public override void OnChop( Mobile from )
-		{
-			if ( !this.Deleted ) Chop( from );
-		}
-
-		public void Chop( Mobile from )
-		{
-			if ( from.InRange( this.GetWorldLocation(), 1 ) )
-			{
-				if ( from == m_sower )
-				{
-					from.Direction = from.GetDirectionTo( this );
-					double lumberValue = from.Skills[SkillName.Lumberjacking].Value / 100;
-					if ( ( lumberValue > .5 ) && ( Utility.RandomDouble() <= lumberValue ) )
-					{
-						Dandelion fruit = new Dandelion( Utility.Random( m_yield +2 ) );
-						from.AddToBackpack( fruit );
-					}
-						this.Delete();
-						from.SendMessage( "Vous coupez le plant." );
-				}
-				else from.SendMessage( "Ce plant ne vous appartient pas !" );
-			}
-			else from.SendLocalizedMessage( 500446 );
-		}
-
-		public DandelionCrop( Serial serial ) : base( serial ) { }
-
-		public override void Serialize( GenericWriter writer )
-		{
-			base.Serialize( writer );
-			writer.Write( (int) 0 );
-			writer.Write( m_lastvisit );
-			writer.Write( m_sower );
-		}
-
-		public override void Deserialize( GenericReader reader )
-		{
-			base.Deserialize( reader );
+			base.Deserialize(reader);
 			int version = reader.ReadInt();
-			m_lastvisit = reader.ReadDateTime();
-			m_sower = reader.ReadMobile();
-			init( this, true );
+
+			Init(this, 1, 0x234C, 0x234D, true);
 		}
 	}
 }

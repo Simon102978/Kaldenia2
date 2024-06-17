@@ -16,7 +16,7 @@ namespace Server.Items
         public RawBeefSlice(int amount)
             : base(amount, 0x979)
 		{
-			Name = "raw slice of beef";
+			Name = "Tranche de Boeuf crue";
 			Weight = 1.0;
 			Stackable = true;
 			Amount = amount;

@@ -25,13 +25,13 @@ namespace Server.Items
         public override int MinSkill { get { return 0; } }
         public override int MaxSkill { get { return 100; } }
         public override bool NeedSilverware { get { return true; } }
-        public override string CookedMessage { get { return "You make a bowl of corn flakes."; } }
+        public override string CookedMessage { get { return "Vous préparer un bol de Corn Flakes."; } }
         public override Item FoodContainer { get { return new EmptyWoodenBowlExp(); } }
 
         [Constructable]
 		public BowlCornFlakes() : base(0x15FA )
 		{
-            Name = "Bowl of Corn Flakes";
+            Name = "Bol de Corn Flakes";
             Weight = 1.0;
             Uses = 2;
             FillFactor = 2;

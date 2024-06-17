@@ -6,9 +6,10 @@ namespace Server.Items
         public GreaterExplosionPotion()
             : base(PotionEffect.ExplosionGreater)
         {
-        }
+			Name = "Potion explosive majeure";
+		}
 
-        public GreaterExplosionPotion(Serial serial)
+		public GreaterExplosionPotion(Serial serial)
             : base(serial)
         {
         }

@@ -68,14 +68,14 @@ namespace Server.Engines.Craft
 			AddRes( index, typeof( Keg ), "Keg", 1, "You need a keg" );
 			AddRes( index, typeof( BaseBeverage ), "Water", 20, "You need more water" );
 			AddRes( index, typeof( Malt ), "Malt", 3, "You need more malt" );
-			AddRes( index, typeof( BrewersYeast ), "Brewers Yeast", 3, "You need more Brewers Yeast" );
+			AddRes( index, typeof( BrewersYeast ), "Levure à Fermentation", 3, "You need more Levure à Fermentation" );
             SetNeedDistillery(index, true);
 
 			index = AddCraft( typeof( AleKeg ), "Alchoholic Beverages", "Keg of Ale", 80.0, 105.6, typeof( BitterHops ), "Bitter Hops", 50, "You need more Hops" );
 			AddRes( index, typeof( Keg ), "Keg", 1, "You need a keg" );
 			AddRes( index, typeof( BaseBeverage ), "Water", 20, "You need more water" );
 			AddRes( index, typeof( Barley ), "Barley", 3, "You need more Barley" );
-			AddRes( index, typeof( BrewersYeast ), "Brewers Yeast", 3, "You need more Brewers Yeast" );
+			AddRes( index, typeof( BrewersYeast ), "Levure à Fermentation", 3, "You need more Levure à Fermentation" );
             SetNeedDistillery(index, true);
 
 			index = AddCraft( typeof( CiderKeg ), "Non Alchoholic Beverages", "Keg of Cider", 80.0, 105.6, typeof( Keg ), "Keg", 1, "You need a keg" );

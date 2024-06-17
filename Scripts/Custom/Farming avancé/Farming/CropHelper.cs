@@ -1,56 +1,8 @@
 using System;
-using Server;
-using Server.Gumps;
-using Server.Items;
-using Server.Network;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace Server.Items.Crops
 {
-	public class BaseCrop : Item, IChopable
-	{
-		public virtual bool CanGrowFarm{ get{ return Config.Get("Farming.CanGrowFarm", true); } }
-		public virtual bool CanGrowHouseTiles{ get{ return Config.Get("Farming.CanGrowHouseTiles", true); } }
-		public virtual bool CanGrowDirt{ get{ return Config.Get("Farming.CanGrowDirt", true); } }
-		public virtual bool CanGrowGround{ get{ return Config.Get("Farming.CanGrowGround", false); } }
-		public virtual bool CanGrowSwamp{ get{ return Config.Get("Farming.CanGrowSwamp", false); } }
-		public virtual bool CanGrowSand{ get{ return Config.Get("Farming.CanGrowSand", false); } }
-		public virtual bool CanGrowGarden{ get{ return Config.Get("Farming.CanGrowGarden", true); } }
-
-		public virtual TimeSpan SowerPickTime{ get{ return TimeSpan.FromDays(Config.Get("Farming.SowerPickTime", (14))); } }
-
-		public virtual bool PlayerCanDestroy{ get{ return Config.Get("Farming.PlayerCanDestroy", true); } }
-		private bool i_bumpZ = false;
-
-		public bool BumpZ { get{ return i_bumpZ; } set{ i_bumpZ = value; } }
-
-		public BaseCrop( int itemID ) : base( itemID )
-        {
-        }
-
-		public virtual void OnChop( Mobile from )
-        {
-        }
-
-		public BaseCrop( Serial serial ) : base( serial )
-        {
-        }
-
-		public override void Serialize( GenericWriter writer )
-        {
-            base.Serialize( writer );
-            writer.Write( (int) 0 );
-        }
-
-		public override void Deserialize( GenericReader reader )
-        {
-            base.Deserialize( reader );
-            int version = reader.ReadInt();
-        }
-	}
-
 	public class CropHelper
 	{
 		public static bool CanWorkMounted{ get{ return false; } }
@@ -127,15 +79,15 @@ namespace Server.Items.Crops
 			0x7D5, 0x7D8,
 		};
 
-		public static bool CheckCanGrow( BaseCrop crop, Map map, int x, int y )
+		public static bool CheckCanGrow( BaseSeed seed, Map map, int x, int y )
 		{
-			if ( crop.CanGrowFarm && ValidateFarmLand( map, x, y ) ) return true;
-			if ( crop.CanGrowHouseTiles && ValidateHouseTiles( map, x, y ) ) return true;
-			if ( crop.CanGrowDirt && ValidateDirt( map, x, y ) ) return true;
-			if ( crop.CanGrowGround && ValidateGround( map, x, y ) ) return true;
-			if ( crop.CanGrowSand && ValidateSand( map, x, y ) ) return true;
-			if ( crop.CanGrowSwamp && ValidateSwamp( map, x, y ) ) return true;
-			if ( crop.CanGrowGarden ) { crop.BumpZ = ValidateGardenPlot( map, x, y ); return crop.BumpZ; }
+			if ( seed.CanGrowFarm && ValidateFarmLand( map, x, y ) ) return true;
+			if ( seed.CanGrowHouseTiles && ValidateHouseTiles( map, x, y ) ) return true;
+			if ( seed.CanGrowDirt && ValidateDirt( map, x, y ) ) return true;
+			if ( seed.CanGrowGround && ValidateGround( map, x, y ) ) return true;
+			if ( seed.CanGrowSand && ValidateSand( map, x, y ) ) return true;
+			if ( seed.CanGrowSwamp && ValidateSwamp( map, x, y ) ) return true;
+			if ( seed.CanGrowGarden ) { seed.BumpZ = ValidateGardenPlot( map, x, y ); return seed.BumpZ; }
 			return false;
 		}
 

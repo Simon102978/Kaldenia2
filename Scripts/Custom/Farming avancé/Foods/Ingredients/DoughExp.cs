@@ -261,45 +261,6 @@ namespace Server.Items
 					((Item)targeted).Consume();
 					from.SendMessage("You fumble around for a bit with even more dough, and eventually make these round doughy things");
 				}
-
-try {
-				if ( targeted is CowCheeseWedgeSmall )
-				{
-					if(!((Item)targeted).Movable) return;
-					if(((Item)targeted).Parent == null )
-						new UncookedPizza( "cheese" ).MoveToWorld(((Item)targeted).Location, ((Item)targeted).Map );
-					else
-						from.AddToBackpack( new UncookedPizza( "cheese" ) );
-					m_Item.Consume();
-					((Item)targeted).Consume();
-					from.SendMessage("You made an uncooked cheese pizza");
-				}
-				else if ( targeted is SheepCheeseWedgeSmall )
-				{
-					if(!((Item)targeted).Movable) return;
-					if(((Item)targeted).Parent == null )
-						new UncookedPizza( "sheep cheese" ).MoveToWorld(((Item)targeted).Location, ((Item)targeted).Map );
-					else
-						from.AddToBackpack( new UncookedPizza( "sheep cheese" ) );
-					m_Item.Consume();
-					((Item)targeted).Consume();
-					from.SendMessage("You made an uncooked sheep cheese pizza");
-				}
-				else if ( targeted is GoatCheeseWedgeSmall )
-				{
-					if(!((Item)targeted).Movable) return;
-					if(((Item)targeted).Parent == null )
-						new UncookedPizza( "goat cheese" ).MoveToWorld(((Item)targeted).Location, ((Item)targeted).Map );
-					else
-						from.AddToBackpack( new UncookedPizza( "goat cheese" ) );
-					m_Item.Consume();
-					((Item)targeted).Consume();
-					from.SendMessage("You made an uncooked goat cheese pizza");
-				}
-}
-catch
-{
-}
 			}
 
 			private class InternalTimer : Timer

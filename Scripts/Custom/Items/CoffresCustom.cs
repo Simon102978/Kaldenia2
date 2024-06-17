@@ -9,20 +9,20 @@ using System.Linq;
 namespace Server.Items
 {
 	[Furniture]
-	[Flipable(0x994B, 0x994C)]
-	public class MaritimeChest : LockableContainer
+	[Flipable(0xA00E, 0xA00F)]
+	public class CoffreMaritime : LockableContainer
 	{
 		public override int DefaultGumpID { get { return 0x44; } }
 		public override int DefaultMaxItems { get { return 250; } }
 		[Constructable]
-		public MaritimeChest()
-			: base(0x994B)
+		public CoffreMaritime()
+			: base(0xA00E)
 		{
 			Name = "Coffre Maritime";
-			Weight = 50.0;
+			Weight = 10.0;
 		}
 
-		public MaritimeChest(Serial serial)
+		public CoffreMaritime(Serial serial)
 			: base(serial)
 		{
 		}
@@ -78,7 +78,7 @@ namespace Server.Items
 	}
 
 	[Furniture]
-	[Flipable(0x995D, 0x995E)]
+	[Flipable(0xA016, 0xA017, 0x9FE7, 0x9FE8)]
 	public class CoffreFort : LockableContainer
 	{
 		public override int DefaultGumpID { get { return 0x4B; } }
@@ -86,10 +86,10 @@ namespace Server.Items
 
 		[Constructable]
 		public CoffreFort()
-			: base(0x995D)
+			: base(0xA016)
 		{
 			Name = "Coffre Fort";
-			Weight = 30.0;
+			Weight = 10.0;
 		}
 
 		public CoffreFort(Serial serial)
@@ -112,7 +112,7 @@ namespace Server.Items
 		}
 	}
 	[Furniture]
-	[Flipable(0x9965, 0x9966)]
+	[Flipable(0xA014, 0xA015)]
 	public class CoffreMetalVisqueux : LockableContainer
 	{
 		public override int DefaultGumpID { get { return 0x4A; } }
@@ -120,10 +120,10 @@ namespace Server.Items
 
 		[Constructable]
 		public CoffreMetalVisqueux()
-			: base(0x9965)
+			: base(0xA014)
 		{
 			Name = "Coffre Visqueux";
-			Weight = 15.0;
+			Weight = 10.0;
 		}
 
 		public CoffreMetalVisqueux(Serial serial)
@@ -146,7 +146,7 @@ namespace Server.Items
 		}
 	}
 	[Furniture]
-	[Flipable(0x9969, 0x996A)]
+	[Flipable(0xA010, 0xA011)]
 	public class CoffreMetalRouille : LockableContainer
 	{
 		public override int DefaultGumpID { get { return 0x4A; } }
@@ -154,10 +154,10 @@ namespace Server.Items
 
 		[Constructable]
 		public CoffreMetalRouille()
-			: base(0x9969)
+			: base(0xA010)
 		{
 			Name = "Coffre Rouillé";
-			Weight = 15.0;
+			Weight = 10.0;
 		}
 
 		public CoffreMetalRouille(Serial serial)
@@ -180,7 +180,7 @@ namespace Server.Items
 		}
 	}
 	[Furniture]
-	[Flipable(0x996B, 0x996C)]
+	[Flipable(0xA012, 0xA013)]
 	public class CoffreMetalDore : LockableContainer
 	{
 		public override int DefaultGumpID { get { return 0x4A; } }
@@ -188,10 +188,10 @@ namespace Server.Items
 
 		[Constructable]
 		public CoffreMetalDore()
-			: base(0x996B)
+			: base(0xA012)
 		{
 			Name = "Coffre Doré";
-			Weight = 15.0;
+			Weight = 10.0;
 		}
 
 		public CoffreMetalDore(Serial serial)

@@ -9,10 +9,9 @@ namespace Server.Items
     {
 		private static TimeSpan AnimateDelay = TimeSpan.FromSeconds(5.0);
 
-
 		[Constructable]
         public Kindling()
-            : this(1)
+            : this(5)
         {
         }
 
@@ -23,10 +22,6 @@ namespace Server.Items
             Stackable = true;
             Weight = 1.0;
             Amount = amount;
-
-			
-			
-
 		}
 
         public Kindling(Serial serial)
@@ -52,7 +47,6 @@ namespace Server.Items
         }
 
         public override void OnDoubleClick(Mobile from)
-
 		{
             if (!VerifyMove(from))
                 return;
@@ -69,7 +63,7 @@ namespace Server.Items
             {
                 from.SendLocalizedMessage(501695); // There is not a spot nearby to place your campfire.
             }
-            else if (!from.CheckSkill(SkillName.Tracking, 0.0, 100.0))
+            else if (!from.CheckSkill(SkillName.Cooking, 0.0, 100.0))
             {
                 from.SendLocalizedMessage(501696); // You fail to ignite the campfire.
             }

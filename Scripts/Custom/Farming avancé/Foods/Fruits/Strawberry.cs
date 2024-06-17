@@ -12,7 +12,7 @@ namespace Server.Items
 		{
 			FillFactor = 1;
 			Hue = 0x85;
-			Name = "Strawberry";
+			Name = "Fraise";
 			Weight = 0.1;
 		}
 

@@ -551,11 +551,11 @@ namespace Server.Commands
                         case "DartRegularBoard":
                             if (m_ItemID == 0x1E2F)
                             {
-                                item = new DartRegularBoardEastAddon();
+                                item = new DartBoardEastAddon();
                             }
                             else
                             {
-                                item = new DartRegularBoardSouthAddon();
+                                item = new DartBoardSouthAddon();
                             }
                             break;
                     }

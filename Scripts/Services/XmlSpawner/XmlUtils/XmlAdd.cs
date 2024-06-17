@@ -17,8 +17,8 @@ namespace Server.Mobiles
         {
             public string AccountName;
             public string PlayerName;
-            public TimeSpan MinDelay = TimeSpan.FromMinutes(5);
-            public TimeSpan MaxDelay = TimeSpan.FromMinutes(10);
+            public TimeSpan MinDelay = TimeSpan.FromMinutes(45);
+            public TimeSpan MaxDelay = TimeSpan.FromMinutes(60);
             public TimeSpan RefractMin = TimeSpan.FromMinutes(0);
             public TimeSpan RefractMax = TimeSpan.FromMinutes(0);
             public TimeSpan TODStart = TimeSpan.FromMinutes(0);

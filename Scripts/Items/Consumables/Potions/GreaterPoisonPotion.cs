@@ -6,9 +6,10 @@ namespace Server.Items
         public GreaterPoisonPotion()
             : base(PotionEffect.PoisonGreater)
         {
-        }
+			Name = "Potion de poison majeure";
+		}
 
-        public GreaterPoisonPotion(Serial serial)
+		public GreaterPoisonPotion(Serial serial)
             : base(serial)
         {
         }

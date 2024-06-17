@@ -6,6 +6,7 @@ namespace Server.Items
         public DarkglowPotion()
             : base(PotionEffect.Darkglow)
         {
+			Name = "Potion de poison sombrelueur";
             Hue = 0x96;
         }
 

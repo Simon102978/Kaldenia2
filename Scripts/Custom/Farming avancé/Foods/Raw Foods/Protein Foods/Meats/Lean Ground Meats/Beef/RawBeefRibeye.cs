@@ -45,7 +45,7 @@ namespace Server.Items
             : base(amount, 0x9F1)
 		{
 			Weight = 1.0;
-			Name = "raw beef ribeye";
+			Name = "Boeuf ribeye crue";
 			Stackable = true;
 			Amount = amount;
             Raw = true;

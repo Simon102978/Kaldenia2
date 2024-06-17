@@ -39,94 +39,96 @@ namespace Server.Engines.Harvest
 			herb.ConsumedPerHarvest = 1;
 			herb.ConsumedPerFeluccaHarvest = 1;
 
-			herb.EffectActions = new int[]{ 32 };
+			herb.EffectActions = new int[]{ 9 };
 			herb.EffectSounds = new int[]{ 0x4F };
 			herb.EffectCounts = new int[]{ 1, 1, 1, 1, 2 };
-			herb.EffectDelay = TimeSpan.FromSeconds( 0.7 );
+			herb.EffectDelay = TimeSpan.FromSeconds( 5.0 );
 			herb.EffectSoundDelay = TimeSpan.FromSeconds( 0.7 );
 
-			herb.NoResourcesMessage = "There are no herbs to harvest here.";
-			herb.FailMessage = "You don't manage to gather any herbs.";
+			herb.NoResourcesMessage = "Il n'y a rien à récolter ici.";
+			herb.FailMessage = "Vous ne retirez aucune herbe ici.";
 			herb.OutOfRangeMessage = 500446;
-			herb.PackFullMessage = "You can't carry any more!";
-			herb.ToolBrokeMessage = "You've broken your boline.";
+			herb.PackFullMessage = "Votre sac est plein.";
+			herb.ToolBrokeMessage = "Vous brisez votre serpe.";
 
 			res = new HarvestResource[]
 			{
-				new HarvestResource( 37.5, 37.5, 37.5, "You put some sage in your backpack.", typeof( Sage ) ),
-				new HarvestResource( 87.5, 87.5, 87.5, "You put some acacia in your backpack.", typeof( Acacia ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some anise in your backpack.", typeof( Anise ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some basil in your backpack.", typeof( Basil ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put a bay leaf in your backpack.", typeof( BayLeaf ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some chamomile in your backpack.", typeof( Chamomile ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some caraway in your backpack.", typeof( Caraway ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some cilantro in your backpack.", typeof( Cilantro ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some cinnamon in your backpack.", typeof( Cinnamon ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some clove in your backpack.", typeof( Clove ) ),
-				new HarvestResource( 87.5, 87.5, 87.5, "You put some copal in your backpack.", typeof( Copal ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some coriander in your backpack.", typeof( Coriander ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some dill in your backpack.", typeof( Dill ) ),
-				new HarvestResource( 87.5, 87.5, 87.5, "You put some dragonsblood in your backpack.", typeof( Dragonsblood ) ),
-				new HarvestResource( 87.5, 87.5, 87.5, "You put some frankincense in your backpack.", typeof( Frankincense ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some lavender in your backpack.", typeof( Lavender ) ),
-				new HarvestResource( 87.5, 87.5, 87.5, "You put some marjoram in your backpack.", typeof( Marjoram ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some meadowsweet in your backpack.", typeof( Meadowsweet ) ),
-				new HarvestResource( 37.5, 37.5, 37.5, "You put some mint in your backpack.", typeof( Mint ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some mugwort in your backpack.", typeof( Mugwort ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some mustard in your backpack.", typeof( Mustard ) ),
-				new HarvestResource( 87.5, 87.5, 87.5, "You put some myrrh in your backpack.", typeof( Myrrh ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some olive in your backpack.", typeof( Olive ) ),
-				new HarvestResource( 37.5, 37.5, 37.5, "You put some oregano in your backpack.", typeof( Oregano ) ),
-				new HarvestResource( 87.5, 87.5, 87.5, "You put some orris in your backpack.", typeof( Orris ) ),
-				new HarvestResource( 87.5, 87.5, 87.5, "You put some patchouli in your backpack.", typeof( Patchouli ) ),
-				new HarvestResource( 37.5, 37.5, 37.5, "You put some peppercorn in your backpack.", typeof( Peppercorn ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some rose in your backpack.", typeof( RoseHerb ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some rosemary in your backpack.", typeof( Rosemary ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some saffron in your backpack.", typeof( Saffron ) ),
-				new HarvestResource( 87.5, 87.5, 87.5, "You put some sandelwood in your backpack.", typeof( Sandelwood ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some slippery elm in your backpack.", typeof( SlipperyElm ) ),
-				new HarvestResource( 37.5, 37.5, 37.5, "You put some thyme in your backpack.", typeof( Thyme ) ),
-				new HarvestResource( 87.5, 87.5, 87.5, "You put some valerian in your backpack.", typeof( Valerian ) ),
-				new HarvestResource( 62.5, 62.5, 62.5, "You put some willow bark in your backpack.", typeof( WillowBark ) )
+				new HarvestResource( 10.0, 10.0, 10.0,  "Vous déposez un peu de sauge dans votre sac.", typeof( Sage ) ),
+				new HarvestResource( 30.0, 30.0, 30.0, "Vous déposez un peu de acacia dans votre sac.", typeof( Acacia ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de anis dans votre sac.", typeof( Anise ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de basilic dans votre sac.", typeof( Basil ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de feuille de laurier dans votre sac.", typeof( BayLeaf ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de camomille dans votre sac.", typeof( Chamomile ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de cumin dans votre sac.", typeof( Caraway ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de coriandre dans votre sac.", typeof( Cilantro ) ),
+				new HarvestResource( 60.0, 60.0, 60.0, "Vous déposez un peu de cannelle dans votre sac.", typeof( Cinnamon ) ),
+				new HarvestResource( 60.0, 60.0, 60.0, "Vous déposez un peu de clou de girofle dans votre sac.", typeof( Clove ) ),
+				new HarvestResource( 30.0, 30.0, 30.0, "Vous déposez un peu de résine dans votre sac.", typeof( Copal ) ),
+				new HarvestResource( 60.0, 60.0, 60.0, "Vous déposez un peu de cerfeuil dans votre sac.", typeof( Coriander ) ),
+				new HarvestResource( 20.0, 20.0, 20.0, "Vous déposez un peu de aneth dans votre sac.", typeof( Dill ) ),
+				new HarvestResource( 30.0, 30.0, 30.0, "Vous déposez un peu de sang de dragon dans votre sac.", typeof( Dragonsblood ) ),
+				new HarvestResource( 30.0, 30.0, 30.0, "Vous déposez un peu de encens dans votre sac.", typeof( Frankincense ) ),
+				new HarvestResource( 20.0, 20.0, 20.0, "Vous déposez un peu de lavande dans votre sac.", typeof( Lavender ) ),
+				new HarvestResource( 30.0, 30.0, 30.0, "Vous déposez un peu de marjolaine dans votre sac.", typeof( Marjoram ) ),
+				new HarvestResource( 20.0, 20.0, 20.0, "Vous déposez un peu de reine-des-prés dans votre sac.", typeof( Meadowsweet ) ),
+				new HarvestResource( 10.0, 10.0, 10.0,  "Vous déposez un peu de menthe dans votre sac.", typeof( Mint ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de armoise commune dans votre sac.", typeof( Mugwort ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de graine de moutarde dans votre sac.", typeof( Mustard ) ),
+				new HarvestResource( 30.0, 30.0, 30.0, "Vous déposez un peu de gomme d'épinette dans votre sac.", typeof( Myrrh ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de olive dans votre sac.", typeof( Olive ) ),
+				new HarvestResource( 10.0, 10.0, 10.0,  "Vous déposez un peu de origan dans votre sac.", typeof( Oregano ) ),
+				new HarvestResource( 30.0, 30.0, 30.0, "Vous déposez un peu de racine d'orris dans votre sac.", typeof( Orris ) ),
+				new HarvestResource( 30.0, 30.0, 30.0, "Vous déposez un peu de patchouli dans votre sac.", typeof( Patchouli ) ),
+				new HarvestResource( 10.0, 10.0, 10.0,  "Vous déposez un peu de grain de poivre dans votre sac.", typeof( Peppercorn ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de rose dans votre sac.", typeof( RoseHerb ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de romarin dans votre sac.", typeof( Rosemary ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de safran dans votre sac.", typeof( Saffron ) ),
+				new HarvestResource( 30.0, 30.0, 30.0, "Vous déposez un peu de bois de santal dans votre sac.", typeof( Sandelwood ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de orme glissante dans votre sac.", typeof( SlipperyElm ) ),
+				new HarvestResource( 10.0, 10.0, 10.0,  "Vous déposez un peu de thym dans votre sac.", typeof( Thyme ) ),
+				new HarvestResource( 30.0, 30.0, 30.0, "Vous déposez un peu de valériane dans votre sac.", typeof( Valerian ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de écorce de saule dans votre sac.", typeof( WillowBark ) ),
+				new HarvestResource( 50.0, 50.0, 50.0, "Vous déposez un peu de baie tribale dans votre sac.", typeof( TribalBerry ) )
 			};
 
 			veins = new HarvestVein[]
 			{
 				new HarvestVein( 5.0, 0.0, res[0], null ),
-				new HarvestVein( 1.5, 0.1, res[1], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[2], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[3], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[4], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[5], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[6], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[7], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[8], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[9], res[0] ),
-				new HarvestVein( 1.5, 0.1, res[10], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[11], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[12], res[0] ),
-				new HarvestVein( 1.5, 0.1, res[13], res[0] ),
-				new HarvestVein( 1.5, 0.1, res[14], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[15], res[0] ),
-				new HarvestVein( 1.5, 0.1, res[16], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[17], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[1], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[2], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[3], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[4], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[5], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[6], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[7], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[8], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[9], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[10], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[11], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[12], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[13], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[14], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[15], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[16], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[17], res[0] ),
 				new HarvestVein( 5.0, 0.1, res[18], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[19], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[20], res[0] ),
-				new HarvestVein( 1.5, 0.1, res[21], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[22], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[19], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[20], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[21], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[22], res[0] ),
 				new HarvestVein( 5.0, 0.1, res[23], res[0] ),
-				new HarvestVein( 1.5, 0.1, res[24], res[0] ),
-				new HarvestVein( 1.5, 0.1, res[25], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[24], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[25], res[0] ),
 				new HarvestVein( 5.0, 0.1, res[26], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[27], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[28], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[29], res[0] ),
-				new HarvestVein( 1.5, 0.1, res[30], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[31], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[27], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[28], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[29], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[30], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[31], res[0] ),
 				new HarvestVein( 5.0, 0.1, res[32], res[0] ),
-				new HarvestVein( 1.5, 0.1, res[33], res[0] ),
-				new HarvestVein( 3.0, 0.1, res[34], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[33], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[34], res[0] ),
+				new HarvestVein( 5.0, 0.1, res[35], res[0] ),
 			};
 
 			herb.Resources = res;
@@ -140,20 +142,20 @@ namespace Server.Engines.Harvest
 		public override bool CheckHarvest( Mobile from, Item tool )
 		{
 			if ( !base.CheckHarvest( from, tool ) ) return false;
-			if ( tool.Parent != from ) { from.SendMessage( "You must be holding the boline for gathering herbs." ); return false; }
+			if ( tool.Parent != from ) { from.SendMessage( "Vous devez avoir votre serpe en main pour récolter les herbes." ); return false; }
 			return true;
 		}
 
 		public override bool CheckHarvest( Mobile from, Item tool, HarvestDefinition def, object toHarvest )
 		{
 			if ( !base.CheckHarvest( from, tool, def, toHarvest ) ) return false;
-			if ( tool.Parent != from ) { from.SendMessage( "You must be holding the boline for gathering herbs." ); return false; }
+			if ( tool.Parent != from ) { from.SendMessage("Vous devez avoir votre serpe en main pour récolter les herbes."); return false; }
 			return true;
 		}
 
 		public override void OnBadHarvestTarget( Mobile from, Item tool, object toHarvest )
 		{
-			from.SendMessage( "You can't use a boline on that." );
+			from.SendMessage( "Vous ne pouvez utiliser votre Serpe sur cela." );
 		}
 
 		public static void Initialize()

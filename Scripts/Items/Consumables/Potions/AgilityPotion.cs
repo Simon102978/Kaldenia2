@@ -8,14 +8,15 @@ namespace Server.Items
         public AgilityPotion()
             : base(PotionEffect.Agility)
         {
-        }
+			Name = "Potion de dextérité";
+		}
 
-        public AgilityPotion(Serial serial)
+		public AgilityPotion(Serial serial)
             : base(serial)
         {
         }
 
-        public override int DexOffset => 10;
+        public override int DexOffset => 15;
         public override TimeSpan Duration => TimeSpan.FromMinutes(5.0);
         public override void Serialize(GenericWriter writer)
         {

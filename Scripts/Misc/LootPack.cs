@@ -225,13 +225,13 @@ namespace Server
 		       public static readonly LootPackItem[] Gold250 = new[] { new LootPackItem(typeof(Diamond), 1) };
 
 
-		public static readonly LootPackItem[] RandomFoodRecipeItems = new[]
-	   {
-			new LootPackItem(typeof(RandomBakingRecipe), 1), new LootPackItem(typeof(RandomPreparationsRecipe), 1),
-			new LootPackItem(typeof(RandomBoilingRecipe), 1), new LootPackItem(typeof(RandomRawMeatPrepRecipe), 1),
-			new LootPackItem(typeof(RandomIngredientsRecipe), 1), new LootPackItem(typeof(RandomSaucesRecipe), 1),
-			new LootPackItem(typeof(RandomOilsRecipe), 1)
-		};
+	//	public static readonly LootPackItem[] RandomFoodRecipeItems = new[]
+	 //  {
+	//		new LootPackItem(typeof(RandomBakingRecipe), 1), new LootPackItem(typeof(RandomPreparationsRecipe), 1),
+	//		new LootPackItem(typeof(RandomBoilingRecipe), 1), new LootPackItem(typeof(RandomRawMeatPrepRecipe), 1),
+	//		new LootPackItem(typeof(RandomIngredientsRecipe), 1), new LootPackItem(typeof(RandomSaucesRecipe), 1),
+	//		new LootPackItem(typeof(RandomOilsRecipe), 1)
+	//	};
 
 		public static readonly LootPackItem[] Instruments = new[] { new LootPackItem(typeof(BaseInstrument), 1) };
 
