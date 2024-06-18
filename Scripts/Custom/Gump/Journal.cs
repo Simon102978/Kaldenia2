@@ -47,12 +47,14 @@ namespace JournalCommand
 		private List<JournalEntry> m_JournalEntries;
 		private int m_Page;
 		private int m_ArticlePerPage = 3;
+		private bool m_AllVisible;
 
-		public CJournalGump(CustomPlayerMobile from, List<JournalEntry> journalEntries, int page) : base("Journal de Mirage", 800, 720, false)
+		public CJournalGump(CustomPlayerMobile from, List<JournalEntry> journalEntries, int page, bool allVisible = false) : base("Journal de Mirage", 800, 720, false)
 		{
 			m_From = from;
 			m_JournalEntries = journalEntries;
 			m_Page = page;
+			m_AllVisible = allVisible;
 
 			AddPage(0);
 			AddBackground(0, 0, 800, 800, 5054);
@@ -61,45 +63,129 @@ namespace JournalCommand
 
 			m_JournalEntries = m_JournalEntries.OrderByDescending(x => x.DateCreated).ToList();
 
+			
 			var tempVisible = m_JournalEntries.Where(x => x.Visible);
 			var temp = tempVisible.Skip(m_Page * m_ArticlePerPage).Take(m_ArticlePerPage).ToList();
 
+			if (allVisible)
+			{
+				temp = m_JournalEntries.Skip(m_Page * m_ArticlePerPage).Take(m_ArticlePerPage).ToList();
+			}
+			
 			foreach (var entry in temp)
 			{
-				void AddParcheminSection(int x, int y, int largeur, int hauteur, string titre)
-				{
-					AddBackground(x, y, largeur, hauteur, 9300);
-					AddHtml(x, y + 1, largeur, 20, String.Concat("<h3><center><basefont color=#000000>", titre, "</basefont></center></h3>"), false, false);
-				}
-
-
-				AddParcheminSection(100, 80 + count * 200, 770, 180, $"{entry.Title}");
-
-				if (m_From.Journaliste || m_From.AccessLevel > AccessLevel.Player)
-				{
-					var index = m_JournalEntries.IndexOf(entry);
-					AddButton(860, 80 + count * 200, 4026, 4028, 100 + index, GumpButtonType.Reply, 0);
-				}
-
-				AddHtml(120, 100 + count * 200, 730, 140, $"<CENTER> - {entry.DateCreated} -\n\r{entry.Content}</CENTER>", true, true);
+				AddParcheminSection(75, 80 + count * 235, 830, 230, entry , from);
 				count++;
-
 			}
+			
+			AddBackground(75, 785, 830, 55, 9270);
+
 
 			if (m_Page > 0)
-				AddButton(400, 760, 4014, 4015, 2, GumpButtonType.Reply, 0);
+				AddButton(400, 800, 4014, 4015, 2, GumpButtonType.Reply, 0);
 
-			var maxPage = Math.Ceiling((double)tempVisible.Count() / m_ArticlePerPage) - 1;
-			AddLabel(500, 760, 0x480, $"{m_Page + 1}/{maxPage + 1}");
+			double maxPage = 0;
+
+			if (m_AllVisible)
+			{
+				maxPage = Math.Ceiling((double)m_JournalEntries.Count() / m_ArticlePerPage) - 1;
+			}
+			else
+			{
+				maxPage = Math.Ceiling((double)tempVisible.Count() / m_ArticlePerPage) - 1;
+			}
+
+			
+			AddLabel(500, 803, 0x480, $"{m_Page + 1}/{maxPage + 1}");
 
 			if (m_Page < maxPage)
-				AddButton(600, 760, 4005, 4006, 3, GumpButtonType.Reply, 0);
+				AddButton(600, 800, 4005, 4006, 3, GumpButtonType.Reply, 0);
 
 			if (m_From.Journaliste || m_From.AccessLevel > AccessLevel.Player)
 			{
-				AddButton(100, 780, 2117, 2118, 1, GumpButtonType.Reply, 0);
-				AddLabel(120, 780, 0x480, "Ajouter un article au journal");
+				AddButtonHtlml(100, 803,1,"Ajouter un article au journal","#FFFFFF");
+
+			
 			}
+
+			if (m_From.AccessLevel > AccessLevel.Player)
+			{
+				if (!allVisible)
+				{
+					AddButtonHtlml(680,803,4,"Voir texte invisible","#FFFFFF");
+				}
+				else
+				{
+					AddButtonHtlml(680,803,4,"Voir seulement texte visible","#FFFFFF");
+				}
+				
+			}
+		}
+
+		void AddParcheminSection(int x, int y, int largeur, int hauteur, JournalEntry entry, CustomPlayerMobile cm)
+		{
+		
+		 	AddBackground(x, y, largeur, 40, 9270);
+			AddBackground(x, y + 42, largeur, hauteur - 42, 9270);
+			AddHtmlTexte(x + 12, y + 12, 150,entry.DateCreated.ToShortDateString());
+
+			string couleur = "#000000";
+
+			if (!entry.Visible)
+			{
+				couleur = "#696969";
+			}
+
+			AddTitleWhite(x + 225 , y +12,400, $"<h3><center>{entry.Title}</center></h3>",couleur);
+			AddHtmlTexte(x + largeur - 175, y + 12, 165, $"<right>par {entry.WriterName}</right>");
+			
+			if ((m_From.Journaliste && m_From.Account.ToString() == entry.Account)|| m_From.AccessLevel > AccessLevel.Player)
+			{
+				var index = m_JournalEntries.IndexOf(entry);
+				AddButton(x + largeur - 200, y + 9, 4026, 4028, 100 + index, GumpButtonType.Reply, 0);
+			}
+
+			AddHtml(x + 20, y + 55, largeur - 40, hauteur - 70, $"{entry.Content}", true, true);
+		}
+
+		void AddTitleWhite(int x, int y, int largeur, string title, string couleur)
+		{
+			
+			int larg = 0;
+
+			AddImage(x, y,1802);
+		
+
+			if (largeur < 220)
+			{
+				AddImage(x + 8, y,1803);
+			}
+			else
+			{
+				bool fin = true;
+				int n = 0;
+
+				while (fin)
+				{
+					if (largeur - larg  > 220)
+					{
+						AddImage(x +larg + 8, y,1803);					
+						larg += 216;
+						n++;
+					}
+					else
+					{
+						int finX = largeur - 220;
+						AddImage(x + finX , y,1803);														
+						fin = false;
+					}
+					
+					
+				}
+			}
+
+			AddImage(x + largeur - 8, y,1804);	
+			AddHtmlTexteColored(x +10,y,largeur,title,couleur);
 		}
 
 		public override void OnResponse(Server.Network.NetState sender, RelayInfo info)
@@ -115,24 +201,40 @@ namespace JournalCommand
 
 				if (m_Page < 0)
 					m_Page = 0;
-				m_From.SendGump(new CJournalGump(m_From, m_JournalEntries, m_Page));
+				m_From.SendGump(new CJournalGump(m_From, m_JournalEntries, m_Page,m_AllVisible));
 			}
 			else if (info.ButtonID == 3)
 			{
 				m_Page++;
-				var tempVisible = m_JournalEntries.Where(x => x.Visible);
-				var maxPage = Math.Ceiling((double)tempVisible.Count() / m_ArticlePerPage) - 1;
+
+				double maxPage = 0;
+
+				if (m_AllVisible)
+				{
+					maxPage = Math.Ceiling((double)m_JournalEntries.Count() / m_ArticlePerPage) - 1;
+				}
+				else
+				{
+					var tempVisible = m_JournalEntries.Where(x => x.Visible);
+					maxPage = Math.Ceiling((double)tempVisible.Count() / m_ArticlePerPage) - 1;
+				}		
+
 				if (m_Page > maxPage)
 					m_Page = (int)maxPage;
 
-				m_From.SendGump(new CJournalGump(m_From, m_JournalEntries, m_Page));
+				m_From.SendGump(new CJournalGump(m_From, m_JournalEntries, m_Page,m_AllVisible));
+			}
+			else if(info.ButtonID == 4)
+			{
+				m_From.SendGump(new CJournalGump(m_From, m_JournalEntries, 0,!m_AllVisible));
 			}
 			else if (info.ButtonID >= 100 && info.ButtonID < 1000)
 			{
-				if (m_From.Journaliste || m_From.AccessLevel > AccessLevel.Player)
-				{
+				JournalEntry entry = m_JournalEntries[info.ButtonID - 100];
 
-						m_From.SendGump(new CJournalAddArticleGump(m_From, m_JournalEntries,m_JournalEntries[info.ButtonID - 100],0));
+				if ((m_From.Journaliste && entry.Account.ToString() == m_From.Account.ToString())|| m_From.AccessLevel > AccessLevel.Player)
+				{
+					m_From.SendGump(new CJournalAddArticleGump(m_From, m_JournalEntries,entry,0));
 				}
 			}
 		}
@@ -296,12 +398,7 @@ namespace JournalCommand
 
 
 				}
-				
-				
-				
-				
-				
-				
+						
 				if (info.ButtonID == 3 || info.ButtonID == 4)
 				{
 
@@ -311,6 +408,13 @@ namespace JournalCommand
 					{
 						m_Entry.Account = sender.Account.ToString();
 					}				
+
+						// Charger les articles existants � partir du fichier JSON - Fait comme ca, pour eviter que si quelqu'un d'autre a editer entre temp, les changements se perdre.
+					string json2 = File.ReadAllText(CJournalGump.Path);
+
+					if (!string.IsNullOrEmpty(json2))
+						m_JournalEntries = JsonConvert.DeserializeObject<List<JournalEntry>>(json2);
+
 
 					JournalEntry customListItem2 = m_JournalEntries.Where(i=> i.Id == m_Entry.Id).FirstOrDefault();
 				 	var index = m_JournalEntries.IndexOf(customListItem2);
