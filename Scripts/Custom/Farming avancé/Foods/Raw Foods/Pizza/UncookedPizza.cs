@@ -480,38 +480,6 @@ namespace Server.Items
 					from.SendMessage("That portion is too large. Use a bladed object to cut it up first.");
 					return;
 				}
-
-try {
-				if ( targeted is CowCheese || targeted is CowCheeseWedge || targeted is SheepCheese || targeted is SheepCheeseWedge || targeted is GoatCheese || targeted is GoatCheeseWedge)
-				{
-					from.SendMessage("That portion is too large. Use a bladed object to cut it up first.");
-					return;
-				}
-				else if ( targeted is CowCheeseWedgeSmall )
-				{
-					if(!((Item)targeted).Movable) return;
-					from.SendMessage("You add extra cheese to the pizza.");
-					m_Item.Desc += ", extra cheese";
-					((Item)targeted).Consume();
-				}
-				else if ( targeted is GoatCheeseWedgeSmall )
-				{
-					if(!((Item)targeted).Movable) return;
-					from.SendMessage("You add goat cheese to the pizza.");
-					m_Item.Desc += ", goat cheese";
-					((Item)targeted).Consume();
-				}
-				else if ( targeted is SheepCheeseWedgeSmall )
-				{
-					if(!((Item)targeted).Movable) return;
-					from.SendMessage("You add sheep cheese to the pizza.");
-					m_Item.Desc += ", sheep cheese";
-					((Item)targeted).Consume();
-				}
-}
-catch
-{
-}
 			}
 
 			private class InternalTimer : Timer

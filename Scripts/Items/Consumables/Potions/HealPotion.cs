@@ -3,19 +3,19 @@ namespace Server.Items
     public class HealPotion : BaseHealPotion
     {
         [Constructable]
-        public HealPotion()
-            : base(PotionEffect.Heal)
+        public HealPotion() : base(PotionEffect.Heal)
         {
-        }
+			Name = "Potion de soin";
+		}
 
-        public HealPotion(Serial serial)
+		public HealPotion(Serial serial)
             : base(serial)
         {
         }
 
-        public override int MinHeal => 20;
+        public override int MinHeal => 25;
         public override int MaxHeal => 25;
-        public override double Delay => 8.0;
+        public override double Delay => 12.0;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

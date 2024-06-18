@@ -14,9 +14,10 @@ namespace Server.Items
         public LesserCurePotion()
             : base(PotionEffect.CureLesser)
         {
-        }
+			Name = "Potion d'antidote mineure";
+		}
 
-        public LesserCurePotion(Serial serial)
+		public LesserCurePotion(Serial serial)
             : base(serial)
         {
         }

@@ -6,9 +6,10 @@ namespace Server.Items
         public ExplosionPotion()
             : base(PotionEffect.Explosion)
         {
-        }
+			Name = "Potion explosive";
+		}
 
-        public ExplosionPotion(Serial serial)
+		public ExplosionPotion(Serial serial)
             : base(serial)
         {
         }

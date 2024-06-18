@@ -81,12 +81,12 @@ namespace Server.Items
 			LabelToAffix( m, 1017323, AffixType.Append, ": " + m_UsesRemaining.ToString() ); // Durability
 		}
 
-				public virtual void OnAosSingleClick( Mobile from )
-				{
-					DisplayDurabilityTo( from );
+		public override void OnAosSingleClick( Mobile from )
+		{
+			DisplayDurabilityTo( from );
 
-				base.OnAosSingleClick( from );
-				}
+			base.OnAosSingleClick( from );
+		}
 		
 		public override void OnDoubleClick(Mobile from)
 		{

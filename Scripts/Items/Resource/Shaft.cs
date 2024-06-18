@@ -1,10 +1,13 @@
+using Server.Engines.Craft;
+using System;
+
 namespace Server.Items
 {
     public class Shaft : Item, ICommodity
     {
         [Constructable]
         public Shaft()
-            : this(1)
+            : this(5)
         {
         }
 
@@ -13,7 +16,7 @@ namespace Server.Items
             : base(0x1BD4)
         {
             Stackable = true;
-            Amount = amount;
+            Amount = 5;
         }
 
         public Shaft(Serial serial)
@@ -37,5 +40,12 @@ namespace Server.Items
 
             int version = reader.ReadInt();
         }
-    }
+
+		public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
+		{
+			Amount = Amount * 5;
+
+			return quality;
+		}
+	}
 }

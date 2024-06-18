@@ -2,21 +2,21 @@ using Server.Network;
 
 namespace Server.Items
 {
-    public class DartRegularBoard : AddonComponent
+    public class DartBoard : AddonComponent
     {
         [Constructable]
-        public DartRegularBoard()
+        public DartBoard()
             : this(true)
         {
         }
 
         [Constructable]
-        public DartRegularBoard(bool east)
+        public DartBoard(bool east)
             : base(east ? 0x1E2F : 0x1E2E)
         {
         }
 
-        public DartRegularBoard(Serial serial)
+        public DartBoard(Serial serial)
             : base(serial)
         {
         }
@@ -100,19 +100,20 @@ namespace Server.Items
         }
     }
 
-    public class DartRegularBoardEastAddon : BaseAddon
+    public class DartBoardEastAddon : BaseAddon
     {
-        public DartRegularBoardEastAddon()
+        public DartBoardEastAddon()
         {
-            AddComponent(new DartRegularBoard(true), 0, 0, 0);
-        }
+            AddComponent(new DartBoard(true), 0, 0, 0);
+			Name = "Jeu de Dards";
+		}
 
-        public DartRegularBoardEastAddon(Serial serial)
+        public DartBoardEastAddon(Serial serial)
             : base(serial)
         {
         }
 
-        public override BaseAddonDeed Deed => new DartRegularBoardEastDeed();
+        public override BaseAddonDeed Deed => new DartBoardEastDeed();
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -128,20 +129,21 @@ namespace Server.Items
         }
     }
 
-    public class DartRegularBoardEastDeed : BaseAddonDeed
+    public class DartBoardEastDeed : BaseAddonDeed
     {
         [Constructable]
-        public DartRegularBoardEastDeed()
+        public DartBoardEastDeed()
         {
+			Name = "Jeu de Dards";
         }
 
-        public DartRegularBoardEastDeed(Serial serial)
+        public DartBoardEastDeed(Serial serial)
             : base(serial)
         {
         }
 
-        public override BaseAddon Addon => new DartRegularBoardEastAddon();
-        public override int LabelNumber => 1044326;// dartRegularBoard (east)
+        public override BaseAddon Addon => new DartBoardEastAddon();
+        public override int LabelNumber => 1044326;// dartboard (east)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -157,19 +159,20 @@ namespace Server.Items
         }
     }
 
-    public class DartRegularBoardSouthAddon : BaseAddon
+    public class DartBoardSouthAddon : BaseAddon
     {
-        public DartRegularBoardSouthAddon()
+        public DartBoardSouthAddon()
         {
-            AddComponent(new DartRegularBoard(false), 0, 0, 0);
-        }
+            AddComponent(new DartBoard(false), 0, 0, 0);
+			Name = "Jeu de dards";
+		}
 
-        public DartRegularBoardSouthAddon(Serial serial)
+        public DartBoardSouthAddon(Serial serial)
             : base(serial)
         {
         }
 
-        public override BaseAddonDeed Deed => new DartRegularBoardSouthDeed();
+        public override BaseAddonDeed Deed => new DartBoardSouthDeed();
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
@@ -185,20 +188,22 @@ namespace Server.Items
         }
     }
 
-    public class DartRegularBoardSouthDeed : BaseAddonDeed
+    public class DartBoardSouthDeed : BaseAddonDeed
     {
         [Constructable]
-        public DartRegularBoardSouthDeed()
+        public DartBoardSouthDeed()
         {
-        }
+			Name = "Jeu de dards";
 
-        public DartRegularBoardSouthDeed(Serial serial)
+		}
+
+        public DartBoardSouthDeed(Serial serial)
             : base(serial)
         {
         }
 
-        public override BaseAddon Addon => new DartRegularBoardSouthAddon();
-        public override int LabelNumber => 1044325;// dartRegularBoard (south)
+        public override BaseAddon Addon => new DartBoardSouthAddon();
+        public override int LabelNumber => 1044325;// dartboard (south)
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

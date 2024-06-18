@@ -6,16 +6,17 @@ namespace Server.Items
         public LesserHealPotion()
             : base(PotionEffect.HealLesser)
         {
-        }
+			Name = "Potion de soin mineure";
+		}
 
-        public LesserHealPotion(Serial serial)
+		public LesserHealPotion(Serial serial)
             : base(serial)
         {
         }
 
         public override int MinHeal => 10;
-        public override int MaxHeal => 15;
-        public override double Delay => 5.0;
+        public override int MaxHeal => 10;
+        public override double Delay => 8.0;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

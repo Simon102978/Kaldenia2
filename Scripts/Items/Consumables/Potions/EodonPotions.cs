@@ -323,10 +323,6 @@ namespace Server.Items
 			{
 				m.SendMessage("Vous ne pouvez pas boire cette potion pour le moment.");
 			}
-			else if (Spells.Bushido.Confidence.IsConfident(m))
-            {
-                m.SendLocalizedMessage(1156873); // You may not use this while under the effects of confidence!
-            }
 
             return base.CanDoEffects(m);
         }

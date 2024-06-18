@@ -28,7 +28,7 @@ namespace Server.Items
 		[Constructable]
 		public Sage( int amount ) : base( amount, 0xC3D )
 		{
-            Name = "Sage";
+            Name = "Sauge";
 		}
 
 		public Sage( Serial serial ) : base( serial ) { }
@@ -64,7 +64,7 @@ namespace Server.Items
 		[Constructable]
 		public Anise( int amount ) : base( amount, 0xF2C )
 		{
-            Name = "Anise";
+            Name = "Anis";
             Hue = 0x5E2;
 		}
 
@@ -83,7 +83,7 @@ namespace Server.Items
 		[Constructable]
 		public Basil( int amount ) : base( amount, 0xC3E )
 		{
-            Name = "Basil";
+            Name = "Basilic";
 		}
 
 		public Basil( Serial serial ) : base( serial ) { }
@@ -101,7 +101,7 @@ namespace Server.Items
 		[Constructable]
 		public BayLeaf( int amount ) : base( amount, 0xF78 )
 		{
-            Name = "Bay leaf";
+            Name = "Feuille de Laurier";
             Hue = 0x59C;
 		}
 
@@ -120,7 +120,7 @@ namespace Server.Items
 		[Constructable]
 		public Chamomile( int amount ) : base( amount, 0xF8D )
 		{
-            Name = "Chamoile";
+            Name = "Camomille";
             Hue = 0x36;
 		}
 
@@ -139,7 +139,7 @@ namespace Server.Items
 		[Constructable]
 		public Caraway( int amount ) : base( amount, 0xF29 )
 		{
-            Name = "Caraway";
+            Name = "Cumin";
             Hue = 0x5E2;
 		}
 
@@ -158,7 +158,7 @@ namespace Server.Items
 		[Constructable]
 		public Cilantro( int amount ) : base( amount, 0x1020 )
 		{
-            Name = "Cilantro";
+            Name = "Coriandre";
             Hue = 0x58B;
 		}
 
@@ -177,7 +177,7 @@ namespace Server.Items
 		[Constructable]
 		public Cinnamon( int amount ) : base( amount, 0xF80 )
 		{
-            Name = "Cinnamon";
+            Name = "Cannelle";
             Hue = 0x21A;
 		}
 
@@ -196,7 +196,7 @@ namespace Server.Items
 		[Constructable]
 		public Clove( int amount ) : base( amount, 0xF8E )
 		{
-            Name = "Clove";
+            Name = "Clou de girofle";
             Hue = 0x39A;
 		}
 
@@ -215,7 +215,7 @@ namespace Server.Items
 		[Constructable]
 		public Copal( int amount ) : base( amount, 0xF21 )
 		{
-            Name = "Copal";
+            Name = "Résine";
             Hue = 0x1C7;
 		}
 
@@ -234,7 +234,7 @@ namespace Server.Items
 		[Constructable]
 		public Coriander( int amount ) : base( amount, 0xF15 )
 		{
-            Name = "Coriander";
+            Name = "Cerfeuil";
             Hue = 0x5E2;
 		}
 
@@ -253,7 +253,7 @@ namespace Server.Items
 		[Constructable]
 		public Dill( int amount ) : base( amount, 0xF1B )
 		{
-            Name = "Dill";
+            Name = "Aneth";
             Hue = 0x1D7;
 		}
 
@@ -272,7 +272,7 @@ namespace Server.Items
 		[Constructable]
 		public Dragonsblood( int amount ) : base( amount, 0xF8F )
 		{
-            Name = "Dragonsblood";
+            Name = "Sang de Dragon";
             Hue = 0x219;
 		}
 
@@ -291,7 +291,7 @@ namespace Server.Items
 		[Constructable]
 		public Frankincense( int amount ) : base( amount, 0xF91 )
 		{
-            Name = "Frankincense";
+            Name = "Encens";
             Hue = 0x5A7;
 		}
 
@@ -310,7 +310,7 @@ namespace Server.Items
 		[Constructable]
 		public Lavender( int amount ) : base( amount, 0xC3B )
 		{
-            Name = "Lavender";
+            Name = "Lavande";
             Hue = 0x552;
 		}
 
@@ -329,7 +329,7 @@ namespace Server.Items
 		[Constructable]
 		public Marjoram( int amount ) : base( amount, 0xC3E )
 		{
-            Name = "Marjoram";
+            Name = "Marjolaine";
             Hue = 0x597;
 		}
 
@@ -348,7 +348,7 @@ namespace Server.Items
 		[Constructable]
 		public Meadowsweet( int amount ) : base( amount, 0xF88 )
 		{
-            Name = "Meadowsweet";
+            Name = "Reine-Des-Prés";
             Hue = 0x585;
 		}
 
@@ -367,7 +367,7 @@ namespace Server.Items
 		[Constructable]
 		public Mint( int amount ) : base( amount, 0xC41 )
 		{
-            Name = "Mint";
+            Name = "Menthe";
             Hue = 0x593;
 		}
 
@@ -386,7 +386,7 @@ namespace Server.Items
 		[Constructable]
 		public Mugwort( int amount ) : base( amount, 0xC42 )
 		{
-            Name = "Mugwort";
+            Name = "Armoise Commune";
             Hue = 0x595;
 		}
 
@@ -405,7 +405,7 @@ namespace Server.Items
 		[Constructable]
 		public Mustard( int amount ) : base( amount, 0xF2C )
 		{
-            Name = "Mustard";
+            Name = "Graines de Moutarde";
             Hue = 0x5E2;
 		}
 
@@ -424,7 +424,7 @@ namespace Server.Items
 		[Constructable]
 		public Myrrh( int amount ) : base( amount, 0xF7B )
 		{
-            Name = "Myrrh";
+            Name = "Gomme d'Épinette";
             Hue = 0x415;
 		}
 
@@ -462,7 +462,7 @@ namespace Server.Items
 		[Constructable]
 		public Oregano( int amount ) : base( amount, 0xC3D )
 		{
-            Name = "Oregano";
+            Name = "Origan";
 		}
 
 		public Oregano( Serial serial ) : base( serial ) { }
@@ -480,7 +480,7 @@ namespace Server.Items
 		[Constructable]
 		public Orris( int amount ) : base( amount, 0xF85 )
 		{
-            Name = "Orris";
+            Name = "Racine d'Orris";
             Hue = 0x416;
 		}
 
@@ -497,10 +497,12 @@ namespace Server.Items
 		public Patchouli() : this( 1 ) { }
 
 		[Constructable]
-		public Patchouli( int amount ) : base( amount, 0x18E4 )
+		public Patchouli( int amount ) : base( amount, 0x0F88)
 		{
             Name = "Patchouli";
-            Hue = 0x597;
+            Hue = 0x562;
+			Stackable = true;
+			
 		}
 
 		public Patchouli( Serial serial ) : base( serial ) { }
@@ -518,7 +520,7 @@ namespace Server.Items
 		[Constructable]
 		public Peppercorn( int amount ) : base( amount, 0xF87 )
 		{
-            Name = "Peppercorn";
+            Name = "Grain de poivre";
             Hue = 0x3D6;
 		}
 
@@ -555,7 +557,7 @@ namespace Server.Items
 		[Constructable]
 		public Rosemary( int amount ) : base( amount, 0x1020 )
 		{
-            Name = "Rosemary";
+            Name = "Romarin";
             Hue = 0x594;
 		}
 
@@ -574,7 +576,7 @@ namespace Server.Items
 		[Constructable]
 		public Saffron( int amount ) : base( amount, 0xC3C )
 		{
-            Name = "Saffron";
+            Name = "Safran";
 		}
 
 		public Saffron( Serial serial ) : base( serial ) { }
@@ -592,7 +594,7 @@ namespace Server.Items
 		[Constructable]
 		public Sandelwood( int amount ) : base( amount, 0x979 )
 		{
-            Name = "Sandelwood";
+            Name = "Bois de santal";
             Hue = 0x59D;
 		}
 
@@ -611,7 +613,7 @@ namespace Server.Items
 		[Constructable]
 		public SlipperyElm( int amount ) : base( amount, 0xF89 )
 		{
-            Name = "Slippery Elm";
+            Name = "Orme glissant";
 		}
 
 		public SlipperyElm( Serial serial ) : base( serial ) { }
@@ -629,7 +631,7 @@ namespace Server.Items
 		[Constructable]
 		public Thyme( int amount ) : base( amount, 0xC3D )
 		{
-            Name = "Thyme";
+            Name = "Thym";
 		}
 
 		public Thyme( Serial serial ) : base( serial ) { }
@@ -647,7 +649,7 @@ namespace Server.Items
 		[Constructable]
 		public Valerian( int amount ) : base( amount, 0xF86 )
 		{
-            Name = "Valerian";
+            Name = "Valériane";
             Hue = 0x47E;
 		}
 
@@ -666,7 +668,7 @@ namespace Server.Items
 		[Constructable]
 		public WillowBark( int amount ) : base( amount, 0xF79 )
 		{
-            Name = "Willow Bark";
+            Name = "écorce de saule";
 		}
 
 		public WillowBark( Serial serial ) : base( serial ) { }

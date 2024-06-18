@@ -16,7 +16,7 @@ namespace Server.Items
 		{
             this.Movable = true;
             this.Hue = 0x489;
-            this.Name = "Grapevine Placement Tool";
+            this.Name = "Outil placement de vignes";
 		}
 
 		public GrapevinePlacementTool(Serial serial) : base( serial ){}

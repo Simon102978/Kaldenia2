@@ -14,9 +14,10 @@ namespace Server.Items
         public CurePotion()
             : base(PotionEffect.Cure)
         {
-        }
+			Name = "Potion d'antidote";
+		}
 
-        public CurePotion(Serial serial)
+		public CurePotion(Serial serial)
             : base(serial)
         {
         }

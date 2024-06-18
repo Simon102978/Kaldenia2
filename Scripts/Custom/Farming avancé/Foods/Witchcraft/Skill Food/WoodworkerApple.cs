@@ -19,7 +19,7 @@ namespace Server.Items
 		{
 			DateTime duration = DateTime.UtcNow + TimeSpan.FromSeconds( 300.0 );
 
-			skillMod = new TimedSkillMod( SkillName.Carpentry, true, 10.0, duration );
+			skillMod = new TimedSkillMod( SkillName.Tinkering, true, 10.0, duration );
 
 			skillMod.ObeyCap = false;
 		}

@@ -12,7 +12,7 @@ namespace Server.Items
 		public WinecraftersTools() : base( 0xF00 )
 		{
             this.Weight = 2.0;
-            this.Name = "Winecrafter Tools";
+            this.Name = "Outil fabrication de vin";
             this.Hue = 0x530;
 		}
 
@@ -20,7 +20,7 @@ namespace Server.Items
 		public WinecraftersTools( int uses ) : base( uses, 0xF00 )
 		{
             this.Weight = 2.0;
-            this.Name = "Winecrafter Tools";
+            this.Name = "Outil fabrication de vin";
             this.Hue = 0x530;
 		}
 

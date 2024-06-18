@@ -6,7 +6,7 @@ namespace Server.Items
 		public BasketOfHerbsFarm() : base( 0x194F )
 		{
 			Weight = 2.0;
-			Name = "Basket of Herbs";
+			Name = "Panier d'herbes fraiches";
 		}
 
         public BasketOfHerbsFarm(Serial serial) : base(serial) { }

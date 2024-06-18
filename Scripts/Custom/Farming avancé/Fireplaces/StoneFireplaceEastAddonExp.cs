@@ -58,7 +58,7 @@ namespace Server.Items
                     if (pack == null)
                         return;
 
-                    int res = pack.ConsumeTotal(new Type[]{typeof( Log )}, new int[]{ 3 });
+                    int res = pack.ConsumeTotal(new Type[]{typeof(Log) }, new int[]{ 3 });
 
                     switch (res)
                     {

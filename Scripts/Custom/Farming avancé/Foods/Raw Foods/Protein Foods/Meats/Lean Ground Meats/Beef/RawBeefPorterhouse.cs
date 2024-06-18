@@ -46,7 +46,7 @@ namespace Server.Items
 			Weight = 1.0;
 			Stackable = true;
 			Amount = amount;
-			Name = "raw beef porterhouse";
+			Name = "Steak de Boeuf Porterhouse cru";
             Raw = true;
 		}
 

@@ -6,9 +6,10 @@ namespace Server.Items
         public DeadlyPoisonPotion()
             : base(PotionEffect.PoisonDeadly)
         {
-        }
+			Name = "Potion de poison supérieure";
+		}
 
-        public DeadlyPoisonPotion(Serial serial)
+		public DeadlyPoisonPotion(Serial serial)
             : base(serial)
         {
         }

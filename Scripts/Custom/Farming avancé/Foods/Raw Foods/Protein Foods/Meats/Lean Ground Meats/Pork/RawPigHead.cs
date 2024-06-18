@@ -16,7 +16,7 @@ namespace Server.Items
         public RawPigHead(int amount)
             : base(amount, 7822)
 		{
-			Name = "pig's head";
+			Name = "Tête de porc crue";
 			Stackable = true;
 			Weight = 1.0;
 			Amount = amount;

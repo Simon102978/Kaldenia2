@@ -19,7 +19,7 @@ namespace Server.Items
 			Stackable = true;
 			Amount = amount;
 			Hue = 2117;
-			Name = "raw ground pork";
+			Name = "Porc haché cru";
             Raw = true;
 		}
 

@@ -11,7 +11,7 @@ namespace Server.Items
         {
             Weight = 0.5;
             Stackable = true;
-            Name = "Ground Pork";
+            Name = "Porc haché";
             Hue = 0x221;
             Amount = amount;
         }

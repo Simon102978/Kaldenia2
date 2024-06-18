@@ -11,14 +11,14 @@ namespace Server.Items
 		[Constructable]
 		public JuicersTools() : base( 0xE4F )
 		{
-			this.Name = "Juicer's Tools";
+			this.Name = "Fabrication de Jus";
 			this.Weight = 2.0;
 		}
 
 		[Constructable]
 		public JuicersTools( int uses ) : base( uses, 0xE4F )
 		{
-			this.Name = "Juicer's Tools";
+			this.Name = "Fabrication de Jus";
 			this.Weight = 2.0;
 		}
 

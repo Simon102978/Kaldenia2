@@ -20,7 +20,7 @@ namespace Server.Items
 		{
 			DateTime duration = DateTime.UtcNow + TimeSpan.FromSeconds( 300.0 );
 
-			skillMod = new TimedSkillMod( SkillName.Lockpicking, true, 10.0, duration );
+			skillMod = new TimedSkillMod( SkillName.Snooping, true, 10.0, duration );
 
 			skillMod.ObeyCap = false;
 		}

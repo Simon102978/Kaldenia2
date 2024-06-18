@@ -1,4 +1,5 @@
 using Server.Commands;
+using Server.Engines.XmlSpawner2;
 using Server.Items;
 using System;
 using System.Collections.Generic;
@@ -7,7 +8,9 @@ using System.Reflection;
 
 namespace Server.Mobiles
 {
-    public class BaseXmlSpawner
+	public delegate void XmlGumpCallback(Mobile from, object invoker, string response);
+
+	public class BaseXmlSpawner
     {
         [Flags]
         public enum KeywordFlags
@@ -89,7 +92,28 @@ namespace Server.Mobiles
             return t.IsDefined(typeofCustomEnum, false);
         }
 
-        private enum typeKeyword
+		public static bool CheckType(object o, string typename)
+		{
+			if (typename == null || o == null) return false;
+
+			// test the type
+			Type objecttype = o.GetType();
+
+			Type targettype = null;
+
+			targettype = SpawnerType.GetType(typename);
+
+			if (objecttype != null && targettype != null && (objecttype.Equals(targettype) || objecttype.IsSubclassOf(targettype)))
+			{
+				return true;
+
+			}
+
+			return false;
+
+		}
+
+		private enum typeKeyword
         {
             SET,
             GOTO,
@@ -2118,10 +2142,732 @@ namespace Server.Mobiles
             }
             return invertreturn;
         }
-        #endregion
+		#endregion
 
-        #region Search object methods
-        public static Item FindItemByName(XmlSpawner fromspawner, string name, string typestr)
+		#region Search object methods
+
+		private static bool CheckNameMatch(string targetname, string name)
+		{
+			// a "*" targetname will match anything
+			// a null or empty targetname will match a null name
+			// otherwise the strings must match
+			return (targetname == "*") || (name == targetname) || (targetname != null && targetname.Length == 0 && name == null);
+		}
+
+		public static Item SearchMobileForItem(Mobile m, string targetName, string typeStr, bool searchbank)
+		{
+			return SearchMobileForItem(m, targetName, typeStr, searchbank, false);
+		}
+
+
+		public static Item SearchMobileForItem(Mobile m, string targetName, string typeStr, bool searchbank, bool equippedonly)
+		{
+			if (m != null && !m.Deleted)
+			{
+				// go through all of the items in the pack
+				List<Item> packlist = m.Items;
+
+				for (int i = 0; i < packlist.Count; ++i)
+				{
+					Item item = packlist[i];
+
+					// dont search bank boxes
+					if (item is BankBox && !searchbank && !equippedonly) continue;
+
+					// recursively search containers
+					if (item != null && !item.Deleted)
+					{
+						if (item is Container && !equippedonly)
+						{
+							Item itemTarget = SearchPackForItem((Container)item, targetName, typeStr);
+
+							if (itemTarget != null) return itemTarget;
+						}
+						// test the item name against the trigger string
+						// if a typestring has been specified then check against that as well
+						if (CheckNameMatch(targetName, item.Name))
+						{
+							if ((typeStr == null || CheckType(item, typeStr)))
+							{
+								//found it
+								return item;
+							}
+						}
+					}
+				}
+				// now check any item that might be held
+				Item held = m.Holding;
+
+				if (held != null && !held.Deleted && !equippedonly)
+				{
+					if (held is Container)
+					{
+						Item itemTarget = SearchPackForItem((Container)held, targetName, typeStr);
+
+						if (itemTarget != null) return itemTarget;
+					}
+					// test the item name against the trigger string
+					if (CheckNameMatch(targetName, held.Name))
+					{
+						if (typeStr == null || CheckType(held, typeStr))
+						{
+							//found it
+							return held;
+						}
+					}
+				}
+			}
+			return null;
+		}
+
+		public static List<Item> SearchMobileForItems(Mobile m, string targetName, string typeStr, bool searchbank, bool equippedonly)
+		{
+			List<Item> itemlist = new List<Item>();
+			if (m != null && !m.Deleted)
+			{
+				// go through all of the items in the pack
+				List<Item> packlist = m.Items;
+
+				for (int i = 0; i < packlist.Count; ++i)
+				{
+					Item item = packlist[i];
+
+					// dont search bank boxes
+					if (item is BankBox && (!searchbank || equippedonly)) continue;
+
+					// recursively search containers
+					if (item != null && !item.Deleted)
+					{
+						if (item is Container && !equippedonly)
+						{
+							itemlist.AddRange(SearchPackForItems((Container)item, targetName, typeStr));
+						}
+						// test the item name against the trigger string
+						// if a typestring has been specified then check against that as well
+						else if (CheckNameMatch(targetName, item.Name))
+						{
+							if ((typeStr == null || CheckType(item, typeStr)))
+							{
+								//found it
+								itemlist.Add(item);
+							}
+						}
+					}
+				}
+				// now check any item that might be held
+				Item held = m.Holding;
+
+				if (held != null && !held.Deleted && !equippedonly)
+				{
+					if (held is Container)
+					{
+						itemlist.AddRange(SearchPackForItems((Container)held, targetName, typeStr));
+					}
+					// test the item name against the trigger string
+					else if (CheckNameMatch(targetName, held.Name))
+					{
+						if (typeStr == null || CheckType(held, typeStr))
+						{
+							//found it
+							itemlist.Add(held);
+						}
+					}
+				}
+			}
+			return itemlist;
+		}
+
+		public static Item SearchPackForItemType(Container pack, string targetName)
+		{
+			if (pack != null && !pack.Deleted && targetName != null && targetName.Length > 0)
+			{
+				Type targetType = SpawnerType.GetType(targetName);
+
+				// go through all of the items in the pack
+				List<Item> packlist = pack.Items;
+
+				for (int i = 0; i < packlist.Count; ++i)
+				{
+					Item item = (Item)packlist[i];
+
+					if (item != null && !item.Deleted)
+					{
+						if (item is Container)
+						{
+							Item itemTarget = SearchPackForItemType((Container)item, targetName);
+
+							if (itemTarget != null) return itemTarget;
+						}
+						// test the item name against the trigger string
+						if (item.GetType() == targetType)
+						{
+							//found it
+							return item;
+						}
+					}
+				}
+			}
+			return null;
+		}
+
+		public static Item SearchMobileForItemType(Mobile m, string targetName, bool searchbank)
+		{
+			if (m != null && !m.Deleted && targetName != null && targetName.Length > 0)
+			{
+				Type targetType = SpawnerType.GetType(targetName);
+
+				// go through all of the items in the pack
+				List<Item> packlist = m.Items;
+
+				for (int i = 0; i < packlist.Count; ++i)
+				{
+					Item item = (Item)packlist[i];
+
+					// dont search bank boxes
+					if (item is BankBox && !searchbank) continue;
+
+					// recursively search containers
+					if (item != null && !item.Deleted)
+					{
+						if (item is Container)
+						{
+							Item itemTarget = SearchPackForItemType((Container)item, targetName);
+
+							if (itemTarget != null) return itemTarget;
+						}
+						// test the item type against the trigger string
+						if ((item.GetType() == targetType))
+						{
+							//found it
+							return item;
+						}
+					}
+				}
+				// now check any item that might be held
+				Item held = m.Holding;
+
+				if (held != null && !held.Deleted)
+				{
+					if (held is Container)
+					{
+						Item itemTarget = SearchPackForItemType((Container)held, targetName);
+
+						if (itemTarget != null) return itemTarget;
+					}
+					// test the item name against the trigger string
+					if (held.GetType() == targetType)
+					{
+						//found it
+						return held;
+					}
+				}
+			}
+			return null;
+		}
+
+		public static Item SearchPackForItem(Container pack, string targetName, string typestr)
+		{
+			if (pack != null && !pack.Deleted)
+			{
+				Type targettype = null;
+
+				if (typestr != null)
+				{
+					targettype = SpawnerType.GetType(typestr);
+				}
+
+				// go through all of the items in the pack
+				List<Item> packlist = pack.Items;
+
+				for (int i = 0; i < packlist.Count; ++i)
+				{
+					Item item = (Item)packlist[i];
+
+					if (item != null && !item.Deleted)
+					{
+
+						if (item is Container)
+						{
+							Item itemTarget = SearchPackForItem((Container)item, targetName, typestr);
+
+							if (itemTarget != null) return itemTarget;
+						}
+						// test the item name against the trigger string
+						if (CheckNameMatch(targetName, item.Name))
+						{
+							if (targettype == null || (item.GetType().Equals(targettype) || item.GetType().IsSubclassOf(targettype)))
+							{
+								//found it
+								return item;
+							}
+						}
+					}
+				}
+			}
+			return null;
+		}
+
+		public static List<Item> SearchPackForItems(Container pack, string targetName, string typestr)
+		{
+			List<Item> itemlist = new List<Item>();
+			if (pack != null && !pack.Deleted)
+			{
+				Type targettype = null;
+
+				if (typestr != null)
+				{
+					targettype = SpawnerType.GetType(typestr);
+				}
+
+				// go through all of the items in the pack
+				List<Item> packlist = pack.Items;
+
+				for (int i = 0; i < packlist.Count; ++i)
+				{
+					Item item = (Item)packlist[i];
+
+					if (item != null && !item.Deleted)
+					{
+
+						if (item is Container)
+						{
+							itemlist.AddRange(SearchPackForItems((Container)item, targetName, typestr));
+						}
+						// test the item name against the trigger string since it's not a container
+						else if (CheckNameMatch(targetName, item.Name))
+						{
+							if (targettype == null || (item.GetType().Equals(targettype) || item.GetType().IsSubclassOf(targettype)))
+							{
+								//found it
+								itemlist.Add(item);
+							}
+						}
+					}
+				}
+			}
+			return itemlist;
+		}
+
+		public static List<Item> SearchPackListForItemType(Container pack, string targetName, List<Item> itemlist)
+		{
+			if (pack != null && !pack.Deleted && targetName != null && targetName.Length > 0)
+			{
+				Type targetType = SpawnerType.GetType(targetName);
+
+				if (targetType == null) return null;
+
+				// go through all of the items in the pack
+				List<Item> packlist = pack.Items;
+
+				for (int i = 0; i < packlist.Count; ++i)
+				{
+					Item item = packlist[i];
+					if (item != null && !item.Deleted && item is Container)
+					{
+						itemlist = SearchPackListForItemType((Container)item, targetName, itemlist);
+					}
+					// test the item name against the trigger string
+					if (item != null && !item.Deleted && (item.GetType().IsSubclassOf(targetType) || item.GetType().Equals(targetType)))
+					{
+						//found it
+						itemlist.Add(item);
+					}
+				}
+			}
+			return itemlist;
+		}
+
+		public static List<Item> FindItemListByType(Mobile m, string targetName, bool searchbank)
+		{
+			List<Item> itemlist = new List<Item>();
+
+			if (m != null && !m.Deleted && targetName != null && targetName.Length > 0)
+			{
+				Type targetType = SpawnerType.GetType(targetName);
+
+				// go through all of the items on the mobile
+				List<Item> packlist = m.Items;
+
+				for (int i = 0; i < packlist.Count; ++i)
+				{
+					Item item = packlist[i];
+
+					// dont search bank boxes
+					if (item is BankBox && !searchbank) continue;
+
+					// recursively search containers
+					if (item != null && !item.Deleted)
+					{
+						if (item is Container)
+						{
+							itemlist = SearchPackListForItemType((Container)item, targetName, itemlist);
+						}
+						// test the item name against the trigger string
+						if (item.GetType().IsSubclassOf(targetType) || item.GetType().Equals(targetType))
+						{
+							//found it
+							// add the item to the list
+							itemlist.Add(item);
+						}
+					}
+				}
+				// now check any item that might be held
+				Item held = m.Holding;
+
+				if (held != null && !held.Deleted)
+				{
+					if (held is Container)
+					{
+						itemlist = SearchPackListForItemType((Container)held, targetName, itemlist);
+					}
+					// test the item name against the trigger string
+					if (held.GetType().IsSubclassOf(targetType) || held.GetType().Equals(targetType))
+					{
+						//found it
+						// add the item to the list
+						itemlist.Add(held);
+					}
+				}
+			}
+			return itemlist;
+		}
+
+		public static bool CheckForCarried(Mobile m, string objectivestr)
+		{
+			if (m == null || objectivestr == null) return true;
+
+			// parse the objective string that might be of the form 'obj &| obj &| obj ...'
+			string[] arglist = ParseString(objectivestr, 2, "&|");
+			if (arglist.Length < 2)
+			{
+				// simple test with no and/or operators
+				return SingleCheckForCarried(m, objectivestr);
+			}
+			else
+			{
+				// test each half independently and combine the results
+				bool first = SingleCheckForCarried(m, arglist[0]);
+
+				// this will recursively parse the property test string with implicit nesting for multiple logical tests of the
+				// form A * B * C * D    being grouped as A * (B * (C * D))
+				bool second = CheckForCarried(m, arglist[1]);
+
+				int andposition = objectivestr.IndexOf("&");
+				int orposition = objectivestr.IndexOf("|");
+
+				// combine them based upon the operator
+				if ((andposition > 0 && orposition <= 0) || (andposition > 0 && andposition < orposition))
+				{
+					// and operator
+					return (first && second);
+				}
+				else if ((orposition > 0 && andposition <= 0) || (orposition > 0 && orposition < andposition))
+				{
+					// or operator
+					return (first || second);
+				}
+				else
+				{
+					// should never get here
+					return false;
+				}
+			}
+		}
+
+		public static bool SingleCheckForCarried(Mobile m, string objectivestr)
+		{
+			if (m == null || objectivestr == null) return false;
+
+			bool has_valid_item = false;
+
+			// check to see whether there is an objective specification as well.  The format is name[,type][,EQUIPPED][,objective,objective,...]
+			string[] objstr = ParseString(objectivestr, 8, ",");
+
+			string itemname = objstr[0];
+
+			// check for attachment keyword
+			if (itemname == "ATTACHMENT")
+			{
+				// syntax is ATTACHMENT,name,type
+				if (objstr.Length > 1)
+				{
+					string aname = objstr[1];
+					Type atype = null;
+					if (objstr.Length > 2)
+					{
+						atype = SpawnerType.GetType(objstr[2]);
+					}
+					// try to find the attachment on the mob
+					if (XmlAttach.FindAttachmentOnMobile(m, atype, aname) != null)
+						return true;
+					else
+						return false;
+				}
+				else
+					return false;
+			}
+
+			bool equippedonly = false;
+			string typestr = null;
+			int objoffset = 1;
+			// is there a type specification?
+
+			while (objoffset < objstr.Length)
+			{
+				if (objstr[objoffset] != null && objstr[objoffset].Length > 0)
+				{
+
+					char startc = objstr[objoffset][0];
+
+					if (startc >= '0' && startc <= '9')
+					{
+						// this is the start of the numeric objective specifications
+						break;
+					}
+					else if (objstr[objoffset].ToLowerInvariant() == "equipped")
+					{
+						equippedonly = true;
+					}
+					else
+					{
+						// treat as a type specification if it does not begin with a numeric char
+						// and is not the EQUIPPED keyword
+						typestr = objstr[objoffset];
+					}
+				}
+				objoffset++;
+			}
+
+			Item testitem = SearchMobileForItem(m, itemname, typestr, false, equippedonly);
+
+			// found the item
+			if (testitem != null)
+			{
+				// check to see if it is a quest token item.  If so, then check validity, otherwise just finding it is enough
+				if (testitem is IXmlQuest)
+				{
+					IXmlQuest token = (IXmlQuest)testitem;
+
+					if (token.IsValid)
+					{
+						if (objstr.Length > objoffset)
+						{
+							has_valid_item = true;
+							// get any objectives and test for them.  If any of the required conditions are false, then dont trigger
+							for (int n = objoffset; n < objstr.Length; n++)
+							{
+								int x = 0;
+								if (int.TryParse(objstr[n], out x))
+								{
+									switch (x - objoffset + 1)
+									{
+										case 1:
+											if (!token.Completed1) has_valid_item = false;
+											break;
+										case 2:
+											if (!token.Completed2) has_valid_item = false;
+											break;
+										case 3:
+											if (!token.Completed3) has_valid_item = false;
+											break;
+										case 4:
+											if (!token.Completed4) has_valid_item = false;
+											break;
+										case 5:
+											if (!token.Completed5) has_valid_item = false;
+											break;
+									}
+								}
+							}
+						}
+						else
+							// if an objective list has not been specified then just a valid item is enough
+							has_valid_item = true;
+					}
+				}
+				else
+				{
+					// is the equippedonly flag set?  If so then see if the item is equipped
+					if ((equippedonly && testitem.Parent == m) || !equippedonly)
+						has_valid_item = true;
+				}
+			}
+			return has_valid_item;
+		}
+
+		public static bool CheckForNotCarried(Mobile m, string objectivestr)
+		{
+			if (m == null || objectivestr == null) return true;
+
+			// parse the objective string that might be of the form 'obj &| obj &| obj ...'
+			string[] arglist = ParseString(objectivestr, 2, "&|");
+			if (arglist.Length < 2)
+			{
+				// simple test with no and/or operators
+				return SingleCheckForNotCarried(m, objectivestr);
+			}
+			else
+			{
+				// test each half independently and combine the results
+				bool first = SingleCheckForNotCarried(m, arglist[0]);
+
+				// this will recursively parse the property test string with implicit nesting for multiple logical tests of the
+				// form A * B * C * D    being grouped as A * (B * (C * D))
+				bool second = CheckForNotCarried(m, arglist[1]);
+
+				int andposition = objectivestr.IndexOf("&");
+				int orposition = objectivestr.IndexOf("|");
+
+				// for the & operator
+				// notrigger if
+				// notcarrying A | notcarrying B
+				// people will actually think of it as  not(carrying A | carrying B)
+				// which is
+				// notrigger if
+				// notcarrying A && notcarrying B
+				// similarly for the & operator
+
+				// combine them based upon the operator
+				if ((andposition > 0 && orposition <= 0) || (andposition > 0 && andposition < orposition))
+				{
+					// and operator (see explanation above)
+					return (first || second);
+				}
+				else if ((orposition > 0 && andposition <= 0) || (orposition > 0 && orposition < andposition))
+				{
+					// or operator (see explanation above)
+					return (first && second);
+				}
+				else
+				{
+					// should never get here
+					return false;
+				}
+			}
+		}
+
+		public static bool SingleCheckForNotCarried(Mobile m, string objectivestr)
+		{
+
+			if (m == null || objectivestr == null) return true;
+
+			bool has_no_such_item = true;
+
+			// check to see whether there is an objective specification as well.  The format is name[,type][,EQUIPPED][,objective,objective,...]
+			string[] objstr = ParseString(objectivestr, 8, ",");
+			string itemname = objstr[0];
+
+			// check for attachment keyword
+			if (itemname == "ATTACHMENT")
+			{
+				// syntax is ATTACHMENT,name,type
+				if (objstr.Length > 1)
+				{
+					string aname = objstr[1];
+					Type atype = null;
+					if (objstr.Length > 2)
+					{
+						atype = SpawnerType.GetType(objstr[2]);
+					}
+
+					// try to find the attachment on the mob
+					if (XmlAttach.FindAttachmentOnMobile(m, atype, aname) != null)
+						return false;
+					else
+						return true;
+				}
+				else
+					return true;
+			}
+
+			bool equippedonly = false;
+			string typestr = null;
+			int objoffset = 1;
+			// is there a type specification?
+
+
+			while (objoffset < objstr.Length)
+			{
+				if (objstr[objoffset] != null && objstr[objoffset].Length > 0)
+				{
+
+					char startc = objstr[objoffset][0];
+
+					if (startc >= '0' && startc <= '9')
+					{
+						// this is the start of the numeric objective specifications
+						break;
+					}
+					else
+						if (objstr[objoffset] == "EQUIPPED")
+					{
+						equippedonly = true;
+					}
+					else
+					{
+						// treat as a type specification if it does not begin with a numeric char
+						// and is not the EQUIPPED keyword
+						typestr = objstr[objoffset];
+					}
+				}
+				objoffset++;
+			}
+
+			// look for the item
+			Item testitem = SearchMobileForItem(m, itemname, typestr, false, equippedonly);
+
+			// found the item
+			if (testitem != null)
+			{
+				// check to see if it is a quest token item.  If so, then check validity, otherwise just finding it is enough
+				if (testitem is IXmlQuest && ((IXmlQuest)testitem).IsValid)
+				{
+					IXmlQuest token = (IXmlQuest)testitem;
+
+					if (objstr.Length > objoffset)
+					{
+						has_no_such_item = true;
+						// get any objectives and test for them.  If any of the required conditions are true, then block trigger
+						for (int n = objoffset; n < objstr.Length; n++)
+						{
+							int x = 0;
+							if (int.TryParse(objstr[n], out x))
+							{
+								switch (x - objoffset + 1)
+								{
+									case 1:
+										if (token.Completed1) has_no_such_item = false;
+										break;
+									case 2:
+										if (token.Completed2) has_no_such_item = false;
+										break;
+									case 3:
+										if (token.Completed3) has_no_such_item = false;
+										break;
+									case 4:
+										if (token.Completed4) has_no_such_item = false;
+										break;
+									case 5:
+										if (token.Completed5) has_no_such_item = false;
+										break;
+								}
+							}
+						}
+					}
+					else
+						has_no_such_item = false;
+				}
+				else
+				{
+					// is the equippedonly flag set?  If so then see if the item is equipped
+					if ((equippedonly && testitem.Parent == m) || !equippedonly)
+						has_no_such_item = false;
+				}
+			}
+			return has_no_such_item;
+		}
+
+		public static Item FindItemByName(XmlSpawner fromspawner, string name, string typestr)
         {
             if (name == null) return null;
 
@@ -3094,6 +3840,7 @@ namespace Server.Mobiles
             return false;
         }
         #endregion
+
 
         public static List<Item> GetItems(Region r)
         {

@@ -252,13 +252,13 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(FemaleStuddedChest), "Armures Cloutée", "Female studded chest", 36.0, 56.0, typeof(Leather), "Leather", 15, "You do not have sufficient leather to make that item.");
 
 
-			//AddCraft(typeof(BrassardCloute), "Armures Cloutée", "Brassard Clouté", 36.0, 56.0, typeof(Leather), 1044462, 10, 1044463);
-			//AddCraft(typeof(JupeCloute), "Armures Cloutée", "Jupe Clouté", 36.0, 56.0, typeof(Leather), 1044462, 12, 1044463);
+			AddCraft(typeof(BrassardCloute), "Armures Cloutée", "Brassard Clouté", 36.0, 56.0, typeof(Leather), 1044462, 10, 1044463);
+			AddCraft(typeof(JupeCloute), "Armures Cloutée", "Jupe Clouté", 36.0, 56.0, typeof(Leather), 1044462, 12, 1044463);
 
-			//AddCraft(typeof(PlastronCloute), "Armures Cloutée", "Plastron Clouté", 36.0, 56.0, typeof(Leather), 1044462, 14, 1044463);
-			//AddCraft(typeof(PlastronCloute2), "Armures Cloutée", "Plastron Clouté2", 36.0, 56.0, typeof(Leather), 1044462, 14, 1044463);
-			//AddCraft(typeof(PlastronCloute3), "Armures Cloutée", "Plastron Clouté3", 36.0, 56.0, typeof(Leather), 1044462, 14, 1044463);
-			//AddCraft(typeof(PlastronCloute4), "Armures Cloutée", "Plastron Clouté4", 36.0, 56.0, typeof(Leather), 1044462, 14, 1044463);
+			AddCraft(typeof(PlastronCloute), "Armures Cloutée", "Plastron Clouté", 36.0, 56.0, typeof(Leather), 1044462, 14, 1044463);
+			AddCraft(typeof(PlastronCloute2), "Armures Cloutée", "Plastron Clouté2", 36.0, 56.0, typeof(Leather), 1044462, 14, 1044463);
+			AddCraft(typeof(PlastronCloute3), "Armures Cloutée", "Plastron Clouté3", 36.0, 56.0, typeof(Leather), 1044462, 14, 1044463);
+			AddCraft(typeof(PlastronCloute4), "Armures Cloutée", "Plastron Clouté4", 36.0, 56.0, typeof(Leather), 1044462, 14, 1044463);
 			#endregion
 
 			#region Armure Cloutée Elfique
@@ -305,14 +305,14 @@ namespace Server.Engines.Craft
 			// Add every material you want the player to be able to choose from
 			// This will override the overridable material
 			AddSubRes(typeof(Leather), "Régulier", 0.0, "Vous ne savez pas travailler le cuir Regulier");
-			AddSubRes(typeof(LupusLeather), "Lupus", 20.0, "Vous ne savez pas travailler le cuir Lupus");
-			AddSubRes(typeof(ReptilienLeather), "Reptilien", 20.0, "Vous ne savez pas travailler le cuir Reptilien");
-			AddSubRes(typeof(GeantLeather), "Geant", 40.0, "Vous ne savez pas travailler le cuir Geant");
-			AddSubRes(typeof(OphidienLeather), "Ophidien", 40.0, "Vous ne savez pas travailler le cuir Ophidien");
-			AddSubRes(typeof(ArachnideLeather), "Arachnide", 60.0, "Vous ne savez pas travailler le cuir Arachnide");
-			AddSubRes(typeof(DragoniqueLeather), "Dragonique", 60.0, "Vous ne savez pas travailler le cuir Dragonique");
-			AddSubRes(typeof(DemoniaqueLeather), "Demoniaque", 80.0, "Vous ne savez pas travailler le cuir Demoniaque");
-			AddSubRes(typeof(AncienLeather), "Ancien", 90.0, "Vous ne savez pas travailler le cuir Ancien");
+			AddSubRes(typeof(LupusLeather), "Lupus", 30.0, "Vous ne savez pas travailler le cuir Lupus");
+			AddSubRes(typeof(ReptilienLeather), "Reptilien", 40.0, "Vous ne savez pas travailler le cuir Reptilien");
+			AddSubRes(typeof(GeantLeather), "Geant", 50.0, "Vous ne savez pas travailler le cuir Geant");
+			AddSubRes(typeof(OphidienLeather), "Ophidien", 60.0, "Vous ne savez pas travailler le cuir Ophidien");
+			AddSubRes(typeof(ArachnideLeather), "Arachnide", 70.0, "Vous ne savez pas travailler le cuir Arachnide");
+			AddSubRes(typeof(DragoniqueLeather), "Dragonique", 80.0, "Vous ne savez pas travailler le cuir Dragonique");
+			AddSubRes(typeof(DemoniaqueLeather), "Demoniaque", 90.0, "Vous ne savez pas travailler le cuir Demoniaque");
+			AddSubRes(typeof(AncienLeather), "Ancien", 95.0, "Vous ne savez pas travailler le cuir Ancien");
 
 			MarkOption = true;
             Repair = true;

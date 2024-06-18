@@ -8,14 +8,15 @@ namespace Server.Items
         public StrengthPotion()
             : base(PotionEffect.Strength)
         {
-        }
+			Name = "Potion de force";
+		}
 
-        public StrengthPotion(Serial serial)
+		public StrengthPotion(Serial serial)
             : base(serial)
         {
         }
 
-        public override int StrOffset => 10;
+        public override int StrOffset => 15;
         public override TimeSpan Duration => TimeSpan.FromMinutes(5.0);
         public override void Serialize(GenericWriter writer)
         {

@@ -15,6 +15,8 @@ namespace Server.Items
         public PoudreCoquillages(int amount) : base(0xF83, amount)
         {
             Name = "poudre de coquillages";
+			Stackable = true;
+			//Amount = amount;
         }
 
         public PoudreCoquillages(Serial serial) : base(serial)

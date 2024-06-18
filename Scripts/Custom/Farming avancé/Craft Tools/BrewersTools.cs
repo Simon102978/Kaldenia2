@@ -13,7 +13,7 @@ namespace Server.Items
             : base(0x1F81)
 		{
 			Weight = 2.0;
-			Name = "Brewer's Tools";
+			Name = "Outil Brasseur";
 			Hue = 0x3EF;
 		}
 
@@ -22,7 +22,7 @@ namespace Server.Items
             : base(uses, 0x1F81)
 		{
 			Weight = 2.0;
-			Name = "Brewer's Tools";
+			Name = "Outil Brasseur";
 			Hue = 0x3EF;
 		}
 

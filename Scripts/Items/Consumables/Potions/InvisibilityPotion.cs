@@ -11,7 +11,9 @@ namespace Server.Items
             : base(0xF0A, PotionEffect.Invisibility)
         {
             Hue = 0x48D;
-        }
+			Name = "Potion d'invisibilité";
+
+		}
 
         public InvisibilityPotion(Serial serial)
             : base(serial)
