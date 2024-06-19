@@ -25,6 +25,8 @@ namespace Server
 		public virtual GrosseurEnum GrosseurMin => GrosseurEnum.Fluet;
 		public virtual GrosseurEnum GrosseurMax => GrosseurEnum.Corpulent;
 
+		public virtual bool Restriction => false;
+
 
 		public virtual int GetGumpId(int hue)
 		{

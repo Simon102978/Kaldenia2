@@ -30,17 +30,21 @@ namespace Server.Gumps
 
             foreach (Race race in Race.AllRaces)
             {
-				string color = "#ffffff";
+                
+                if(race is BaseRace br && (!br.Restriction || from.IsStaff() || from.RaceRestreinte))
+                {
+                    string color = "#ffffff";
 
-				if (race == creationPerso.Race)
-				{
-					color = "#ffcc00";
-				}
+                    if (race == creationPerso.Race)
+                    {
+                        color = "#ffcc00";
+                    }
 
-				AddButtonHtlml(x + 20, y + scale * line + 50, race.Name, 200, 40, race.RaceID + 100, color);
-
-			
-                line++;
+                    AddButtonHtlml(x + 20, y + scale * line + 50, race.Name, 200, 40, race.RaceID + 100, color);
+                
+                    line++;
+                }
+				
             }
 
             if (creationPerso.Race != null)
@@ -49,7 +53,7 @@ namespace Server.Gumps
 
                 m_Creation.Hue = creationPerso.Hue == -1 ? creationPerso.Race.RandomSkinHue() : creationPerso.Hue;
 
-                AddImage(x + 355, y + 30, creationPerso.Race.GetGump(creationPerso.Female, m_Creation.Hue), m_Creation.Hue);
+                AddImage(x + 355, y + 30, creationPerso.Race.GetGump(creationPerso.Female, m_Creation.Hue), m_Creation.Hue - 1);
                 
 
                 AddColorChoice(x + 435 - creationPerso.Race.SkinHues.Length * 9, y + 275, 10, creationPerso.Race.SkinHues);
@@ -86,7 +90,14 @@ namespace Server.Gumps
             }
             else if (info.ButtonID >= 100 && info.ButtonID < 1000)
             {
-                m_Creation.Race = (BaseRace)Race.GetRace(info.ButtonID - 100);
+                
+                
+                BaseRace br = (BaseRace)Race.GetRace(info.ButtonID - 100);
+
+                if (!br.Restriction || from.IsStaff() || from.RaceRestreinte)
+                {
+                    m_Creation.Race  = br;
+                }
 
                 from.SendGump(new CreationRaceGump(from, m_Creation));
             }

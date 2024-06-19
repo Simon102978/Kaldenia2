@@ -97,6 +97,9 @@ namespace Server.Mobiles
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool Journaliste { get; set; }
 
+	   [CommandProperty(AccessLevel.Administrator)]
+		public bool RaceRestreinte { get; set; }
+
 		[CommandProperty(AccessLevel.GameMaster)]
 		public DateTime LastDeathTime { get; private set; }
 		public double DeathDuration => 1; //minutes
@@ -2582,6 +2585,11 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+				case 32:
+				{
+					RaceRestreinte = reader.ReadBool();
+					goto case 31;
+				}
 
 				case 31:
 					{
@@ -2816,9 +2824,9 @@ namespace Server.Mobiles
         {        
             base.Serialize(writer);
 
-            writer.Write(31); // version
+            writer.Write(32); // version
 
-			
+			writer.Write(RaceRestreinte);
 			writer.Write(Journaliste);
 
 			writer.Write(LastNormalFE);
