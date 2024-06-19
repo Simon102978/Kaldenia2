@@ -45,6 +45,8 @@ namespace Server.Items
             : base(0xF00)
         {
             BacterialResistance = resistance;
+			Name = "Levure";
+			Weight = 0.1;
         }
 
         public override void GetProperties(ObjectPropertyList list)

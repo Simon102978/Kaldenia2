@@ -41,7 +41,7 @@ namespace Server.Engines.Distillation
                     m_Labels[i] = 1025631;
                 else if (type == typeof(PewterBowlOfPotatos))
                     m_Labels[i] = 1025634;
-                else if (type == typeof(TribalBerry))
+                else if (type == typeof(Strawberry))
                     m_Labels[i] = 1040001;
                 else if (type == typeof(HoneydewMelon))
                     m_Labels[i] = 1023189;

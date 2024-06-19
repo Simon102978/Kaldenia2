@@ -10,8 +10,8 @@ namespace Server.Items
         [Constructable]
         public DistilleryEastAddon()
         {
-            AddComponent(new LocalizedAddonComponent(15802, 1150640), 0, 0, 0);
-            AddComponent(new LocalizedAddonComponent(15803, 1150640), 0, 1, 0);
+            AddComponent(new LocalizedAddonComponent(8880, 1150640), 0, 0, 0);
+            AddComponent(new LocalizedAddonComponent(8881, 1150640), 0, 1, 0);
         }
 
         public override void OnComponentUsed(AddonComponent component, Mobile from)
@@ -79,8 +79,8 @@ namespace Server.Items
         [Constructable]
         public DistillerySouthAddon()
         {
-            AddComponent(new LocalizedAddonComponent(15800, 1150640), 0, 0, 0);
-            AddComponent(new LocalizedAddonComponent(15801, 1150640), -1, 0, 0);
+            AddComponent(new LocalizedAddonComponent(8878, 1150640), 0, 0, 0);
+            AddComponent(new LocalizedAddonComponent(8879, 1150640), -1, 0, 0);
         }
 
         public override void OnComponentUsed(AddonComponent component, Mobile from)

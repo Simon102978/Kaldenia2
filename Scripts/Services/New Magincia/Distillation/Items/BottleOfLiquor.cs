@@ -24,7 +24,7 @@ namespace Server.Engines.Distillation
         public override bool ShowQuantity => false;
 
         [Constructable]
-        public BottleOfLiquor() : this(Liquor.Whiskey, null, false, null)
+        public BottleOfLiquor() : this(Liquor.Whisky, null, false, null)
         {
         }
 
@@ -50,7 +50,7 @@ namespace Server.Engines.Distillation
         {
             base.GetProperties(list);
 
-            if (m_Liquor != Liquor.None)
+            if (m_Liquor != Liquor.Aucun)
                 list.Add(1150454, string.Format("#{0}", DistillationSystem.GetLabel(m_Liquor, m_IsStrong))); // Liquor Type: ~1_TYPE~
 
             if (m_Distiller != null)

@@ -22,8 +22,8 @@ namespace Server.Engines.Distillation
 
         public DistillationContext()
         {
-            m_LastGroup = Group.WheatBased;
-            m_LastLiquor = Liquor.None;
+            m_LastGroup = Group.BaseBle;
+            m_LastLiquor = Liquor.Aucun;
             m_MakeStrong = false;
             m_Mark = true;
             m_Label = null;

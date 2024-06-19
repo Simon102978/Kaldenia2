@@ -16,7 +16,9 @@ namespace Server.Items
             Stackable = true;
             Amount = num;
             Hue = 1281;
-        }
+			Name = "Moût de blé";
+
+		}
 
         public WheatWort(Serial serial) : base(serial)
         {

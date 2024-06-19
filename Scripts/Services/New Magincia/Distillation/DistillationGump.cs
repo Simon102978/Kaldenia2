@@ -7,8 +7,8 @@ using System;
 
 namespace Server.Engines.Distillation
 {
-    public class DistillationGump : Gump
-    {
+    public class DistillationGump : BaseProjectMGump
+	{
         private const int LabelHue = 0x480;
         private const int LabelColor = 0x7FFF;
         private const int FontColor = 0xFFFFFF;
@@ -16,8 +16,8 @@ namespace Server.Engines.Distillation
         private readonly DistillationContext m_Context;
         private readonly CraftDefinition m_Def;
 
-        public DistillationGump(Mobile from) : base(35, 35)
-        {
+        public DistillationGump(Mobile from) : base("", 0, 0, false)
+		{
             from.CloseGump(typeof(DistillationGump));
 
             m_Context = DistillationSystem.GetContext(from);
@@ -25,7 +25,7 @@ namespace Server.Engines.Distillation
             Group group = m_Context.LastGroup;
             Liquor liquor = m_Context.LastLiquor;
 
-            if (liquor == Liquor.None)
+            if (liquor == Liquor.Aucun)
                 liquor = DistillationSystem.GetFirstLiquor(group);
 
             m_Def = DistillationSystem.GetDefinition(liquor, group);
@@ -36,7 +36,7 @@ namespace Server.Engines.Distillation
             if (m_Def.Liquor != liquor)
                 liquor = m_Def.Liquor;
 
-            AddBackground(0, 0, 500, 500, 5054);
+           AddBackground(0, 0, 500, 500, 5054);
             AddImageTiled(10, 10, 480, 30, 2624);
             AddImageTiled(10, 50, 230, 120, 2624);
             AddImageTiled(10, 180, 230, 200, 2624);
@@ -46,18 +46,19 @@ namespace Server.Engines.Distillation
             AddImageTiled(10, 460, 480, 30, 2624);
             AddAlphaRegion(10, 10, 480, 480);
 
-            AddHtmlLocalized(10, 16, 510, 20, 1150682, LabelColor, false, false); // <center>DISTILLERY MENU</center>
+            AddHtmlTexte(10, 16, 510, 20, "Menu de Distillerie"); // <center>DISTILLERY MENU</center>
 
-            AddHtmlLocalized(10, 55, 230, 20, 1150683, LabelColor, false, false); // <center>Select the group</center>
+
+			AddHtmlTexte(10, 55, 230, 20, "Sélection de la Base"); // <center>Select the group</center>
 
             AddButton(15, 80, 4005, 4007, 1, GumpButtonType.Reply, 0);
-            AddHtmlLocalized(55, 80, 200, 20, DistillationSystem.GetLabel(Group.WheatBased), LabelColor, false, false); // WHEAT BASED
+            AddHtmlLocalized(55, 80, 200, 20, DistillationSystem.GetLabel(Group.BaseBle), LabelColor, false, false); // WHEAT BASED
 
             AddButton(15, 106, 4005, 4007, 2, GumpButtonType.Reply, 0);
-            AddHtmlLocalized(55, 106, 200, 20, DistillationSystem.GetLabel(Group.WaterBased), LabelColor, false, false); // WATER  BASED
+            AddHtmlLocalized(55, 106, 200, 20, DistillationSystem.GetLabel(Group.BaseEau), LabelColor, false, false); // WATER  BASED
 
             AddButton(15, 132, 4005, 4007, 3, GumpButtonType.Reply, 0);
-            AddHtmlLocalized(55, 132, 200, 20, DistillationSystem.GetLabel(Group.Other), LabelColor, false, false); // OTHER
+            AddHtmlLocalized(55, 132, 200, 20, DistillationSystem.GetLabel(Group.Autre), LabelColor, false, false); // OTHER
 
             AddHtmlLocalized(10, 184, 230, 20, 1150684, LabelColor, false, false); // <center>Select the liquor type</center>
 
@@ -108,7 +109,7 @@ namespace Server.Engines.Distillation
                 y += 26;
             }
 
-            AddHtmlLocalized(250, 264, 240, 20, 1150770, LabelColor, false, false); // <center>Distillery Options</center>
+			AddHtmlTexte(250, 264, 240, 20, "Options de Distillation"); // <center>Distillery Options</center>
 
             AddButton(255, 290, 4005, 4007, 4, GumpButtonType.Reply, 0);
             AddHtmlLocalized(295, 290, 200, 20, m_Context.MakeStrong ? 1150730 : 1150729, LabelColor, false, false); // Double Distillation - Standard Distillation
@@ -117,7 +118,7 @@ namespace Server.Engines.Distillation
             AddHtmlLocalized(295, 320, 200, 20, m_Context.Mark ? 1150731 : 1150732, LabelColor, false, false); // Mark Distiller Name - Do Not Mark
 
             AddButton(15, 395, 4005, 4007, 6, GumpButtonType.Reply, 0);
-            AddHtmlLocalized(55, 395, 200, 20, 1150733, string.Format("Label\t{0}", m_Context.Label == null ? "None" : m_Context.Label), LabelColor, false, false); // ~1_NAME~ : ~2_NUMBER~
+            AddHtmlLocalized(55, 395, 200, 20, 1150733, string.Format("Etiquette\t{0}", m_Context.Label == null ? "Aucun" : m_Context.Label), LabelColor, false, false); // ~1_NAME~ : ~2_NUMBER~
 
             AddButton(15, 465, 4005, 4007, 7, GumpButtonType.Reply, 0);
             AddHtmlLocalized(55, 465, 200, 20, 1150771, LabelColor, false, false); // Execute Distillation
@@ -134,13 +135,13 @@ namespace Server.Engines.Distillation
             {
                 case 0: return;
                 case 1: // Select Wheat Based
-                    m_Context.LastGroup = Group.WheatBased;
+                    m_Context.LastGroup = Group.BaseBle;
                     break;
                 case 2: // Select Water Based
-                    m_Context.LastGroup = Group.WaterBased;
+                    m_Context.LastGroup = Group.BaseEau;
                     break;
                 case 3: // Select Other
-                    m_Context.LastGroup = Group.Other;
+                    m_Context.LastGroup = Group.Autre;
                     break;
                 case 4: // Distillation Strength
                     if (m_Context.MakeStrong)
@@ -160,7 +161,7 @@ namespace Server.Engines.Distillation
                     return;
                 case 7: // Execute Distillation
                     from.Target = new DistillationTarget(from, m_Context, m_Def);
-                    from.SendLocalizedMessage(1150810); // Target an empty liquor barrel in your backpack. If you don't have one already, you can use the Carpentry skill to make one.
+                    from.SendMessage("Sélectionnez un Tonneau d'Alcool dans votre sac. Si vous n'en avez pas, demander à un charpentier!"); // Target an empty liquor barrel in your backpack. If you don't have one already, you can use the Carpentry skill to make one.
                     return;
                 default:
                     {
@@ -213,7 +214,7 @@ namespace Server.Engines.Distillation
                 {
                     text = text.Trim();
                     if (text.Length > 15 || !Guilds.BaseGuildGump.CheckProfanity(text))
-                        from.SendMessage("That label is unacceptable. Please try again.");
+                        from.SendMessage("Cette Etiquette est inacceptable. Merci de réessayer.");
                     else
                         m_Context.Label = text;
                 }
@@ -251,9 +252,9 @@ namespace Server.Engines.Distillation
                     if (barrel.IsChildOf(from.Backpack))
                     {
                         if (barrel.IsMature)
-                            from.SendLocalizedMessage(1150811); // This liquor barrel already contains liquor.
+                            from.SendMessage("Ce Tonneau contient déjà de l'alcool"); // This liquor barrel already contains liquor.
                         else if (!barrel.IsEmpty)
-                            from.SendLocalizedMessage(1150802); // You realize that the liquor is on the process of maturation so you leave it alone.
+                            from.SendMessage("Vous réalisez que l'alcool est en fermentation."); // You realize that the liquor is on the process of maturation so you leave it alone.
                         else
                         {
                             double perc = m_Context.MakeStrong ? 2 : 1;
@@ -278,9 +279,10 @@ namespace Server.Engines.Distillation
                                 {
                                     ConsumeTotal(from, perc);
                                     m_Context.ClearYeasts();
-                                    from.SendLocalizedMessage(1150772); // You succeed at your distillation attempt.
+                                    from.SendMessage("Vous réussissez votre Distillation."); // You succeed at your distillation attempt.
 
-                                    Mobile marker = m_Context.Mark ? from : null;
+
+									Mobile marker = m_Context.Mark ? from : null;
                                     from.PlaySound(0x2D6);
 
                                     barrel.BeginDistillation(m_Def.Liquor, m_Def.MaturationDuration, m_Context.Label, m_Context.MakeStrong, marker);
@@ -289,18 +291,18 @@ namespace Server.Engines.Distillation
                                 {
                                     from.PlaySound(0x2D6);
                                     ConsumeTotal(from, perc / 2);
-                                    from.SendLocalizedMessage(1150745); // You have failed your distillation attempt and ingredients have been lost.
+                                    from.SendMessage("Vous échouez votre Distillation. Vous perdez vos ingrédients."); // You have failed your distillation attempt and ingredients have been lost.
                                 }
                             }
                             else
-                                from.SendLocalizedMessage(1150747); // You don't have enough ingredients.
+                                from.SendMessage("Vous n'avez pas assez d'ingrédients"); // You don't have enough ingredients.
                         }
                     }
                     else
-                        from.SendLocalizedMessage(1054107); // This item must be in your backpack.
+                        from.SendMessage("Cet item doit être dans votre sac."); // This item must be in your backpack.
                 }
                 else
-                    from.SendMessage("That is not a liquor barrel.");
+                    from.SendMessage("Ce n'est pas un Tonneau d'alcool.");
 
                 DistillationSystem.SendDelayedGump(from);
             }
@@ -308,7 +310,7 @@ namespace Server.Engines.Distillation
             protected override void OnTargetCancel(Mobile from, TargetCancelType cancelType)
             {
                 if (cancelType == TargetCancelType.Timeout)
-                    from.SendLocalizedMessage(1150859); // You have waited too long to make your selection, your distillation attempt has timed out.
+                    from.SendMessage("Trop lent, votre tentative de distillation est annulée."); // You have waited too long to make your selection, your distillation attempt has timed out.
 
                 from.SendGump(new DistillationGump(from));
             }

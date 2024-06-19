@@ -44,12 +44,12 @@ namespace Server.Items
         public Mobile Distiller { get { return m_Distiller; } set { m_Distiller = value; InvalidateProperties(); } }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public virtual bool IsMature => m_Liquor != Liquor.None && (m_MaturationDuration == TimeSpan.MinValue || m_MaturationBegin + m_MaturationDuration < DateTime.UtcNow);
+        public virtual bool IsMature => m_Liquor != Liquor.Aucun && (m_MaturationDuration == TimeSpan.MinValue || m_MaturationBegin + m_MaturationDuration < DateTime.UtcNow);
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public bool IsEmpty => m_Liquor == Liquor.None;
+        public bool IsEmpty => m_Liquor == Liquor.Aucun;
 
-        public override int LabelNumber => m_UsesRemaining == 0 || m_Liquor == Liquor.None ? 1150816 : 1150807;  // liquor barrel
+        public override int LabelNumber => m_UsesRemaining == 0 || m_Liquor == Liquor.Aucun ? 1150816 : 1150807;  // liquor barrel
 
         public override double DefaultWeight => 5.0;
 
@@ -57,9 +57,11 @@ namespace Server.Items
         public LiquorBarrel()
             : base(4014)
         {
-            m_Liquor = Liquor.None;
+            m_Liquor = Liquor.Aucun;
             m_UsesRemaining = 0;
-        }
+			Name = "Tonneau d'alcool";
+
+		}
 
         public override void OnDoubleClick(Mobile from)
         {
@@ -132,7 +134,7 @@ namespace Server.Items
         {
             TimeSpan ts;
 
-            if (liquor == Liquor.Spirytus || liquor == Liquor.Akvavit)
+            if (liquor == Liquor.Vodka || liquor == Liquor.Gin)
                 ts = TimeSpan.MinValue;
             else
                 ts = DistillationSystem.MaturationPeriod;
