@@ -157,6 +157,8 @@ namespace Server.Misc
 
             CheckBonusSkill(from, from.Hits, from.Hits, SkillName.Focus);
 
+            points += from.Skills[SkillName.Focus].Fixed / 50;
+
             if (points < 0)
                 points = 0;
 
