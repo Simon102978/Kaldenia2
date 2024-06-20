@@ -47,9 +47,9 @@ namespace Server.Items
             {
                 from.SendLocalizedMessage(1116615); // You cannot pilot a ship while flying!
             }
-			else if (from.Skills[SkillName.Cartography].Base < CartographyRequirement)
+			else if (from.Skills[SkillName.Camping].Base < CartographyRequirement)
 			{
-				from.SendMessage("Vous n'êtes pas assez doué en cartographie pour pouvoir naviguer!"); // Cartographie < 50 
+				from.SendMessage("Vous n'êtes pas assez doué en camping pour pouvoir naviguer!"); // Cartographie < 50 
 			}
 			else if (from.Mounted && !(mount is BoatMountItem))
             {
