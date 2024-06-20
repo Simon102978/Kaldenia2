@@ -926,6 +926,9 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LivreEpicier), "Livre de Classe", "livre d'épicier", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
+			index = AddCraft(typeof(LivreAventurier), "Livre de Classe", "livre d'aventurier", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
 			index = AddCraft(typeof(LivreHistorien), "Livre de Classe", "livre d'Historien", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 

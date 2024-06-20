@@ -38,6 +38,7 @@ namespace Server.Misc
 						Classe.RegisterClasse(new Classe(14, "Styliste", ClasseType.Metier, new List<SkillName>() { SkillName.Carpentry, SkillName.Tailoring }, 0));
 						Classe.RegisterClasse(new Classe(15, "Palefrenier", ClasseType.Metier, new List<SkillName>() { SkillName.Herding, SkillName.Equitation }, 0));
 						Classe.RegisterClasse(new Classe(16, "Épicier", ClasseType.Metier, new List<SkillName>() { SkillName.Cooking, SkillName.Alchemy }, 0));
+						Classe.RegisterClasse(new Classe(16, "Aventurier", ClasseType.Metier, new List<SkillName>() { SkillName.Tracking, SkillName.Camping }, 0));
 					}
 		}
 }
