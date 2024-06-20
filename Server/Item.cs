@@ -4503,6 +4503,11 @@ namespace Server
 		{
 			return true;
 		}
+		
+		public virtual bool CanSee(Mobile m)
+        {
+            return Visible || m.IsStaff();
+        }
 
 		public ISpawner Spawner
 		{

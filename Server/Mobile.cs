@@ -9067,7 +9067,7 @@ namespace Server
 				}
 			}
 
-			return !item.Deleted && item.Map == m_Map && (item.Visible || IsStaff());
+			return !item.Deleted && item.Map == m_Map && item.CanSee(this);
 		}
 
 		public virtual bool CanSee(Mobile m)
