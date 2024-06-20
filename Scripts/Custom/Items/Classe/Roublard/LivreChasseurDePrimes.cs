@@ -3,20 +3,20 @@ using Server.Custom;
 namespace Server.Items
 {
     [FlipableAttribute(0xFBE, 0xFBD)]
-    public class LivrePisteur : LivreClasse
+    public class LivreChasseurDePrimes  : LivreClasse
 	{
         [Constructable]
-        public LivrePisteur() : this(Classe.GetClasse(10))
+        public LivreChasseurDePrimes() : this(Classe.GetClasse(10))
         {
         }
 
         [Constructable]
-        public LivrePisteur(Classe classe) : base(classe)
+        public LivreChasseurDePrimes(Classe classe) : base(classe)
         {
-            Name = "livre de pisteur";
+            Name = "livre de Chasseur de primes";
         }
 
-        public LivrePisteur(Serial serial) : base(serial)
+        public LivreChasseurDePrimes(Serial serial) : base(serial)
         {
         }
 

@@ -950,7 +950,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LivreMenestrel), "Livre de Classe", "livre de ménéstrel", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivrePisteur), "Livre de Classe", "livre de pisteur", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+			index = AddCraft(typeof(LivreChasseurDePrimes), "Livre de Classe", "livre de Chasseur de primes", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
 

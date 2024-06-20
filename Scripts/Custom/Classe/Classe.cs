@@ -30,7 +30,7 @@ namespace Server.Misc
 						Classe.RegisterClasse(new Classe(7,  "Ménéstrel", ClasseType.Roublard, new List<SkillName>() { SkillName.Musicianship, SkillName.Peacemaking, SkillName.Provocation,SkillName.Discordance }, 2));
 						Classe.RegisterClasse(new Classe(8,  "Cambrioleur", ClasseType.Roublard, new List<SkillName>() { SkillName.Stealing, SkillName.Snooping, SkillName.Lockpicking }, 2));
 						Classe.RegisterClasse(new Classe(9,  "Assassin", ClasseType.Roublard, new List<SkillName>() { SkillName.Hiding, SkillName.Poisoning, SkillName.Fencing }, 2));
-						Classe.RegisterClasse(new Classe(10, "Pisteur", ClasseType.Roublard, new List<SkillName>() { SkillName.Tracking, SkillName.Hiding, SkillName.Archery }, 2));
+						Classe.RegisterClasse(new Classe(10, "Chasseur de primes", ClasseType.Roublard, new List<SkillName>() { SkillName.Poisoning, SkillName.Hiding, SkillName.Archery }, 2));
 						Classe.RegisterClasse(new Classe(11, "Dresseur", ClasseType.Roublard, new List<SkillName>() { SkillName.AnimalLore, SkillName.AnimalTaming, SkillName.Veterinary }, 2));
 
 						Classe.RegisterClasse(new Classe(12, "Historien", ClasseType.Metier, new List<SkillName>() { SkillName.Inscribe, SkillName.Cartography}, 0));
