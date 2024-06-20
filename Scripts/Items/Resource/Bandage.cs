@@ -573,8 +573,8 @@ namespace Server.Items
                 {
                     healerNumber = 500969; // You finish applying the bandages.
 
-                    double min = (anatomy / 8.0) + (healing / 5.0) + 4.0;
-                    double max = (anatomy / 6.0) + (healing / 2.5) + 4.0;
+                    double min = (anatomy / 8.0) + (healing / 6.0) + 4.0;
+                    double max = (anatomy / 6.0) + (healing / 3.0) + 4.0;
 
                     double toHeal = min + (Utility.RandomDouble() * (max - min));
 
