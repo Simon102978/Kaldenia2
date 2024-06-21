@@ -1,4 +1,5 @@
-﻿using Server.Items;
+﻿using JournalCommand;
+using Server.Items;
 using Server.Mobiles;
 using Server.Network;
 using System;
@@ -33,19 +34,12 @@ namespace Server.Engines.Quests
         }
 
         public static void QuestButton(NetState state, IEntity e, EncodedReader reader)
-        {
-            if (state.Mobile is PlayerMobile)
-            {
-                PlayerMobile from = (PlayerMobile)state.Mobile;
+		{
+			if (state.Mobile is CustomPlayerMobile pm)
+				CJournalGump.OpenJournal(pm);
+		}
 
-				from.SendMessage("Menu désactivé.");
-
-            //    from.CloseGump(typeof(MondainQuestGump));
-            //    from.SendGump(new MondainQuestGump(from));
-            }
-        }
-
-        public static void HeritageTransform(NetState state, PacketReader reader)
+		public static void HeritageTransform(NetState state, PacketReader reader)
         {
             Mobile m = state.Mobile;
 

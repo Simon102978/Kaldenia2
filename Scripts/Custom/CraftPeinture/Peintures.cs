@@ -3913,7 +3913,7 @@ namespace Server.Items
 
 		}
 	}
-	[Flipable(0x99A6, 0x99A7)]
+	[Flipable(0xA565, 0xA566)]
 	public class ToileKershe : Peintures
 	{
 		[Constructable]
@@ -3922,7 +3922,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public ToileKershe(int hue) : base(0x99A6, hue)
+		public ToileKershe(int hue) : base(0xA565, hue)
 		{
 			Weight = 1.0;
 
@@ -3948,7 +3948,7 @@ namespace Server.Items
 
 		}
 	}
-	[Flipable(0x99A8, 0x99A9)]
+	[Flipable(0xA567, 0xA568)]
 	public class ToileChameau : Peintures
 	{
 		[Constructable]
@@ -3957,7 +3957,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public ToileChameau(int hue) : base(0x99A8, hue)
+		public ToileChameau(int hue) : base(0xA567, hue)
 		{
 			Weight = 1.0;
 

@@ -11,9 +11,11 @@ namespace Server.Scripts.Commands
         public static void Initialize()
         {
             CommandSystem.Register("Decoration", AccessLevel.Player, new CommandEventHandler(Decoration_OnCommand));
-        }
+			CommandSystem.Register("Decorate", AccessLevel.Player, new CommandEventHandler(Decoration_OnCommand));
 
-        [Usage("Decoration")]
+		}
+
+		[Usage("Decoration")]
         [Description("Permet l'acces aux joueurs de plusieurs commandes de decoration.")]
         public static void Decoration_OnCommand(CommandEventArgs e)
         {
