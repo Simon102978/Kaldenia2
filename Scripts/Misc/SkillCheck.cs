@@ -242,7 +242,7 @@ namespace Server.Misc
         {
             double gc = (double)(from.Skills.Cap - from.Skills.Total) / from.Skills.Cap;
 
-            gc += (skill.Cap - skill.Base) / skill.Cap;
+            gc += (100 - skill.Base) / 100;
             gc /= 2;
 
             gc += (1.0 - chance) * (success ? 0.5 : 0.0);
@@ -311,16 +311,14 @@ namespace Server.Misc
         private static bool AllowGain(Mobile from, Skill skill, object obj)
         {
 			/*     if (Engines.VvV.ViceVsVirtueSystem.InSkillLoss(from)) //Changed some time between the introduction of AoS and SE.
-					 return false;
+					 return false;*/
 
 				 if (from is PlayerMobile)
 				 {
 					 if (_AntiMacroCode && UseAntiMacro[skill.Info.SkillID])
 						 return ((PlayerMobile)from).AntiMacroCheck(skill, obj);
 				 }
-				 return true;*/
-
-			return false;
+				 return true;		
         }
 
         public enum Stat
