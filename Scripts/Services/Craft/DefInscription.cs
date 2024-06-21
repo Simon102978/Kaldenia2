@@ -889,7 +889,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(NewSpellbook), "Autres", "Livre de sort", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
 
 			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre de Barde", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
-
+/*
 			index = AddCraft(typeof(LivreArcher), "Livre de Classe", "livre d'archer", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
@@ -955,7 +955,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(LivreChasseurDePrimes), "Livre de Classe", "livre de Chasseur de primes", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
-
+*/
 
 			/*			index = AddCraft(typeof(ScrappersCompendium), 1044294, 1072940, 75.0, 125.0, typeof(BlankScroll), 1044377, 100, 1044378);
 						AddRes(index, typeof(DreadHornMane), 1032682, 1, 1044253);

@@ -29,53 +29,9 @@ namespace Server.Gumps
 
             string info = "<h3><basefont color=#FFFFFFF>Nom: " + m_Creation.Name + "\n\nRace: " + m_Creation.Race + "\nDivinité: " + m_Creation.God.Name + "\nSexe: " + (m_Creation.Female ? "Femme" : "Homme") + "\nApparence: " + m_Creation.GetApparence() + "\nGrandeur: " + m_Creation.GetGrandeur() + "\nGrosseur: " + m_Creation.GetGrosseur() + "\n\n<basefont></h3>";
 
-			Dictionary<SkillName, int> Skill = new Dictionary<SkillName, int>();
-
-			Classe primaire = Classe.GetClasse(m_Creation.ClassePrimaire);
-
-			int armor = primaire.Armor;
-
-			foreach (SkillName item in primaire.Skill)
-			{
-				Skill.Add(item, 50);
-			}
-
-			Classe metier = Classe.GetClasse(m_Creation.Metier);
-
-			armor += metier.Armor;
-
-			foreach (SkillName item in metier.Skill)
-			{
-				if (!Skill.ContainsKey(item))
-				{
-					Skill.Add(item, 50);
-				}			
-			}
-
-			Classe secondaire = Classe.GetClasse(m_Creation.ClasseSecondaire);
-
-			armor += secondaire.Armor;
-
-			foreach (SkillName item in secondaire.Skill)
-			{
-				if (!Skill.ContainsKey(item))
-				{
-					Skill.Add(item, 30);
-				}			
-			}
-
-			info = info + "Skills: \n\n";
-
-			foreach (KeyValuePair<SkillName,int> item in Skill)
-			{
-				info = info +"  -" + item.Key + ": " + item.Value + "\n";
-			}
-
-			info = info + "  -Mining: 30\n  -Fishing: 30\n  -Lumberjacking: 30\n  -MagicResist: 30\n";
-
-
-
-			info = info + "\nArmure: " + armor;
+				
+			info = info + "Classe: " + Classe.GetClasse(creationPerso.Classe).Name;
+			info = info + "\nMetier: " + Classe.GetClasse(creationPerso.Metier).Name;
 
 			info = info + "\n\nForce: " + creationPerso.Str;
 			info = info + "\nDextérité: " + creationPerso.Dex;
@@ -88,7 +44,7 @@ namespace Server.Gumps
 
 			AddSection(x - 10, y, 303, 508, "Information", info);
 
-			string context = "Vous allez maintenant être envoyé dans la cité de Boscula, pour une escale avant votre destination finale.\n\nDurant cette escale, profitez bien des marchands présents dans la cité pour regarnir votre garde-robe. \n\nMais prenez garde, le bateau est rempli, vous ne pourrez que transporter ce que vous portez.";
+			string context = "Vous allez maintenant être envoyé dans la seconde salle de création, pour une escale avant votre destination finale.\n\nDurant cette escale, profitez bien des marchands présents dans la cité pour regarnir votre garde-robe. \n\nMais prenez garde, le bateau est rempli, vous ne pourrez que transporter ce que vous portez.";
 
 			AddSection(x + 294, y, 304, 508, "Contexte", context);
 			AddSection(x - 10, y + 509, 610, 99, "Validation");

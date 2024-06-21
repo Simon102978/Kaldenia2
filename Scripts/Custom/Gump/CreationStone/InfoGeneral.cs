@@ -142,7 +142,7 @@ namespace Server.Gumps
 
 			else if (info.ButtonID == 1001)
             {
-                from.SendGump(new ClasseGump(m_from, m_Creation));
+                from.SendGump(new ClasseEvoGump(m_from, m_Creation));
             }
             else if (info.ButtonID == 1000 || info.ButtonID == 0)
             {

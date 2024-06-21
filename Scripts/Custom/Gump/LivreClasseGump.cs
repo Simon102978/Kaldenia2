@@ -14,16 +14,16 @@ namespace Server.Gumps
 	{
 		CustomPlayerMobile m_From;
 		Classe m_Classe;
-		LivreClasse m_Livre;
+	//	LivreClasse m_Livre;
 
-        public LivreClasseGump(CustomPlayerMobile from, Classe classe, LivreClasse livre)
+        public LivreClasseGump(CustomPlayerMobile from, Classe classe/*, LivreClasse livre*/)
             : base("Livres de classes", 250, 150, true)
         {
 
 
 			m_From = from;
 			m_Classe = classe;
-			m_Livre = livre;
+	//		m_Livre = livre;
 
 
 			int x = XBase + 20;
@@ -40,7 +40,7 @@ namespace Server.Gumps
 			line++;
 			line++;
 
-			if (from.ClassePrimaire != classe)
+		/*	if (from.ClassePrimaire != classe)
 			{
 
 			AddButtonHtlml(x, y + line * scale, 1, "Primaire", "#FFFFFF");
@@ -57,7 +57,7 @@ namespace Server.Gumps
 			{
 				AddButtonHtlml(x, y + line * scale, 3, "Métier", "#FFFFFF");
 			}
-			
+			*/
 
 			
 		}
@@ -71,7 +71,7 @@ namespace Server.Gumps
 			{
 				CustomPlayerMobile cp = (CustomPlayerMobile)from;
 
-				if (info.ButtonID == 1)
+	/*			if (info.ButtonID == 1)
 				{
 					cp.ClassePrimaire = m_Classe;
 					m_Livre.Delete();
@@ -85,7 +85,7 @@ namespace Server.Gumps
 				{
 					cp.Metier = m_Classe;
 					m_Livre.Delete();
-				}
+				}*/
 		
 			}
         }

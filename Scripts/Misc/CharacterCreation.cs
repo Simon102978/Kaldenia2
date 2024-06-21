@@ -117,14 +117,9 @@ namespace Server.Misc
                         pm.Skills[i].Cap = skillcap;
                 }
 
-				pm.Metier = Classe.GetClasse(-1);
-				pm.ClassePrimaire = Classe.GetClasse(-1);
-				pm.ClasseSecondaire = Classe.GetClasse(-1);
-			
-
-
-
-
+				pm.Metier = Classe.GetClasse(0);
+				pm.Classe = Classe.GetClasse(0);
+                pm.SetUselessSkill();
 			}
 
 			SetName(newChar, args.Name);

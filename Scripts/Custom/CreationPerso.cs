@@ -34,9 +34,8 @@ namespace Server
 		private AppearanceEnum m_Appearance = (AppearanceEnum)(-1);
 		private GrandeurEnum m_Grandeur = (GrandeurEnum)(-1);
 		private GrosseurEnum m_Grosseur = (GrosseurEnum)(-1);
-		private int m_ClassePrimaire = -1;
-		private int m_ClasseSecondaire = -1;
-		private int m_Metier = -1;
+		private int m_Classe = 0;
+		private int m_Metier = 0;
 
 		private God m_God = null;
 
@@ -54,40 +53,28 @@ namespace Server
              
         }
 
-		public int ClassePrimaire
+		public int Classe
 		{
-			get => m_ClassePrimaire;
+			get => m_Classe;
 			set
 			{
-				if (m_ClassePrimaire != value)
+				if (m_Classe != value)
 				{
-					ChangeClassePrimaire();
+					ChangeClasse();
 				}
-				m_ClassePrimaire = value;
+
+				m_Classe= value;
 			}
 
 		}
 
-		public int ClasseSecondaire
-		{
-			get => m_ClasseSecondaire;
-			set
-			{
-				if (m_ClasseSecondaire != value)
-				{
-					ChangeClasseSecondaire();
-				}
-				m_ClasseSecondaire = value;
-			}
-
-		}
 
 		public int Metier
 		{
 			get => m_Metier;
 			set
 			{
-				if (Classe.GetClasse(value).ClasseType == ClasseType.Metier)  //    Juste pour s'assurer que personne le fasse... Genre utiliser razor pour choisir une classe combat au lieux de metier.
+				if (Server.Classe.GetClasse(value).Metier)  //    Juste pour s'assurer que personne le fasse... Genre utiliser razor pour choisir une classe combat au lieux de metier.
 				{
 					if (m_Metier != value)
 					{
@@ -225,20 +212,15 @@ namespace Server
             
         }
 
-		public void ChangeClassePrimaire()
+		public void ChangeClasse()
 		{		
-				m_ClasseSecondaire = -1;			
-				m_Metier = -1;
-		}
-
-		public void ChangeClasseSecondaire()
-		{
-			m_Metier = -1;
+				m_Classe = 0;			
+				m_Metier = 0;
 		}
 
 		public void ChangeMetier()
 		{
-		
+				m_Metier = 0;
 		}
 
 		public bool InfoGeneral()
@@ -273,15 +255,12 @@ namespace Server
 
 		public bool ClasseSelection( int Stade)
 		{
-			if (Stade == 0 && ClassePrimaire != -1)
+			if (Stade == 0 && Classe != 0)
 			{
 				return true;
 			}
-			else if (Stade == 1 && ClasseSecondaire != -1)
-			{
-				return true;
-			}
-			else if (Stade == 2 && Metier != -1)
+			
+			else if (Stade == 1 && Metier != 0)
 			{
 				return true;
 			}
@@ -297,18 +276,14 @@ namespace Server
 			{
 				case 0:
 					{
-						return "Classe Primaire";
+						return "Classe";
 					}
 				case 1:
-					{
-						return "Classe Secondaire";
-					}
-				case 2:
 					{
 						return "Metier";
 					}
 				default:
-					return "Classe Primaire";
+					return "Classe";
 			}
 
 
@@ -375,60 +350,14 @@ namespace Server
 
 			m_Player.InitStats(m_Str, m_Dex, m_Int);
 
-			m_Player.ClassePrimaire = Classe.GetClasse(m_ClassePrimaire);
-			m_Player.ClasseSecondaire = Classe.GetClasse(m_ClasseSecondaire);
-			m_Player.Metier = Classe.GetClasse(Metier);
+			m_Player.Classe = Server.Classe.GetClasse(m_Classe);
+			m_Player.Metier = Server.Classe.GetClasse(Metier);
 
 			m_Player.God = God;
 
 			m_Player.StatutSocial = m_Statut;
 
 	//		Dictionary<SkillName, int> m_skills = new Dictionary<SkillName, int>();
-
-
-
-
-			foreach (SkillName item in m_Player.ClasseSecondaire.Skill)
-			{
-				m_Player.Skills[item].Base = 30;
-
-	//			m_skills.Add(item, 30);
-			}
-
-			foreach (SkillName item in m_Player.Metier.Skill)
-			{
-				m_Player.Skills[item].Base = 50;
-
-/*				if (m_skills.ContainsKey(item))
-				{
-					m_skills[item] = 50;
-				}
-				else
-				{
-					m_skills.Add(item, 50);
-				}*/
-			}
-
-			foreach (SkillName item in m_Player.ClassePrimaire.Skill)
-			{
-				m_Player.Skills[item].Base = 50;
-
-/*				if (m_skills.ContainsKey(item))
-				{
-					m_skills[item] = 50;
-				}
-				else
-				{
-					m_skills.Add(item, 50);
-				}*/
-			}
-
-
-			m_Player.Skills[SkillName.Mining].Base = 30;
-			m_Player.Skills[SkillName.Lumberjacking].Base = 30;
-			m_Player.Skills[SkillName.Fishing].Base = 30;
-			m_Player.Skills[SkillName.MagicResist].Base = 30;
-
 
 
 
@@ -448,46 +377,17 @@ namespace Server
 
 
 
-
-
-
-
-
-
-
-			/*			m_skills.Add(SkillName.Mining, 0);
-						m_skills.Add(SkillName.Lumberjacking, 0);
-						m_skills.Add(SkillName.Fishing, 0);
-						m_skills.Add(SkillName.MagicResist, 0);*/
-
 			int GoldNumber = 5000;
 			
 
 			m_Player.AddToBackpack(new Gold(GoldNumber));
-
-
-
-			/*           if (Reroll != null)
-					   {
-						   Reroll.Valider(sp);
-					   }
-
-					 */
-
 			
 
 			m_Player.MoveToWorld(new Point3D(6132, 2566, 55), Map.Felucca);
 			m_Player.Blessed = false;
 			Robe robe = new Robe();
 
-
 			m_Player.AddItem(robe);
-
-
-
-			
-		//	m_Player.EquipItem(robe);
-
 
 		}
 

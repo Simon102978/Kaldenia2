@@ -20,15 +20,14 @@ namespace Server.Mobiles
 
 	public partial class CustomPlayerMobile : PlayerMobile
 	{
-		public static List<SkillName> SkillGeneral = new List<SkillName>() { SkillName.Mining, SkillName.Lumberjacking, SkillName.Fishing, SkillName.MagicResist };
 
 		private GrandeurEnum m_Grandeur;
 		private GrosseurEnum m_Grosseur;
 		private AppearanceEnum m_Beaute;
+		private int m_Niveau;
 
-		private Classe m_ClassePrimaire = Classe.GetClasse(-1);
-		private Classe m_ClasseSecondaire = Classe.GetClasse(-1);
-		private Classe m_Metier = Classe.GetClasse(-1);
+		private Classe m_Classe= Classe.GetClasse(0);
+		private Classe m_Metier = Classe.GetClasse(0);
 
 		private List<Mobile> m_Esclaves = new List<Mobile>();
 		private CustomPlayerMobile m_Maitre;
@@ -38,7 +37,6 @@ namespace Server.Mobiles
 		private Container m_Corps;
 		private int m_StatAttente;
 		private int m_fe;
-		private int m_feAttente;
 		private int m_TotalNormalFE;
 		private int m_TotalRPFE;
 
@@ -148,23 +146,6 @@ namespace Server.Mobiles
 		public AppearanceEnum Beaute { get => m_Beaute; set => m_Beaute = value; }
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public Classe ClassePrimaire
-		{
-			get => m_ClassePrimaire;
-			set
-			{
-				if (CheckClassePrimaire(value))
-				{
-					RecalculeClasse(value, 1);
-
-					m_ClassePrimaire = value; // S'assurer que le metier, soit un metier...
-				}
-			}
-
-		}
-
-
-		[CommandProperty(AccessLevel.GameMaster)]
 		public string BaseName
 		{
 			get => GetBaseName();
@@ -178,40 +159,7 @@ namespace Server.Mobiles
 			set { Hallucinating = value; InvalidateProperties(); }
 		}
 
-		[CommandProperty(AccessLevel.GameMaster)]
-		public Classe ClasseSecondaire {
-			get => m_ClasseSecondaire;
-			set
-			{
-				if (CheckClasseSecondaire(value))
-				{
-					RecalculeClasse(value, 2);
 
-					m_ClasseSecondaire = value; // S'assurer que le metier, soit un metier...
-
-				}
-			}
-		}
-
-		[CommandProperty(AccessLevel.GameMaster)]
-		public Classe Metier
-		{
-			get => m_Metier;
-			set
-			{
-				if (value.ClasseType == ClasseType.Metier || value.ClasseType == ClasseType.None)
-				{
-					if (CheckMetier(value))
-					{
-						RecalculeClasse(value, 3);
-						m_Metier = value;  // S'assurer que le metier, soit un metier...
-					}
-
-					// S'assurer que le metier, soit un metier...
-				}
-			}
-
-		}
 
 		[CommandProperty(AccessLevel.Owner)]
 		public StatutSocialEnum StatutSocial
@@ -269,7 +217,18 @@ namespace Server.Mobiles
 		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public int FE { get { return m_fe; } set { m_fe = value; } }
+		public int FE
+		 { 
+			get 
+			{ 
+				return m_fe; 
+			} 
+			set 
+			{ 
+				m_fe = value; 
+				CheckLevel();
+			} 
+		  }
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int FEDay { get { return m_feDay; } set { m_feDay = value; } }
@@ -284,13 +243,56 @@ namespace Server.Mobiles
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int FETotal { get { return m_TotalNormalFE + m_TotalRPFE; } }
 
+   		[CommandProperty(AccessLevel.GameMaster)]
+		public int Niveau 
+        { 
+            get 
+            { return m_Niveau; } 
+            set 
+            { 
+                int newValue = value;
 
+                if (newValue > 30 )          
+                     newValue = 30;               
 
-		[CommandProperty(AccessLevel.GameMaster)]
-		public int FEAttente { get { return m_feAttente; } set { m_feAttente = value; } }
+                if (m_Niveau != newValue)
+                {
+                     m_Niveau = newValue; 
+                     AdjustLvl();
+                }              
+            } 
+        }
 
-		[CommandProperty(AccessLevel.GameMaster)]
-		public int Armure { get => m_ClassePrimaire.Armor + m_ClasseSecondaire.Armor; }
+        [CommandProperty(AccessLevel.GameMaster)]
+		public Classe Metier
+		{
+			get => m_Metier;
+			set
+			{
+				if (value.Metier)
+				{
+				  m_Metier = value;
+              	  AdjustLvl();
+				}
+			}
+		}
+
+        [CommandProperty(AccessLevel.GameMaster)]
+		public Classe Classe
+		{
+			get => m_Classe;
+			set
+			{
+		    	m_Classe = value;
+                AdjustLvl();
+
+			}
+
+		}
+
+    	[CommandProperty(AccessLevel.GameMaster)]
+		public int Armure { get => m_Classe.Armor; }
+
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public Container Corps { get { return m_Corps; } set { m_Corps = value; } }
@@ -1451,30 +1453,6 @@ namespace Server.Mobiles
 
 		#endregion
 
-		public HashSet<SkillName> SkillDisponible()
-		{
-			HashSet<SkillName> list = new HashSet<SkillName>();
-
-			foreach (SkillName item in ClassePrimaire.Skill)
-			{
-				list.Add(item);
-			}
-
-			foreach (SkillName item in ClasseSecondaire.Skill)
-			{
-				list.Add(item);
-			}
-			foreach (SkillName item in Metier.Skill)
-			{
-				list.Add(item);
-			}
-
-			foreach (SkillName item in SkillGeneral)
-			{
-				list.Add(item);
-			}
-			return list;
-		}
 
 		public int GetAffinityValue(MagieType affinity)
 		{
@@ -1495,416 +1473,146 @@ namespace Server.Mobiles
 		}
 
 		#region Classe
+		public void CheckLevel()
+        {
+            if (Niveau + 1 > 30)
+            {
+                return;
+            }
 
-		public bool ClassSkill(SkillName skills)
-		{
+			int NewLvl = Niveau;
+ 	
+			while (FE >= XPLevel.GetLevel(NewLvl).FeRequis && NewLvl <= 30)
+            {
+               NewLvl++;              
+            }
 
-			foreach (SkillName item in ClassePrimaire.Skill)
+	 		if (NewLvl - 1 > Niveau)
+            {
+                 SendMessage("Félicitation ! Vous venez de gagner un niveau !");
+                 Niveau = NewLvl - 1;
+	
+                 if (CanEvolveClass())
+                 {
+                    SendMessage("Vous pouvez maintenant choisir une nouvelle classe !");
+                 }
+            }         
+        }
+
+		public void AdjustLvl()
+        {
+			if (m_Classe == null || m_Metier == null) 
 			{
-				if (item == skills)
-				{
-					return true;
-				}
+				return;
 			}
 
-			foreach (SkillName item in ClasseSecondaire.Skill)
-			{
-				if (item == skills)
-				{
-					return true;
-				}
-			}
-
-
-			foreach (SkillName item in Metier.Skill)
-			{
-				if (item == skills)
-				{
-					return true;
-				}
-			}
-
-			foreach (SkillName item in SkillGeneral)
-			{
-				if (item == skills)
-				{
-					return true;
-				}
-			}
-
-			return false;
-
-		}
-
-		public bool CheckClassePrimaire(Classe cl)
-		{
-
-			if (cl == Classe.GetClasse(-1))
-			{
-				return true;
-			}
-			else if (cl == ClasseSecondaire)
-			{
-
-				m_ClassePrimaire = cl;
-
-				foreach (SkillName item in cl.Skill)
-				{
-					Skills[item].Base += 20;
-
-					if (Skills[item].Base > 100)
-					{
-						m_feAttente += (int)Math.Round(Skills[item].Base) - 100;
-						Skills[item].Base = 100;
-					}
-				}
-
-				ClasseSecondaire = Classe.GetClasse(-1);
-				return false;
-			}
-			else if (cl == Metier)
-			{
-				m_ClassePrimaire = cl;
-				Metier = Classe.GetClasse(-1);
-				return false;
-			}
-
-			return true;
-		}
-
-		public bool CheckClasseSecondaire(Classe cl)
-		{
-			if (cl == Classe.GetClasse(-1))
-			{
-				return true;
-			}
-			else if (cl == ClassePrimaire)
-			{
-				m_ClasseSecondaire = cl;
-
-				foreach (SkillName item in cl.Skill)
-				{
-					Skills[item].Base -= 20;
-				}
-
-				ClassePrimaire = Classe.GetClasse(-1);
-				return false;
-			}
-			else if (cl == Metier)
-			{
-				m_ClasseSecondaire = cl;
-
-				Metier = Classe.GetClasse(-1);
-				return false;
-			}
-
-			return true;
-		}
-
-		public bool CheckMetier(Classe cl)
-		{
-			if (cl == Classe.GetClasse(-1))
-			{
-				return true;
-			}
-			else if (cl == ClassePrimaire)
-			{
-				m_Metier = cl;
-				ClassePrimaire = Classe.GetClasse(-1);
-				return false;
-			}
-			else if (cl == ClasseSecondaire)
-			{
-				m_Metier = cl;
-
-				foreach (SkillName item in cl.Skill)
-				{
-					Skills[item].Base += 20;
-
-					if (Skills[item].Base > 100)
-					{
-						m_feAttente += (int)Math.Round(Skills[item].Base) - 100;
-						Skills[item].Base = 100;
-					}
-				}
-
-				ClasseSecondaire = Classe.GetClasse(-1);
-				return false;
-			}
-
-			return true;
-		}
-
-		public void RecalculeClasse(Classe NewClass, int type)
-		{
-
-
-
-
-			switch (type)
-			{
-				case 1:
-					{
-						if (ClassePrimaire != null)
-						{
-							ChangeAffinity(NewClass, ClassePrimaire);
-
-							foreach (SkillName item in ClassePrimaire.Skill)
-							{
-								if (Metier.ContainSkill(item))
-								{
-									// rien a faire, tout deux a 50...
-								}
-								else if (NewClass.ContainSkill(item))
-								{
-									// rien a faire, tout deux a 50...
-								}
-								else if (ClasseSecondaire.ContainSkill(item))
-								{
-									// Secondaire a 30, et primaire à 50, donc perte de 20 de skills.
-									Skills[item].Base -= 20;
-								}
-								else
-								{
-									int Arecuperer = (int)(Skills[item].Base - 50);
-									Skills[item].Base = 0;
-									m_feAttente += Arecuperer;
-								}
-							}
-
-							foreach (SkillName item in NewClass.Skill)
-							{
-								if (Metier.ContainSkill(item))
-								{
-									// rien a faire, tout deux a 50...
-								}
-								else if (ClassePrimaire.ContainSkill(item))
-								{
-									// rien a faire, tout deux a 50...
-								}
-								else if (ClasseSecondaire.ContainSkill(item))
-								{
-									// Secondaire a 30, et primaire à 50, donc perte de 20 de skills.
-									Skills[item].Base += 20;
-
-									if (Skills[item].Base > 100)
-									{
-										m_feAttente += (int)Math.Round(Skills[item].Base) - 100;
-										Skills[item].Base = 100;
-									}
-								}
-								else
-								{
-									Skills[item].Base = 50;
-								}
-							}
-						}
-
-						// classe primaire
-
-						break;
-					}
-				case 2:
-					{
-						// Classe secondaire
-
-						if (ClasseSecondaire != null)
-						{
-
-							ChangeAffinity(NewClass, ClasseSecondaire);
-
-							foreach (SkillName item in ClasseSecondaire.Skill)
-							{
-								if (ClassePrimaire.ContainSkill(item))
-								{
-									// rien a faire, classe primaire est plus elevés.
-								}
-								else if (NewClass.ContainSkill(item))
-								{
-									// rien a faire, tout deux a 30...
-								}
-								else if (Metier.ContainSkill(item))
-								{
-									// rien a faire, metier à 50...
-								}
-								else
-								{
-									int Arecuperer = (int)(Skills[item].Value - 30);
-									Skills[item].Base = 0;
-									m_feAttente += Arecuperer;
-								}
-							}
-
-							foreach (SkillName item in NewClass.Skill)
-							{
-								if (ClassePrimaire.ContainSkill(item))
-								{
-									// rien a faire, classe primaire est plus elevés.
-								}
-								else if (ClasseSecondaire.ContainSkill(item))
-								{
-									// rien a faire, tout deux a 30...
-								}
-								else if (Metier.ContainSkill(item))
-								{
-									// rien a faire, metier à 50...
-								}
-								else
-								{
-									Skills[item].Base = 30;
-								}
-							}
-						}
-
-
-						break;
-					}
-				case 3:
-					{
-						// Metier
-
-						if (Metier != null)
-						{
-							foreach (SkillName item in Metier.Skill)
-							{
-								if (ClassePrimaire.ContainSkill(item))
-								{
-									// rien a faire, tout deux a 50...
-								}
-								else if (NewClass.ContainSkill(item))
-								{
-									// rien a faire, tout deux a 50...
-								}
-								else if (ClasseSecondaire.ContainSkill(item))
-								{
-									// Secondaire a 30, et primaire à 50, donc perte de 20 de skills.
-									Skills[item].Base -= 20;
-								}
-								else
-								{
-									int Arecuperer = (int)(Skills[item].Base - 50);
-									Skills[item].Base = 0;
-									m_feAttente += Arecuperer;
-								}
-							}
-
-							foreach (SkillName item in NewClass.Skill)
-							{
-								if (ClassePrimaire.ContainSkill(item))
-								{
-									// rien a faire, tout deux a 50...
-								}
-								else if (Metier.ContainSkill(item))
-								{
-									// rien a faire, tout deux a 50...
-								}
-								else if (ClasseSecondaire.ContainSkill(item))
-								{
-
-									Skills[item].Base += 20;
-
-
-									if (Skills[item].Base > 100)
-									{
-										m_feAttente += (int)Math.Round(Skills[item].Base) - 100;
-										Skills[item].Base = 100;
-									}
-								}
-								else
-								{
-									Skills[item].Base = 50;
-								}
-							}
-						}
-
-
-
-
-						break;
-					}
-
-				default:
-					break;
-			}
-		}
-
-
-		public void ChangeAffinity(Classe NewClass, Classe OldClass)
-		{
-			int feAredonner = 0; 
-				
-				
-				foreach (KeyValuePair<MagieType, int> item in OldClass.Magie)
-				{
-					if (MagicAfinity.ContainsKey(item.Key))
-					{
-						MagicAfinity[item.Key] -= item.Value;
-					}
-					else
-					{
-						MagicAfinity.Add(item.Key, -item.Value);
-					}
-
-					if (!NewClass.ContainAffinity(item.Key))
-					{
 		
 
-						int affValue = GetAffinityValue(item.Key);
+			double skillcap = XPLevel.GetLevel(Niveau).MaxSkill;
 
-						if (affValue > 0)
-						{
-							feAredonner += affValue * 5;
+			SkillsCap = Niveau * 10 + 500;
 
-							MagicAfinity[item.Key] = 0;						
-						}
-							
-					}
-				}
-
-				foreach (KeyValuePair<MagieType, int> item in NewClass.Magie)
+			if (m_Classe.Metier)
+			{
+				foreach (SkillName item in Classe.MetierSkill) // Classe et Metier gerer en meme temps
 				{
-					if (MagicAfinity.ContainsKey(item.Key))
+					double metierSkill = Metier.GetSkillValue(item) > Classe.GetSkillValue(item) ? Metier.GetSkillValue(item) : Classe.GetSkillValue(item);
+
+					metierSkill = metierSkill < skillcap ? metierSkill : skillcap;
+
+					Skills[item].Cap = metierSkill;
+
+					if (Skills[item].Value > metierSkill)
 					{
-						MagicAfinity[item.Key] += item.Value;
-					}
-					else
+						Skills[item].Base = metierSkill;
+					}					
+				}		
+			}
+			else
+			{
+				
+				
+				foreach (SkillName item in Classe.ClasseSkill) // Metier
+				{
+					double ClasseSkill = Classe.GetSkillValue(item) < skillcap ? Classe.GetSkillValue(item) : skillcap;
+
+					Skills[item].Cap = ClasseSkill;
+
+					if (Skills[item].Value > ClasseSkill)
 					{
-						MagicAfinity.Add(item.Key, item.Value);
-					}
-					
-				}
+						Skills[item].Base = ClasseSkill;
+					}					
+				}	
 
-				m_feAttente += feAredonner;
+				foreach (SkillName item in Classe.MetierSkill) // Metier
+				{
+					double metierSkill = Metier.GetSkillValue(item) < skillcap ? Metier.GetSkillValue(item) : skillcap;
 
+					Skills[item].Cap = metierSkill;
 
+					if (Skills[item].Value > metierSkill)
+					{
+						Skills[item].Base = metierSkill;
+					}					
+				}		
+			}
 
-		}
+			foreach (SkillName item in Classe.GeneralSkill)
+			{
+				Skills[item].Cap = skillcap;
 
-		public void SetClasseSkills(double skills)
+				if (Skills[item].Value > skillcap)
+				{
+					Skills[item].Base = skillcap;
+				}	
+			}
+
+			
+            
+        }
+
+		public void SetUselessSkill()
 		{
-			double principal = skills < 50 ? 50 : skills;
-			double secondaire = skills < 30 ? 30 : skills;
+				foreach (SkillName item in Classe.NonAssigneSkill) // Metier
+				{				
+					Skills[item].Cap = 0;
 
-
-			foreach (SkillName item in ClasseSecondaire.Skill)
-			{
-				Skills[item].Base = secondaire;
-			}
-
-			foreach (SkillName item in ClassePrimaire.Skill)
-			{
-				Skills[item].Base = principal;
-			}
-
-			foreach (SkillName item in Metier.Skill)
-			{
-				Skills[item].Base = principal;
-			}
-
-
+					if (Skills[item].Value > 0)
+					{
+						Skills[item].Base = 0;
+					}					
+				}		
 		}
 
+		public bool CanEvolveClass()
+        {
+            if(Classe.LevelToEvolve(m_Classe.ClasseLvl + 1 ) >= m_Niveau)
+                return true;
+            else
+                return false;
+        }
 
+		public bool CanEvolveTo(Classe evolution)
+        {
+            if (this.AccessLevel > AccessLevel.Player)
+			{
+				return true;
+			}
+			  else if (!CanEvolveClass())
+            {
+                return false;
+            }
+            else if(!m_Classe.Evolution.Contains(evolution.ClasseID))
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
+        }
+
+	
 		#endregion
 
 		#region Stats
@@ -2045,176 +1753,6 @@ namespace Server.Mobiles
 
 		#endregion
 
-		#region Skills
-		public bool CanIncreaseSkill(SkillName skills)
-		{
-			if (m_fe == 0)
-			{
-				return false;
-			}
-			else if (Skills[skills].Value == 100)
-			{
-				return false;
-			}
-			if (!ClassSkill(skills))
-			{
-				return false;
-			}
-			return true;
-		}
-
-		public void IncreaseSkills(SkillName skills)
-		{
-
-			if (CanIncreaseSkill(skills))
-			{
-				Skills[skills].Base += 1;
-				m_fe--;
-			}
-
-
-
-		}
-
-		public void DecreaseSkills(SkillName skills)
-		{
-			if (CanDecreaseSkill(skills))
-			{
-				Skills[skills].Base -= 1;
-				m_feAttente++;
-			}
-		}
-
-		public bool CanDecreaseSkill(SkillName skills)
-		{
-
-			if (Skills[skills].Base > 50) // sert à rien de calculer ca..
-			{
-				return true;
-			}
-			else if (Skills[skills].Base == 0) // sert à rien de calculer ca..
-			{
-				return false;
-			}
-
-			foreach (SkillName item in ClassePrimaire.Skill)
-			{
-
-				if (item == skills)
-				{
-					return false;
-				}
-			}
-
-			foreach (SkillName item in Metier.Skill)
-			{
-
-				if (item == skills)
-				{
-					return false;
-				}
-			}
-
-			foreach (SkillName item in ClasseSecondaire.Skill)
-			{
-
-				if (item == skills && Skills[skills].Base == 30)
-				{
-					return false;
-				}
-			}
-
-			foreach (SkillName item in SkillGeneral)
-			{
-				if (item == skills && Skills[skills].Base == 30)
-				{
-					return false;
-				}
-			}
-			return true;
-		}
-
-		#endregion
-
-
-		#region Affinity 
-
-		public bool CanIncreaseAffinity(MagieType mtype)
-		{
-			if (m_fe < 5)
-			{
-				return false;
-			}
-			else if (MagicAfinity[mtype] == 16)
-			{
-				return false;
-			}
-			if (!ClassAffinity(mtype))
-			{
-				return false;
-			}
-			return true;
-		}
-		public void IncreaseAffinity(MagieType mtype)
-		{
-			if (CanIncreaseAffinity(mtype))
-			{
-				MagicAfinity[mtype] += 1;
-				m_fe -= 5;
-			}
-		}
-
-		public bool CanDecreaseAffinity(MagieType mtype)
-		{
-
-			if (MagicAfinity[mtype] <= 8) 
-			{
-				return false;
-			}
-
-			return true;
-		}
-
-		public void DecreaseAffinity(MagieType mtype)
-		{
-			if (CanDecreaseAffinity(mtype))
-			{
-				MagicAfinity[mtype] -= 1;
-
-				m_feAttente += 5;
-			}
-		}
-
-
-
-		public bool ClassAffinity(MagieType mtype)
-		{
-
-			foreach (KeyValuePair<MagieType, int> item in ClassePrimaire.Magie)
-			{
-				if (item.Key == mtype)
-				{
-					return true;
-				}
-			}
-
-			foreach (KeyValuePair<MagieType, int> item in ClasseSecondaire.Magie)
-			{
-				if (item.Key == mtype)
-				{
-					return true;
-				}
-			}
-
-
-			return false;
-
-		}
-
-
-
-
-		#endregion
 
 		#region Mort
 
@@ -2585,6 +2123,7 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+				case 33:
 				case 32:
 				{
 					RaceRestreinte = reader.ReadBool();
@@ -2739,18 +2278,13 @@ namespace Server.Mobiles
 						m_BaseRace = Server.BaseRace.GetRace(reader.ReadInt());
 						m_BaseFemale = reader.ReadBool();
 
-						if (version <= 18)
-						{
-							goto case 9;
-						}
-						else
-						{
+
 							goto case 8;
-						}	
+						
 					}
 				case 9:
 					{	
-						Deguisement.Add(0,Server.Deguisement.Deserialize(reader));
+						
 						goto case 8;
 					}
 				case 8:
@@ -2771,19 +2305,29 @@ namespace Server.Mobiles
 					{
 						God = God.GetGod(reader.ReadInt());
 
-						MagicAfinity = new AffinityDictionary(this, reader);					
+						MagicAfinity = new AffinityDictionary(this, reader);	
+										
 						goto case 5;
 					}
 				case 5:
 					{
-						m_feAttente = reader.ReadInt();
+						m_StatAttente = reader.ReadInt();
 
-						goto case 4;
+
+						if (version < 33)
+						{
+							goto case 4;
+						}
+						else
+						{
+							goto case 3;
+						}
+						
 
 					}
 				case 4:
 					{
-						m_feAttente = reader.ReadInt();
+						 reader.ReadInt();
 
 						goto case 3;
 					}
@@ -2799,9 +2343,9 @@ namespace Server.Mobiles
 					}
 				case 2:
 					{
-						m_ClassePrimaire = Classe.GetClasse(reader.ReadInt());
-						m_ClasseSecondaire = Classe.GetClasse(reader.ReadInt());
+						m_Classe = Classe.GetClasse(reader.ReadInt());				
 						m_Metier = Classe.GetClasse(reader.ReadInt());
+						m_Niveau = reader.ReadInt();
 						goto case 1;
 					}
 				case 1:
@@ -2817,6 +2361,13 @@ namespace Server.Mobiles
                         break;
                     }
             }
+					if(version < 33)
+					{
+						m_Classe = Classe.GetClasse(0);
+						m_Metier = Classe.GetClasse(0);
+						m_Niveau = 0;
+						SetUselessSkill();
+					}
 
 		}
 
@@ -2824,7 +2375,7 @@ namespace Server.Mobiles
         {        
             base.Serialize(writer);
 
-            writer.Write(32); // version
+            writer.Write(33); // version
 
 			writer.Write(RaceRestreinte);
 			writer.Write(Journaliste);
@@ -2913,21 +2464,7 @@ namespace Server.Mobiles
 			}
 
 			writer.Write(m_BaseRace.RaceID);
-			writer.Write(m_BaseFemale);
-
-/*
-
-			if (m_Deguisement == null)
-			{
-				m_Deguisement = new Deguisement(this);
-			}
-
-			
-			m_Deguisement.Serialize(writer);
-			
-			*/
-
-			
+			writer.Write(m_BaseFemale);		
 
 			writer.Write(ChosenSpellbook);
 
@@ -2940,7 +2477,6 @@ namespace Server.Mobiles
 			m_MagicAfinity.Serialize(writer);
 
 			writer.Write(m_StatAttente);
-			writer.Write(m_feAttente);
 			writer.Write(m_fe);
 			writer.Write(m_lastLoginTime);
 			writer.Write(m_nextFETime);
@@ -2948,9 +2484,9 @@ namespace Server.Mobiles
 
 
 
-			writer.Write((int)m_ClassePrimaire.ClasseID);
-			writer.Write((int)m_ClasseSecondaire.ClasseID);
+			writer.Write((int)m_Classe.ClasseID);
 			writer.Write((int)m_Metier.ClasseID);
+			writer.Write(m_Niveau);
 
 
 

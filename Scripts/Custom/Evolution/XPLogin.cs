@@ -11,7 +11,7 @@ namespace Server
     public static void Initialize()
     {
       EventSink.Login += new LoginEventHandler(EventSink_Login);
-      EventSink.Logout += new LogoutEventHandler(EventSink_Logout);
+//      EventSink.Logout += new LogoutEventHandler(EventSink_Logout);
     }
 
     public static void EventSink_Login(LoginEventArgs e)
@@ -28,19 +28,6 @@ namespace Server
 
 		}
       }
-    }
-
-    public static void EventSink_Logout(LogoutEventArgs e)
-    {
-
-
-      /*if (e.Mobile.Player)
-      {
-        if (e.Mobile is SolsoraPlayerMobile)
-        {
-          ((SolsoraPlayerMobile)e.Mobile).LastLoginTime = null;
-        }
-      }*/
     }
   }
 }
