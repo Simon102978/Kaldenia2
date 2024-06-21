@@ -176,7 +176,7 @@ namespace Server.Gumps
 
 			AddSection(x + 241, y + 453, 359, 210, "Dévotions");
 
-			foreach (KeyValuePair<MagieType, int> item in m_From.MagicAfinity)
+			foreach (KeyValuePair<MagieType, int> item in m_From.Classe.MagicAffinity)
 			{
 				AddHtmlTexte(x + 261, y + 493 + line * 25, 150, item.Key.ToString() );
 				AddLabel(x + 525, y + 493 + line * 25, 150, item.Value.ToString());		

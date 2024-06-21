@@ -54,7 +54,7 @@ namespace Server.Mobiles
 
 
 		private God m_God = God.GetGod(-1);
-		private AffinityDictionary m_MagicAfinity;
+
 		private List<int> m_QuickSpells = new List<int>();
 
 
@@ -314,9 +314,6 @@ namespace Server.Mobiles
 		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public AffinityDictionary MagicAfinity { get { return m_MagicAfinity; } set { m_MagicAfinity = value; } }
-
-		[CommandProperty(AccessLevel.GameMaster)]
 		public TribeRelation TribeRelation { get { return m_TribeRelation; } set { m_TribeRelation = value; } }
 
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -486,7 +483,6 @@ namespace Server.Mobiles
 		public DateTime NextFrapper { get; set; }
 		public CustomPlayerMobile()
 		{
-			MagicAfinity = new AffinityDictionary(this);
 			TribeRelation = new TribeRelation(this);
 		}
 
@@ -1282,7 +1278,7 @@ namespace Server.Mobiles
 		public CustomPlayerMobile(Serial s)
 			: base(s)
 		{
-			MagicAfinity = new AffinityDictionary(this);
+
 			TribeRelation = new TribeRelation(this);
 		}
 
@@ -1456,7 +1452,7 @@ namespace Server.Mobiles
 
 		public int GetAffinityValue(MagieType affinity)
 		{
-			return MagicAfinity.GetValue(affinity);
+			return Classe.GetMagicAffinity(affinity);
 		}
 
 		
@@ -2305,7 +2301,7 @@ namespace Server.Mobiles
 					{
 						God = God.GetGod(reader.ReadInt());
 
-						MagicAfinity = new AffinityDictionary(this, reader);	
+				
 										
 						goto case 5;
 					}
@@ -2473,8 +2469,6 @@ namespace Server.Mobiles
 				writer.Write((int)QuickSpells[i]);
 
 			writer.Write(God.GodID);
-
-			m_MagicAfinity.Serialize(writer);
 
 			writer.Write(m_StatAttente);
 			writer.Write(m_fe);

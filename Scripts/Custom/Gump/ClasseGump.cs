@@ -89,6 +89,13 @@ namespace Server.Gumps
 			{
 				competence = competence + item.Key.ToString() + " - " + item.Value.ToString() + "\n";
 			}
+
+			competence = competence + "\n\nDévotions: \n" ;
+
+			foreach (KeyValuePair<MagieType, int> item in m_Classe.MagicAffinity)
+			{
+				competence = competence + "  -" + item.Key.ToString() + ": " + item.Value.ToString() + "\n";
+			}
 			
 
 			AddSection(x - 10, y + 245, 605, 300, "Compétences", competence);

@@ -233,6 +233,18 @@ namespace Server
 			return MetierSkill.Contains(skillN);
 		}
 
+		public int GetMagicAffinity(MagieType affinity)
+		{
+			if (m_MagicAffinity.ContainsKey(affinity))
+			{
+				return m_MagicAffinity[affinity];
+			}
+			
+
+			return 0;
+
+
+		}
 
 
 
