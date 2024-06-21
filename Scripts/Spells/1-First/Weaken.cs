@@ -13,7 +13,7 @@ namespace Server.Spells.First
             Reagent.Garlic,
             Reagent.Nightshade);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 2) }; } }
 
 		public static Dictionary<Mobile, Timer> m_Table = new Dictionary<Mobile, Timer>();
 

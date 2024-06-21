@@ -17,7 +17,7 @@ namespace Server.Spells.Fourth
             Reagent.Bloodmoss,
             Reagent.MandrakeRoot);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 10) }; } }
 
 		private readonly RunebookEntry m_Entry;
         private readonly Runebook m_Book;

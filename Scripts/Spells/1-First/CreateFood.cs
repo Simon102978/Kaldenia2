@@ -13,7 +13,7 @@ namespace Server.Spells.First
             Reagent.Ginseng,
             Reagent.MandrakeRoot);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 1) }; } }
 
 		private static readonly FoodInfo[] m_Food = new FoodInfo[]
         {

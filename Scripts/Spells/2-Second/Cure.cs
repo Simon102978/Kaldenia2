@@ -15,7 +15,7 @@ namespace Server.Spells.Second
         {
         }
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 4) }; } }
 		public override SpellCircle Circle => SpellCircle.Second;
 
         public override void OnCast()

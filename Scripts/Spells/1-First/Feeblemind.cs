@@ -13,7 +13,7 @@ namespace Server.Spells.First
             Reagent.Ginseng,
             Reagent.Nightshade);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 2) }; } }
 		public FeeblemindSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
         {

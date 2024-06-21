@@ -13,7 +13,7 @@ namespace Server.Spells.Second
             Reagent.SpidersSilk,
             Reagent.SulfurousAsh);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 3) }; } }
 		public MagicTrapSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
         {

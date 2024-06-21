@@ -14,7 +14,7 @@ namespace Server.Spells.Second
             Reagent.Ginseng,
             Reagent.SulfurousAsh);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 4) }; } }
 
 		private static readonly Hashtable m_Table = new Hashtable();
         public ProtectionSpell(Mobile caster, Item scroll)

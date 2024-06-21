@@ -14,7 +14,7 @@ namespace Server.Spells.Eighth
             Reagent.MandrakeRoot,
             Reagent.SpidersSilk);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 13) }; } }
 		public WaterElementalSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
         {

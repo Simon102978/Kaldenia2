@@ -12,7 +12,7 @@ namespace Server.Spells.First
             Reagent.SpidersSilk,
             Reagent.SulfurousAsh);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 1) }; } }
 
 
 

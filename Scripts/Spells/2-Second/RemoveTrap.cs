@@ -12,7 +12,7 @@ namespace Server.Spells.Second
             Reagent.Bloodmoss,
             Reagent.SulfurousAsh);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 3) }; } }
 		public RemoveTrapSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
         {

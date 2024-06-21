@@ -11,7 +11,7 @@ namespace Server.Spells.Second
             Reagent.Nightshade,
             Reagent.SpidersSilk);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 5) }; } }
 		public HarmSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
         {

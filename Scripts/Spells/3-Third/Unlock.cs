@@ -18,7 +18,7 @@ namespace Server.Spells.Third
             Reagent.Bloodmoss,
             Reagent.SulfurousAsh);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 6) }; } }
 		public UnlockSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
         {

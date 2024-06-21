@@ -13,7 +13,7 @@ namespace Server.Spells.Third
             Reagent.Bloodmoss,
             Reagent.MandrakeRoot);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 0) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 8) }; } }
 		public TeleportSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
         {
