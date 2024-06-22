@@ -216,13 +216,9 @@ namespace Server
 					case 0:					
 						return 0; 					
 					case 1:
-						return 5;
+						return 10;
 					case 2:				
-						return 15; 
-					case 3:						          
-						return 20;
-					case 4:
-						return 30;
+						return 20; 
 					default:
 						return 99;
 				}	
