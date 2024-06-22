@@ -148,7 +148,7 @@ namespace Server.Items
 
 				}
 
-/*				if (entry.Safe = true)
+				if (entry.Safe = true)
 				{
 
 					if (entry.Player.Hits < entry.Player.HitsMax && entry.Player.CanHeal())
@@ -164,7 +164,7 @@ namespace Server.Items
 						DoBuff(entry.Player);
 						entry.IsBuffed = true;
 					}
-				}*/
+				}
 
 			}
 
@@ -184,15 +184,15 @@ namespace Server.Items
 						pm.SendLocalizedMessage(500620); // You feel it would take a few moments to secure your camp.
 					}
 				}
-		/*		else
+				else
 				{
 					state.Hits += 10;
-				}		*/		
+				}			
 			}
 
 			eable.Free();
 		}
-/*
+
 		public bool DoBuff(Mobile from)
 		{
 			TimeSpan Duration = TimeSpan.FromMinutes(10);
@@ -219,7 +219,7 @@ namespace Server.Items
 			from.SendLocalizedMessage(502173); // You are already under a similar effect.
 			return false;
 		}
-*/
+
 
 
 		private void ClearEntries()
