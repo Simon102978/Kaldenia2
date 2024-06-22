@@ -462,7 +462,7 @@ namespace Server.Gumps
                 SkillName.Fishing,
                 SkillName.Focus,
                 SkillName.Healing,
-                SkillName.Herding,
+                SkillName.Regeneration,
                 SkillName.Lockpicking,
                 SkillName.Lumberjacking,
                 SkillName.Mining,

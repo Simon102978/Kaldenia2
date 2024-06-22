@@ -14,7 +14,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Archery, 90.0, 100.0);
             SetSkill(SkillName.Tracking, 90.0, 100.0);
             SetSkill(SkillName.Fencing, 36.0, 68.0);
-            SetSkill(SkillName.Herding, 36.0, 68.0);
+            SetSkill(SkillName.Regeneration, 36.0, 68.0);
             SetSkill(SkillName.Swords, 45.0, 68.0);
         }
 

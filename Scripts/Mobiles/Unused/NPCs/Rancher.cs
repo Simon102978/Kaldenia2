@@ -11,7 +11,7 @@ namespace Server.Mobiles
         {
             SetSkill(SkillName.AnimalLore, 55.0, 78.0);
             SetSkill(SkillName.AnimalTaming, 55.0, 78.0);
-            SetSkill(SkillName.Herding, 64.0, 100.0);
+            SetSkill(SkillName.Regeneration, 64.0, 100.0);
             SetSkill(SkillName.Veterinary, 60.0, 83.0);
         }
 

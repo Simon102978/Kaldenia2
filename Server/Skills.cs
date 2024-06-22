@@ -47,7 +47,7 @@ namespace Server
 		Healing = 17,
 		Fishing = 18,
 		Forensics = 19,
-		Herding = 20,
+		Regeneration = 20,
 		Hiding = 21,
 		Provocation = 22,
 		Inscribe = 23,
@@ -607,7 +607,7 @@ namespace Server
 			new SkillInfo(17, "Healing", 6.0, 6.0, 8.0, "Healer", null, 0.6, 0.6, 0.8, 1.0, StatCode.Int, StatCode.Dex),
 			new SkillInfo(18, "Fishing", 0.0, 0.0, 0.0, "Fisherman", null, 0.5, 0.5, 0.0, 1.0, StatCode.Dex, StatCode.Str),
 			new SkillInfo(19, "Forensic Evaluation", 0.0, 0.0, 0.0, "Detective", null, 0.0, 0.2, 0.8, 1.0, StatCode.Int, StatCode.Dex),
-			new SkillInfo(20, "Herding", 16.25, 6.25, 2.5, "Shepherd", null, 1.625, 0.625, 0.25, 1.0, StatCode.Int, StatCode.Dex),
+			new SkillInfo(20, "Régénération", 16.25, 6.25, 2.5, "Regen Master", null, 1.625, 0.625, 0.25, 1.0, StatCode.Str, StatCode.Int),
 			new SkillInfo(21, "Hiding", 0.0, 0.0, 0.0, "Shade", null, 0.0, 0.8, 0.2, 1.0, StatCode.Dex, StatCode.Int),
 			new SkillInfo(22, "Provocation", 0.0, 4.5, 0.5, "Rouser", null, 0.0, 0.45, 0.05, 1.0, StatCode.Int, StatCode.Dex, true ),
 			new SkillInfo(23, "Inscription", 0.0, 2.0, 8.0, "Scribe", null, 0.0, 0.2, 0.8, 1.0, StatCode.Int, StatCode.Dex),
@@ -720,7 +720,7 @@ namespace Server
 		public Skill Forensics { get => this[SkillName.Forensics]; set { } }
 
 		[CommandProperty(AccessLevel.Counselor)]
-		public Skill Herding { get => this[SkillName.Herding]; set { } }
+		public Skill Regeneration { get => this[SkillName.Regeneration]; set { } }
 
 		[CommandProperty(AccessLevel.Counselor)]
 		public Skill Hiding { get => this[SkillName.Hiding]; set { } }

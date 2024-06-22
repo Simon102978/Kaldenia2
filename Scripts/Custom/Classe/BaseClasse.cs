@@ -60,7 +60,7 @@ namespace Server
 			SkillName.AnimalLore,
 			SkillName.AnimalTaming,
 			SkillName.Veterinary,
-			SkillName.Herding,
+			SkillName.Regeneration,
 			SkillName.Equitation,
 			SkillName.Tracking,
 			SkillName.Camping

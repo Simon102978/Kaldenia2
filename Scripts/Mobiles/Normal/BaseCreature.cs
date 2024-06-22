@@ -1318,7 +1318,7 @@ namespace Server.Mobiles
 				if (this.ControlMaster is PlayerMobile)
 				{
 					PlayerMobile owner = (PlayerMobile)this.ControlMaster;
-					herdingbonus += owner.Skills[SkillName.Herding].Value / 500; // max of 25%
+					herdingbonus += owner.Skills[SkillName.AnimalLore].Value / 500; // max of 25%
 				}
 			}
 

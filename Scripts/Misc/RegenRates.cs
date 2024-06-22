@@ -155,9 +155,9 @@ namespace Server.Misc
      //       if (from is PlayerMobile && from.Race == Race.Human)	//Is this affected by the cap?
        //         points += 2;
 
-            CheckBonusSkill(from, from.Hits, from.Hits, SkillName.Focus);
+            CheckBonusSkill(from, from.Hits, from.Hits, SkillName.Regeneration);
 
-            points += from.Skills[SkillName.Focus].Fixed / 50;
+            points += from.Skills[SkillName.Regeneration].Fixed / 50;
 
             if (points < 0)
                 points = 0;
