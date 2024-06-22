@@ -8,6 +8,7 @@ using System.Reflection;
 using Server.HuePickers;
 using System.Collections.Generic;
 
+
 namespace Server.Gumps
 {
 	public class ClasseEvoGump : CreationBaseGump
@@ -86,25 +87,7 @@ namespace Server.Gumps
 						if (m_Creation.Classe != 0)
 						{
 
-							Classe Classe = Server.Classe.GetClasse(m_Creation.Classe );
-
-							description = Classe.Name + "\n\n";
-
-							foreach (KeyValuePair<SkillName,double> item in Classe.Skill)
-							{
-								description = description + "  -" + item.Key.ToString() + ": " + item.Value+ "\n";
-							}
-
-							description = description + "\nArmure: " + Classe.Armor;
-
-							description = description + "\n\nDévotions: \n" ;
-
-							foreach (KeyValuePair<MagieType, int> item in Classe.MagicAffinity)
-							{
-								description = description + "  -" + item.Key.ToString() + ": " + item.Value.ToString() + "\n";
-							}
-
-							return description;
+							return Server.Classe.GetClasse(m_Creation.Classe ).ClasseDescription();
 						}
 						else
 						{
@@ -116,25 +99,7 @@ namespace Server.Gumps
 						if (m_Creation.Metier != 0)
 						{
 
-							Classe Classe = Server.Classe.GetClasse(m_Creation.Metier);
-
-							description = Classe.Name + "\n\n";
-
-							foreach (KeyValuePair<SkillName,double> item in Classe.Skill)
-							{
-								description = description + "  -" + item.Key.ToString() + ": " + item.Value+ "\n";
-							}
-
-							description = description + "\nArmure: " + Classe.Armor;
-
-							description = description + "\n\nDévotions: \n" ;
-
-							foreach (KeyValuePair<MagieType, int> item in Classe.MagicAffinity)
-							{
-								description = description + "  -" + item.Key.ToString() + ": " + item.Value.ToString() + "\n";
-							}
-
-							return description;
+							return Server.Classe.GetClasse(m_Creation.Metier).ClasseDescription();
 						}
 						else
 						{

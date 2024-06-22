@@ -242,6 +242,52 @@ namespace Server
 
 		}
 
+		public string ClasseDescription()
+		{
+			string description = "";	
+
+			description = Name + "\n\n";
+	
+			description = description + "\nArmure: " + Armor;
+
+			description = description + "\n\n" + SkillsDescription();
+
+			description = description + "\n\n" ;
+
+			description = description + DevotionDescription();
+
+			return description;
+		}
+
+		public string SkillsDescription()
+		{
+			string description = "Compétences: \n" ;
+
+			var sortedDict = from entry in Skill orderby entry.Value descending select entry;
+
+			foreach (KeyValuePair<SkillName,double> item in sortedDict)
+			{
+				description = description + "  -" + item.Key.ToString() + ": " + item.Value+ "\n";
+			}
+
+			return description;
+		}
+
+		public string DevotionDescription()
+		{
+			string description = "Dévotions: \n";
+
+			var sortedDict2 = from entry in MagicAffinity orderby entry.Value descending select entry;
+
+			foreach (KeyValuePair<MagieType, int> item in sortedDict2)
+			{
+				description = description + "  -" + item.Key.ToString() + ": " + item.Value.ToString() + "\n";
+			}
+
+			return description;
+		}
+
+
 
 
 

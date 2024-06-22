@@ -18,13 +18,16 @@ namespace Server.Gumps
 		private List<int> m_List;
 		private int m_Index;
 
-        public ClasseGump(CustomPlayerMobile from, int classeId, List<int> list, int index)
+		private int m_Page;
+
+        public ClasseGump(CustomPlayerMobile from, int classeId, List<int> list, int index, int page = 0)
             : base("Classes", 560, 622, false)
         {
             m_From = from;
 			m_Classe = Classe.GetClasse(classeId);
 			m_List = list;
 			m_Index = index;
+			m_Page = page;
 
 		
 
@@ -61,42 +64,31 @@ namespace Server.Gumps
 
 			AddButtonHtlml(x + 10, y + yLine * 20,4,"Index des classes", "#FFFFFF");
 
-			AddSection(x + 295, y, 300, 240, "Évolutions");
+			AddSection(x + 295, y, 300, 240, "Évolutions","");
+			AddButton(x +566, y + 43, 5, 251, 250);
+			AddButton(x +566, y + 202, 6, 253, 252);
 
+/*			AddSection(70 , 175, 465, 345,"Corps","");
+			AddButton(505, 219, 1, 251, 250);
+			AddButton(505, 483, 2, 253, 252);
+*/
 			yLine = 2;
 
-			foreach (int item in m_Classe.Evolution)
-			{
-				Classe evoClasse = Classe.GetClasse(item);
+			int MaxCount = m_Classe.Evolution.Count < 8 + m_Page * 8 ? m_Classe.Evolution.Count : 8 + m_Page * 8  ;
 
-				AddButtonHtlml(x + 315, y + yLine * 20,1000 + evoClasse.ClasseID,evoClasse.Name,"#FFFFFF");
+			for (int i = m_Page * 8; i < MaxCount; i++)
+			{
+				Classe evoClasse = Classe.GetClasse(m_Classe.Evolution[i]);
+
+				AddButtonHtlml(x + 315, y + 5 + yLine * 20,1000 + evoClasse.ClasseID,evoClasse.Name,"#000000");
 
 				yLine++;
-
-
-
 			}
 
-
-
-
-
-
-
+			
 			string competence = "";
 
-			foreach (KeyValuePair<SkillName, double> item in m_Classe.Skill)
-			{
-				competence = competence + item.Key.ToString() + " - " + item.Value.ToString() + "\n";
-			}
-
-			competence = competence + "\n\nDévotions: \n" ;
-
-			foreach (KeyValuePair<MagieType, int> item in m_Classe.MagicAffinity)
-			{
-				competence = competence + "  -" + item.Key.ToString() + ": " + item.Value.ToString() + "\n";
-			}
-			
+			competence = m_Classe.SkillsDescription() +  "\n\n" + m_Classe.DevotionDescription();
 
 			AddSection(x - 10, y + 245, 605, 300, "Compétences", competence);
 
@@ -154,6 +146,26 @@ namespace Server.Gumps
 			else if(info.ButtonID == 4)
 			{
 				m_From.SendGump(new ClasseIndexGump(m_From));
+			}
+			else if (info.ButtonID == 5)
+			{
+				m_Page--;
+
+				if (m_Page < 0)
+					m_Page = 0;
+
+				m_From.SendGump(new ClasseGump(m_From, m_List[m_Index],m_List,m_Index, m_Page));
+			}
+			else if (info.ButtonID == 6)
+			{
+				m_Page++;
+
+				double maxPage = (m_Classe.Evolution.Count + 8) / 8  - 1;
+
+				if (m_Page > maxPage)
+					m_Page = (int)maxPage;
+
+				m_From.SendGump(new ClasseGump(m_From, m_List[m_Index],m_List,m_Index, m_Page));
 			}
 			else if (info.ButtonID >= 1000)
 			{
