@@ -97,7 +97,7 @@ namespace Server.Items.Crops
 			IPooledEnumerable eable = map.GetItemsInBounds( new Rectangle2D( x, y, 1, 1 ) );
 			foreach( Item item in eable )
 			{
-				if( item.ItemID == 0x32C9 || item.ItemID == 0x32CA ) ground = true;
+				if( item.ItemID == 0x32C9 || item.ItemID == 0x32CA || item.ItemID == 0x31F5) ground = true;
 			}
 			eable.Free();
 			if ( !ground )
