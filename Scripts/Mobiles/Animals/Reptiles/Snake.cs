@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a snake corpse")]
+    [CorpseName("le corps d'un serpent")]
     public class Snake : BaseCreature
     {
         [Constructable]
         public Snake()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a snake";
+            Name = "un serpent";
             Body = 52;
             Hue = Utility.RandomSnakeHue();
             BaseSoundID = 0xDB;
@@ -50,13 +50,13 @@ namespace Server.Mobiles
         public override Poison PoisonImmune => Poison.Lesser;
         public override Poison HitPoison => Poison.Lesser;
         public override bool DeathAdderCharmable => true;
-        public override int Meat => 1;
+        public override int Meat => Utility.RandomMinMax(1, 2);
 
-		public override int Hides => 2;
+		public override int Hides => Utility.RandomMinMax(1, 2);
 		public override HideType HideType => HideType.Reptilien;
 
 
-		public override int Bones => 2;
+		public override int Bones => Utility.RandomMinMax(1, 2);
 		public override BoneType BoneType => BoneType.Reptilien;
 		public override FoodType FavoriteFood => FoodType.Eggs;
 

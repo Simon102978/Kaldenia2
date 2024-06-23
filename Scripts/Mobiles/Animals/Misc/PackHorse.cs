@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a horse corpse")]
+    [CorpseName("le corps d'un cheval")]
     public class PackHorse : BaseCreature
     {
         [Constructable]
         public PackHorse()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a pack horse";
+            Name = "un cheval porteur";
             Body = 291;
             BaseSoundID = 0xA8;
 
@@ -57,8 +57,8 @@ namespace Server.Mobiles
             AddItem(pack);
         }
 
-        public override int Meat => 3;
-        public override int Hides => 10;
+        public override int Meat => Utility.RandomMinMax(1, 3);
+        public override int Hides => 5;
         public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
 		public override bool CanBeParagon => false;
 		public override bool CanAutoStable => (Backpack == null || Backpack.Items.Count == 0) && base.CanAutoStable;

@@ -12,14 +12,18 @@ namespace Server.Items
         public FletcherTools()
             : base(0x1022)
         {
-        }
+			Name = "Outil de fabrication d'arc";
+			Weight = 2.0;
+
+		}
 
         [Constructable]
         public FletcherTools(int uses)
             : base(uses, 0x1022)
         {
             Weight = 2.0;
-        }
+			Name = "Outil de fabrication d'arc";
+		}
 
         public FletcherTools(Serial serial)
             : base(serial)

@@ -1,3 +1,5 @@
+using Server.Engines.Craft;
+
 namespace Server.Items
 {
     public class NavigatorsWorldMap : WorldMap
@@ -11,7 +13,7 @@ namespace Server.Items
             LootType = LootType.Blessed;
             Hue = 483;
 
-            SetDisplay(0, 0, 5119, 4095, 200, 200);
+			SetDisplay(256, 104, 1900, 1740, 600, 600);
         }
 
         public NavigatorsWorldMap(Serial serial)
@@ -36,10 +38,10 @@ namespace Server.Items
         [Constructable]
         public WorldMap()
         {
-            SetDisplay(0, 0, 5119, 4095, 400, 400);
-        }
+			SetDisplay(256, 104, 1900, 1740, 600, 600);
+		}
 
-        public override void CraftInit(Mobile from)
+        public override void CraftInit(Mobile from, CraftItem craftitem)
         {
             // Unlike the others, world map is not based on crafted location
             Facet = from.Map;
@@ -54,16 +56,7 @@ namespace Server.Items
                 size = 400;
 
             if (Facet == Map.Trammel || Facet == Map.Felucca)
-            {
-                if (Spells.SpellHelper.IsAnyT2A(Facet, from.Location))
-                {
-                    Bounds = new Rectangle2D(5120, 2304, 1024, 1792);
-                    Width = size;
-                    Height = size;
-                }
-                else
-                    SetDisplay(1344 - x20, 1600 - x20, 1472 + x20, 1728 + x20, size, size);
-            }
+                SetDisplay(1344 - x20, 1600 - x20, 1472 + x20, 1728 + x20, size, size);
             else
                 SetDisplayByFacet();
         }

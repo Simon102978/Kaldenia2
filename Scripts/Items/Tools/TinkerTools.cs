@@ -11,14 +11,17 @@ namespace Server.Items
             : base(0x1EB8)
         {
             Weight = 1.0;
-        }
+			Name = "Trousse de Bricolage";
+
+		}
 
         [Constructable]
         public TinkerTools(int uses)
             : base(uses, 0x1EB8)
         {
             Weight = 1.0;
-        }
+			Name = "Trousse de Bricolage";
+		}
 
         public TinkerTools(Serial serial)
             : base(serial)
@@ -82,6 +85,7 @@ namespace Server.Items
             : base(0x1EBC)
         {
             Weight = 1.0;
+			Name = "Outils du Bricoleur";
         }
 
         [Constructable]
@@ -89,7 +93,8 @@ namespace Server.Items
             : base(uses, 0x1EBC)
         {
             Weight = 1.0;
-        }
+			Name = "Outils du Bricoleur";
+		}
 
         public TinkersTools(Serial serial)
             : base(serial)

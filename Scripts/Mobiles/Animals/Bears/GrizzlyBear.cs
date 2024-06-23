@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a grizzly bear corpse")]
+    [CorpseName("le corps d'un grizzly")]
     public class GrizzlyBear : BaseCreature
     {
         [Constructable]
         public GrizzlyBear()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a grizzly bear";
+            Name = "un grizzly";
             Body = 212;
             BaseSoundID = 0xA3;
 
@@ -44,9 +44,9 @@ namespace Server.Mobiles
         {
         }
 		public override bool CanBeParagon => false;
-		public override int Meat => 5;
-        public override int Hides => 8;
-        public override FoodType FavoriteFood => FoodType.Fish | FoodType.FruitsAndVegies | FoodType.Meat;
+		public override int Meat => Utility.RandomMinMax(3, 5);
+		public override int Hides => Utility.RandomMinMax(4, 8);
+		public override FoodType FavoriteFood => FoodType.Fish | FoodType.FruitsAndVegies | FoodType.Meat;
         public override PackInstinct PackInstinct => PackInstinct.Bear;
         public override void Serialize(GenericWriter writer)
         {

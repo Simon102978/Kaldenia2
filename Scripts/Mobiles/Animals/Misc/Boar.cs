@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a pig corpse")]
+    [CorpseName("le corps d'un sanglier")]
     public class Boar : BaseCreature
     {
         [Constructable]
         public Boar()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a boar";
+            Name = "le corps d'un sanglier";
             Body = 0x122;
             BaseSoundID = 0xC4;
 
@@ -45,7 +45,7 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 
-		public override int Meat => 8;
+		public override int Meat => Utility.RandomMinMax(4, 8);
         public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void Serialize(GenericWriter writer)
         {

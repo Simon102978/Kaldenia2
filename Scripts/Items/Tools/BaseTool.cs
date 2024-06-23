@@ -1,6 +1,7 @@
 using Server.Engines.Craft;
 using Server.Network;
 using System;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -89,8 +90,8 @@ namespace Server.Items
             m_UsesRemaining = (m_UsesRemaining * 100) / GetUsesScalar();
         }
 
-		public int GetUsesScalar()
-		{
+        public int GetUsesScalar()
+        {
 			if (m_Quality == ItemQuality.Exceptional)
 				return 150;
 			else if (m_Quality == ItemQuality.Epic)
@@ -99,9 +100,9 @@ namespace Server.Items
 				return 500;
 
 			return 100;
-		}
+        }
 
-		public bool ShowUsesRemaining
+        public bool ShowUsesRemaining
         {
             get { return true; }
             set { }
@@ -120,7 +121,7 @@ namespace Server.Items
             : base(itemID)
         {
             m_UsesRemaining = uses;
-            m_Quality = ItemQuality.Normal;
+            //m_Quality = ItemQuality.Normal;
         }
 
         public BaseTool(Serial serial)
@@ -128,10 +129,10 @@ namespace Server.Items
         {
         }
 
-		public override void AddCraftedProperties(ObjectPropertyList list)
-		{
-			if (m_Crafter != null)
-				list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+        public override void AddCraftedProperties(ObjectPropertyList list)
+        {
+            if (m_Crafter != null)
+                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
 
 			if (m_Quality == ItemQuality.Exceptional)
 				list.Add("Exceptionnelle");
@@ -140,12 +141,11 @@ namespace Server.Items
 			else if (m_Quality == ItemQuality.Legendary)
 				list.Add("Légendaire");
 		}
-
 		public override void AddNameProperties(ObjectPropertyList list)
 		{
 			var name = Name ?? String.Empty;
-
-			if (Quality == ItemQuality.Legendary)
+			
+			 if (Quality == ItemQuality.Legendary)
 				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
 			else if (Quality == ItemQuality.Epic)
 				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
@@ -177,12 +177,13 @@ namespace Server.Items
 			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
 		}
 
-		public override void AddUsesRemainingProperties(ObjectPropertyList list)
-		{
-			list.Add("Utilisation restante: {0}", UsesRemaining.ToString()); // uses remaining: ~1_val~
-		}
 
-		public virtual void DisplayDurabilityTo(Mobile m)
+		public override void AddUsesRemainingProperties(ObjectPropertyList list)
+        {
+            list.Add("Utilisation restante: {0}", UsesRemaining.ToString()); // uses remaining: ~1_val~
+        }
+
+        public virtual void DisplayDurabilityTo(Mobile m)
         {
             LabelToAffix(m, 1017323, AffixType.Append, ": " + m_UsesRemaining.ToString()); // Durability
         }
@@ -255,7 +256,17 @@ namespace Server.Items
         {
             if (IsChildOf(from.Backpack) || Parent == from)
             {
-                CraftSystem system = CraftSystem;
+
+				bool isSmithHammer = this is SmithHammer;
+
+				if (isSmithHammer && Parent != from)
+				{
+					from.SendMessage("Vous devez avoir l'outil en main pour l'utiliser."); // That must be in your pack for you to use it.
+				}
+				else if (isSmithHammer || from.HasFreeHand())
+				{
+
+					CraftSystem system = CraftSystem;
 
                 if (m_RepairMode)
                 {
@@ -275,13 +286,40 @@ namespace Server.Items
                     }
                 }
             }
-            else
+				else
+				{
+					from.SendMessage("Vous devez avoir les mains vides.");
+				}
+
+			}
+
+			else
             {
                 from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
             }
         }
+		public override bool CanEquip(Mobile from)
+		{
+			Item item = from.FindItemOnLayer(Layer.OneHanded);
 
-        public override void Serialize(GenericWriter writer)
+			if (item != null)
+			{
+				from.SendMessage("Vous devez avoir les mains libres pour équipper un outil !");
+				return false;
+			}
+
+			item = from.FindItemOnLayer(Layer.TwoHanded);
+
+			if (item != null)
+			{
+				from.SendMessage("Vous devez avoir les mains libres pour équipper un outil !");
+				return false;
+			}
+
+			return true;
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 

@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a llama corpse")]
+    [CorpseName("le corps d'un llama")]
     public class PackLlama : BaseCreature
     {
         [Constructable]
         public PackLlama()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a pack llama";
+            Name = "un llama porteur";
             Body = 292;
             BaseSoundID = 0x3F3;
 
@@ -57,7 +57,7 @@ namespace Server.Mobiles
             AddItem(pack);
         }
 
-        public override int Meat => 1;
+        public override int Meat => Utility.RandomMinMax(1, 2);
         public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
 
 		public override bool CanBeParagon => false;

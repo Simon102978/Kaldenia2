@@ -199,7 +199,7 @@ namespace Server.Items
             Pen = pen;
             SourceBook = sourcebook;
             CopyBook = copybook;
-            MarkScrollAmount = bp.GetAmount(typeof(MarkScroll), true);
+			MarkScrollAmount = 0; // bp.GetAmount(typeof(MarkScroll), true);
             RuneAmount = bp.GetAmount(typeof(RecallRune), true);
             Blank = copybook.MaxEntries - copybook.Entries.Count;
 
@@ -344,7 +344,7 @@ namespace Server.Items
 
                             Container bp = from.Backpack;
 
-                            bp.ConsumeTotal(typeof(MarkScroll), Checked.Count, true);
+                            //bp.ConsumeTotal(typeof(MarkScroll), Checked.Count, true);
                             bp.ConsumeTotal(typeof(RecallRune), Checked.Count, true);
                             Pen.UsesRemaining--;
 

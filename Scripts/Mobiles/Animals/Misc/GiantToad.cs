@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a giant toad corpse")]
+    [CorpseName("le corps d'une grenouille geante")]
     public class GiantToad : BaseCreature
     {
         [Constructable]
         public GiantToad()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a giant toad";
+            Name = "une grenouille geante";
             Body = 80;
             BaseSoundID = 0x26B;
 
@@ -60,11 +60,11 @@ namespace Server.Mobiles
         {
         }
 
-		public override int Hides => 4;
+		public override int Hides => Utility.RandomMinMax(2, 4);
 		public override HideType HideType => HideType.Reptilien;
 
 
-		public override int Bones => 4;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Reptilien;
 
 		/*    public override int Hides => 12;

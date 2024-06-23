@@ -9,14 +9,17 @@ namespace Server.Items
             : base(0x97F)
         {
             Weight = 1.0;
-        }
+			Name = "Poêlon";
+
+		}
 
         [Constructable]
         public Skillet(int uses)
             : base(uses, 0x97F)
         {
             Weight = 1.0;
-        }
+			Name = "Poêlon";
+		}
 
         public Skillet(Serial serial)
             : base(serial)

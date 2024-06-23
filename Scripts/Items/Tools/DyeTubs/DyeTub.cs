@@ -28,7 +28,9 @@ namespace Server.Items
             Weight = 10.0;
             m_Redyable = true;
 			m_Charges = 10;
-        }
+			Name = "Bac de teinture";
+
+		}
 
         public DyeTub(Serial serial)
             : base(serial)
@@ -50,6 +52,7 @@ namespace Server.Items
         public virtual bool AllowDyables => true;
         public virtual bool AllowMetal => false;
 		public virtual bool AllowWeapons => false;
+	
 
 
 
@@ -191,7 +194,7 @@ namespace Server.Items
 
 						}
 					}
-					else if (m_Tub.AllowFurniture && (FurnitureAttribute.Check(item) || m_Tub.CanForceDye(item)))
+					else if (m_Tub.AllowFurniture && (FurnitureAttribute.Check(item) || m_Tub.CanForceDye(item) || item is AddonComponent ))
 					{
 						if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
 						{
@@ -243,7 +246,7 @@ namespace Server.Items
 						}
 					}
 
-					else if	(item is FurnitureDyeTub fdye)
+					else if	(item is FurnitureDyeTub fdye )
 					{
 						if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
 						{

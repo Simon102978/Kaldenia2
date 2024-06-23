@@ -15,7 +15,7 @@ namespace Server.Mobiles
         public EnergyVortex(bool summoned)
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "an energy vortex";
+            Name = "un vortex d'energie";
 
             if (0.002 > Utility.RandomDouble()) // Per OSI FoF, it's a 1/500 chance.
             {

@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a crane corpse")]
+    [CorpseName("le corps d'une grue")]
     public class Crane : BaseCreature
     {
         [Constructable]
         public Crane()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a crane";
+            Name = "une grue";
             Body = 254;
             BaseSoundID = 0x4D7;
 
@@ -37,9 +37,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 1;
-        public override int Feathers => 25;
-        public override int GetAngerSound()
+        public override int Meat => Utility.RandomMinMax(1, 3);
+		public override int Feathers => Utility.RandomMinMax(10, 25);
+		public override int GetAngerSound()
         {
             return 0x4D9;
         }

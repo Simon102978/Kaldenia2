@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a polar bear corpse")]
+    [CorpseName("le corps d'un ours polaire")]
     public class PolarBear : BaseCreature
     {
         [Constructable]
         public PolarBear()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a polar bear";
+            Name = "un ours polaire";
             Body = 213;
             BaseSoundID = 0xA3;
 
@@ -44,8 +44,8 @@ namespace Server.Mobiles
         {
         }
 		public override bool CanBeParagon => false;
-		public override int Meat => 2;
-        public override int Hides => 8;
+		public override int Meat => Utility.RandomMinMax(3, 6);
+		public override int Hides => Utility.RandomMinMax(3, 6);
 		public override FoodType FavoriteFood => FoodType.Fish | FoodType.FruitsAndVegies | FoodType.Meat;
         public override PackInstinct PackInstinct => PackInstinct.Bear;
         public override void Serialize(GenericWriter writer)

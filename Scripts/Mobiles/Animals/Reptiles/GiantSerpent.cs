@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a giant serpent corpse")]
+    [CorpseName("le corps d'un serpent geant")]
     public class GiantSerpent : BaseCreature
     {
         [Constructable]
         public GiantSerpent()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a giant serpent";
+            Name = "un serpent geant";
             Body = 0x15;
             Hue = Utility.RandomSnakeHue();
             BaseSoundID = 219;
@@ -55,16 +55,16 @@ namespace Server.Mobiles
 		public override Poison PoisonImmune => Poison.Greater;
         public override Poison HitPoison => (0.8 >= Utility.RandomDouble() ? Poison.Greater : Poison.Deadly);
         public override bool DeathAdderCharmable => true;
-        public override int Meat => 4;
+        public override int Meat => Utility.RandomMinMax(2, 4);
 		/*     public override int Hides => 15;
 			 public override HideType HideType => HideType.Spined;*/
 
 
-		public override int Hides => 4;
+		public override int Hides => Utility.RandomMinMax(2, 4);
 		public override HideType HideType => HideType.Reptilien;
 
 
-		public override int Bones => 4;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Reptilien;
 
 
@@ -74,6 +74,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.LootItem<Bone>());
 			AddLoot(LootPack.LootItem<OeufSerpent>());
 			AddLoot(LootPack.LootItem<EcaillesSerpentGeant>());
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 3));
 
 
 

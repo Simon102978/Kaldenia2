@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a bull corpse")]
+    [CorpseName("le corps d'un boeuf")]
     public class Bull : BaseCreature
     {
         [Constructable]
         public Bull()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a bull";
+            Name = "un boeuf";
             Body = Utility.RandomList(0xE8, 0xE9);
             BaseSoundID = 0x64;
 
@@ -46,9 +46,9 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
-		public override int Meat => 8;
-        public override int Hides => 10;
-        public override FoodType FavoriteFood => FoodType.GrainsAndHay;
+		public override int Meat => Utility.RandomMinMax(4, 8);
+        public override int Hides => Utility.RandomMinMax(5, 10);
+		public override FoodType FavoriteFood => FoodType.GrainsAndHay;
         public override PackInstinct PackInstinct => PackInstinct.Bull;
         public override void Serialize(GenericWriter writer)
         {

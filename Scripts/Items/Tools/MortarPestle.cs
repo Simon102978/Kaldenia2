@@ -9,13 +9,15 @@ namespace Server.Items
             : base(0xE9B)
         {
             Weight = 1.0;
-        }
+			Name = "Mortier et Pilon";
+		}
 
         [Constructable]
         public MortarPestle(int uses)
             : base(uses, 0xE9B)
         {
             Weight = 1.0;
+			Name = "Mortier et Pilon";
         }
 
         public MortarPestle(Serial serial)

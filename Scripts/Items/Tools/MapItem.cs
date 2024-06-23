@@ -45,7 +45,7 @@ namespace Server.Items
             Facet = map;
         }
 
-        public virtual void CraftInit(Mobile from)
+        public virtual void CraftInit(Mobile from, CraftItem craftItem)
         {
         }
 
@@ -404,8 +404,9 @@ namespace Server.Items
 
         public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
-            CraftInit(from);
-            return 1;
+            CraftInit(from, craftItem);
+
+			return 1;
         }
 
         #endregion

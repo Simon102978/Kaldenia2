@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a grizzly bear corpse")]
+    [CorpseName("le corps d'un grizzly")]
     public class RagingGrizzlyBear : BaseCreature
     {
         [Constructable]
         public RagingGrizzlyBear()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a raging grizzly bear";
+            Name = "un grizzly enrage";
             Body = 212;
             BaseSoundID = 0xA3;
 
@@ -32,8 +32,8 @@ namespace Server.Mobiles
             SetSkill(SkillName.MagicResist, 32.8, 54.6);
             SetSkill(SkillName.Anatomy, 0, 0);
 
-            Fame = 10000;  //Guessing here
-            Karma = 10000;  //Guessing here
+     //       Fame = 10000;  //Guessing here
+      //      Karma = 10000;  //Guessing here
 
             Tamable = false;
         }
@@ -43,9 +43,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 4;
-        public override int Hides => 7;
-		public override int Bones => 7;
+        public override int Meat => Utility.RandomMinMax(1, 6);
+		public override int Hides => Utility.RandomMinMax(1, 6);
+		public override int Bones => Utility.RandomMinMax(1, 6);
 		public override PackInstinct PackInstinct => PackInstinct.Bear;
         public override void Serialize(GenericWriter writer)
         {

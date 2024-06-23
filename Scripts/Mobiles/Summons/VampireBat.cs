@@ -5,7 +5,7 @@ namespace Server.Mobiles
     {
         public VampireBatFamiliar()
         {
-            Name = "a vampire bat";
+            Name = "une chauve souris";
             Body = 317;
             BaseSoundID = 0x270;
 

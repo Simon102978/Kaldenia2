@@ -9,14 +9,17 @@ namespace Server.Items
             : base(0x1043)
         {
             Weight = 1.0;
-        }
+			Name = "Rouleau à pâte";
+
+		}
 
         [Constructable]
         public RollingPin(int uses)
             : base(uses, 0x1043)
         {
             Weight = 1.0;
-        }
+			Name = "Rouleau à pâte";
+		}
 
         public RollingPin(Serial serial)
             : base(serial)

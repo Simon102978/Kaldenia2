@@ -1,3 +1,5 @@
+using Server.Engines.Craft;
+
 namespace Server.Items
 {
     public class LocalMap : MapItem
@@ -5,8 +7,8 @@ namespace Server.Items
         [Constructable]
         public LocalMap()
         {
-            SetDisplay(0, 0, 5119, 4095, 400, 400);
-        }
+			SetDisplay(256, 104, 1900, 1740, 400, 400);
+		}
 
         public LocalMap(Serial serial)
             : base(serial)
@@ -14,7 +16,7 @@ namespace Server.Items
         }
 
         public override int LabelNumber => 1015230;// local map
-        public override void CraftInit(Mobile from)
+        public override void CraftInit(Mobile from, CraftItem craftitem)
         {
             double skillValue = from.Skills[SkillName.Cartography].Value;
             int dist = 64 + (int)(skillValue * 2);

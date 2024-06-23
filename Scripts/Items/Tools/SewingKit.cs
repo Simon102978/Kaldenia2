@@ -9,14 +9,17 @@ namespace Server.Items
             : base(0xF9D)
         {
             Weight = 2.0;
-        }
+			Name = "Kit de couture";
+		}
 
         [Constructable]
         public SewingKit(int uses)
             : base(uses, 0xF9D)
         {
             Weight = 2.0;
-        }
+			Name = "Kit de couture";
+
+		}
 
         public SewingKit(Serial serial)
             : base(serial)

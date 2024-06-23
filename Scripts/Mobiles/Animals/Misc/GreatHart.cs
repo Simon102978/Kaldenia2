@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a deer corpse")]
+    [CorpseName("le corps d'un cerf")]
     public class GreatHart : BaseCreature
     {
         [Constructable]
         public GreatHart()
             : base(AIType.AI_Melee, FightMode.Weakest, 10, 1, 0.2, 0.4)
         {
-            Name = "a great hart";
+            Name = "un cerf";
             Body = 0xEA;
 
             SetStr(41, 71);
@@ -41,9 +41,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 5;
-        public override int Hides => 8;
-        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
+        public override int Meat => Utility.RandomMinMax(2, 4);
+        public override int Hides => Utility.RandomMinMax(4, 8);
+		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override int GetAttackSound()
         {
             return 0x82;

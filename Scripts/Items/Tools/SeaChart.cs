@@ -1,3 +1,5 @@
+using Server.Engines.Craft;
+
 namespace Server.Items
 {
     public class SeaChart : MapItem
@@ -5,10 +7,10 @@ namespace Server.Items
         [Constructable]
         public SeaChart()
         {
-            SetDisplay(0, 0, 5119, 4095, 400, 400);
-        }
+			SetDisplay(256, 104, 1900, 1740, 400, 400);
+		}
 
-        public override void CraftInit(Mobile from)
+        public override void CraftInit(Mobile from, CraftItem craftitem)
         {
             Facet = from.Map;
 

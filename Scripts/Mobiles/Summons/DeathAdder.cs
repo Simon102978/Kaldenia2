@@ -5,7 +5,7 @@ namespace Server.Mobiles
     {
         public DeathAdder()
         {
-            Name = "a death adder";
+            Name = "un serpent geant";
             Body = 0x15;
             Hue = 0x455;
             BaseSoundID = 219;

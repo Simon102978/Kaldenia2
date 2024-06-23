@@ -7,7 +7,7 @@ namespace Server.Mobiles
         public SummonedEarthElemental()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an earth elemental";
+            Name = "un elemental de terre";
             Body = 14;
             BaseSoundID = 268;
 

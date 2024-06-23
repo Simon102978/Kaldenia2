@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a cat corpse")]
+    [CorpseName("le corps d'un chat")]
     public class Cat : BaseCreature
     {
         [Constructable]
         public Cat()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a cat";
+            Name = "un chat";
             Body = 0xC9;
             Hue = Utility.RandomAnimalHue();
             BaseSoundID = 0x69;

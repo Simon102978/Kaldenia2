@@ -9,7 +9,7 @@ namespace Server.Mobiles
         public SummonedFireElemental()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a fire elemental";
+            Name = "un elemental de feu";
             Body = 15;
             BaseSoundID = 838;
 

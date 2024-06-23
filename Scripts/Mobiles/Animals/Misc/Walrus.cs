@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a walrus corpse")]
+    [CorpseName("le corps d'un morse")]
     public class Walrus : BaseCreature
     {
         [Constructable]
         public Walrus()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a walrus";
+            Name = "un morse";
             Body = 0xDD;
             BaseSoundID = 0xE0;
 
