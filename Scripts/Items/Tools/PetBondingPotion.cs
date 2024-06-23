@@ -11,7 +11,7 @@ namespace Server.Items
         public PetBondingPotion() : base(0x0F04)
         {
             Weight = 1.0;
-            LootType = LootType.Blessed;
+			Name = "Potion de Lien animal";
             Hue = 2629;
         }
 

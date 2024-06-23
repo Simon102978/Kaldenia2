@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a gorilla corpse")]
+    [CorpseName("le corps d'un gorille")]
     public class Gorilla : BaseCreature
     {
         [Constructable]
         public Gorilla()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a gorilla";
+            Name = "un gorille";
             Body = 0x1D;
             BaseSoundID = 0x9E;
 
@@ -44,9 +44,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 3;
-        public override int Hides => 6;
-        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
+        public override int Meat => Utility.RandomMinMax(1 ,3);
+        public override int Hides => Utility.RandomMinMax(3, 6);
+		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

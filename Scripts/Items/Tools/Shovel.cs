@@ -17,6 +17,8 @@ namespace Server.Items
             : base(uses, 0xF39)
         {
             Weight = 5.0;
+			Name = "Pelle";
+			Layer = Layer.TwoHanded;
         }
 
         public Shovel(Serial serial)

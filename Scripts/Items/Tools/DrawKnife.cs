@@ -9,6 +9,7 @@ namespace Server.Items
             : base(0x10E4)
         {
             Weight = 1.0;
+			Name = "Scie";
         }
 
         [Constructable]
@@ -16,7 +17,8 @@ namespace Server.Items
             : base(uses, 0x10E4)
         {
             Weight = 1.0;
-        }
+			Name = "Scie";
+		}
 
         public DrawKnife(Serial serial)
             : base(serial)

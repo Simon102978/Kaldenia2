@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a dolphin corpse")]
+    [CorpseName("le corps d'un dauphin")]
     public class Dolphin : BaseCreature
     {
         [Constructable]
         public Dolphin()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a dolphin";
+            Name = "un dauphin";
             Body = 0x97;
             BaseSoundID = 0x8A;
 

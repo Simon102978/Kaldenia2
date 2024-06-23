@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a bull frog corpse")]
+    [CorpseName("le corps d'une grenouille")]
     public class BullFrog : BaseCreature
     {
         [Constructable]
         public BullFrog()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a bull frog";
+            Name = "une grenouille";
             Body = 81;
             Hue = Utility.RandomList(0x5AC, 0x5A3, 0x59A, 0x591, 0x588, 0x57F);
             BaseSoundID = 0x266;
@@ -44,7 +44,7 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 		public override int Meat => 1;
-        public override int Hides => 4;
+        public override int Hides => Utility.RandomMinMax(2, 4);
         public override FoodType FavoriteFood => FoodType.Fish | FoodType.Meat;
         public override void GenerateLoot()
         {

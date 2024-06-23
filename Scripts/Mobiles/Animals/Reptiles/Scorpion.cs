@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a scorpion corpse")]
+    [CorpseName("le corps d'un scorpion")]
     public class Scorpion : BaseCreature
     {
         [Constructable]
         public Scorpion()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a scorpion";
+            Name = "un scorpion";
             Body = 48;
             BaseSoundID = 397;
 
@@ -49,13 +49,13 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 3;
+        public override int Meat => Utility.RandomMinMax(2, 3);
 
-		public override int Hides => 3;
+		public override int Hides => Utility.RandomMinMax(2, 3);
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 3;
+		public override int Bones => Utility.RandomMinMax(2, 3);
 		public override BoneType BoneType => BoneType.Arachnide;
 
 
@@ -67,6 +67,7 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(0, 2));
         }
 
         public override void Serialize(GenericWriter writer)

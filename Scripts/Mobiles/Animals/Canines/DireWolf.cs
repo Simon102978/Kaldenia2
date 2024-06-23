@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a dire wolf corpse")]
+    [CorpseName("le corps d'un loup sombre")]
     [TypeAlias("Server.Mobiles.Direwolf")]
     public class DireWolf : BaseCreature
     {
@@ -10,7 +10,7 @@ namespace Server.Mobiles
         public DireWolf()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a dire wolf";
+            Name = "un loup sombre";
             Body = 23;
             BaseSoundID = 0xE5;
 
@@ -61,11 +61,11 @@ namespace Server.Mobiles
             return base.IsEnemy(m);
         }
 
-        public override int Meat => 1;
-        public override int Hides => 5;
-        public override HideType HideType => HideType.Lupus;
+        public override int Meat => Utility.RandomMinMax(2, 6);
+		public override int Hides => Utility.RandomMinMax(2, 6);
+		public override HideType HideType => HideType.Lupus;
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(2, 6);
 		public override BoneType BoneType => BoneType.Lupus;
 
 

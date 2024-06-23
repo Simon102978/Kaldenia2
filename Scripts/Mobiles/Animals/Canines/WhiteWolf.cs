@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a white wolf corpse")]
+    [CorpseName("le corps d'un loup blanc")]
     public class WhiteWolf : BaseCreature
     {
         [Constructable]
         public WhiteWolf()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a white wolf";
+            Name = "un loup blanc";
             Body = Utility.RandomList(34, 37);
             BaseSoundID = 0xE5;
 
@@ -47,14 +47,14 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-		public override int Hides => 3;
+		public override int Hides => Utility.RandomMinMax(2, 4);
 		public override HideType HideType => HideType.Lupus;
 
 		public override void GenerateLootParagon()
 		{
 			AddLoot(LootPack.LootItem<SangEnvouteFroid>(), Utility.RandomMinMax(2, 4));
 		}
-		public override int Bones => 3;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Lupus;
 
 		

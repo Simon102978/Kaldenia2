@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a giant spider corpse")]
+    [CorpseName("le corps d'une araignee geante")]
     public class GiantSpider : BaseCreature
     {
         [Constructable]
         public GiantSpider()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a giant spider";
+            Name = "une araignee geante";
             Body = 28;
             BaseSoundID = 0x388;
 
@@ -60,6 +60,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.Poor);
             AddLoot(LootPack.LootItem<SpidersSilk>(5, true));
 			AddLoot(LootPack.LootItem<VeninAraigneeGeante>());
+			AddLoot(LootPack.Others, Utility.RandomMinMax(0, 2));
 		}
 
         public override void Serialize(GenericWriter writer)

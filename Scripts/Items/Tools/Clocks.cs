@@ -346,7 +346,10 @@ namespace Server.Items
         public LargeGrandfatherClock()
             : base(0x44DD)
         {
-        }
+			Name = "Horloge Grand Père";
+			Weight = 20;
+
+		}
 
         public LargeGrandfatherClock(Serial serial)
             : base(serial)
@@ -375,7 +378,10 @@ namespace Server.Items
         public SmallGrandfatherClock()
             : base(0x44D5)
         {
-        }
+			Name = "Petite horloge grand père";
+			Weight = 10;
+
+		}
 
         public SmallGrandfatherClock(Serial serial)
             : base(serial)
@@ -404,7 +410,10 @@ namespace Server.Items
         public WhiteGrandfatherClock()
             : base(0x48D4)
         {
-        }
+			Name = "Horloge Grand Père Blanche";
+			Weight = 20;
+
+		}
 
         public WhiteGrandfatherClock(Serial serial)
             : base(serial)

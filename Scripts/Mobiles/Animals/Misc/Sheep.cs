@@ -5,7 +5,7 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a sheep corpse")]
+    [CorpseName("le corps d'un mouton")]
     public class Sheep : BaseCreature, ICarvable
     {
         private DateTime m_NextWoolTime;
@@ -13,7 +13,7 @@ namespace Server.Mobiles
         public Sheep()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a sheep";
+            Name = "un mouton";
             Body = 0xCF;
             BaseSoundID = 0xD6;
 
@@ -61,12 +61,12 @@ namespace Server.Mobiles
                 Body = (DateTime.UtcNow >= m_NextWoolTime) ? 0xCF : 0xDF;
             }
         }
-        public override int Meat => 3;
-		public override int Hides => 4;
+		public override int Meat => Utility.RandomMinMax(1, 3);
+		public override int Hides => Utility.RandomMinMax(2, 4);
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 4;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Regular;
 		public override MeatType MeatType => MeatType.LambLeg;
         public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;

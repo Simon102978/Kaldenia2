@@ -5,14 +5,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a goat corpse")]
+    [CorpseName("le corps d'une chevre")]
     public class Goat : BaseCreature
     {
         [Constructable]
         public Goat()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a goat";
+            Name = "une chevre";
             Body = 0xD1;
             BaseSoundID = 0x99;
 
@@ -47,9 +47,11 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
-		public override int Meat => 3;
-        public override int Hides => 3;
-        public override FoodType FavoriteFood => FoodType.GrainsAndHay | FoodType.FruitsAndVegies;
+		public override int Meat => Utility.RandomMinMax(1, 3);
+
+		public override MeatType MeatType => MeatType.LambLeg;
+		public override int Hides => Utility.RandomMinMax(1, 3);
+		public override FoodType FavoriteFood => FoodType.GrainsAndHay | FoodType.FruitsAndVegies;
 
         private static readonly Type[] _FeedTypes = new[]
         {

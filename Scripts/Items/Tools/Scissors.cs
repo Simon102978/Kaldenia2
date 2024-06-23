@@ -18,6 +18,7 @@ namespace Server.Items
 		{
 			Weight = 1.0;
 			Layer = Layer.OneHanded;
+			Name = "Ciseaux";
 		}
 
 		public Scissors(Serial serial) : base(serial)

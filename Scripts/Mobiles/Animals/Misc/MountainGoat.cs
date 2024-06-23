@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a mountain goat corpse")]
+    [CorpseName("le corps d'une chèvre")]
     public class MountainGoat : BaseCreature
     {
         [Constructable]
         public MountainGoat()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a mountain goat";
+            Name = "une chevre des montagnes";
             Body = 88;
             BaseSoundID = 0x99;
 
@@ -45,9 +45,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 2;
-        public override int Hides => 4;
-        public override FoodType FavoriteFood => FoodType.GrainsAndHay | FoodType.FruitsAndVegies;
+        public override int Meat =>	Utility.RandomMinMax(1, 3);
+        public override int Hides => Utility.RandomMinMax(2, 4);
+		public override FoodType FavoriteFood => FoodType.GrainsAndHay | FoodType.FruitsAndVegies;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

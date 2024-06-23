@@ -15,14 +15,14 @@ namespace Server.Mobiles
         {
             public InternalBuyInfo()
             {
-				Add(new GenericBuyInfo(typeof(GoldRing), 250, 20, 0x108A, 0));
-				Add(new GenericBuyInfo(typeof(Necklace), 250, 20, 0x1085, 0));
-				Add(new GenericBuyInfo(typeof(GoldNecklace), 250, 20, 0x1088, 0));
-				Add(new GenericBuyInfo(typeof(GoldBeadNecklace), 250, 20, 0x1089, 0));
-				Add(new GenericBuyInfo(typeof(Beads), 250, 20, 0x108B, 0, true));
-				Add(new GenericBuyInfo(typeof(GoldBracelet), 250, 20, 0x1086, 0));
-				Add(new GenericBuyInfo(typeof(GoldEarrings), 250, 20, 0x1087, 0));
-			}
+         /*       Add(new GenericBuyInfo(typeof(GoldRing), 27, 20, 0x108A, 0));
+                Add(new GenericBuyInfo(typeof(Necklace), 26, 20, 0x1085, 0));
+                Add(new GenericBuyInfo(typeof(GoldNecklace), 27, 20, 0x1088, 0));
+                Add(new GenericBuyInfo(typeof(GoldBeadNecklace), 27, 20, 0x1089, 0));
+                Add(new GenericBuyInfo(typeof(Beads), 27, 20, 0x108B, 0, true));
+                Add(new GenericBuyInfo(typeof(GoldBracelet), 27, 20, 0x1086, 0));
+                Add(new GenericBuyInfo(typeof(GoldEarrings), 27, 20, 0x1087, 0));             */
+            }
         }
 
         public class InternalSellInfo : GenericSellInfo
@@ -31,27 +31,27 @@ namespace Server.Mobiles
             {
 
 				Add(typeof(Citrine), 5);
-				Add(typeof(Amber), 8);
-				Add(typeof(Tourmaline), 9);
-				Add(typeof(Ruby), 10);
-				Add(typeof(Amethyst), 12);
-				Add(typeof(Sapphire), 15);
-				Add(typeof(StarSapphire), 20);
-				Add(typeof(Emerald), 25);
-				Add(typeof(Diamond), 35);
+				Add(typeof(Amber), 10);
+				Add(typeof(Tourmaline), 25);
+				Add(typeof(Ruby), 50);
+				Add(typeof(Amethyst), 75);
+				Add(typeof(Sapphire), 100);
+				Add(typeof(StarSapphire), 150);
+				Add(typeof(Emerald), 200);
+				Add(typeof(Diamond), 250);
 
-				Add(typeof(GoldRing), 7);
-                Add(typeof(SilverRing), 5);
-                Add(typeof(Necklace), 5);
-                Add(typeof(GoldNecklace), 7);
-                Add(typeof(GoldBeadNecklace), 7);
-                Add(typeof(SilverNecklace), 6);
-                Add(typeof(SilverBeadNecklace), 6);
-                Add(typeof(Beads), 5);
-                Add(typeof(GoldBracelet), 7);
-                Add(typeof(SilverBracelet), 6);
-                Add(typeof(GoldEarrings), 7);
-                Add(typeof(SilverEarrings), 6);
+				Add(typeof(GoldRing), 13);
+                Add(typeof(SilverRing), 10);
+                Add(typeof(Necklace), 13);
+                Add(typeof(GoldNecklace), 13);
+                Add(typeof(GoldBeadNecklace), 13);
+                Add(typeof(SilverNecklace), 10);
+                Add(typeof(SilverBeadNecklace), 10);
+                Add(typeof(Beads), 13);
+                Add(typeof(GoldBracelet), 13);
+                Add(typeof(SilverBracelet), 10);
+                Add(typeof(GoldEarrings), 13);
+                Add(typeof(SilverEarrings), 10);
             }
         }
     }

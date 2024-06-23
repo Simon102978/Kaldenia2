@@ -1,6 +1,6 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a bird corpse")]
+    [CorpseName("le corps d'un oiseau")]
     public class Bird : BaseCreature
     {
         [Constructable]
@@ -14,20 +14,20 @@ namespace Server.Mobiles
                 switch (Utility.Random(3))
                 {
                     case 0:
-                        Name = "a crow";
+                        Name = "un corbeau";
                         break;
                     case 2:
-                        Name = "a raven";
+                        Name = "une corneille";
                         break;
                     case 1:
-                        Name = "a magpie";
+                        Name = "une pie";
                         break;
                 }
             }
             else
             {
                 Hue = Utility.RandomBirdHue();
-                Name = NameList.RandomName("bird");
+                Name = NameList.RandomName("un oiseau");
             }
 
             Body = 6;
@@ -60,8 +60,8 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 		public override MeatType MeatType => MeatType.Bird;
-        public override int Meat => 1;
-        public override int Feathers => 25;
+        public override int Meat => Utility.RandomMinMax(0, 2);
+        public override int Feathers => Utility.RandomMinMax(5, 25);
         public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void Serialize(GenericWriter writer)
         {
@@ -76,7 +76,7 @@ namespace Server.Mobiles
         }
     }
 
-    [CorpseName("a bird corpse")]
+    [CorpseName("le corps d'un oiseau")]
     public class TropicalBird : BaseCreature
     {
         [Constructable]
@@ -84,7 +84,7 @@ namespace Server.Mobiles
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
             Hue = Utility.RandomBirdHue();
-            Name = "a tropical bird";
+            Name = "un oiseau tropical";
 
             Body = 6;
             BaseSoundID = 0xBF;
@@ -115,8 +115,8 @@ namespace Server.Mobiles
         }
 
         public override MeatType MeatType => MeatType.Bird;
-        public override int Meat => 1;
-        public override int Feathers => 15;
+        public override int Meat => Utility.RandomMinMax(0,2);
+        public override int Feathers => Utility.RandomMinMax(5, 15);
         public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void Serialize(GenericWriter writer)
         {

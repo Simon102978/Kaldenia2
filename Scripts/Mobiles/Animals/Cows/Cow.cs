@@ -2,7 +2,7 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a cow corpse")]
+    [CorpseName("le corps d'une vache")]
     public class Cow : BaseCreature
     {
         private DateTime m_MilkedOn;
@@ -12,7 +12,7 @@ namespace Server.Mobiles
         public Cow()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a cow";
+            Name = "une vache";
             Body = Utility.RandomList(0xD8, 0xE7);
             BaseSoundID = 0x78;
 
@@ -74,9 +74,9 @@ namespace Server.Mobiles
                 m_Milk = value;
             }
         }
-        public override int Meat => 8;
-        public override int Hides => 12;
-        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
+        public override int Meat => Utility.RandomMinMax(4, 8);
+        public override int Hides => Utility.RandomMinMax(6, 12);
+		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void OnDoubleClick(Mobile from)
         {
             base.OnDoubleClick(from);

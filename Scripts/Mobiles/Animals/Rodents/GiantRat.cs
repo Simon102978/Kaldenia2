@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a giant rat corpse")]
+    [CorpseName("le corps d'un rat geant")]
     public class GiantRat : BaseCreature
     {
         [Constructable]
         public GiantRat()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a giant rat";
+            Name = "un rat geant";
             Body = 0xD7;
             BaseSoundID = 0x188;
 
@@ -45,8 +45,8 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 
-		public override int Meat => 2;
-        public override int Hides => 3;
+		public override int Meat => Utility.RandomMinMax(2, 3);
+        public override int Hides => Utility.RandomMinMax(1, 2);
         public override FoodType FavoriteFood => FoodType.Fish | FoodType.Meat | FoodType.FruitsAndVegies | FoodType.Eggs;
         public override void GenerateLoot()
         {

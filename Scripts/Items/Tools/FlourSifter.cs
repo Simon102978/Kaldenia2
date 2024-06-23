@@ -9,14 +9,17 @@ namespace Server.Items
             : base(0x103E)
         {
             Weight = 1.0;
-        }
+			Name = "Tamis à farine";
+		}
 
         [Constructable]
         public FlourSifter(int uses)
             : base(uses, 0x103E)
         {
             Weight = 1.0;
-        }
+			Name = "Tamis à farine";
+
+		}
 
         public FlourSifter(Serial serial)
             : base(serial)

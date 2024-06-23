@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a deer corpse")]
+    [CorpseName("le corps d'une biche")]
     public class Hind : BaseCreature
     {
         [Constructable]
         public Hind()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a hind";
+            Name = "une biche";
             Body = 0xED;
 
             SetStr(21, 51);
@@ -41,9 +41,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 3;
-        public override int Hides => 5;
-        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
+        public override int Meat => Utility.RandomMinMax(1, 3);
+        public override int Hides => Utility.RandomMinMax(3, 5);
+		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override int GetAttackSound()
         {
             return 0x82;

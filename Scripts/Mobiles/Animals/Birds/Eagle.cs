@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an eagle corpse")]
+    [CorpseName("le corps d'un aigle")]
     public class Eagle : BaseCreature
     {
         [Constructable]
         public Eagle()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "an eagle";
+            Name = "un aigle";
             Body = 5;
             BaseSoundID = 0x2EE;
 
@@ -49,9 +49,9 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 
-		public override int Meat => 1;
+		public override int Meat => Utility.RandomMinMax(1, 3);
         public override MeatType MeatType => MeatType.Bird;
-        public override int Feathers => 36;
+        public override int Feathers => Utility.RandomMinMax(10, 35);
         public override FoodType FavoriteFood => FoodType.Meat | FoodType.Fish;
         public override bool CanFly => true;
 

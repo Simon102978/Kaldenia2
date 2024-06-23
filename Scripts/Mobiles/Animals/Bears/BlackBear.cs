@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a bear corpse")]
+    [CorpseName("le corps d'un ours noir")]
     public class BlackBear : BaseCreature
     {
         [Constructable]
         public BlackBear()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a black bear";
+            Name = "un ours noir";
             Body = 211;
             BaseSoundID = 0xA3;
 
@@ -44,9 +44,9 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
-		public override int Meat => 5;
-        public override int Hides => 8;
-        public override FoodType FavoriteFood => FoodType.Fish | FoodType.Meat | FoodType.FruitsAndVegies;
+		public override int Meat => Utility.RandomMinMax(2, 8);
+		public override int Hides => Utility.RandomMinMax(2, 8);
+		public override FoodType FavoriteFood => FoodType.Fish | FoodType.Meat | FoodType.FruitsAndVegies;
         public override PackInstinct PackInstinct => PackInstinct.Bear;
         public override void Serialize(GenericWriter writer)
         {

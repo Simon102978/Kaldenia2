@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a timber wolf corpse")]
+    [CorpseName("le corps d'un loup")]
     public class TimberWolf : BaseCreature
     {
         [Constructable]
         public TimberWolf()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a timber wolf";
+            Name = "un loup des bois";
             Body = 225;
             BaseSoundID = 0xE5;
 
@@ -48,13 +48,13 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
-		public override int Meat => 3;
+		public override int Meat => Utility.RandomMinMax(1, 4);
 
-		public override int Hides => 12;
+		public override int Hides => Utility.RandomMinMax(2, 6);
 		public override HideType HideType => HideType.Lupus;
 
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(2, 6);
 		public override BoneType BoneType => BoneType.Lupus;
 
 		public override FoodType FavoriteFood => FoodType.Meat;

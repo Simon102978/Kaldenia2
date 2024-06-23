@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a chicken corpse")]
+    [CorpseName("le corps d'un poulet")]
     public class Chicken : BaseCreature
     {
         [Constructable]
         public Chicken()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a chicken";
+            Name = "un poulet";
             Body = 0xD0;
             BaseSoundID = 0x6E;
 
@@ -43,12 +43,12 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 
-		public override int Meat => 1;
-        public override MeatType MeatType => MeatType.Bird;
+		public override int Meat => Utility.RandomMinMax(1, 2);
+		public override MeatType MeatType => MeatType.Chicken;
         public override FoodType FavoriteFood => FoodType.GrainsAndHay;
         public override bool CanFly => true;
-        public override int Feathers => 25;
-        public override void Serialize(GenericWriter writer)
+        public override int Feathers => Utility.RandomMinMax(5, 15);
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

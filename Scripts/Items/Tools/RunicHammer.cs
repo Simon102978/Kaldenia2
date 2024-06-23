@@ -50,18 +50,10 @@ namespace Server.Items
             if (index >= 1 && index <= 8)
                 return;
 
-            if (!CraftResources.IsStandard(Resource))
-            {
-                int num = CraftResources.GetLocalizationNumber(Resource);
+			list.Add(CraftResources.GetName(Resource));
+		}
 
-                if (num > 0)
-                    list.Add(num);
-                else
-                    list.Add(CraftResources.GetName(Resource));
-            }
-        }
-
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
