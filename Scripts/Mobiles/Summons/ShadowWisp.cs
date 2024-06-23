@@ -9,7 +9,7 @@ namespace Server.Mobiles
         private DateTime m_NextFlare;
         public ShadowWispFamiliar()
         {
-            Name = "a shadow wisp";
+            Name = "une à wisp sombre";
             Body = 165;
             Hue = 0x901;
             BaseSoundID = 466;

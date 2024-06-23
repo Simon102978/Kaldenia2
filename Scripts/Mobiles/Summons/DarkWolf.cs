@@ -10,7 +10,7 @@ namespace Server.Mobiles
         private DateTime m_NextRestore;
         public DarkWolfFamiliar()
         {
-            Name = "a dark wolf";
+            Name = "un soup sombre";
             Body = 99;
             Hue = 0x901;
             BaseSoundID = 0xE5;
