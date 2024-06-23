@@ -30,7 +30,7 @@ namespace Server.Gumps
 
             int space = 115;
 
-			string context = "Le bateau continuera de voger en direction de la ville principale, et vous allez perdre tous les objets présents dans votre sac. \n\nEtes-vous certain de vouloir continuer?";
+			string context = "Vous vous retrouverez dans la ville principale, et vous allez perdre tous les objets présents dans votre sac. \n\nEtes-vous certain de vouloir continuer?";
 
 			AddSection(x - 5 , y, 445, 160, "Contexte", context);
 
@@ -77,19 +77,19 @@ namespace Server.Gumps
 				switch (Utility.Random(3))
 				{
 					case 0:
-						p = new Point3D(1536, 920, 9);
+						p = new Point3D(1498, 2918, 0);
 						break;
 					case 1:
-						p = new Point3D(1536, 945, 9);
+						p = new Point3D(1509, 2915, 0);
 						break;
 					case 2:
-						p = new Point3D(1532, 931, 9);
+						p = new Point3D(1518, 2918, 0);
 						break;
 					case 3:
-						p = new Point3D(1532, 925, 9);
+						p = new Point3D(1533, 2903, 0);
 						break;
 					default:
-						p = new Point3D(1530, 945, 9);
+						p = new Point3D(1534, 2893, 0);
 						break;
 				}
 
