@@ -120,6 +120,7 @@ namespace Server.Misc
 				pm.Metier = Classe.GetClasse(0);
 				pm.Classe = Classe.GetClasse(0);
                 pm.SetUselessSkill();
+                pm.AddPerfume(new Perfume());
 			}
 
 			SetName(newChar, args.Name);

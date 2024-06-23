@@ -60,7 +60,8 @@ namespace Server.Items
 		ExplodingTarPotion,
 		RefreshTotal,
 		UltimeCure,
-		Experience
+		Experience,
+        Perfume
 	}
 
     public abstract class BasePotion : Item, ICraftable, ICommodity

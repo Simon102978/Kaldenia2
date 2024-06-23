@@ -24,6 +24,7 @@ namespace Server.Mobiles
 		private GrandeurEnum m_Grandeur;
 		private GrosseurEnum m_Grosseur;
 		private AppearanceEnum m_Beaute;
+		private Perfume m_Perfume = new Perfume();
 		private int m_Niveau;
 
 		private Classe m_Classe= Classe.GetClasse(0);
@@ -144,6 +145,19 @@ namespace Server.Mobiles
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public AppearanceEnum Beaute { get => m_Beaute; set => m_Beaute = value; }
+
+		public Perfume Perfume
+        {
+            get
+            {
+                return m_Perfume;
+            }
+            set
+            {
+                m_Perfume = value;
+                SendPropertyChange();
+            }
+        }
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public string BaseName
@@ -488,12 +502,21 @@ namespace Server.Mobiles
 
 		public override void GetProperties(ObjectPropertyList list)
 		{
-			base.GetProperties(list);
+	//		base.GetProperties(list);
+
+
+
+			list.Add(1050045, "\t< BIG ><basefont color={0}>{1}</basefont></BIG>\t", this.Perfume.HtmlHue, Name); // ~1_PREFIX~~2_NAME~~3_SUFFIX~ */
 
 			if (Vulnerability)
 			{
 				list.Add(1050045, "<\th3><basefont color=#FF8000>" + (Female ? "ASSOMÉE" : "ASSOMÉ") + "</basefont></h3>\t");
 			}
+
+			if (this.Perfume.Hue != 0x3B2)
+            {
+              list.Add(1050045, "\t< BIG ><basefont color={0}>{1}</basefont></BIG>\t", this.Perfume.HtmlHue,this.Perfume.Nom); // ~1_PREFIX~~2_NAME~~3_SUFFIX~      */
+            }
 
 			if (NameMod == null)
 			{
@@ -533,8 +556,58 @@ namespace Server.Mobiles
 
 		private static void OnLogin(LoginEventArgs e)
 		{
+			CustomPlayerMobile from = (CustomPlayerMobile)e.Mobile;
 
+
+			if (DateTime.Today >= from.Perfume.DateFin && from.Perfume.Hue != 0x3B2)
+            {
+                from.Perfume = new Perfume();
+                from.SendMessage("Votre parfum vient de s'estomper.");
+            }
 		}
+
+		 #region Perfume
+
+        public void AddPerfume(Perfume p)
+        {
+            Perfume newP = p;
+
+            NameHue = newP.Hue;
+
+            newP.DateFin = DateTime.Today.Add(p.Duration);
+
+            Perfume = newP;
+
+            this.SendPropertiesTo(this);
+
+            SendIncomingPacket();
+        }
+
+		public virtual void SendPropertyChange()
+        {
+            if (this != null && this.Map != null)
+            {
+                IPooledEnumerable eable = this.Map.GetMobilesInRange(this.Location, 12);
+
+                foreach (object o in eable)
+                {
+                    if (o is CustomPlayerMobile sp && sp != null )
+                    {
+                        if ((sp.CanSee(this)) && sp.InLOS(this))
+                        {
+                            SendPropertiesTo(sp);
+                        }
+                    }            
+                }
+
+                eable.Free();
+
+            }
+        }
+
+
+
+        #endregion
 
 
 		public bool AddEsclave(Mobile m)
@@ -2119,6 +2192,11 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+				case 34:
+				{
+					m_Perfume = Perfume.Deserialize(reader);
+					goto case 32;
+				}
 				case 33:
 				case 32:
 				{
@@ -2371,7 +2449,9 @@ namespace Server.Mobiles
         {        
             base.Serialize(writer);
 
-            writer.Write(33); // version
+            writer.Write(34); // version
+
+			Perfume.Serialize(writer);
 
 			writer.Write(RaceRestreinte);
 			writer.Write(Journaliste);
