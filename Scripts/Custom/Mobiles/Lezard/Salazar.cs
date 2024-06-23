@@ -17,6 +17,7 @@ namespace Server.Mobiles
             SetStr(177, 195);
             SetDex(251, 269);
             SetInt(153, 170);
+            Hue = 1158;
 
             SetHits(350, 400);
 

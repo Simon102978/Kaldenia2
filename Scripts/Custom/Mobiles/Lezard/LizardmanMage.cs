@@ -14,6 +14,7 @@ namespace Server.Mobiles
             Name = NameList.RandomName("lizardman");
             Body = Utility.RandomList(35, 36);
             BaseSoundID = 417;
+            Hue = 1345;
 
             SetStr(146, 180);
             SetDex(101, 130);

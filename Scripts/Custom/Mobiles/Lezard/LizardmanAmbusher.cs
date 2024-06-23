@@ -20,6 +20,8 @@ namespace Server.Mobiles
             SetDex(86, 105);
             SetInt(36, 60);
 
+            Hue = 1149;
+
             SetHits(58, 72);
 
             SetDamage(5, 7);
