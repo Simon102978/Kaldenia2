@@ -21,7 +21,9 @@ namespace Server.Mobiles
 		//		Add(new GenericBuyInfo(typeof(RecycleBag), 50, 20, 0xE76, 0));
 				Add(new GenericBuyInfo(typeof(Recycleur), 50, 20, 0x12B3, 0));
 				Add(new GenericBuyInfo(typeof(Boline), 50, 20, 0xEC5, 1940));
-				Add(new GenericBuyInfo(typeof(BedrollTent), 5000, 20, 0xA57, 0));
+				Add(new GenericBuyInfo(typeof(BedrollTent), 3000, 20, 0xA57, 0));
+				Add(new GenericBuyInfo(typeof(GardenDeed), 3000, 20, 0xE88, 1164));
+
 
 				Add(new GenericBuyInfo(typeof(Arrow), 5, 999, 0xF3F, 0, true));
                 Add(new GenericBuyInfo(typeof(Bolt), 5, 999, 0x1BFB, 0, true));
