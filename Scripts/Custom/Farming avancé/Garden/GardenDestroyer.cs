@@ -12,13 +12,13 @@ namespace Server.Items
       [Constructable] 
       public GardenDestroyer( GardenFence gardenfence, GardenGround gardenground, PlayerMobile player, SecureGarden securegarden, GardenVerifier gardenverifier) 
       { 
-         Name = "'Clean-Up' Sign"; 
+         Name = "Pancarte de Nettoyage"; 
          m_Player = player; 
          m_GardenFence = gardenfence; 
          m_GardenGround = gardenground; 
 	     m_SecureGarden = securegarden;
          m_GardenVerifier = gardenverifier;
-         this.ItemID = 2981;
+         this.ItemID = 3081;
          this.Visible = true; 
       }
       private GardenFence m_GardenFence; 
@@ -33,7 +33,7 @@ namespace Server.Items
  		{
         if ( m_SecureGarden != null && m_SecureGarden.Items.Count > 0 )
  		{
-         from.SendMessage( "You must remove the items from the Garden Secure before destroying your garden." );
+         from.SendMessage( "Vous devez retirer vos items du coffre avant de détruire votre jardin!" );
         } 
      else 
          { 
@@ -42,7 +42,7 @@ namespace Server.Items
          } 
       else 
          { 
-         from.SendMessage( "You don't appear to own this garden." ); 
+         from.SendMessage( "Vous ne semblez pas être le propriétaire de ce jardin!" ); 
          } 
       } 
 

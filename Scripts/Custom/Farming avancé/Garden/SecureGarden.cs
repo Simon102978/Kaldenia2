@@ -83,7 +83,7 @@ namespace Server.Items
         public override void AddNameProperty(ObjectPropertyList list)
         {
             if (m_Player != null)
-                list.Add("Garden Secure");
+                list.Add("Coffre");
             else
                 base.AddNameProperty(list);
         }
@@ -92,7 +92,7 @@ namespace Server.Items
         {
             if (m_Player != null)
             {
-                LabelTo(from, "Garden Secure");
+                LabelTo(from, "Coffre");
 
                 if (CheckContentDisplay(from))
                     LabelTo(from, "({0} items, {1} stones)", TotalItems, TotalWeight);
