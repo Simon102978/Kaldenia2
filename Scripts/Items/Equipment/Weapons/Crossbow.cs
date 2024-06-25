@@ -11,6 +11,7 @@ namespace Server.Items
         {
             Weight = 7.0;
             Layer = Layer.TwoHanded;
+			Name = "Arbalète";
         }
 
         public Crossbow(Serial serial)

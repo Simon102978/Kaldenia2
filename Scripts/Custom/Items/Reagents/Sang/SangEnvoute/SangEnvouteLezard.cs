@@ -11,7 +11,7 @@ namespace Server.Items
 
         [Constructable]
         public SangEnvouteLezard(int amount)
-            : base(0x2DB6)
+            : base(0x0F91)
         {
             Stackable = true;
             Amount = amount;

@@ -3,12 +3,12 @@
 namespace Server.Items
 {
 	[Furniture]
-[Flipable(0x994D, 0x994E)]
+[Flipable(0xA5C0, 0xA5C1)]
 public class MachineCoudre : CraftableFurniture
 {
 	[Constructable]
 	public MachineCoudre()
-		: base(0x994D)
+		: base(0xA5C0)
 	{
 		Weight = 15.0;
 		Name = "Machine à Coudre";
@@ -36,12 +36,12 @@ public class MachineCoudre : CraftableFurniture
 }
 
 [Furniture]
-[Flipable(0x994F, 0x994F)]
+[Flipable(0xA5C2, 0xA5C2)]
 public class BancMachineCoudre : CraftableFurniture
 {
 	[Constructable]
 	public BancMachineCoudre()
-		: base(0x994F)
+		: base(0xA5C2)
 	{
 		Weight = 5.0;
 		Name = "Banc Machine à Coudre";
@@ -69,12 +69,12 @@ public class BancMachineCoudre : CraftableFurniture
 }
 
 [Furniture]
-[Flipable(0x995F, 0x9960)]
+[Flipable(0xA5C5, 0xA5E3)]
 public class TinkerTable : CraftableFurniture
 {
 	[Constructable]
 	public TinkerTable()
-		: base(0x995F)
+		: base(0xA5C5)
 	{
 		Weight = 5.0;
 		Name = "Bureau de travail";
@@ -104,7 +104,7 @@ public class TinkerTable : CraftableFurniture
 	{
 		[Constructable]
 		public Tableronde1()
-			: base(0x99C8)
+			: base(0xA587)
 		{
 			Weight = 5.0;
 			Name = "Table Ronde";
@@ -135,7 +135,7 @@ public class TinkerTable : CraftableFurniture
 	{
 		[Constructable]
 		public TableRonde2()
-			: base(0x99C9)
+			: base(0xA588)
 		{
 			Weight = 5.0;
 			Name = "Table Ronde";
@@ -166,7 +166,7 @@ public class TinkerTable : CraftableFurniture
 	{
 		[Constructable]
 		public TableRonde3()
-			: base(0x99CA)
+			: base(0xA589)
 		{
 			Weight = 5.0;
 			Name = "Table Ronde";
@@ -192,12 +192,12 @@ public class TinkerTable : CraftableFurniture
 
 		}
 	}
-	[Flipable(0x99CC, 0x99CD)]
+	[Flipable(0xA58B, 0xA58C)]
 	public class TableGrise : CraftableFurniture
 	{
 		[Constructable]
 		public TableGrise()
-			: base(0x99CC)
+			: base(0xA58B)
 		{
 			Weight = 5.0;
 			Name = "Table Grise";
@@ -224,12 +224,12 @@ public class TinkerTable : CraftableFurniture
 		}
 	}
 	[Furniture]
-[Flipable(0x9961, 0x9962)]
+[Flipable(0xA024, 0xA025)]
 public class RepairTable : CraftableFurniture
 {
 	[Constructable]
 	public RepairTable()
-		: base(0x9961)
+		: base(0xA024)
 	{
 		Weight = 5.0;
 		Name = "Bureau de travail";
@@ -256,12 +256,12 @@ public class RepairTable : CraftableFurniture
 	}
 }
 [Furniture]
-	[Flipable(0x9963, 0x9964)]
+	[Flipable(0xA026, 0xA027)]
 	public class FeedingThrough : CraftableFurniture
 	{
 		[Constructable]
 		public FeedingThrough()
-			: base(0x9963)
+			: base(0xA026)
 		{
 			Weight = 5.0;
 			Name = "Mangeoir";
@@ -288,12 +288,12 @@ public class RepairTable : CraftableFurniture
 		}
 }
 [Furniture]
-[Flipable(0x9967, 0x9968)]
+[Flipable(0xA5EA, 0xA5EB)]
 public class Puit : CraftableFurniture, IWaterSource
 	{
 	[Constructable]
 	public Puit()
-		: base(0x9967)
+		: base(0xA5EA)
 	{
 		Weight = 100.0;
 		Name = "Un Puit";
@@ -328,12 +328,12 @@ public class Puit : CraftableFurniture, IWaterSource
 
 	}
 }
-	[Flipable(0x0A3C, 0x0A3D, 0x0A44, 0x0A45)]
+	[Flipable(0xA58F, 0xA590, 0xA591, 0xA592)]
 	public class NormDresser : CraftableFurniture
 	{
 		[Constructable]
 		public NormDresser()
-			: base(0x0A3C)
+			: base(0xA58F)
 		{
 			Weight = 15.0;
 			Name = "Coiffeuse";
@@ -360,12 +360,12 @@ public class Puit : CraftableFurniture, IWaterSource
 		}
 	}
 
-	[Flipable(0x99C6, 0x99C7)]
+	[Flipable(0xA585, 0xA586)]
 	public class CommodeFoncee : CraftableFurniture
 	{
 		[Constructable]
 		public CommodeFoncee()
-			: base(0x99C6)
+			: base(0xA585)
 		{
 			Weight = 15.0;
 			Name = "Commode Foncee";
@@ -392,12 +392,12 @@ public class Puit : CraftableFurniture, IWaterSource
 		}
 	}
 
-	[Flipable(0x99CE, 0x99CF)]
+	[Flipable(0xA58D, 0xA58E)]
 	public class CommodeHaute : CraftableFurniture
 	{
 		[Constructable]
 		public CommodeHaute()
-			: base(0x99CE)
+			: base(0xA58D)
 		{
 			Weight = 15.0;
 			Name = "Commode Haute";
@@ -423,12 +423,12 @@ public class Puit : CraftableFurniture, IWaterSource
 
 		}
 	}
-	[Flipable(0x99D0, 0x99D2)]
+	[Flipable(0xA58F, 0xA591)]
 	public class GardeRobeFermer  : CraftableFurniture
 	{
 		[Constructable]
 		public GardeRobeFermer()
-			: base(0x99D0)
+			: base(0xA58F)
 		{
 			Weight = 15.0;
 			Name = "Garde Robe Fermé";
@@ -454,12 +454,12 @@ public class Puit : CraftableFurniture, IWaterSource
 
 		}
 	}
-	[Flipable(0x99D1, 0x99D3)]
+	[Flipable(0xA590, 0xA592)]
 	public class GardeRobeOuvert : CraftableFurniture
 	{
 		[Constructable]
 		public GardeRobeOuvert()
-			: base(0x99D1)
+			: base(0xA590)
 		{
 			Weight = 15.0;
 			Name = "Garde Robe Ouvert";
@@ -486,12 +486,12 @@ public class Puit : CraftableFurniture, IWaterSource
 		}
 	}
 	[Furniture]
-[Flipable(0x996D, 0x996D)]
+[Flipable(0xA018, 0xA018)]
 public class Ancre : CraftableFurniture
 {
 	[Constructable]
 	public Ancre()
-		: base(0x996D)
+		: base(0xA018)
 	{
 		Weight = 25.0;
 		Name = "Une Ancre";
@@ -518,12 +518,12 @@ public class Ancre : CraftableFurniture
 	}
 }
 	[Furniture]
-	[Flipable(0x99B5, 0x99B6, 0x99B7, 0x99B8)]
+	[Flipable(0xA574, 0xA575, 0xA576, 0xA577)]
 	public class ChaiseLuxe : CraftableFurniture
 	{
 		[Constructable]
 		public ChaiseLuxe()
-			: base(0x99B5)
+			: base(0xA574)
 		{
 			Weight = 25.0;
 			Name = "Chaise de Luxe";
@@ -550,12 +550,12 @@ public class Ancre : CraftableFurniture
 		}
 	}
 	[Furniture]
-	[Flipable(0x99B9, 0x99BA)]
+	[Flipable(0xA578, 0xA579)]
 	public class BancGris : CraftableFurniture
 	{
 		[Constructable]
 		public BancGris()
-			: base(0x99B9)
+			: base(0xA578)
 		{
 			Weight = 25.0;
 			Name = "Banc Gris";
@@ -582,12 +582,12 @@ public class Ancre : CraftableFurniture
 		}
 	}
 	[Furniture]
-	[Flipable(0x99BB, 0x99BC)]
+	[Flipable(0xA57A, 0xA57B)]
 	public class BancFer : CraftableFurniture
 	{
 		[Constructable]
 		public BancFer()
-			: base(0x99BB)
+			: base(0xA57A)
 		{
 			Weight = 25.0;
 			Name = "Banc Fer";
@@ -614,12 +614,12 @@ public class Ancre : CraftableFurniture
 		}
 	}
 	[Furniture]
-	[Flipable(0x99BD, 0x99BE, 0x99BF, 0x99C0)]
+	[Flipable(0xA57C, 0xA57D, 0xA57E, 0xA57F)]
 	public class ChaiseRembourer : CraftableFurniture
 	{
 		[Constructable]
 		public ChaiseRembourer()
-			: base(0x99BD)
+			: base(0xA57C)
 		{
 			Weight = 25.0;
 			Name = "Chaise Rembourée";
@@ -646,12 +646,12 @@ public class Ancre : CraftableFurniture
 		}
 	}
 	[Furniture]
-	[Flipable(0x99C1, 0x99C2, 0x99C3, 0x99C4)]
+	[Flipable(0xA580, 0xA581, 0xA582, 0xA583)]
 	public class ChaiseVerte : CraftableFurniture
 	{
 		[Constructable]
 		public ChaiseVerte()
-			: base(0x99C1)
+			: base(0xA580)
 		{
 			Weight = 25.0;
 			Name = "Chaise Verte";
@@ -678,12 +678,12 @@ public class Ancre : CraftableFurniture
 		}
 	}
 	[Furniture]
-[Flipable(0x996E, 0x996F)]
+[Flipable(0xA019, 0xA01A)]
 public class RackaVin : CraftableFurniture
 {
 	[Constructable]
 	public RackaVin()
-		: base(0x996E)
+		: base(0xA019)
 	{
 		Weight = 25.0;
 		Name = "Cellier";
@@ -710,12 +710,12 @@ public class RackaVin : CraftableFurniture
 	}
 }
 	[Furniture]
-	[Flipable(0x9998, 0x9999)]
+	[Flipable(0xA609, 0xA60A)]
 	public class PresentoireVide : CraftableFurniture
 	{
 		[Constructable]
 		public PresentoireVide()
-			: base(0x9998)
+			: base(0xA609)
 		{
 			Weight = 25.0;
 			Name = "Presentoir Vide";
@@ -742,12 +742,12 @@ public class RackaVin : CraftableFurniture
 		}
 	}
 	[Furniture]
-	[Flipable(0x999A, 0x999B)]
+	[Flipable(0xA5D2, 0xA5D3)]
 	public class PresentoirePlein1 : CraftableFurniture
 	{
 		[Constructable]
 		public PresentoirePlein1()
-			: base(0x999A)
+			: base(0xA5D2)
 		{
 			Weight = 25.0;
 			Name = "Presentoir Plein 1";
@@ -774,12 +774,12 @@ public class RackaVin : CraftableFurniture
 		}
 	}
 	[Furniture]
-	[Flipable(0x999C, 0x999D)]
+	[Flipable(0xA5D4, 0xA5D5)]
 	public class PresentoirePlein2 : CraftableFurniture
 	{
 		[Constructable]
 		public PresentoirePlein2()
-			: base(0x999D)
+			: base(0xA5D4)
 		{
 			Weight = 25.0;
 			Name = "Presentoir Plein 2";
@@ -807,12 +807,12 @@ public class RackaVin : CraftableFurniture
 	}
 
 	[Furniture]
-	[Flipable(0x998E, 0x998F, 0x9990, 0x9991)]
+	[Flipable(0xA5D0, 0xA5D1, 0xA601, 0xA602)]
 	public class TableApothicaire  : FurnitureContainer
 	{
 		[Constructable]
 		public TableApothicaire()
-			: base(0x998E)
+			: base(0xA5D0)
 		{
 			Weight = 25.0;
 			Name = "Table Apothicaire";
@@ -840,12 +840,12 @@ public class RackaVin : CraftableFurniture
 		}
 	}
 	[Furniture]
-[Flipable(0x9970, 0x9971)]
+[Flipable(0xA028, 0xA029)]
 public class RangementAlchimie : FurnitureContainer
 	{
 	[Constructable]
 	public RangementAlchimie()
-		: base(0x9970)
+		: base(0xA028)
 	{
 		Weight = 25.0;
 		Name = "Armoire Alchimiste";
@@ -873,12 +873,12 @@ public class RangementAlchimie : FurnitureContainer
 	}
 }
 	[Furniture]
-	[Flipable(0x9957, 0x9958, 0x9959, 0x995A, 0x995B, 0x995C)]
+	[Flipable(0x9F52, 0x9F53, 0x9F54, 0x9F58, 0x9F59, 0x9F5A)]
 	public class TableBrasseur : CraftableFurniture
 	{
 		[Constructable]
 		public TableBrasseur()
-			: base(0x9957)
+			: base(0x9F52)
 		{
 			Weight = 10.0;
 			Name = "Table de Brasseur";
@@ -936,12 +936,12 @@ public class RangementAlchimie : FurnitureContainer
 
 		}
 	}
-	[Flipable(0x997A, 0x997B)]
+	[Flipable(0xA5C6, 0xA5C7)]
 	public class ItemAlchimie : CraftableFurniture
 	{
 		[Constructable]
 		public ItemAlchimie()
-			: base(0x997B)
+			: base(0xA5C6)
 		{
 			Weight = 10.0;
 			Name = "Nécessaire d'alchimie";
@@ -971,7 +971,7 @@ public class RangementAlchimie : FurnitureContainer
 	{
 		[Constructable]
 		public GoldPile1()
-			: base(0x9976)
+			: base(0xA5F3)
 		{
 			Weight = 15.0;
 			Name = "Trésor";
@@ -1007,7 +1007,7 @@ public class RangementAlchimie : FurnitureContainer
 	{
 		[Constructable]
 		public GoldPile2()
-			: base(0x9977)
+			: base(0xA5F4)
 		{
 			Weight = 15.0;
 			Name = "Trésor";

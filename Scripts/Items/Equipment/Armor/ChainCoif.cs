@@ -8,7 +8,8 @@ namespace Server.Items
             : base(0x13BB)
         {
             Weight = 1.0;
-        }
+			Name = "Casque";
+		}
 
         public ChainCoif(Serial serial)
             : base(serial)

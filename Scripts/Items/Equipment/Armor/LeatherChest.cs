@@ -11,7 +11,8 @@ namespace Server.Items
             : base(0x13CC)
         {
             Weight = 6.0;
-        }
+			Name = "Plastron Cuir";
+		}
 
         public LeatherChest(Serial serial)
             : base(serial)

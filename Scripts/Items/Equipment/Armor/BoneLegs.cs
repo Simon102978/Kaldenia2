@@ -21,7 +21,8 @@ namespace Server.Items
             : base(0x1452)
         {
             Weight = 3.0;
-        }
+			Name = "Jambières Os";
+		}
 
         public BoneLegs(Serial serial)
             : base(serial)

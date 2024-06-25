@@ -21,7 +21,8 @@ namespace Server.Items
             : base(0x144F)
         {
             Weight = 6.0;
-        }
+			Name = "Plastron Os";
+		}
 
         public BoneChest(Serial serial)
             : base(serial)

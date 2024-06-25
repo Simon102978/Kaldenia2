@@ -24,7 +24,8 @@ namespace Server.Items
             : base(0x13C6)
         {
             Weight = 1.0;
-        }
+			Name = "Gants Cuir";
+		}
 
         public LeatherGloves(Serial serial)
             : base(serial)

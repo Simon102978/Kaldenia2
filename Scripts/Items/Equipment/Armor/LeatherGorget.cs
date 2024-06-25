@@ -7,7 +7,8 @@ namespace Server.Items
             : base(0x13C7)
         {
             Weight = 1.0;
-        }
+			Name = "Gorget Cuir";
+		}
 
         public LeatherGorget(Serial serial)
             : base(serial)

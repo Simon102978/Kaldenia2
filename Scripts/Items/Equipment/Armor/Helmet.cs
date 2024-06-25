@@ -7,7 +7,8 @@ namespace Server.Items
             : base(0x140A)
         {
             Weight = 5.0;
-        }
+			Name = "Casque";
+		}
 
         public Helmet(Serial serial)
             : base(serial)

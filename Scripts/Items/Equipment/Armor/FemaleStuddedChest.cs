@@ -8,7 +8,8 @@ namespace Server.Items
             : base(0x1C02)
         {
             Weight = 6.0;
-        }
+			Name = "Plastron femme Cuir clouté";
+		}
 
         public FemaleStuddedChest(Serial serial)
             : base(serial)

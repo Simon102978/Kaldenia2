@@ -9,6 +9,7 @@ namespace Server.Items
             : base(0x9A96)
         {
             LootType = LootType.Blessed;
+			Name = "Machine à espresso";
         }
 
         public SteamPoweredBeverageMaker(Serial serial)

@@ -19,7 +19,8 @@ namespace Server.Items
             : base(0x140C)
         {
             Weight = 5.0;
-        }
+			Name = "Casque";
+		}
 
         public Bascinet(Serial serial)
             : base(serial)

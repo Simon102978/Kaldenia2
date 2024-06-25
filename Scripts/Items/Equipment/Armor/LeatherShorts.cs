@@ -11,7 +11,8 @@ namespace Server.Items
             : base(0x1C00)
         {
             Weight = 3.0;
-        }
+			Name = "Short Cuir";
+		}
 
         public LeatherShorts(Serial serial)
             : base(serial)

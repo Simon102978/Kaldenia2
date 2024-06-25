@@ -8,7 +8,8 @@ namespace Server.Items
             : base(0x1C0C)
         {
             Weight = 1.0;
-        }
+			Name = "Buste femme cuir clouté";
+		}
 
         public StuddedBustierArms(Serial serial)
             : base(serial)

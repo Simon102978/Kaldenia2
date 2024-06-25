@@ -11,7 +11,8 @@ namespace Server.Items
             : base(0x1411)
         {
             Weight = 7.0;
-        }
+			Name = "Jambières Plaque";
+		}
 
         public PlateLegs(Serial serial)
             : base(serial)

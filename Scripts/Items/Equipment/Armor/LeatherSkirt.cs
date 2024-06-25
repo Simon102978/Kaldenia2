@@ -11,7 +11,8 @@ namespace Server.Items
             : base(0x1C08)
         {
             Weight = 1.0;
-        }
+			Name = "Jupe Cuir";
+		}
 
         public LeatherSkirt(Serial serial)
             : base(serial)

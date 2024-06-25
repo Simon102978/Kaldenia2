@@ -7,7 +7,8 @@ namespace Server.Items
             : base(0x1413)
         {
             Weight = 2.0;
-        }
+			Name = "Gorget Plaque";
+		}
 
         public PlateGorget(Serial serial)
             : base(serial)

@@ -9,7 +9,8 @@ namespace Server.Items
             : base(0x1408)
         {
             Weight = 5.0;
-        }
+			Name = "Casque";
+		}
 
         public CloseHelm(Serial serial)
             : base(serial)

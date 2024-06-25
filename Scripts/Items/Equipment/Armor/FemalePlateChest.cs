@@ -11,7 +11,8 @@ namespace Server.Items
             : base(0x1C04)
         {
             Weight = 4.0;
-        }
+			Name = "Plastron Femme Plaque";
+		}
 
         public FemalePlateChest(Serial serial)
             : base(serial)

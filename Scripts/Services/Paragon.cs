@@ -3,7 +3,8 @@ using System;
 
 namespace Server.Mobiles
 {
-    public class Paragon
+
+	public class Paragon
     {
         public static double ChestChance = 0;// Chance that a paragon will carry a paragon chest
         public static double ChocolateIngredientChance = 0;// Chance that a paragon will drop a chocolatiering ingredient
@@ -31,7 +32,8 @@ namespace Server.Mobiles
 	*/
 
 		};
-        public static int Hue = 0xB1B;// Paragon hue
+
+		public static int Hue = 0X6F1;// Paragon hue
 
         // Buffs
         public static double HitsBuff = 5.0;
@@ -63,6 +65,7 @@ namespace Server.Mobiles
             bc.Mana = bc.ManaMax;
             bc.Stam = bc.StamMax;
 			bc.Title = "Envoutée";
+			
 
 			for (int i = 0; i < bc.Skills.Length; i++)
             {

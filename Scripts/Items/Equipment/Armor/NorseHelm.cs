@@ -9,7 +9,8 @@ namespace Server.Items
             : base(0x140E)
         {
             Weight = 5.0;
-        }
+			Name = "Casque";
+		}
 
         public NorseHelm(Serial serial)
             : base(serial)

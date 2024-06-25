@@ -8,7 +8,8 @@ namespace Server.Items
             : base(0x13DC)
         {
             Weight = 4.0;
-        }
+			Name = "Brassards cuir clouté";
+		}
 
         public StuddedArms(Serial serial)
             : base(serial)

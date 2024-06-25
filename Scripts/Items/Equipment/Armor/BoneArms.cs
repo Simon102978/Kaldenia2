@@ -21,7 +21,8 @@ namespace Server.Items
             : base(0x144E)
         {
             Weight = 2.0;
-        }
+			Name = "Brassards Os";
+		}
 
         public BoneArms(Serial serial)
             : base(serial)

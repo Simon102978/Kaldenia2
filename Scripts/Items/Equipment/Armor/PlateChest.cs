@@ -11,7 +11,8 @@ namespace Server.Items
             : base(0x1415)
         {
             Weight = 10.0;
-        }
+			Name = "Plastron Plaque";
+		}
 
         public PlateChest(Serial serial)
             : base(serial)

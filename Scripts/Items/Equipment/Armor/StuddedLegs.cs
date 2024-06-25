@@ -8,7 +8,8 @@ namespace Server.Items
             : base(0x13DA)
         {
             Weight = 5.0;
-        }
+			Name = "Jambières cuir clouté";
+		}
 
         public StuddedLegs(Serial serial)
             : base(serial)

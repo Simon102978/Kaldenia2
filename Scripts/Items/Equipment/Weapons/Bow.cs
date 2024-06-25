@@ -11,7 +11,8 @@ namespace Server.Items
         {
             Weight = 6.0;
             Layer = Layer.TwoHanded;
-        }
+			Name = "Arc";
+		}
 
         public Bow(Serial serial)
             : base(serial)

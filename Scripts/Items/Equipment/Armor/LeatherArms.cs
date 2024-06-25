@@ -11,7 +11,8 @@ namespace Server.Items
             : base(0x13CD)
         {
             Weight = 2.0;
-        }
+			Name = "Brassards Cuir";
+		}
 
         public LeatherArms(Serial serial)
             : base(serial)

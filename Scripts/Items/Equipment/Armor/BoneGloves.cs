@@ -21,7 +21,8 @@ namespace Server.Items
             : base(0x1450)
         {
             Weight = 2.0;
-        }
+			Name = "Gants Os";
+		}
 
         public BoneGloves(Serial serial)
             : base(serial)

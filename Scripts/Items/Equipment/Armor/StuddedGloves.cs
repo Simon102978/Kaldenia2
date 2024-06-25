@@ -8,7 +8,8 @@ namespace Server.Items
             : base(0x13D5)
         {
             Weight = 1.0;
-        }
+			Name = "Gants cuir clouté";
+		}
 
         public StuddedGloves(Serial serial)
             : base(serial)

@@ -8,7 +8,7 @@ namespace Server.Items
 {
 	public class CoffeeKeg : Item, ICraftable
 	{
-		public static readonly TimeSpan CheckDelay = TimeSpan.FromDays( 7.0 );
+		public static readonly TimeSpan CheckDelay = TimeSpan.FromDays( 1.0 );
 
 		private int m_Held;
 		private Mobile m_Crafter;

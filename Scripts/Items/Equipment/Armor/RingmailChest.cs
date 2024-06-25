@@ -8,7 +8,8 @@ namespace Server.Items
             : base(0x13EC)
         {
             Weight = 15.0;
-        }
+			Name = "Plastron Anneaux";
+		}
 
         public RingmailChest(Serial serial)
             : base(serial)

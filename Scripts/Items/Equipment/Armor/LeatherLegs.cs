@@ -11,7 +11,8 @@ namespace Server.Items
             : base(0x13CB)
         {
             Weight = 4.0;
-        }
+			Name = "Jambières Cuir";
+		}
 
         public LeatherLegs(Serial serial)
             : base(serial)

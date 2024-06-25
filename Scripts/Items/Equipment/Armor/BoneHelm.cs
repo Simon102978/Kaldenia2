@@ -20,7 +20,8 @@ namespace Server.Items
             : base(0x1451)
         {
             Weight = 3.0;
-        }
+			Name = "Casque Os";
+		}
 
         public BoneHelm(Serial serial)
             : base(serial)

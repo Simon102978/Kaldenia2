@@ -11,6 +11,7 @@ namespace Server.Items
             : base(0x1C06)
         {
             Weight = 1.0;
+			Name = "Plastron femme Cuir";
         }
 
         public FemaleLeatherChest(Serial serial)

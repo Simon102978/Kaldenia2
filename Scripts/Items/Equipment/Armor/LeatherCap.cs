@@ -8,7 +8,8 @@ namespace Server.Items
             : base(0x1DB9)
         {
             Weight = 2.0;
-        }
+			Name = "Casque Cuir";
+		}
 
         public LeatherCap(Serial serial)
             : base(serial)

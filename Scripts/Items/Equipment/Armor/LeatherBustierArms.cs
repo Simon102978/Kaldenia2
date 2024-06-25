@@ -11,7 +11,8 @@ namespace Server.Items
             : base(0x1C0A)
         {
             Weight = 1.0;
-        }
+			Name = "Buste femme Cuir";
+		}
 
         public LeatherBustierArms(Serial serial)
             : base(serial)

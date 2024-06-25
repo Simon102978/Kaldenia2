@@ -8,6 +8,7 @@ namespace Server.Items
             : base(0x13EE)
         {
             Weight = 15.0;
+			Name = "Brassards Anneaux";
         }
 
         public RingmailArms(Serial serial)

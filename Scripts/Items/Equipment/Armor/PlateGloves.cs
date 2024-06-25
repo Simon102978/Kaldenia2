@@ -11,7 +11,8 @@ namespace Server.Items
             : base(0x1414)
         {
             Weight = 2.0;
-        }
+			Name = "Gants Plaque";
+		}
 
         public PlateGloves(Serial serial)
             : base(serial)

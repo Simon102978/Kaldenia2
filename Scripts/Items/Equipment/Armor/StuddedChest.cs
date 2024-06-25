@@ -8,7 +8,8 @@ namespace Server.Items
             : base(0x13DB)
         {
             Weight = 8.0;
-        }
+			Name = "Plastron cuir clouté";
+		}
 
         public StuddedChest(Serial serial)
             : base(serial)

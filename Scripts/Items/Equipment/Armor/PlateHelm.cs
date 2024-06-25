@@ -9,7 +9,8 @@ namespace Server.Items
             : base(0x1412)
         {
             Weight = 5.0;
-        }
+			Name = "Casque";
+		}
 
         public PlateHelm(Serial serial)
             : base(serial)
