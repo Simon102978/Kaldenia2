@@ -20,6 +20,7 @@ namespace Server.Custom
 		public static Dictionary<string, double> SellItems = new Dictionary<string, double>();
 
 		public static int Location { get; set; }
+		public static int LocationJardin { get; set; }
 
 
 		public static void AddSellItem(string items, double value)
@@ -83,7 +84,9 @@ namespace Server.Custom
                 FilePath,
                 writer =>
                 {
-                    writer.Write(5);
+                    writer.Write(6);
+
+					writer.Write(LocationJardin);
 
 					writer.Write(SlaveSell);
 
@@ -115,6 +118,11 @@ namespace Server.Custom
 
 					switch (version)
 					{
+						case 6:
+						{
+							LocationJardin = reader.ReadInt();
+							goto case 5;
+						}
 						case 5:
 							{
 								SlaveSell = reader.ReadInt();

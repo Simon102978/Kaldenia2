@@ -2379,7 +2379,7 @@ namespace Server.Multis
 
         public bool IsSameAccount(Mobile one, Mobile two)
         {
-            if (one == null || two == null)
+          /*  if (one == null || two == null)
                 return false;
 
             if (one == two)
@@ -2391,7 +2391,7 @@ namespace Server.Multis
             {
                 if (acct[i] != null && acct[i] == two)
                     return true;
-            }
+            }*/
 
             return false;
         }

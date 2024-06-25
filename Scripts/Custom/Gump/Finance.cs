@@ -16,7 +16,7 @@ namespace Server.Gumps
    
 
         public FinanceGump(CustomPlayerMobile from)
-            : base("Finance D'Alverton", 500, 500, true)
+            : base("Finance de Mirage", 500, 500, true)
         {
 
 			int x = XBase + 20;
@@ -42,6 +42,11 @@ namespace Server.Gumps
 			AddHtmlTexteColored(xAmountColum, y + line * scale, 120, "<p style = \"text-align:right> " + LocationTaxes.ToString("### ### ##0") + "</p>", "#FFFFFF");
 			line++;
 
+			AddHtmlTexteColored(xSecondColum, y + line * scale, 120, "Locations - Jardin:", "#FFFFFF");
+			int LocationJardin = CustomPersistence.LocationJardin;
+			AddHtmlTexteColored(xAmountColum, y + line * scale, 120, "<p style = \"text-align:right> " + LocationJardin.ToString("### ### ##0") + "</p>", "#FFFFFF");
+			line++;
+
 			AddHtmlTexteColored(xSecondColum, y + line * scale, 120, "Esclave:", "#FFFFFF");
 			int SlaveSell = CustomPersistence.SlaveSell;
 			AddHtmlTexteColored(xAmountColum, y + line * scale, 120, "<p style = \"text-align:right> " + SlaveSell.ToString("### ### ##0") + "</p>", "#FFFFFF");
@@ -49,7 +54,7 @@ namespace Server.Gumps
 			AddHorizontalLigne(xAmountColum - 20, y + line * scale + 15, 120);
 			line++;
 
-			int Revenue = TaxesGold + LocationTaxes + SlaveSell;
+			int Revenue = TaxesGold + LocationTaxes + SlaveSell + LocationJardin;
 			AddHtmlTexteColored(xSecondColum, y + line * scale, 200, "Total des revenues :", "#FFFFFF");
 			AddHtmlTexteColored(xAmountColum, y + line * scale, 120, "<p style = \"text-align:right> " + Revenue.ToString("### ### ##0") + "</p>", "#FFFFFF");
 

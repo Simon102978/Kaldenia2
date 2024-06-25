@@ -52,7 +52,7 @@ namespace Server.Items
                         x.Location = new Point3D(from.X + 3, from.Y - 2, from.Z);
                         x.Map = from.Map;
 
-                        from.SendGump(new GardenGump(from));
+                    //    from.SendGump(new GardenGump(from));
                         this.Delete();
                     }
                     else

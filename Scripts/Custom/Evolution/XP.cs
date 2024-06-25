@@ -38,6 +38,8 @@ namespace Server
 			CustomPersistence.ProchainePay = CustomPersistence.ProchainePay.AddDays(7);
 			Server.Custom.System.GuildRecruter.Pay();
 
+			BaseGarden.PayRent();
+
 		 }
       
 

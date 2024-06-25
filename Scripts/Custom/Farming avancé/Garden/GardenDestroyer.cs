@@ -27,23 +27,23 @@ namespace Server.Items
       private SecureGarden m_SecureGarden; 
    	  private GardenVerifier m_GardenVerifier; 
 
-            public override void OnDoubleClick( Mobile from ) 
+      public override void OnDoubleClick( Mobile from ) 
       { 
-      if (m_Player==from)
- 		{
-        if ( m_SecureGarden != null && m_SecureGarden.Items.Count > 0 )
- 		{
-         from.SendMessage( "You must remove the items from the Garden Secure before destroying your garden." );
-        } 
-     else 
-         { 
-		from.SendGump (new GardenDGump(this,from));
-		}
-         } 
-      else 
-         { 
-         from.SendMessage( "You don't appear to own this garden." ); 
-         } 
+            if (m_Player==from)
+            {
+            if ( m_SecureGarden != null && m_SecureGarden.Items.Count > 0 )
+            {
+            from.SendMessage( "You must remove the items from the Garden Secure before destroying your garden." );
+            } 
+            else 
+               { 
+            from.SendGump (new GardenDGump(this,from));
+            }
+               } 
+            else 
+               { 
+               from.SendMessage( "You don't appear to own this garden." ); 
+               } 
       } 
 
       public override void OnDelete() 

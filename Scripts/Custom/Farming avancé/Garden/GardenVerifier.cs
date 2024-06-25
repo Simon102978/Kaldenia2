@@ -18,7 +18,7 @@ namespace Server.Items
 		Name = "Garden Verifier (ADMIN/GM DO NOT DELETE)";
 		Weight = 0;
 		Movable = false;
-		Visible = false;
+		Visible = true;
 		}
 		
 		public GardenVerifier( Serial serial ) : base( serial )

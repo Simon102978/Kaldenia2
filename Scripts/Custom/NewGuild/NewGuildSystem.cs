@@ -212,7 +212,7 @@ namespace Server.Custom.System
                         {
                             foreach (CustomGuildMember kvp in guild.Members)
                             {
-								if (kvp.Mobile != null)
+								if (kvp.Mobile != null && kvp.Mobile.IsPlayer())
 								{
 									kvp.Mobile.GainSalaire(kvp);
 								}							
