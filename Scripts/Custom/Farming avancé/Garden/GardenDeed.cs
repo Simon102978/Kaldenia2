@@ -14,7 +14,7 @@ namespace Server.Items
         public GardenDeed()
             : base(3720) //pitchfork
         {
-            Name = "Bluegrass Garden Tool";
+            Name = "Outil placement de jardin";
             Hue = 1164;
             Weight = 50.0;
             LootType = LootType.Blessed;
@@ -24,7 +24,7 @@ namespace Server.Items
         {
             if (GardenCheck(from) == false)
             {
-                from.SendMessage("You already own a splendid garden.");
+                from.SendMessage("Vous possedez deja un magnifique jardin");
             }
             else
             {
@@ -35,8 +35,8 @@ namespace Server.Items
                     {
                         GardenFence v = new GardenFence();
                         v.Location = from.Location;
-                        v.Map = from.Map;
-
+						v.Map = from.Map;
+						
                         GardenGround y = new GardenGround();
                         y.Location = from.Location;
                         y.Map = from.Map;
@@ -45,11 +45,11 @@ namespace Server.Items
                         from.AddToBackpack(gardenverifier);
 
                         SecureGarden securegarden = new SecureGarden((PlayerMobile)from);
-                        securegarden.Location = new Point3D(from.X - 1, from.Y - 2, from.Z);
+                        securegarden.Location = new Point3D(from.X - 2, from.Y - 3, from.Z);
                         securegarden.Map = from.Map;
 
                         GardenDestroyer x = new GardenDestroyer(v, y, (PlayerMobile)from, (SecureGarden)securegarden, (GardenVerifier)gardenverifier);
-                        x.Location = new Point3D(from.X + 3, from.Y - 2, from.Z);
+                        x.Location = new Point3D(from.X + 4, from.Y - 3, from.Z);
                         x.Map = from.Map;
 
                     //    from.SendGump(new GardenGump(from));
@@ -57,7 +57,7 @@ namespace Server.Items
                     }
                     else
                     {
-                        from.SendMessage("You cannot errect your garden in this area.");
+                        from.SendMessage("Vous ne pouvez pas faire votre jardin ici.");
                     }
                 }
                 else
@@ -126,7 +126,7 @@ namespace Server.Items
                     count = count + 0;
                 }
             }
-            if (count > 0) //change this if you want players to own more than 1,2,3 etc.
+            if (count > 3) //change this if you want players to own more than 1,2,3 etc.
             {
                 return false;
             }

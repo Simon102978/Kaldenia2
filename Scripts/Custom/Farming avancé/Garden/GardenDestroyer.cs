@@ -12,13 +12,13 @@ namespace Server.Items
       [Constructable] 
       public GardenDestroyer( GardenFence gardenfence, GardenGround gardenground, PlayerMobile player, SecureGarden securegarden, GardenVerifier gardenverifier) 
       { 
-         Name = "'Clean-Up' Sign"; 
+         Name = "Pancarte de Nettoyage"; 
          m_Player = player; 
          m_GardenFence = gardenfence; 
          m_GardenGround = gardenground; 
 	     m_SecureGarden = securegarden;
          m_GardenVerifier = gardenverifier;
-         this.ItemID = 2981;
+         this.ItemID = 3081;
          this.Visible = true; 
       }
       private GardenFence m_GardenFence; 
@@ -29,6 +29,7 @@ namespace Server.Items
 
       public override void OnDoubleClick( Mobile from ) 
       { 
+<<<<<<< HEAD
             if (m_Player==from)
             {
             if ( m_SecureGarden != null && m_SecureGarden.Items.Count > 0 )
@@ -44,6 +45,23 @@ namespace Server.Items
                { 
                from.SendMessage( "You don't appear to own this garden." ); 
                } 
+=======
+      if (m_Player==from)
+ 		{
+        if ( m_SecureGarden != null && m_SecureGarden.Items.Count > 0 )
+ 		{
+         from.SendMessage( "Vous devez retirer vos items du coffre avant de détruire votre jardin!" );
+        } 
+     else 
+         { 
+		from.SendGump (new GardenDGump(this,from));
+		}
+         } 
+      else 
+         { 
+         from.SendMessage( "Vous ne semblez pas être le propriétaire de ce jardin!" ); 
+         } 
+>>>>>>> 13058bb23a2f96f9baaff223ed47d09d6ed6277c
       } 
 
       public override void OnDelete() 
