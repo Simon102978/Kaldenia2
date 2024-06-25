@@ -744,6 +744,8 @@ namespace Server.Engines.Harvest
 			return true;
 		}
 
+	
+
 		public override bool CheckHarvest(Mobile from, Item tool)
 		{
 			if (!base.CheckHarvest(from, tool))
@@ -1018,7 +1020,26 @@ namespace Server.Engines.Harvest
 		public override void FinishHarvesting(Mobile from, Item tool, HarvestDefinition def, object toHarvest, object locked)
 		{
 			//Lava fishing needs to have its own set of rules.
-			if (IsLavaHarvest(tool, toHarvest))
+			if (tool is IFishingPole)
+			{
+				IFishingPole pole = (IFishingPole)tool;
+
+				if (pole.Bait != Bait.Aucun && pole.Charge > 0)
+				{
+					pole.Charge--;
+
+					if (pole.Charge <= 0)
+					{
+						pole.Bait = Bait.Aucun;
+						from.SendMessage("Votre appât s'est détruit.");
+					}
+				}
+			}
+
+			base.FinishHarvesting(from, tool, def, toHarvest, locked);
+		
+
+if (IsLavaHarvest(tool, toHarvest))
 			{
 				from.EndAction(locked);
 

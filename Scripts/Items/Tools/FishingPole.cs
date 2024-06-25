@@ -1,18 +1,57 @@
 using Server.ContextMenus;
 using Server.Engines.Craft;
 using Server.Engines.Harvest;
+using Server.Targeting;
+using Server.Items;
 using System;
 using System.Collections.Generic;
 
+
+
+namespace Server.ContextMenus
+{
+	public class RemoveBaitEntry : ContextMenuEntry
+	{
+		private Mobile m_From;
+		public IFishingPole m_Pole;
+
+		public RemoveBaitEntry(Mobile from, IFishingPole pole) : base(163, 1)
+		{
+			m_From = from;
+			m_Pole = pole;
+		}
+
+		public override void OnClick()
+		{
+			if (!m_From.CheckAlive())
+				return;
+
+			if (m_Pole.Bait == Bait.Aucun || m_Pole.Charge <= 0)
+				return;
+
+			BaseBait newBait = BaseBait.CreateBait(m_Pole.Bait, m_Pole.Charge);
+
+			if (newBait != null)
+				m_From.AddToBackpack(newBait);
+
+			m_Pole.Bait = Bait.Aucun;
+			m_Pole.Charge = 0;
+
+			m_From.SendMessage("Vous enlevez l'appât.");
+		}
+	}
+}
 namespace Server.Items
 {
+
+
 	public interface IBaitable
 	{
 		Type BaitType { get; }
 		bool EnhancedBait { get; }
 	}
 
-	public class FishingPole : Item, IUsesRemaining, IResource, IQuality, IBaitable
+	public class FishingPole : Item, IFishingPole, IUsesRemaining, IResource, IQuality, IBaitable
 	{
 		private Type m_BaitType;
 		private bool m_EnhancedBait;
@@ -188,13 +227,33 @@ namespace Server.Items
 			set { m_LowerStatReq = value; InvalidateProperties(); }
 		}
 
+		private Bait m_Bait;
+		private int m_Charge;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public Bait Bait
+		{
+			get { return m_Bait; }
+			set { m_Bait = value; }
+		}
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Charge
+		{
+			get { return m_Charge; }
+			set { m_Charge = value; }
+		}
+
 		[Constructable]
 		public FishingPole()
 			: base(0x0DC0)
 		{
+			Name = "canne à pêche";
 			Layer = Layer.OneHanded;
 			Weight = 8.0;
 			Resource = CraftResource.RegularWood;
+			Bait = m_Bait;
+			Charge = m_Charge;
 
 			m_BaitType = null;
 			m_HookType = HookType.None;
@@ -204,6 +263,20 @@ namespace Server.Items
 			ShowUsesRemaining = true;
 			UsesRemaining = 50;
 		}
+
+
+		public override void OnAosSingleClick(Mobile from)
+		{
+			base.OnAosSingleClick(from);
+
+			if (m_Bait != Bait.Aucun && m_Charge > 0)
+			{
+				LabelTo(from, String.Format("[{0} / {1} charge{2}]", BaseBait.m_Material[(int)m_Bait], m_Charge, m_Charge > 1 ? "s" : ""));
+			}
+		}
+		
+
+		
 
 		public void ScaleUses()
 		{
@@ -276,6 +349,10 @@ namespace Server.Items
 
 		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
 		{
+			if (from.Alive && m_Bait != Bait.Aucun && m_Charge > 0)
+			{
+				list.Add(new RemoveBaitEntry(from, this));
+			}
 			base.GetContextMenuEntries(from, list);
 
 			BaseHarvestTool.AddContextMenuEntries(from, this, list, Fishing.System);
@@ -494,7 +571,10 @@ namespace Server.Items
 		{
 			base.Serialize(writer);
 
-			writer.Write(4); // version
+			writer.Write(6); // version
+
+			writer.Write((int)m_Bait);
+			writer.Write(m_Charge);
 
 			writer.Write(m_PlayerConstructed);
 			writer.Write(m_LowerStatReq);
@@ -532,6 +612,10 @@ namespace Server.Items
 
 			switch (version)
 			{
+				case 5:
+						m_Bait = (Bait)reader.ReadInt();
+						m_Charge = reader.ReadInt();
+					goto case 4;
 				case 4:
 					m_PlayerConstructed = reader.ReadBool();
 					m_LowerStatReq = reader.ReadInt();

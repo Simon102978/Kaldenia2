@@ -20,7 +20,7 @@ namespace Server.Engines.Quests
         {
             AddObjective(new ObtainObjective(typeof(MudPuppy), "Mud Puppy", 1, 0x9cc));
 
-            AddReward(new BaseReward(typeof(XenrrFishingPole), 1095066));
+            AddReward(new BaseReward(typeof(FishingPole), 1095066));
         }
 
         public override void Serialize(GenericWriter writer)
