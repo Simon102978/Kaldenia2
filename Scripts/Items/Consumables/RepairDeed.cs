@@ -11,7 +11,7 @@ namespace Server.Items
         Tailoring,
         Tinkering,
         Carpentry,
-        Fletching,
+    //    Fletching,
         Masonry,
         Glassblowing
     }

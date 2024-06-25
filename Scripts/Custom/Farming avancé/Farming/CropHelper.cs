@@ -79,8 +79,11 @@ namespace Server.Items.Crops
 			0x7D5, 0x7D8,
 		};
 
-		public static bool CheckCanGrow( BaseSeed seed, Map map, int x, int y )
+		public static bool CheckCanGrow( BaseSeed seed, Map map, Point3D p )
 		{
+			int x = p.X;
+			int y = p.Y;
+
 			if ( seed.CanGrowFarm && ValidateFarmLand( map, x, y ) ) return true;
 			if ( seed.CanGrowHouseTiles && ValidateHouseTiles( map, x, y ) ) return true;
 			if ( seed.CanGrowDirt && ValidateDirt( map, x, y ) ) return true;

@@ -98,7 +98,7 @@ namespace Server.Engines.Quests
         {
             SetSkill(SkillName.Anatomy, 120.0, 120.0);
             SetSkill(SkillName.Parry, 120.0, 120.0);
-            SetSkill(SkillName.Fletching, 120.0, 120.0);
+            SetSkill(SkillName.Carpentry, 120.0, 120.0);
             SetSkill(SkillName.Healing, 120.0, 120.0);
             SetSkill(SkillName.Tactics, 120.0, 120.0);
             SetSkill(SkillName.Archery, 120.0, 120.0);

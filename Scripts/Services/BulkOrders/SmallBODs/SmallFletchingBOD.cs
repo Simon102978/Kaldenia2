@@ -97,7 +97,7 @@ namespace Server.Engines.BulkOrders
         {
             SmallBulkEntry[] entries;
 
-            double theirSkill = BulkOrderSystem.GetBODSkill(m, SkillName.Fletching);
+            double theirSkill = BulkOrderSystem.GetBODSkill(m, SkillName.Carpentry);
             bool useMaterials = false;
 
             if (theirSkill < 30.0 || .20 > Utility.RandomDouble())

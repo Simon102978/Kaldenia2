@@ -429,7 +429,7 @@ namespace Server.Gumps
                 SkillName.Cartography,
                 SkillName.Carpentry,
                 SkillName.Cooking,
-                SkillName.Fletching,
+  
                 SkillName.Inscribe,
                 SkillName.Tailoring,
                 SkillName.Tinkering,
@@ -458,6 +458,7 @@ namespace Server.Gumps
             }),
             new SkillsGumpGroup("Miscellaneous", new SkillName[]
             {
+               SkillName.Botanique,
                 SkillName.Camping,
                 SkillName.Fishing,
                 SkillName.Focus,

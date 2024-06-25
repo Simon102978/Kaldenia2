@@ -57,7 +57,7 @@ namespace Server.Items
             new RepairBenchDefinition(DefTailoring.CraftSystem, RepairSkillType.Tailoring, 1044094, 0, 0),
             new RepairBenchDefinition(DefMasonry.CraftSystem, RepairSkillType.Masonry, 1072392, 0, 0),
             new RepairBenchDefinition(DefGlassblowing.CraftSystem, RepairSkillType.Glassblowing, 1072393, 0, 0),
-            new RepairBenchDefinition(DefBowFletching.CraftSystem, RepairSkillType.Fletching, 1015156, 0, 0)
+            new RepairBenchDefinition(DefBowFletching.CraftSystem, RepairSkillType.Carpentry, 1015156, 0, 0)
         };
 
         public static RepairBenchDefinition GetInfo(RepairSkillType type)
@@ -544,8 +544,8 @@ namespace Server.Items
             AddItem(20, 350, 0x1022);
             AddTooltip(1015156);
             AddButton(70, 337, 0x15E1, 0x15E5, 14, GumpButtonType.Reply, 0);
-            AddLabel(113, 337, 0x5F, string.Format("{0:F1}", GetSkillValue(RepairSkillType.Fletching)));
-            AddLabel(218, 337, 0x5F, string.Format("{0}", GetCharges(RepairSkillType.Fletching)));
+            AddLabel(113, 337, 0x5F, string.Format("{0:F1}", GetSkillValue(RepairSkillType.Carpentry)));
+            AddLabel(218, 337, 0x5F, string.Format("{0}", GetCharges(RepairSkillType.Carpentry)));
             AddButton(318, 337, 0x2716, 0x2716, 24, GumpButtonType.Reply, 0);
 
             AddButton(70, 407, 0x15E1, 0x15E5, 1, GumpButtonType.Reply, 0);

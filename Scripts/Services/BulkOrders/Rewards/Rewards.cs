@@ -1601,7 +1601,7 @@ namespace Server.Engines.BulkOrders
 
         private static Item CraftsmanTalisman(int type)
         {
-            return new MasterCraftsmanTalisman(type, 0x9E29, TalismanSkill.Fletching);
+            return new MasterCraftsmanTalisman(type, 0x9E29, TalismanSkill.Carpentry);
         }
 
         private static Item CreateRunicFletcherTools(int type)

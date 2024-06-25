@@ -298,7 +298,7 @@ namespace Server.Engines.BulkOrders
                 case BODType.Inscription: return SkillName.Inscribe;
                 case BODType.Tinkering: return SkillName.Tinkering;
                 case BODType.Cooking: return SkillName.Cooking;
-                case BODType.Fletching: return SkillName.Fletching;
+                case BODType.Fletching: return SkillName.Carpentry;
                 case BODType.Carpentry: return SkillName.Carpentry;
             }
         }

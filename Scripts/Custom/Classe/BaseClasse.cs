@@ -28,7 +28,8 @@ namespace Server
 			SkillName.Fishing,
 			SkillName.Lumberjacking,
 			SkillName.Mining,
-			SkillName.MagicResist
+			SkillName.MagicResist,
+			SkillName.Botanique,
 		};
 
 
@@ -78,7 +79,6 @@ namespace Server
 			SkillName.Chivalry,
 			SkillName.Ninjitsu,
 			SkillName.Throwing,
-			SkillName.Fletching,
 			SkillName.Imbuing,
 			SkillName.Mysticism,
 			SkillName.Necromancy,

@@ -24,7 +24,7 @@ namespace Server.Items
     {
         Alchemy,
         Blacksmithy,
-        Fletching,
+     //   Fletching,
         Carpentry,
         Cartography,
         Cooking,
@@ -1392,7 +1392,7 @@ namespace Server.Items
             SkillName.Carpentry,
             SkillName.Cartography,
             SkillName.Cooking,
-            SkillName.Fletching,
+      //      SkillName.Fletching,
             SkillName.Inscribe,
             SkillName.Tailoring,
             SkillName.Tinkering,
@@ -1403,7 +1403,7 @@ namespace Server.Items
         {
             TalismanSkill.Alchemy,
             TalismanSkill.Blacksmithy,
-            TalismanSkill.Fletching,
+        //    TalismanSkill.Fletching,
             TalismanSkill.Carpentry,
             TalismanSkill.Cartography,
             TalismanSkill.Cooking,
@@ -1485,7 +1485,7 @@ namespace Server.Items
                 case SkillName.Carpentry: return TalismanSkill.Carpentry;
                 case SkillName.Cartography: return TalismanSkill.Cartography;
                 case SkillName.Cooking: return TalismanSkill.Cooking;
-                case SkillName.Fletching: return TalismanSkill.Fletching;
+          //      case SkillName.Fletching: return TalismanSkill.Fletching;
                 case SkillName.Inscribe: return TalismanSkill.Inscription;
                 case SkillName.Tailoring: return TalismanSkill.Tailoring;
                 case SkillName.Tinkering: return TalismanSkill.Tinkering;
@@ -1499,7 +1499,7 @@ namespace Server.Items
                 default:
                 case TalismanSkill.Alchemy: return SkillName.Alchemy;
                 case TalismanSkill.Blacksmithy: return SkillName.Blacksmith;
-                case TalismanSkill.Fletching: return SkillName.Fletching;
+         //       case TalismanSkill.Fletching: return SkillName.Fletching;
                 case TalismanSkill.Carpentry: return SkillName.Carpentry;
                 case TalismanSkill.Cartography: return SkillName.Cartography;
                 case TalismanSkill.Cooking: return SkillName.Cooking;

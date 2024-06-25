@@ -52,6 +52,7 @@ namespace Server.Items.Crops
 				from.SendMessage("Vous ne pouvez pas planter une graine lorsque vous êtes sur votre monture.");
 				return;
 			}
+
 			Point3D m_pnt = from.Location;
 			Map m_map = from.Map;
 
@@ -60,28 +61,54 @@ namespace Server.Items.Crops
 				from.SendLocalizedMessage(1042010);
 				return;
 			}
-			else if (!CropHelper.CheckCanGrow(this, m_map, m_pnt.X, m_pnt.Y))
+
+			BaseGarden garden = BaseGarden.FindGardenAt(m_pnt,m_map);
+
+			if (garden == null)
+			{
+				from.SendMessage("Cette graine ne poussera pas hors d'un jardin.");
+				return;
+			}	
+			else if (!garden.Public && garden.Owner != from )
+			{
+				from.SendMessage("Ce jardin est privé et il ne vous appartient pas.");
+				return;
+			}
+			else if (!CropHelper.CheckCanGrow(this, m_map, m_pnt))
 			{
 				from.SendMessage("Cette graine ne poussera pas ici.");
 				return;
 			}
 			ArrayList Seedshere = CropHelper.CheckCrop(m_pnt, m_map, 0);
+
 			if (Seedshere.Count > 0)
 			{
 				from.SendMessage("Il y a déjà un plant qui pousse ici.");
 				return;
 			}
 			ArrayList Seedsnear = CropHelper.CheckCrop(m_pnt, m_map, 1);
+
 			if ((Seedsnear.Count > 1))
 			{
 				from.SendMessage("Il y a trop de plants à proximité.");
 				return;
 			}
+
+			if (true)
+			{
+				
+			}
+
 			if (this.BumpZ)
 				++m_pnt.Z;
 			if (!from.Mounted)
 				from.Animate(32, 5, 1, true, false, 0);
+
+
+
 			from.SendMessage("Vous plantez la graine.");
+
+
 			this.Consume();
 
 			Item item = (BaseSeedling)Activator.CreateInstance(seedType, new object[] { from });
