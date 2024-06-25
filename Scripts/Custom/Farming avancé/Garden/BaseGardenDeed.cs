@@ -17,7 +17,7 @@ namespace Server.Items
         public BaseGardenDeed()
             : base(3720) //pitchfork
         {
-         
+            Name = "Outil placement de jardin";
             Hue = 1164;
             Weight = 50.0;
             LootType = LootType.Blessed;
