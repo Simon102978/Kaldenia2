@@ -4,6 +4,11 @@ namespace Server.Items.Crops
 	{
 		public override bool CanGrowGarden{ get{ return true; } }
 
+		public override double MinSkill{ get { return 20.0; } }
+
+		public override double MaxSkill{ get { return 50.0; } }
+
+
 		[Constructable]
 		public GarlicSeed() : this( 1 ) { }
 

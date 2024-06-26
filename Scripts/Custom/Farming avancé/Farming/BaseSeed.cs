@@ -13,6 +13,10 @@ namespace Server.Items.Crops
 		public virtual bool CanGrowSand { get { return Config.Get("Farming.CanGrowSand", false); } }
 		public virtual bool CanGrowGarden { get { return Config.Get("Farming.CanGrowGarden", true); } }
 
+		public virtual double MinSkill{ get { return 0.0; } }
+
+		public virtual double MaxSkill{ get { return 120.0; } }
+
 		public virtual TimeSpan SowerPickTime { get { return TimeSpan.FromDays(Config.Get("Farming.SowerPickTime", (14))); } }
 
 		public virtual bool PlayerCanDestroy { get { return Config.Get("Farming.PlayerCanDestroy", true); } }
@@ -94,27 +98,41 @@ namespace Server.Items.Crops
 				return;
 			}
 
-			if (true)
+			if (from.NextSkillTime > Core.TickCount )
 			{
-				
+				from.SendMessage("Vous devez attendre avant de planter d'autres plantes.");
+				return;
 			}
 
-			if (this.BumpZ)
-				++m_pnt.Z;
-			if (!from.Mounted)
-				from.Animate(32, 5, 1, true, false, 0);
+			
+			if (from.CheckSkill(SkillName.Botanique,MinSkill,MaxSkill))
+			{
+				if (this.BumpZ)
+					++m_pnt.Z;
+				if (!from.Mounted)
+					from.Animate(32, 5, 1, true, false, 0);
+
+      		
+				from.SendMessage("Vous plantez la graine.");
 
 
+				this.Consume();
 
-			from.SendMessage("Vous plantez la graine.");
+				Item item = (BaseSeedling)Activator.CreateInstance(seedType, new object[] { from });
+				item.Location = m_pnt;
+				item.Map = m_map;
 
-
-			this.Consume();
-
-			Item item = (BaseSeedling)Activator.CreateInstance(seedType, new object[] { from });
-			item.Location = m_pnt;
-			item.Map = m_map;
+				
+			}
+			else
+			{
+				from.SendMessage("Vous échouez à planter la graine.");
+			}
+		
+			from.NextSkillTime = Core.TickCount + 1500;
 		}
+
+
 
 		public override void Serialize(GenericWriter writer)
 		{

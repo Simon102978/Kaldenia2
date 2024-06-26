@@ -3,6 +3,10 @@ namespace Server.Items.Crops
 	public class RedMushroomSeed : BaseSeed
 	{
 		public override bool CanGrowGarden{ get{ return true; } }
+		public override double MinSkill{ get { return 0.0; } }
+
+		public override double MaxSkill{ get { return 40.0; } }
+
 
 		[Constructable]
 		public RedMushroomSeed() : this( 1 ) { }

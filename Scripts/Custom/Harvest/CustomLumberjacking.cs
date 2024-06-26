@@ -98,7 +98,7 @@ namespace Server.Engines.Harvest
 				new HarvestResource(00.0, 00.0, 100.0, "Plainois",      typeof(PlainoisLog)),
 				new HarvestResource(20.0, 20.0, 100.0, "Forestier",     typeof(ForestierLog)),
 				new HarvestResource(20.0, 20.0, 100.0, "Collinois",     typeof(CollinoisLog)),
-				new HarvestResource(40.0, 40.0, 100.0, "Désertique",    typeof(DesertiqueLog)),
+				new HarvestResource(40.0, 40.0, 100.0, "DÃ©sertique",    typeof(DesertiqueLog)),
 				new HarvestResource(40.0, 40.0, 100.0, "Savanois",      typeof(SavanoisLog)),
 				new HarvestResource(60.0, 60.0, 100.0, "Montagnard",    typeof(MontagnardLog)),
 				new HarvestResource(60.0, 60.0, 100.0, "Volcanique",    typeof(VolcaniqueLog)),

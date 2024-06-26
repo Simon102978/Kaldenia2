@@ -438,7 +438,7 @@ namespace Server.Misc
 
         private static void CheckReduceSkill(Skills skills, int toGain, Skill gainSKill)
         {
-         /*   if (skills.Total / skills.Cap >= Utility.RandomDouble())
+            if (skills.Total / skills.Cap >= Utility.RandomDouble())
             {
                 foreach (Skill toLower in skills)
                 {
@@ -448,7 +448,7 @@ namespace Server.Misc
                         break;
                     }
                 }
-            }*/
+            }
         }
 
         public static void TryStatGain(SkillInfo info, Mobile from)

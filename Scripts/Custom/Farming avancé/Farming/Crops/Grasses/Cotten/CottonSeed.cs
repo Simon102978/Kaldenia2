@@ -4,6 +4,11 @@
     {
         public override bool CanGrowGarden { get { return true; } }
 
+    	public override double MinSkill{ get { return 30.0; } }
+
+		public override double MaxSkill{ get { return 60.0; } }
+
+
         [Constructable]
         public CottonSeed() : this(1) { }
 
