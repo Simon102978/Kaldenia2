@@ -37,6 +37,7 @@ namespace Server.Items.Crops
 
 	public class GarlicSeedling : BaseSeedling
 	{
+		
 		[Constructable]
 		public GarlicSeedling( Mobile sower ) : base( 0xC68 )
 		{
@@ -65,6 +66,10 @@ namespace Server.Items.Crops
 
 	public class GarlicCrop : BaseCrop
 	{
+
+		public override double MinSkill{ get { return 20.0; } }
+
+		public override double MaxSkill{ get { return 50.0; } }
 		[Constructable]
 		public GarlicCrop() : this(null) { }
 

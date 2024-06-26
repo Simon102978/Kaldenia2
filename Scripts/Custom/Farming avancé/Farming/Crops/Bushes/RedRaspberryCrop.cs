@@ -73,6 +73,10 @@ namespace Server.Items.Crops
 
 	public class RedRaspberryCrop : BaseCrop
 	{
+
+		public override double MinSkill{ get { return 10.0; } }
+
+		public override double MaxSkill{ get { return 50.0; } }
 		[Constructable]
 		public RedRaspberryCrop() : this(null) { }
 

@@ -73,6 +73,10 @@ namespace Server.Items.Crops
 
 	public class BananaCrop : BaseCrop
 	{
+
+		public override double MinSkill{ get { return 20.0; } }
+
+		public override double MaxSkill{ get { return 50.0; } }
 		[Constructable]
 		public BananaCrop() : this(null) { }
 

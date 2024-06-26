@@ -73,6 +73,10 @@
 
 	public class CeleryCrop : BaseCrop
 	{
+
+		public override double MinSkill{ get { return 10.0; } }
+
+		public override double MaxSkill{ get { return 40.0; } }
 		[Constructable]
 		public CeleryCrop() : this(null) { }
 

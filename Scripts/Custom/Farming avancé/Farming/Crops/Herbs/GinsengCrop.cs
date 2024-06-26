@@ -65,6 +65,10 @@ namespace Server.Items.Crops
 
 	public class GinsengCrop : BaseCrop
 	{
+
+		public override double MinSkill{ get { return 20.0; } }
+
+		public override double MaxSkill{ get { return 50.0; } }
 		[Constructable]
 		public GinsengCrop() : this(null) { }
 

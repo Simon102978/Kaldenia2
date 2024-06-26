@@ -67,6 +67,10 @@ namespace Server.Items.Crops
 
 	public class PinkCarnationCrop : BaseCrop
 	{
+
+		public override double MinSkill{ get { return 10.0; } }
+
+		public override double MaxSkill{ get { return 50.0; } }
 		[Constructable]
 		public PinkCarnationCrop() : this(null) { }
 

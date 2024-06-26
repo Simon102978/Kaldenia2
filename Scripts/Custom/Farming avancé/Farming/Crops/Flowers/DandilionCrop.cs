@@ -67,6 +67,10 @@ namespace Server.Items.Crops
 
 	public class DandelionCrop : BaseCrop
 	{
+
+		public override double MinSkill{ get { return 10.0; } }
+
+		public override double MaxSkill{ get { return 50.0; } }
 		private const int max = 1;
 		private int fullGraphic;
 		private int pickedGraphic;

@@ -2,6 +2,10 @@ namespace Server.Items.Crops
 {
     public class HayCrop : BaseCrop
     {
+
+		public override double MinSkill{ get { return 20.0; } }
+
+		public override double MaxSkill{ get { return 55.0; } }
         [Constructable]
         public HayCrop() : this(null) { }
 

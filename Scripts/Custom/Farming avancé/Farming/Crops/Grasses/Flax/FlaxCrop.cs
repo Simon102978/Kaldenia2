@@ -2,6 +2,10 @@ namespace Server.Items.Crops
 {
     public class FlaxCrop : BaseCrop
     {
+
+		public override double MinSkill{ get { return 30.0; } }
+
+		public override double MaxSkill{ get { return 60.0; } }
         [Constructable]
         public FlaxCrop() : this(null) { }
 

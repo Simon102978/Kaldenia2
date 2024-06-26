@@ -65,6 +65,10 @@ namespace Server.Items.Crops
 
 	public class CornCrop : BaseCrop
 	{
+
+		public override double MinSkill{ get { return 10.0; } }
+
+		public override double MaxSkill{ get { return 40.0; } }
 		[Constructable]
 		public CornCrop() : this(null) { }
 

@@ -16,6 +16,14 @@ namespace Server.Items.Crops
 		public virtual TimeSpan SowerPickTime { get { return TimeSpan.FromDays(Config.Get("Farming.SowerPickTime", (14))); } }
 
 		public virtual bool PlayerCanDestroy { get { return Config.Get("Farming.PlayerCanDestroy", true); } }
+
+		public virtual double MinSkill{ get { return 0.0; } }
+
+		public virtual double MaxSkill{ get { return 120.0; } }
+
+		[CommandProperty(AccessLevel.GameMaster)]
+
+		public virtual bool NotGardenOnly  { get; set; }
 		private bool i_bumpZ = false;
 
 		public bool BumpZ { get { return i_bumpZ; } set { i_bumpZ = value; } }
@@ -111,6 +119,27 @@ namespace Server.Items.Crops
 				return; 
 			}
 
+			if (NotGardenOnly)
+			{
+				BaseGarden garden = BaseGarden.FindGardenAt(Location,Map);
+
+				if (garden == null)
+				{
+					from.SendMessage("Cette plante aurait du être dans un jardin.");
+
+					return;
+				}	
+				else if (!garden.Public && garden.Owner != from )
+				{
+					from.SendMessage("Ce jardin est privé et il ne vous appartient pas.");
+					return;
+				}
+
+			}
+
+			
+
+
 			if (DateTime.UtcNow > LastPick.AddSeconds(3))
 			{
 				LastPick = DateTime.UtcNow;
@@ -134,28 +163,27 @@ namespace Server.Items.Crops
 					from.SendMessage("Il n'y a rien à récolter ici.");
 					return;
 				}
-					
+
 				from.Direction = from.GetDirectionTo(this);
 				from.Animate(from.Mounted ? 29 : 32, 5, 1, true, false, 0);
 				LastSowerVisit = DateTime.UtcNow;
 
-				if (cookValue > Yield) 
-					cookValue = Yield + 1;
+				int amount = Utility.RandomMinMax(1, 4);
 
-				int amount = Utility.RandomMinMax(cookValue - 4, cookValue);
 
-				if (amount <= 0)
+				if (from.CheckSkill(SkillName.Botanique,MinSkill,MaxSkill))
+				{
+					Item item = (Item)Activator.CreateInstance(result);
+					item.Amount = amount;
+					from.AddToBackpack(item);
+					from.SendMessage("Vous récoltez {0} {1}{2}!", amount, item.Name, amount == 1 ? "" : "s");					
+				}
+				else
 				{
 					from.SendMessage("Votre récolte ne porte pas fruit.");
-					return;
 				}
 
 				Yield -= amount;
-
-				Item item = (Item)Activator.CreateInstance(result);
-				item.Amount = amount;
-				from.AddToBackpack(item);
-				from.SendMessage("Vous récoltez {0} {1}{2}!", amount, item.Name, amount == 1 ? "" : "s");
 
 				if (Yield < 1)
 					Delete();
@@ -165,7 +193,9 @@ namespace Server.Items.Crops
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-			writer.Write((int)0);
+			writer.Write((int)1);
+
+			writer.Write(NotGardenOnly);
 
 			writer.Write(Sower);
 		}
@@ -175,7 +205,21 @@ namespace Server.Items.Crops
 			base.Deserialize(reader);
 			int version = reader.ReadInt();
 
-			Sower = reader.ReadMobile();
+			switch (version)
+			{
+				case 1:
+				{
+					NotGardenOnly = reader.ReadBool();
+					goto case 0;
+				}
+				case 0:
+				{
+					Sower = reader.ReadMobile();
+					break;
+				}
+			}
+
+			
 		}
 	}
 }
