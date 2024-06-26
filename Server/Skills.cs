@@ -877,6 +877,8 @@ namespace Server
 			return "...";
 		}
 
+		
+
 		public static bool UseSkill(Mobile from, SkillName name)
 		{
 			return UseSkill(from, (int)name);
