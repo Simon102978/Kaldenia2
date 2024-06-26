@@ -877,15 +877,7 @@ namespace Server
 			return "...";
 		}
 
-		public static bool IsActive(SkillName skillName)
-		{
-			return skillName == SkillName.Alchemy || skillName == SkillName.Anatomy || skillName == SkillName.AnimalTaming || skillName == SkillName.Archery || skillName == SkillName.ArmsLore || skillName == SkillName.Blacksmith
-				 || skillName == SkillName.Cooking || skillName == SkillName.EvalInt || skillName == SkillName.Fencing || skillName == SkillName.Healing
-				 || skillName == SkillName.Hiding || skillName == SkillName.Inscribe || skillName == SkillName.Lumberjacking || skillName == SkillName.Macing || skillName == SkillName.Magery
-				 || skillName == SkillName.MagicResist || skillName == SkillName.Meditation || skillName == SkillName.Mining || skillName == SkillName.Musicianship || skillName == SkillName.Necromancy
-				 || skillName == SkillName.Parry || skillName == SkillName.Poisoning || skillName == SkillName.SpiritSpeak || skillName == SkillName.Snooping || skillName == SkillName.Swords || skillName == SkillName.Tactics
-				 || skillName == SkillName.Tailoring || skillName == SkillName.Tinkering || skillName == SkillName.Tracking || skillName == SkillName.Wrestling;
-		}
+		
 
 		public static bool UseSkill(Mobile from, SkillName name)
 		{
