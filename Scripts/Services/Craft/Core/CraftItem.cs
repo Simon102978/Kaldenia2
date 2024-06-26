@@ -431,7 +431,7 @@ namespace Server.Engines.Craft
 			new[] { typeof( CrystallineFragments ), typeof( BrokenCrystals ), typeof( ShatteredCrystals ), typeof( ScatteredCrystals ), typeof( CrushedCrystals ), typeof( JaggedCrystals ), typeof( AncientPotteryFragments ) },
 			new[] { typeof( MedusaDarkScales ), typeof( MedusaLightScales ), typeof( RedScales ), typeof( BlueScales ), typeof( BlackScales ), typeof( YellowScales ), typeof( GreenScales ), typeof( WhiteScales ) },
 			new[] { typeof(Sausage), typeof(CookableSausage) },
-			new[] { typeof(Lettuce), typeof(FarmableLettuce) },
+			new[] { typeof(Lettuce) },
 			new[] { typeof(DarkYarn), typeof(LightYarn) }
 		};
 
@@ -1049,7 +1049,7 @@ namespace Server.Engines.Craft
 
 					if (subResource != null && from.Skills[craftSystem.MainSkill].Base < subResource.RequiredSkill)
 					{
-						message = $"Niveau requis de compétence: {subResource.RequiredSkill}% de {craftSystem.MainSkill}";
+						message = $"Niveau requis de compï¿½tence: {subResource.RequiredSkill}% de {craftSystem.MainSkill}";
 						return false;
 					}
 
@@ -1404,11 +1404,11 @@ namespace Server.Engines.Craft
 		{
 			int chance = Utility.Random(1, 10001);
 
-			double chanceLegendary = GetLegendaryChance(system, successChance, from); // chance légendaire augmentée de 0.002% par point d'expertise, max de 0.01%
-			double chanceEpic = GetEpicChance(system, successChance, from); // chance épique augmentée de 0.2% par point d'expertise, max de 1%
-			double chanceExceptional = GetExceptionalChance(system, successChance, from); // chance exceptionnelle augmentée de 4% par point d'expertise, max de 20%
+			double chanceLegendary = GetLegendaryChance(system, successChance, from); // chance lï¿½gendaire augmentï¿½e de 0.002% par point d'expertise, max de 0.01%
+			double chanceEpic = GetEpicChance(system, successChance, from); // chance ï¿½pique augmentï¿½e de 0.2% par point d'expertise, max de 1%
+			double chanceExceptional = GetExceptionalChance(system, successChance, from); // chance exceptionnelle augmentï¿½e de 4% par point d'expertise, max de 20%
 
-			// multiplier par 1000 pour obtenir un chiffre entier (0.002 étant la plus petite valeur (4/2000))
+			// multiplier par 1000 pour obtenir un chiffre entier (0.002 ï¿½tant la plus petite valeur (4/2000))
 			if (chance <= chanceLegendary * 1000)
 				return ItemQuality.Legendary;
 			else if (chance <= chanceEpic * 1000)

@@ -6,6 +6,11 @@ namespace Server.Items
     public abstract class FarmableCrop : Item
     {
         private bool m_Picked;
+
+
+        public virtual double SkillNecessaire => 0;
+
+
         public FarmableCrop(int itemID)
             : base(itemID)
         {
@@ -19,7 +24,21 @@ namespace Server.Items
 
         public abstract Item GetCropObject();
 
-        public abstract int GetPickedID();
+ //       public abstract int GetPickedID();
+
+        public override bool CanSee(Mobile m)
+        {
+            if (SkillNecessaire < m.Skills[SkillName.Botanique].Base || m.IsStaff())
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+    
+        }
+
 
         public override void OnDoubleClick(Mobile from)
         {
@@ -37,18 +56,35 @@ namespace Server.Items
 
         public virtual void OnPicked(Mobile from, Point3D loc, Map map)
         {
-            ItemID = GetPickedID();
-
+         
             Item spawn = GetCropObject();
 
             if (spawn != null)
-                spawn.MoveToWorld(loc, map);
+            {
+
+                if (from.CheckSkill(SkillName.Botanique, SkillNecessaire, SkillNecessaire + 20))
+                {
+                    from.AddToBackpack(spawn);
+
+                    from.SendMessage("Vous recoltez: " + spawn.Name + ".");
+
+
+
+                    //spawn.MoveToWorld(loc, map);
+                }
+                else
+                {
+                    spawn.Delete();
+                    from.SendMessage("Vous ne réussissez pas votre récolte.");
+                }
+            }
+                
 
             m_Picked = true;
 
             Unlink();
 
-            Timer.DelayCall(TimeSpan.FromMinutes(5.0), Delete);
+            this.Delete();
         }
 
         public void Unlink()
