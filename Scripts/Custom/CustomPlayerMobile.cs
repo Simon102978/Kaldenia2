@@ -37,7 +37,7 @@ namespace Server.Mobiles
 
 		private Container m_Corps;
 		private int m_StatAttente;
-		private int m_fe;
+
 		private int m_TotalNormalFE;
 		private int m_TotalRPFE;
 
@@ -230,28 +230,38 @@ namespace Server.Mobiles
 			set { m_LastNormalFE = value; }
 		}
 
-		[CommandProperty(AccessLevel.GameMaster)]
-		public int FE
-		 { 
-			get 
-			{ 
-				return m_fe; 
-			} 
-			set 
-			{ 
-				m_fe = value; 
-				CheckLevel();
-			} 
-		  }
+
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int FEDay { get { return m_feDay; } set { m_feDay = value; } }
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public int FENormalTotal { get { return m_TotalNormalFE; } set { m_TotalNormalFE = value; } }
+		public int FENormalTotal 
+		{
+			 get 
+			 { 
+				return m_TotalNormalFE; 
+			 } 
+			 set 
+			 { 
+				m_TotalNormalFE = value; 
+				CheckLevel();
+			 }
+	    }
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public int FERPTotal { get { return m_TotalRPFE; } set { m_TotalRPFE = value; } }
+		public int FERPTotal 
+		{ 
+			get 
+			{ 
+				return m_TotalRPFE; 
+			} 
+			set 
+			{
+				 m_TotalRPFE = value; 
+				 CheckLevel();
+			} 
+		}
 
 
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -1550,7 +1560,7 @@ namespace Server.Mobiles
 
 			int NewLvl = Niveau;
  	
-			while (FE >= XPLevel.GetLevel(NewLvl).FeRequis && NewLvl <= 30)
+			while ( >= XPLevel.GetLevel(NewLvl).FeRequis && NewLvl <= 30)
             {
                NewLvl++;              
             }
@@ -2477,7 +2487,11 @@ namespace Server.Mobiles
 					}
 				case 3:
 					{
-						m_fe = reader.ReadInt();
+						if (version < 34)
+						{
+							reader.ReadInt();
+						}
+						
 						m_lastLoginTime = reader.ReadDateTime();
 						m_nextFETime = reader.ReadTimeSpan();
 						m_TotalNormalFE = reader.ReadInt();
@@ -2519,7 +2533,7 @@ namespace Server.Mobiles
         {        
             base.Serialize(writer);
 
-            writer.Write(34); // version
+            writer.Write(35); // version
 
 			Perfume.Serialize(writer);
 
@@ -2621,7 +2635,7 @@ namespace Server.Mobiles
 			writer.Write(God.GodID);
 
 			writer.Write(m_StatAttente);
-			writer.Write(m_fe);
+		//	writer.Write(m_fe);
 			writer.Write(m_lastLoginTime);
 			writer.Write(m_nextFETime);
 			writer.Write(m_TotalNormalFE);

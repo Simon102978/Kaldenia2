@@ -363,7 +363,6 @@ namespace Server
 
 			if (m_Reroll != null)
 			{
-				m_Player.FE +=  (int)(Math.Round(m_Reroll.ExperienceRP * 0.50) + m_Reroll.ExperienceNormal);
 				m_Player.FENormalTotal += (int)m_Reroll.ExperienceNormal;
 				m_Player.FERPTotal += (int)Math.Round(m_Reroll.ExperienceRP * 0.5);
 

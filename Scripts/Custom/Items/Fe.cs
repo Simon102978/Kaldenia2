@@ -57,7 +57,6 @@ namespace Server.Items
 		public override void Drink(Mobile from)
 		{
 			m_Player.FERPTotal++;
-			m_Player.FE++;
 			m_Player.RevealingAction();
 			m_Player.PlaySound(0x2D6);
 

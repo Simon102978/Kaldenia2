@@ -100,7 +100,6 @@ namespace Server
 	  else
 	  {
 
-		 pm.FE++;
 		 pm.FEDay++;
 		 pm.FENormalTotal++;
 
