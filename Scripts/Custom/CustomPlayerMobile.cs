@@ -279,13 +279,18 @@ namespace Server.Mobiles
                 int newValue = value;
 
                 if (newValue > 30 )          
-                     newValue = 30;               
+                     newValue = 30;        
 
-                if (m_Niveau != newValue)
-                {
-                     m_Niveau = newValue; 
-                     AdjustLvl();
-                }              
+				if (IsPlayer())
+				{
+					if (m_Niveau != newValue)
+					{
+						m_Niveau = newValue; 
+						AdjustLvl();
+					}   
+				}	        
+
+           
             } 
         }
 
