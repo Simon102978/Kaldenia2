@@ -271,7 +271,9 @@ namespace Server.Mobiles
 		public int Niveau 
         { 
             get 
-            { return m_Niveau; } 
+            {
+				 return m_Niveau;
+		    } 
             set 
             { 
                 int newValue = value;
@@ -2272,6 +2274,7 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+				case 35:
 				case 34:
 				{
 					m_Perfume = Perfume.Deserialize(reader);
@@ -2487,7 +2490,7 @@ namespace Server.Mobiles
 					}
 				case 3:
 					{
-						if (version < 34)
+						if (version < 35)
 						{
 							reader.ReadInt();
 						}
