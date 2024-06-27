@@ -726,43 +726,45 @@ namespace Server.Items
         }
     }
 
-    [FlipableAttribute(0xFBE, 0xFBD)]
-    public class LivreSkillsHerding : LivreSkills
-    {
-        [Constructable]
-        public LivreSkillsHerding()
-            : this(SkillName.Herding, 0.0, 0.0)
-        {
-        }
+	/*  [FlipableAttribute(0xFBE, 0xFBD)]
+	   public class LivreSkillsHerding : LivreSkills
+	   {
+		   [Constructable]
+		   public LivreSkillsHerding()
+			   : this(SkillName.Herding, 0.0, 0.0)
+		   {
+		   }
 
-        [Constructable]
-        public LivreSkillsHerding(SkillName skill, double value, double growvalue)
-            : base(skill, value, growvalue)
-        {
-            Name = "Étude : Herding";
-        }
+		   [Constructable]
+		   public LivreSkillsHerding(SkillName skill, double value, double growvalue)
+			   : base(skill, value, growvalue)
+		   {
+			   Name = "Étude : Herding";
+		   }
 
-        public LivreSkillsHerding(Serial serial)
-            : base(serial)
-        {
-        }
+		   public LivreSkillsHerding(Serial serial)
+			   : base(serial)
+		   {
+		   }
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
+		   public override void Serialize(GenericWriter writer)
+		   {
+			   base.Serialize(writer);
 
-            writer.Write((int)0); // version
-        }
+			   writer.Write((int)0); // version
+		   }
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
+		   public override void Deserialize(GenericReader reader)
+		   {
+			   base.Deserialize(reader);
 
-            int version = reader.ReadInt();
-        }
-    }
+			   int version = reader.ReadInt();
+		   }
+	   }
+	  */
 
-    [FlipableAttribute(0xFBE, 0xFBD)]
+
+	[FlipableAttribute(0xFBE, 0xFBD)]
     public class LivreSkillsHiding : LivreSkills
     {
         [Constructable]
@@ -1733,43 +1735,43 @@ namespace Server.Items
         }
     }
 
-    [FlipableAttribute(0xFBE, 0xFBD)]
-    public class LivreSkillsStealth : LivreSkills
-    {
-        [Constructable]
-        public LivreSkillsStealth()
-            : this(SkillName.Stealth, 0.0, 0.0)
-        {
-        }
+	/*   [FlipableAttribute(0xFBE, 0xFBD)]
+	 public class LivreSkillsStealth : LivreSkills
+	  {
+		  [Constructable]
+		  public LivreSkillsStealth()
+			  : this(SkillName.Stealth, 0.0, 0.0)
+		  {
+		  }
 
-        [Constructable]
-        public LivreSkillsStealth(SkillName skill, double value, double growvalue)
-            : base(skill, value, growvalue)
-        {
-            Name = "Étude : Equitation";
-        }
+		  [Constructable]
+		  public LivreSkillsStealth(SkillName skill, double value, double growvalue)
+			  : base(skill, value, growvalue)
+		  {
+			  Name = "Étude : Equitation";
+		  }
 
-        public LivreSkillsStealth(Serial serial)
-            : base(serial)
-        {
-        }
+		  public LivreSkillsStealth(Serial serial)
+			  : base(serial)
+		  {
+		  }
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
+		  public override void Serialize(GenericWriter writer)
+		  {
+			  base.Serialize(writer);
 
-            writer.Write((int)0); // version
-        }
+			  writer.Write((int)0); // version
+		  }
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
+		  public override void Deserialize(GenericReader reader)
+		  {
+			  base.Deserialize(reader);
 
-            int version = reader.ReadInt();
-        }
-    }
-
-    [FlipableAttribute(0xFBE, 0xFBD)]
+			  int version = reader.ReadInt();
+		  }
+	  }
+	*/
+	[FlipableAttribute(0xFBE, 0xFBD)]
     public class LivreSkillsRemoveTrap : LivreSkills
     {
         [Constructable]

@@ -1,5 +1,4 @@
 using System;
-using Server.Custom.Aptitudes;
 using Server.Engines.Craft;
 using Server.Mobiles;
 using static Server.Mobiles.CustomPlayerMobile;
@@ -189,7 +188,7 @@ namespace Server.Items
             double cap = Math.Min(skillCap, m_Max);
             SkillLock lockc = from.Skills[skill].Lock;
 
-            from.Validate(ValidateType.Skills);
+       //     from.Validate(ValidateType.Skills);
 
             if (lockc == SkillLock.Up)
             {
@@ -343,12 +342,12 @@ namespace Server.Items
 
                 if (from is CustomPlayerMobile pm)
                 {
-                    m_Level = pm.Aptitudes.GetRealValue(Aptitude.Transcription) * 3;
-                    m_GrowValue = pm.Aptitudes.GetRealValue(Aptitude.Transcription) * 0.2 + pm.Capacites.Expertise * 0.1 + pm.Capacites.Perfection * 0.1;
+                   // m_Level = pm.Aptitudes.GetRealValue(Aptitude.Transcription) * 3;
+                   // m_GrowValue = pm.Aptitudes.GetRealValue(Aptitude.Transcription) * 0.2 + pm.Capacites.Expertise * 0.1 + pm.Capacites.Perfection * 0.1;
 
-                    double apti = pm.Aptitudes.GetRealValue(Aptitude.Transcription);
+                   // double apti = pm.Aptitudes.GetRealValue(Aptitude.Transcription);
 
-                    m_Max = 50 + apti * 5;
+                    m_Max = 50/* + apti * 5*/;
                 }
 
                 m_Author = from;
@@ -363,7 +362,7 @@ namespace Server.Items
                     case "Parry": m_Skill = SkillName.Parry; break;
                     case "Begging": m_Skill = SkillName.Begging; break;
                     case "Blacksmith": m_Skill = SkillName.Blacksmith; break;
-                    case "Fletching": m_Skill = SkillName.Fletching; break;
+                //    case "Fletching": m_Skill = SkillName.Fletching; break;
                     case "Peacemaking": m_Skill = SkillName.Peacemaking; break;
                     case "Camping": m_Skill = SkillName.Camping; break;
                     case "Carpentry": m_Skill = SkillName.Carpentry; break;
@@ -375,7 +374,7 @@ namespace Server.Items
                     case "Healing": m_Skill = SkillName.Healing; break;
                     case "Fishing": m_Skill = SkillName.Fishing; break;
                     case "Forensics": m_Skill = SkillName.Forensics; break;
-                    case "Herding": m_Skill = SkillName.Herding; break;
+                //    case "Herding": m_Skill = SkillName.Herding; break;
                     case "Hiding": m_Skill = SkillName.Hiding; break;
                     case "Provocation": m_Skill = SkillName.Provocation; break;
                     case "Inscribe": m_Skill = SkillName.Inscribe; break;
@@ -402,7 +401,7 @@ namespace Server.Items
                     case "Lumberjacking": m_Skill = SkillName.Lumberjacking; break;
                     case "Mining": m_Skill = SkillName.Mining; break;
                     case "Meditation": m_Skill = SkillName.Meditation; break;
-                    case "Stealth": m_Skill = SkillName.Stealth; break;
+                //    case "Stealth": m_Skill = SkillName.Stealth; break;
                     case "RemoveTrap": m_Skill = SkillName.RemoveTrap; break;
                     case "Necromancy": m_Skill = SkillName.Necromancy; break;
                 }
