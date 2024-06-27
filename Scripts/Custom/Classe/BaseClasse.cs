@@ -267,7 +267,11 @@ namespace Server
 
 			foreach (KeyValuePair<SkillName,double> item in sortedDict)
 			{
-				description = description + "  -" + item.Key.ToString() + ": " + item.Value+ "\n";
+				if (item.Value > 30)
+				{
+					description = description + "  -" + item.Key.ToString() + ": " + item.Value+ "\n";
+				}
+				
 			}
 
 			return description;
