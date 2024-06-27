@@ -144,14 +144,6 @@ namespace Server.Items.Crops
 			{
 				LastPick = DateTime.UtcNow;
 
-				int cookValue = (int)from.Skills[SkillName.Cooking].Value / 20;
-
-				if (cookValue == 0) 
-				{ 
-					from.SendMessage("Vous ignorez comment récolter cette pousse."); 
-					return; 
-				}
-
 				if (!from.InRange(GetWorldLocation(), 1))
 				{
 					from.SendMessage("Vous êtes trop loin pour récolter quelque chose.");
