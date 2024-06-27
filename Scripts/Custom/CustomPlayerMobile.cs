@@ -1560,7 +1560,7 @@ namespace Server.Mobiles
 
 			int NewLvl = Niveau;
  	
-			while ( >= XPLevel.GetLevel(NewLvl).FeRequis && NewLvl <= 30)
+			while ( FETotal>= XPLevel.GetLevel(NewLvl).FeRequis && NewLvl <= 30)
             {
                NewLvl++;              
             }
