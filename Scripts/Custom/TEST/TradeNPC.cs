@@ -290,8 +290,6 @@ namespace Server.Mobiles
 
 				_offeredResources.Add((resourceType, quantity, artID, resourceName));
 
-				// Log pour vérifier ce qui est lu
-				Console.WriteLine($"Offered Resource {i + 1}: Type={resourceType?.FullName}, Quantity={quantity}, ArtID={artID}, Name={resourceName}");
 			}
 		}
 	}
