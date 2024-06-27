@@ -134,8 +134,9 @@ namespace Server.Gumps
 			{
 				if (m_From.CanEvolveTo(m_Classe))
 				{
-					m_From.Classe = m_Classe;
-					m_From.SendGump(new ClasseGump(m_From, m_List[m_Index],m_List,m_Index));
+					m_From.SendGump(new ClasseValidationGump(m_From,m_Classe,m_List,m_Index));
+			//		m_From.Classe = m_Classe;
+			//		m_From.SendGump(new ClasseGump(m_From, m_List[m_Index],m_List,m_Index));
 				}
 				else
 				{

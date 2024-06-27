@@ -30,47 +30,77 @@ namespace Server.Gumps
             AddSection(x - 10, y, 300, 357, "Classes");
 			AddSection(x + 291, y, 309, 357, "Métiers");
 
-            AddSection(x - 10, y + 358, 610, 250, "Description", ClasseDescription());
+           
 			
 			int LClasse = 0;
 			int LMetier = 0;
 
-			Classe aucune = Classe.GetClasse(0);
-
-
-
-
-			foreach (int classeId in aucune.Evolution)
+			if (stade == 0)
 			{
-				Classe item = Classe.GetClasse(classeId);
+				AddSection(x - 10, y + 358, 610, 250, "Description", ClasseDescription());
+				Classe aucune = Classe.GetClasse(0);
 
-				if (stade == 1 && (( creationPerso.Classe == item.ClasseID) ||  !item.Metier))
+
+
+
+				foreach (int classeId in aucune.Evolution)
 				{
+					Classe item = Classe.GetClasse(classeId);
 
+					
+						string color = "#ffffff";
+
+						if (creationPerso.Classe == item.ClasseID  )
+						{
+							color = "#ffcc00";
+						}
+
+						if (item.Metier)
+						{
+							AddButtonHtlml(x + 321, y + 40 + LMetier * scale, 100 + item.ClasseID, 2117, 2118, item.Name,color);
+							LMetier++;
+						}
+						else
+						{
+							AddButtonHtlml(x + 20, y + 40 + LClasse * scale, 100 + item.ClasseID, 2117, 2118, item.Name, color);
+							
+							LClasse++;
+						}
+
+					
 				}
-				else
+			}
+			if (stade == 1)
+			{
+				AddSection(x - 10, y + 358, 610, 250, "Description", MetierDescription());
+				Metier aucune = Metier.GetMetier(0);
+
+
+
+
+				foreach (int MetierId in aucune.Evolution)
 				{
-					string color = "#ffffff";
+						Metier item = Metier.GetMetier(MetierId);
 
-					if ((stade == 0 && creationPerso.Classe == item.ClasseID ) || (stade == 1 && creationPerso.Metier == item.ClasseID) )
-					{
-						color = "#ffcc00";
-					}
+						if (!item.ClasseIncompatible.Contains(m_Creation.Classe))
+						{
+							string color = "#ffffff";
 
-					if (item.Metier)
-					{
-						AddButtonHtlml(x + 321, y + 40 + LMetier * scale, 100 + item.ClasseID, 2117, 2118, item.Name,color);
-						LMetier++;
-					}
-					else
-					{
-						AddButtonHtlml(x + 20, y + 40 + LClasse * scale, 100 + item.ClasseID, 2117, 2118, item.Name, color);
-						
-						LClasse++;
-					}
+							if (creationPerso.Metier == item.MetierID )
+							{
+								color = "#ffcc00";
+							}
+
+							AddButtonHtlml(x + 321, y + 40 + LMetier * scale, 100 + item.MetierID, 2117, 2118, item.Name,color);
+							LMetier++;
+						}
 
 				}
 			}
+			
+
+
+			
 
 
 
@@ -80,41 +110,39 @@ namespace Server.Gumps
 		{
 			string description = "";
 
-			switch (m_stade)
+			if (m_Creation.Classe != 0)
 			{
-				case 0:
-					{
-						if (m_Creation.Classe != 0)
-						{
 
-							return Server.Classe.GetClasse(m_Creation.Classe ).ClasseDescription();
-						}
-						else
-						{
-							return description;
-						}
-					}
-				case 1:
-					{
-						if (m_Creation.Metier != 0)
-						{
-
-							return Server.Classe.GetClasse(m_Creation.Metier).ClasseDescription();
-						}
-						else
-						{
-							return description;
-						}
-					}
-				
-				default:
-					break;
+			 return Server.Classe.GetClasse(m_Creation.Classe ).ClasseDescription();
+			}
+			else
+			{
+				return description;
 			}
 
 
 
 
-			return description;
+
+		}
+
+		public string MetierDescription()
+		{
+			string description = "";
+
+
+						if (m_Creation.Metier != 0)
+						{
+
+							return Server.Metier.GetMetier(m_Creation.Metier).MetierDescription();
+						}
+						else
+						{
+							return description;
+						}
+
+
+
 		}
 
 	

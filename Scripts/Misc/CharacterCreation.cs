@@ -117,7 +117,7 @@ namespace Server.Misc
                         pm.Skills[i].Cap = skillcap;
                 }
 
-				pm.Metier = Classe.GetClasse(0);
+				pm.Metier = Metier.GetMetier(0);
 				pm.Classe = Classe.GetClasse(0);
                 pm.SetUselessSkill();
                 pm.AddPerfume(new Perfume());

@@ -351,7 +351,7 @@ namespace Server
 			m_Player.InitStats(m_Str, m_Dex, m_Int);
 
 			m_Player.Classe = Server.Classe.GetClasse(m_Classe);
-			m_Player.Metier = Server.Classe.GetClasse(Metier);
+			m_Player.Metier = Server.Metier.GetMetier(Metier);
 
 			m_Player.God = God;
 

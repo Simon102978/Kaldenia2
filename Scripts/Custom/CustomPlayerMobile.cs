@@ -28,7 +28,7 @@ namespace Server.Mobiles
 		private int m_Niveau;
 
 		private Classe m_Classe= Classe.GetClasse(0);
-		private Classe m_Metier = Classe.GetClasse(0);
+		private Metier m_Metier = Metier.GetMetier(0);
 
 		private List<Mobile> m_Esclaves = new List<Mobile>();
 		private CustomPlayerMobile m_Maitre;
@@ -278,16 +278,15 @@ namespace Server.Mobiles
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-		public Classe Metier
+		public Metier Metier
 		{
 			get => m_Metier;
 			set
 			{
-				if (value.Metier)
-				{
+				
 				  m_Metier = value;
               	  AdjustLvl();
-				}
+				
 			}
 		}
 
@@ -305,7 +304,7 @@ namespace Server.Mobiles
 		}
 
     	[CommandProperty(AccessLevel.GameMaster)]
-		public int Armure { get => m_Classe.Armor; }
+		public int Armure { get => m_Classe.Armor + m_Metier.Armor; }
 
 
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -1561,12 +1560,33 @@ namespace Server.Mobiles
                  SendMessage("Félicitation ! Vous venez de gagner un niveau !");
                  Niveau = NewLvl - 1;
 	
-                 if (CanEvolveClass())
+                 if (Niveau == 10 || Niveau == 20)
                  {
-                    SendMessage("Vous pouvez maintenant choisir une nouvelle classe !");
+                    SendMessage("Vous venez de gagner un point d'évolution !");
                  }
             }         
         }
+
+		public int CalculePtsEvolution()
+		{
+			int pts = 0;
+
+			if (Niveau >= 20)
+			{
+				pts = 2;
+			}
+			else if (Niveau >= 10)
+			{
+				pts = 1;
+			}
+
+			pts -= Classe.ClasseLvl;
+
+			pts -= Metier.MetierLvl;
+
+			return pts;
+
+		}
 
 		public void AdjustLvl()
         {
@@ -1653,12 +1673,62 @@ namespace Server.Mobiles
 				}		
 		}
 
-		public bool CanEvolveClass()
+		public bool CanEvolveClass(int pointNecessaire)
         {
-            if(Classe.LevelToEvolve(m_Classe.ClasseLvl + 1 ) >= m_Niveau)
-                return true;
-            else
+			if(Classe.LevelToEvolve(m_Classe.ClasseLvl + 1 ) > m_Niveau)
+			{
+				return false;
+			}
+			else if ( CalculePtsEvolution()< pointNecessaire)
+			{
+				 return false;
+			}
+			
+             return true;		
+        }
+
+
+		public bool CanEvolveMetier(int pointNecessaire)
+        {
+            if(Metier.LevelToEvolve(m_Metier.MetierLvl + 1 ) > m_Niveau)
+			{
+				return false;
+			}
+			else if ( CalculePtsEvolution()< pointNecessaire)
+			{
+				 return false;
+			}
+			
+             return true;
+
+        }
+
+
+		public bool CanEvolveMetierTo(Metier evolution)
+        {
+            if (this.AccessLevel > AccessLevel.Player)
+			{
+				return true;
+			}
+			  else if (!CanEvolveMetier(evolution.MetierLvl - m_Metier.MetierLvl))
+            {
+
                 return false;
+            }
+            else if(!m_Metier.Evolution.Contains(evolution.MetierID))
+            {
+
+                return false;
+            }
+			else if(evolution.ClasseIncompatible.Contains(Classe.ClasseID))
+            { 
+
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
 
 		public bool CanEvolveTo(Classe evolution)
@@ -1667,7 +1737,7 @@ namespace Server.Mobiles
 			{
 				return true;
 			}
-			  else if (!CanEvolveClass())
+			  else if (!CanEvolveClass(evolution.ClasseLvl - m_Classe.ClasseLvl))
             {
                 return false;
             }
@@ -2418,7 +2488,7 @@ namespace Server.Mobiles
 				case 2:
 					{
 						m_Classe = Classe.GetClasse(reader.ReadInt());				
-						m_Metier = Classe.GetClasse(reader.ReadInt());
+						m_Metier = Metier.GetMetier(reader.ReadInt());
 						m_Niveau = reader.ReadInt();
 						goto case 1;
 					}
@@ -2438,7 +2508,7 @@ namespace Server.Mobiles
 					if(version < 33)
 					{
 						m_Classe = Classe.GetClasse(0);
-						m_Metier = Classe.GetClasse(0);
+						m_Metier = Metier.GetMetier(0);
 						m_Niveau = 0;
 						SetUselessSkill();
 					}
@@ -2559,7 +2629,7 @@ namespace Server.Mobiles
 
 
 			writer.Write((int)m_Classe.ClasseID);
-			writer.Write((int)m_Metier.ClasseID);
+			writer.Write((int)m_Metier.MetierID);
 			writer.Write(m_Niveau);
 
 
