@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections;
 using System.Collections.Generic;
-using Server;
-using Server.Network;
-using Server.Mobiles;
-using Server.Items;
 using Server.Gumps;
+using Server.Mobiles;
+using Server.Network;
+using Server.Items; // Assurez-vous d'inclure cette directive pour accéder aux classes d'objets
 
 namespace Server.Gumps
 {
@@ -14,34 +12,45 @@ namespace Server.Gumps
 		private PlayerMobile _player;
 		private TradeNPC _trader;
 
-		private Type _requiredResource; // Type of resource required for trade
-		private List<(Type, int)> _offeredResources; // Type and quantity of resources offered in exchange
-		private int _requiredQuantity; // Quantity of required resource
+		private Type _requiredResource;
+		private int _requiredQuantity;
+		private int _requiredResourceArtID;
+		private string _requiredResourceName;
 
-		public TradeNPCGump(PlayerMobile player, TradeNPC trader, Type requiredResource, int requiredQuantity, List<(Type, int)> offeredResources)
-			: base("Marchand Itinérant", 100, 50, true)
+		private List<(Type, int, int, string)> _offeredResources;
+
+		public TradeNPCGump(PlayerMobile player, TradeNPC trader, Type requiredResource, int requiredQuantity, int requiredResourceArtID, string requiredResourceName, List<(Type, int, int, string)> offeredResources)
+			: base("Marchand Itinérant", 300, 350, true)
 		{
 			_player = player;
 			_trader = trader;
 			_requiredResource = requiredResource;
 			_requiredQuantity = requiredQuantity;
+			_requiredResourceArtID = requiredResourceArtID;
+			_requiredResourceName = requiredResourceName;
 			_offeredResources = offeredResources;
 
 			AddPage(0);
-			AddBackground(0, 0, 300, 300, 0x13EC);
+			//AddBackground(0, 0, 400, 800, 0x4CC);
 
-			AddHtml(20, 20, 260, 20, "<center><b>Offre d'échange</b></center>", false, false);
+			AddHtml(20, 5, 360, 20, "", false, false);
 
-			int y = 60;
+			int y = 110;
 			int buttonID = 1;
 
-			foreach (var (resource, quantity) in _offeredResources)
+			foreach (var (resource, quantity, resourceArtID, resourceName) in _offeredResources)
 			{
 				if (resource != null)
 				{
-					AddLabel(40, y, 0x486, $"Échangez {_requiredQuantity} {_requiredResource?.Name ?? "Ressource"} contre {quantity} {resource?.Name ?? "Ressource"}");
-					AddButton(40, y + 20, 0xFA5, 0xFA7, buttonID, GumpButtonType.Reply, 0); // Accept button
-					y += 40;
+					AddItem(110, y, resourceArtID); // Display the offered item art
+					AddLabel(110, y + 40, 0x486, $"{resourceName} ({quantity})");
+
+					AddButton(220, y + 20, 0xFA5, 0xFA7, buttonID, GumpButtonType.Reply, 0); // Accept button
+
+					AddItem(290, y, _requiredResourceArtID); // Display the required item art
+					AddLabel(290, y + 40, 0x486, $"{_requiredResourceName} ({_requiredQuantity})"); // Display the required item name with custom name
+
+					y += 60;
 					buttonID++;
 				}
 			}
@@ -53,22 +62,61 @@ namespace Server.Gumps
 
 			if (buttonID >= 0 && buttonID < _offeredResources.Count)
 			{
-				var (selectedResource, selectedQuantity) = _offeredResources[buttonID];
+				var (selectedResource, selectedQuantity, _, selectedResourceName) = _offeredResources[buttonID];
 
-				// Check if player has required resource
-				if (_player.Backpack != null && _player.Backpack.ConsumeTotal(_requiredResource, _requiredQuantity))
+				try
 				{
-					// Give player the reward
-					for (int i = 0; i < selectedQuantity; i++)
+					// Debug log to track the execution
+					Console.WriteLine($"Button clicked: {buttonID}, Resource: {selectedResource}, Quantity: {selectedQuantity}");
+
+					// Check if player has required resource
+					if (_player.Backpack != null && _player.Backpack.ConsumeTotal(_requiredResource, _requiredQuantity))
 					{
-						_player.Backpack.AddItem((Item)Activator.CreateInstance(selectedResource)); // Use Activator
+						// Give player the reward
+						for (int i = 0; i < selectedQuantity; i++)
+						{
+							Item item = (Item)Activator.CreateInstance(selectedResource);
+							if (item != null)
+							{
+								// Add item to backpack
+								AddItemsToBackpack(_player, item.GetType(), 1);
+							}
+							else
+							{
+								Console.WriteLine("Failed to create instance of item.");
+							}
+						}
+						_player.SendMessage("Vous avez échangé {0} {1} contre {2} {3}.", _requiredQuantity, _requiredResourceName, selectedQuantity, selectedResourceName);
 					}
-					_player.SendMessage("Vous avez échangé {0} {1} contre {2} {3}.", _requiredQuantity, _requiredResource.Name, selectedQuantity, selectedResource.Name);
+					else
+					{
+						_player.SendMessage("Vous n'avez pas assez de {0}.", _requiredResourceName);
+					}
 				}
-				else
+				catch (Exception ex)
 				{
-					_player.SendMessage("Vous n'avez pas assez de {0}.", _requiredResource.Name);
+					// Detailed error message
+					Console.WriteLine($"Error during trade: {ex.Message}\nStack Trace: {ex.StackTrace}");
+					_player.SendMessage("Une erreur s'est produite lors de l'échange. Veuillez réessayer.");
 				}
+			}
+		}
+
+		private void AddItemsToBackpack(PlayerMobile player, Type itemType, int quantity)
+		{
+			Item existingItem = player.Backpack.FindItemByType(itemType);
+
+			if (existingItem != null)
+			{
+				// If the item already exists in the backpack, increase its amount
+				existingItem.Amount += quantity;
+			}
+			else
+			{
+				// If the item doesn't exist, create a new item with the specified quantity
+				Item newItem = (Item)Activator.CreateInstance(itemType);
+				newItem.Amount = quantity;
+				player.Backpack.AddItem(newItem); // Use AddItem to add the item to backpack
 			}
 		}
 	}
