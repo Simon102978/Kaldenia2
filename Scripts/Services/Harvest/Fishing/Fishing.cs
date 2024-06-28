@@ -101,6 +101,18 @@ namespace Server.Engines.Harvest
 				new BonusHarvestResource(50.0, 2.0, "Coquillage", typeof(CoquillePlate)),
 				new BonusHarvestResource(50.0, 2.0, "Coquillage", typeof(CoquilleTachetee)),
 
+				new BonusHarvestResource(50.0, 2.0, "Dent de requin", typeof(DentRequin)),
+				new BonusHarvestResource(50.0, 2.0, "Dent d'alligator", typeof(DentAlligator)),
+				new BonusHarvestResource(50.0, 2.0, "Graisse de sole", typeof(GraisseSole)),
+				new BonusHarvestResource(50.0, 2.0, "Oeil de raie", typeof(OeilRaie)),
+				new BonusHarvestResource(50.0, 2.0, "Oeuf de thon", typeof(OeufThon)),
+				new BonusHarvestResource(50.0, 2.0, "Sang d'anguille", typeof(SangAnguille)),
+
+
+
+
+
+
 
 					};
 
