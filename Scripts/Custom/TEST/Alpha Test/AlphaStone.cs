@@ -51,7 +51,7 @@ namespace Server.Gumps
         CustomPlayerMobile m_from;
 
         public AlphaStoneGump(CustomPlayerMobile owner)
-            : base("Pierre de l'Alpha", 250, 200, true)
+            : base("Pierre de l'Alpha", 280, 200, true)
         {          
 
             m_from = owner;
@@ -73,10 +73,13 @@ namespace Server.Gumps
 
 			AddButtonHtlml(x, y+ yLine * 20,3,"Reset de Métier","#FFFFFF");
             yLine++; 
-
+         	AddButtonHtlml(x, y+ yLine * 20,6,"Retirer période d'attente pour la classe","#FFFFFF");
+            yLine++; 
+           	AddButtonHtlml(x, y+ yLine * 20,7,"Retirer période d'attente pour le metier","#FFFFFF");
+            yLine++;            
 			AddButtonHtlml(x, y+ yLine * 20,4,"Changer les compétences","#FFFFFF");
             yLine++; 
-           
+
 
         }
 
@@ -125,11 +128,16 @@ namespace Server.Gumps
                   }
                   case 6:
                   {
-				
+						m_from.LastEvolutionClasse = DateTime.Now.AddDays(-8);
 
                     break;
                   }
+                  case 7:
+                  {
+					m_from.LastEvolutionMetier = DateTime.Now.AddDays(-8);
 
+                    break;
+                  }
             }
         }
 

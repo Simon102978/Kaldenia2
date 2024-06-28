@@ -49,6 +49,8 @@ namespace Server.Mobiles
 
 		private DateTime m_LastNormalFE;
 
+		private DateTime m_LastEvolutionMetier;
+		private DateTime m_LastEvolutionClasse;
 
 		private DateTime m_LastPay;
 		private int m_Salaire;
@@ -230,7 +232,19 @@ namespace Server.Mobiles
 			set { m_LastNormalFE = value; }
 		}
 
+		[CommandProperty(AccessLevel.GameMaster)]
+		public DateTime LastEvolutionMetier
+		{
+			get { return m_LastEvolutionMetier; }
+			set { m_LastEvolutionMetier = value; }
+		}
 
+		[CommandProperty(AccessLevel.GameMaster)]
+		public DateTime LastEvolutionClasse
+		{
+			get { return m_LastEvolutionClasse; }
+			set { m_LastEvolutionClasse = value; }
+		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int FEDay { get { return m_feDay; } set { m_feDay = value; } }
@@ -303,6 +317,7 @@ namespace Server.Mobiles
 				
 				  m_Metier = value;
               	  AdjustLvl();
+				  m_LastEvolutionMetier = DateTime.Now;
 				
 			}
 		}
@@ -314,6 +329,9 @@ namespace Server.Mobiles
 			set
 			{
 		    	m_Classe = value;
+
+    			m_LastEvolutionClasse = DateTime.Now;
+				
                 AdjustLvl();
 
 			}
@@ -1727,6 +1745,10 @@ namespace Server.Mobiles
 			{
 				return true;
 			}
+			else if (  (DateTime.Now - LastEvolutionClasse).TotalDays < NombreJourEvolution(evolution.MetierLvl) )
+			{
+				return false;
+			}
 			  else if (!CanEvolveMetier(evolution.MetierLvl - m_Metier.MetierLvl))
             {
 
@@ -1754,6 +1776,10 @@ namespace Server.Mobiles
 			{
 				return true;
 			}
+			else if (  (DateTime.Now - LastEvolutionClasse).TotalDays < NombreJourEvolution(evolution.ClasseLvl) )
+			{			
+				return false;
+			}
 			  else if (!CanEvolveClass(evolution.ClasseLvl - m_Classe.ClasseLvl))
             {
                 return false;
@@ -1767,6 +1793,23 @@ namespace Server.Mobiles
                 return true;
             }
         }
+
+		public int NombreJourEvolution(int classeLvl)
+		{
+			switch (classeLvl)
+			{
+				case 0:
+					return 0;
+				case 1:
+					return 3;
+				case 2:
+					return 7;
+				
+				default:
+					return 0;
+			}	
+		}
+
 
 	
 		#endregion
@@ -2279,6 +2322,13 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+				case 36:
+				{
+					m_LastEvolutionClasse = reader.ReadDateTime();
+					m_LastEvolutionMetier = reader.ReadDateTime();
+
+					goto case 34;
+				}
 				case 35:
 				case 34:
 				{
@@ -2541,7 +2591,10 @@ namespace Server.Mobiles
         {        
             base.Serialize(writer);
 
-            writer.Write(35); // version
+            writer.Write(36); // version
+
+			writer.Write(m_LastEvolutionClasse);
+			writer.Write(m_LastEvolutionMetier);
 
 			Perfume.Serialize(writer);
 
