@@ -552,12 +552,19 @@ namespace Server.Engines.Craft
 			craftItem = CraftItems.GetAt(index);
 			craftItem.Mana = 14;
 
-			index = AddCraft(typeof(MarkScroll),"Cycle","Marquage", 46.4, 96.4, typeof(BlankScroll), 1044377, 1, 1044378);
+		/*	index = AddCraft(typeof(MarkScroll),"Cycle","Marquage", 46.4, 96.4, typeof(BlankScroll), 1044377, 1, 1044378);
 			 AddRes(index, typeof(BlackPearl),"BlackPearl", 1,"Vous n'avez pas assez de BlackPearl.");
 			AddRes(index, typeof(Bloodmoss),"Bloodmoss", 1,"Vous n'avez pas assez de Bloodmoss.");
 			 AddRes(index, typeof(MandrakeRoot),"MandrakeRoot", 1,"Vous n'avez pas assez de MandrakeRoot.");
 			craftItem = CraftItems.GetAt(index);
-			craftItem.Mana = 20;
+			craftItem.Mana = 20;*/
+
+			index = AddCraft(typeof(ChainLightningScroll),"Cycle","Éclair en série",  60.7, 110.7, typeof(BlankScroll), 1044377, 1, 1044378);
+			 AddRes(index, typeof(BlackPearl),"BlackPearl", 1,"Vous n'avez pas assez de BlackPearl.");
+			 AddRes(index, typeof(SulfurousAsh),"SulfurousAsh", 1,"Vous n'avez pas assez de SulfurousAsh.");
+			 AddRes(index, typeof(MandrakeRoot),"MandrakeRoot", 1,"Vous n'avez pas assez de MandrakeRoot.");
+			craftItem = CraftItems.GetAt(index);
+			craftItem.Mana = 40;
 
 			index = AddCraft(typeof(ExplosionScroll),"Cycle","Explosion", 46.4, 96.4, typeof(BlankScroll), 1044377, 1, 1044378);
 			 AddRes(index, typeof(Bloodmoss),"Bloodmoss", 1,"Vous n'avez pas assez de Bloodmoss.");

@@ -271,7 +271,7 @@ namespace Server.Spells
 			Register(799, typeof(Seventh.PolymorphSpell));
 			Register(800, typeof(Necromancy.AnimateDeadSpell));
 			Register(801, typeof(Fifth.SummonCreatureSpell));
-			Register(802, typeof(Sixth.MarkSpell));
+			Register(802, typeof(Seventh.ChainLightningSpell));
 			Register(803, typeof(Sixth.ExplosionSpell));
 			Register(804, typeof(Mysticism.HailStormSpell));
 			Register(805, typeof(Mysticism.NetherCycloneSpell));

@@ -19,8 +19,7 @@ namespace Server.Spells.Sixth
         {
         }
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Cycle, 11) }; } }
-
+		
 		public override SpellCircle Circle => SpellCircle.Sixth;
         public override void OnCast()
         {

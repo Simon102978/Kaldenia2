@@ -15,13 +15,15 @@ namespace Server.Spells.Seventh
             9022,
             false,
             Reagent.BlackPearl,
-            Reagent.Bloodmoss,
             Reagent.MandrakeRoot,
             Reagent.SulfurousAsh);
         public ChainLightningSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
         {
         }
+
+        public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Cycle, 11) }; } }
+
 
         public override SpellCircle Circle => SpellCircle.Seventh;
         public override bool DelayedDamage => true;

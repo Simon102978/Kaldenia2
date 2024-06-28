@@ -1671,6 +1671,7 @@ public override void Deserialize(GenericReader reader)
 	int version = reader.ReadInt();
 }
 	}
+	/*
 public class MarkScroll : SpellScroll
 	{
 	[Constructable]
@@ -1702,6 +1703,39 @@ public override void Deserialize(GenericReader reader)
 
 	int version = reader.ReadInt();
 }
+	}*/
+
+	public class ChainLightningScroll : SpellScroll
+	{
+		[Constructable]
+		public ChainLightningScroll() : this(1)
+		{
+		}
+
+		[Constructable]
+		public ChainLightningScroll(int amount) : base(802, 7993, amount)
+		{
+			Name ="Éclair en série";
+			Hue = 72;
+		}
+
+		public ChainLightningScroll(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
 	}
 public class ExplosionScroll : SpellScroll
 	{
