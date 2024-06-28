@@ -54,7 +54,7 @@ namespace Server.Mobiles
 
 
 		public override int Bones => Utility.RandomMinMax(3, 5);
-;
+
 		public override BoneType BoneType => BoneType.Regular;
 		public override void GenerateLoot()
         {

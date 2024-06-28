@@ -64,7 +64,7 @@ namespace Server.Mobiles
 		public override HideType HideType => HideType.Ophidien;
 
 
-		public override int Bones => Utility.RandomMinMax(2, 6)
+		public override int Bones => Utility.RandomMinMax(2, 6);
 		public override BoneType BoneType => BoneType.Ophidien;
 
 		public override void GenerateLoot()

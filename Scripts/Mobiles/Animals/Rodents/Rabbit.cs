@@ -67,7 +67,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot(LootPack.LootItem<PattesLapin>());
+			AddLoot(LootPack.LootItem<PattesLapin>(1, 4));
 		}
 
 		public override void Serialize(GenericWriter writer)

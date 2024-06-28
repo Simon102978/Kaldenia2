@@ -47,17 +47,17 @@ namespace Server.Mobiles
         public Kepetch(Serial serial)
             : base(serial)
         {
-        }
+		}
 
-        public override int Meat => Utility.RandomMinMax(1, 2));
+		public override int Meat => Utility.RandomMinMax(1, 2);
 		/* public override int Hides => 14;
 		 public override HideType HideType => HideType.Spined;*/
 
-		public override int Hides => Utility.RandomMinMax(1, 2));
+		public override int Hides => Utility.RandomMinMax(1, 2);
 
 		public override HideType HideType => HideType.Reptilien;
 
-		public override int Bones => Utility.RandomMinMax(1, 2));
+		public override int Bones => Utility.RandomMinMax(1, 2);
 		public override BoneType BoneType => BoneType.Reptilien;
 
 

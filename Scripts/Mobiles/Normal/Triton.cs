@@ -120,7 +120,7 @@ namespace Server.Mobiles
 
         public override bool DeleteOnRelease => true;
         public override int Meat => Utility.RandomMinMax(2, 4);
-;
+
 		public override int Hides => Utility.RandomMinMax(3, 7);
 
 		public override HideType HideType => HideType.Reptilien;

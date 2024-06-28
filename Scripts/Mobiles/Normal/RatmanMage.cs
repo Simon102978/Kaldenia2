@@ -50,7 +50,7 @@ namespace Server.Mobiles
         public override bool CanRummageCorpses => true;
         public override int TreasureMapLevel => 2;
         public override int Meat => Utility.RandomMinMax(1, 2);
-;
+
 		public override int Hides => Utility.RandomMinMax(3, 7);
 
 		public override HideType HideType => HideType.Regular;
