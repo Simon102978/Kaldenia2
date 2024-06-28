@@ -889,6 +889,26 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(NewSpellbook), "Autres", "Livre de sort", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
 
 			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre de Barde", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
+
+			index = AddCraft(typeof(LivreClasse0Oubli), "Livre de Classe", "livre de l'oubli de classe 0", 50.0, 60, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+			index = AddCraft(typeof(LivreClasse1Oubli), "Livre de Classe", "livre de l'oubli de classe 1", 70.0, 90, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+			index = AddCraft(typeof(LivreClasse2Oubli), "Livre de Classe", "livre de l'oubli de classe 2", 90.0, 100, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+
+			index = AddCraft(typeof(LivreMetier0Oubli), "Livre de Classe", "livre de l'oubli de métier 0", 50.0, 60, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+			index = AddCraft(typeof(LivreMetier1Oubli), "Livre de Classe", "livre de l'oubli de métier 1", 70.0, 90, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+						index = AddCraft(typeof(LivreMetier2Oubli), "Livre de Classe", "livre de l'oubli de métier 2", 90.0, 100, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
 /*
 			index = AddCraft(typeof(LivreArcher), "Livre de Classe", "livre d'archer", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
