@@ -1,11 +1,11 @@
 namespace Server.Mobiles
 {
-    [CorpseName("an undead horse corpse")]
+    [CorpseName("le corps d'un cheval squelettique")]
     public class SkeletalMount : BaseMount
     {
         [Constructable]
         public SkeletalMount()
-            : this("a skeletal steed")
+            : this("un cheval squelettique")
         {
         }
 

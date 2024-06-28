@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a drake corpse")]
+    [CorpseName("le corps d'un dragonneau")]
     public class Drake : BaseCreature
     {
         [Constructable]
         public Drake()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a drake";
+            Name = "un dragonneau";
             Body = Utility.RandomList(60, 61);
             BaseSoundID = 362;
 
@@ -51,14 +51,17 @@ namespace Server.Mobiles
 
         public override bool ReacquireOnMovement => true;
         public override int TreasureMapLevel => 2;
-        public override int Meat => 10;
-        public override int DragonBlood => 8;
+        public override int Meat => Utility.RandomMinMax(5, 10);
 
-		public override int Hides => 6;
+		public override int DragonBlood => 8;
+
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Dragonique;
 
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Dragonique;
 
 
@@ -81,6 +84,8 @@ namespace Server.Mobiles
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.MedScrolls, 2);
             AddLoot(LootPack.MageryRegs, 3);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 5));
+
 
 			AddLoot(LootPack.LootItem<Items.GemmeFeu>(), (double)5);
 		}

@@ -3,12 +3,12 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a unicorn corpse")]
+    [CorpseName("le corps d'une licorne")]
     public class Unicorn : BaseMount
     {
         [Constructable]
         public Unicorn()
-            : this("a unicorn")
+            : this("une licorne")
         {
         }
 

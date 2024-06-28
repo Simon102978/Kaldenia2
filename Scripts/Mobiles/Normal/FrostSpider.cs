@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a frost spider corpse")]
+    [CorpseName("le corps d'une araignée de glace")]
     public class FrostSpider : BaseCreature
     {
         [Constructable]
         public FrostSpider()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a frost spider";
+            Name = "une araignée de glace";
             Body = 20;
             BaseSoundID = 0x388;
 
@@ -50,11 +50,13 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-		public override int Hides => 5;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Arachnide;
 		public override FoodType FavoriteFood => FoodType.Meat;
         public override PackInstinct PackInstinct => PackInstinct.Arachnid;
@@ -63,10 +65,10 @@ namespace Server.Mobiles
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.Poor);
             AddLoot(LootPack.LootItem<SpidersSilk>(7));
-			AddLoot(LootPack.LootItem<VeninTarenlune>());
+			AddLoot(LootPack.LootItem<VeninTarenlune>(1, 3));
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

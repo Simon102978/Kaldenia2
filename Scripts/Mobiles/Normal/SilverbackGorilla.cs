@@ -3,14 +3,14 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a silverback gorilla corpse")]
+    [CorpseName("le corps d'un gorille")]
     public class SilverbackGorilla : BaseCreature
     {
         [Constructable]
         public SilverbackGorilla()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, .2, .4)
         {
-            Name = "a silverback gorilla";
+            Name = "un gorille au dos argenté";
             Body = 0x1D;
             BaseSoundID = 0x9E;
 
@@ -40,13 +40,14 @@ namespace Server.Mobiles
             Karma = -5000;
         }
 
-        public override int Meat => 3;
+        public override int Meat => Utility.RandomMinMax(2, 4);
 
-		public override int Hides => 4;
+
+		public override int Hides => Utility.RandomMinMax(2, 4);
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 4;
+		public override int Bones => Utility.RandomMinMax(2, 5);
 		public override BoneType BoneType => BoneType.Regular;
 
 		public override FoodType FavoriteFood => FoodType.FruitsAndVegies;
@@ -56,11 +57,13 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.LootGold(60, 70));
-            AddLoot(LootPack.LootItemCallback(TryDropBannana, 25.0, Utility.RandomMinMax(1, 5), false, false));
-        }
+           // AddLoot(LootPack.LootGold(60, 70));
+            AddLoot(LootPack.LootItemCallback(TryDropBannana, 50.0, Utility.RandomMinMax(1, 5), false, false));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void OnActionCombat()
+		}
+
+		public override void OnActionCombat()
         {
             Mobile combatant = Combatant as Mobile;
 

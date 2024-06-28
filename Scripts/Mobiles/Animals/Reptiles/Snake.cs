@@ -62,7 +62,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot(LootPack.LootItem<OeufSerpent>());
+			AddLoot(LootPack.LootItem<OeufSerpent>(2, 5));
 		}
 
 		public override void Serialize(GenericWriter writer)

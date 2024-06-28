@@ -3,7 +3,7 @@ using Server.Network;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a kepetch corpse")]
+    [CorpseName("le corps d'un kepech")]
     public class Kepetch : BaseCreature, ICarvable
     {
         public bool GatheredFur { get; set; }
@@ -12,7 +12,7 @@ namespace Server.Mobiles
         public Kepetch()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a kepetch";
+            Name = "un kepech";
             Body = 726;
 
             SetStr(337, 380);
@@ -49,14 +49,15 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 5;
+        public override int Meat => Utility.RandomMinMax(1, 2));
 		/* public override int Hides => 14;
 		 public override HideType HideType => HideType.Spined;*/
 
-		public override int Hides => 2;
+		public override int Hides => Utility.RandomMinMax(1, 2));
+
 		public override HideType HideType => HideType.Reptilien;
 
-		public override int Bones => 2;
+		public override int Bones => Utility.RandomMinMax(1, 2));
 		public override BoneType BoneType => BoneType.Reptilien;
 
 
@@ -94,9 +95,11 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average, 2);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override int GetIdleSound()
+		}
+
+		public override int GetIdleSound()
         {
             return 1545;
         }

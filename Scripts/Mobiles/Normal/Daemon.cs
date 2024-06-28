@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a daemon corpse")]
+    [CorpseName("le corps d'un démon")]
     public class Daemon : BaseCreature
     {
         [Constructable]
         public Daemon()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = NameList.RandomName("daemon");
+            Name = "un démon";
             Body = 9;
             BaseSoundID = 357;
 
@@ -40,11 +40,13 @@ namespace Server.Mobiles
 
             ControlSlots = 4;
         }
-		public override int Hides => 8;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Demoniaque;
 
 
-		public override int Bones => 8;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Demoniaque;
 		public override void GenerateLoot()
         {
@@ -53,9 +55,13 @@ namespace Server.Mobiles
 			AddLoot(LootPack.Average, 2);
             AddLoot(LootPack.MedScrolls, 2);
             AddLoot(LootPack.RandomLootItem(new System.Type[] { typeof(LichFormScroll), typeof(PoisonStrikeScroll), typeof(StrangleScroll), typeof(VengefulSpiritScroll), typeof(WitherScroll) }, 25.0, 1, false, true));
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(5, 10));
+			AddLoot(LootPack.LootItem<MucusDemon>(5, 10));
 
-        public Daemon(Serial serial)
+
+		}
+
+		public Daemon(Serial serial)
             : base(serial)
         {
         }

@@ -3,7 +3,7 @@ using Server.Network;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a boura corpse")]
+    [CorpseName("le corps d'un boura")]
     public class HighPlainsBoura : BaseCreature, ICarvable
     {
         private bool GatheredFur { get; set; }
@@ -12,7 +12,7 @@ namespace Server.Mobiles
         public HighPlainsBoura()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a high plains boura";
+            Name = "un boura des plaines";
             Body = 715;
 
             SetStr(400, 435);
@@ -51,19 +51,22 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 10;
+        public override int Meat => Utility.RandomMinMax(5, 10);
 
-     //   public override int Hides => 22;
+
+		//   public override int Hides => 22;
 
 		/*       public override int DragonBlood => 8;
 
 			   public override HideType HideType => HideType.Horned;*/
 
-		public override int Hides => 8;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 8;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Regular;
 
 		public override FoodType FavoriteFood => FoodType.FruitsAndVegies;

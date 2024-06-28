@@ -1,13 +1,15 @@
+using Server.Items;
+
 namespace Server.Mobiles
 {
-    [CorpseName("a frost troll corpse")]
+    [CorpseName("le corps d'un troll de glace")]
     public class FrostTroll : BaseCreature
     {
         [Constructable]
         public FrostTroll()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a frost troll";
+            Name = "un troll de glace";
             Body = 55;
             BaseSoundID = 461;
 
@@ -46,9 +48,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Gems);
-        }
+			AddLoot(LootPack.LootItem<CheveuxTroll>(3, 7));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

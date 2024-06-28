@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a whipping vine corpse")]
+    [CorpseName("le corps d'une vigne")]
     public class WhippingVine : BaseCreature
     {
         [Constructable]
         public WhippingVine()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a whipping vine";
+            Name = "une vigne maligneuse";
             Body = 8;
             Hue = 0x851;
             BaseSoundID = 352;
@@ -42,10 +42,12 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.MageryRegs, 3);
-            AddLoot(LootPack.LootItem<DecorativeVines>(10.0));
+            AddLoot(LootPack.LootItem<DecorativeVines>(25.0));
             AddLoot(LootPack.LootItem<FertileDirt>(1, 10, false, true));
             AddLoot(LootPack.LootItem<Vines>());
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 3));
+
+		}
 
 		public override void GenerateLootParagon()
 		{

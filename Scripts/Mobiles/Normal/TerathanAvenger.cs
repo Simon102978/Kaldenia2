@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a terathan avenger corpse")]
+    [CorpseName("le corps d'un vengeur terathan")]
     public class TerathanAvenger : BaseCreature
     {
         [Constructable]
         public TerathanAvenger()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a terathan avenger";
+            Name = "un vengeur terathan";
             Body = 152;
             BaseSoundID = 0x24D;
 
@@ -50,13 +50,13 @@ namespace Server.Mobiles
         public override Poison PoisonImmune => Poison.Deadly;
         public override Poison HitPoison => Poison.Deadly;
         public override int TreasureMapLevel => 3;
-        public override int Meat => 2;
+        public override int Meat => Utility.RandomMinMax(2, 4);
 
-		public override int Hides => 4;
+		public override int Hides => Utility.RandomMinMax(2, 4);
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 4;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Arachnide;
 
 		public override TribeType Tribe => TribeType.Terathan;
@@ -64,10 +64,13 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich, 2);
-            
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 3));
+			AddLoot(LootPack.LootItem<SpidersSilk>(4, true));
 
-        public override void Serialize(GenericWriter writer)
+
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

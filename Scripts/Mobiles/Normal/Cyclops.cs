@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a cyclopean corpse")]
+    [CorpseName("le corps d'un cyclope")]
     public class Cyclops : BaseCreature
     {
         [Constructable]
         public Cyclops()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a cyclopean warrior";
+            Name = "un cyclope";
             Body = 75;
             BaseSoundID = 604;
 
@@ -40,21 +40,26 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-		public override int Hides => 8;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Geant;
 
 
-		public override int Bones => 8;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Geant;
-		public override int Meat => 4;
-        public override int TreasureMapLevel => 3;
+		public override int Meat => Utility.RandomMinMax(5, 10);
+
+		public override int TreasureMapLevel => 3;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.Average);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 7));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

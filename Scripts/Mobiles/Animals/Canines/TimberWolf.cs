@@ -63,7 +63,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot(LootPack.LootItem<PoilsLoup>());
+			AddLoot(LootPack.LootItem<PoilsLoup>(3, 7));
 		}
 
 		public override void Serialize(GenericWriter writer)

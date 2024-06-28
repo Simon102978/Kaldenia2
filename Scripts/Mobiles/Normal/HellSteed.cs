@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a hellsteed corpse")]
+    [CorpseName("le corps d'un cheval des enfers")]
     public class HellSteed : BaseMount, IElementalCreature
     {
         public ElementType ElementType => ElementType.Chaos;
 
         [Constructable]
         public HellSteed()
-            : this("a hellsteed")
+            : this("un cheval des enfers")
         {
         }
 

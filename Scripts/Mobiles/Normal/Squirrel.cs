@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a squirrel corpse")]
+    [CorpseName("le corps d'un écureuil")]
     public class Squirrel : BaseCreature
     {
         [Constructable]
         public Squirrel()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a squirrel";
+            Name = "un écureuil";
             Body = 0x116;
 
             SetStr(44, 50);
@@ -41,13 +41,16 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
-		public override int Meat => 1;
+		public override int Meat => Utility.RandomMinMax(1, 2);
 
-		public override int Hides => 2;
+
+		public override int Hides => Utility.RandomMinMax(1, 2);
+
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 2;
+		public override int Bones => Utility.RandomMinMax(1, 2);
+
 		public override BoneType BoneType => BoneType.Regular;
 
 		public override FoodType FavoriteFood => FoodType.FruitsAndVegies;

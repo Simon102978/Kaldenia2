@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a terathan warrior corpse")]
+    [CorpseName("le corps d'un guerrier terathan")]
     public class TerathanWarrior : BaseCreature
     {
         [Constructable]
         public TerathanWarrior()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a terathan warrior";
+            Name = "un guerrier terathan";
             Body = 70;
             BaseSoundID = 589;
 
@@ -43,12 +43,12 @@ namespace Server.Mobiles
         }
 
         public override int TreasureMapLevel => 1;
-        public override int Meat => 4;
-		public override int Hides => 5;
+        public override int Meat => Utility.RandomMinMax(2, 5);
+		public override int Hides => Utility.RandomMinMax(2, 5);
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(2, 5);
 		public override BoneType BoneType => BoneType.Arachnide;
 
 
@@ -58,9 +58,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Average);
             AddLoot(LootPack.PeculiarSeed4);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

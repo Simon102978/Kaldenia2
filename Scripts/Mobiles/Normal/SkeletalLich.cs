@@ -2,13 +2,13 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a skeletal corpse")]
+    [CorpseName("le corps d'une liche squelette")]
     public class SkeletalLich : BaseCreature
     {
         [Constructable]
         public SkeletalLich() : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a skeletal lich";
+            Name = "une liche squelette";
             Body = 309;
             Hue = 1345;
             BaseSoundID = 0x48D;
@@ -59,10 +59,13 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.FilthyRich, 2);
+			AddLoot(LootPack.LootItem<CerveauLiche>(1, 2));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 4));
 
-        }
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

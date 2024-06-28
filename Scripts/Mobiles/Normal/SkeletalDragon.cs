@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a skeletal dragon corpse")]
+    [CorpseName("le corps d'un dragon squelette")]
     public class SkeletalDragon : BaseCreature
     {
         [Constructable]
         public SkeletalDragon()
             : base(AIType.AI_NecroMage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a skeletal dragon";
+            Name = "un dragon squelette";
             Body = 104;
             BaseSoundID = 0x488;
 
@@ -52,10 +52,11 @@ namespace Server.Mobiles
         public override bool ReacquireOnMovement => !Controlled;
         public override double BonusPetDamageScalar => 3.0;
   //      public override int Hides => 20;
-        public override int Meat => 19;  // where's it hiding these? :)
+        public override int Meat => Utility.RandomMinMax(5, 8);  // where's it hiding these? :)
 										 //     public override HideType HideType => HideType.Barbed;
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(10, 15);
+
 		public override BoneType BoneType => BoneType.Dragonique;
 		public override Poison PoisonImmune => Poison.Lethal;
         public override TribeType Tribe => TribeType.Undead;
@@ -64,9 +65,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.FilthyRich, 4);
             AddLoot(LootPack.Gems, 5);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(8, 16));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

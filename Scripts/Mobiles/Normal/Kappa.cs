@@ -3,14 +3,14 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a kappa corpse")]
+    [CorpseName("le corps d'un kappa")]
     public class Kappa : BaseCreature
     {
         [Constructable]
         public Kappa()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a kappa";
+            Name = "un kappa";
             Body = 240;
 
             SetStr(186, 230);
@@ -55,9 +55,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.LootItem<RawFishSteak>(3, true));
             AddLoot(LootPack.RandomLootItem(new [] { typeof(Gears), typeof(Hinge), typeof(Axle) }, 50.0, 1));
             AddLoot(LootPack.PeculiarSeed2);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override int GetAngerSound()
+		}
+
+		public override int GetAngerSound()
         {
             return 0x50B;
         }

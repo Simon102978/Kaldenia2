@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a hare corpse")]
+    [CorpseName("un lapin")]
     public class FireRabbit : VorpalBunny
     {
         [Constructable]

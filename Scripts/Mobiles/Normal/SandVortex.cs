@@ -3,7 +3,7 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a sand vortex corpse")]
+    [CorpseName("le corps d'un vortex de sable")]
     public class SandVortex : BaseCreature
     {
         private DateTime m_NextAttack;
@@ -11,7 +11,7 @@ namespace Server.Mobiles
         public SandVortex()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a sand vortex";
+            Name = "un vortex de sable";
             Body = 790;
             BaseSoundID = 263;
 
@@ -49,9 +49,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Meager, 2);
             AddLoot(LootPack.LootItem<Bone>());
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void OnActionCombat()
+		}
+
+		public override void OnActionCombat()
         {
             Mobile combatant = Combatant as Mobile;
 

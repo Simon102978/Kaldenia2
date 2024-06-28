@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a panther corpse")]
+    [CorpseName("le corps d'une panthère")]
     public class Panther : BaseCreature
     {
         [Constructable]
         public Panther()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a panther";
+            Name = "une panthère";
             Body = 0xD6;
             Hue = 0x901;
             BaseSoundID = 0x462;
@@ -48,14 +48,15 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
-		public override int Meat => 1;
-        public override int Hides => 6;
-        public override FoodType FavoriteFood => FoodType.Meat | FoodType.Fish;
+		public override int Meat => Utility.RandomMinMax(1, 3);
+
+		public override int Hides => Utility.RandomMinMax(2, 6);
+		public override FoodType FavoriteFood => FoodType.Meat | FoodType.Fish;
         public override PackInstinct PackInstinct => PackInstinct.Feline;
 
 		public override void GenerateLoot()
 		{
-			AddLoot(LootPack.LootItem<PattesPanthere>());
+			AddLoot(LootPack.LootItem<PattesPanthere>(1, 2));
 		}
 
 		public override void Serialize(GenericWriter writer)

@@ -6,14 +6,14 @@ using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a tangling root corpse")]
+    [CorpseName("un corps de liane")]
     public class TanglingRoots : BaseCreature
     {
         [Constructable]
         public TanglingRoots()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a tangling root";
+            Name = "une liane rampante";
             Body = 8;
             BaseSoundID = 684;
 
@@ -47,9 +47,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.FilthyRich);         
             AddLoot(LootPack.RandomLootItem(new[] { typeof(RegularBoard), typeof(Log) }, 100.0, 5, false, true));
             AddLoot(LootPack.LootItem<MandrakeRoot>(3, true));
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public TanglingRoots(Serial serial)
+		}
+
+		public TanglingRoots(Serial serial)
             : base(serial)
         {
         }

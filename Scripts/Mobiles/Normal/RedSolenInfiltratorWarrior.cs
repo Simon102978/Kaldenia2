@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a solen infiltrator corpse")]
+    [CorpseName("un corps d'espionne fourifeu")]
     public class RedSolenInfiltratorWarrior : BaseCreature, IRedSolen
     {
         [Constructable]
         public RedSolenInfiltratorWarrior()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a red solen infiltrator";
+            Name = "une espionne fourifeu";
             Body = 782;
             BaseSoundID = 959;
 
@@ -38,20 +38,22 @@ namespace Server.Mobiles
             Karma = -3000;
         }
 
-		public override int Hides => 5;
+		public override int Hides => Utility.RandomMinMax(1, 5);
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(1, 5);
 		public override BoneType BoneType => BoneType.Arachnide;
 
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Average, 2);
- 
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public RedSolenInfiltratorWarrior(Serial serial)
+
+		}
+
+		public RedSolenInfiltratorWarrior(Serial serial)
             : base(serial)
         {
         }

@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a trapdoor spider corpse")]
+    [CorpseName("le corps d'une araignée")]
     public class TrapdoorSpider : BaseCreature
     {
         public override bool CanStealth => true;
@@ -11,7 +11,7 @@ namespace Server.Mobiles
         public TrapdoorSpider()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a trapdoor spider";
+            Name = "une araignée grimpante";
             Body = 737;
             Hidden = true;
 
@@ -59,19 +59,23 @@ namespace Server.Mobiles
         }
 
         public override int TreasureMapLevel => 2;
-		public override int Hides => 3;
+		public override int Hides => Utility.RandomMinMax(1, 3);
+
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 3;
+		public override int Bones => Utility.RandomMinMax(1, 3);
+
 		public override BoneType BoneType => BoneType.Arachnide;
 
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich);
-        }
+			AddLoot(LootPack.LootItem<SpidersSilk>(3, 7));
 
-        public override int GetIdleSound()
+		}
+
+		public override int GetIdleSound()
         {
             return 1605;
         }

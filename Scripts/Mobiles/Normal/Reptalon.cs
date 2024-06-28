@@ -2,12 +2,12 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a reptalon corpse")]
+    [CorpseName("le corps d'un reptalon")]
     public class Reptalon : BaseMount
     {
         [Constructable]
         public Reptalon()
-            : base("a reptalon", 0x114, 0x3E90, AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.35)
+            : base("un reptalon", 0x114, 0x3E90, AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.35)
         {
             BaseSoundID = 0x16A;
 
@@ -48,19 +48,23 @@ namespace Server.Mobiles
         }
 
         public override int TreasureMapLevel => 5;
-        public override int Meat => 4;
-        public override MeatType MeatType => MeatType.DinoRibs;
-        public override int Hides => 10;
-        public override bool CanAngerOnTame => true;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
+		public override MeatType MeatType => MeatType.DinoRibs;
+        public override int Hides => Utility.RandomMinMax(5, 10);
+
+		public override bool CanAngerOnTame => true;
         public override bool StatLossAfterTame => true;
         public override FoodType FavoriteFood => FoodType.Meat;
         public override bool CanFly => true;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.UltraRich, 3);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(5, 12));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(1); // version

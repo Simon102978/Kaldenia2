@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("corp de Troll")]
+    [CorpseName("corps de Troll")]
     public class Troll : BaseCeosSpawn
 	{
         [Constructable]
         public Troll()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "Troll";
+            Name = "un troll";
 			Body = 53; /* Utility.RandomList(53, 54);*/
             BaseSoundID = 461;
 
@@ -48,20 +48,23 @@ namespace Server.Mobiles
 		}
 		public override bool CanRummageCorpses => true;
         public override int TreasureMapLevel => 1;
-        public override int Meat => 2;
-		public override int Hides => 5;
+        public override int Meat => Utility.RandomMinMax(3, 5);
+		public override int Hides => Utility.RandomMinMax(3, 5);
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(3, 5);
+;
 		public override BoneType BoneType => BoneType.Regular;
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
-			AddLoot(LootPack.LootItem<CheveuxTroll>());
+			AddLoot(LootPack.LootItem<CheveuxTroll>(5, true));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 5));
+
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

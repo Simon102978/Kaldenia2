@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a phoenix corpse")]
+    [CorpseName("le corps d'un phénix")]
     public class Phoenix : BaseCreature, IAuraCreature
     {
         [Constructable]
         public Phoenix()
             : base(AIType.AI_Mage, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a phoenix";
+            Name = "un phénix";
             Body = 0x340;
             BaseSoundID = 0x8F;
 
@@ -53,8 +53,9 @@ namespace Server.Mobiles
         public override bool CanAngerOnTame => true;
         public override int Meat => 1;
         public override MeatType MeatType => MeatType.Bird;
-        public override int Feathers => 36;
-        public override bool CanFly => true;
+        public override int Feathers => Utility.RandomMinMax(10, 35);
+
+		public override bool CanFly => true;
 
         public void AuraEffect(Mobile m)
         {
@@ -77,9 +78,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.Rich);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 5));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

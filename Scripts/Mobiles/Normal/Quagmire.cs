@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a quagmire corpse")]
+    [CorpseName("le corps d'un quagmire")]
     public class Quagmire : BaseCreature
     {
         [Constructable]
         public Quagmire()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.4, 0.8)
         {
-            Name = "a quagmire";
+            Name = "un quagmire";
             Body = 789;
             BaseSoundID = 352;
 
@@ -53,9 +53,11 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override int GetAngerSound()
+		}
+
+		public override int GetAngerSound()
         {
             return 353;
         }

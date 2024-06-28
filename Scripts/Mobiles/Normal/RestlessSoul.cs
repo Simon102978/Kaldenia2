@@ -1,16 +1,17 @@
 using Server.ContextMenus;
+using Server.Items;
 using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a ghostly corpse")]
+    [CorpseName("le corps d'un spectre")]
     public class RestlessSoul : BaseCreature
     {
         [Constructable]
         public RestlessSoul()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.4, 0.8)
         {
-            Name = "restless soul";
+            Name = "une ame perdue";
             Body = 0x3CA;
             Hue = 0x453;
 
@@ -50,9 +51,18 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Poor);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+			AddLoot(LootPack.LootItem<CerveauSpectre>(1, true));
+			AddLoot(LootPack.LootItem<PoussiereNecrotique>(5, true));
+			AddLoot(LootPack.LootItem<FluideAstral>(1, true));
 
-        public override void DisplayPaperdollTo(Mobile to)
+
+
+
+
+		}
+
+		public override void DisplayPaperdollTo(Mobile to)
         {
         }
 

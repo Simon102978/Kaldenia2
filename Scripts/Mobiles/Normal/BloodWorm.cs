@@ -7,14 +7,14 @@ namespace Server.Mobiles
     {
     }
 
-    [CorpseName("a bloodworm corpse")]
+    [CorpseName("le corps d'un vers de sang")]
     public class BloodWorm : BaseCreature, IBloodCreature
     {
         [Constructable]
         public BloodWorm()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a bloodworm";
+            Name = "un vers de sang";
             Body = 287;
 
             SetStr(401, 473);
@@ -50,9 +50,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.Average);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 5));
 
-        public override void OnDeath(Container c)
+		}
+
+		public override void OnDeath(Container c)
         {
             base.OnDeath(c);
 

@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a giant turkey corpse")]
+    [CorpseName("le corps d'une dinde géante")]
     public class GiantTurkey : BaseCreature
     {
         [Constructable]
         public GiantTurkey()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a giant turkey";
+            Name = "une dinde geante";
             Body = 1026;
             BaseSoundID = 0x66A;
 
@@ -45,14 +45,17 @@ namespace Server.Mobiles
         public override int Meat => 5;
         public override MeatType MeatType => MeatType.Bird;
         public override FoodType FavoriteFood => FoodType.GrainsAndHay;
-        public override int Feathers => 35;
+        public override int Feathers => Utility.RandomMinMax(10, 35);
 
-        public override void GenerateLoot()
+
+		public override void GenerateLoot()
         {
             AddLoot(LootPack.UltraRich);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(10, 20));
 
-        public override int GetIdleSound()
+		}
+
+		public override int GetIdleSound()
         {
             return 0x66A;
         }

@@ -2,13 +2,13 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a dragon corpse")]
+    [CorpseName("le corps d'un dragon")]
     public class FrostDragon : BaseCreature, IAuraCreature
     {
         [Constructable]
         public FrostDragon() : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a frost dragon";
+            Name = "un dragon de glace";
             Body = Utility.RandomList(12, 59);
             BaseSoundID = 362;
 
@@ -73,16 +73,17 @@ namespace Server.Mobiles
         public override bool ReacquireOnMovement => !Controlled;
         public override bool AutoDispel => !Controlled;
         public override int TreasureMapLevel => 4;
-        public override int Meat => 19;
+        public override int Meat => Utility.RandomMinMax(6, 12);
 		/*       public override int Hides => 33;
 			   public override HideType HideType => HideType.Barbed;*/
 
 
-		public override int Hides => 12;
+		public override int Hides => Utility.RandomMinMax(6, 12);
+
 		public override HideType HideType => HideType.Dragonique;
 
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(6, 12);
 		public override BoneType BoneType => BoneType.Dragonique;
 
 

@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a skeletal corpse")]
+    [CorpseName("le corps d'un mage squelette")]
     public class SkeletalMage : BaseCreature
     {
         [Constructable]
         public SkeletalMage()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a skeletal mage";
+            Name = "un mage squelette";
             Body = 148;
             BaseSoundID = 451;
 
@@ -60,9 +60,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.MageryRegs, 3);
             AddLoot(LootPack.NecroRegs, 3, 10);
             AddLoot(LootPack.LootItem<Bone>());
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

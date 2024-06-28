@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a bone demon corpse")]
+    [CorpseName("le corps d'un démon d'os")]
     public class BoneDemon : BaseCreature
     {
         [Constructable]
         public BoneDemon()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a bone demon";
+            Name = "un démon d'os";
             Body = 308;
             BaseSoundID = 0x48D;
 
@@ -45,7 +45,8 @@ namespace Server.Mobiles
         {
         }
 	
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(6, 18);
+
 		public override BoneType BoneType => BoneType.Demoniaque;
 		public override bool Unprovokable => true;
         public override bool AreaPeaceImmune => true;
@@ -57,9 +58,11 @@ namespace Server.Mobiles
 			AddLoot(LootPack.FilthyRich, 8);
 
 			AddLoot(LootPack.LootItem<Items.GemmeGlace>(), (double)5);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(7, 15));
+
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

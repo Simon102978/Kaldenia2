@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a stone harpy corpse")]
+    [CorpseName("le corps d'une harpie de pierre")]
     public class StoneHarpy : Harpy
 	{
         [Constructable]
         public StoneHarpy()
             : base()
         {
-            Name = "a stone harpy";
+            Name = "une harpie de pierre";
             Body = 73;
             BaseSoundID = 402;
 
@@ -50,15 +50,15 @@ namespace Server.Mobiles
 		}
 
 
-		public override int Meat => 1;
-        public override int Feathers => 50;
-        public override bool CanFly => true;
+		public override int Meat => Utility.RandomMinMax(2, 4);
+		public override int Feathers => Utility.RandomMinMax(15, 50);
+		public override bool CanFly => true;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average, 2);
 			AddLoot(LootPack.RandomLootItem(new System.Type[] { typeof(SilverRing), typeof(Necklace), typeof(SilverNecklace), typeof(Collier), typeof(Collier2) }, 5.0, 1, false, true));
-			AddLoot(LootPack.LootItem<PlumesHarpie>());
-			AddLoot(LootPack.LootItem<OeufPierre>());
+			AddLoot(LootPack.LootItem<PlumesHarpie>(2, 5));
+			AddLoot(LootPack.LootItem<OeufPierre>(2, 5));            
 			// AddLoot(LootPack.Gems, 2);
 		}
 

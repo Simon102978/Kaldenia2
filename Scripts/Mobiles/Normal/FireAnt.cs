@@ -2,13 +2,13 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a fire ant corpse")]
+    [CorpseName("le corps d'une fourmis de feu")]
     public class FireAnt : BaseCreature
     {
         [Constructable]
         public FireAnt() : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a fire ant";
+            Name = "une fourmis incendiaire";
             Body = 738;
 
             SetStr(225);
@@ -48,9 +48,11 @@ namespace Server.Mobiles
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Average, 2);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override int TreasureMapLevel => 3;
+		}
+
+		public override int TreasureMapLevel => 3;
 
         public override int GetIdleSound()
         {

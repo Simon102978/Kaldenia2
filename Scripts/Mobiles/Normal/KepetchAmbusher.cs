@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a kepetch corpse")]
+    [CorpseName("le corps dun kepech")]
     public class KepetchAmbusher : BaseCreature, ICarvable
     {
         public override bool CanStealth => true;  //Stays Hidden until Combatant in range.
@@ -12,7 +12,7 @@ namespace Server.Mobiles
         public KepetchAmbusher()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a kepetch ambusher";
+            Name = "un kepech éclaireur";
             Body = 726;
             Hidden = true;
 
@@ -86,17 +86,18 @@ namespace Server.Mobiles
             base.OnDamagedBySpell(from);
         }
 
-        public override int Meat => 7;
+        public override int Meat => Utility.RandomMinMax(3, 7);
+
 
 		/*       public override int Hides => 12;
 
 			   public override HideType HideType => HideType.Horned;*/
 
 
-		public override int Hides => 3;
+		public override int Hides => Utility.RandomMinMax(1, 3);
 		public override HideType HideType => HideType.Reptilien;
 
-		public override int Bones => 3;
+		public override int Bones => Utility.RandomMinMax(1, 3);
 		public override BoneType BoneType => BoneType.Reptilien;
 
 		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
@@ -110,9 +111,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Average, 2);
             AddLoot(LootPack.LootItem<RawRibs>(5));
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override int GetIdleSound()
+		}
+
+		public override int GetIdleSound()
         {
             return 1545;
         }

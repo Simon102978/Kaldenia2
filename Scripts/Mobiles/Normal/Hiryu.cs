@@ -3,12 +3,12 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a hiryu corpse")]
+    [CorpseName("le corps d'un hiryu")]
     public class Hiryu : BaseMount
     {
         [Constructable]
         public Hiryu()
-            : base("a hiryu", 243, 0x3E94, AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base("un hiryu", 243, 0x3E94, AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Hue = GetHue();
 
@@ -60,9 +60,11 @@ namespace Server.Mobiles
 
         public override bool StatLossAfterTame => true;
         public override int TreasureMapLevel => 5;
-        public override int Meat => 16;
-        public override int Hides => 60;
-        public override FoodType FavoriteFood => FoodType.Meat;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
+		public override FoodType FavoriteFood => FoodType.Meat;
         public override bool CanAngerOnTame => true;
         public override WeaponAbility GetWeaponAbility()
         {

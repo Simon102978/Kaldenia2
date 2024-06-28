@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a hell cat corpse")]
+    [CorpseName("le corps d'un chat des enfers")]
     public class PredatorHellCat : BaseCreature
     {
         [Constructable]
         public PredatorHellCat()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a predator hellcat";
+            Name = "un chat des enfers";
             Body = 127;
             BaseSoundID = 0xBA;
 
@@ -54,11 +54,11 @@ namespace Server.Mobiles
 		   public override FoodType FavoriteFood => FoodType.Meat;*/
 
 
-		public override int Hides => 10;
+		public override int Hides => Utility.RandomMinMax(5, 10);
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 10;
+		public override int Bones => Utility.RandomMinMax(5, 10);
 		public override BoneType BoneType => BoneType.Regular;
 
 
@@ -66,9 +66,11 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a terathan matriarch corpse")]
+    [CorpseName("le corps d'une matriarche terathan")]
     public class TerathanMatriarch : BaseCreature
     {
         [Constructable]
         public TerathanMatriarch()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a terathan matriarch";
+            Name = "une terathan matriarche";
             Body = 72;
             BaseSoundID = 599;
 
@@ -46,11 +46,11 @@ namespace Server.Mobiles
 
         public override int TreasureMapLevel => 4;
 
-		public override int Hides => 10;
+		public override int Hides => Utility.RandomMinMax(5, 10);
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 10;
+		public override int Bones => Utility.RandomMinMax(5, 10);
 		public override BoneType BoneType => BoneType.Arachnide;
 
 		public override TribeType Tribe => TribeType.Terathan;
@@ -62,10 +62,14 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls, 2);
             AddLoot(LootPack.Potions);
             AddLoot(LootPack.NecroRegs, 4, 10);
-            AddLoot(LootPack.LootItem<SpidersSilk>(100.0, 5, false, true));
-        }
+            AddLoot(LootPack.LootItem<SpidersSilk>(100.0, 20, false, true));
+			AddLoot(LootPack.LootItem<SpidersSilk>(4, true));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(5, 10));
 
-        public override void Serialize(GenericWriter writer)
+
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a hydra corpse")]
+    [CorpseName("le corps d'une hydre")]
     public class Hydra : BaseCreature
     {
         [Constructable]
         public Hydra()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a hydra";
+            Name = "une hydre";
             Body = 0x109;
             BaseSoundID = 0x16A;
 
@@ -49,22 +49,27 @@ namespace Server.Mobiles
         {
         }
 
-		public override int Hides => 12;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Reptilien;
 
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Reptilien;
 
-		public override int Meat => 19;
-        public override int TreasureMapLevel => 5;
+		public override int Meat => Utility.RandomMinMax(5, 10);
+
+		public override int TreasureMapLevel => 5;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.UltraRich, 3);
             AddLoot(LootPack.ArcanistScrolls, 0, 1);
-        }
+			AddLoot(LootPack.LootItem<SulfurousAsh>(4, true));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 

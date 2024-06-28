@@ -1,13 +1,15 @@
+using Server.Items;
+
 namespace Server.Mobiles
 {
-    [CorpseName("a jack rabbit corpse")]
+    [CorpseName("le corps d'un lapin")]
     public class JackRabbit : BaseCreature
     {
         [Constructable]
         public JackRabbit()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a jack rabbit";
+            Name = "un lapin";
             Body = 0xCD;
             Hue = 0x1BB;
 
@@ -44,7 +46,13 @@ namespace Server.Mobiles
 		public override bool CanBeParagon => false;
 		public override int Meat => 1;
         public override int Hides => 1;
-        public override FoodType FavoriteFood => FoodType.FruitsAndVegies;
+
+		public override void GenerateLoot() // -- Need to verify
+		{
+			AddLoot(LootPack.LootItem<PattesLapin>(1, 4));
+		}
+
+		public override FoodType FavoriteFood => FoodType.FruitsAndVegies;
         public override int GetAttackSound()
         {
             return 0xC9;

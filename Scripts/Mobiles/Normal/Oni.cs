@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("an oni corpse")]
+    [CorpseName("le corps d'un oni")]
     public class Oni : BaseCreature
     {
         [Constructable]
         public Oni()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an oni";
+            Name = "un oni";
             Body = 241;
 
             SetStr(801, 910);
@@ -77,9 +77,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.FilthyRich, 3);
             AddLoot(LootPack.BonsaiSeed);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(4, 8));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

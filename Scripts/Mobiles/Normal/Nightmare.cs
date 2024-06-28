@@ -2,12 +2,12 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a nightmare corpse")]
+    [CorpseName("le corps d'un nightmare")]
     public class Nightmare : BaseMount
     {
         [Constructable]
         public Nightmare()
-            : this("a nightmare")
+            : this("un nightmare")
         {
         }
 
@@ -87,16 +87,19 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 5;
-      //  public override int Hides => 10;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
+		//  public override int Hides => 10;
 		/*   public override HideType HideType => HideType.Barbed;
 		   public override FoodType FavoriteFood => FoodType.Meat;*/
 
-		public override int Hides => 12;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Demoniaque;
 
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Demoniaque;
 
 

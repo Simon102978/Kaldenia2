@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a gargoyle corpse")]
+    [CorpseName("le corps d'une gargouille de pierre")]
     public class StoneGargoyle : BaseCreature
     {
         [Constructable]
         public StoneGargoyle()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a stone gargoyle";
+            Name = "une gargouille de pierre";
             Body = 67;
             BaseSoundID = 0x174;
 
@@ -47,10 +47,12 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Average, 2);           
             AddLoot(LootPack.Potions);
-           
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 4));
 
-        public override void Serialize(GenericWriter writer)
+
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

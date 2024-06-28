@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ettins corpse")]
+    [CorpseName("le corps d'un ettin")]
     public class Ettin : BaseCreature
     {
         [Constructable]
         public Ettin()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an ettin";
+            Name = "un ettin";
             Body = 18;
             BaseSoundID = 367;
 
@@ -41,26 +41,31 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-		public override int Hides => 4;
+		public override int Hides => Utility.RandomMinMax(2, 4);
+
 		public override HideType HideType => HideType.Geant;
 
 		public override void GenerateLootParagon()
 		{
 			AddLoot(LootPack.LootItem<SangEnvoutePhysique>(), Utility.RandomMinMax(2, 4));
 		}
-		public override int Bones => 4;
+		public override int Bones =>  Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Geant;
 		public override bool CanRummageCorpses => true;
         public override int TreasureMapLevel => 1;
-        public override int Meat => 4;
-        public override void GenerateLoot()
+        public override int Meat => Utility.RandomMinMax(2, 4);
+		public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Potions);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+			AddLoot(LootPack.LootItem<CheveuxGeant>(3, 7));
 
-        public override void Serialize(GenericWriter writer)
+
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

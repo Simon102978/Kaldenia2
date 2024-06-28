@@ -1,12 +1,12 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a drake corpse")]
+    [CorpseName("le crops d'un dragonneau de glace")]
     public class FrostDrake : ColdDrake
     {
         [Constructable]
         public FrostDrake()
         {
-            Name = "a cold drake";
+            Name = "un dragonneau de glace";
         }
 
         public FrostDrake(Serial serial)

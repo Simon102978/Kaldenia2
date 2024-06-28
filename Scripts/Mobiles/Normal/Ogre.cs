@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ogre corpse")]
+    [CorpseName("le corps d'un ogre")]
     public class Ogre : BaseCeosSpawn
 	{
         [Constructable]
         public Ogre()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an ogre";
+            Name = "un ogre";
             Body = 1;
             BaseSoundID = 427;
 
@@ -51,11 +51,11 @@ namespace Server.Mobiles
         public override int TreasureMapLevel => 1;
         public override int Meat => 2;
 
-		public override int Hides => 6;
+		public override int Hides => Utility.RandomMinMax(3, 6);
 		public override HideType HideType => HideType.Geant;
 
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(3, 6);
 		public override BoneType BoneType => BoneType.Geant;
 
 
@@ -64,10 +64,10 @@ namespace Server.Mobiles
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Potions);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 4));
-			AddLoot(LootPack.LootItem<CheveuxGeant>());
+			AddLoot(LootPack.LootItem<CheveuxGeant>(3, 7));
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

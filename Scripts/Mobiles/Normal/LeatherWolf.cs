@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a wolf corpse")]
+    [CorpseName("le corps d'un loup")]
     public class LeatherWolf : BaseCreature, IRepairableMobile
     {
         public Type RepairResource => typeof(IronIngot);
@@ -18,7 +18,7 @@ namespace Server.Mobiles
         public LeatherWolf()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a leather wolf";
+            Name = "un loup";
             Body = 739;
             BaseSoundID = 0xE5;
 
@@ -134,22 +134,25 @@ namespace Server.Mobiles
 
         public override bool AlwaysMurderer => true;
 
-        public override int Meat => 1;
-        public override PackInstinct PackInstinct => PackInstinct.Canine;
+        public override int Meat => Utility.RandomMinMax(2, 5);
+		public override PackInstinct PackInstinct => PackInstinct.Canine;
 
-		public override int Hides => 5;
+		public override int Hides => Utility.RandomMinMax(2, 5);
 		public override HideType HideType => HideType.Lupus;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(2, 5);
+
 		public override BoneType BoneType => BoneType.Lupus;
 		public override FoodType FavoriteFood => FoodType.Meat;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager, 2);
-        }
+			AddLoot(LootPack.LootItem<PoilsLoup>(3, 7));
 
-        public override int GetIdleSound()
+		}
+
+		public override int GetIdleSound()
         {
             return 1545;
         }

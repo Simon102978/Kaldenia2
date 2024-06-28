@@ -2,13 +2,13 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ophidian corpse")]
+    [CorpseName("le corps d'un ophidien")]
     public class OphidianMage : BaseCreature
     {
         private static readonly string[] m_Names = new string[]
         {
-            "an ophidian apprentice mage",
-            "an ophidian shaman"
+            "un apprenti mage ophidien",
+            "un shaman opihidien"
         };
         [Constructable]
         public OphidianMage()
@@ -60,11 +60,11 @@ namespace Server.Mobiles
 
 		public override TribeType Tribe => TribeType.Ophidian;
 
-		public override int Hides => 6;
+		public override int Hides => Utility.RandomMinMax(2, 6);
 		public override HideType HideType => HideType.Ophidien;
 
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(2, 6)
 		public override BoneType BoneType => BoneType.Ophidien;
 
 		public override void GenerateLoot()
@@ -74,10 +74,12 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.Potions);
             AddLoot(LootPack.MageryRegs, 10);
-    //        AddLoot(LootPack.LootItem<PainSpikeScroll>(16.7));
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+			//        AddLoot(LootPack.LootItem<PainSpikeScroll>(16.7));
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an earth elemental corpse")]
+    [CorpseName("le corps d'un elementaire de terre")]
     public class EarthElemental : BaseCreature
     {
         [Constructable]
         public EarthElemental()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an earth elemental";
+            Name = "un elementaire de terre";
             Body = 14;
             BaseSoundID = 268;
 

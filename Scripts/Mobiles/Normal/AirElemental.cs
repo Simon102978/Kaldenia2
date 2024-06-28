@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an air elemental corpse")]
+    [CorpseName("le corps d'un elementaire d'air")]
     public class AirElemental : BaseCreature
     {
         [Constructable]
         public AirElemental()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an air elemental";
+            Name = "un elementaire d'air";
             Body = 13;
             Hue = 0x4001;
             BaseSoundID = 655;
@@ -60,10 +60,12 @@ namespace Server.Mobiles
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.LowScrolls);
             AddLoot(LootPack.MedScrolls);
-           
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

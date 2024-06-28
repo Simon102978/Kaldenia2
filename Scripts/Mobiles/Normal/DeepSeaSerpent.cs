@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a deep sea serpents corpse")]
+    [CorpseName("le corps d'un serpent de mer")]
     public class DeepSeaSerpent : BaseCreature
     {
         [Constructable]
         public DeepSeaSerpent()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a deep sea serpent";
+            Name = "un serpent de mer";
             Body = 150;
             BaseSoundID = 447;
 

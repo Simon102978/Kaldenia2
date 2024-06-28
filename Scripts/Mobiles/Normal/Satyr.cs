@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a satyr's corpse")]
+    [CorpseName("le corps d'un satyr")]
     public class Satyr : BaseCreature
     {
         [Constructable]
         public Satyr()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a satyr";
+            Name = "un satire";
             Body = 271;
             BaseSoundID = 0x586;
 
@@ -53,7 +53,9 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.MedScrolls);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+
+		}
 
 		public override void GenerateLootParagon()
 		{

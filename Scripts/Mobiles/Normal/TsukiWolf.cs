@@ -2,7 +2,7 @@ using System.Collections;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a tsuki wolf corpse")]
+    [CorpseName("le corps d'un loup tsuki")]
     public class TsukiWolf : BaseCreature
     {
         private static readonly Hashtable m_Table = new Hashtable();
@@ -10,7 +10,7 @@ namespace Server.Mobiles
         public TsukiWolf()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a tsuki wolf";
+            Name = "un loup tsuki";
             Body = 250;
 
             switch (Utility.Random(3))
@@ -67,10 +67,10 @@ namespace Server.Mobiles
         public override bool CanAngerOnTame => true;
 
         public override int TreasureMapLevel => 3;
-        public override int Meat => 4;
-		public override int Hides => 10;
+        public override int Meat => Utility.RandomMinMax(3, 5);
+		public override int Hides => Utility.RandomMinMax(5, 10);
 		public override HideType HideType => HideType.Lupus;
-		public override int Bones => 10;
+		public override int Bones => Utility.RandomMinMax(5, 10);
 		public override BoneType BoneType => BoneType.Lupus;
 		public override FoodType FavoriteFood => FoodType.Meat;
 
@@ -79,9 +79,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.BodyPartsAndBones);
             AddLoot(LootPack.PeculiarSeed1);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 6));
 
-        public override int GetAngerSound()
+		}
+
+		public override int GetAngerSound()
         {
             return 0x52D;
         }

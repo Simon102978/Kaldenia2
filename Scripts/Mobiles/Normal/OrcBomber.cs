@@ -4,7 +4,7 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an orcish corpse")]
+    [CorpseName("le corps d'un orc")]
     public class OrcBomber : BaseCreature
     {
         private DateTime m_NextBomb;
@@ -15,7 +15,7 @@ namespace Server.Mobiles
         {
             Body = 182;
 
-            Name = "an orc bomber";
+            Name = "un orc artificier";
             BaseSoundID = 0x45A;
 
             SetStr(147, 215);
@@ -64,10 +64,17 @@ namespace Server.Mobiles
             AddLoot(LootPack.LootItem<BlackPearl>(6, 10));
             AddLoot(LootPack.LootItem<MortarPestle>(20.0));
             AddLoot(LootPack.LootItem<LesserExplosionPotion>(20.0));
-            AddLoot(LootPack.LootItem<Yeast>(5.0));
-        }
+			AddLoot(LootPack.LootItem<WinecrafterYeast>(1, 3));
+			AddLoot(LootPack.LootItem<BrewersYeast>(1, 3));
+			AddLoot(LootPack.LootItem<Yeast>(1, 3));
+			AddLoot(LootPack.LootItem<Apple>(3, 5));
+			AddLoot(LootPack.LootItem<Arrow>(15, 28));
+			AddLoot(LootPack.LootItem<Bandage>(1, 15));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override bool IsEnemy(Mobile m)
+		}
+
+		public override bool IsEnemy(Mobile m)
         {
             if (m.Player && m.FindItemOnLayer(Layer.Helm) is OrcishKinMask)
                 return false;

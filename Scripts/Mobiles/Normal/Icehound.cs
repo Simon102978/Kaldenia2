@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ice hound corpse")]
+    [CorpseName("le corps d'un loup de glace")]
     public class IceHound : BaseCreature
     {
         [Constructable]
         public IceHound()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an ice hound";
+            Name = "un loup de glace";
             Body = 98;
             BaseSoundID = 229;
             Hue = 1153;
@@ -47,16 +47,17 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 1;
+        public override int Meat => Utility.RandomMinMax(1, 3);
 
-		public override int Hides => 5;
+
+		public override int Hides => Utility.RandomMinMax(2, 5);
 		public override HideType HideType => HideType.Regular;
 
 		public override void GenerateLootParagon()
 		{
 			AddLoot(LootPack.LootItem<SangEnvouteFroid>(), Utility.RandomMinMax(2, 4));
 		}
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(2, 5);
 		public override BoneType BoneType => BoneType.Regular;
 
 

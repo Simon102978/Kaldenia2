@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a wolf spider spider corpse")]
+    [CorpseName("le corps d'une araignee loup")]
     public class WolfSpider : BaseCreature
     {
         [Constructable]
         public WolfSpider()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a Wolf spider";
+            Name = "une araignee loup";
             Body = 736;
             Hue = 0;
 
@@ -55,22 +55,22 @@ namespace Server.Mobiles
         public override Poison PoisonImmune => Poison.Regular;
         public override Poison HitPoison => Poison.Regular;
 
-		public override int Hides => 3;
+		public override int Hides => Utility.RandomMinMax(1, 3);
 		public override HideType HideType => HideType.Arachnide;
-		public override int Bones => 3;
+		public override int Bones => Utility.RandomMinMax(1, 3);
 		public override BoneType BoneType => BoneType.Arachnide;
 
-		public override int TreasureMapLevel => 1;
+		public override int TreasureMapLevel => Utility.RandomMinMax(1, 3);
 
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.Gems, 2);
             AddLoot(LootPack.LootItem<SpidersSilk>(8, true));
-            AddLoot(LootPack.LootItem<LuckyCoin>(1.0));
-        }
+			AddLoot(LootPack.LootItem<VeninAraigneeNoire>(4, true));
+		}
 
-        public override int GetIdleSound()
+		public override int GetIdleSound()
         {
             return 1605;
         }

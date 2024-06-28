@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a minotaur corpse")]
+    [CorpseName("le corps d'un minotaure")]
     public class MinotaurCaptain : BaseCreature
     {
         [Constructable]
         public MinotaurCaptain()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)// NEED TO CHECK
         {
-            Name = "a minotaur captain";
+            Name = "un minotaure capitaine";
             Body = 280;
             BaseSoundID = 1270;
 
@@ -55,9 +55,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.ArcanistScrolls, 0, 1);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

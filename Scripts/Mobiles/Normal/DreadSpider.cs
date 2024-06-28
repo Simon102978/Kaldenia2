@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a dread spider corpse")]
+    [CorpseName("le corps d'une tarenlune")]
     public class DreadSpider : BaseCreature
     {
         [Constructable]
         public DreadSpider()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a dread spider";
+            Name = "une tarenlune";
             Body = 11;
             BaseSoundID = 1170;
 
@@ -52,11 +52,13 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-		public override int Hides => 5;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Arachnide;
 		public override bool CanAngerOnTame => true;
         public override Poison PoisonImmune => Poison.Lethal;
@@ -67,10 +69,10 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.LootItem<SpidersSilk>(8, true));
-			AddLoot(LootPack.LootItem<VeninTarenlune>());
+			AddLoot(LootPack.LootItem<VeninTarenlune>(3, 7));
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(1);

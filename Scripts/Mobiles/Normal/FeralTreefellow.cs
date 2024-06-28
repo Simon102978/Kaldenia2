@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a treefellow corpse")]
+    [CorpseName("le corps d'un arbre tronc")]
     public class FeralTreefellow : BaseCreature
     {
         [Constructable]
         public FeralTreefellow()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a feral treefellow";
+            Name = "un arbre tronc";
             Body = 301;
 
             SetStr(1351, 1600);
@@ -63,10 +63,12 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Average); //Unknown
             AddLoot(LootPack.LootItem<Log>(Utility.RandomMinMax(5, 10)));
-			AddLoot(LootPack.LootItem<EcorceArbreGeant>());
+			AddLoot(LootPack.LootItem<EcorceArbreGeant>(3, 7));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

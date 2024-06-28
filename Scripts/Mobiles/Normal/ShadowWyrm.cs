@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a shadow wyrm corpse")]
+    [CorpseName("le corps d'une wyrm sombre")]
     public class ShadowWyrm : BaseCreature
     {
         [Constructable]
         public ShadowWyrm()
             : base(AIType.AI_NecroMage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a shadow wyrm";
+            Name = "une wyrm sombre";
             Body = 106;
             BaseSoundID = 362;
 			Hue = -1;
@@ -62,16 +62,18 @@ namespace Server.Mobiles
         public override Poison PoisonImmune => Poison.Deadly;
         public override Poison HitPoison => Poison.Deadly;
         public override int TreasureMapLevel => 5;
-        public override int Meat => 19;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
 		//    public override int Hides => 20;
 		//     public override int Scales => 10;
 		//     public override ScaleType ScaleType => ScaleType.Black;
 		//      public override HideType HideType => HideType.Barbed;
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(6, 12);
+
 		public override BoneType BoneType => BoneType.Dragonique;
 
-		public override int Hides => 12;
+		public override int Hides => Utility.RandomMinMax(6, 12);
 		public override HideType HideType => HideType.Dragonique;
 		public override bool CanFly => true;
 
@@ -79,10 +81,12 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.FilthyRich, 3);
             AddLoot(LootPack.Gems, 5);
-			AddLoot(LootPack.LootItem<EcaillesWyrm>());
+			AddLoot(LootPack.LootItem<EcaillesWyrm>(3, 7));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(6, 12));
+
 		}
 
-        public override int GetIdleSound()
+		public override int GetIdleSound()
         {
             return 0x2D5;
         }

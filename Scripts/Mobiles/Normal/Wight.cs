@@ -3,14 +3,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a wight corpse")]
+    [CorpseName("le corps d'une wight")]
     public class Wight : BaseCreature
     {
         [Constructable]
         public Wight()
             : base(AIType.AI_NecroMage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a Wight";
+            Name = "une Wight";
             Body = 252;
             Hue = 1153;
             BaseSoundID = 0x482;
@@ -57,9 +57,13 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 5));
+			AddLoot(LootPack.LootItem<GriffeWight>(3, 5));
+
+
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

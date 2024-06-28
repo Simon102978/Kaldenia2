@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a harpy corpse")]
+    [CorpseName("le corps d'une harpie")]
     public class Harpy : BaseCreature
     {
 
@@ -10,7 +10,7 @@ namespace Server.Mobiles
         public Harpy()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a harpy";
+            Name = "une harpie";
             Body = 30;
             BaseSoundID = 402;
 
@@ -49,15 +49,16 @@ namespace Server.Mobiles
 		}
 
 		public override bool CanRummageCorpses => true;
-        public override int Meat => 4;
-        public override MeatType MeatType => MeatType.Bird;
-        public override int Feathers => 50;
-        public override bool CanFly => true;
+        public override int Meat => Utility.RandomMinMax(2, 4);
+
+		public override MeatType MeatType => MeatType.Bird;
+        public override int Feathers => Utility.RandomMinMax(15, 50);
+		public override bool CanFly => true;
         public override void GenerateLoot()
         {
-			AddLoot(LootPack.LootItem<PlumesHarpie>());
 			AddLoot(LootPack.Meager, 2);
 			AddLoot(LootPack.RandomLootItem(new System.Type[] { typeof(SilverRing), typeof(Necklace), typeof(SilverNecklace), typeof(Collier), typeof(Collier2) }, 5.0, 1, false, true));
+			AddLoot(LootPack.LootItem<PlumesHarpie>(2, 5));
 		}
 
         public override int GetAttackSound()

@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a giant black widow spider corpse")]
+    [CorpseName("le corps d'une araignée géante")]
     public class GiantBlackWidow : BaseCreature
     {
         [Constructable]
         public GiantBlackWidow()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a giant black widow";
+            Name = "une araignée noire";
             Body = 0x9D;
             BaseSoundID = 0x388; // TODO: validate
 
@@ -43,11 +43,13 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-		public override int Hides => 5;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Arachnide;
 		public override FoodType FavoriteFood => FoodType.Meat;
         public override Poison PoisonImmune => Poison.Deadly;
@@ -57,10 +59,10 @@ namespace Server.Mobiles
             AddLoot(LootPack.Average);
             AddLoot(LootPack.LootItem<SpidersSilk>(5, true));
             AddLoot(LootPack.LootItem<LesserPoisonPotion>(2, true));
-			AddLoot(LootPack.LootItem<VeninAraigneeNoire>());
+			AddLoot(LootPack.LootItem<VeninAraigneeNoire>(3, 7));
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

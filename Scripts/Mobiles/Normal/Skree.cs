@@ -1,6 +1,6 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a skree corpse")]
+    [CorpseName("le corps d'un skrie")]
     public class Skree : BaseCreature
     {
         public override bool CanAngerOnTame => true;
@@ -9,7 +9,7 @@ namespace Server.Mobiles
         public Skree()
             : base(AIType.AI_Mystic, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a skree";
+            Name = "un skrie";
             Body = 733;
 
             SetStr(297, 330);
@@ -47,13 +47,13 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 3;
+        public override int Meat => Utility.RandomMinMax(1, 3);
 
-        public override MeatType MeatType => MeatType.Bird;
+		public override MeatType MeatType => MeatType.Bird;
 
-        public override int Hides => 5;
+        public override int Hides => Utility.RandomMinMax(2, 5);
 
-        public override void GenerateLoot()
+		public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
         }

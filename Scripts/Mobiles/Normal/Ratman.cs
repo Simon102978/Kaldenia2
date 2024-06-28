@@ -3,14 +3,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a ratman's corpse")]
+    [CorpseName("un corps de ssins")]
     public class Ratman : BaseCreature
     {
         [Constructable]
         public Ratman()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = NameList.RandomName("ratman");
+            Name = "ssins";
             Body = 42;
             BaseSoundID = 437;
 
@@ -45,10 +45,10 @@ namespace Server.Mobiles
 
         public override InhumanSpeech SpeechType => InhumanSpeech.Ratman;
         public override bool CanRummageCorpses => true;
-		public override int Hides => 8;
+		public override int Hides => Utility.RandomMinMax(4, 8);
 		public override HideType HideType => HideType.Regular;
 
-		public override int Bones => 8;
+		public override int Bones => Utility.RandomMinMax(4, 8);
 		public override BoneType BoneType => BoneType.Regular;
 		public override void GenerateLoot()
         {

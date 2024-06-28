@@ -1,6 +1,6 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a horse corpse")]
+    [CorpseName("le corps d'un cheval")]
     public class Horse : BaseMount
     {
         private static readonly int[] m_IDs = new int[]
@@ -12,7 +12,7 @@ namespace Server.Mobiles
         };
         [Constructable]
         public Horse()
-            : this("a horse")
+            : this("un cheval")
         {
         }
 
@@ -57,9 +57,11 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
-		public override int Meat => 3;
-        public override int Hides => 10;
-        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
+		public override int Meat => Utility.RandomMinMax(5, 10);
+
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
+		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

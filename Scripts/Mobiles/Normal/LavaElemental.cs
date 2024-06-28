@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a lava elemental corpse")]
+    [CorpseName("le corps d'un elementaire de lave")]
     public class LavaElemental : BaseCreature
     {
         [Constructable]
         public LavaElemental()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a lava elemental";
+            Name = "un elementaire de lave";
             Body = 720;
 
             SetStr(446, 510);
@@ -49,8 +49,9 @@ namespace Server.Mobiles
             AddLoot(LootPack.FilthyRich, 3);
             AddLoot(LootPack.Gems, 2);
             AddLoot(LootPack.MedScrolls);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-            AddLoot(LootPack.LootItem<Nightshade>(4, true));
+			AddLoot(LootPack.LootItem<Nightshade>(4, true));
             AddLoot(LootPack.LootItem<SulfurousAsh>(5, true));
             AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
         }

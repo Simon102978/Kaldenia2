@@ -4,7 +4,7 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a solen queen corpse")]
+    [CorpseName("un corps de reine fourifeu\"")]
     public class RedSolenQueen : BaseCreature, IRedSolen
     {
         private bool m_BurstSac;
@@ -14,7 +14,7 @@ namespace Server.Mobiles
         public RedSolenQueen()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a red solen queen";
+            Name = "une reine fourifeu";
             Body = 783;
             BaseSoundID = 959;
 
@@ -43,19 +43,23 @@ namespace Server.Mobiles
             Karma = -4500;
         }
 
-		public override int Hides => 10;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 10;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Arachnide;
 
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 7));
 
-        public RedSolenQueen(Serial serial)
+		}
+
+		public RedSolenQueen(Serial serial)
             : base(serial)
         {
         }

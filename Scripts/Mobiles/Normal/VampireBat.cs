@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a vampire bat corpse")]
+    [CorpseName("le corps d'une chauve-souris")]
     public class VampireBat : BaseCreature
     {
         [Constructable]
         public VampireBat()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a vampire bat";
+            Name = "une chauve-souris";
             Body = 317;
             BaseSoundID = 0x270;
 
@@ -44,9 +44,11 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Poor);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override int GetIdleSound()
+		}
+
+		public override int GetIdleSound()
         {
             return 0x29B;
         }

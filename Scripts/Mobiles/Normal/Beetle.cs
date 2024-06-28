@@ -4,14 +4,14 @@ using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a giant beetle corpse")]
+    [CorpseName("le corps d'un scarabée")]
     public class Beetle : BaseMount
     {
         public virtual double BoostedSpeed => 0.1;
 
         [Constructable]
         public Beetle()
-            : this("a giant beetle")
+            : this("un scarabée")
         {
         }
 

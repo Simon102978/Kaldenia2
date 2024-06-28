@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a dragon corpse")]
+    [CorpseName("le corps d'un dragon")]
     public class GreaterDragon : BaseCreature
     {
         [Constructable]
         public GreaterDragon()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.3, 0.5)
         {
-            Name = "a greater dragon";
+            Name = "un grand Dragon";
             Body = Utility.RandomList(12, 59);
             BaseSoundID = 362;
 
@@ -63,16 +63,19 @@ namespace Server.Mobiles
         public override bool ReacquireOnMovement => !Controlled;
         public override bool AutoDispel => !Controlled;
         public override int TreasureMapLevel => 5;
-        public override int Meat => 19;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
 		/*        public override int Hides => 30;
 				public override HideType HideType => HideType.Barbed;
 				public override int Scales => 7;
 				public override ScaleType ScaleType => (Body == 12 ? ScaleType.Yellow : ScaleType.Red);*/
 
-		public override int Hides => 12;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Dragonique;
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Dragonique;
 
 		public override FoodType FavoriteFood => FoodType.Meat;
@@ -82,9 +85,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.FilthyRich, 4);
             AddLoot(LootPack.Gems, 8);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(71, 10));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

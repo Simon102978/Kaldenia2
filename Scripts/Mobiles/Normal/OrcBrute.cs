@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an orcish corpse")]
+    [CorpseName("le corps d'un orc")]
     public class OrcBrute : BaseCreature
     {
         [Constructable]
@@ -11,7 +11,7 @@ namespace Server.Mobiles
         {
             Body = 189;
 
-            Name = "an orc brute";
+            Name = "un orc brute";
             BaseSoundID = 0x45A;
 
             SetStr(767, 945);
@@ -56,12 +56,17 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.Rich);
-            AddLoot(LootPack.LootItem<ShadowIronOre>(3));
-            AddLoot(LootPack.LootItem<IronIngot>(5));
-            AddLoot(LootPack.LootItem<Yeast>());
-        }
+			AddLoot(LootPack.LootItem<WinecrafterYeast>(1, 3));
+			AddLoot(LootPack.LootItem<BrewersYeast>(1, 3));
+			AddLoot(LootPack.LootItem<Yeast>(1, 3));
+			AddLoot(LootPack.LootItem<Apple>(3, 5));
+			AddLoot(LootPack.LootItem<Arrow>(15, 28));
+			AddLoot(LootPack.LootItem<Bandage>(1, 15));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override bool IsEnemy(Mobile m)
+		}
+
+		public override bool IsEnemy(Mobile m)
         {
             if (m.Player && m.FindItemOnLayer(Layer.Helm) is OrcishKinMask)
                 return false;

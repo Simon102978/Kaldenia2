@@ -53,6 +53,7 @@ namespace Server.Mobiles
 		public override void GenerateLootParagon()
 		{
 			AddLoot(LootPack.LootItem<SangEnvouteFroid>(), Utility.RandomMinMax(2, 4));
+			AddLoot(LootPack.LootItem<PoilsLoup>(3, 7));
 		}
 		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Lupus;

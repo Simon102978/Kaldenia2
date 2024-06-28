@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a mongbat corpse")]
+    [CorpseName("le corps d'une mongbat")]
     public class StrongMongbat : BaseCreature
     {
         [Constructable]
         public StrongMongbat()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a mongbat";
+            Name = "une mongbat";
             Body = 39;
             BaseSoundID = 422;
 
@@ -41,15 +41,19 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 1;
-        public override int Hides => 6;
-        public override FoodType FavoriteFood => FoodType.Meat;
+        public override int Meat => Utility.RandomMinMax(1, 2);
+
+		public override int Hides => Utility.RandomMinMax(2, 4);
+
+		public override FoodType FavoriteFood => FoodType.Meat;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Poor);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);
