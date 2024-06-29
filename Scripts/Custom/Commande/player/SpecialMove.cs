@@ -42,7 +42,15 @@ namespace Server.Scripts.Commands
 			}
 			else
 			{
+
+
 				WeaponAbility attack = WeaponAbility.Abilities[attaque];
+
+				if (attack == null)
+				{
+					from.SendMessage("Votre arme n'a pas d'attaque spéciale.");
+					return;
+				}
 
 				if (attack.Validate(from))
 				{
@@ -55,6 +63,7 @@ namespace Server.Scripts.Commands
 					error = true;
 				}
 			}
+			
 
 			if (error)
 			{
@@ -63,15 +72,27 @@ namespace Server.Scripts.Commands
 
 				IWeapon wep = from.Weapon;
 
+				
+
 				if (wep is BaseWeapon)
 				{
 					BaseWeapon bw = (BaseWeapon)wep;
 
-					primaire = bw.PrimaryAbility;
-					secondaire = bw.SecondaryAbility;
+					if (bw.PrimaryAbility == null || bw.SecondaryAbility == null)
+					{
+							from.SendMessage("Votre arme n'a pas d'attaque spéciale.");
+					}
+					else
+					{
+						
+						primaire = bw.PrimaryAbility;
+						secondaire = bw.SecondaryAbility;
+						from.SendMessage("Vous pouvez utiliser les attaques : " + primaire.Name + " (" + primaire.Id + "), " + secondaire.Name + " (" + secondaire.Id + ")"); // Placeholder
+					}
+
 				}
 
-				from.SendMessage("Vous pouvez utiliser les attaques : " + primaire.Name + " (" + primaire.Id + "), " + secondaire.Name + " (" + secondaire.Id + ")"); // Placeholder
+				
 			}
 
 
@@ -101,12 +122,16 @@ namespace Server.Scripts.Commands
 			
 				}
 
-				if (primaire.Validate(from))
+				if (primaire != null && primaire.Validate(from))
 				{
 					from.SendMessage("Vous activez l'attaque special : " + primaire.Name);
 					WeaponAbility.SetCurrentAbility(from, primaire);
 
 				}		
+				else
+				{
+					from.SendMessage("Votre arme n'a pas d'attaque spéciale.");
+				}
 
 			}
 
@@ -131,10 +156,14 @@ namespace Server.Scripts.Commands
 
 			}
 
-			if (primaire.Validate(from))
+			if (primaire != null && primaire.Validate(from))
 			{
 				from.SendMessage("Vous activez l'attaque special : " + primaire.Name);
 				WeaponAbility.SetCurrentAbility(from, primaire);
+			}
+			else
+			{
+				from.SendMessage("Votre arme n'a pas d'attaque spéciale.");
 			}
 		}
 	}	
