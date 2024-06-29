@@ -1710,6 +1710,11 @@ namespace Server.Mobiles
 
 		public bool CanEvolveClass(int pointNecessaire)
         {
+			if(m_Classe.ClasseID == 0)
+				return true;
+
+
+
 			if(Classe.LevelToEvolve(m_Classe.ClasseLvl + 1 ) > m_Niveau)
 			{
 				return false;
@@ -1725,6 +1730,13 @@ namespace Server.Mobiles
 
 		public bool CanEvolveMetier(int pointNecessaire)
         {
+			if (m_Metier.MetierID == 0)
+			{
+				return true;
+			}
+
+
+
             if(Metier.LevelToEvolve(m_Metier.MetierLvl + 1 ) > m_Niveau)
 			{
 				return false;
