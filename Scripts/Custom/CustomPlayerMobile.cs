@@ -1636,6 +1636,18 @@ namespace Server.Mobiles
 
 			SkillsCap = Niveau * 10 + 500;
 
+			foreach (SkillName item in Classe.ClasseSkill) // Metier
+			{
+					double ClasseSkill = Classe.GetSkillValue(item) < skillcap ? Classe.GetSkillValue(item) : skillcap;
+
+					Skills[item].Cap = ClasseSkill;
+
+					if (Skills[item].Value > ClasseSkill)
+					{
+						Skills[item].Base = ClasseSkill;
+					}					
+			}	
+
 			if (m_Classe.Metier)
 			{
 				foreach (SkillName item in Classe.MetierSkill) // Classe et Metier gerer en meme temps
@@ -1654,20 +1666,6 @@ namespace Server.Mobiles
 			}
 			else
 			{
-				
-				
-				foreach (SkillName item in Classe.ClasseSkill) // Metier
-				{
-					double ClasseSkill = Classe.GetSkillValue(item) < skillcap ? Classe.GetSkillValue(item) : skillcap;
-
-					Skills[item].Cap = ClasseSkill;
-
-					if (Skills[item].Value > ClasseSkill)
-					{
-						Skills[item].Base = ClasseSkill;
-					}					
-				}	
-
 				foreach (SkillName item in Classe.MetierSkill) // Metier
 				{
 					double metierSkill = Metier.GetSkillValue(item) < skillcap ? Metier.GetSkillValue(item) : skillcap;
