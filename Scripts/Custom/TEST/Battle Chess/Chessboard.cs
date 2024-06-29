@@ -29,7 +29,7 @@ namespace Arya.Chess
 	}
 
 	/// <summary>
-	/// Defines the style of the NPCs on the BChessRegularBoard
+	/// Defines the style of the NPCs on the BChessboard
 	/// </summary>
 	public enum ChessSet : int
 	{
@@ -41,27 +41,27 @@ namespace Arya.Chess
 	}
 
 	/// <summary>
-	/// The orientaion of the game on the BChessRegularBoard
+	/// The orientaion of the game on the BChessboard
 	/// </summary>
-	public enum RegularBoardOrientation : byte
+	public enum BoardOrientation : byte
 	{
 		NorthSouth = 0,
 		EastWest = 1
 	}
 
 	/// <summary>
-	/// This class holds the BChessRegularBoard logic that manages the chess game
+	/// This class holds the BChessboard logic that manages the chess game
 	/// </summary>
-	public class BChessRegularBoard
+	public class BChessboard
 	{
 		#region Variables
 
 		/// <summary>
-		/// The Map the physical BChessRegularBoard lies on
+		/// The Map the physical BChessboard lies on
 		/// </summary>
 		private Map m_Map;
 		/// <summary>
-		/// The Z coordinate of the BChessRegularBoard plane
+		/// The Z coordinate of the BChessboard plane
 		/// </summary>
 		private int m_Z;
 		/// <summary>
@@ -73,7 +73,7 @@ namespace Arya.Chess
 		/// </summary>
 		private Mobile m_Black;
 		/// <summary>
-		/// This table holds all the pieces, their location on the RegularBoard is the key
+		/// This table holds all the pieces, their location on the board is the key
 		/// </summary>
 		private Hashtable m_Table;
 		/// <summary>
@@ -81,7 +81,7 @@ namespace Arya.Chess
 		/// </summary>
 		private ArrayList m_CapturedPieces;
 		/// <summary>
-		/// The physical bounds of this RegularBoard
+		/// The physical bounds of this board
 		/// </summary>
 		private Rectangle2D m_Bounds;
 		/// <summary>
@@ -97,7 +97,7 @@ namespace Arya.Chess
 		/// </summary>
 		private ChessGame m_Game;
 		/// <summary>
-		/// The chess set for this RegularBoard
+		/// The chess set for this board
 		/// </summary>
 		private ChessSet m_ChessSet;
 		/// <summary>
@@ -109,9 +109,9 @@ namespace Arya.Chess
 		/// </summary>
 		private int m_BlackHue = 1175;
 		/// <summary>
-		/// The orientation of the BChessRegularBoard
+		/// The orientation of the BChessboard
 		/// </summary>
-		private RegularBoardOrientation m_Orientation;
+		private BoardOrientation m_Orientation;
 		/// <summary>
 		/// The minor hue for white pieces
 		/// </summary>
@@ -154,7 +154,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Gets the Z coordinate of the RegularBoard plane
+		/// Gets the Z coordinate of the board plane
 		/// </summary>
 		public int Z
 		{
@@ -162,7 +162,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Gets or sets the chess set for this RegularBoard
+		/// Gets or sets the chess set for this board
 		/// </summary>
 		public ChessSet ChessSet
 		{
@@ -294,9 +294,9 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Gets the orientation of the RegularBoard
+		/// Gets the orientation of the board
 		/// </summary>
-		public RegularBoardOrientation Orientation
+		public BoardOrientation Orientation
 		{
 			get { return m_Orientation; }
 			set
@@ -355,7 +355,7 @@ namespace Arya.Chess
 
 		#endregion
 
-		public BChessRegularBoard( Mobile black, Mobile white, int z, Rectangle2D bounds, ChessGame game, ChessSet chessSet, int whiteHue, int blackHue, int whiteMinorHue, int blackMinorHue, bool overrideMinorHue )
+		public BChessboard( Mobile black, Mobile white, int z, Rectangle2D bounds, ChessGame game, ChessSet chessSet, int whiteHue, int blackHue, int whiteMinorHue, int blackMinorHue, bool overrideMinorHue )
 		{
 			m_Game = game;
 			m_Black = black;
@@ -383,7 +383,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Gets the chess piece currently on the RegularBoard
+		/// Gets the chess piece currently on the board
 		/// </summary>
 		public BaseChessPiece this[int x, int y]
 		{
@@ -394,7 +394,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Gets the chess piece currently on the RegularBoard
+		/// Gets the chess piece currently on the board
 		/// </summary>
 		public BaseChessPiece this[ Point2D p ]
 		{
@@ -404,10 +404,10 @@ namespace Arya.Chess
 			}
 		}
 
-		#region RegularBoard Creation
+		#region Board Creation
 
 		/// <summary>
-		/// Adds a chess piece to the RegularBoard table
+		/// Adds a chess piece to the board table
 		/// </summary>
 		/// <param name="piece">The piece being added</param>
 		private void AddPiece( BaseChessPiece piece )
@@ -460,7 +460,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Rebuilds the BChessRegularBoard applying any changes made to the NPCs
+		/// Rebuilds the BChessboard applying any changes made to the NPCs
 		/// </summary>
 		public void Rebuild()
 		{
@@ -482,36 +482,36 @@ namespace Arya.Chess
 
 		#endregion
 
-		#region Physic RegularBoard Managment
+		#region Physic Board Managment
 
 		/// <summary>
-		/// Verifies is a given Point2D is a valid position on the BChessRegularBoard
+		/// Verifies is a given Point2D is a valid position on the BChessboard
 		/// </summary>
 		/// <param name="pos">The Point2D considered</param>
-		/// <returns>True if the position provided is part of the BChessRegularBoard</returns>
+		/// <returns>True if the position provided is part of the BChessboard</returns>
 		public bool IsValid( Point2D pos )
 		{
 			return pos.X >= 0 && pos.Y >= 0 && pos.X < 8 && pos.Y < 8;
 		}
 
 		/// <summary>
-		/// Converts a position on the RegularBoard, to a real world location
+		/// Converts a position on the board, to a real world location
 		/// </summary>
-		/// <param name="RegularBoardPosition">The point on the RegularBoard</param>
+		/// <param name="boardPosition">The point on the board</param>
 		/// <returns>The corresponding real world coordinate</returns>
-		public Point2D RegularBoardToWorld( Point2D RegularBoardPosition )
+		public Point2D BoardToWorld( Point2D boardPosition )
 		{
-			if ( m_Orientation == RegularBoardOrientation.NorthSouth )
+			if ( m_Orientation == BoardOrientation.NorthSouth )
 			{
-				int xoffset = RegularBoardPosition.X * m_Step + m_Offset;
-				int yoffset = RegularBoardPosition.Y * m_Step + m_Offset;
+				int xoffset = boardPosition.X * m_Step + m_Offset;
+				int yoffset = boardPosition.Y * m_Step + m_Offset;
 
 				return new Point2D( m_Bounds.X + xoffset, m_Bounds.Y + yoffset );
 			}
 			else
 			{
-				int xoffset = RegularBoardPosition.Y * m_Step + m_Offset;
-				int yoffset = RegularBoardPosition.X * m_Step + m_Offset;
+				int xoffset = boardPosition.Y * m_Step + m_Offset;
+				int yoffset = boardPosition.X * m_Step + m_Offset;
 
 				return new Point2D(
 					m_Bounds.X + xoffset,
@@ -520,13 +520,13 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Converts a position in the game world to a position on the RegularBoard
+		/// Converts a position in the game world to a position on the board
 		/// </summary>
 		/// <param name="worldPosition">The location being converted</param>
-		/// <returns>RegularBoard coordinates</returns>
-		public Point2D WorldToRegularBoard( Point2D worldPosition )
+		/// <returns>Board coordinates</returns>
+		public Point2D WorldToBoard( Point2D worldPosition )
 		{
-			if ( m_Orientation == RegularBoardOrientation.NorthSouth )
+			if ( m_Orientation == BoardOrientation.NorthSouth )
 			{
 				int dx = worldPosition.X - m_Bounds.X;
 				int dy = worldPosition.Y - m_Bounds.Y;
@@ -556,7 +556,7 @@ namespace Arya.Chess
 		/// <returns>True if the move is legal</returns>
 		public bool TryMove( ref string err, BaseChessPiece piece, Point2D to )
 		{
-			Point2D p2 = WorldToRegularBoard( to );
+			Point2D p2 = WorldToBoard( to );
 
 			if ( piece == null )
 			{
@@ -610,7 +610,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// A chess piece will call this function to notify the RegularBoard that its movement is complete
+		/// A chess piece will call this function to notify the board that its movement is complete
 		/// </summary>
 		/// <param name="move">The move perfromed</param>
 		public void OnMoveOver( Move move )
@@ -685,7 +685,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// A pawn has been promoted and should be changed on the RegularBoard
+		/// A pawn has been promoted and should be changed on the board
 		/// </summary>
 		/// <param name="pawn">The pawn that has been promoted</param>
 		/// <param name="to">The type of piece it should be promoted to</param>
@@ -727,7 +727,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// Applies a move to the BChessRegularBoard logic
+		/// Applies a move to the BChessboard logic
 		/// </summary>
 		/// <param name="move">The move object</param>
 		public void ApplyMove( Move move )
@@ -875,7 +875,7 @@ namespace Arya.Chess
 		/// Gets the current status of a player
 		/// </summary>
 		/// <param name="color">The player being examined</param>
-		/// <returns>The Status enumeration value corresponding to the RegularBoard situation</returns>
+		/// <returns>The Status enumeration value corresponding to the board situation</returns>
 		private Status GetStatus( ChessColor color )
 		{
 			bool check = IsCheck( color );
@@ -1060,7 +1060,7 @@ namespace Arya.Chess
 		#region Deletion
 
 		/// <summary>
-		/// Deletes all the mobiles associated with the RegularBoard
+		/// Deletes all the mobiles associated with the board
 		/// </summary>
 		public void Delete()
 		{
@@ -1069,7 +1069,7 @@ namespace Arya.Chess
 		}
 
 		/// <summary>
-		/// The staff deleted a piece from the BChessRegularBoard, so clean up the game
+		/// The staff deleted a piece from the BChessboard, so clean up the game
 		/// </summary>
 		public void OnStaffDelete()
 		{

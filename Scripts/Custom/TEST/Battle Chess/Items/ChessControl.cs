@@ -14,7 +14,7 @@ namespace Arya.Chess
 		private ChessGame m_Game;
 		private Rectangle2D m_Bounds;
 		private int m_SquareWidth = 2;
-		private int m_RegularBoardHeight = 0;
+		private int m_BoardHeight = 0;
 		private ChessSet m_ChessSet = ChessSet.Classic;
 		private int m_WhiteHue = 91;
 		private int m_BlackHue = 437;
@@ -22,7 +22,7 @@ namespace Arya.Chess
 		private int m_CaptureEffect = 14186; // Blue/Gold Sparkle 2
 		private bool m_BoltOnDeath = true;
 		private bool m_AllowSpectators = false;
-		private RegularBoardOrientation m_Orientation = RegularBoardOrientation.NorthSouth;
+		private BoardOrientation m_Orientation = BoardOrientation.NorthSouth;
 		private int m_BlackMinorHue = 447;
 		private int m_WhiteMinorHue = 96;
 		private bool m_OverrideMinorHue = false;
@@ -38,7 +38,7 @@ namespace Arya.Chess
 		}
 
 		[ CommandProperty( AccessLevel.GameMaster ) ]
-		public Point2D RegularBoardNorthWestCorner
+		public Point2D BoardNorthWestCorner
 		{
 			get { return m_Bounds.Start; }
 			set
@@ -186,10 +186,10 @@ namespace Arya.Chess
 		}
 
 		[ CommandProperty( AccessLevel.GameMaster ) ]
-		public int RegularBoardHeight
+		public int BoardHeight
 		{
-			get { return m_RegularBoardHeight; }
-			set { m_RegularBoardHeight = value; }
+			get { return m_BoardHeight; }
+			set { m_BoardHeight = value; }
 		}
 
 		[ CommandProperty( AccessLevel.GameMaster ) ]
@@ -228,7 +228,7 @@ namespace Arya.Chess
 		}
 
 		[ CommandProperty( AccessLevel.GameMaster ) ]
-		public RegularBoardOrientation Orientation
+		public BoardOrientation Orientation
 		{
 			get { return m_Orientation; }
 			set
@@ -280,7 +280,7 @@ namespace Arya.Chess
 			// Version 0
 			writer.Write( m_Bounds );
 			writer.Write( m_SquareWidth );
-			writer.Write( m_RegularBoardHeight );
+			writer.Write( m_BoardHeight );
 		}
 
 		public override void Deserialize(GenericReader reader)
@@ -299,7 +299,7 @@ namespace Arya.Chess
 
 				case 2 :
 
-					m_Orientation = (RegularBoardOrientation) reader.ReadByte();
+					m_Orientation = (BoardOrientation) reader.ReadByte();
 					m_BlackMinorHue = reader.ReadInt();
 					m_WhiteMinorHue = reader.ReadInt();
 					goto case 1;
@@ -318,7 +318,7 @@ namespace Arya.Chess
 					
 					m_Bounds = reader.ReadRect2D();
 					m_SquareWidth = reader.ReadInt();
-					m_RegularBoardHeight = reader.ReadInt();
+					m_BoardHeight = reader.ReadInt();
 					break;
 			}
 		}
@@ -347,7 +347,7 @@ namespace Arya.Chess
 				if ( m_Game.Region != null )
 					spect = m_Game.Region.AllowSpectators;
 
-				list.Add( 1060659, "Spectators on the ChessRegularBoard\t{0}",
+				list.Add( 1060659, "Spectators on the Chessboard\t{0}",
 					spect ? "Allowed" : "Not Allowed" );
 				list.Add( 1060660, "If you loose your target say\t{0}", ChessConfig.ResetKeyword );
 			}
@@ -360,12 +360,12 @@ namespace Arya.Chess
 				// Not configured yet
 				if ( from.AccessLevel >= AccessLevel.GameMaster )
 				{
-					from.Target = new ChessTarget( from, "Target the north west corner of the chessRegularBoard you wish to create",
-						new ChessTargetCallback( OnRegularBoardTarget ) );
+					from.Target = new ChessTarget( from, "Target the north west corner of the chessboard you wish to create",
+						new ChessTargetCallback( OnBoardTarget ) );
 				}
 				else
 				{
-					from.SendMessage( 0x40, "This chess RegularBoard isn't ready for a game yet. Please contact a game master for assistance with its configuration." );
+					from.SendMessage( 0x40, "This chess board isn't ready for a game yet. Please contact a game master for assistance with its configuration." );
 				}
 			}
 			else if ( m_Game != null )
@@ -377,7 +377,7 @@ namespace Arya.Chess
 			}
 			else
 			{
-				m_Game = new ChessGame( this, from, m_Bounds, m_RegularBoardHeight );
+				m_Game = new ChessGame( this, from, m_Bounds, m_BoardHeight );
 
 				InvalidateProperties();
 			}
@@ -389,7 +389,7 @@ namespace Arya.Chess
 			InvalidateProperties();
 		}
 
-		private void OnRegularBoardTarget( Mobile from, object targeted )
+		private void OnBoardTarget( Mobile from, object targeted )
 		{
 			IPoint3D p = targeted as IPoint3D;
 
@@ -399,7 +399,7 @@ namespace Arya.Chess
 				return;
 			}
 
-			BuildRegularBoard( this, new Point3D( p ), Map );
+			BuildBoard( this, new Point3D( p ), Map );
 			InvalidateProperties();
 		}
 
@@ -416,14 +416,14 @@ namespace Arya.Chess
 			m_ChessSet = s;
 		}
 
-		#region RegularBoard Building
+		#region Board Building
 
-		private static void BuildRegularBoard( ChessControl chess, Point3D p, Map map )
+		private static void BuildBoard( ChessControl chess, Point3D p, Map map )
 		{
-			chess.m_RegularBoardHeight = p.Z + 5; // Placing stairs on the specified point
-			chess.RegularBoardNorthWestCorner = new Point2D( p.X, p.Y );
+			chess.m_BoardHeight = p.Z + 5; // Placing stairs on the specified point
+			chess.BoardNorthWestCorner = new Point2D( p.X, p.Y );
 
-			#region RegularBoard Tiles
+			#region Board Tiles
 
 			int stairNW = 1909;
 			int stairSE = 1910;
@@ -459,7 +459,7 @@ namespace Arya.Chess
 							tile = black;
 					}
 
-					if ( chess.Orientation == RegularBoardOrientation.EastWest ) // Invert tiles if the orientation is EW
+					if ( chess.Orientation == BoardOrientation.EastWest ) // Invert tiles if the orientation is EW
 					{
 						if ( tile == white )
 							tile = black;
@@ -472,7 +472,7 @@ namespace Arya.Chess
 						for ( int ky = 0; ky < chess.m_SquareWidth; ky++ )
 						{
 							Server.Items.Static s = new Server.Items.Static( tile );
-							Point3D target = new Point3D( p.X + x * chess.m_SquareWidth + kx, p.Y + y * chess.m_SquareWidth + ky, chess.m_RegularBoardHeight );
+							Point3D target = new Point3D( p.X + x * chess.m_SquareWidth + kx, p.Y + y * chess.m_SquareWidth + ky, chess.m_BoardHeight );
 							s.MoveToWorld( target, map );
 						}
 					}

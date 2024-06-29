@@ -9,11 +9,11 @@ namespace Arya.Chess
 	public class ChessRegion : Region
 	{
 		/// <summary>
-		/// Specifies whether spectators should be allowed on the BChessRegularBoard or not
+		/// Specifies whether spectators should be allowed on the BChessboard or not
 		/// </summary>
 		private bool m_AllowSpectators = false;
 		/// <summary>
-		/// The game that's being held on the BChessRegularBoard
+		/// The game that's being held on the BChessboard
 		/// </summary>
 		private ChessGame m_Game;
 		/// <summary>
@@ -21,11 +21,11 @@ namespace Arya.Chess
 		/// </summary>
 		private Rectangle2D m_Bounds;
 		/// <summary>
-		/// The bounds of the BChessRegularBoard
+		/// The bounds of the BChessboard
 		/// </summary>
-		private Rectangle2D m_RegularBoardBounds;
+		private Rectangle2D m_BoardBounds;
 		/// <summary>
-		/// The height of the BChessRegularBoard
+		/// The height of the BChessboard
 		/// </summary>
 		private int m_Height;
 
@@ -44,14 +44,14 @@ namespace Arya.Chess
 		}
 
 		public ChessRegion( Map map, ChessGame game, bool allowSpectators, Rectangle2D bounds, int height )
-            : base("ChessRegularBoard", map, 100, GetArea(bounds))
+            : base("Chessboard", map, 100, GetArea(bounds))
 		{
 			m_Game = game;
 			m_AllowSpectators = allowSpectators;
 			
 			// Make the region larger so that people can't cast invisibility outside
 			m_Bounds = new Rectangle2D( bounds.X - 12, bounds.Y - 12, bounds.Width + 24, bounds.Height + 24 );
-			m_RegularBoardBounds = bounds;
+			m_BoardBounds = bounds;
 
 			m_Height = height;
         }
@@ -65,15 +65,15 @@ namespace Arya.Chess
 		{
 			if ( m_Game == null || m is ChessMobile || m_AllowSpectators || m_Game.IsPlayer( m ) )
 				base.OnLocationChanged (m, oldLocation);
-			else if ( m_RegularBoardBounds.Contains( m.Location ) && m.AccessLevel < AccessLevel.GameMaster )
+			else if ( m_BoardBounds.Contains( m.Location ) && m.AccessLevel < AccessLevel.GameMaster )
 			{
-				m.SendMessage( 0x40, "Spectators aren't allowed on the chessRegularBoard" );
+				m.SendMessage( 0x40, "Spectators aren't allowed on the chessboard" );
 
 				// Expel
-				if ( ! m_RegularBoardBounds.Contains( oldLocation as IPoint2D ) )
+				if ( ! m_BoardBounds.Contains( oldLocation as IPoint2D ) )
 					m.Location = oldLocation;
 				else
-					m.Location = new Point3D( m_RegularBoardBounds.X - 1, m_RegularBoardBounds.Y - 1, m_Height );
+					m.Location = new Point3D( m_BoardBounds.X - 1, m_BoardBounds.Y - 1, m_Height );
 			}
 			else
 				base.OnLocationChanged( m, oldLocation );
@@ -83,7 +83,7 @@ namespace Arya.Chess
 		{
 			if ( s is Server.Spells.Sixth.InvisibilitySpell )
 			{
-				m.SendMessage( 0x40, "You can't cast that spell when you're close to a chessRegularBoard" );
+				m.SendMessage( 0x40, "You can't cast that spell when you're close to a chessboard" );
 				return false;
 			}
 			else
@@ -122,7 +122,7 @@ namespace Arya.Chess
 		{
 			if ( m_Game != null && ! m_AllowSpectators )
 			{
-				IPooledEnumerable en = Map.GetMobilesInBounds( m_RegularBoardBounds );
+				IPooledEnumerable en = Map.GetMobilesInBounds( m_BoardBounds );
 				ArrayList expel = new ArrayList();
 
 				try
@@ -142,8 +142,8 @@ namespace Arya.Chess
 
 				foreach( Mobile m in expel )
 				{
-					m.SendMessage( 0x40, "Spectators aren't allowed on the chessRegularBoard" );
-					m.Location = new Point3D( m_RegularBoardBounds.X - 1, m_RegularBoardBounds.Y - 1, m_Height );
+					m.SendMessage( 0x40, "Spectators aren't allowed on the chessboard" );
+					m.Location = new Point3D( m_BoardBounds.X - 1, m_BoardBounds.Y - 1, m_Height );
 				}
 			}
 		}

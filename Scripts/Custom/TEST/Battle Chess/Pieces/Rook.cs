@@ -23,7 +23,7 @@ namespace Arya.Chess
 			}
 		}
 
-		public Rook( BChessRegularBoard RegularBoard, ChessColor color, Point2D position ) : base( RegularBoard, color, position )
+		public Rook( BChessboard board, ChessColor color, Point2D position ) : base( board, color, position )
 		{
 		}
 
@@ -32,7 +32,7 @@ namespace Arya.Chess
 			m_Piece = new ChessMobile( this );
 			m_Piece.Name	= string.Format( "Rook [{0}]", m_Color.ToString() );
 
-			switch ( m_BChessRegularBoard.ChessSet )
+			switch ( m_BChessboard.ChessSet )
 			{
 				case ChessSet.Classic : CreateClassic();
 					break;
@@ -110,12 +110,12 @@ namespace Arya.Chess
 				return false;
 
 			// Verify if this is a castle
-			BaseChessPiece king = m_BChessRegularBoard[ newLocation ];
+			BaseChessPiece king = m_BChessboard[ newLocation ];
 
 			if ( king is King && king.Color == m_Color )
 			{
 				// Trying to castle
-				return m_BChessRegularBoard.AllowCastle( king, this, ref err );
+				return m_BChessboard.AllowCastle( king, this, ref err );
 			}
 
 			int dx = newLocation.X - m_Position.X;
@@ -140,7 +140,7 @@ namespace Arya.Chess
 					{
 						int offset = direction * i;
 
-						if ( m_BChessRegularBoard[ m_Position.X + offset, m_Position.Y ] != null )
+						if ( m_BChessboard[ m_Position.X + offset, m_Position.Y ] != null )
 						{
 							err = "Rooks can't move over pieces";
 							return false; // There's a piece on the 
@@ -149,7 +149,7 @@ namespace Arya.Chess
 				}
 
 				// Verify if there's a piece to each at the end
-				BaseChessPiece piece = m_BChessRegularBoard[ newLocation ];
+				BaseChessPiece piece = m_BChessboard[ newLocation ];
 
 				if ( piece == null || piece.Color != m_Color )
 					return true;
@@ -171,7 +171,7 @@ namespace Arya.Chess
 					{
 						int offset = direction * i;
 
-						if ( m_BChessRegularBoard[ m_Position.X, m_Position.Y + offset ] != null )
+						if ( m_BChessboard[ m_Position.X, m_Position.Y + offset ] != null )
 						{
 							err = "The rook can't move over other pieces";
 							return false; // Piece on the way
@@ -180,7 +180,7 @@ namespace Arya.Chess
 				}
 
 				// Verify for piece at end
-				BaseChessPiece piece = m_BChessRegularBoard[ newLocation ];
+				BaseChessPiece piece = m_BChessboard[ newLocation ];
 
 				if ( piece == null || piece.Color != m_Color )
 					return true;
@@ -210,10 +210,10 @@ namespace Arya.Chess
 				{
 					Point2D p = new Point2D( m_Position.X + offset * xDir, m_Position.Y + offset * yDir );
 
-					if ( ! m_BChessRegularBoard.IsValid( p ) )
+					if ( ! m_BChessboard.IsValid( p ) )
 						break;
 
-					BaseChessPiece piece = m_BChessRegularBoard[ p ];
+					BaseChessPiece piece = m_BChessboard[ p ];
 
 					if ( piece == null )
 					{
@@ -237,11 +237,11 @@ namespace Arya.Chess
 
 		public override bool IsCastle(Point2D loc)
 		{
-			King king = m_BChessRegularBoard[ loc ] as King;
+			King king = m_BChessboard[ loc ] as King;
 
 			string err = null;
 
-			return king != null && king.Color == m_Color && m_BChessRegularBoard.AllowCastle( king, this, ref err );
+			return king != null && king.Color == m_Color && m_BChessboard.AllowCastle( king, this, ref err );
 		}
 
 		public void Castle()
@@ -268,9 +268,9 @@ namespace Arya.Chess
 			{
 				m_Castle = false;
 
-				m_BChessRegularBoard.ApplyMove( m_Move );
+				m_BChessboard.ApplyMove( m_Move );
 
-				King king = m_BChessRegularBoard.GetKing( m_Color ) as King;
+				King king = m_BChessboard.GetKing( m_Color ) as King;
 				
 				int dx = 0;
 

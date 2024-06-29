@@ -56,10 +56,10 @@ namespace Arya.Chess
 
 		#endregion
 
-		#region Movement on the BChessRegularBoard
+		#region Movement on the BChessboard
 
 		/// <summary>
-		/// Places the piece on the RegularBoard for the first time
+		/// Places the piece on the board for the first time
 		/// </summary>
 		/// <param name="location">The location where the piece should be placed</param>
 		/// <param name="map">The map where the game takes place</param>
