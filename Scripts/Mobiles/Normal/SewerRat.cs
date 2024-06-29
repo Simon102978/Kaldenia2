@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a sewer rat corpse")]
+    [CorpseName("le corps d'un rat")]
     public class Sewerrat : BaseCreature
     {
         [Constructable]
         public Sewerrat()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a sewer rat";
+            Name = "un rat d'égout";
             Body = 238;
             BaseSoundID = 0xCC;
 
@@ -45,21 +45,24 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 
-		public override int Meat => 1;
-		public override int Hides => 2;
+		public override int Meat => Utility.RandomMinMax(1, 2);
+
+		public override int Hides => Utility.RandomMinMax(1, 2);
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 2;
+		public override int Bones => Utility.RandomMinMax(1, 2);
 		public override BoneType BoneType => BoneType.Regular;
 
 		public override FoodType FavoriteFood => FoodType.Meat | FoodType.Eggs | FoodType.FruitsAndVegies;
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Poor);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 1));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

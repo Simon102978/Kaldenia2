@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a skittering hopper corpse")]
+    [CorpseName("le corps d'un skitter des sables")]
     public class SkitteringHopper : BaseCreature
     {
         [Constructable]
         public SkitteringHopper()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a skittering hopper";
+            Name = "un skitter des sables";
             Body = 302;
             BaseSoundID = 959;
 
@@ -46,9 +46,11 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

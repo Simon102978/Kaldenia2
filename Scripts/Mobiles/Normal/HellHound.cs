@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a hell hound corpse")]
+    [CorpseName("le corps d'un loup des enfers")]
     public class HellHound : BaseCreature
     {
         [Constructable]
         public HellHound()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a hell hound";
+            Name = "un loup des enfers";
             Body = 98;
             BaseSoundID = 229;
 
@@ -51,13 +51,14 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 1;
+        public override int Meat => Utility.RandomMinMax(3, 5);
 
-		public override int Hides => 5;
+		public override int Hides => Utility.RandomMinMax(3, 5);
+
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(3, 5);
 		public override BoneType BoneType => BoneType.Regular;
 
 
@@ -68,7 +69,9 @@ namespace Server.Mobiles
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.LootItem<SulfurousAsh>(5));
-        }
+			AddLoot(LootPack.LootItem<PoilsLoup>(5));
+
+		}
 
 		public override void GenerateLootParagon()
 		{

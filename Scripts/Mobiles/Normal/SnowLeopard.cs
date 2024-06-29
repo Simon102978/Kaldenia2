@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a leopard corpse")]
+    [CorpseName("le corps d'un leopard")]
     public class SnowLeopard : BaseCreature
     {
         [Constructable]
         public SnowLeopard()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a snow leopard";
+            Name = "un leopard des neiges";
             Body = Utility.RandomList(64, 65);
             BaseSoundID = 0x73;
 
@@ -45,12 +45,14 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 3;
-		public override int Hides => 5;
+        public override int Meat => Utility.RandomMinMax(2, 4);
+
+		public override int Hides => Utility.RandomMinMax(2, 4);
+
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Regular;
 		public override FoodType FavoriteFood => FoodType.Meat | FoodType.Fish;
         public override PackInstinct PackInstinct => PackInstinct.Feline;

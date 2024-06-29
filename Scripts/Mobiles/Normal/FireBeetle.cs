@@ -2,13 +2,13 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a fire beetle corpse")]
+    [CorpseName("le corps d'un scarabée")]
     [Engines.Craft.Forge]
     public class FireBeetle : BaseMount
     {
         [Constructable]
         public FireBeetle()
-            : base("a fire beetle", 0xA9, 0x3E95, AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base("un scarabée de feu", 0xA9, 0x3E95, AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             SetStr(300);
             SetDex(100);
@@ -61,8 +61,9 @@ namespace Server.Mobiles
         public override bool StatLossAfterTame => true;
         public virtual double BoostedSpeed => 0.1;
         public override bool ReduceSpeedWithDamage => false;
-        public override int Meat => 16;
-        public override FoodType FavoriteFood => FoodType.Meat;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
+		public override FoodType FavoriteFood => FoodType.Meat;
         public override void OnHarmfulSpell(Mobile from)
         {
             if (!Controlled && ControlMaster == null)

@@ -2,13 +2,13 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ophidian corpse")]
+    [CorpseName("le corps d'un chevalier ophidien")]
     public class OphidianKnight : BaseCreature
     {
         private static readonly string[] m_Names = new string[]
         {
-            "an ophidian knight-errant",
-            "an ophidian avenger"
+            "un chevalier ophidien"
+            
         };
         [Constructable]
         public OphidianKnight()
@@ -49,14 +49,15 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 2;
-        public override Poison PoisonImmune => Poison.Lethal;
+        public override int Meat => Utility.RandomMinMax(1, 2);
+
+		public override Poison PoisonImmune => Poison.Lethal;
         public override Poison HitPoison => Poison.Lethal;
         public override int TreasureMapLevel => 3;
 
         public override TribeType Tribe => TribeType.Ophidian;
 
-		public override int Hides => 6;
+		public override int Hides => Utility.RandomMinMax(2, 6);
 		public override HideType HideType => HideType.Ophidien;
 
 		public override void GenerateLootParagon()
@@ -65,16 +66,18 @@ namespace Server.Mobiles
 		}
 
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(2, 6);
 		public override BoneType BoneType => BoneType.Ophidien;
 
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich, 2);
             AddLoot(LootPack.LootItem<LesserPoisonPotion>());
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 4));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

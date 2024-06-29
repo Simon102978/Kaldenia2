@@ -6,7 +6,7 @@ using Server.Targeting;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an orcish corpse")]
+    [CorpseName("le corps d'un orc")]
     public class OrcScout : BaseCreature
     {
         public override double HealChance => 1.0;
@@ -15,7 +15,7 @@ namespace Server.Mobiles
         public OrcScout()
             : base(AIType.AI_OrcScout, FightMode.Closest, 10, 7, 0.2, 0.4)
         {
-            Name = "an orc scout";
+            Name = "un orc eclaireur";
             Body = 0xB5;
             BaseSoundID = 0x45A;
 
@@ -67,7 +67,7 @@ namespace Server.Mobiles
 
         public override bool CanRummageCorpses => true;
         public override bool CanStealth => true;
-        public override int Meat => 1;
+        public override int Meat => 2;
 
         public override InhumanSpeech SpeechType => InhumanSpeech.Orc;
         public override TribeType Tribe => TribeType.Orc;
@@ -75,13 +75,17 @@ namespace Server.Mobiles
 
         {
             AddLoot(LootPack.Rich);
-            AddLoot(LootPack.LootItem<Yeast>(50.0));
-            AddLoot(LootPack.LootItem<Apple>(3, 5));
+			AddLoot(LootPack.LootItem<BrewersYeast>(1, 3));
+			AddLoot(LootPack.LootItem<BrewersYeast>(1, 3));
+			AddLoot(LootPack.LootItem<Yeast>(1, 3));
+			AddLoot(LootPack.LootItem<Apple>(3, 5));
             AddLoot(LootPack.LootItem<Arrow>(15, 28));
             AddLoot(LootPack.LootItem<Bandage>(1, 15));
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override bool IsEnemy(Mobile m)
+		}
+
+		public override bool IsEnemy(Mobile m)
         {
             if (m.Player && m.FindItemOnLayer(Layer.Helm) is OrcishKinMask)
             {

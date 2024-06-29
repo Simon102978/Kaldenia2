@@ -3,14 +3,14 @@ using Server.Misc;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a glowing orc corpse")]
+    [CorpseName("le corps d'un orc")]
     public class OrcishMage : BaseCreature
     {
         [Constructable]
         public OrcishMage()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an orcish mage";
+            Name = "un shaman orc";
             Body = 140;
             BaseSoundID = 0x45A;
 
@@ -59,10 +59,14 @@ namespace Server.Mobiles
             AddLoot(LootPack.MageryRegs, 6);
             AddLoot(LootPack.LootItem<CorpseSkinScroll>(12.5));
             AddLoot(LootPack.LootItem<OrcishKinMask>(5.0));
-            AddLoot(LootPack.LootItem<Yeast>(50.0));
-        }
+			AddLoot(LootPack.LootItem<BrewersYeast>(1, 3));
+			AddLoot(LootPack.LootItem<BrewersYeast>(1, 3));
+			AddLoot(LootPack.LootItem<Yeast>(1, 3));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override bool IsEnemy(Mobile m)
+		}
+
+		public override bool IsEnemy(Mobile m)
         {
             if (m.Player && m.FindItemOnLayer(Layer.Helm) is OrcishKinMask)
                 return false;

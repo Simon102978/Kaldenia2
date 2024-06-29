@@ -50,13 +50,13 @@ namespace Server.Mobiles
 		public override int TreasureMapLevel => 1;
         public override InhumanSpeech SpeechType => InhumanSpeech.Lizardman;
         public override bool CanRummageCorpses => true;
-        public override int Meat => 1;
+        public override int Meat => Utility.RandomMinMax(2, 4);
 
 
-		public override int Hides => 4;
+		public override int Hides => Utility.RandomMinMax(2, 4);
 		public override HideType HideType => HideType.Reptilien;
 
-		public override int Bones => 4;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Reptilien;
 
 		/*    public override int Hides => 12;
@@ -64,9 +64,11 @@ namespace Server.Mobiles
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a slith corpse")]
+    [CorpseName("le corps d'un lezard de pierre")]
     public class StoneSlith : BaseCreature
     {
         [Constructable]
         public StoneSlith()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a stone slith";
+            Name = "un lezard de pierre";
             Body = 734;
 
             SetStr(250, 300);
@@ -50,13 +50,13 @@ namespace Server.Mobiles
 
         public override int DragonBlood => 6;
 
-        public override int Meat => 1;
+        public override int Meat => Utility.RandomMinMax(2, 4);
 
-		public override int Hides => 6;
+		public override int Hides => Utility.RandomMinMax(2, 4);
 		public override HideType HideType => HideType.Reptilien;
 
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Reptilien;
 
 
@@ -67,9 +67,11 @@ namespace Server.Mobiles
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Average, 2);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void OnDeath(Container c)
+		}
+
+		public override void OnDeath(Container c)
         {
             base.OnDeath(c);
 

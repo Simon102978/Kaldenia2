@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a pixie corpse")]
+    [CorpseName("le corps d'une pixie")]
     public class SAPixie : BaseCreature
     {
         public override bool InitialInnocent => true;
@@ -11,7 +11,7 @@ namespace Server.Mobiles
         public SAPixie()
             : base(AIType.AI_Mage, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "Pixie";
+            Name = "une pixie";
             Body = 128;
             BaseSoundID = 0x467;
 
@@ -48,7 +48,9 @@ namespace Server.Mobiles
             AddLoot(LootPack.Gems, 2);
             AddLoot(LootPack.Statue);
             AddLoot(LootPack.LootItem<PixieLeg>(33.0, 1, false, true));
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+
+		}
 
 
 		public override int Hides => 4;

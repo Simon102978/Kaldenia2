@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a llama corpse")]
+    [CorpseName("le corps d'un llama")]
     public class Llama : BaseCreature
     {
         [Constructable]
         public Llama()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a llama";
+            Name = "un llama";
             Body = 0xDC;
             BaseSoundID = 0x3F3;
 
@@ -42,9 +42,10 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
-		public override int Meat => 1;
-        public override int Hides => 4;
-        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
+		public override int Meat => Utility.RandomMinMax(2, 4);
+		public override int Hides => Utility.RandomMinMax(2, 4);
+
+		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

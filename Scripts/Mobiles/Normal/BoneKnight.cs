@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a skeletal corpse")]
+    [CorpseName("le corps d'un chevalier squelette")]
     public class BoneKnight : BaseCreature
     {
         [Constructable]
         public BoneKnight()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a bone knight";
+            Name = "un chevalier squelette";
             Body = 57;
             BaseSoundID = 451;
 
@@ -49,9 +49,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Meager);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

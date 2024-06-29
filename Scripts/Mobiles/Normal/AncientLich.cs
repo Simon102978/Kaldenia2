@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ancient liche's corpse")]
+    [CorpseName("le corps d'une liche ancienne")]
     public class AncientLich : BaseCreature
     {
         [Constructable]
         public AncientLich()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = NameList.RandomName("ancient lich");
+            Name = "une liche ancienne";
             Body = 78;
             BaseSoundID = 412;
 
@@ -96,10 +96,12 @@ namespace Server.Mobiles
 			AddLoot(LootPack.BodyPartsAndBones, Utility.RandomMinMax(3, 5));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 			AddLoot(LootPack.LootItem<Items.Gold>(25, 100));
-			AddLoot(LootPack.LootItem<CerveauLiche>());
+			AddLoot(LootPack.LootItem<CerveauLiche>(3, 7));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(5, 12));
+
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

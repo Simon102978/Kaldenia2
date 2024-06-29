@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an abyssmal horror corpse")]
+    [CorpseName("le corps d'une horreur abyssal")]
     public class AbysmalHorror : BaseCreature
     {
         [Constructable]
         public AbysmalHorror()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an abyssmal horror";
+            Name = "une horreur abyssal";
             Body = 312;
             BaseSoundID = 0x451;
 
@@ -66,7 +66,9 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.UltraRich, 2);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(5, 10));
+			AddLoot(LootPack.LootItem<CerveauSpectre>(4, true));
+		}
 
         public override void Serialize(GenericWriter writer)
         {

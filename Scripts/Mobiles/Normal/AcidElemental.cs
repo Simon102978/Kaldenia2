@@ -6,14 +6,14 @@ namespace Server.Mobiles
     {
     }
 
-    [CorpseName("an acid elementals corpse")]
+    [CorpseName("le corps d'un Elemental d'acide")]
     public class AcidElemental : BaseCreature, IAcidCreature
     {
         [Constructable]
         public AcidElemental()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an acid elemental";
+            Name = "un elemental d'acide";
             Body = 158;
             BaseSoundID = 263;
 
@@ -60,9 +60,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.LootItem<Nightshade>(4, true));
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(5, 10));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(1);

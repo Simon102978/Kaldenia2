@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a white wyrm corpse")]
+    [CorpseName("le corps d'une wyrm")]
     public class WhiteWyrm : BaseCreature
     {
         public override double AverageThreshold => 0.25;
@@ -12,7 +12,7 @@ namespace Server.Mobiles
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Body = Utility.RandomBool() ? 180 : 49;
-            Name = "a white wyrm";
+            Name = "une wyrm blanche";
             BaseSoundID = 362;
 
             SetStr(721, 760);
@@ -53,12 +53,12 @@ namespace Server.Mobiles
 
         public override bool ReacquireOnMovement => true;
         public override int TreasureMapLevel => 4;
-        public override int Meat => 19;
-        public override int DragonBlood => 8;
-		public override int Hides => 12;
+        public override int Meat => Utility.RandomMinMax(10, 15);
+		public override int DragonBlood => 8;
+		public override int Hides => Utility.RandomMinMax(10, 15);
 		public override HideType HideType => HideType.Dragonique;
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(10, 15);
 		public override BoneType BoneType => BoneType.Dragonique;
 
         public override FoodType FavoriteFood => FoodType.Meat | FoodType.Gold;
@@ -69,10 +69,12 @@ namespace Server.Mobiles
             AddLoot(LootPack.FilthyRich, 2);
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Gems, Utility.Random(1, 5));
-			AddLoot(LootPack.LootItem<EcaillesWyrm>());
+			AddLoot(LootPack.LootItem<EcaillesWyrm>(5, true));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(10, 15));
+
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

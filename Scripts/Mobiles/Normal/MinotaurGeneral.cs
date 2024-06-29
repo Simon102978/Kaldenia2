@@ -1,12 +1,12 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a minotaur general corpse")]
+    [CorpseName("le corps d'un minotaure")]
     public class MinotaurGeneral : MinotaurCaptain
     {
         [Constructable]
         public MinotaurGeneral()
         {
-            Name = "a minotaur general";
+            Name = "un général minotaure";
             Body = 0x118;
             BaseSoundID = 1270;
 
@@ -46,9 +46,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.UltraRich, 2);
             AddLoot(LootPack.ArcanistScrolls, 0, 1);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override int TreasureMapLevel => 4;
+		}
+
+		public override int TreasureMapLevel => 4;
 
         public override void Serialize(GenericWriter writer)
         {

@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a moloch corpse")]
+    [CorpseName("le corps d'un moloche")]
     public class Moloch : BaseCreature
     {
         [Constructable]
         public Moloch()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a moloch";
+            Name = "un moloche";
             Body = 0x311;
             BaseSoundID = 0x300;
 

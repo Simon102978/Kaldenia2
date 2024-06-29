@@ -4,14 +4,14 @@ using Server.Misc;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a glowing ratman corpse")]
+    [CorpseName("un corps de shaman ssins")]
     public class RatmanMage : BaseCreature
     {
         [Constructable]
         public RatmanMage()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = NameList.RandomName("ratman");
+            Name = NameList.RandomName("un shaman ssins");
             Body = 0x8F;
             BaseSoundID = 437;
 
@@ -49,11 +49,13 @@ namespace Server.Mobiles
         public override InhumanSpeech SpeechType => InhumanSpeech.Ratman;
         public override bool CanRummageCorpses => true;
         public override int TreasureMapLevel => 2;
-        public override int Meat => 1;
-		public override int Hides => 8;
+        public override int Meat => Utility.RandomMinMax(1, 2);
+
+		public override int Hides => Utility.RandomMinMax(3, 7);
+
 		public override HideType HideType => HideType.Regular;
 
-		public override int Bones => 8;
+		public override int Bones => Utility.RandomMinMax(3, 7);
 		public override BoneType BoneType => BoneType.Regular;
 
 		public override void GenerateLoot()
@@ -62,8 +64,10 @@ namespace Server.Mobiles
             AddLoot(LootPack.LowScrolls);
             AddLoot(LootPack.MageryRegs, 6);
             AddLoot(LootPack.Statue);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-            AddLoot(LootPack.RandomLootItem(new Type[] { typeof(AnimateDeadScroll), typeof(BloodOathScroll), typeof(CorpseSkinScroll),
+
+			AddLoot(LootPack.RandomLootItem(new Type[] { typeof(AnimateDeadScroll), typeof(BloodOathScroll), typeof(CorpseSkinScroll),
                 typeof(CurseWeaponScroll), typeof(EvilOmenScroll), typeof(HorrificBeastScroll), typeof(MindRotScroll),
                 typeof(CloseWoundsScroll), typeof(WraithFormScroll), typeof(PoisonStrikeScroll) }, 20.0, 1, false, true));
 

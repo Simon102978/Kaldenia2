@@ -1,6 +1,6 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a horse corpse")]
+    [CorpseName("le corps d'un cheval")]
     public class Palomino : BaseMount
     {
         [Constructable]
@@ -38,9 +38,9 @@ namespace Server.Mobiles
             MinTameSkill = 29.1;
         }
 
-        public override int Meat => 3;
-        public override int Hides => 10;
-        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
+        public override int Meat => Utility.RandomMinMax(1, 3);
+		public override int Hides => Utility.RandomMinMax(5, 10);
+		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
 
         public Palomino(Serial serial) : base(serial)
         {

@@ -2,13 +2,13 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ophidian corpse")]
+    [CorpseName("le corps d'un opihidien")]
     public class OphidianArchmage : BaseCreature
     {
         private static readonly string[] m_Names = new string[]
         {
-            "an ophidian justicar",
-            "an ophidian zealot"
+            "un archimage ophidien"
+            
         };
         [Constructable]
         public OphidianArchmage()
@@ -50,12 +50,14 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 1;
-        public override int TreasureMapLevel => 2;
+        public override int Meat => Utility.RandomMinMax(1, 2);
+
+		public override int TreasureMapLevel => 2;
 
         public override TribeType Tribe => TribeType.Ophidian;
 
-		public override int Hides => 6;
+		public override int Hides => Utility.RandomMinMax(3, 6);
+
 		public override HideType HideType => HideType.Ophidien;
 
 		public override void GenerateLootParagon()
@@ -63,7 +65,7 @@ namespace Server.Mobiles
 			AddLoot(LootPack.LootItem<SangEnvoutePoison>(), Utility.RandomMinMax(2, 4));
 		}
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(3, 6);
 		public override BoneType BoneType => BoneType.Ophidien;
 
 		public override void GenerateLoot()
@@ -72,9 +74,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls, 2);
             AddLoot(LootPack.MageryRegs, 5, 15);
             AddLoot(LootPack.NecroRegs, 5, 15);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 4));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

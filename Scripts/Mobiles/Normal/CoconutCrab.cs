@@ -41,12 +41,12 @@ namespace Server.Mobiles
         }
     }
 
-    [CorpseName("a Coconut Crab corpse")]
+    [CorpseName("le corps d'un crabe coconut")]
     public class CoconutCrab : BaseMount
     {
         [Constructable]
         public CoconutCrab()
-            : this("Coconut Crab")
+            : this("un crabe coconut")
         {
         }
 
@@ -90,9 +90,11 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 3;
-        public override int Hides => 10;
-        public override FoodType FavoriteFood => FoodType.FruitsAndVegies;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
+		public override FoodType FavoriteFood => FoodType.FruitsAndVegies;
 
         public override void Serialize(GenericWriter writer)
         {

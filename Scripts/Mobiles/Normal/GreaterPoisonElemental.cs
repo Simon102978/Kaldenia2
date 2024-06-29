@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a poison elementals corpse")]
+    [CorpseName("le corps d'un elementaire de poison")]
     public class GreaterPoisonElemental : BaseCreature
     {
         [Constructable]
         public GreaterPoisonElemental()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "greater poison elemental";
+            Name = "un elementaire de poison";
             Body = 162;
             BaseSoundID = 263;
 
@@ -64,9 +64,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.LootItem<Nightshade>(4, true));
             AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 5));
 
-        public override void OnDeath(Container c)
+		}
+
+		public override void OnDeath(Container c)
         {
             base.OnDeath(c);
 

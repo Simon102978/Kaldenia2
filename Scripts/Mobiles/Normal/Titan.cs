@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a titans corpse")]
+    [CorpseName("le corps d'un titan")]
     public class Titan : BaseCreature
     {
         [Constructable]
         public Titan()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a titan";
+            Name = "un titan";
             Body = 76;
             BaseSoundID = 609;
 
@@ -44,14 +44,14 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 4;
-        public override Poison PoisonImmune => Poison.Regular;
+        public override int Meat => Utility.RandomMinMax(2, 4);
+		public override Poison PoisonImmune => Poison.Regular;
         public override int TreasureMapLevel => 5;
-		public override int Hides => 8;
+		public override int Hides => Utility.RandomMinMax(4, 8);
 		public override HideType HideType => HideType.Geant;
 
 
-		public override int Bones => 8;
+		public override int Bones => Utility.RandomMinMax(4, 8);
 		public override BoneType BoneType => BoneType.Geant;
 
 		public override void GenerateLoot()
@@ -61,11 +61,13 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.PeculiarSeed1);
             AddLoot(LootPack.LootItem<Items.RoastPig>(10.0));
-			AddLoot(LootPack.LootItem<CheveuxGeant>());
+			AddLoot(LootPack.LootItem<CheveuxGeant>(4, true));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 7));
+
 
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

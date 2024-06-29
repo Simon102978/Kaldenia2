@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a patchwork skeletal corpse")]
+    [CorpseName("le corps d'un squelette rapiece")]
     public class PatchworkSkeleton : BaseCreature
     {
         [Constructable]
         public PatchworkSkeleton()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a patchwork skeleton";
+            Name = "un squelette rapiece";
             Body = 309;
             BaseSoundID = 0x48D;
 
@@ -52,9 +52,11 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

@@ -3,7 +3,7 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ant lion corpse")]
+    [CorpseName("le corps d'un ant lion")]
     public class AntLion : BaseCreature
     {
         private DateTime _NextTunnel;
@@ -15,7 +15,7 @@ namespace Server.Mobiles
         public AntLion()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an ant lion";
+            Name = "un ant lion";
             Body = 787;
             BaseSoundID = 1006;
 
@@ -52,7 +52,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.PeculiarSeed3);
             AddLoot(LootPack.Bones);
             AddLoot(LootPack.LootItem<Bone>(100.0, 3, false, true));
-            AddLoot(LootPack.LootItem<FertileDirt>(100.0, Utility.RandomMinMax(1, 5), false, true));
+            AddLoot(LootPack.LootItem<FertileDirt>(100.0, Utility.RandomMinMax(5, 10), false, true));
         }
 
         private Item RandomOre(IEntity e)

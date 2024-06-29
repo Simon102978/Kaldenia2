@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a dragon corpse")]
+    [CorpseName("le corps d'une wyrm")]
     public class AncientWyrm : BaseCreature
     {
         [Constructable]
         public AncientWyrm()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an ancient wyrm";
+            Name = "une wyrm ancienne";
             Body = 46;
             BaseSoundID = 362;
 
@@ -56,10 +56,11 @@ namespace Server.Mobiles
 		/*       public override int Scales => 12;
 			   public override ScaleType ScaleType => (ScaleType)Utility.Random(4);*/
 
-		public override int Hides => 12;
+		public override int Hides => Utility.RandomMinMax(8, 16);
+
 		public override HideType HideType => HideType.Ancien;
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(8, 16);
 		public override BoneType BoneType => BoneType.Ancien;
 
 
@@ -71,11 +72,13 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.FilthyRich, 3);
             AddLoot(LootPack.Gems, 5);
-			AddLoot(LootPack.LootItem<EcaillesWyrm>());
+			AddLoot(LootPack.LootItem<EcaillesWyrm>(5, 15));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(8, 16));
+
 
 		}
 
-        public override int GetIdleSound()
+		public override int GetIdleSound()
         {
             return 0x2D3;
         }

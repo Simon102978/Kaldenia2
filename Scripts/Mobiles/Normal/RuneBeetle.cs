@@ -3,7 +3,7 @@ using System.Collections;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a rune beetle corpse")]
+    [CorpseName("le corps d'un scarabée runique")]
     public class RuneBeetle : BaseCreature
     {
         private static readonly Hashtable m_Table = new Hashtable();
@@ -11,7 +11,7 @@ namespace Server.Mobiles
         public RuneBeetle()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a rune beetle";
+            Name = "un scarabée runique";
             Body = 244;
 
             SetStr(401, 460);
@@ -61,11 +61,12 @@ namespace Server.Mobiles
         public override bool CanAngerOnTame => true;
 
 
-		public override int Hides => 6;
+		public override int Hides => Utility.RandomMinMax(2, 4);
+
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Regular;
 
 		public override void GenerateLoot()
@@ -74,9 +75,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls, 1);
             AddLoot(LootPack.BodyPartsAndBones);
             AddLoot(LootPack.BonsaiSeed);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override int GetAngerSound()
+		}
+
+		public override int GetAngerSound()
         {
             return 0x4E8;
         }

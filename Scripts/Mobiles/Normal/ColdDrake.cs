@@ -1,12 +1,12 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a drake corpse")]
+    [CorpseName("le corps d'un dragonneau de glace")]
     public class ColdDrake : BaseCreature, IAuraCreature
     {
         [Constructable]
         public ColdDrake() : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a cold drake";
+            Name = "un dragonneau de glace";
             Body = Utility.RandomList(60, 61);
             BaseSoundID = 362;
 
@@ -45,19 +45,23 @@ namespace Server.Mobiles
             SetSpecialAbility(SpecialAbility.DragonBreath);
             SetAreaEffect(AreaEffect.AuraDamage);
         }
-		public override int Hides => 8;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Dragonique;
 
 
-		public override int Bones => 8;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Dragonique;
 
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.FilthyRich, 3);
             AddLoot(LootPack.MageryRegs, 3);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 5));
 
-            if (Utility.RandomBool())
+
+			if (Utility.RandomBool())
             {
                 AddLoot(LootPack.NecroScrolls, 2);
             }
@@ -70,7 +74,8 @@ namespace Server.Mobiles
         public override bool CanAngerOnTame => true;
         public override bool ReacquireOnMovement => !Controlled;
         public override int TreasureMapLevel => 3;
-        public override int Meat => 10;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
 
 
 		public override int DragonBlood => 8;

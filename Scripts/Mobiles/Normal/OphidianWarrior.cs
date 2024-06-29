@@ -2,19 +2,19 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ophidian corpse")]
+    [CorpseName("le corps d'un ophidien")]
     public class OphidianWarrior : BaseCreature
     {
         private static readonly string[] m_Names = new string[]
         {
-            "an ophidian warrior",
-            "an ophidian enforcer"
+            "un guerrier ophidien",
+            "un protecteur ophidien"
         };
         [Constructable]
         public OphidianWarrior()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = m_Names[Utility.Random(m_Names.Length)];
+            Name = "Un Ophidien";
             Body = 86;
             BaseSoundID = 634;
 
@@ -48,7 +48,8 @@ namespace Server.Mobiles
         {
         }
 
-		public override int Hides => 6;
+		public override int Hides => Utility.RandomMinMax(2, 6);
+
 		public override HideType HideType => HideType.Ophidien;
 
 		public override void GenerateLootParagon()
@@ -57,11 +58,11 @@ namespace Server.Mobiles
 		}
 
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(2, 6);
 		public override BoneType BoneType => BoneType.Ophidien;
 
-		public override int Meat => 1;
-        public override int TreasureMapLevel => 1;
+		public override int Meat => Utility.RandomMinMax(2, 6);
+		public override int TreasureMapLevel => 1;
 
         public override TribeType Tribe => TribeType.Ophidian;
 
@@ -70,9 +71,13 @@ namespace Server.Mobiles
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Gems);
-        }
+			AddLoot(LootPack.LootItem<Apple>(3, 5));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

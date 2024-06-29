@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a skeletal corpse")]
+    [CorpseName("le corps d'un chevalier squelette")]
     public class SkeletalKnight : BaseCreature
     {
         [Constructable]
         public SkeletalKnight()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a skeletal knight";
+            Name = "un chevalier squelette";
             Body = 147;
             BaseSoundID = 451;
 

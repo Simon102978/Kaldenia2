@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a pit fiend corpse")]
+    [CorpseName("le corps d'un pitfiend")]
     public class PitFiend : BaseCreature
     {
         [Constructable]
         public PitFiend()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a pit fiend";
+            Name = "un pit fiend";
             Body = 43;
             Hue = 1863;
             BaseSoundID = 357;
@@ -46,21 +46,26 @@ namespace Server.Mobiles
         public override bool CanRummageCorpses => true;
         public override Poison PoisonImmune => Poison.Regular;
         public override int TreasureMapLevel => 4;
-        public override int Meat => 5;
-		public override int Hides => 6;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Demoniaque;
 
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Demoniaque;
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.Average, 2);
             AddLoot(LootPack.MedScrolls, 2);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 4));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

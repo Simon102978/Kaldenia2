@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a solen worker corpse")]
+    [CorpseName("un corps d'eclaireuse fourifeu")]
     public class RedSolenWorker : BaseCreature, IRedSolen
     {
         [Constructable]
         public RedSolenWorker()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a red solen worker";
+            Name = "une eclaireuse fourifeu";
             Body = 781;
             BaseSoundID = 959;
 
@@ -37,18 +37,21 @@ namespace Server.Mobiles
             Karma = -1500;
         }
 
-		public override int Hides => 5;
+		public override int Hides => Utility.RandomMinMax(1, 5);
+
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(1, 5);
 		public override BoneType BoneType => BoneType.Arachnide;
 		public override void GenerateLoot()
         {
-            AddLoot(LootPack.Gems, 1, 2);           
-        }
+            AddLoot(LootPack.Gems, 1, 2);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(0, 2));
 
-        public RedSolenWorker(Serial serial)
+		}
+
+		public RedSolenWorker(Serial serial)
             : base(serial)
         {
         }

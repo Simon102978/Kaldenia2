@@ -59,7 +59,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot(LootPack.LootItem<DentAlligator>());
+			AddLoot(LootPack.LootItem<DentAlligator>(3, 7));
 		}
 
 		public override void Serialize(GenericWriter writer)

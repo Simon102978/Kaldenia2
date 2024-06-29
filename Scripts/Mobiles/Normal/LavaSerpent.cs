@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a lava serpent corpse")]
+    [CorpseName("le corps d'un serpent")]
     [TypeAlias("Server.Mobiles.Lavaserpant")]
     public class LavaSerpent : BaseCreature
     {
@@ -10,7 +10,7 @@ namespace Server.Mobiles
         public LavaSerpent()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a lava serpent";
+            Name = "un serpent de lave geant";
             Body = 90;
             BaseSoundID = 219;
 
@@ -47,21 +47,21 @@ namespace Server.Mobiles
         }
 
         public override bool DeathAdderCharmable => true;
-        public override int Meat => 4;
+        public override int Meat => Utility.RandomMinMax(2, 4);
 		/*      public override int Hides => 15;
 			  public override HideType HideType => HideType.Spined;*/
 
 
-		public override int Hides => 4;
+		public override int Hides => Utility.RandomMinMax(2, 4);
 		public override HideType HideType => HideType.Reptilien;
 
-		public override int Bones => 4;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Reptilien;
 
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
-            AddLoot(LootPack.LootItem<SulfurousAsh>(100.0, 1, false, true));
+            AddLoot(LootPack.LootItem<SulfurousAsh>(100.0, 5, false, true));
             AddLoot(LootPack.LootItem<Bone>(100.0, 1, false, true));
             AddLoot(LootPack.BodyParts);
         }

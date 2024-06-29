@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a balron corpse")]
+    [CorpseName("le corps d'un balrog")]
     public class Balron : BaseCreature
     {
         [Constructable]
         public Balron()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = NameList.RandomName("balron");
+			Name = "un balrog";
             Body = 40;
             BaseSoundID = 357;
 
@@ -53,23 +53,28 @@ namespace Server.Mobiles
         public override bool CanRummageCorpses => true;
         public override Poison PoisonImmune => Poison.Deadly;
         public override int TreasureMapLevel => 5;
-        public override int Meat => 1;
-		public override int Hides => 12;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
+		public override int Hides => Utility.RandomMinMax(8, 20);
+
 		public override HideType HideType => HideType.Demoniaque;
 
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(8, 20);
 		public override BoneType BoneType => BoneType.Demoniaque;
 
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.FilthyRich, 2);
             AddLoot(LootPack.Rich);
-			AddLoot(LootPack.LootItem<MucusDemon>());
+			AddLoot(LootPack.LootItem<MucusDemon>(5, 10));
 			AddLoot(LootPack.MedScrolls, 2);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(8, 16));
+		
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

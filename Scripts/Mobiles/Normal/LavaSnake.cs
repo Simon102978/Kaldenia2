@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a lava snake corpse")]
+    [CorpseName("le corps d'un serpent de lave")]
     public class LavaSnake : BaseCreature
     {
         [Constructable]
         public LavaSnake()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a lava snake";
+            Name = "un serpent de lave";
             Body = 52;
             Hue = Utility.RandomList(0x647, 0x650, 0x659, 0x662, 0x66B, 0x674);
             BaseSoundID = 0xDB;
@@ -47,12 +47,14 @@ namespace Server.Mobiles
 
         public override bool DeathAdderCharmable => true;
 
-        public override int Meat => 1;
-		public override int Hides => 2;
+        public override int Meat => Utility.RandomMinMax(1, 2);
+
+		public override int Hides => Utility.RandomMinMax(1, 2);
+
 		public override HideType HideType => HideType.Reptilien;
 
 
-		public override int Bones => 2;
+		public override int Bones => Utility.RandomMinMax(1, 2);
 		public override BoneType BoneType => BoneType.Reptilien;
 
 		public override void GenerateLoot()

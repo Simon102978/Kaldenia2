@@ -1,11 +1,11 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a llama corpse")]
+    [CorpseName("le corps d'un llama")]
     public class RidableLlama : BaseMount
     {
         [Constructable]
         public RidableLlama()
-            : this("a ridable llama")
+            : this("un llama")
         {
         }
 
@@ -49,9 +49,10 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 1;
-        public override int Hides => 5;
-        public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
+        public override int Meat => Utility.RandomMinMax(1, 3);
+		public override int Hides => Utility.RandomMinMax(1, 5);
+
+		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

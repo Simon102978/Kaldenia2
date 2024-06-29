@@ -45,11 +45,11 @@ namespace Server.Mobiles
 		{
 			AddLoot(LootPack.LootItem<SangEnvoutePhysique>(), Utility.RandomMinMax(2, 4));
 		}
-		public override int Hides => 6;
+		public override int Hides => Utility.RandomMinMax(3, 6);
 		public override HideType HideType => HideType.Geant;
 
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(3, 6);
 		public override BoneType BoneType => BoneType.Geant;
 
 		public override bool CanRummageCorpses => true;
@@ -61,10 +61,10 @@ namespace Server.Mobiles
             AddLoot(LootPack.Rich, 2);
 			AddLoot(LootPack.Potions, 2);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 4));
-			AddLoot(LootPack.LootItem<CheveuxGeant>());
+			AddLoot(LootPack.LootItem<CheveuxGeant>(3, 7));
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

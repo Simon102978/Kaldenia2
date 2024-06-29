@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ice elemental corpse")]
+    [CorpseName("le corps d'un elementaire de glace")]
     public class IceElemental : BaseCreature, IAuraCreature
     {
         [Constructable]
         public IceElemental()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an ice elemental";
+            Name = "un elementaire de glace";
             Body = 161;
             BaseSoundID = 268;
 

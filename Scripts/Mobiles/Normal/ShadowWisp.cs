@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a wisp corpse")]
+    [CorpseName("le corps d'une wisp")]
     public class ShadowWisp : BaseCreature
     {
         [Constructable]
         public ShadowWisp()
             : base(AIType.AI_Mage, FightMode.Aggressor, 10, 1, 0.3, 0.6)
         {
-            Name = "a shadow wisp";
+            Name = "une wisp sombre";
             Body = 165;
             BaseSoundID = 466;
 			Hue = -1;
@@ -44,9 +44,11 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Bones);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public ShadowWisp(Serial serial)
+		}
+
+		public ShadowWisp(Serial serial)
             : base(serial)
         {
         }

@@ -61,14 +61,14 @@ namespace Server.Mobiles
         }
     }
 
-    [CorpseName("a triton corpse")]
+    [CorpseName("le corps d'un triton")]
     public class Triton : BaseCreature
     {
         [Constructable]
         public Triton()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "Triton";
+            Name = "un triton";
             Body = 0x2D0;
             Hue = 2713;
             BaseSoundID = 0x5A;
@@ -119,12 +119,15 @@ namespace Server.Mobiles
         }
 
         public override bool DeleteOnRelease => true;
-        public override int Meat => 3;
-		public override int Hides => 7;
+        public override int Meat => Utility.RandomMinMax(2, 4);
+
+		public override int Hides => Utility.RandomMinMax(3, 7);
+
 		public override HideType HideType => HideType.Reptilien;
 
 
-		public override int Bones => 7;
+		public override int Bones => Utility.RandomMinMax(3, 7);
+
 		public override BoneType BoneType => BoneType.Reptilien;
 		public override FoodType FavoriteFood => FoodType.Meat;
 

@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a ghostly corpse")]
+    [CorpseName("le corps d'une goule")]
     public class Ghoul : BaseCreature
     {
         [Constructable]
         public Ghoul()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a ghoul";
+            Name = "une goule";
             Body = 153;
             BaseSoundID = 0x482;
 
@@ -48,9 +48,11 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

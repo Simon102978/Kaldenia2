@@ -3,14 +3,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a liche's corpse")]
+    [CorpseName("le corps d'une liche")]
     public class LichLord : BaseCreature
     {
         [Constructable]
         public LichLord()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a lich lord";
+            Name = "un seigneur liche";
             Body = 79;
             BaseSoundID = 412;
 
@@ -62,9 +62,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls, 2);
             AddLoot(LootPack.NecroRegs, 12, 40);
             AddLoot(LootPack.RandomLootItem(new Type[] { typeof(LichFormScroll), typeof(PoisonStrikeScroll), typeof(StrangleScroll), typeof(VengefulSpiritScroll), typeof(WitherScroll) }, false, true ));
-        }
+			AddLoot(LootPack.LootItem<CerveauLiche>(4, true));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

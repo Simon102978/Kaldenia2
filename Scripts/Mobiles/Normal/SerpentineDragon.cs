@@ -1,13 +1,15 @@
+using Server.Items;
+
 namespace Server.Mobiles
 {
-    [CorpseName("a dragon corpse")]
+    [CorpseName("le corps d'un dragon")]
     public class SerpentineDragon : BaseCreature
     {
         [Constructable]
         public SerpentineDragon()
             : base(AIType.AI_Mage, FightMode.Evil, 10, 1, 0.2, 0.4)
         {
-            Name = "a serpentine dragon";
+            Name = "un dragon serpentin";
             Body = 103;
             BaseSoundID = 362;
 
@@ -58,26 +60,34 @@ namespace Server.Mobiles
 
 
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Dragonique;
 
-		public override int Hides => 12;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Dragonique;
 
-		public override int Meat => 19;
-  /*      public override int Scales => 6;
+		public override int Meat => Utility.RandomMinMax(5, 10);
 
-        public override ScaleType ScaleType => (Utility.RandomBool() ? ScaleType.Black : ScaleType.White);*/
-        public override int TreasureMapLevel => 4;
+		/*      public override int Scales => 6;
+
+			  public override ScaleType ScaleType => (Utility.RandomBool() ? ScaleType.Black : ScaleType.White);*/
+		public override int TreasureMapLevel => 4;
         public override bool CanAngerOnTame => true;
 
         public override void GenerateLoot()
         {
             AddLoot(LootPack.FilthyRich, 2);          
             AddLoot(LootPack.PeculiarSeed3);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(7, 11));
+			AddLoot(LootPack.LootItem<EcaillesWyrm>(1, true));
 
-        public override int GetIdleSound()
+
+
+		}
+
+		public override int GetIdleSound()
         {
             return 0x2C4;
         }

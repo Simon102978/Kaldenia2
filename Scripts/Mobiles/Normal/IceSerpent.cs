@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ice serpent corpse")]
+    [CorpseName("le corps d'un serpent de glace")]
     public class IceSerpent : BaseCreature
     {
         [Constructable]
         public IceSerpent()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a giant ice serpent";
+            Name = "un serpent de glace geant";
             Body = 89;
             BaseSoundID = 219;
 
@@ -49,15 +49,18 @@ namespace Server.Mobiles
 			AddLoot(LootPack.LootItem<SangEnvouteFroid>(), Utility.RandomMinMax(2, 4));
 		}
 		public override bool DeathAdderCharmable => true;
-        public override int Meat => 4;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
 		/*       public override int Hides => 15;
 			   public override HideType HideType => HideType.Spined;*/
 
-		public override int Hides => 8;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Reptilien;
 
 
-		public override int Bones => 8;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Reptilien;
 		public override void GenerateLoot()
         {

@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an ophidian corpse")]
+    [CorpseName("le corps d'une matriarche ophidien")]
     public class OphidianMatriarch : BaseCreature
     {
         [Constructable]
         public OphidianMatriarch()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "an ophidian matriarch";
+            Name = "une matriarche ophidien";
             Body = 87;
             BaseSoundID = 644;
 
@@ -56,11 +56,11 @@ namespace Server.Mobiles
 
         public override TribeType Tribe => TribeType.Ophidian;
 
-		public override int Hides => 6;
+		public override int Hides => Utility.RandomMinMax(2, 6);
 		public override HideType HideType => HideType.Ophidien;
 
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(2, 6);
 		public override BoneType BoneType => BoneType.Ophidien;
 
 		public override void GenerateLoot()
@@ -68,9 +68,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.Average, 2);
             AddLoot(LootPack.MedScrolls, 2);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

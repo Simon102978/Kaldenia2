@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a water elemental corpse")]
+    [CorpseName("le corps d'un elementaire")]
     public class WaterElemental : BaseCreature
     {
         private bool m_HasDecanter = true;
@@ -14,7 +14,7 @@ namespace Server.Mobiles
         public WaterElemental()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a water elemental";
+            Name = "un elementaire d'eau";
             Body = 16;
             BaseSoundID = 278;
 
@@ -62,9 +62,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.Potions);
             AddLoot(LootPack.LootItem<BlackPearl>(3, true));
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(1);

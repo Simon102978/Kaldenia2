@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a wyvern corpse")]
+    [CorpseName("le corps d'un rautour")]
     public class Wyvern : BaseCreature
     {
         [Constructable]
         public Wyvern()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a wyvern";
+            Name = "un rautour";
             Body = 62;
             BaseSoundID = 362;
 
@@ -48,11 +48,11 @@ namespace Server.Mobiles
         public override Poison PoisonImmune => Poison.Deadly;
         public override Poison HitPoison => Poison.Deadly;
         public override int TreasureMapLevel => 2;
-        public override int Meat => 10;
-        public override int Hides => 12;
+        public override int Meat => Utility.RandomMinMax(5, 10);
+        public override int Hides => Utility.RandomMinMax(6, 12);
         public override HideType HideType => HideType.Dragonique;
 
-		public override int Bones => 12;
+		public override int Bones => Utility.RandomMinMax(6, 12);
 		public override BoneType BoneType => BoneType.Dragonique;
 
 		public override bool CanFly => true;
@@ -63,6 +63,10 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
 			AddLoot(LootPack.LootItem<Items.GemmePoison>(), (double)5);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(7, 14));
+			AddLoot(LootPack.LootItem<SangDragon>(4, true));
+
+
 		}
 
 		public override void GenerateLootParagon()

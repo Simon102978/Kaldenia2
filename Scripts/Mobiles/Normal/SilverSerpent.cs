@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a silver serpent corpse")]
+    [CorpseName("le corps d'un serpent argenté")]
     public class SilverSerpent : BaseCreature
     {
         [Constructable]
@@ -10,7 +10,7 @@ namespace Server.Mobiles
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Body = 92;
-            Name = "a silver serpent";
+            Name = "un serpent argenté";
             BaseSoundID = 219;
             Hue = 1150;
 
@@ -47,13 +47,14 @@ namespace Server.Mobiles
         }
 
         public override bool DeathAdderCharmable => true;
-        public override int Meat => 5;
+        public override int Meat => Utility.RandomMinMax(2, 5);
 
-		public override int Hides => 4;
+
+		public override int Hides => Utility.RandomMinMax(2, 5);
 		public override HideType HideType => HideType.Reptilien;
 
 
-		public override int Bones => 4;
+		public override int Bones => Utility.RandomMinMax(2, 5);
 		public override BoneType BoneType => BoneType.Reptilien;
 
 		public override Poison PoisonImmune => Poison.Lethal;
@@ -63,9 +64,13 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Gems, 2);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+			AddLoot(LootPack.LootItem<OeufSerpent>(3, 7));
 
-        public override void OnDeath(Container c)
+
+		}
+
+		public override void OnDeath(Container c)
         {
             base.OnDeath(c);
 

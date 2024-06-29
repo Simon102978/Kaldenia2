@@ -1,13 +1,15 @@
+using Server.Items;
+
 namespace Server.Mobiles
 {
-    [CorpseName("a rotting corpse")]
+    [CorpseName("le corps d'un zombie")]
     public class Zombie : BaseCreature
     {
         [Constructable]
         public Zombie()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a zombie";
+            Name = "un zombie";
             Body = 3;
             BaseSoundID = 471;
 
@@ -53,6 +55,10 @@ namespace Server.Mobiles
 			AddLoot(LootPack.BodyParts, Utility.RandomMinMax(3, 5));
 
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+
+			AddLoot(LootPack.LootItem<CerveauSpectre>(1, true));
+
+		
 
 		}
 

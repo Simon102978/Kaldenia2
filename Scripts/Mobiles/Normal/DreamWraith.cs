@@ -1,13 +1,15 @@
+using Server.Items;
+
 namespace Server.Mobiles
 {
-    [CorpseName("a dream wraith corpse")]
+    [CorpseName("le corps d'un wraith")]
     public class DreamWraith : BaseCreature
     {
         [Constructable]
         public DreamWraith()
             : base(AIType.AI_NecroMage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a dream wraith";
+            Name = "un wraith";
             Body = 740;
             BaseSoundID = 0x482;
 
@@ -54,9 +56,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.MageryRegs, 10);
-        }
+			AddLoot(LootPack.LootItem<CerveauSpectre>(1, 3));
 
-        public override int GetIdleSound()
+		}
+
+		public override int GetIdleSound()
         {
             return 0x5F4;
         }

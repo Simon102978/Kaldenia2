@@ -2,13 +2,13 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a slith corpse")]
+    [CorpseName("le corps d'un lezard")]
     public class ToxicSlith : BaseCreature
     {
         [Constructable]
         public ToxicSlith() : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a toxic slith";
+            Name = "un lezard toxique";
             Body = 734;
             Hue = 476;
 
@@ -37,28 +37,35 @@ namespace Server.Mobiles
             SetSpecialAbility(SpecialAbility.DragonBreath);
         }
 
-        public override int DragonBlood => 6;
+        public override int DragonBlood => Utility.RandomMinMax(3, 6);
 
-        public ToxicSlith(Serial serial) : base(serial)
+
+
+		public ToxicSlith(Serial serial) : base(serial)
         {
         }
 
-        public override int Meat => 6;
-
-        public override int Hides => 6;
-
-        public override HideType HideType => HideType.Reptilien;
+        public override int Meat => Utility.RandomMinMax(3, 6);
 
 
-		public override int Bones => 6;
+		public override int Hides => Utility.RandomMinMax(3, 6);
+
+		public override HideType HideType => HideType.Reptilien;
+
+
+		public override int Bones => Utility.RandomMinMax(3, 6);
 		public override BoneType BoneType => BoneType.Reptilien;
 
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.Average, 2);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+			AddLoot(LootPack.LootItem<OeufSerpent>(2, 4));
 
-        public override void OnDeath(Container c)
+
+		}
+
+		public override void OnDeath(Container c)
         {
             base.OnDeath(c);
 

@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a rat corpse")]
+    [CorpseName("le corps d'un rat")]
     public class Rat : BaseCreature
     {
         [Constructable]
         public Rat()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a rat";
+            Name = "un rat";
             Body = 238;
             BaseSoundID = 0xCC;
 

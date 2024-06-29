@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a dragon corpse")]
+    [CorpseName("le corps d'un dragon")]
     public class Dragon : BaseCreature
     {
         [Constructable]
         public Dragon()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a dragon";
+            Name = "un dragon";
             Body = Utility.RandomList(12, 59);
             BaseSoundID = 362;
 
@@ -53,11 +53,12 @@ namespace Server.Mobiles
         public override bool ReacquireOnMovement => !Controlled;
         public override bool AutoDispel => !Controlled;
         public override int TreasureMapLevel => 4;
-        public override int Meat => 19;
-        public override int DragonBlood => 8;
-        public override int Hides => 10;
-        public override HideType HideType => HideType.Dragonique;
-		public override int Bones => 10;
+        public override int Meat => Utility.RandomMinMax(8, 16);
+
+		public override int DragonBlood => 8;
+        public override int Hides => Utility.RandomMinMax(8, 16);
+		public override HideType HideType => HideType.Dragonique;
+		public override int Bones => Utility.RandomMinMax(8, 16);
 		public override BoneType BoneType => BoneType.Dragonique;
 
 
@@ -68,6 +69,8 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.FilthyRich, 2);
 			AddLoot(LootPack.LootItem<Items.GemmeFeu>(), (double)10);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(7, 14));
+
 			//     AddLoot(LootPack.Gems, 8);
 		}
 

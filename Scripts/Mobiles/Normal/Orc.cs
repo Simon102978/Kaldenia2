@@ -3,14 +3,14 @@ using Server.Misc;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an orcish corpse")]
+    [CorpseName("le corps d'un orc")]
     public class Orc : BaseCreature
     {
         [Constructable]
         public Orc()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = NameList.RandomName("orc");
+            Name = "un orc";
             Body = 17;
             BaseSoundID = 0x45A;
 
@@ -53,11 +53,15 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
-            AddLoot(LootPack.LootItem<Yeast>(50.0, true));
             AddLoot(LootPack.LootItem<ThighBoots>());
-        }
+			AddLoot(LootPack.LootItem<WinecrafterYeast>(1, 3));
+			AddLoot(LootPack.LootItem<BrewersYeast>(1, 3));
+			AddLoot(LootPack.LootItem<Yeast>(1, 3));
+			AddLoot(LootPack.LootItem<Apple>(3, 5));
 
-        public override bool IsEnemy(Mobile m)
+		}
+
+		public override bool IsEnemy(Mobile m)
         {
             if (m.Player && m.FindItemOnLayer(Layer.Helm) is OrcishKinMask)
                 return false;

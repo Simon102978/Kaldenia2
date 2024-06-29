@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a reapers corpse")]
+    [CorpseName("le corps d'un arbre maudit")]
     public class Reaper : BaseCreature
     {
         [Constructable]
         public Reaper()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a reaper";
+            Name = "un arbre maudit";
             Body = 47;
             BaseSoundID = 442;
 
@@ -54,10 +54,12 @@ namespace Server.Mobiles
             AddLoot(LootPack.Average);
             AddLoot(LootPack.LootItem<Log>(5));
             AddLoot(LootPack.LootItem<MandrakeRoot>(5));
-			AddLoot(LootPack.LootItem<EcorceArbreMaudit>());
+			AddLoot(LootPack.LootItem<EcorceArbreMaudit>(3, 10));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

@@ -3,14 +3,14 @@ using Server.Items;
 namespace Server.Mobiles
 	
 {
-    [CorpseName("a ghostly corpse")]
+    [CorpseName("le corps d'un spectre")]
     public class Spectre : BaseCreature
     {
         [Constructable]
         public Spectre()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a spectre";
+            Name = "un spectre";
             Body = 26;
             Hue = 0x4001;
             BaseSoundID = 0x482;
@@ -54,10 +54,11 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.MageryRegs, 10);
-			AddLoot(LootPack.LootItem<CerveauSpectre>());
+			AddLoot(LootPack.LootItem<CerveauSpectre>(1, 3));
+
 		}
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

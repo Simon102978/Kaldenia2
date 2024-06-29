@@ -3,7 +3,7 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a swamp dragon corpse")]
+    [CorpseName("le corps d'un dragon des marais")]
     public class SwampDragon : BaseMount
     {
         private bool m_BardingExceptional;
@@ -14,7 +14,7 @@ namespace Server.Mobiles
 
         [Constructable]
         public SwampDragon()
-            : this("a swamp dragon")
+            : this("un dragon des marais")
         {
         }
 
@@ -201,16 +201,19 @@ namespace Server.Mobiles
         public override bool ReacquireOnMovement => true;
         public override bool AutoDispel => !Controlled;
         public override FoodType FavoriteFood => FoodType.Meat;
-        public override int Meat => 12;
-        
+        public override int Meat => Utility.RandomMinMax(5, 10);
+
+
 		/*     public override int Scales => 5;
 			 public override ScaleType ScaleType => ScaleType.Green;*/
 
-		public override int Hides => 8;
+		public override int Hides => Utility.RandomMinMax(5, 10);
+
 		public override HideType HideType => HideType.Dragonique;
 
 
-		public override int Bones => 8;
+		public override int Bones => Utility.RandomMinMax(5, 10);
+
 		public override BoneType BoneType => BoneType.Dragonique;
 
 

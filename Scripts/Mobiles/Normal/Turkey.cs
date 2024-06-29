@@ -1,8 +1,9 @@
 using System;
+using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an turkey corpse")]
+    [CorpseName("le corps d'une dinde")]
     public class Turkey : BaseCreature
     {
         [Constructable]
@@ -13,7 +14,7 @@ namespace Server.Mobiles
         [Constructable]
         public Turkey(bool tamable) : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a turkey";
+            Name = "une dinde";
             Body = 95;
             BaseSoundID = 0x66A;
 
@@ -44,12 +45,20 @@ namespace Server.Mobiles
             m_NextGobble = DateTime.UtcNow;
         }
 
-        public override int Meat => 5;
-        public override MeatType MeatType => MeatType.Bird;
+        public override int Meat => Utility.RandomMinMax(3, 5);
+		public override MeatType MeatType => MeatType.Bird;
         public override FoodType FavoriteFood => FoodType.GrainsAndHay;
-        public override int Feathers => 25;
+        public override int Feathers => Utility.RandomMinMax(10, 25);
 
-        public override int GetIdleSound()
+		public override void GenerateLoot()
+		{
+			AddLoot(LootPack.LootItem<RawTurkeyLeg>(4, true));
+			AddLoot(LootPack.LootItem<RawTurkey>(1, true));
+
+
+		}
+
+		public override int GetIdleSound()
         {
             return 0x66A;
         }

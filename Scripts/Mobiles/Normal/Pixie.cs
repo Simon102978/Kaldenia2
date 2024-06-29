@@ -2,7 +2,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a pixie corpse")]
+    [CorpseName("le corps d'une pixie")]
     public class Pixie : BaseCreature
     {
         [Constructable]
@@ -50,26 +50,29 @@ namespace Server.Mobiles
 		//   public override int Hides => 5;
 
 
-		public override int Hides => 4;
+		public override int Hides => Utility.RandomMinMax(2, 4);
+
 		public override HideType HideType => HideType.Regular;
 
 
-		public override int Bones => 4;
+		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Regular;
 
 
-		public override int Meat => 1;
+		public override int Meat => Utility.RandomMinMax(2, 4);
 
-        public override TribeType Tribe => TribeType.Fey;
+		public override TribeType Tribe => TribeType.Fey;
 
         public override void GenerateLoot()
         {
             AddLoot(LootPack.LowScrolls);
             AddLoot(LootPack.Gems, 2);
             AddLoot(LootPack.Statue);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void OnDeath(Container c)
+		}
+
+		public override void OnDeath(Container c)
         {
             base.OnDeath(c);
 

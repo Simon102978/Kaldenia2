@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a gaman corpse")]
+    [CorpseName("le corps d'un gaman")]
     public class Gaman : BaseCreature
     {
         [Constructable]
         public Gaman()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a gaman";
+            Name = "un gaman";
             Body = 248;
 
             SetStr(146, 175);
@@ -46,9 +46,11 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 5;
-        public override int Hides => 8;
-        public override FoodType FavoriteFood => FoodType.GrainsAndHay;
+        public override int Meat => Utility.RandomMinMax(2, 5);
+
+		public override int Hides => Utility.RandomMinMax(3, 7);
+
+		public override FoodType FavoriteFood => FoodType.GrainsAndHay;
         public override int GetAngerSound()
         {
             return 0x4F8;

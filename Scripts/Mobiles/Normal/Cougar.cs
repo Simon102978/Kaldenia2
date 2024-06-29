@@ -1,13 +1,13 @@
 namespace Server.Mobiles
 {
-    [CorpseName("a cougar corpse")]
+    [CorpseName("le corps d'un cougar")]
     public class Cougar : BaseCreature
     {
         [Constructable]
         public Cougar()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "a cougar";
+            Name = "un cougar";
             Body = 63;
             BaseSoundID = 0x73;
 
@@ -46,9 +46,12 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 
-		public override int Meat => 3;
-        public override int Hides => 5;
-        public override FoodType FavoriteFood => FoodType.Fish | FoodType.Meat;
+		public override int Meat => Utility.RandomMinMax(2, 4);
+
+		public override int Hides => Utility.RandomMinMax(3, 5);
+
+
+		public override FoodType FavoriteFood => FoodType.Fish | FoodType.Meat;
         public override PackInstinct PackInstinct => PackInstinct.Feline;
         public override void Serialize(GenericWriter writer)
         {

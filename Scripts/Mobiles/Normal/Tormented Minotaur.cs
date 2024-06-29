@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a tormented minotaur corpse")]
+    [CorpseName("le corps d'un minotaure")]
     public class TormentedMinotaur : BaseCreature
     {
         [Constructable]
         public TormentedMinotaur()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "Tormented Minotaur";
+            Name = "un minotaure tourmenté";
             Body = 262;
 
             SetStr(822, 930);
@@ -45,19 +45,24 @@ namespace Server.Mobiles
 
         public override Poison PoisonImmune => Poison.Deadly;
         public override int TreasureMapLevel => 3;
-		public override int Hides => 5;
+		public override int Hides => Utility.RandomMinMax(3, 5);
+
 		public override HideType HideType => HideType.Geant;
 
 
-		public override int Bones => 5;
+		public override int Bones => Utility.RandomMinMax(3, 5);
 		public override BoneType BoneType => BoneType.Geant;
 
 		public override void GenerateLoot()
         {
             AddLoot(LootPack.FilthyRich, 10);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(4, 7));
+			AddLoot(LootPack.LootItem<CheveuxGeant>(4, true));
 
-        public override int GetDeathSound()
+
+		}
+
+		public override int GetDeathSound()
         {
             return 0x596;
         }

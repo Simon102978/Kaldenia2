@@ -4,12 +4,12 @@ using System;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a ki-rin corpse")]
+    [CorpseName("le corps d'un ki-rin")]
     public class Kirin : BaseMount
     {
         [Constructable]
         public Kirin()
-            : this("a ki-rin")
+            : this("un ki-rin")
         {
         }
 
@@ -65,15 +65,16 @@ namespace Server.Mobiles
 
         public override TribeType Tribe => TribeType.Fey;
 
-        public override int Meat => 3;
+        public override int Meat => Utility.RandomMinMax(1, 3);
+
 		/*    public override int Hides => 10;
 			public override HideType HideType => HideType.Horned;*/
 
 
-		public override int Hides => 6;
+		public override int Hides => Utility.RandomMinMax(2, 6);
 		public override HideType HideType => HideType.Regular;
 
-		public override int Bones => 6;
+		public override int Bones => Utility.RandomMinMax(2, 6);
 		public override BoneType BoneType => BoneType.Regular;
 		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void OnDisallowedRider(Mobile m)
@@ -106,9 +107,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.LowScrolls);
             AddLoot(LootPack.Potions);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void OnDeath(Container c)
+		}
+
+		public override void OnDeath(Container c)
         {
             base.OnDeath(c);
 

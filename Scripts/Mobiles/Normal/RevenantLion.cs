@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a revenant lion corpse")]
+    [CorpseName("le corps d'un vers des sables")]
     public class RevenantLion : BaseCreature
     {
         [Constructable]
         public RevenantLion()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a Revenant Lion";
+            Name = "un vers des sables";
             Body = 251;
 
             SetStr(276, 325);
@@ -59,9 +59,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls, 2);
             AddLoot(LootPack.NecroRegs, 6, 8);
             AddLoot(LootPack.BodyPartsAndBones);
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 5));
 
-        public override int GetAngerSound()
+		}
+
+		public override int GetAngerSound()
         {
             return 0x518;
         }

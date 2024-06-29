@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("a snow elemental corpse")]
+    [CorpseName("le corps d'un elementaire des neiges")]
     public class SnowElemental : BaseCreature, IAuraCreature
     {
         [Constructable]
         public SnowElemental()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a snow elemental";
+            Name = "un elementaire des neiges";
             Body = 163;
             BaseSoundID = 263;
 
@@ -61,9 +61,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.Rich);
             AddLoot(LootPack.LootItem<BlackPearl>(3, true));
             AddLoot(LootPack.LootItem<IronOre>(3, true));
-        }
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);
