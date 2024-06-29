@@ -418,26 +418,27 @@ namespace Server.Engines.Craft
 
 
 			#region "Boucliers"
-			AddCraft(typeof(Buckler), "Boucliers", "Bouclier", 32.0, 52.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(MetalShield), "Boucliers", "Rampart", 39.0, 59.0, typeof(IronIngot), "Fer", 14, "Vous n'avez pas suffisament de lingot de Fer");
-			index = AddCraft(typeof(SmallPlateShield), "Boucliers", "Targe", 32.0, 52.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(WoodenKiteShield), "Boucliers", "La pointe", 41.0, 61.0, typeof(IronIngot), "Fer", 8, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(MediumPlateShield), "Boucliers", "Rondache", 49.0, 69.0, typeof(IronIngot), "Fer", 14, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(BronzeShield), "Boucliers", "Rondache résonnante", 36.0, 56.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(EcuBois), "Boucliers", "Écu de bois", 32.0, 52.0, typeof(IronIngot), "Fer", 8, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(BouclierRond2), "Boucliers", "Bouclier Rond", 32.0, 52.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(Targe3), "Boucliers", "Targe renforcée", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(Rondache), "Boucliers", "Rondache", 41.0, 41.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(MetalKiteShield), "Boucliers", "Blason", 45.0, 65.0, typeof(IronIngot), "Fer", 16, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(BouclierRond), "Boucliers", "Bouclier Rond", 41.0, 61.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(ChaosShield), "Boucliers", "Targe décorée", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(HeaterShield), "Boucliers", "Muraille", 49.0, 49.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(Pavois), "Boucliers", "Pavois", 32.0, 52.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(Targe), "Boucliers", "Targe Bicolore", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(OrderShield), "Boucliers", "Égide", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(EcuLong), "Boucliers", "Écu Long", 41.0, 61.0, typeof(IronIngot), "Fer", 16, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(Pavois2), "Boucliers", "Pavois Décoratif", 41.0, 61.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(Targe2), "Boucliers", "Rondache Colimaçon", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Buckler), "Boucliers", "Bouclier (0)", 32.0, 52.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(SmallPlateShield), "Boucliers", "Targe (1)", 32.0, 52.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(WoodenKiteShield), "Boucliers", "La pointe (2)", 41.0, 61.0, typeof(IronIngot), "Fer", 8, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(MediumPlateShield), "Boucliers", "Rondache (2)", 49.0, 69.0, typeof(IronIngot), "Fer", 14, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(BronzeShield), "Boucliers", "Rondache résonnante (3)", 36.0, 56.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(EcuBois), "Boucliers", "Écu de bois (3)", 32.0, 52.0, typeof(IronIngot), "Fer", 8, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(BouclierRond2), "Boucliers", "Bouclier Rond (3)", 32.0, 52.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Targe3), "Boucliers", "Targe renforcée (3)", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Rondache), "Boucliers", "Rondache (4)", 41.0, 41.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(MetalKiteShield), "Boucliers", "Blason (4)", 45.0, 65.0, typeof(IronIngot), "Fer", 16, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(BouclierRond), "Boucliers", "Bouclier Rond (4)", 41.0, 61.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(ChaosShield), "Boucliers", "Targe décorée (4)", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(HeaterShield), "Boucliers", "Muraille (5)", 49.0, 49.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Pavois), "Boucliers", "Pavois (5)", 32.0, 52.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Targe), "Boucliers", "Targe Bicolore (5)", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(OrderShield), "Boucliers", "Égide (5)", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(MetalShield), "Boucliers", "Rampart (5)", 39.0, 59.0, typeof(IronIngot), "Fer", 14, "Vous n'avez pas suffisament de lingot de Fer");
+
+			AddCraft(typeof(EcuLong), "Boucliers", "Écu Long (6)", 41.0, 61.0, typeof(IronIngot), "Fer", 16, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Pavois2), "Boucliers", "Pavois Décoratif (6)", 41.0, 61.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Targe2), "Boucliers", "Rondache Colimaçon (6)", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
 			#endregion
 
 			#region "Armes de poings"

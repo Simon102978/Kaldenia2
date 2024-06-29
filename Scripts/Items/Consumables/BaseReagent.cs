@@ -19,7 +19,7 @@ namespace Server.Items
         {
         }
 
-        public override double DefaultWeight => 0.1;
+        public override double DefaultWeight => 0.05;
 
         public override void Serialize(GenericWriter writer)
         {

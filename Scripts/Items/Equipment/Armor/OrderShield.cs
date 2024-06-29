@@ -24,7 +24,7 @@ namespace Server.Items
         public override int BaseEnergyResistance => 0;
         public override int InitMinHits => 100;
         public override int InitMaxHits => 125;
-        public override int StrReq => 95;
+        public override int StrReq => 65;
 
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
 

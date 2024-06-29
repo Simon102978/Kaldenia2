@@ -24,7 +24,10 @@ namespace Server.Items
         public override int InitMaxHits => 30;
         public override int StrReq => 35;
 
-        public override void Deserialize(GenericReader reader)
+		public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
+
+
+		public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();

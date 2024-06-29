@@ -28,7 +28,7 @@ namespace Server.Mobiles
 				Add(new GenericBuyInfo(typeof(Pantalon7), 7, 20, 0xA336, 0));
 				Add(new GenericBuyInfo(typeof(FancyShirt), 21, 20, 0x1EFD, 0));
 				Add(new GenericBuyInfo(typeof(Tabar), 21, 20, 0xA308, 0));
-				Add(new GenericBuyInfo(typeof(LongPants), 10, 20, 0xA2F1, 0));
+				Add(new GenericBuyInfo(typeof(LongPants), 10, 20, 0x1539, 0));
 				Add(new GenericBuyInfo(typeof(Pantalon5), 10, 20, 0xA334, 0));
 				Add(new GenericBuyInfo(typeof(FancyDress), 26, 20, 0x1EFF, 0));
 				Add(new GenericBuyInfo(typeof(Robe9), 26, 20, 0x1EFF, 0));
