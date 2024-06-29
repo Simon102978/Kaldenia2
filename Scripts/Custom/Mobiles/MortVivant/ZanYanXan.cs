@@ -456,11 +456,11 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
         {
-			AddLoot(LootPack.SuperBoss, 8);
+			AddLoot(LootPack.SuperBoss, 2);
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.PeculiarSeed1);
-            AddLoot(LootPack.LootItem<Items.RoastPig>(10.0));
-			AddLoot(LootPack.LootItem<Items.Gold>(15000,20000));
+			AddLoot(LootPack.LootItem<Items.Gold>(500, 1000));
+
 		}
 
         public override void Serialize(GenericWriter writer)

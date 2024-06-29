@@ -270,6 +270,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.LootItem<WoodenShield>());
 			AddLoot(LootPack.Bones, Utility.RandomMinMax(3, 5));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+			AddLoot(LootPack.LootItem<Items.Gold>(250, 400));
 
 		}
 

@@ -555,6 +555,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls, 2);
             AddLoot(LootPack.MageryRegs, 5, 15);
             AddLoot(LootPack.NecroRegs, 5, 15);
+			AddLoot(LootPack.LootItem<Items.Gold>(500,1000));
 		}
 
         public override void Serialize(GenericWriter writer)
