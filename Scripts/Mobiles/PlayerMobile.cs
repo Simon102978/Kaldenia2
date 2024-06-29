@@ -1164,10 +1164,7 @@ namespace Server.Mobiles
 		public override int GetResistance(ResistanceType type)
 		{
 			int resistance = base.GetResistance(type) + SphynxFortune.GetResistanceBonus(this, type);
-			if (type != ResistanceType.Physical)
-			{
-				resistance += 20;
-			}
+
 			if (CityLoyaltySystem.HasTradeDeal(this, TradeDeal.SocietyOfClothiers))
 			{
 				resistance++;

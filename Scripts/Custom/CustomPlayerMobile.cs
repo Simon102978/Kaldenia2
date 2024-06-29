@@ -1975,6 +1975,7 @@ namespace Server.Mobiles
 			{
 				return false;
 			}
+		/*	
 			if (m_PossessStorage != null)
 			{
 				Server.Possess.CopySkills(this, m_Possess);
@@ -1996,7 +1997,7 @@ namespace Server.Mobiles
 				m_Possess = null;
 				Hidden = true;
 				return false;
-			}
+			}*/
 
 		}
 
