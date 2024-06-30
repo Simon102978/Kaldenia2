@@ -4,7 +4,7 @@ namespace Server.Items
     {
         [Constructable]
         public Boomerang()
-            : base(0x8FF)
+            : base(0x4067)
         {
             Weight = 4.0;
             Layer = Layer.OneHanded;

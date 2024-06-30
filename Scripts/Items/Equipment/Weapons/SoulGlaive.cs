@@ -4,7 +4,7 @@ namespace Server.Items
     {
         [Constructable]
         public SoulGlaive()
-            : base(0x090A)
+            : base(0x406B)
         {
             Weight = 8.0;
             Layer = Layer.OneHanded;

@@ -4,7 +4,7 @@ namespace Server.Items
     {
         [Constructable]
         public Cyclone()
-            : base(0x901)
+            : base(0x406C)
         {
             Weight = 6.0;
             Layer = Layer.OneHanded;
