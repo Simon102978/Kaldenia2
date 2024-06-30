@@ -424,7 +424,7 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(MediumPlateShield), "Boucliers", "Rondache (2)", 49.0, 69.0, typeof(IronIngot), "Fer", 14, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(BronzeShield), "Boucliers", "Rondache résonnante (3)", 36.0, 56.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(EcuBois), "Boucliers", "Écu de bois (3)", 32.0, 52.0, typeof(IronIngot), "Fer", 8, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(BouclierRond2), "Boucliers", "Bouclier Rond (3)", 32.0, 52.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
+			//AddCraft(typeof(BouclierRond2), "Boucliers", "Bouclier Rond (3)", 32.0, 52.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(Targe3), "Boucliers", "Targe renforcée (3)", 41.0, 61.0, typeof(IronIngot), "Fer", 25, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(Rondache), "Boucliers", "Rondache (4)", 41.0, 41.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(MetalKiteShield), "Boucliers", "Blason (4)", 45.0, 65.0, typeof(IronIngot), "Fer", 16, "Vous n'avez pas suffisament de lingot de Fer");

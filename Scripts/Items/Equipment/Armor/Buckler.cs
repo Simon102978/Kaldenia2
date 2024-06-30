@@ -5,11 +5,11 @@ namespace Server.Items
     [Alterable(typeof(DefBlacksmithy), typeof(SmallPlateShield))]
     public class Buckler : BaseShield
     {
-        public override int BasePhysicalResistance => 1;
-        public override int BaseFireResistance => 0;
-        public override int BaseColdResistance => 0;
-        public override int BasePoisonResistance => 1;
-        public override int BaseEnergyResistance => 0;
+        public override int BasePhysicalResistance => 2;
+        public override int BaseFireResistance => 2;
+        public override int BaseColdResistance => 2;
+        public override int BasePoisonResistance => 2;
+        public override int BaseEnergyResistance => 2;
         public override int InitMinHits => 40;
         public override int InitMaxHits => 50;
         public override int StrReq => 20;
@@ -21,6 +21,7 @@ namespace Server.Items
             : base(0x1B73)
         {
             Weight = 5.0;
+			Name = "Bouclier";
         }
 
         public Buckler(Serial serial)

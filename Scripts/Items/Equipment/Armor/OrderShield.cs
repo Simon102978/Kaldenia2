@@ -9,7 +9,8 @@ namespace Server.Items
         public OrderShield()
             : base(0x1BC4)
         {
-            Weight = 7.0;
+            Weight = 8.0;
+			Name = "Égide";
         }
 
         public OrderShield(Serial serial)
@@ -17,14 +18,14 @@ namespace Server.Items
         {
         }
 
-        public override int BasePhysicalResistance => 6;
-        public override int BaseFireResistance => 0;
-        public override int BaseColdResistance => 0;
-        public override int BasePoisonResistance => 0;
-        public override int BaseEnergyResistance => 0;
-        public override int InitMinHits => 100;
-        public override int InitMaxHits => 125;
-        public override int StrReq => 65;
+		public override int BasePhysicalResistance => 6;
+		public override int BaseFireResistance => 1;
+		public override int BaseColdResistance => 0;
+		public override int BasePoisonResistance => 1;
+		public override int BaseEnergyResistance => 1;
+		public override int InitMinHits => 110;
+		public override int InitMaxHits => 140;
+		public override int StrReq => 35;
 
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
 

@@ -12,7 +12,9 @@ namespace Server.Items
             : base(0x1BC3)
         {
             Weight = 5.0;
-        }
+			Name = "Targe décorée";
+
+		}
 
         public ChaosShield(Serial serial)
             : base(serial)
@@ -21,13 +23,13 @@ namespace Server.Items
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Ringmail;
 
 		public override int BasePhysicalResistance => 5;
-        public override int BaseFireResistance => 0;
-        public override int BaseColdResistance => 0;
-        public override int BasePoisonResistance => 0;
-        public override int BaseEnergyResistance => 0;
-        public override int InitMinHits => 100;
-        public override int InitMaxHits => 125;
-        public override int StrReq => 65;
+		public override int BaseFireResistance => 1;
+		public override int BaseColdResistance => 1;
+		public override int BasePoisonResistance => 0;
+		public override int BaseEnergyResistance => 0;
+		public override int InitMinHits => 100;
+		public override int InitMaxHits => 125;
+		public override int StrReq => 35;
 		public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
