@@ -27,6 +27,7 @@ namespace Server.Items
 		public override int MinDamage => 9;
 		public override int MaxDamage => 11;
 		public override float Speed => 2.75f;
+		public override int DefMaxRange => 2;
 
 		public override int InitMinHits => 31;
 		public override int InitMaxHits => 80;
@@ -65,6 +66,7 @@ namespace Server.Items
 		public override int MinDamage => 9;
 		public override int MaxDamage => 11;
 		public override float Speed => 2.75f;
+		public override int DefMaxRange => 2;
 
 		public override int InitMinHits => 31;
 		public override int InitMaxHits => 80;
@@ -102,6 +104,7 @@ namespace Server.Items
 		public override int MinDamage => 9;
 		public override int MaxDamage => 11;
 		public override float Speed => 2.75f;
+		public override int DefMaxRange => 2;
 
 		public override int InitMinHits => 31;
 		public override int InitMaxHits => 80;
@@ -139,6 +142,7 @@ namespace Server.Items
 		public override int MinDamage => 6;
 		public override int MaxDamage => 8;
 		public override float Speed => 2.75f;
+		public override int DefMaxRange => 2;
 
 		public override int InitMinHits => 31;
 		public override int InitMaxHits => 80;
@@ -176,6 +180,7 @@ namespace Server.Items
 		public override int MinDamage => 9;
 		public override int MaxDamage => 11;
 		public override float Speed => 2.75f;
+		public override int DefMaxRange => 2;
 
 		public override int InitMinHits => 31;
 		public override int InitMaxHits => 80;
