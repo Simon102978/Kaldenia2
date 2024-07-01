@@ -1,6 +1,6 @@
 namespace Server.Mobiles
 {
-    [CorpseName("le corps d'une chèvre")]
+    [CorpseName("le corps d'une chï¿½vre")]
     public class MountainGoat : BaseCreature
     {
         [Constructable]
@@ -45,6 +45,7 @@ namespace Server.Mobiles
         {
         }
 
+        public override bool CanBeParagon => false;
         public override int Meat =>	Utility.RandomMinMax(1, 3);
         public override int Hides => Utility.RandomMinMax(2, 4);
 		public override FoodType FavoriteFood => FoodType.GrainsAndHay | FoodType.FruitsAndVegies;

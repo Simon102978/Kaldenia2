@@ -40,7 +40,7 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-
+        public override bool CanBeParagon => false;
         public override int Meat => Utility.RandomMinMax(2, 4);
         public override int Hides => Utility.RandomMinMax(4, 8);
 		public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;

@@ -36,7 +36,7 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-
+        public override bool CanBeParagon => false;
         public override int Meat => Utility.RandomMinMax(1, 3);
 		public override int Feathers => Utility.RandomMinMax(10, 25);
 		public override int GetAngerSound()

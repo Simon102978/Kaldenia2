@@ -45,6 +45,7 @@ namespace Server.Mobiles
         {
         }
 
+        public override bool CanBeParagon => false;
         public override int Meat => 1;
 		public override int Hides => 5;
 		public override HideType HideType => HideType.Regular;
