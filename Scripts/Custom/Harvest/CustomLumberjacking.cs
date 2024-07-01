@@ -69,7 +69,7 @@ namespace Server.Engines.Harvest
 				Skill = SkillName.Lumberjacking,
 
 				// Set the list of harvestable tiles
-				Tiles = m_TreeTiles,
+				Tiles = m_TreeTiles, 
 
 				// Players must be within 2 tiles to harvest
 				MaxRange = 2,
@@ -307,7 +307,7 @@ namespace Server.Engines.Harvest
 			0x152B, 0x155A, 0x155B, 0x0C95, 0x0C96, 0x0C99, 0x0C9A, 0x0C9B,
 			0x0C9C, 0x0C9D, 0x0CA6, 0x0CA8, 0x0CAA, 0x0CAB, 0x1444, 0x1445,
 			0x1446, 0x1447, 0x1448, 0x144A, 0x144B, 0x144C, 0x0D37, 0x0D38,
-			0x0D35, 0xD37,
+			0x0D35, 0xD37
 		};
 		#endregion
 	}
