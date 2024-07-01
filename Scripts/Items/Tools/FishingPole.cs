@@ -5,8 +5,7 @@ using Server.Targeting;
 using Server.Items;
 using System;
 using System.Collections.Generic;
-
-
+using System.Windows.Forms;
 
 namespace Server.ContextMenus
 {
@@ -571,7 +570,7 @@ namespace Server.Items
 		{
 			base.Serialize(writer);
 
-			writer.Write(6); // version
+			writer.Write( (int) 5); // version
 
 			writer.Write((int)m_Bait);
 			writer.Write(m_Charge);
@@ -613,9 +612,11 @@ namespace Server.Items
 			switch (version)
 			{
 				case 5:
+					{
 						m_Bait = (Bait)reader.ReadInt();
 						m_Charge = reader.ReadInt();
-					goto case 4;
+					break;
+			}
 				case 4:
 					m_PlayerConstructed = reader.ReadBool();
 					m_LowerStatReq = reader.ReadInt();
