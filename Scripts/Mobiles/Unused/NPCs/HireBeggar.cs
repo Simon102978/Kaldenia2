@@ -42,7 +42,7 @@ namespace Server.Mobiles
 
             SetDamage(1, 1);
 
-            SetSkill(SkillName.Begging, 66, 97);
+            SetSkill(SkillName.Concentration, 66, 97);
             SetSkill(SkillName.Tactics, 5, 27);
             SetSkill(SkillName.Wrestling, 5, 27);
             SetSkill(SkillName.Magery, 2, 2);

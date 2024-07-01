@@ -454,7 +454,8 @@ namespace Server.Gumps
                 SkillName.Ninjitsu,
                 SkillName.Bushido,
                 SkillName.Spellweaving,
-                SkillName.Mysticism
+                SkillName.Mysticism,
+                SkillName.Concentration,
             }),
             new SkillsGumpGroup("Miscellaneous", new SkillName[]
             {
@@ -484,7 +485,7 @@ namespace Server.Gumps
             new SkillsGumpGroup("Actions", new SkillName[]
             {
                 SkillName.AnimalTaming,
-                SkillName.Begging,
+
                 SkillName.DetectHidden,
                 SkillName.Hiding,
                 SkillName.RemoveTrap,

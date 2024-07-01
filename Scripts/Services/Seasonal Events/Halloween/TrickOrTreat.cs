@@ -200,7 +200,7 @@ namespace Server.Engines.Events
                                         break;
                                 }
 
-                                if (Utility.RandomDouble() <= .01 && from.Skills.Begging.Value >= 100)
+                                if (Utility.RandomDouble() <= .01 && from.Skills.Concentration.Value >= 100)
                                 {
                                     from.AddToBackpack(HalloweenSettings.RandomGMBeggerItem);
 

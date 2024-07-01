@@ -223,22 +223,22 @@ namespace Server.Items
     }
 
     [FlipableAttribute(0xFBE, 0xFBD)]
-    public class LivreSkillsBegging : LivreSkills
+    public class LivreSkillsConcentration : LivreSkills
     {
         [Constructable]
-        public LivreSkillsBegging()
-            : this(SkillName.Begging, 0.0, 0.0)
+        public LivreSkillsConcentration()
+            : this(SkillName.Concentration, 0.0, 0.0)
         {
         }
 
         [Constructable]
-        public LivreSkillsBegging(SkillName skill, double value, double growvalue)
+        public LivreSkillsConcentration(SkillName skill, double value, double growvalue)
             : base(skill, value, growvalue)
         {
-            Name = "Étude : Begging";
+            Name = "Étude : Concentration";
         }
 
-        public LivreSkillsBegging(Serial serial)
+        public LivreSkillsConcentration(Serial serial)
             : base(serial)
         {
         }

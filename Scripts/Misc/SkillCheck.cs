@@ -63,7 +63,7 @@ namespace Server.Misc
 			true, 	// ItemID = 3,
 			true, 	// ArmsLore = 4,
 			false, 	// Parry = 5,
-			true, 	// Begging = 6,
+			false, 	// Begging = 6,
 			false, 	// Blacksmith = 7,
 			false, 	// Fletching = 8,
 			true, 	// Peacemaking = 9,

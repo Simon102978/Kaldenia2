@@ -1355,6 +1355,13 @@ namespace Server.Spells
             Mobile target = damageable as Mobile;
             int iDamage = (int)damage;
 
+            if (from is CustomPlayerMobile cp)
+            {
+                iDamage +=  (int)(damage *cp.Skills.Concentration.Fixed / 3000); 
+            }
+
+
+
             if (delay == TimeSpan.Zero)
             {
                 if (from is BaseCreature && target != null)

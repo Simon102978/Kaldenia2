@@ -397,6 +397,11 @@ namespace Server.Spells
                 return true;
             }
 
+            if (m_Caster is CustomPlayerMobile cp && cp.CheckSkill(SkillName.Concentration,0,100))
+            {   
+                return true;
+            }
+
             Container pack = m_Caster.Backpack;
 
             if (pack == null)

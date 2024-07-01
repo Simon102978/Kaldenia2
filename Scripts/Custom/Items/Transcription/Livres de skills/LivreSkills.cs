@@ -78,7 +78,7 @@ namespace Server.Items
 
         public LivreSkills(SkillName skill, double value, double growvalue) : base(0xFBE)
         {
-            Name = "livre d'étude";
+            Name = "livre d'ï¿½tude";
             Weight = 2.0;
 
             m_Skill = skill;
@@ -97,12 +97,12 @@ namespace Server.Items
 
 			if (m_Level <= 0)
 			{
-				from.SendMessage("Vous ne pouvez plus augmenter votre compétence avec ce livre.");
+				from.SendMessage("Vous ne pouvez plus augmenter votre compï¿½tence avec ce livre.");
 				return false;
 			}
 			//else if (from.SkillsTotal >= from.SkillsCap)
 			//{
-			//	from.SendMessage("Vous ne pouvez plus augmenter votre compétence avec ce livre (Total Skill Cap).");
+			//	from.SendMessage("Vous ne pouvez plus augmenter votre compï¿½tence avec ce livre (Total Skill Cap).");
 			//	return false;
 			//}
 			else if (skillValue >= from.Skills[skill].Cap)
@@ -112,7 +112,7 @@ namespace Server.Items
             }
             else if (from.Skills[skill].Lock != SkillLock.Up)
             {
-                from.SendMessage("Vous ne pouvez augmenter votre skill. Vérifiez le cadenas.");
+                from.SendMessage("Vous ne pouvez augmenter votre skill. Vï¿½rifiez le cadenas.");
                 return false;
             }
             else if (skillValue >= m_Max)
@@ -144,7 +144,7 @@ namespace Server.Items
 
                 if (!IsChildOf(pm.Backpack))
                 {
-                    pm.SendMessage("Le livre doit être dans votre sac.");
+                    pm.SendMessage("Le livre doit ï¿½tre dans votre sac.");
                 }
                 else if (m_Owner != null && m_Owner != pm)
                 {
@@ -152,16 +152,16 @@ namespace Server.Items
                 }
                 else if (!IsInLibrary(pm))
                 {
-                    pm.SendMessage("Vous devez être dans une bibliothèque pour lire ce livre.");
+                    pm.SendMessage("Vous devez ï¿½tre dans une bibliothï¿½que pour lire ce livre.");
                 }
                 else if (!pm.CanBeginAction(typeof(Etude)))
                 {
-                    pm.SendMessage("Vous ne pouvez étudier présentement.");
+                    pm.SendMessage("Vous ne pouvez ï¿½tudier prï¿½sentement.");
                 }
                 else if (CanRaise(pm, m_Skill))
                 {
                     m_Owner = pm;
-                    pm.SendMessage("Vous débutez votre lecture.");
+                    pm.SendMessage("Vous dï¿½butez votre lecture.");
                     pm.BeginAction(typeof(Etude));
 
                     double duration = 68 - (0.4 * pm.RawInt);
@@ -229,7 +229,7 @@ namespace Server.Items
                 }
                 else
                 {
-                    m_Owner.SendMessage("Vous tournez les pages du livre sans trop comprendre ce qu'il est écrit.");
+                    m_Owner.SendMessage("Vous tournez les pages du livre sans trop comprendre ce qu'il est ï¿½crit.");
                 }
             }
         }
@@ -256,11 +256,11 @@ namespace Server.Items
                     {
                         if (!m_Livre.IsChildOf(m_Owner.Backpack))
                         {
-                            m_Owner.SendMessage("Le livre doit être dans votre sac.");
+                            m_Owner.SendMessage("Le livre doit ï¿½tre dans votre sac.");
                         }
                         else if (!m_Livre.IsInLibrary(m_Owner))
                         {
-                            m_Owner.SendMessage("Vous devez être dans une bibliothèque pour lire ce livre.");
+                            m_Owner.SendMessage("Vous devez ï¿½tre dans une bibliothï¿½que pour lire ce livre.");
                         }
                         else if (m_Livre.CanRaise(m_Owner, m_Livre.Skill))
                         {
@@ -360,7 +360,7 @@ namespace Server.Items
                     case "ItemID": m_Skill = SkillName.ItemID; break;
                     case "ArmsLore": m_Skill = SkillName.ArmsLore; break;
                     case "Parry": m_Skill = SkillName.Parry; break;
-                    case "Begging": m_Skill = SkillName.Begging; break;
+                    case "Concentration": m_Skill = SkillName.Concentration; break;
                     case "Blacksmith": m_Skill = SkillName.Blacksmith; break;
                 //    case "Fletching": m_Skill = SkillName.Fletching; break;
                     case "Peacemaking": m_Skill = SkillName.Peacemaking; break;

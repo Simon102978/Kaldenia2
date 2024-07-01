@@ -64,14 +64,14 @@ namespace Server
 			SkillName.Regeneration,
 			SkillName.Equitation,
 			SkillName.Tracking,
-			SkillName.Camping
+			SkillName.Camping,
+			SkillName.Concentration
 		};
 
 		public static List<SkillName> NonAssigneSkill = new List<SkillName>()
 		{
 			
 			SkillName.ArmsLore,
-			SkillName.Begging,
 			SkillName.Forensics,
 			SkillName.ItemID,
 			SkillName.TasteID,

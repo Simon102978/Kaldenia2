@@ -1227,7 +1227,7 @@ namespace Server
 		private static readonly SkillName[] m_AllSkills = new[]
 		{
 			SkillName.Alchemy, SkillName.Anatomy, SkillName.AnimalLore, SkillName.ItemID, SkillName.ArmsLore, SkillName.Parry,
-			SkillName.Begging, SkillName.Blacksmith, SkillName.Botanique, SkillName.Peacemaking, SkillName.Camping,
+			SkillName.Concentration, SkillName.Blacksmith, SkillName.Botanique, SkillName.Peacemaking, SkillName.Camping,
 			SkillName.Carpentry, SkillName.Cartography, SkillName.Cooking, SkillName.DetectHidden, SkillName.Discordance,
 			SkillName.EvalInt, SkillName.Healing, SkillName.Fishing, SkillName.Forensics, SkillName.Regeneration, SkillName.Hiding,
 			SkillName.Provocation, SkillName.Inscribe, SkillName.Lockpicking, SkillName.Magery, SkillName.MagicResist,

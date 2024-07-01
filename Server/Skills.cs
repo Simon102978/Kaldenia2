@@ -33,7 +33,7 @@ namespace Server
 		ItemID = 3,
 		ArmsLore = 4,
 		Parry = 5,
-		Begging = 6,
+		Concentration = 6,
 		Blacksmith = 7,
 		Botanique = 8,
 		Peacemaking = 9,
@@ -593,7 +593,7 @@ namespace Server
 			new SkillInfo(3, "Item Identification", 0.0, 0.0, 0.0, "Merchant", null, 0.0, 0.0, 1.0, 1.0, StatCode.Int, StatCode.Dex),
 			new SkillInfo(4, "Arms Lore", 0.0, 0.0, 0.0, "Weapon Master", null, 0.75, 0.15, 0.1, 1.0, StatCode.Int, StatCode.Str),
 			new SkillInfo(5, "Parrying", 7.5, 2.5, 0.0, "Duelist", null, 0.75, 0.25, 0.0, 1.0, StatCode.Dex, StatCode.Str, true ),
-			new SkillInfo(6, "Begging", 0.0, 0.0, 0.0, "Beggar", null, 0.0, 0.0, 0.0, 1.0, StatCode.Dex, StatCode.Int),
+			new SkillInfo(6, "Concentration", 0.0, 0.0, 0.0, "Concentration", null, 0.0, 0.0, 0.0, 1.0, StatCode.Int, StatCode.Str),
 			new SkillInfo(7, "Blacksmithy", 10.0, 0.0, 0.0, "Blacksmith", null, 1.0, 0.0, 0.0, 1.0, StatCode.Str, StatCode.Dex),
 			new SkillInfo(8, "Bowcraft/Fletching", 6.0, 16.0, 0.0, "Bowyer", null, 0.6, 1.6, 0.0, 1.0, StatCode.Dex, StatCode.Str),
 			new SkillInfo(9, "Peacemaking", 0.0, 0.0, 0.0, "Pacifier", null, 0.0, 0.0, 0.0, 1.0, StatCode.Int, StatCode.Dex, true ),
@@ -678,7 +678,7 @@ namespace Server
 		public Skill Parry { get => this[SkillName.Parry]; set { } }
 
 		[CommandProperty(AccessLevel.Counselor)]
-		public Skill Begging { get => this[SkillName.Begging]; set { } }
+		public Skill Concentration { get => this[SkillName.Concentration]; set { } }
 
 		[CommandProperty(AccessLevel.Counselor)]
 		public Skill Blacksmith { get => this[SkillName.Blacksmith]; set { } }
