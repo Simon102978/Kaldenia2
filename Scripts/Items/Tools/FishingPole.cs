@@ -430,7 +430,19 @@ namespace Server.Items
 
 			if (m_Quality == ItemQuality.Exceptional)
 				list.Add(1060636); // exceptional
-		}
+
+			if (m_Bait != Bait.Aucun && m_Charge > 0)
+			{
+				list.Add( String.Format("[{0} / {1} charge{2}]", BaseBait.m_Material[(int)m_Bait], m_Charge, m_Charge > 1 ? "s" : ""));
+			}
+			else 
+				list.Add(String.Format("[ aucun appât ]"));
+				
+			
+			}
+
+
+		
 
 		public override void AddUsesRemainingProperties(ObjectPropertyList list)
 		{
