@@ -32,7 +32,7 @@ namespace Server.Items
 				from.CloseGump(typeof(CreationFinalisationGump));
 
 
-                from.SendGump(new CreationFinalisationGump(cPlayer));
+        from.SendGump(new CreationFinalisationGump(cPlayer));
       }
       else
       {

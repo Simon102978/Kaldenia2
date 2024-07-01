@@ -97,6 +97,15 @@ namespace Server.Gumps
 				from.Thirst = 20;
 				from.Hunger = 20;
 
+				Server.Skills skills = from.Skills;
+
+			    for (int i = 0; i < skills.Length; ++i)
+				{
+				 	skills[i].Base = 0;
+				}
+                       
+
+
 				
 			}
 			if (info.ButtonID == 2)
