@@ -368,6 +368,9 @@ namespace Server.Mobiles
 		public Item ChosenSpellbook { get; set; }
 
 		[CommandProperty(AccessLevel.GameMaster)]
+		public TeleportStone TeleportStone { get; set; }
+
+		[CommandProperty(AccessLevel.GameMaster)]
 		public Dictionary<int, Deguisement> Deguisement { get { return m_Deguisement; } set { m_Deguisement = value; } }
 
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -2333,6 +2336,11 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+				case 37:
+				{
+					TeleportStone = (TeleportStone)reader.ReadItem();
+					goto case 36;
+				}
 				case 36:
 				{
 					m_LastEvolutionClasse = reader.ReadDateTime();
@@ -2403,23 +2411,14 @@ namespace Server.Mobiles
 						goto case 22;
 					}
 				case 22:
+				case 21:
 					{
 						m_TotalRPFE = reader.ReadInt();
 
-						if (version >= 27)
-						{
-							goto case 20;
-						}
-						else
-						{
-							goto case 21;
-						}					
-					}
-				case 21:
-					{
-						reader.ReadTimeSpan();
 
-						goto case 20;
+							goto case 20;
+						
+			
 					}
 				case 20:
 					{
@@ -2555,12 +2554,7 @@ namespace Server.Mobiles
 						goto case 3;
 					}
 				case 3:
-					{
-						if (version < 35)
-						{
-							reader.ReadInt();
-						}
-						
+					{					
 						m_lastLoginTime = reader.ReadDateTime();
 						m_nextFETime = reader.ReadTimeSpan();
 						m_TotalNormalFE = reader.ReadInt();
@@ -2588,13 +2582,7 @@ namespace Server.Mobiles
                         break;
                     }
             }
-					if(version < 33)
-					{
-						m_Classe = Classe.GetClasse(0);
-						m_Metier = Metier.GetMetier(0);
-						m_Niveau = 0;
-						SetUselessSkill();
-					}
+
 
 		}
 
@@ -2602,8 +2590,9 @@ namespace Server.Mobiles
         {        
             base.Serialize(writer);
 
-            writer.Write(36); // version
+            writer.Write(37); // version
 
+			writer.Write(TeleportStone);
 			writer.Write(m_LastEvolutionClasse);
 			writer.Write(m_LastEvolutionMetier);
 

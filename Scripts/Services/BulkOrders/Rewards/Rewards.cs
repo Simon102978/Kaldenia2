@@ -1376,7 +1376,7 @@ namespace Server.Engines.BulkOrders
             new RewardType(300, typeof(BladeSpiritsScroll), typeof(DispelFieldScroll), typeof(MagicReflectScroll), typeof(ParalyzeScroll), typeof(SummonCreatureScroll)),
         //    new RewardType(350, typeof(ChainLightningScroll), typeof(FlamestrikeScroll), typeof(ManaVampireScroll), typeof(MeteorSwarmScroll), typeof(PolymorphScroll)),
         //    new RewardType(400, typeof(SummonAirElementalScroll), typeof(SummonDaemonScroll), typeof(SummonEarthElementalScroll), typeof(SummonFireElementalScroll), typeof(SummonWaterElementalScroll)),
-            new RewardType(450, typeof(Spellbook), typeof(NecromancerSpellbook), typeof(Runebook), typeof(RunicAtlas))
+            new RewardType(450, typeof(Spellbook), typeof(NecromancerSpellbook)/*, typeof(Runebook), typeof(RunicAtlas)*/)
         };
 
         private static readonly int[][] m_GoldTable = new int[][]

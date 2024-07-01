@@ -465,7 +465,7 @@ namespace Server.Gumps
                                         SendLocationMessage(e, from);
 
                                         Book.OnTravel();
-                                        new RecallSpell(from, null, e, null).Cast();
+                                    //    new RecallSpell(from, null, e, null).Cast();
                                     }
                                     else
                                     {

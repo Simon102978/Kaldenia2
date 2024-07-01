@@ -1162,7 +1162,7 @@ public class RecallScroll : SpellScroll
 	{
 	[Constructable]
 	public RecallScroll() : this(1)
-		{
+	{
 	}
 
 	[Constructable]

@@ -255,7 +255,7 @@ namespace Server.Spells
 			Register(783, typeof(Third.UnlockSpell));
 			Register(784, typeof(Third.TelekinesisSpell));
 			Register(785, typeof(Third.TeleportSpell));
-			Register(786, typeof(Fourth.RecallSpell));
+			Register(786, typeof(Fourth.CustomRecallSpell));
 			Register(787, typeof(Fifth.MindBlastSpell));
 			Register(788, typeof(Third.FireballSpell));
 			Register(789, typeof(Eighth.FireElementalSpell));
