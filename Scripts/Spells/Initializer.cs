@@ -275,7 +275,7 @@ namespace Server.Spells
 			Register(803, typeof(Sixth.ExplosionSpell));
 			Register(804, typeof(Mysticism.HailStormSpell));
 			Register(805, typeof(Mysticism.NetherCycloneSpell));
-			Register(806, typeof(Seventh.GateTravelSpell));
+			Register(806, typeof(Seventh.CustomGateTravelSpell));
 			Register(807, typeof(Eighth.EarthquakeSpell));
 			Register(808, typeof(Spellweaving.GiftOfRenewalSpell));
 			Register(809, typeof(Necromancy.CurseWeaponSpell));

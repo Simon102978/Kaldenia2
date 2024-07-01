@@ -19,9 +19,7 @@ namespace Server.Spells.Seventh
             Reagent.SulfurousAsh);
 
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Cycle, 15) }; } }
-
-		private readonly RunebookEntry m_Entry;
+	    private readonly RunebookEntry m_Entry;
 
         public GateTravelSpell(Mobile caster, Item scroll)
             : this(caster, scroll, null)

@@ -4,6 +4,7 @@ using Server.Gumps;
 using Server.Mobiles;
 using System.Collections.Generic;
 using Server.Accounting;
+using Server.Misc;
 
 namespace Server.Items
 {
@@ -33,6 +34,7 @@ namespace Server.Items
                 else
                 {
                   Hue = 1157;
+                  KillAllGate();
                 }
             }
         }
@@ -122,6 +124,68 @@ namespace Server.Items
 
 
     }
+
+    public void CreateGate(CustomPlayerMobile from)
+    {
+      if (!m_Active)
+      {
+        from.SendMessage("La pierre ne répond pas.");
+        return;
+      }
+      else if(Landing.Count == 0)
+      {
+        from.SendMessage("Vous ne pouvez pas vous téléporter à cette pierre.");
+        return;
+      } 
+
+      Timer.DelayCall(TimeSpan.FromSeconds(1), () =>
+      {
+          Point3D loc = GetLocation();
+
+          Item GateThere = GateAt(Map, loc);
+
+          if (GateThere != null)
+          {
+            GateThere.Delete();
+          }
+
+          from.SendLocalizedMessage(501024); // You open a magical gate to another location
+
+          Effects.PlaySound(from.Location, from.Map, 0x20E);
+
+          InternalItem firstGate = new InternalItem(loc, Map);
+          firstGate.MoveToWorld(from.Location, from.Map);
+
+          Effects.PlaySound(loc, Map, 0x20E);
+
+          InternalItem secondGate = new InternalItem(from.Location, from.Map);
+          secondGate.MoveToWorld(loc, Map);
+
+          firstGate.LinkedGate = secondGate;
+          secondGate.LinkedGate = firstGate;
+      });
+
+    }
+
+
+    public void KillAllGate()
+    {
+
+      foreach (Point3D item in Landing)
+      {
+        Item gate = GateAt(Map, item);
+
+        if(gate != null)
+          gate.Delete();
+      }
+
+
+
+
+    }
+
+
+
 
     public Point3D GetLocation()
     {
@@ -240,6 +304,121 @@ namespace Server.Items
         }
       }
     }
+ 
+ 
+        [DispellableField]
+        private class InternalItem : Moongate
+        {
+            [CommandProperty(AccessLevel.GameMaster)]
+            public Moongate LinkedGate { get; set; }
+
+           
+
+            public InternalItem(Point3D target, Map map)
+                : base(target, map)
+            {
+                Map = map;
+
+                if (ShowFeluccaWarning && map == Map.Felucca)
+                    ItemID = 0xDDA;
+
+                Dispellable = true;
+
+                InternalTimer t = new InternalTimer(this);
+                t.Start();
+            }
+
+            public override void UseGate(Mobile m)
+            {
+                if (LinkedGate == null || !(LinkedGate is InternalItem) || !LinkedGate.Deleted)
+                {
+                    base.UseGate(m);
+                }
+                else
+                    m.SendMessage("The other gate no longer exists.");
+            }
+
+
+            public override void OnDelete()
+            {
+
+              base.OnDelete();
+
+              if (LinkedGate != null)
+              {
+                ((InternalItem)LinkedGate).LinkedGate = null;
+
+                LinkedGate.Delete();
+
+
+
+              }
+            }
+
+
+
+            public InternalItem(Serial serial)
+                : base(serial)
+            {
+            }
+
+            public override bool ShowFeluccaWarning => true;
+            public override void Serialize(GenericWriter writer)
+            {
+                base.Serialize(writer);
+            }
+
+            public override void Deserialize(GenericReader reader)
+            {
+                base.Deserialize(reader);
+
+                Delete();
+            }
+
+            private class InternalTimer : Timer
+            {
+                private readonly Item m_Item;
+
+                public InternalTimer(Item item)
+                    : base(TimeSpan.FromSeconds(30.0))
+                {
+                    Priority = TimerPriority.OneSecond;
+                    m_Item = item;
+                }
+
+                protected override void OnTick()
+                {
+                    m_Item.Delete();
+                }
+            }
+        }
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
   }
 }
 
