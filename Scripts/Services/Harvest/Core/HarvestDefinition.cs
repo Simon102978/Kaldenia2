@@ -143,9 +143,12 @@ namespace Server.Engines.Harvest
 		{
 			double randomValue = Utility.RandomDouble() * 100;
 
-			if (tool is IFishingPole)
+			if (from is PlayerMobile)
+				randomValue -= 20;
+
+			if (tool is FishingPole)
 			{
-				IFishingPole pole = (IFishingPole)tool;
+				FishingPole pole = (FishingPole)tool;
 
 				for (int i = Veins.Length - 1; i >= 0; i--)
 				{
@@ -154,7 +157,7 @@ namespace Server.Engines.Harvest
 						if (randomValue - 40 <= Veins[i].VeinChance)
 							return Veins[i];
 
-						if (from.Alive)
+						if (from is PlayerMobile)
 							from.SendMessage("Bait : " + ((int)randomValue).ToString() + " / " + ((int)Veins[i].VeinChance).ToString());
 					}
 					else if (pole.Bait == Bait.Aucun || pole.Charge <= 0)

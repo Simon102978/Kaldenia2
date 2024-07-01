@@ -37,19 +37,19 @@ namespace Server.Engines.Harvest
 			{
 
 				// Resource banks are every 8x8 tiles
-				BankWidth = 8,
-				BankHeight = 8,
+				BankWidth = 2,
+				BankHeight = 2,
 
 				// Every bank holds from 5 to 15 fish
-				MinTotal = 3,
-				MaxTotal = 12,
+				MinTotal = 5,
+				MaxTotal = 15,
 
 				// A resource bank will respawn its content every 10 to 20 minutes
-				MinRespawn = TimeSpan.FromMinutes(30.0),
-				MaxRespawn = TimeSpan.FromMinutes(60.0),
+				MinRespawn = TimeSpan.FromMinutes(20.0),
+				MaxRespawn = TimeSpan.FromMinutes(40.0),
 
 				// Skill checking is done on the Fishing skill
-				Skill = SkillName.Cooking,
+				Skill = SkillName.Fishing,
 
 				// Set the list of harvestable tiles
 				Tiles = m_WaterTiles,
@@ -57,7 +57,7 @@ namespace Server.Engines.Harvest
 				//RangedTiles = true,
 
 				// Players must be within 4 tiles to harvest
-				MaxRange = 4,
+				MaxRange = 8,
 
 				// One fish per harvest action
 				ConsumedPerHarvest = 1,
@@ -107,7 +107,6 @@ namespace Server.Engines.Harvest
 				new BonusHarvestResource(50.0, 2.0, "Oeil de raie", typeof(OeilRaie)),
 				new BonusHarvestResource(50.0, 2.0, "Oeuf de thon", typeof(OeufThon)),
 				new BonusHarvestResource(50.0, 2.0, "Sang d'anguille", typeof(SangAnguille)),
-
 
 
 
@@ -242,7 +241,7 @@ namespace Server.Engines.Harvest
 						if (from.Map != sp.Map)
 							from.SendLocalizedMessage(1150861); //Charybdis have never been seen in these waters, try somewhere else.
 
-						else if (pole.BaitType == typeof(Charydbis) && from.Skills[SkillName.Cooking].Value >= 100)
+						else if (pole.BaitType == typeof(Charydbis) && from.Skills[SkillName.Fishing].Value >= 100)
 						{
 							if (sp.Charydbis == null && !sp.HasSpawned && sp.CurrentLocation.Contains(loc))
 							{
@@ -275,8 +274,8 @@ namespace Server.Engines.Harvest
 			bool deepWater = IsDeepWater(loc, map);
 			bool junkproof = HasTypeHook(tool, HookType.JunkProof);
 
-			double skillBase = from.Skills[SkillName.Cooking].Base;
-			double skillValue = from.Skills[SkillName.Cooking].Value;
+			double skillBase = from.Skills[SkillName.Fishing].Base;
+			double skillValue = from.Skills[SkillName.Fishing].Value;
 
 			MutateEntry[] table = Siege.SiegeShard ? m_SiegeMutateTable : m_MutateTable;
 
@@ -1032,9 +1031,9 @@ namespace Server.Engines.Harvest
 		public override void FinishHarvesting(Mobile from, Item tool, HarvestDefinition def, object toHarvest, object locked)
 		{
 			//Lava fishing needs to have its own set of rules.
-			if (tool is IFishingPole)
+			if (tool is FishingPole)
 			{
-				IFishingPole pole = (IFishingPole)tool;
+				FishingPole pole = (FishingPole)tool;
 
 				if (pole.Bait != Bait.Aucun && pole.Charge > 0)
 				{
@@ -1132,7 +1131,7 @@ if (IsLavaHarvest(tool, toHarvest))
 				{
 					def.SendMessageTo(from, def.FailMessage);
 
-					double skill = from.Skills[SkillName.Cooking].Value / 50;
+					double skill = from.Skills[SkillName.Fishing].Value / 50;
 
 					if (0.5 / skill > Utility.RandomDouble())
 						OnToolUsed(from, tool, false);
@@ -1149,7 +1148,7 @@ if (IsLavaHarvest(tool, toHarvest))
         //public override bool CheckHarvestSkill(Map map, Point3D loc, Mobile from, HarvestResource res, HarvestDefinition def)
         //{
         //    bool deepWater = IsDeepWater(loc, map);
-        //    double value = from.Skills[SkillName.Cooking].Value;
+        //    double value = from.Skills[SkillName.Fishing].Value;
 
         //    if (deepWater && value < 75.0) // can't fish here yet
         //        return from.Skills[def.Skill].Value >= res.ReqSkill;
@@ -1164,8 +1163,8 @@ if (IsLavaHarvest(tool, toHarvest))
 		{
 			Type newType = null;
 
-			double skillBase = from.Skills[SkillName.Cooking].Base;
-			double skillValue = Math.Min(120.0, from.Skills[SkillName.Cooking].Value);
+			double skillBase = from.Skills[SkillName.Fishing].Base;
+			double skillValue = Math.Min(120.0, from.Skills[SkillName.Fishing].Value);
 
 			//Same method as mutate entries
 			for (int i = 0; i < m_LavaMutateTable.Length; ++i)
