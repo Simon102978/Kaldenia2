@@ -16,7 +16,7 @@ namespace Server.Gumps
 		Mobile m_to;
 		Coiffure m_coif;
 		BarberScissorsBase m_scissor;
-
+		
 
 		public CoiffureConfirmationGump(CustomPlayerMobile from, Mobile m, Coiffure coiffure, BarberScissorsBase scissor)
 		   : base(25, 25)
@@ -29,12 +29,12 @@ namespace Server.Gumps
 
 
 
-		int movex = 150;
-		int movey = 150;
-		AddBackground(36+movex, 25+movey, 369, 170, 9270);
-		AddBackground(54+movex, 43+movey, 334, 28, 3000);
+				int movex = 150;
+				int movey = 150;
+				AddBackground(36+movex, 25+movey, 369, 170, 9270);
+				AddBackground(54+movex, 43+movey, 334, 28, 3000);
 			 
-			AddLabel(77+movex, 47+movey, 0, from.Name +  " tente de vous faire cette coiffure : ");
+			AddLabel(77+movex, 47+movey, 0, from.Name +  " tente de coiffer "+ m.Name+" de cette coiffure : ");
 			AddItem(195+movex,80+movey, coiffure.ItemId);
 			//AddLabel(250+movex, 90+movey, 2101, coifrelate[i]);
 			AddLabel(135+movex, 137+movey, 2101, "Non");
@@ -49,7 +49,7 @@ namespace Server.Gumps
 		{
 			if (info.ButtonID == 0)
 			{
-				m_from.SendMessage(m_to.Name + " resister à la tentative de se faire coiffer.");
+				m_from.SendMessage(m_to.Name + " refuse de se faire coiffer.");
 			}
 			else
 			{
@@ -109,6 +109,8 @@ namespace Server.Gumps
 
 			int n = 0;
 			int column = 0;
+			int showing = 0;
+			int shown = 0;
 			
 
 
@@ -131,20 +133,27 @@ namespace Server.Gumps
 					skip = true;
 				}
 
-
 				if (skip)
 				{
-					AddBackground(x + column * 86, y + line * 86, 85, 85, 9270);
+					showing++;
+				
 
-					AddItem(x + 25 + column * 86, y + 25 + line * 86, Coiffure.coiffure[n].ItemId);
-					AddButton(x + 30 + column * 86, y + 60 + line * 86, Coiffure.coiffure[n].Id + 1000, 2117, 2118);
 
-					column++;
-
-					if (column == 7)
+					if (showing >= 50 * m_Page &&  showing < 50 * (m_Page + 1) )
 					{
-						column = 0;
-						line++;
+						AddBackground(x + column * 86, y + line * 86, 85, 85, 9270);
+
+						AddItem(x + 25 + column * 86, y + 25 + line * 86, Coiffure.coiffure[n].ItemId);
+						AddButton(x + 30 + column * 86, y + 60 + line * 86, Coiffure.coiffure[n].Id + 1000, 2117, 2118);
+
+						column++;
+						shown++;
+
+						if (column == 7)
+						{
+							column = 0;
+							line++;
+						}
 					}
 				}			
 				n++;
@@ -174,6 +183,15 @@ namespace Server.Gumps
 
 			}
 
+			if (m_Page > 0)
+			{
+				AddButton(x + 10, y + 610, 3, 4506);
+			}
+			if ((m_Page < Math.Ceiling((double)Coiffure.coiffure.Count / 50) - 1 ) && !m_Barbe && shown == 49)
+			{
+				AddButton(x + 540, y + 610, 4, 4502);
+			} 
+
 
 		}
 			
@@ -184,6 +202,30 @@ namespace Server.Gumps
 			if (buttonID == 2)
 			{
 				m_From.SendGump(new CoiffureGump(m_From, m_to, 0, m_Item, !m_Barbe));
+			}
+			else if (buttonID == 3)
+			{
+				int pagi = m_Page;
+
+				if (pagi > 0)
+				{
+					pagi -= 1;
+				}				
+
+				m_From.SendGump(new CoiffureGump(m_From, m_to, pagi, m_Item, m_Barbe));
+			}
+			if (buttonID == 4)
+			{
+					int pagi = m_Page + 1;
+
+					if (pagi > Math.Ceiling((double)Coiffure.coiffure.Count / 50) - 1)
+					{
+						pagi--;
+					}
+
+					m_Page = pagi;
+
+				m_From.SendGump(new CoiffureGump(m_From, m_to, pagi, m_Item, m_Barbe));
 			}
 			else if(buttonID >= 1000)
 			{
@@ -196,7 +238,7 @@ namespace Server.Gumps
 				}
 				else
 				{
-					if (m_From == m_to || m_From.AccessLevel > AccessLevel.Player)
+					if (m_From == m_to || m_From.AccessLevel > AccessLevel.Player || (m_to is BaseHire bh && bh.GetMaster() == m_From)) 
 					{
 						if (co.Barbe)
 						{
@@ -224,6 +266,13 @@ namespace Server.Gumps
 							m_Item.Delete();
 						}
 					}
+					else if(m_to is BaseHire bah && bah.GetMaster() != null)
+					{
+
+						bah.GetMaster().SendGump(new CoiffureConfirmationGump(m_From,m_to,co,m_Item));
+
+
+					}
 					else
 					{
 						m_to.SendGump(new CoiffureConfirmationGump(m_From, m_to, co, m_Item));
@@ -234,60 +283,6 @@ namespace Server.Gumps
 
 
 			}
-
-						
-		/*	if (coiffure < coif[buttonID,3])
-				enough = 1;
-
-			if (m_Where == 2 && enough == 0 && coif[buttonID,4] == 0 && buttonID > 0 && draked == 0)
-			{
-				outop = 1;
-
-				if (m_Transid == 0)
-				{
-					m_From.SendMessage(String.Format("En attente de l'acceptation de votre coiffure par la cible..."));
-				//	m_From.SendGump(new CoiffureConfirmationGump(m_From,m_M,))
-				}
-				else
-				{
-					if (buttonID == 108)
-					{
-						m_From.SendMessage(String.Format("La personne que vous venez de cibler vient d'accepter votre coiffure"));
-						outop = 0;
-					}
-
-					if (outop == 1)
-						m_From.SendMessage(String.Format("La personne que vous venez de cibler vient de refuser votre coiffure"));
-				}
-			}
-			
-			if (coif[buttonID,4] == 0 && enough == 0 && buttonID > 0 && outop == 0)
-			{
-				if (m_Transid > 0)
-					buttonID = m_Transid;
-
-				if (coif[buttonID,2] == 0)
-                    m_M.HairItemID = coif[buttonID, 1];
-                else
-                    m_M.FacialHairItemID = coif[buttonID, 1];
-
-				m_From.PlaySound(0x248);
-				m_Item.UsesRemaining = m_Item.UsesRemaining - 1;
-
-				if (m_Item.UsesRemaining < 1)
-				{
-					m_From.SendMessage("Vous avez brisé votre outil.");
-					m_Item.Delete();
-				}
-			}
-			else
-			{					
-				if (enough == 1)
-					m_From.SendMessage(String.Format("Vous avez {0} en Coiffure , il vous faut au moins {1} pour réaliser cette coiffure", coiffure, coif[buttonID,3]));
-
-
-
-			}*/
         }		
 	}	
 }

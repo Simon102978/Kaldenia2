@@ -75,7 +75,7 @@ namespace Server.Misc
 			Coiffure.Register(new Coiffure(41887, 72, false));
 			Coiffure.Register(new Coiffure(41888, 42, false, true, 50));
 			Coiffure.Register(new Coiffure(41889, 49, false, true, 50));
-			Coiffure.Register(new Coiffure(41890, 120, false));
+			Coiffure.Register(new Coiffure(41890, 35, false,true, 50));
 			Coiffure.Register(new Coiffure(41891, 68, false));
 			Coiffure.Register(new Coiffure(41892, 43, false, true, 50));
 			Coiffure.Register(new Coiffure(41893, 46, false, true, 50));
@@ -106,7 +106,10 @@ namespace Server.Misc
 			Coiffure.Register(new Coiffure(0, 0, true, true, 20));
 			Coiffure.Register(new Coiffure(0, 0, false, true, 20));
 
-
+			Coiffure.Register(new Coiffure(0xA4AA, 0, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4A8, 0, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4A9, 0, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4A7, 0, false, true, 50));
 
 			Coiffure.Register(new Coiffure(0x2044, 30, false, true, 50));
 			Coiffure.Register(new Coiffure(0x2045, 30, false, true, 50));
