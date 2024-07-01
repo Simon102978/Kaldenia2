@@ -1634,7 +1634,7 @@ namespace Server.Mobiles
 
 			double skillcap = XPLevel.GetLevel(Niveau).MaxSkill;
 
-			SkillsCap = Niveau * 10 + 500;
+			SkillsCap = Niveau * 100 + 5000;
 
 			foreach (SkillName item in Classe.ClasseSkill) // Metier
 			{
