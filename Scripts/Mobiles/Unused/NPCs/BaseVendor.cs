@@ -1782,7 +1782,7 @@ namespace Server.Mobiles
                 bought = true;
             }
 
-            if (!bought)
+   /*        if (!bought)
             {
                 if (totalCost <= int.MaxValue)
                 {
@@ -1800,9 +1800,9 @@ namespace Server.Mobiles
                         fromBank = true;
                     }
                 }
-            }
+            }*/
 
-            if (!bought)
+      /*      if (!bought)
             {
                 cont = buyer.FindBankNoCreate();
 
@@ -1811,7 +1811,7 @@ namespace Server.Mobiles
                     bought = true;
                     fromBank = true;
                 }
-            }
+            }*/
 
             if (!bought)
             {
@@ -1824,7 +1824,7 @@ namespace Server.Mobiles
 
             buyer.PlaySound(0x32);
 
-            cont = buyer.Backpack ?? buyer.BankBox;
+            cont = buyer.Backpack /*?? buyer.BankBox*/;
 
             foreach (BuyItemResponse buy in validBuy)
             {
