@@ -2,9 +2,9 @@ using System.Xml;
 
 namespace Server.Regions
 {
-    public class Jail : BaseRegion
+    public class CreationRoom : BaseRegion
     {
-        public Jail(XmlElement xml, Map map, Region parent)
+        public CreationRoom(XmlElement xml, Map map, Region parent)
             : base(xml, map, parent)
         {
         }
@@ -35,11 +35,6 @@ namespace Server.Regions
             return false;
         }
 
-        public override void AlterLightLevel(Mobile m, ref int global, ref int personal)
-        {
-            global = LightCycle.JailLevel;
-        }
-
         public override bool OnBeginSpellCast(Mobile from, ISpell s)
         {
             if (from.IsPlayer())
@@ -63,14 +58,14 @@ namespace Server.Regions
 		{
 			base.OnEnter(m);
 
-            m.SendMessage("Bienvenue en prison, esperant que votre séjour sera térrifiant.");
+            m.SendMessage("Bienvenue sur Kaldenia ! Amusez-vous bien !");
 		}
 
         public override void OnExit(Mobile from)
         {
             base.OnExit(from);
 
-            from.SendMessage("Au revoir, en espèrant plus vous revoir !");
+            from.SendMessage("Bonne aventure !");
         }
 
 		public override bool OnCombatantChange(Mobile from, IDamageable Old, IDamageable New)

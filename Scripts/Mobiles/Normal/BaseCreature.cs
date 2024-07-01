@@ -725,6 +725,31 @@ namespace Server.Mobiles
                 CurrentTameSkill = MaxTameRequirement;
             }
         }
+
+
+
+        public void OnEnterCity()
+        {
+            if (ControlMaster != null)
+            {
+                return;
+            }
+            else if (Spawner == null)
+            {
+                return;
+            }
+            else if (!Warmode && Combatant == null)
+            {
+                return;
+            }
+            else 
+            {
+                World.Broadcast(37, false, AccessLevel.Counselor, $"{Combatant.Name} essait de faire rentrer un {this.Name} en le combatant dans Mirage à {X},{Y},{Z}");
+
+                Delete();
+            }
+        }
+
         #endregion
 
         #region Skill Masteries
