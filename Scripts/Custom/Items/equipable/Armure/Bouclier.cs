@@ -21,13 +21,12 @@ namespace Server.Items
 
 		public override int BasePhysicalResistance => 4;
 		public override int BaseFireResistance => 0;
-		public override int BaseColdResistance => 0;
+		public override int BaseColdResistance => 1;
 		public override int BasePoisonResistance => 0;
 		public override int BaseEnergyResistance => 1;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
 		public override int StrReq => 20;
-
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
@@ -43,13 +42,13 @@ namespace Server.Items
 	public class BouclierRond : BaseShield // buckler
 	{
 		public override int BasePhysicalResistance => 5;
-		public override int BaseFireResistance => 0;
-		public override int BaseColdResistance => 0;
-		public override int BasePoisonResistance => 1;
+		public override int BaseFireResistance => 1;
+		public override int BaseColdResistance => 1;
+		public override int BasePoisonResistance => 0;
 		public override int BaseEnergyResistance => 0;
-		public override int InitMinHits => 40;
-		public override int InitMaxHits => 50;
-		public override int StrReq => 20;
+		public override int InitMinHits => 100;
+		public override int InitMaxHits => 125;
+		public override int StrReq => 35;
 
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Ringmail;
 
@@ -124,7 +123,7 @@ namespace Server.Items
 		public EcuLong()
 			: base(41630)
 		{
-			Weight = 7.0;
+			Weight = 8.0;
 			Name = "Écu Long";
 		}
 
@@ -134,12 +133,12 @@ namespace Server.Items
 		}
 
 		public override int BasePhysicalResistance => 7;
-		public override int BaseFireResistance => 0;
-		public override int BaseColdResistance => 0;
-		public override int BasePoisonResistance => 0;
+		public override int BaseFireResistance => 2;
+		public override int BaseColdResistance => 1;
+		public override int BasePoisonResistance => 1;
 		public override int BaseEnergyResistance => 1;
-		public override int InitMinHits => 45;
-		public override int InitMaxHits => 60;
+		public override int InitMinHits => 125;
+		public override int InitMaxHits => 175;
 		public override int StrReq => 45;
 
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
@@ -176,11 +175,11 @@ namespace Server.Items
 		public override int BasePhysicalResistance => 6;
 		public override int BaseFireResistance => 1;
 		public override int BaseColdResistance => 0;
-		public override int BasePoisonResistance => 0;
-		public override int BaseEnergyResistance => 0;
-		public override int InitMinHits => 50;
-		public override int InitMaxHits => 65;
-		public override int StrReq => 90;
+		public override int BasePoisonResistance => 1;
+		public override int BaseEnergyResistance => 1;
+		public override int InitMinHits => 110;
+		public override int InitMaxHits => 140;
+		public override int StrReq => 35;
 
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
 		public override void Deserialize(GenericReader reader)
@@ -212,13 +211,13 @@ namespace Server.Items
 		}
 
 		public override int BasePhysicalResistance => 7;
-		public override int BaseFireResistance => 1;
-		public override int BaseColdResistance => 0;
-		public override int BasePoisonResistance => 0;
-		public override int BaseEnergyResistance => 0;
-		public override int InitMinHits => 50;
-		public override int InitMaxHits => 65;
-		public override int StrReq => 90;
+		public override int BaseFireResistance => 2;
+		public override int BaseColdResistance => 1;
+		public override int BasePoisonResistance => 1;
+		public override int BaseEnergyResistance => 1;
+		public override int InitMinHits => 125;
+		public override int InitMaxHits => 175;
+		public override int StrReq => 45;
 
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 		public override void Deserialize(GenericReader reader)
@@ -237,12 +236,12 @@ namespace Server.Items
 	public class Rondache : BaseShield // BronzeShield
 	{
 		public override int BasePhysicalResistance => 5;
-		public override int BaseFireResistance => 0;
+		public override int BaseFireResistance => 1;
 		public override int BaseColdResistance => 1;
 		public override int BasePoisonResistance => 0;
 		public override int BaseEnergyResistance => 0;
-		public override int InitMinHits => 25;
-		public override int InitMaxHits => 30;
+		public override int InitMinHits => 100;
+		public override int InitMaxHits => 125;
 		public override int StrReq => 35;
 
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Ringmail;
@@ -292,13 +291,13 @@ namespace Server.Items
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
 
 		public override int BasePhysicalResistance => 6;
-		public override int BaseFireResistance => 0;
+		public override int BaseFireResistance => 1;
 		public override int BaseColdResistance => 0;
-		public override int BasePoisonResistance => 0;
-		public override int BaseEnergyResistance => 0;
-		public override int InitMinHits => 100;
-		public override int InitMaxHits => 125;
-		public override int StrReq => 65;
+		public override int BasePoisonResistance => 1;
+		public override int BaseEnergyResistance => 1;
+		public override int InitMinHits => 110;
+		public override int InitMaxHits => 140;
+		public override int StrReq => 35;
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
@@ -331,13 +330,13 @@ namespace Server.Items
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 
 		public override int BasePhysicalResistance => 7;
-		public override int BaseFireResistance => 0;
-		public override int BaseColdResistance => 0;
-		public override int BasePoisonResistance => 0;
-		public override int BaseEnergyResistance => 0;
-		public override int InitMinHits => 100;
-		public override int InitMaxHits => 125;
-		public override int StrReq => 65;
+		public override int BaseFireResistance => 2;
+		public override int BaseColdResistance => 1;
+		public override int BasePoisonResistance => 1;
+		public override int BaseEnergyResistance => 1;
+		public override int InitMinHits => 125;
+		public override int InitMaxHits => 175;
+		public override int StrReq => 45;
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
@@ -371,12 +370,12 @@ namespace Server.Items
 
 		public override int BasePhysicalResistance => 4;
 		public override int BaseFireResistance => 0;
-		public override int BaseColdResistance => 0;
+		public override int BaseColdResistance => 1;
 		public override int BasePoisonResistance => 0;
-		public override int BaseEnergyResistance => 0;
-		public override int InitMinHits => 100;
-		public override int InitMaxHits => 125;
-		public override int StrReq => 65;
+		public override int BaseEnergyResistance => 1;
+		public override int InitMinHits => 50;
+		public override int InitMaxHits => 65;
+		public override int StrReq => 20;
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);

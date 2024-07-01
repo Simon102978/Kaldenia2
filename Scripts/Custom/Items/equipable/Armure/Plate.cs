@@ -24,7 +24,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
-		public override int StrReq => 80;
+		public override int StrReq => 65;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 		public override void Serialize(GenericWriter writer)
 		{
@@ -63,7 +63,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
-		public override int StrReq => 80;
+		public override int StrReq => 65;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 		public override void Serialize(GenericWriter writer)
 		{
@@ -137,7 +137,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
-		public override int StrReq => 80;
+		public override int StrReq => 65;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 		public override void Serialize(GenericWriter writer)
 		{
@@ -176,7 +176,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
-		public override int StrReq => 80;
+		public override int StrReq => 65;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 		public override void Serialize(GenericWriter writer)
 		{
@@ -213,7 +213,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
-		public override int StrReq => 90;
+		public override int StrReq => 65;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 		public override void Serialize(GenericWriter writer)
 		{
@@ -287,7 +287,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
-		public override int StrReq => 90;
+		public override int StrReq => 65;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 		public override void Serialize(GenericWriter writer)
 		{
@@ -324,7 +324,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
-		public override int StrReq => 80;
+		public override int StrReq => 65;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 		public override void Serialize(GenericWriter writer)
 		{
@@ -361,7 +361,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
-		public override int StrReq => 70;
+		public override int StrReq => 65;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 
 		public override void Serialize(GenericWriter writer)

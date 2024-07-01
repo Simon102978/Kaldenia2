@@ -346,7 +346,7 @@ namespace Server.Engines.Craft
                 if (index == 0)
                 {
                     if (i > 0)
-                        AddButton(485, 455, 4005, 4007, 0, GumpButtonType.Page, (i / 10) + 1);
+                        AddButton(485, 360, 4005, 4007, 0, GumpButtonType.Page, (i / 10) + 1);
 
                     AddPage((i / 10) + 1);
 

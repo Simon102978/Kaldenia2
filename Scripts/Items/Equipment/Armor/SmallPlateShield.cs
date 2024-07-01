@@ -8,6 +8,7 @@ namespace Server.Items
             : base(0x4202)
         {
             Weight = 6.0;
+			Name = "Targe";
         }
 
         public SmallPlateShield(Serial serial)
@@ -15,14 +16,14 @@ namespace Server.Items
         {
         }
 
-        public override int BasePhysicalResistance => 2;
-        public override int BaseFireResistance => 0;
-        public override int BaseColdResistance => 1;
+        public override int BasePhysicalResistance => 3;
+        public override int BaseFireResistance => 2;
+        public override int BaseColdResistance => 3;
         public override int BasePoisonResistance => 0;
-        public override int BaseEnergyResistance => 0;
-        public override int InitMinHits => 25;
-        public override int InitMaxHits => 30;
-        public override int StrReq => 35;
+        public override int BaseEnergyResistance => 1;
+		public override int InitMinHits => 40;
+		public override int InitMaxHits => 50;
+		public override int StrReq => 20;
 
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
 

@@ -190,7 +190,7 @@ namespace Server.Engines.Craft
 				if (minSkill < 0)
                     minSkill = 0;
 
-				if (skill.SkillToMake != SkillName.Cooking)
+			/*	if (skill.SkillToMake != SkillName.Cooking)
 				{
 					AddLabel(170, 132, LabelHue, $"Niveau d'aptitude:");
 					if (minSkill >= 50)
@@ -198,13 +198,13 @@ namespace Server.Engines.Craft
 					else
 						AddLabel(430, 132, LabelHue, "0");
 				}
-
+			*/
 			//	if (m_CraftItem.ItemType.BaseType == typeof(BaseSouvenirPotion))
 			//	{
 			//		AddLabel(170, 152, LabelHue, $"Niveau d'expertise:");
 			//		AddLabel(430, 152, LabelHue, "5");
 			//	}
-				else if (m_CraftItem.ItemType.BaseType.BaseType == typeof(BasePotion))
+			/*	else if (m_CraftItem.ItemType.BaseType.BaseType == typeof(BasePotion))
 				{
 					AddLabel(170, 152, LabelHue, $"Niveau d'expertise:");
 					if (minSkill < 25)
@@ -218,6 +218,8 @@ namespace Server.Engines.Craft
 					else if (minSkill < 100)
 						AddLabel(430, 152, LabelHue, "5");
 				}
+
+				*/
 
 				AddHtmlLocalized(170, 172 + (i * 20), 200, 18, AosSkillBonuses.GetLabel(skill.SkillToMake), LabelColor, false, false);
                 AddLabel(430, 172 + (i * 20), LabelHue, string.Format("{0:F1}", minSkill));
@@ -262,7 +264,7 @@ namespace Server.Engines.Craft
 				if (epicChance < 0.0) epicChance = 0.0;
 				else if (epicChance > 100.0) epicChance = 100.0;
 
-				AddLabel(350, 80, LabelHue, "Epic Chance");
+				AddLabel(350, 80, LabelHue, "Epic Chance:");
 				AddLabel(465, 80, LabelHue, string.Format("{0:F3}%", epicChance));
 
 				double legendaryChance = m_CraftItem.GetLegendaryChance(m_CraftSystem, chance, m_From);

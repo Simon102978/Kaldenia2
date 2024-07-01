@@ -10,6 +10,7 @@ namespace Server.Items
             : base(0x1B76)
         {
             Weight = 8.0;
+			Name = "Muraille";
         }
 
         public HeaterShield(Serial serial)
@@ -20,11 +21,11 @@ namespace Server.Items
         public override int BasePhysicalResistance => 6;
         public override int BaseFireResistance => 1;
         public override int BaseColdResistance => 0;
-        public override int BasePoisonResistance => 0;
-        public override int BaseEnergyResistance => 0;
-        public override int InitMinHits => 50;
-        public override int InitMaxHits => 65;
-        public override int StrReq => 90;
+        public override int BasePoisonResistance => 1;
+        public override int BaseEnergyResistance => 1;
+		public override int InitMinHits => 110;
+		public override int InitMaxHits => 140;
+		public override int StrReq => 35;
 
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
 		public override void Deserialize(GenericReader reader)

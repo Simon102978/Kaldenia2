@@ -7,6 +7,7 @@ namespace Server.Items
             : base(0x1B78)
         {
             Weight = 5.0;
+			Name = "La Pointe";
         }
 
         public WoodenKiteShield(Serial serial)
@@ -16,9 +17,9 @@ namespace Server.Items
 
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Studded;
 
-		public override int BasePhysicalResistance => 3;
+		public override int BasePhysicalResistance => 4;
         public override int BaseFireResistance => 0;
-        public override int BaseColdResistance => 0;
+        public override int BaseColdResistance => 4;
         public override int BasePoisonResistance => 0;
         public override int BaseEnergyResistance => 1;
         public override int InitMinHits => 50;

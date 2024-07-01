@@ -1,41 +1,41 @@
 namespace Server.Items
 {
-    public class OrSombreDyeTub : DyeTub
-    {
-        [Constructable]
-        public OrSombreDyeTub()
-        {
-            Hue = DyedHue = 1673;
-            Redyable = false;
+	public class OrSombreDyeTub : DyeTub
+	{
+		[Constructable]
+		public OrSombreDyeTub()
+		{
+			Hue = DyedHue = 2389;
+			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Or Sombre";
 		}
 
-        public OrSombreDyeTub(Serial serial)
-            : base(serial)
-        {
-        }
+		public OrSombreDyeTub(Serial serial)
+			: base(serial)
+		{
+		}
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
 
-            writer.Write(0); // version
-        }
+			writer.Write(0); // version
+		}
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-            int version = reader.ReadInt();
-        }
-    }
+			int version = reader.ReadInt();
+		}
+	}
 	public class CitronAbrasifDyeTub : DyeTub
 	{
 		[Constructable]
 		public CitronAbrasifDyeTub()
 		{
-			Hue = DyedHue = 2091;
+			Hue = DyedHue = 2943;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Citron Abrasif";
@@ -65,7 +65,7 @@ namespace Server.Items
 		[Constructable]
 		public OrDouxDyeTub()
 		{
-			Hue = DyedHue = 2840;
+			Hue = DyedHue = 2946;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Or Doux";
@@ -95,7 +95,7 @@ namespace Server.Items
 		[Constructable]
 		public BeurreDouxDyeTub()
 		{
-			Hue = DyedHue = 2458;
+			Hue = DyedHue = 2885;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Beurre Doux";
@@ -125,7 +125,7 @@ namespace Server.Items
 		[Constructable]
 		public CafeBruleDyeTub()
 		{
-			Hue = DyedHue = 1470;
+			Hue = DyedHue = 2832;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Cafe Brule";
@@ -155,7 +155,7 @@ namespace Server.Items
 		[Constructable]
 		public RouilleDyeTub()
 		{
-			Hue = DyedHue = 1468;
+			Hue = DyedHue = 1922;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Rouille";
@@ -185,7 +185,7 @@ namespace Server.Items
 		[Constructable]
 		public BronzeDyeTub()
 		{
-			Hue = DyedHue = 1655;
+			Hue = DyedHue = 1798;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Bronze";
@@ -215,7 +215,7 @@ namespace Server.Items
 		[Constructable]
 		public CuivreDyeTub()
 		{
-			Hue = DyedHue = 1926;
+			Hue = DyedHue = 1955;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Cuivre";
@@ -245,7 +245,7 @@ namespace Server.Items
 		[Constructable]
 		public RougeSanguinDyeTub()
 		{
-			Hue = DyedHue = 1461;
+			Hue = DyedHue = 2252;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Rouge Sanguin";
@@ -275,7 +275,7 @@ namespace Server.Items
 		[Constructable]
 		public BordeauDyeTub()
 		{
-			Hue = DyedHue = 2174;
+			Hue = DyedHue = 2327;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Bordeau";
@@ -305,7 +305,7 @@ namespace Server.Items
 		[Constructable]
 		public CorailDyeTub()
 		{
-			Hue = DyedHue = 2084;
+			Hue = DyedHue = 2190;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Corail";
@@ -335,7 +335,7 @@ namespace Server.Items
 		[Constructable]
 		public RougeObscureDyeTub()
 		{
-			Hue = DyedHue = 2802;
+			Hue = DyedHue = 1461;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Rouge Obscure";
@@ -365,7 +365,7 @@ namespace Server.Items
 		[Constructable]
 		public BleuGlacierDyeTub()
 		{
-			Hue = DyedHue = 2580;
+			Hue = DyedHue = 2362;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Bleu Glacier";
@@ -395,7 +395,7 @@ namespace Server.Items
 		[Constructable]
 		public BleuProfondDyeTub()
 		{
-			Hue = DyedHue = 1199;
+			Hue = DyedHue = 1790;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Bleu Profond";
@@ -425,7 +425,7 @@ namespace Server.Items
 		[Constructable]
 		public BleuCielDyeTub()
 		{
-			Hue = DyedHue = 1366;
+			Hue = DyedHue = 2251;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Bleu Ciel";
@@ -455,7 +455,7 @@ namespace Server.Items
 		[Constructable]
 		public BleuSombreDyeTub()
 		{
-			Hue = DyedHue = 1464;
+			Hue = DyedHue = 1916;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Bleu Sombre";
@@ -485,7 +485,7 @@ namespace Server.Items
 		[Constructable]
 		public VertSombreDyeTub()
 		{
-			Hue = DyedHue = 1466;
+			Hue = DyedHue = 1436;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Vert Sombre";
@@ -515,7 +515,7 @@ namespace Server.Items
 		[Constructable]
 		public VertOliveDyeTub()
 		{
-			Hue = DyedHue = 2736;
+			Hue = DyedHue = 1267;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Vert Olive";
@@ -545,7 +545,7 @@ namespace Server.Items
 		[Constructable]
 		public VertPrintanierDyeTub()
 		{
-			Hue = DyedHue = 2883;
+			Hue = DyedHue = 2100;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Vert Printanier";
@@ -575,7 +575,7 @@ namespace Server.Items
 		[Constructable]
 		public VertIridescentDyeTub()
 		{
-			Hue = DyedHue = 2334;
+			Hue = DyedHue = 2367;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Vert Iridescent";
@@ -605,7 +605,7 @@ namespace Server.Items
 		[Constructable]
 		public TurquoisePlumePaon()
 		{
-			Hue = DyedHue = 1469;
+			Hue = DyedHue = 2282;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Plume Paon";
@@ -635,7 +635,7 @@ namespace Server.Items
 		[Constructable]
 		public TurquoiseDyeTub()
 		{
-			Hue = DyedHue = 1160;
+			Hue = DyedHue = 2176;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Turquoise";
@@ -665,7 +665,7 @@ namespace Server.Items
 		[Constructable]
 		public EcaillePoissonDyeTub()
 		{
-			Hue = DyedHue = 1059;
+			Hue = DyedHue = 2587;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Ecaille de Poisson";
@@ -695,7 +695,7 @@ namespace Server.Items
 		[Constructable]
 		public AquaMarineDyeTub()
 		{
-			Hue = DyedHue = 2567;
+			Hue = DyedHue = 2084;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Aqua Marine";
@@ -725,7 +725,7 @@ namespace Server.Items
 		[Constructable]
 		public MauveIndigoDyeTub()
 		{
-			Hue = DyedHue = 1665;
+			Hue = DyedHue = 2370;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Indigo";
@@ -755,7 +755,7 @@ namespace Server.Items
 		[Constructable]
 		public RosePerleDyeTub()
 		{
-			Hue = DyedHue = 2660;
+			Hue = DyedHue = 2163;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Rose Perle";
@@ -785,7 +785,7 @@ namespace Server.Items
 		[Constructable]
 		public PruneDyeTub()
 		{
-			Hue = DyedHue = 1394;
+			Hue = DyedHue = 2981;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Prune";
@@ -815,7 +815,7 @@ namespace Server.Items
 		[Constructable]
 		public MauveVelourDyeTub()
 		{
-			Hue = DyedHue = 1677;
+			Hue = DyedHue = 2074;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Mauve Velour";
@@ -845,7 +845,7 @@ namespace Server.Items
 		[Constructable]
 		public GrisAntraciteDyeTub()
 		{
-			Hue = DyedHue = 1935;
+			Hue = DyedHue = 2119;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Antracite";
@@ -875,7 +875,7 @@ namespace Server.Items
 		[Constructable]
 		public GrisArgenteDyeTub()
 		{
-			Hue = DyedHue = 2459;
+			Hue = DyedHue = 2796;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Argenté";
@@ -905,7 +905,7 @@ namespace Server.Items
 		[Constructable]
 		public NoirDyeTub()
 		{
-			Hue = DyedHue = 2268;
+			Hue = DyedHue = 2051;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Noire";
@@ -936,7 +936,7 @@ namespace Server.Items
 		[Constructable]
 		public BlancDyeTub()
 		{
-			Hue = DyedHue = 2340;
+			Hue = DyedHue = 2498;
 			Redyable = false;
 			Charges = 5;
 			Name = "Teinture Blanc Pure";

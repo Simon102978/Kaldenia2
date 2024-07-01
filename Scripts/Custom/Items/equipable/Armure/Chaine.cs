@@ -25,7 +25,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 35;
 		public override int InitMaxHits => 60;
-		public override int StrReq => 60;
+		public override int StrReq => 50;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
 		public override void Serialize(GenericWriter writer)
 		{
@@ -61,7 +61,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 35;
 		public override int InitMaxHits => 60;
-		public override int StrReq => 60;
+		public override int StrReq => 50;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
 		public override void Serialize(GenericWriter writer)
 		{
@@ -85,7 +85,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 45;
 		public override int InitMaxHits => 60;
-		public override int StrReq => 60;
+		public override int StrReq => 50;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
 
 		[Constructable]
@@ -136,7 +136,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 45;
 		public override int InitMaxHits => 60;
-		public override int StrReq => 60;
+		public override int StrReq => 50;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
 		public override void Serialize(GenericWriter writer)
 		{
@@ -173,7 +173,7 @@ namespace Server.Items
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 45;
 		public override int InitMaxHits => 60;
-		public override int StrReq => 60;
+		public override int StrReq => 50;
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
 		public override void Serialize(GenericWriter writer)
 		{
