@@ -1,6 +1,8 @@
 namespace Server.Items
 {
-    public class DecoDeckOfTarot : Item
+
+	[FlipableAttribute(0x12AB, 0x12AC, 0x12A6, 0x12A5, 0x12A7, 0x12A8, 0x12AA)]
+	public class DecoDeckOfTarot : Item
     {
         [Constructable]
         public DecoDeckOfTarot()
@@ -8,8 +10,9 @@ namespace Server.Items
         {
             Movable = true;
             Stackable = false;
+			Name = "Jeu de Tarot";
         }
-
+		
         public DecoDeckOfTarot(Serial serial)
             : base(serial)
         {

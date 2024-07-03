@@ -1152,7 +1152,7 @@ namespace Server.Mobiles
 		}
 
 		public virtual uint TraitsGiven(uint atLevel) { return (atLevel == 10) ? (uint)3 : (uint)1; }
-		public string SexString { get { return (Female ? "Femelle" : "Male"); } }
+		public string SexString { get { return (Female ? "" : ""); } }
 		public JakoAttributes m_jakoAttributes = new JakoAttributes();
 
 
@@ -6144,8 +6144,8 @@ namespace Server.Mobiles
                     list.Add(502006); // (tame)
                 }
 				#region Jako Taming
-				if (!Summoned && JakoIsEnabled)
-					list.Add("Level {0} {1}", m_realLevel, SexString);
+			//	if (!Summoned && JakoIsEnabled)
+			//		list.Add("Level {0} {1}", m_realLevel, SexString);
 				#endregion
 			}
 
