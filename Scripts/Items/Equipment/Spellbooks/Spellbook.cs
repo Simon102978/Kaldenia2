@@ -28,9 +28,12 @@ namespace Server.Items
 
     public enum BookQuality
     {
-        Regular,
-        Exceptional
-    }
+		Low,
+		Regular,
+		Exceptional,
+		Epic,
+		Legendary
+	}
 
     public class Spellbook : Item, ICraftable, ISlayer, IEngravable, IVvVItem, IOwnerRestricted, IWearableDurability
     {
@@ -124,17 +127,25 @@ namespace Server.Items
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public BookQuality Quality
-        {
-            get { return m_Quality; }
-            set
-            {
-                m_Quality = value;
-                InvalidateProperties();
-            }
-        }
+		public BookQuality Quality
+		{
+			get { return m_Quality; }
+			set
+			{
+				m_Quality = value;
 
-        public override bool DisplayWeight => false;
+				if (Quality == BookQuality.Legendary)
+					Attributes.SpellDamage = 30;
+				else if (Quality == BookQuality.Epic)
+					Attributes.SpellDamage = 20;
+				else if (Quality == BookQuality.Exceptional)
+					Attributes.SpellDamage = 10;
+
+				InvalidateProperties();
+			}
+		}
+
+		public override bool DisplayWeight => false;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public AosAttributes Attributes { get { return m_AosAttributes; } set { } }
@@ -752,14 +763,36 @@ namespace Server.Items
 
         public override void AddNameProperties(ObjectPropertyList list)
         {
-            base.AddNameProperties(list);
+			var name = Name ?? String.Empty;
 
-            if (m_Quality == BookQuality.Exceptional)
-            {
-                list.Add(1063341); // exceptional
-            }
+			if (String.IsNullOrWhiteSpace(name))
+				name = System.Text.RegularExpressions.Regex.Replace(GetType().Name, "[A-Z]", " $0");
 
-            if (m_EngravedText != null)
+			/*if (IsSetItem)
+				list.Add($"<BASEFONT COLOR=#00FF00>{name}</BASEFONT>");
+			else */
+			if (m_Quality == BookQuality.Legendary)
+				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
+			else if (m_Quality == BookQuality.Epic)
+				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
+			else if (m_Quality == BookQuality.Exceptional)
+				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
+			else
+				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
+
+			var desc = Description ?? String.Empty;
+
+			if (!String.IsNullOrWhiteSpace(desc))
+				list.Add(desc);
+
+			if (m_Quality == BookQuality.Exceptional)
+				list.Add("Exceptionnelle");
+			else if (m_Quality == BookQuality.Epic)
+				list.Add("Épique");
+			else if (m_Quality == BookQuality.Legendary)
+				list.Add("Légendaire");
+
+			if (m_EngravedText != null)
             {
                 list.Add(1072305, Utility.FixHtml(m_EngravedText)); // Engraved: ~1_INSCRIPTION~
             }
@@ -1101,16 +1134,28 @@ namespace Server.Items
         }
 
         public virtual int OnCraft(
-            int quality,
-            bool makersMark,
-            Mobile from,
-            CraftSystem craftSystem,
-            Type typeRes,
-            ITool tool,
-            CraftItem craftItem,
-            int resHue)
-        {
-            int magery = from.Skills.Magery.BaseFixedPoint;
+					 int quality,
+			bool makersMark,
+			Mobile from,
+			CraftSystem craftSystem,
+			Type typeRes,
+			ITool tool,
+			CraftItem craftItem,
+			int resHue)
+		{
+			Quality = (BookQuality)(quality);
+
+			if (Quality == BookQuality.Legendary)
+				Attributes.SpellDamage = 30;
+			else if (Quality == BookQuality.Epic)
+				Attributes.SpellDamage = 20;
+			else if (Quality == BookQuality.Exceptional)
+				Attributes.SpellDamage = 10;
+
+			if (typeRes == null)
+				typeRes = craftItem.Resources.GetAt(0).ItemType;
+
+			int magery = from.Skills.Magery.BaseFixedPoint;
 
             if (magery >= 800)
             {

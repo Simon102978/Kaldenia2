@@ -1379,7 +1379,9 @@ namespace Server.Engines.Craft
 
 			if (from is CustomPlayerMobile pm)
 			{
-				chanceLegendary += pm.Skills[SkillName.ArmsLore].Value / 50;
+			//	chanceLegendary += pm.Skills[SkillName.ArmsLore].Value / 50;
+				chanceLegendary += pm.Dex / 50;
+
 			}
 
 			return chanceLegendary;
@@ -1403,7 +1405,8 @@ namespace Server.Engines.Craft
 
 			if (from is CustomPlayerMobile pm)
 			{
-				chanceEpic += pm.Skills[SkillName.ArmsLore].Value / 20;
+				// chanceEpic += pm.Skills[SkillName.ArmsLore].Value / 20;
+				chanceEpic += pm.Dex / 20;
 			}
 
 			return chanceEpic;
@@ -1427,7 +1430,8 @@ namespace Server.Engines.Craft
 
 			if (from is CustomPlayerMobile pm)
 			{
-				exceptionalChance += pm.Skills[SkillName.ArmsLore].Value / 5;
+				// exceptionalChance += pm.Skills[SkillName.ArmsLore].Value / 5;
+				exceptionalChance += pm.Dex / 5;
 			}
 
 			return exceptionalChance;

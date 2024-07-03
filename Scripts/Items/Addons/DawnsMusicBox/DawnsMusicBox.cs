@@ -31,8 +31,8 @@ namespace Server.Items
             MusicName.Stones2, MusicName.Serpents, MusicName.Taiko, MusicName.Tavern01,
             MusicName.Tavern02, MusicName.Tavern03, MusicName.TokunoDungeon, MusicName.Trinsic,
             MusicName.OldUlt01, MusicName.Ocllo, MusicName.Vesper, MusicName.Victory,
-            MusicName.Mountn_a, MusicName.Wind, MusicName.Yew, MusicName.Zento
-        };
+            MusicName.Mountn_a, MusicName.Wind, MusicName.Yew, MusicName.Zento, MusicName.ThemeOfMorroc
+		};
         public static MusicName[] m_UncommonTracks = new MusicName[]
         {
             MusicName.GwennoConversation, MusicName.DreadHornArea, MusicName.ElfCity,
@@ -128,8 +128,10 @@ namespace Server.Items
             m_Info.Add(MusicName.Wind, new DawnsMusicInfo(1075157, DawnsMusicRarity.Common));
             m_Info.Add(MusicName.Yew, new DawnsMusicInfo(1075158, DawnsMusicRarity.Common));
             m_Info.Add(MusicName.Zento, new DawnsMusicInfo(1075178, DawnsMusicRarity.Common));
+			m_Info.Add(MusicName.ThemeOfMorroc, new DawnsMusicInfo(1075999, DawnsMusicRarity.Common));
 
-            m_Info.Add(MusicName.GwennoConversation, new DawnsMusicInfo(1075131, DawnsMusicRarity.Uncommon));
+
+			m_Info.Add(MusicName.GwennoConversation, new DawnsMusicInfo(1075131, DawnsMusicRarity.Uncommon));
             m_Info.Add(MusicName.DreadHornArea, new DawnsMusicInfo(1075181, DawnsMusicRarity.Uncommon));
             m_Info.Add(MusicName.ElfCity, new DawnsMusicInfo(1075182, DawnsMusicRarity.Uncommon));
             m_Info.Add(MusicName.GoodEndGame, new DawnsMusicInfo(1075132, DawnsMusicRarity.Uncommon));
