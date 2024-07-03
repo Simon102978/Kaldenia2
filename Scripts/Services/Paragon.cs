@@ -33,7 +33,7 @@ namespace Server.Mobiles
 
 		};
 
-		public static int Hue = 0X6F1;// Paragon hue
+		public static int Hue = 0x687;// Paragon hue
 
         // Buffs
         public static double HitsBuff = 5.0;
@@ -53,8 +53,12 @@ namespace Server.Mobiles
                 return;
 
             bc.Hue = Hue;
+			bc.FixedParticles(0x376A, 9, 32, 5030, EffectLayer.Waist);
 
-            if (bc.HitsMaxSeed >= 0)
+
+
+
+			if (bc.HitsMaxSeed >= 0)
                 bc.HitsMaxSeed = (int)(bc.HitsMaxSeed * HitsBuff);
 
             bc.RawStr = (int)(bc.RawStr * StrBuff);
@@ -65,7 +69,7 @@ namespace Server.Mobiles
             bc.Mana = bc.ManaMax;
             bc.Stam = bc.StamMax;
 			bc.Title = "Envoutée";
-			
+
 
 			for (int i = 0; i < bc.Skills.Length; i++)
             {

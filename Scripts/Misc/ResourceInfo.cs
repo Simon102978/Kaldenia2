@@ -152,8 +152,45 @@ namespace Server.Items
 		DemoniaqueBone,
 		[Description("Ancien")]
 		AncienBone,
-	}
-
+		
+				Fish = 601,
+				AutumnDragonfish,
+				BlueLobster,
+				BullFish,
+				CrystalFish,
+				FairySalmon,
+				GiantKoi,
+				GreatBarracuda,
+				HolyMackerel,
+				LavaFish,
+				ReaperFish,
+				SpiderCrab,
+				StoneCrab,
+				SummerDragonfish,
+				UnicornFish,
+				YellowtailBarracuda,
+				AbyssalDragonfish,
+				BlackMarlin,
+				BloodLobster,
+				BlueMarlin,
+				DreadLobster,
+				DungeonPike,
+				GiantSamuraiFish,
+				GoldenTuna,
+				Kingfish,
+				LanternFish,
+				RainbowFish,
+				SeekerFish,
+				SpringDragonfish,
+				StoneFish,
+				TunnelCrab,
+				VoidCrab,
+				VoidLobster,
+				WinterDragonfish,
+				ZombieFish
+			}
+		
+	
 	public enum CraftResourceType
 	{
 		None,
@@ -161,7 +198,8 @@ namespace Server.Items
 		Leather,
 		Scales,
 		Wood,
-		Bone
+		Bone,
+		Fish 
 	}
 
 	public class CraftAttributeInfo
@@ -1275,6 +1313,47 @@ namespace Server.Items
 			new CraftResourceInfo(0x47F, 0, "Frostwood",  99, CraftAttributeInfo.Frostwood,    CraftResource.Frostwood,    typeof(FrostwoodLog),   typeof(FrostwoodBoard)),
 		};
 
+	private static CraftResourceInfo[] m_FishInfo = new CraftResourceInfo[]
+
+
+		  {
+				new CraftResourceInfo( 0, 0, "Fish",				 0,     null,        CraftResource.Fish,					 typeof( Fish )/*,	    typeof( RawTruiteFishSteak ),	    typeof( TruiteFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Autumn Dragon fish",   0,		null,        CraftResource.AutumnDragonfish,         typeof( AutumnDragonfish )/*,	    typeof( RawTruiteFishSteak ),	    typeof( TruiteFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Blue Lobster",         0,		null,        CraftResource.BlueLobster,				 typeof( BlueLobster )/*,	        typeof( RawDoreFishSteak ),	        typeof( DoreFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Bull Fish",            0,		null,		 CraftResource.BullFish,				 typeof( BullFish )/*,	    typeof( RawCarpeFishSteak ),	    typeof( CarpeFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Crystal Fish",         0,		null,		 CraftResource.CrystalFish,				 typeof( CrystalFish )/*,	    typeof( RawAnguilleFishSteak ),	    typeof( AnguilleFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Fairy Salmon",         0,		null,		 CraftResource.FairySalmon,				 typeof( FairySalmon )/*,	typeof( RawEsturgeonFishSteak ),	typeof( EsturgeonFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Giant Koi",            0,		null,		 CraftResource.GiantKoi,				 typeof( GiantKoi )/*,	    typeof( RawBrochetFishSteak ),	    typeof( BrochetFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Great Barracuda",      0,	    null,        CraftResource.GreatBarracuda,			 typeof( GreatBarracuda )/*,	    typeof( RawSardineFishSteak ),	    typeof( SardineFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Holy Mackerel",        0,	    null,		 CraftResource.HolyMackerel,			 typeof( HolyMackerel )/*,	    typeof( RawAnchoieFishSteak ),	    typeof( AnchoieFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Lava Fish",            0,	    null,		 CraftResource.LavaFish,				 typeof( LavaFish )/*,	    typeof( RawMorueFishSteak ),	    typeof( MorueFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Reaper Fish",          0,     null,		 CraftResource.ReaperFish,				 typeof( ReaperFish )/*,	    typeof( RawHarengFishSteak ),	    typeof( HarengFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Spider Crab",          0,     null,        CraftResource.SpiderCrab,				 typeof( SpiderCrab )/*,	    typeof( RawFletanFishSteak ),	    typeof( FletanFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Stone Crab",           0,     null,		 CraftResource.StoneCrab,				 typeof( StoneCrab )/*,	typeof( RawMaquereauFishSteak ),	typeof( MaquereauFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Summer Dragon fish",   0,     null,        CraftResource.SummerDragonfish,         typeof( SummerDragonfish )/*,	        typeof( RawSoleFishSteak ),	        typeof( SoleFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Unicorn Fish",         0,     null,		 CraftResource.UnicornFish,				 typeof( UnicornFish )/*,	        typeof( RawThonFishSteak ),	        typeof( ThonFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Yellowtail Barracuda", 0,     null,        CraftResource.YellowtailBarracuda,      typeof( YellowtailBarracuda )/*,	    typeof( RawSaumonFishSteak ),	    typeof( SaumonFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Abyssal Dragonfish",   0,     null,		 CraftResource.AbyssalDragonfish,	     typeof( AbyssalDragonfish )/*,	typeof( RawGrandBrochetFishSteak ),	typeof( GrandBrochetFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Black Marlin",         0,		null,		 CraftResource.BlackMarlin,				 typeof( BlackMarlin )/*,typeof( RawTruiteSauvageFishSteak ),typeof( TruiteSauvageFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Blood Lobster",        0,		null,		 CraftResource.BloodLobster,			 typeof( BloodLobster )/*,	typeof( RawGrandDoreFishSteak ),	typeof( GrandDoreFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Blue Marlin",          0,		null,		 CraftResource.BlueMarlin,				 typeof( BlueMarlin )/*,	typeof( RawTruiteMerFishSteak ),	typeof( TruiteMerFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Dread Lobster",        0,     null,		 CraftResource.DreadLobster,			 typeof( DreadLobster )/*,	typeof( RawEsturgeonMerFishSteak ),	typeof( EsturgeonMerFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Dungeon Pike",         0,     null,		 CraftResource.DungeonPike,				 typeof( DungeonPike )/*,	typeof( RawGrandSaumonFishSteak ),	typeof( GrandSaumonFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Giant Samurai Fish",   0,     null,        CraftResource.GiantSamuraiFish,         typeof( GiantSamuraiFish )/*,	        typeof( RawRaieFishSteak ),	        typeof( RaieFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Golden Tuna",          0,		null,		 CraftResource.GoldenTuna,				 typeof( GoldenTuna )/*,	    typeof( RawEspadonFishSteak ),	    typeof( EspadonFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "King fish",            0,     null,		 CraftResource.Kingfish,				 typeof( Kingfish )/*,	typeof( RawRequinGrisFishSteak ),	typeof( RequinGrisFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Lantern Fish",         0,		null,        CraftResource.LanternFish,				 typeof( LanternFish )/*,	typeof( RawRequinBlancFishSteak ),	typeof( RequinBlancFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Rainbow Fish",         0,		null,		 CraftResource.RainbowFish,				 typeof( SeekerFish )	   /* typeof( RawHuitreFishSteak ),       typeof( HuitreFishSteak ) */),
+				new CraftResourceInfo( 0, 0, "Seeker Fish",          0,		null,		 CraftResource.SeekerFish,				 typeof( SeekerFish )/*,	    typeof( RawCalmarFishSteak ),	    typeof( CalmarFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Spring Dragon fish",   0,		null,        CraftResource.SpringDragonfish,		 typeof( SpringDragonfish )     /* typeof( RawPieuvreFishSteak ),      typeof( PieuvreFishSteak ) */),
+				new CraftResourceInfo( 0, 0, "Stone Fish",           0,		null,		 CraftResource.StoneFish,				 typeof( StoneFish )/*,	    typeof( RawEspadonFishSteak ),	    typeof( EspadonFishSteak )*/ ),
+			    new CraftResourceInfo( 0, 0, "Tunnel Crab",          0,		null,        CraftResource.TunnelCrab,				 typeof( TunnelCrab )/*,	typeof( RawRequinGrisFishSteak ),	typeof( RequinGrisFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Void Crab",            0,		null,		 CraftResource.VoidCrab,				 typeof( VoidCrab )/*,	typeof( RawRequinBlancFishSteak ),	typeof( RequinBlancFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Void Lobster",		 0,		null,        CraftResource.VoidLobster,				 typeof( VoidLobster )	 /*   typeof( RawHuitreFishSteak ),       typeof( HuitreFishSteak ) */),
+				new CraftResourceInfo( 0, 0, "Winter Dragon fish",   0,		null,        CraftResource.WinterDragonfish,	     typeof( WinterDragonfish )/*,	    typeof( RawCalmarFishSteak ),	    typeof( CalmarFishSteak )*/ ),
+				new CraftResourceInfo( 0, 0, "Zombie Fish",          0,		null,		 CraftResource.ZombieFish,				 typeof( ZombieFish )      /* typeof( RawPieuvreFishSteak ),      typeof( PieuvreFishSteak )*/ ),
+	  };
+
 		public static int GetLevel(CraftResource resource)
 		{
 			CraftResourceInfo info = GetInfo(resource);
@@ -1343,6 +1422,9 @@ namespace Server.Items
 				case CraftResourceType.Bone:
 					list = m_BoneInfo;
 					break;
+				case CraftResourceType.Fish:
+					list = m_FishInfo;
+					break;
 			}
 
 			if (list != null)
@@ -1376,6 +1458,9 @@ namespace Server.Items
 
 			if (resource >= CraftResource.RegularBone && resource <= CraftResource.AncienBone)
 				return CraftResourceType.Bone;
+
+			if (resource >= CraftResource.Fish && resource <= CraftResource.ZombieFish)
+				return CraftResourceType.Fish;
 
 			return CraftResourceType.None;
 		}

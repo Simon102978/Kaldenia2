@@ -914,75 +914,135 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
 						index = AddCraft(typeof(LivreMetier2Oubli), "Livre de Classe", "livre de l'oubli de métier 2", 90.0, 100, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+		AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-/*
-			index = AddCraft(typeof(LivreArcher), "Livre de Classe", "livre d'archer", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreBagarreur), "Livre de Classe", "livre de Bagarreur", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			#region Skills
+			index = AddCraft(typeof(LivreSkillsAlchemy), "Livre d'étude (skills)", "Alchemy", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsAnatomy), "Livre d'étude (skills)", "Anatomy", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsAnimalLore), "Livre d'étude (skills)", "AnimalLore", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsAnimalTaming), "Livre d'étude (skills)", "AnimalTaming", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsArchery), "Livre d'étude (skills)", "Archery", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsArmsLore), "Livre d'étude (skills)", "ArmsLore", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsBegging), "Livre d'étude (skills)", "Begging", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsBlacksmith), "Livre d'étude (skills)", "Blacksmith", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsCamping), "Livre d'étude (skills)", "Camping", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsCarpentry), "Livre d'étude (skills)", "Carpentry", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsCartography), "Livre d'étude (skills)", "Cartography", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsCooking), "Livre d'étude (skills)", "Cooking", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsDetectHidden), "Livre d'étude (skills)", "DetectHidden", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsDiscordance), "Livre d'étude (skills)", "Discordance", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsEvalInt), "Livre d'étude (skills)", "EvalInt", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsFencing), "Livre d'étude (skills)", "Fencing", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsFishing), "Livre d'étude (skills)", "Fishing", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsFletching), "Livre d'étude (skills)", "Fletching", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsForensics), "Livre d'étude (skills)", "Forensics", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsHealing), "Livre d'étude (skills)", "Healing", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsHerding), "Livre d'étude (skills)", "Herding", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsHiding), "Livre d'étude (skills)", "Hiding", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsInscribe), "Livre d'étude (skills)", "Inscribe", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsItemID), "Livre d'étude (skills)", "ItemID", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsLockpicking), "Livre d'étude (skills)", "Lockpicking", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsLumberjacking), "Livre d'étude (skills)", "Lumberjacking", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsMacing), "Livre d'étude (skills)", "Macing", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsMagery), "Livre d'étude (skills)", "Magery", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsMagicResist), "Livre d'étude (skills)", "MagicResist", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsMeditation), "Livre d'étude (skills)", "Meditation", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsMining), "Livre d'étude (skills)", "Mining", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsMusicianship), "Livre d'étude (skills)", "Musicianship", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsNecromancy), "Livre d'étude (skills)", "Necromancy", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsParry), "Livre d'étude (skills)", "Parry", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsPeacemaking), "Livre d'étude (skills)", "Peacemaking", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsPoisoning), "Livre d'étude (skills)", "Poisoning", 25.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsProvocation), "Livre d'étude (skills)", "Provocation", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsRemoveTrap), "Livre d'étude (skills)", "Remove Trap", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsSpiritSpeak), "Livre d'étude (skills)", "SpiritSpeak", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsSnooping), "Livre d'étude (skills)", "Snooping", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsStealing), "Livre d'étude (skills)", "Stealing", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsStealth), "Livre d'étude (skills)", "Stealth", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsSwords), "Livre d'étude (skills)", "Swords", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsTactics), "Livre d'étude (skills)", "Tactics", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsTailoring), "Livre d'étude (skills)", "Tailoring", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsTasteID), "Livre d'étude (skills)", "TasteID", 50.0.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsTinkering), "Livre d'étude (skills)", "Tinkering", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsTracking), "Livre d'étude (skills)", "Tracking", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			//index = AddCraft(typeof(LivreSkillsVeterinary), "Livre d'étude (skills)", "Veterinary", 50.0.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsWrestling), "Livre d'étude (skills)", "Wrestling", 50.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			#endregion
 
-			index = AddCraft(typeof(LivreDueliste), "Livre de Classe", "livre de Dueliste", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			index = AddCraft(typeof(BlankScroll), "Autres", "Parchemin Vierge", 10.0, 20.0, typeof(Kindling), "Kindling", 5, "Vous n'avez pas assez de Petit Bois.");
+			index = AddCraft(typeof(Missive), "Autres", "Missive", 15.0, 50.0, typeof(BlankScroll), 1044377, 1, 1044378);
 
-			index = AddCraft(typeof(LivreEpeiste), "Livre de Classe", "livre d'épéiste", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			index = AddCraft(typeof(CarnetAdresse), "Autres", "Carnet d'Adresse", 25.0, 50.0, typeof(BlankScroll), 1044377, 10, 1044378);
+			index = AddCraft(typeof(Calendrier), "Autres", "Calendrier", 0.0, 25.0, typeof(BlankScroll), 1044377, 5, 1044378);
 
-			index = AddCraft(typeof(LivreGardien), "Livre de Classe", "livre de gardien", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			/*
+						index = AddCraft(typeof(LivreArcher), "Livre de Classe", "livre d'archer", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreMassier), "Livre de Classe", "livre de Massier", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreBagarreur), "Livre de Classe", "livre de Bagarreur", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreHeraut), "Livre de Classe", "livre d'hérault", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreDueliste), "Livre de Classe", "livre de Dueliste", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreNecromancien), "Livre de Classe", "livre de Nécromancien", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreEpeiste), "Livre de Classe", "livre d'épéiste", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreChaman), "Livre de Classe", "livre de Chaman", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreGardien), "Livre de Classe", "livre de gardien", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreDevoue), "Livre de Classe", "livre de Dévoué", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreMassier), "Livre de Classe", "livre de Massier", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreAnarchiste), "Livre de Classe", "livre d'Anarchiste", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreHeraut), "Livre de Classe", "livre d'hérault", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreEpicier), "Livre de Classe", "livre d'épicier", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreNecromancien), "Livre de Classe", "livre de Nécromancien", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreAventurier), "Livre de Classe", "livre d'aventurier", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreChaman), "Livre de Classe", "livre de Chaman", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreHistorien), "Livre de Classe", "livre d'Historien", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreDevoue), "Livre de Classe", "livre de Dévoué", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreIngenieur), "Livre de Classe", "livre d'Ingénieur", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreAnarchiste), "Livre de Classe", "livre d'Anarchiste", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivrePalefrenier), "Livre de Classe", "livre de palefrenier", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreEpicier), "Livre de Classe", "livre d'épicier", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreStyliste), "Livre de Classe", "livre de styliste", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreAventurier), "Livre de Classe", "livre d'aventurier", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreAssassin), "Livre de Classe", "livre d'assassin", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreHistorien), "Livre de Classe", "livre d'Historien", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreCambrioleur), "Livre de Classe", "livre de Cambrioleur", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreIngenieur), "Livre de Classe", "livre d'Ingénieur", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreDresseur), "Livre de Classe", "livre de dresseur", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivrePalefrenier), "Livre de Classe", "livre de palefrenier", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreMenestrel), "Livre de Classe", "livre de ménéstrel", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+						index = AddCraft(typeof(LivreStyliste), "Livre de Classe", "livre de styliste", 95.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-			index = AddCraft(typeof(LivreChasseurDePrimes), "Livre de Classe", "livre de Chasseur de primes", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
-*/
+						index = AddCraft(typeof(LivreAssassin), "Livre de Classe", "livre d'assassin", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+						index = AddCraft(typeof(LivreCambrioleur), "Livre de Classe", "livre de Cambrioleur", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+						index = AddCraft(typeof(LivreDresseur), "Livre de Classe", "livre de dresseur", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+						index = AddCraft(typeof(LivreMenestrel), "Livre de Classe", "livre de ménéstrel", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+
+						index = AddCraft(typeof(LivreChasseurDePrimes), "Livre de Classe", "livre de Chasseur de primes", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
+						AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			*/
 
 			/*			index = AddCraft(typeof(ScrappersCompendium), 1044294, 1072940, 75.0, 125.0, typeof(BlankScroll), 1044377, 100, 1044378);
 						AddRes(index, typeof(DreadHornMane), 1032682, 1, 1044253);

@@ -418,18 +418,17 @@ namespace Server.Items
 
 	public class EpeeLongue : BaseSword // VikingSword
 	{
-		public override WeaponAbility PrimaryAbility => WeaponAbility.InfectiousStrike;
-		public override WeaponAbility SecondaryAbility => WeaponAbility.WhirlwindAttack;
-		public override int StrengthReq => 40;
-		public override int MinDamage => 16;
-		public override int MaxDamage => 19;
-		public override float Speed => 3.50f;
+		public override WeaponAbility PrimaryAbility => WeaponAbility.ParalyzingBlow;
+		public override WeaponAbility SecondaryAbility => WeaponAbility.DoubleStrike;
+		public override int StrengthReq => 25;
+		public override int MinDamage => 10;
+		public override int MaxDamage => 14;
+		public override float Speed => 2.50f;
 
-
-		public override int DefHitSound => 0x237;
+		public override int DefHitSound => 0x23B;
 		public override int DefMissSound => 0x23A;
 		public override int InitMinHits => 31;
-		public override int InitMaxHits => 100;
+		public override int InitMaxHits => 90;
 
 		[Constructable]
 		public EpeeLongue()

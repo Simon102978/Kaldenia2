@@ -37,16 +37,16 @@ namespace Server.Engines.Harvest
 			{
 
 				// Resource banks are every 8x8 tiles
-				BankWidth = 2,
-				BankHeight = 2,
+				BankWidth = 1,
+				BankHeight = 1,
 
 				// Every bank holds from 5 to 15 fish
-				MinTotal = 5,
+				MinTotal = 8,
 				MaxTotal = 15,
 
 				// A resource bank will respawn its content every 10 to 20 minutes
-				MinRespawn = TimeSpan.FromMinutes(20.0),
-				MaxRespawn = TimeSpan.FromMinutes(40.0),
+				MinRespawn = TimeSpan.FromMinutes(15.0),
+				MaxRespawn = TimeSpan.FromMinutes(25.0),
 
 				// Skill checking is done on the Fishing skill
 				Skill = SkillName.Fishing,
@@ -60,7 +60,7 @@ namespace Server.Engines.Harvest
 				MaxRange = 8,
 
 				// One fish per harvest action
-				ConsumedPerHarvest = 1,
+				ConsumedPerHarvest = 0,
 				ConsumedPerFeluccaHarvest = 1,
 
 				// The fishing
@@ -80,47 +80,8 @@ namespace Server.Engines.Harvest
 
 			res = new HarvestResource[]
 			{
-				new HarvestResource(00.0, 00.0, 120.0, 1043297, typeof(Fish)),
-				new HarvestResource( 00.0, -70.0, 100.0, "Vous pêchez un Dragon Fish Automnale et la déposez dans votre sac.", typeof( AutumnDragonfish ) ), //24
-				new HarvestResource( 00.0, -70.0, 100.0, "Vous pêchez un Homard Bleu et le déposez dans votre sac.", typeof( BlueLobster ) ), //25
-				new HarvestResource( 35.0, -35.0, 100.0, "Vous pêchez un Poisson Boeuf et la déposez dans votre sac.", typeof( BullFish ) ), //26
-				new HarvestResource( 00.0, -70.0, 100.0, "Vous pêchez un Poisson Cristal et la déposez dans votre sac.", typeof( CrystalFish ) ), //27
-				new HarvestResource( 35.0, -35.0, 100.0, "Vous pêchez un Saumon et le déposez dans votre sac.", typeof( FairySalmon ) ), //28
-				new HarvestResource( 35.0, -35.0, 100.0, "Vous pêchez un Koi Geant et le déposez dans votre sac.", typeof( GiantKoi ) ), //29
-				new HarvestResource( 40.0, -30.0, 100.0, "Vous pêchez un grand barracuda et la déposez dans votre sac.", typeof( GreatBarracuda ) ), //30
-				new HarvestResource( 40.0, -30.0, 100.0, "Vous pêchez un holy mackerel et le déposez dans votre sac.", typeof( HolyMackerel ) ), //31
-				new HarvestResource( 60.0,  10.0, 100.0, "Vous pêchez un poisson lave et la déposez dans votre sac.", typeof( LavaFish ) ), //32
-				new HarvestResource( 40.0, -30.0, 100.0, "Vous pêchez un poisson reaper et le déposez dans votre sac.", typeof( ReaperFish ) ), //33
-				new HarvestResource( 60.0,  10.0, 100.0, "Vous pêchez un crabe araignée et le déposez dans votre sac.", typeof( SpiderCrab ) ), //34
-				new HarvestResource( 60.0,  10.0, 100.0, "Vous pêchez un crabe roche et le déposez dans votre sac.", typeof( StoneCrab ) ), //35
-				new HarvestResource( 60.0,  10.0, 100.0, "Vous pêchez un dragon fish de l'été et la déposez dans votre sac.", typeof( SummerDragonfish ) ), //36
-				new HarvestResource( 60.0,  10.0, 100.0, "Vous pêchez un poisson licorne et le déposez dans votre sac.", typeof( UnicornFish ) ), //37
-				new HarvestResource( 60.0,  10.0, 100.0, "Vous pêchez un saumon et le déposez dans votre sac.", typeof( YellowtailBarracuda ) ), //38
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez un grand brochet et le déposez dans votre sac.", typeof( AbyssalDragonfish ) ), //39
-				new HarvestResource( 35.0, -35.0, 100.0, "Vous pêchez une truite sauvage et la déposez dans votre sac.", typeof( BlackMarlin ) ), //40
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez un grand doré et le déposez dans votre sac.", typeof( BloodLobster ) ), //41
-				new HarvestResource( 60.0,  10.0, 100.0, "Vous pêchez une truite de mer et la déposez dans votre sac.", typeof( BlueMarlin ) ), //42
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez un esturgeon de mer et le déposez dans votre sac.", typeof( DreadLobster ) ), //43
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez un grand saumon et le déposez dans votre sac.", typeof( DungeonPike ) ), //44
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez une raie et la déposez dans votre sac.", typeof( GiantSamuraiFish ) ), //45
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez un espadon et le déposez dans votre sac.", typeof( GoldenTuna ) ), //46
-				new HarvestResource( 90.0,  85.0, 300.0, "Vous pêchez un requin gris.", typeof( Kingfish ) ), //47
-				new HarvestResource( 90.0,  85.0, 300.0, "Vous pêchez un requin blanc.", typeof( LanternFish ) ), //48
-				new HarvestResource( 40.0, -30.0, 100.0, "Vous pêchez une huître et la déposez dans votre sac.", typeof( RainbowFish ) ), //49
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez un calmar et le déposez dans votre sac.", typeof( SeekerFish ) ), //50
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez une pieuvre et la déposez dans votre sac.", typeof( SpringDragonfish ) ), //51			};
-				new HarvestResource( 40.0, -30.0, 100.0, "Vous pêchez une huître et la déposez dans votre sac.", typeof( StoneFish ) ), //49
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez un calmar et le déposez dans votre sac.", typeof( TunnelCrab ) ), //50
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez une pieuvre et la déposez dans votre sac.", typeof( VoidCrab ) ), //51							
-					new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez une pieuvre et la déposez dans votre sac.", typeof( VoidLobster ) ), //51			};
-				new HarvestResource( 40.0, -30.0, 100.0, "Vous pêchez une huître et la déposez dans votre sac.", typeof( WinterDragonfish ) ), //49
-				new HarvestResource( 75.0,  25.0, 110.0, "Vous pêchez un calmar et le déposez dans votre sac.", typeof( ZombieFish ) ), //50
-
-
-
-
-				};
-	
+				new HarvestResource(00.0, 00.0, 120.0, 1043297, typeof(Fish))
+			};
 
 			veins = new HarvestVein[]
 			{
@@ -132,13 +93,13 @@ namespace Server.Engines.Harvest
 
 			fish.BonusResources = new BonusHarvestResource[]
 			{
-				new BonusHarvestResource(0, 88.0, null, null), //set to same chance as mining ml gems
-			    new BonusHarvestResource(50.0, 2.0, "Coquillage", typeof(CoquillageHautsFonds)),
-				new BonusHarvestResource(50.0, 2.0, "Coquillage", typeof(CoquillageArcEnCiel)),
-				new BonusHarvestResource(50.0, 2.0, "Coquillage", typeof(CoquilleDoree)),
-				new BonusHarvestResource(50.0, 2.0, "Coquillage", typeof(CoquilleEcarlate)),
-				new BonusHarvestResource(50.0, 2.0, "Coquillage", typeof(CoquillePlate)),
-				new BonusHarvestResource(50.0, 2.0, "Coquillage", typeof(CoquilleTachetee)),
+				new BonusHarvestResource(0, 90.0, null, null), //set to same chance as mining ml gems
+			    new BonusHarvestResource(15.0, 2.0, "Coquillage", typeof(CoquillageHautsFonds)),
+				new BonusHarvestResource(15.0, 2.0, "Coquillage", typeof(CoquillageArcEnCiel)),
+				new BonusHarvestResource(15.0, 2.0, "Coquillage", typeof(CoquilleDoree)),
+				new BonusHarvestResource(15.0, 2.0, "Coquillage", typeof(CoquilleEcarlate)),
+				new BonusHarvestResource(15.0, 2.0, "Coquillage", typeof(CoquillePlate)),
+				new BonusHarvestResource(15.0, 2.0, "Coquillage", typeof(CoquilleTachetee)),
 
 				new BonusHarvestResource(50.0, 2.0, "Dent de requin", typeof(DentRequin)),
 				new BonusHarvestResource(50.0, 2.0, "Dent d'alligator", typeof(DentAlligator)),
@@ -146,10 +107,6 @@ namespace Server.Engines.Harvest
 				new BonusHarvestResource(50.0, 2.0, "Oeil de raie", typeof(OeilRaie)),
 				new BonusHarvestResource(50.0, 2.0, "Oeuf de thon", typeof(OeufThon)),
 				new BonusHarvestResource(50.0, 2.0, "Sang d'anguille", typeof(SangAnguille)),
-
-
-
-
 
 
 					};
@@ -280,7 +237,7 @@ namespace Server.Engines.Harvest
 						if (from.Map != sp.Map)
 							from.SendLocalizedMessage(1150861); //Charybdis have never been seen in these waters, try somewhere else.
 
-						else if (pole.BaitType == typeof(Charydbis) && from.Skills[SkillName.Fishing].Value >= 100)
+						else if (pole.BaitType == typeof(Charydbis) && from.Skills[SkillName.Cooking].Value >= 100)
 						{
 							if (sp.Charydbis == null && !sp.HasSpawned && sp.CurrentLocation.Contains(loc))
 							{
@@ -313,8 +270,8 @@ namespace Server.Engines.Harvest
 			bool deepWater = IsDeepWater(loc, map);
 			bool junkproof = HasTypeHook(tool, HookType.JunkProof);
 
-			double skillBase = from.Skills[SkillName.Fishing].Base;
-			double skillValue = from.Skills[SkillName.Fishing].Value;
+			double skillBase = from.Skills[SkillName.Cooking].Base;
+			double skillValue = from.Skills[SkillName.Cooking].Value;
 
 			MutateEntry[] table = Siege.SiegeShard ? m_SiegeMutateTable : m_MutateTable;
 
@@ -794,8 +751,6 @@ namespace Server.Engines.Harvest
 			return true;
 		}
 
-	
-
 		public override bool CheckHarvest(Mobile from, Item tool)
 		{
 			if (!base.CheckHarvest(from, tool))
@@ -1070,26 +1025,7 @@ namespace Server.Engines.Harvest
 		public override void FinishHarvesting(Mobile from, Item tool, HarvestDefinition def, object toHarvest, object locked)
 		{
 			//Lava fishing needs to have its own set of rules.
-			if (tool is FishingPole)
-			{
-				FishingPole pole = (FishingPole)tool;
-
-				if (pole.Bait != Bait.Aucun && pole.Charge > 0)
-				{
-					pole.Charge--;
-
-					if (pole.Charge <= 0)
-					{
-						pole.Bait = Bait.Aucun;
-						from.SendMessage("Votre appât s'est détruit.");
-					}
-				}
-			}
-
-			base.FinishHarvesting(from, tool, def, toHarvest, locked);
-		
-
-if (IsLavaHarvest(tool, toHarvest))
+			if (IsLavaHarvest(tool, toHarvest))
 			{
 				from.EndAction(locked);
 
@@ -1170,7 +1106,7 @@ if (IsLavaHarvest(tool, toHarvest))
 				{
 					def.SendMessageTo(from, def.FailMessage);
 
-					double skill = from.Skills[SkillName.Fishing].Value / 50;
+					double skill = from.Skills[SkillName.Cooking].Value / 50;
 
 					if (0.5 / skill > Utility.RandomDouble())
 						OnToolUsed(from, tool, false);
@@ -1184,26 +1120,26 @@ if (IsLavaHarvest(tool, toHarvest))
 				base.FinishHarvesting(from, tool, def, toHarvest, locked);
 		}
 
-        //public override bool CheckHarvestSkill(Map map, Point3D loc, Mobile from, HarvestResource res, HarvestDefinition def)
-        //{
-        //    bool deepWater = IsDeepWater(loc, map);
-        //    double value = from.Skills[SkillName.Fishing].Value;
+		//public override bool CheckHarvestSkill(Map map, Point3D loc, Mobile from, HarvestResource res, HarvestDefinition def)
+		//{
+		//    bool deepWater = IsDeepWater(loc, map);
+		//    double value = from.Skills[SkillName.Cooking].Value;
 
-        //    if (deepWater && value < 75.0) // can't fish here yet
-        //        return from.Skills[def.Skill].Value >= res.ReqSkill;
+		//    if (deepWater && value < 75.0) // can't fish here yet
+		//        return from.Skills[def.Skill].Value >= res.ReqSkill;
 
-        //    if (!deepWater && value >= 75.0) // you can fish, but no gains!
-        //        return true;
+		//    if (!deepWater && value >= 75.0) // you can fish, but no gains!
+		//        return true;
 
-        //    return base.CheckHarvestSkill(map, loc, from, res, def);
-        //}
+		//    return base.CheckHarvestSkill(map, loc, from, res, def);
+		//}
 
 		public Type GetSpecialLavaItem(Mobile from, Item type, Map map, Point3D pnt, object toHarvest)
 		{
 			Type newType = null;
 
-			double skillBase = from.Skills[SkillName.Fishing].Base;
-			double skillValue = Math.Min(120.0, from.Skills[SkillName.Fishing].Value);
+			double skillBase = from.Skills[SkillName.Cooking].Base;
+			double skillValue = Math.Min(120.0, from.Skills[SkillName.Cooking].Value);
 
 			//Same method as mutate entries
 			for (int i = 0; i < m_LavaMutateTable.Length; ++i)

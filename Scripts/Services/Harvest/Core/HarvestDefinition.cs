@@ -1,7 +1,5 @@
 using System;
 using System.Collections.Generic;
-using Server.Mobiles;
-using Server.Items;
 
 namespace Server.Engines.Harvest
 {
@@ -53,28 +51,6 @@ namespace Server.Engines.Harvest
 				from.SendMessage((string)message);
 		}
 
-		public HarvestBank GetBank(Map map, int x, int y)
-		{
-			if (map == null || map == Map.Internal)
-				return null;
-
-			x /= BankWidth;
-			y /= BankHeight;
-
-			Banks.TryGetValue(map, out Dictionary<Point2D, HarvestBank> banks);
-
-			if (banks == null)
-				Banks[map] = banks = new Dictionary<Point2D, HarvestBank>();
-
-			Point2D key = new Point2D(x, y);
-			banks.TryGetValue(key, out HarvestBank bank);
-
-			if (bank == null)
-				banks[key] = bank = new HarvestBank(this, GetVeinAt(map, x, y));
-
-			return bank;
-		}
-
 		public static Bait ToBait(string name)
 		{
 			switch (name)
@@ -119,6 +95,28 @@ namespace Server.Engines.Harvest
 			}
 		}
 
+		public HarvestBank GetBank(Map map, int x, int y)
+		{
+			if (map == null || map == Map.Internal)
+				return null;
+
+			x /= BankWidth;
+			y /= BankHeight;
+
+			Banks.TryGetValue(map, out Dictionary<Point2D, HarvestBank> banks);
+
+			if (banks == null)
+				Banks[map] = banks = new Dictionary<Point2D, HarvestBank>();
+
+			Point2D key = new Point2D(x, y);
+			banks.TryGetValue(key, out HarvestBank bank);
+
+			if (bank == null)
+				banks[key] = bank = new HarvestBank(this, GetVeinAt(map, x, y));
+
+			return bank;
+		}
+
 		public HarvestVein GetVeinAt(Map map, int x, int y)
 		{
 			if (Veins.Length == 1)
@@ -134,45 +132,6 @@ namespace Server.Engines.Harvest
 			{
 				Random random = new Random((x * 17) + (y * 11) + (map.MapID * 3));
 				randomValue = random.NextDouble();
-			}
-
-			return GetVeinFrom(randomValue);
-		}
-
-		public HarvestVein GetVeinAt(Mobile from, Map map, int x, int y, Item tool, int tileID)
-		{
-			double randomValue = Utility.RandomDouble() * 100;
-
-			if (from is PlayerMobile)
-				randomValue -= 20;
-
-			if (tool is FishingPole)
-			{
-				FishingPole pole = (FishingPole)tool;
-
-				for (int i = Veins.Length - 1; i >= 0; i--)
-				{
-					if (ToBait(Veins[i].PrimaryResource.Types[0].Name) == pole.Bait && pole.Charge > 0)
-					{
-						if (randomValue - 40 <= Veins[i].VeinChance)
-							return Veins[i];
-
-						if (from is PlayerMobile)
-							from.SendMessage("Bait : " + ((int)randomValue).ToString() + " / " + ((int)Veins[i].VeinChance).ToString());
-					}
-					else if (pole.Bait == Bait.Aucun || pole.Charge <= 0)
-					{
-						if (randomValue <= Veins[i].VeinChance)
-							return Veins[i];
-
-						randomValue -= Veins[i].VeinChance;
-
-						if (from.Alive)
-							from.SendMessage("No Bait : " + ((int)randomValue).ToString() + " / " + ((int)Veins[i].VeinChance).ToString());
-					}
-				}
-
-				return null;
 			}
 
 			return GetVeinFrom(randomValue);
@@ -216,24 +175,29 @@ namespace Server.Engines.Harvest
 
 		public bool Validate(int tileID)
 		{
-			//if (RangedTiles)
-			//{
-			//	bool contains = false;
+			if (RangedTiles)
+			{
+				bool contains = false;
 
-			//	for (int i = 0; !contains && i <= Tiles.Length; i += 2)
-			//		contains = tileID >= Tiles[i] && tileID <= Tiles[i + 1];
+				//  for (int i = 0; !contains && i < Tiles.Length; i += 2)
+				//    contains = tileID >= Tiles[i] && tileID <= Tiles[i + 1];
 
-			//	return contains;
-			//}
-			//else
-			//{
-			int dist = -1;
+				for (int i = 0; !contains && i < Tiles.Length; i++)
+				{
+					contains = tileID == Tiles[i];
+				}
 
-			for (int i = 0; dist < 0 && i < Tiles.Length; ++i)
-				dist = Tiles[i] - tileID;
+				return contains;
+			}
+			else
+			{
+				int dist = -1;
 
-			return dist == 0;
-			//}
+				for (int i = 0; dist < 0 && i < Tiles.Length; ++i)
+					dist = Tiles[i] - tileID;
+
+				return dist == 0;
+			}
 		}
 
 		#region High Seas
