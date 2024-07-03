@@ -6,7 +6,7 @@ using Server.Network;
 
 namespace Server.Mobiles
 {
-	public class TradeNPC : BaseVendor
+	public class BazaarNPC : BaseVendor
 	{
 		private Type _requiredResource;
 		private int _requiredQuantity;
@@ -222,7 +222,7 @@ namespace Server.Mobiles
 		}
 
 		[Constructable]
-		public TradeNPC() : base("Marchand itinérant")
+		public BazaarNPC() : base("Marchand itinérant")
 		{
 			_requiredResource = typeof(Log);
 			_requiredQuantity = 20;
@@ -245,7 +245,7 @@ namespace Server.Mobiles
 			CantWalk = true;
 		}
 
-		public TradeNPC(Serial serial) : base(serial) { }
+		public BazaarNPC(Serial serial) : base(serial) { }
 
 		public override bool ClickTitle => false;
 		public override bool IsActiveBuyer => false;
@@ -263,7 +263,7 @@ namespace Server.Mobiles
 		{
 			List<(Type, int, int, string)> offers = new List<(Type, int, int, string)>(_offeredResources);
 
-			from.SendGump(new TradeNPCGump((PlayerMobile)from, this, _requiredResource, _requiredQuantity, _requiredResourceArtID, _requiredResourceName, offers));
+			from.SendGump(new BazaarNPCGump((PlayerMobile)from, this, _requiredResource, _requiredQuantity, _requiredResourceArtID, _requiredResourceName, offers));
 		}
 
 		public override int GetHairHue()
