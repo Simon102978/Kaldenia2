@@ -93,7 +93,9 @@ namespace Server.Engines.ArenaSystem
 			DeadZ = zDead;
         }
 
-        public static ArenaDefinition LostLandsFelucca { get; set; }
+  //      public static ArenaDefinition Alverton { get; set; }
+
+        public static ArenaDefinition Mirage { get; set; }
 
         public static ArenaDefinition[] Definitions => _Definitions;
         private static readonly ArenaDefinition[] _Definitions = new ArenaDefinition[1];
@@ -101,9 +103,8 @@ namespace Server.Engines.ArenaSystem
         static ArenaDefinition()
         {
 
- 
-            LostLandsFelucca = new ArenaDefinition("Alverton", 0,
-     //           new Point3D(1379, 687, -35),
+ /*
+            Alverton = new ArenaDefinition("Alverton", 0,
                 new Point3D(1378, 687, -35),
                 new Point3D(1373, 671, 25),
                 new Point3D(1373, 668, 25),
@@ -139,13 +140,59 @@ namespace Server.Engines.ArenaSystem
                 new Point3D(1378, 682, -35), // fait
                 new Rectangle2D[]
                 {
-                    new Rectangle2D(1373, 659, 13, 23)
+                    new Rectangle2D(1359, 2726, 12, 6)
+                  //  new Rectangle2D(1373, 659, 13, 23)
                 },
                 new Rectangle2D(1375, 680, 5, 4),// fait
                 new Rectangle2D(1370, 655, 2, 2),  // fait?
 				-15); // fait?
-          
-            _Definitions[0] = LostLandsFelucca;
+      */    
+
+               Mirage = new ArenaDefinition("Mirage", 0,
+                new Point3D(1371, 2743, 1), // fait - Lucia -- Good
+                new Point3D(1361, 2727, 20),   // banner 1 -- Good
+                new Point3D(1369, 2727, 18),   // banner 2 -- Good
+                17101, // Banner ID
+                17099, // Banner Id
+				0, // Z arene fait
+                new Rectangle2D[]
+                {
+
+                    new Rectangle2D(1363, 2727, 1, 9),
+                    new Rectangle2D(1368, 2727, 1, 9),
+                    new Rectangle2D(1358, 2729, 15, 1),
+                    new Rectangle2D(1358, 2731, 15, 1),
+                    new Rectangle2D(1358, 2733, 15, 1),
+					new Rectangle2D(1357, 2731, 1, 1),
+					new Rectangle2D(1373, 2731, 1, 1),
+                
+				},
+                new Rectangle2D[]
+                {
+                    new Rectangle2D(1358, 2730, 4, 1),
+                    new Rectangle2D(1369, 2730, 4, 1),
+                    new Rectangle2D(1364, 2734, 4, 2),
+                    new Rectangle2D(1364, 2727, 4, 2),
+                    new Rectangle2D(1358, 2727, 5, 2),    
+                    new Rectangle2D(1369, 2734, 4, 2),
+                    new Rectangle2D(1358, 2732, 4, 1),
+                    new Rectangle2D(1369, 2732, 4, 1),
+                    new Rectangle2D(1364, 2730, 4, 1),
+                    new Rectangle2D(1358, 2734, 4, 2),
+                    new Rectangle2D(1364, 2732, 4, 1),
+                    new Rectangle2D(1369, 2727, 4, 2),
+				},
+                new Point3D(1371, 2739, 0), // Sorti gagnant  - fait -- good
+                new Rectangle2D[]
+                {
+                    new Rectangle2D(1358, 2727, 15, 10) // arene   == 1372 2735 fait
+                },
+                new Rectangle2D(1367, 2737, 5, 4),// Eject fait  -- Good
+                new Rectangle2D(1370, 2719,10 ,1),  //  Fait Dead eject  -- Good
+				0); // fait - Dead Z  -- Good
+
+            _Definitions[0] = Mirage;
+      //      _Definitions[1] = Alverton;
 
         }
     }

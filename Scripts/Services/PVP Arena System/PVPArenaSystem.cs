@@ -105,6 +105,7 @@ namespace Server.Engines.ArenaSystem
 
         public void AddBlockedArena(PVPArena arena)
         {
+
             if (BlockedArenas == null)
             {
                 BlockedArenas = new List<string>();
@@ -116,6 +117,7 @@ namespace Server.Engines.ArenaSystem
                 BlockedArenas.Add(arena.Definition.Name);
                 Unregister(arena);
             }
+
         }
 
         public void RemoveBlockedArena(ArenaDefinition def)
@@ -353,9 +355,14 @@ namespace Server.Engines.ArenaSystem
                 Instance.Register(new PVPArena(ArenaDefinition.LostLandsTrammel));
             }
    */
-			          if (CanInitialize(ArenaDefinition.LostLandsFelucca))
+		/*	          if (CanInitialize(ArenaDefinition.Alverton))
 					   {
-						   Instance.Register(new PVPArena(ArenaDefinition.LostLandsFelucca));
+						   Instance.Register(new PVPArena(ArenaDefinition.Alverton));
+					   }*/
+
+                       if (CanInitialize(ArenaDefinition.Mirage))
+					   {
+						   Instance.Register(new PVPArena(ArenaDefinition.Mirage));
 					   }
 					  
 	/*				   if (CanInitialize(ArenaDefinition.HavenTrammel))

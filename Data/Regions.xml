@@ -15,7 +15,7 @@
       <rect x="5183" y="2595" width="30" height="26" />
       <logoutDelay active="false" />
     </region>
-     <region type="Mirage" priority="50" name="Mirage">
+     <region type="Mirage" name="Mirage">
       <rune name="Mirage" />
 			<rect x="1265" y="2789" width="121" height="26" />
 			<rect x="1269" y="2815" width="117" height="9" />
@@ -60,10 +60,6 @@
 			<rect x="1317" y="2870" width="41" height="10" />
       <logoutDelay active="false" />
     </region>
-    <region type="Jail" priority="50" name="Jail">
-      <rect x="5183" y="2595" width="30" height="26" />
-      <logoutDelay active="false" />
-    </region>  
   </Facet>
   <Facet name="Trammel">
       <region type="CreationRoom" priority="50" name="CreationRoom">
