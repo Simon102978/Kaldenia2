@@ -30,7 +30,8 @@ namespace Server
         Virtuoso,
         Aloron,
         Darden,
-		Chefs
+		Chefs,
+		GuerrierAncien
 	}
 
     public interface ISetItem
