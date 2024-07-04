@@ -77,7 +77,7 @@ namespace Server.Misc
 			true, 	// Healing = 17,
 			true, 	// Fishing = 18,
 			true, 	// Forensics = 19,
-			true, 	// Herding = 20,
+			false, 	// Herding = 20,
 			true, 	// Hiding = 21,
 			true, 	// Provocation = 22,
 			false, 	// Inscribe = 23,
