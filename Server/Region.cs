@@ -117,7 +117,8 @@ namespace Server
 		NujelmWaltz,
 		SherrysSong,
 		StarlightInBritain,
-		TheVesperMist
+		TheVesperMist,
+		ThemeOfMorroc
 	}
 
 	[PropertyObject]

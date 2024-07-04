@@ -52,7 +52,7 @@ namespace Server.Items
             BaseWeapon weapon = from.Weapon as BaseWeapon;
 
             if (weapon != null && (weapon.PrimaryAbility == this || weapon.PrimaryAbility == Bladeweave))
-                return 70.0;
+                return 50.0;
             else if (weapon != null && (weapon.SecondaryAbility == this || weapon.SecondaryAbility == Bladeweave))
                 return 90.0;
 

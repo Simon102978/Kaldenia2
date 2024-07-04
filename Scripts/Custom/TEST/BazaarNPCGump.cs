@@ -7,10 +7,10 @@ using Server.Items; // Assurez-vous d'inclure cette directive pour accéder aux 
 
 namespace Server.Gumps
 {
-	public class TradeNPCGump : BaseProjectMGump
+	public class BazaarNPCGump : BaseProjectMGump
 	{
 		private PlayerMobile _player;
-		private TradeNPC _trader;
+		private BazaarNPC _trader;
 
 		private Type _requiredResource;
 		private int _requiredQuantity;
@@ -19,7 +19,7 @@ namespace Server.Gumps
 
 		private List<(Type, int, int, string)> _offeredResources;
 
-		public TradeNPCGump(PlayerMobile player, TradeNPC trader, Type requiredResource, int requiredQuantity, int requiredResourceArtID, string requiredResourceName, List<(Type, int, int, string)> offeredResources)
+		public BazaarNPCGump(PlayerMobile player, BazaarNPC trader, Type requiredResource, int requiredQuantity, int requiredResourceArtID, string requiredResourceName, List<(Type, int, int, string)> offeredResources)
 			: base("Marchand Itinérant", 300, 350, true)
 		{
 			_player = player;

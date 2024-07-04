@@ -19,7 +19,7 @@ namespace Server.Items
 
         [Constructable]
         public MessageInABottle(Map map, int level)
-            : base(0xA30C)
+            : base(0xA01F)
         {
             Weight = 1.0;
             m_TargetMap = map;

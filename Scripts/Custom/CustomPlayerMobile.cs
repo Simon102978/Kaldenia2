@@ -2217,6 +2217,51 @@ namespace Server.Mobiles
 			return false;
 		}
 
+		public override void OnSkillChange(SkillName skill, double oldBase)
+		{
+			Validate(ValidateType.All);
+
+			if (skill == SkillName.MagicResist)
+				UpdateResistances();
+
+			base.OnSkillChange(skill, oldBase);
+		}
+
+		public enum ValidateType
+		{
+			Skills,
+			All
+		}
+
+		public virtual void Validate(ValidateType type)
+		{
+			if (AccessLevel >= AccessLevel.Counselor)
+				return;
+
+			if (!CanBeginAction(typeof(ValidateType)))
+				return;
+
+			if ( Skills == null)
+				return;
+
+			BeginAction(typeof(ValidateType));
+
+			if (type == ValidateType.Skills || type == ValidateType.All)
+			{
+				for (int i = 0; i < Skills.Length; ++i)
+				{
+					double cap = Skills[i].Cap;
+
+					if (Skills[i].Base > cap)
+						Skills[i].Base = cap;
+				}
+			}
+
+
+			EndAction(typeof(ValidateType));
+		}
+
+
 		public bool CheckRoux()
 		{
 			if ((HairHue >= 1602 && HairHue < 1655) || (HairHue >= 1502 && HairHue < 1534) || (HairHue >= 1202 && HairHue < 1226))

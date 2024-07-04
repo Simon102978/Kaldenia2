@@ -1363,12 +1363,53 @@ namespace Server.Engines.Craft
 
 		public double GetLegendaryChance(CraftSystem system, double successChance, Mobile from)
 		{
-			return GetExceptionalChance(system, successChance, from) / 2000;
+			if (ForceNonExceptional || successChance <= 0)
+				return 0.0;
+
+			if (ForceExceptional)
+			{
+				bool allRequiredSkills = false;
+				GetSuccessChance(from, null, system, false, ref allRequiredSkills);
+
+				if (allRequiredSkills)
+					return 100.0;
+			}
+
+			var chanceLegendary = 0.0;
+
+			if (from is CustomPlayerMobile pm)
+			{
+			//	chanceLegendary += pm.Skills[SkillName.ArmsLore].Value / 50;
+				chanceLegendary += pm.Dex / 50;
+
+			}
+
+			return chanceLegendary;
 		}
 
 		public double GetEpicChance(CraftSystem system, double successChance, Mobile from)
 		{
-			return GetExceptionalChance(system, successChance, from) / 20;
+			if (ForceNonExceptional || successChance <= 0)
+				return 0.0;
+
+			if (ForceExceptional)
+			{
+				bool allRequiredSkills = false;
+				GetSuccessChance(from, null, system, false, ref allRequiredSkills);
+
+				if (allRequiredSkills)
+					return 100.0;
+			}
+
+			var chanceEpic = 0.0;
+
+			if (from is CustomPlayerMobile pm)
+			{
+				// chanceEpic += pm.Skills[SkillName.ArmsLore].Value / 20;
+				chanceEpic += pm.Dex / 20;
+			}
+
+			return chanceEpic;
 		}
 
 		public double GetExceptionalChance(CraftSystem system, double successChance, Mobile from)
@@ -1389,7 +1430,8 @@ namespace Server.Engines.Craft
 
 			if (from is CustomPlayerMobile pm)
 			{
-				exceptionalChance += pm.Skills[SkillName.ArmsLore].Value / 5;
+				// exceptionalChance += pm.Skills[SkillName.ArmsLore].Value / 5;
+				exceptionalChance += pm.Dex / 5;
 			}
 
 			return exceptionalChance;
@@ -1402,18 +1444,17 @@ namespace Server.Engines.Craft
 
 		public ItemQuality GetQuality(CraftSystem system, double successChance, Mobile from, int expertise)
 		{
-			int chance = Utility.Random(1, 10001);
+			double chanceLegendary = GetLegendaryChance(system, successChance, from); // Max 2%
+			double chanceEpic = GetEpicChance(system, successChance, from); // Max 5%
+			double chanceExceptional = GetExceptionalChance(system, successChance, from); // Max 20%
 
-			double chanceLegendary = GetLegendaryChance(system, successChance, from); // chance l�gendaire augment�e de 0.002% par point d'expertise, max de 0.01%
-			double chanceEpic = GetEpicChance(system, successChance, from); // chance �pique augment�e de 0.2% par point d'expertise, max de 1%
-			double chanceExceptional = GetExceptionalChance(system, successChance, from); // chance exceptionnelle augment�e de 4% par point d'expertise, max de 20%
+			double roll = Utility.RandomDouble() * 100; // Convertir en pourcentage
 
-			// multiplier par 1000 pour obtenir un chiffre entier (0.002 �tant la plus petite valeur (4/2000))
-			if (chance <= chanceLegendary * 1000)
+			if (roll <= chanceLegendary)
 				return ItemQuality.Legendary;
-			else if (chance <= chanceEpic * 1000)
+			else if (roll <= chanceLegendary + chanceEpic)
 				return ItemQuality.Epic;
-			else if (chance <= chanceExceptional * 1000)
+			else if (roll <= chanceLegendary + chanceEpic + chanceExceptional)
 				return ItemQuality.Exceptional;
 
 			return ItemQuality.Normal;
@@ -1424,13 +1465,35 @@ namespace Server.Engines.Craft
 		{
 			double chance = GetSuccessChance(from, typeRes, craftSystem, gainSkills, ref allRequiredSkills, maxAmount);
 
-			if (GetExceptionalChance(craftSystem, chance, from) > Utility.RandomDouble())
+			double exceptionalChance = GetExceptionalChance(craftSystem, chance, from);
+			double epicChance = GetEpicChance(craftSystem, chance, from);
+			double legendaryChance = GetLegendaryChance(craftSystem, chance, from);
+
+			double roll = Utility.RandomDouble() * 100; // Convertir en pourcentage
+
+			if (roll <= legendaryChance)
+			{
+				quality = 4;
+			}
+			else if (roll <= legendaryChance + epicChance)
+			{
+				quality = 3;
+			}
+			else if (roll <= legendaryChance + epicChance + exceptionalChance)
 			{
 				quality = 2;
+			}
+			else
+			{
+				quality = 1;
 			}
 
 			return (chance > Utility.RandomDouble());
 		}
+
+
+
+
 
 		private static Type[] m_UseLeathers = new Type[]
 		  {

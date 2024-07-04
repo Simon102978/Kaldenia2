@@ -10,7 +10,7 @@ namespace Server.Items
         public BaseShell(int itemID) : base(itemID)
 		{
             Weight = 0.5;
-            Movable = false;
+            Movable = true;
 		}
 
 		public BaseShell( Serial serial ) : base( serial )

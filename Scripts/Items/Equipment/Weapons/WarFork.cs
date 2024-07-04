@@ -20,16 +20,16 @@ namespace Server.Items
 
         public override WeaponAbility PrimaryAbility => WeaponAbility.BleedAttack;
         public override WeaponAbility SecondaryAbility => WeaponAbility.Disarm;
-        public override int StrengthReq => 45;
-        public override int MinDamage => 10;
-        public override int MaxDamage => 14;
-        public override float Speed => 2.50f;
+	
+		public override int StrengthReq => 50;
+		public override int MinDamage => 6;
+		public override int MaxDamage => 8;
+		public override float Speed => 2.75f;
+		public override int DefMaxRange => 2;
 
-        public override int DefHitSound => 0x236;
-        public override int DefMissSound => 0x238;
-        public override int InitMinHits => 31;
-        public override int InitMaxHits => 110;
-        public override WeaponAnimation DefAnimation => WeaponAnimation.Pierce1H;
+		public override int InitMinHits => 31;
+		public override int InitMaxHits => 80;
+		public override WeaponAnimation DefAnimation => WeaponAnimation.Pierce1H;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

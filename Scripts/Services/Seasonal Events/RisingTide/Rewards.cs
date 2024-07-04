@@ -121,7 +121,7 @@ namespace Server.Items
         }
     }
 
-    [Flipable(0x3B4C, 0x3B4D)]
+    [Flipable(0xA537, 0xA538)]
     public class ShoulderParrot : BaseOuterTorso
     {
         private DateTime _NextFly;
@@ -136,7 +136,7 @@ namespace Server.Items
 
         [Constructable]
         public ShoulderParrot()
-            : base(0x3B4C)
+            : base(0xA537)
         {
 			Name = "Perroquet";
 			Weight = 2.0;

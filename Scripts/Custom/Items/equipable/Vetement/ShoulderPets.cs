@@ -13,7 +13,7 @@ namespace Server.Items
 
 		[Constructable]
 		public ShoulderMonkey(int hue)
-			: base(0x3B44, hue)
+			: base(0xA53B, hue)
 		{
 			Weight = 3.0;
 			Name = "Un Singe";
@@ -53,7 +53,7 @@ namespace Server.Items
 
 		[Constructable]
 		public ShoulderEagle(int hue)
-			: base(0x3B45, hue)
+			: base(0xA53C, hue)
 		{
 			Weight = 3.0;
 			Name = "Un Aigle";
@@ -82,7 +82,7 @@ namespace Server.Items
 
 
 	public class ShoulderAraignee : BaseOuterTorso
-{
+	{
 	[Constructable]
 	public ShoulderAraignee()
 		: this(0)
@@ -91,7 +91,7 @@ namespace Server.Items
 
 	[Constructable]
 	public ShoulderAraignee(int hue)
-		: base(0x3B46, hue)
+		: base(0xA53D, hue)
 	{
 		Weight = 3.0;
 		Name = "Une Araignée";
@@ -121,7 +121,7 @@ namespace Server.Items
 
 
 	public class ShoulderChouette : BaseOuterTorso
-{
+	{
 	[Constructable]
 	public ShoulderChouette()
 		: this(0)
@@ -130,7 +130,7 @@ namespace Server.Items
 
 	[Constructable]
 	public ShoulderChouette(int hue)
-		: base(0x3B47, hue)
+		: base(0xA53E, hue)
 	{
 		Weight = 3.0;
 		Name = "Une Chouette";
@@ -160,7 +160,7 @@ namespace Server.Items
 
 
 	public class ShoulderCorneille : BaseOuterTorso
-{
+	{
 	[Constructable]
 	public ShoulderCorneille()
 		: this(0)
@@ -169,7 +169,7 @@ namespace Server.Items
 
 	[Constructable]
 	public ShoulderCorneille(int hue)
-		: base(0x3B48, hue)
+		: base(0xA53F, hue)
 	{
 		Weight = 3.0;
 		Name = "Un Corbeau";
@@ -199,7 +199,7 @@ namespace Server.Items
 
 
 	public class ShoulderLezard : BaseOuterTorso
-{
+	{
 	[Constructable]
 	public ShoulderLezard()
 		: this(0)
@@ -208,7 +208,7 @@ namespace Server.Items
 
 	[Constructable]
 	public ShoulderLezard(int hue)
-		: base(0x3B49, hue)
+		: base(0xA540, hue)
 	{
 		Weight = 3.0;
 		Name = "Un Lézard";
@@ -238,7 +238,7 @@ namespace Server.Items
 
 
 	public class ShoulderSerpent : BaseOuterTorso
-{
+	{
 	[Constructable]
 	public ShoulderSerpent()
 		: this(0)
@@ -247,7 +247,7 @@ namespace Server.Items
 
 	[Constructable]
 	public ShoulderSerpent(int hue)
-		: base(0x3B4A, hue)
+		: base(0xA536, hue)
 	{
 		Weight = 3.0;
 		Name = "Un Serpent";
