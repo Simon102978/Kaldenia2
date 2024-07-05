@@ -148,9 +148,11 @@ namespace Server
 		{
 			string description = "";	
 
-			description = Name + "\n\n";
+			description = Name + "\n";
 	
 			description = description + "\nArmure: " + Armor;
+
+			description = description + "\n\nNiveau de classe / Point d'évolution requis: " + MetierLvl;
 
 			description = description + "\n\n" + SkillsDescription();
 
