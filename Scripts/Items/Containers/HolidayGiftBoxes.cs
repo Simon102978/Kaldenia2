@@ -40,7 +40,7 @@
     }
 
     [Flipable(0x46A5, 0x46A6)]
-    public class GiftBoxRectangle : BaseContainer
+    public class GiftBoxRectangle : LockableContainer
     {
         [Constructable]
         public GiftBoxRectangle()
@@ -68,7 +68,7 @@
         }
     }
 
-    public class GiftBoxCube : BaseContainer
+    public class GiftBoxCube : LockableContainer
     {
         [Constructable]
         public GiftBoxCube()
@@ -96,7 +96,7 @@
         }
     }
 
-    public class GiftBoxCylinder : BaseContainer
+    public class GiftBoxCylinder : LockableContainer
     {
         [Constructable]
         public GiftBoxCylinder()
@@ -124,7 +124,7 @@
         }
     }
 
-    public class GiftBoxOctogon : BaseContainer
+    public class GiftBoxOctogon : LockableContainer
     {
         [Constructable]
         public GiftBoxOctogon()
@@ -152,7 +152,7 @@
         }
     }
 
-    public class GiftBoxAngel : BaseContainer
+    public class GiftBoxAngel : LockableContainer
     {
         [Constructable]
         public GiftBoxAngel()

@@ -4,7 +4,7 @@
 */
 namespace Server.Items
 {
-    public class RedVelvetGiftBox : BaseContainer
+    public class RedVelvetGiftBox : LockableContainer
     {
         [Constructable]
         public RedVelvetGiftBox()
