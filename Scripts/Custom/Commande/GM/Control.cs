@@ -236,7 +236,9 @@ namespace Server.Commands
 				cp1.Grandeur = bh.Grandeur;
 			}
 
+			from.SendPropertiesTo(from);
 
+            from.SendIncomingPacket();
 
 
 
@@ -372,6 +374,11 @@ namespace Server.Commands
 				from.Hidden = true;
 
 			}
+
+			from.SendPropertiesTo(from);
+
+            from.SendIncomingPacket();
+
 		}
 
     //Return true if the base.OnBeforeDeath should be executed and false if not.
