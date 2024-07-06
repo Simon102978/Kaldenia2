@@ -406,7 +406,7 @@ namespace Server.Items
 
 	public class Foulard2 :  BaseFoulards
 	{
-//		public override bool Anonymous => ItemID ==  41800 ? true : false;
+		public override bool Disguise => ItemID ==  41800 ? true : false;
 
 		[Constructable]
 		public Foulard2() : this(0)
@@ -442,7 +442,7 @@ namespace Server.Items
 
 	public class Foulard4 :  BaseFoulards
 	{
-	//	public override bool Anonymous => true;
+public override bool Disguise { get { return true; } }
 
 		[Constructable]
 		public Foulard4() : this(0)

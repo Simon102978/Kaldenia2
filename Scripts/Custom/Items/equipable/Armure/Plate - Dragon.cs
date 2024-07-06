@@ -41,7 +41,7 @@ namespace Server.Items
 
 	public class CasqueDragon : BaseArmor
 	{
-//		public override bool Anonymous => true;
+		public override bool Disguise { get { return true; } }
 
 		[Constructable]
 		public CasqueDragon()

@@ -41,7 +41,7 @@ namespace Server.Items
 
 	public class CasqueDaedric : BaseArmor
 	{
-	//	public override bool Anonymous => true;
+public override bool Disguise { get { return true; } }
 
 		[Constructable]
 		public CasqueDaedric()

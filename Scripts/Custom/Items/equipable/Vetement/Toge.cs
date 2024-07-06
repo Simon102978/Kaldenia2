@@ -281,7 +281,7 @@ public override void Deserialize(GenericReader reader)
 public class Toge8 :  BaseOuterTorso
 
 	{
-	//	public override bool Anonymous => true;
+public override bool Disguise { get { return true; } }
 
 		[Constructable]
 	public Toge8()
