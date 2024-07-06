@@ -152,7 +152,7 @@ namespace Server.Items
 					{
 						if (!c.Owner.Alive)
 						{
-							if (BandageContext.BeginHeal(from, (Mobile)c.Owner, m_Bandage is EnhancedBandage) != null)
+							if (BandageContext.BeginHeal(from, (Mobile)c.Owner, m_Bandage is EnhancedBandage, true) != null)
 							{
 								NegativeAttributes.OnCombatAction(from);
 								m_Bandage.Consume();
@@ -463,8 +463,8 @@ namespace Server.Items
 							{
 								CustomPlayerMobile cm = (CustomPlayerMobile)m_Patient;
 
-
-								cm.MoveToWorld(cm.Corpse.Location, cm.Corpse.Map);
+                                if(corpse)
+							    	cm.MoveToWorld(cm.Corpse.Location, cm.Corpse.Map);
 
 
 
