@@ -14,8 +14,8 @@ namespace Server.Items
         {
         }
 
-        public override int StamMaxOffset => 15;
-		public override TimeSpan Duration => TimeSpan.FromMinutes(5.0);
+        public override int StamMaxOffset => 30;
+		public override TimeSpan Duration => TimeSpan.FromMinutes(10.0);
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

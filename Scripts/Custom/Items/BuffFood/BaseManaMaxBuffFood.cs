@@ -44,6 +44,8 @@ namespace Server.Items
 
 			from.SendMessage($"La nourriture réconfortante de sagesse prend son effet sur vous pendant {Duration.TotalSeconds} seconde{(Duration.TotalSeconds > 1 ? "s" : "")}.");
 
+			// Appliquer le buff
+			from.AddStatMod(new StatMod(StatType.Int, $"[Buff] {this.GetType().Name}", ManaMaxOffset, Duration));
 			m_Table[from] = ManaMaxOffset;
 
 			Timer t = new InternalTimer(from, DateTime.Now + Duration);
@@ -76,6 +78,7 @@ namespace Server.Items
 				t.Stop();
 				m_Timers.Remove(m);
 				m_Table.Remove(m);
+				m.RemoveStatMod($"[Buff] {typeof(BaseManaMaxBuffFood).Name}");
 				m.Delta(MobileDelta.Mana);
 				m.SendMessage("La nourriture réconfortante de sagesse prend fin.");
 			}

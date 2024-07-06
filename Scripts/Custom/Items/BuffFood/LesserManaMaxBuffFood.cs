@@ -14,8 +14,8 @@ namespace Server.Items
         {
         }
 
-        public override int ManaMaxOffset => 5;
-		public override TimeSpan Duration => TimeSpan.FromMinutes(5.0);
+        public override int ManaMaxOffset => 10;
+		public override TimeSpan Duration => TimeSpan.FromMinutes(10.0);
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

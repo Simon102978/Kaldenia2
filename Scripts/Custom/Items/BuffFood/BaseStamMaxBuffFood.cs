@@ -44,6 +44,9 @@ namespace Server.Items
 
 			from.SendMessage($"La nourriture réconfortante d'endurance prend son effet sur vous pendant {Duration.TotalSeconds} seconde{(Duration.TotalSeconds > 1 ? "s" : "")}.");
 
+			// Appliquer le buff
+			from.AddStatMod(new StatMod(StatType.Dex, $"[Buff] {this.GetType().Name}", StamMaxOffset, Duration));
+
 			m_Table[from] = StamMaxOffset;
 
 			Timer t = new InternalTimer(from, DateTime.Now + Duration);
@@ -76,6 +79,8 @@ namespace Server.Items
 				t.Stop();
 				m_Timers.Remove(m);
 				m_Table.Remove(m);
+				m.RemoveStatMod($"[Buff] {typeof(BaseStamMaxBuffFood).Name}");
+
 				m.Delta(MobileDelta.Stam);
 				m.SendMessage("La nourriture réconfortante d'endurance prend fin.");
 			}

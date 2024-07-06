@@ -44,15 +44,17 @@ namespace Server.Items
 
 			from.SendMessage($"La nourriture réconfortante de constitution prend son effet sur vous pendant {Duration.TotalSeconds} seconde{(Duration.TotalSeconds > 1 ? "s" : "")}.");
 
-			m_Table[from] = HitsMaxOffset;
+			// Appliquer le buff
+			from.AddStatMod(new StatMod(StatType.Str, $"[Buff] {this.GetType().Name}", HitsMaxOffset, Duration));
 
+
+			m_Table[from] = HitsMaxOffset;
 			Timer t = new InternalTimer(from, DateTime.Now + Duration);
 			m_Timers[from] = t;
 			t.Start();
-
 			from.Delta(MobileDelta.Hits);
 			return true;
-        }
+		}
 
 		public static bool IsActive(Mobile m)
 		{
@@ -77,6 +79,7 @@ namespace Server.Items
 				t.Stop();
 				m_Timers.Remove(m);
 				m_Table.Remove(m);
+				m.RemoveStatMod($"[Buff] {typeof(BaseHitsMaxBuffFood).Name}");
 				m.Delta(MobileDelta.Hits);
 				m.SendMessage("La nourriture réconfortante de constitution prend fin.");
 			}
@@ -106,12 +109,12 @@ namespace Server.Items
 		}
 
 		public override void Eat(Mobile from)
-        {
-            if (DoEffect(from))
-            {
-                PlayDrinkEffect(from);
-                Consume();
-            }
+		{
+			if (DoEffect(from))
+			{
+				PlayDrinkEffect(from);
+				Consume();
+			}
         }
     }
 }
