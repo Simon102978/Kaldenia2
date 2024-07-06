@@ -1515,8 +1515,16 @@ namespace Server.Mobiles
 			if (chanceToFall < 0)
 				chanceToFall = 0;
 
-			if (chanceToFall <= Utility.RandomMinMax(0, 100))
+
+			if (CheckSkill(SkillName.Equitation, 100 - chanceToFall))
+			{
+				
 				return true;
+			}		
+
+
+	//		if (chanceToFall <= Utility.RandomMinMax(0, 100))
+	//			return true;
 
 			if (type == EquitationType.Running)
 			{
@@ -1528,6 +1536,9 @@ namespace Server.Mobiles
 				if (tile == TileType.Other || tile == TileType.Dirt)
 					return true;
 			}
+
+
+			
 
 			BaseMount mount = (BaseMount)Mount;
 
