@@ -2,6 +2,7 @@
 using Server.Engines.Quests;
 using Server.Engines.Quests.Collector;
 using Server.Items;
+using Server.Misc;
 using Server.Mobiles;
 using Server.Targeting;
 using System;
@@ -165,6 +166,11 @@ namespace Server.Engines.Harvest
 				new BonusHarvestResource(10.0, 2.0, "Chaussures", typeof(Shoes)),
 				new BonusHarvestResource(1.0, 2.0, "Sandales", typeof(Sandals)),
 				new BonusHarvestResource(1.0, 2.0, "Cuissardes", typeof(ThighBoots)),
+
+				new BonusHarvestResource(5.0, 1.0, "Perle noire", typeof(BlackPearl)),
+				new BonusHarvestResource(50.0, 0.5, "Perle Blanche", typeof(WhitePearl)),
+				new BonusHarvestResource(50.0, 2.0, "Un poisson des bas fonds", typeof(BaseHighseasFish)),
+
 
 
 
