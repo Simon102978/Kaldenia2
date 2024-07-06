@@ -22,14 +22,14 @@ namespace Server.Mobiles
             SetDex(191, 215);
             SetInt(96, 120);
 
-            SetHits(109, 123);
+			SetHits(211, 326);
 
-            SetDamage(5, 10);
+			SetDamage(9, 16);
 
             SetDamageType(ResistanceType.Physical, 100);
 
-            SetResistance(ResistanceType.Physical, 25, 35);
-            SetResistance(ResistanceType.Fire, 30, 40);
+			SetResistance(ResistanceType.Physical, 50, 75);
+			SetResistance(ResistanceType.Fire, 30, 40);
             SetResistance(ResistanceType.Cold, 35, 45);
             SetResistance(ResistanceType.Poison, 40, 50);
             SetResistance(ResistanceType.Energy, 35, 45);
@@ -60,11 +60,11 @@ namespace Server.Mobiles
 
 		public override TribeType Tribe => TribeType.Ophidian;
 
-		public override int Hides => Utility.RandomMinMax(2, 6);
+		public override int Hides => Utility.RandomMinMax(1, 3);
 		public override HideType HideType => HideType.Ophidien;
 
 
-		public override int Bones => Utility.RandomMinMax(2, 6);
+		public override int Bones => Utility.RandomMinMax(1, 3);
 		public override BoneType BoneType => BoneType.Ophidien;
 
 		public override void GenerateLoot()
