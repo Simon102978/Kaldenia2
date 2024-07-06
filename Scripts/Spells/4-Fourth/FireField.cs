@@ -22,7 +22,7 @@ namespace Server.Spells.Fourth
         {
         }
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Cycle, 7) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Cycle, 6) }; } }
 		public override SpellCircle Circle => SpellCircle.Fourth;
         public override void OnCast()
         {
