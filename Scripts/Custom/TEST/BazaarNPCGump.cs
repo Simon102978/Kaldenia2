@@ -20,7 +20,7 @@ namespace Server.Gumps
 		private List<(Type, int, int, string)> _offeredResources;
 
 		public BazaarNPCGump(PlayerMobile player, BazaarNPC trader, Type requiredResource, int requiredQuantity, int requiredResourceArtID, string requiredResourceName, List<(Type, int, int, string)> offeredResources)
-			: base("Marchand Itinérant", 300, 350, true)
+			: base("Marchand du Bazaar", 360, 440, true) // Ajuster les dimensions du cadre initial
 		{
 			_player = player;
 			_trader = trader;
@@ -31,26 +31,32 @@ namespace Server.Gumps
 			_offeredResources = offeredResources;
 
 			AddPage(0);
-			//AddBackground(0, 0, 400, 800, 0x4CC);
 
 			AddHtml(20, 5, 360, 20, "", false, false);
 
-			int y = 110;
+			int y = 95; // Remonter la première ressource de 10 pixels
 			int buttonID = 1;
 
 			foreach (var (resource, quantity, resourceArtID, resourceName) in _offeredResources)
 			{
 				if (resource != null)
 				{
-					AddItem(110, y, resourceArtID); // Display the offered item art
-					AddLabel(110, y + 40, 0x486, $"{resourceName} ({quantity})");
+					// Draw rectangle around the entire entry, adjusted by 5 pixels to the right and 10 pixels shorter
+					AddImageTiled(98, y, 340, 80, 0x2422); // Ajuster les dimensions du rectangle entourant chaque offre
+					AddImageTiled(99, y + 1, 338, 78, 0x2430);
 
-					AddButton(220, y + 20, 0xFA5, 0xFA7, buttonID, GumpButtonType.Reply, 0); // Accept button
+					// Display the offered item art and label
+					AddItem(140, y + 15, resourceArtID);
+					AddLabel(140, y + 60, 0x486, $"{resourceName} ({quantity})");
 
-					AddItem(290, y, _requiredResourceArtID); // Display the required item art
-					AddLabel(290, y + 40, 0x486, $"{_requiredResourceName} ({_requiredQuantity})"); // Display the required item name with custom name
+					// Display the accept button
+					AddButton(250, y + 35, 0xFA5, 0xFA7, buttonID, GumpButtonType.Reply, 0);
 
-					y += 60;
+					// Display the required item art and label
+					AddItem(320, y + 15, _requiredResourceArtID);
+					AddLabel(320, y + 60, 0x486, $"{_requiredResourceName} ({_requiredQuantity})");
+
+					y += 90; // Augmenter y pour laisser de l'espace entre les entrées
 					buttonID++;
 				}
 			}

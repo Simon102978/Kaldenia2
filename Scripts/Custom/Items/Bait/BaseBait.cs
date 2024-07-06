@@ -5,234 +5,162 @@ using Server.ContextMenus;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace Server
-{
-    public interface IFishingPole
-    {
-        Bait Bait { get; set; }
-        int Charge { get; set; }
-    }
-
-    public enum Bait
-    {
-        Aucun,
-		AutumnDragonfish,
-		BlueLobster,
-		BullFish,
-		CrystalFish,
-		FairySalmon,
-		FireFish,
-		GiantKoi,
-		GreatBarracuda,
-		HolyMackerel,
-		LavaFish,
-		ReaperFish,
-		SpiderCrab,
-		StoneCrab,
-		SummerDragonfish,
-		UnicornFish,
-		YellowtailBarracuda,
-		AbyssalDragonfish,
-		BlackMarlin,
-		BloodLobster,
-		BlueMarlin,
-		DreadLobster,
-		DungeonPike,
-		GiantSamuraiFish,
-		GoldenTuna,
-		Kingfish,
-		LanternFish,
-		RainbowFish,
-		SeekerFish,
-		SpringDragonfish,
-		StoneFish,
-		TunnelCrab,
-		VoidCrab,
-		VoidLobster,
-		WinterDragonfish,
-		ZombieFish
-	}
-}
-
-namespace Server.ContextMenus
-{
-    public class ApplyBaitEntry : ContextMenuEntry
-    {
-        private Mobile m_From;
-        private BaseBait m_Bait;
-
-        public ApplyBaitEntry(Mobile from, BaseBait Bait) : base(90, 1)
-        {
-            m_From = from;
-            m_Bait = Bait;
-        }
-
-        public override void OnClick()
-        {
-            if (m_Bait.Deleted || !m_Bait.Movable || !m_From.CheckAlive())
-                return;
-
-            m_From.SendMessage("Appliquer sur quelle canne à pêche?");
-            m_From.BeginTarget(1, false, Server.Targeting.TargetFlags.None, new TargetStateCallback(Bait_OnApply), m_Bait);
-        }
-
-        private void Bait_OnApply(Mobile from, object targeted, object state)
-        {
-            if (targeted is IFishingPole)
-            {
-				BaseBait bait = state as BaseBait;
-				IFishingPole pole = (IFishingPole)targeted;
-
-				if (pole.Bait == Bait.Aucun && pole.Charge <= 0)
-				{
-					pole.Bait = bait.Bait;
-					pole.Charge = bait.Charge;
-					from.SendMessage("Vous accrochez l'appât après la canne à pêche.");
-
-					bait.Delete();
-				}
-                else
-                {
-                    from.SendMessage("Cette canne à pêche possède déjà un appât.");
-                }
-            }
-            else
-            {
-                from.SendMessage("Vous devez choisir une canne à pêche.");
-            }
-        }
-    }
-}
-
 namespace Server.Items
 {
-    public abstract class BaseBait : Item
-    {
-        private Bait m_Bait;
-        private int m_Charge;
+	public abstract class BaseBait : Item
+	{
+		private Bait m_Bait;
+		private int m_Charge;
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public Bait Bait
-        {
-            get { return m_Bait; }
-            set { m_Bait = value; SetNewName(); InvalidateProperties();  }
-        }
+		[CommandProperty(AccessLevel.GameMaster)]
+		public Bait Bait
+		{
+			get { return m_Bait; }
+			set { m_Bait = value; SetNewName(); InvalidateProperties(); }
+		}
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int Charge
-        {
-            get { return m_Charge; }
-            set
-            {
-                m_Charge = value;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Charge
+		{
+			get { return m_Charge; }
+			set
+			{
+				m_Charge = value;
 
-                if (m_Charge <= 0)
-                    Delete();
-                else if (m_Charge > 20)
-                    m_Charge = 20;
-            }
-        }
+				if (m_Charge <= 0)
+					Delete();
+				else if (m_Charge > 20)
+					m_Charge = 20;
+			}
+		}
 
-        [Constructable]
-        public BaseBait(Bait Bait, int charge) : base(0xDCE)
-        {
-            Name = "appât";
-            Weight = 0.5;
+		[Constructable]
+		public BaseBait(Bait bait, int charge) : base(0xDCE)
+		{
+			Name = "Appât";
+			Weight = 0.5;
 
-            m_Bait = Bait;
-            m_Charge = charge;
-            Stackable = true;
-        }
+			m_Bait = bait;
+			m_Charge = charge;
+			Stackable = true;
+		}
 
-        public static string[] m_Material = new string[]
-            {
-		"aucun",
-		"AutumnDragonfish",
-		"BlueLobster",
-		"BullFish",
-		"CrystalFish",
-		"FairySalmon",
-		"FireFish",
-		"GiantKoi",
-		"GreatBarracuda",
-		"HolyMackerel",
-		"LavaFish",
-		"ReaperFish",
-		"SpiderCrab",
-		"StoneCrab",
-		"SummerDragonfish",
-		"UnicornFish",
-		"YellowtailBarracuda",
-		"AbyssalDragonfish",
-		"BlackMarlin",
-		"BloodLobster",
-		"BlueMarlin",
-		"DreadLobster",
-		"DungeonPike",
-		"GiantSamuraiFish",
-		"GoldenTuna",
-		"Kingfish",
-		"LanternFish",
-		"RainbowFish",
-		"SeekerFish",
-		"SpringDragonfish",
-		"StoneFish",
-		"TunnelCrab",
-		"VoidCrab",
-		"VoidLobster",
-		"WinterDragonfish",
-		"ZombieFish",
-			};
+		public static string[] m_Material = new string[]
+		{
+			"Aucun",
+			"Fish",
+			"AutumnDragonfish",
+			"BlueLobster",
+			"BullFish",
+			"CrystalFish",
+			"FairySalmon",
+			"FireFish",
+			"GiantKoi",
+			"GreatBarracuda",
+			"HolyMackerel",
+			"LavaFish",
+			"ReaperFish",
+			"SpiderCrab",
+			"StoneCrab",
+			"SummerDragonfish",
+			"UnicornFish",
+			"YellowtailBarracuda",
+			"AbyssalDragonfish",
+			"BlackMarlin",
+			"BloodLobster",
+			"BlueMarlin",
+			"DreadLobster",
+			"DungeonPike",
+			"GiantSamuraiFish",
+			"GoldenTuna",
+			"Kingfish",
+			"LanternFish",
+			"RainbowFish",
+			"SeekerFish",
+			"SpringDragonfish",
+			"StoneFish",
+			"TunnelCrab",
+			"VoidCrab",
+			"VoidLobster",
+			"WinterDragonfish",
+			"ZombieFish"
+		};
+		public bool ApplyTo(LargeFishingPole pole)
+		{
+			if (pole == null)
+				return false;
 
-        public virtual string GetMaterial()
-        {
-            string value = "aucun";
+			// Si l'appât actuel est épuisé ou différent, on le remplace
+			if (pole.Charge == 0 || pole.Bait != this.Bait)
+			{
+				pole.Bait = this.Bait;
+				pole.Charge = this.Charge;
+				this.Delete(); // On supprime l'objet appât une fois appliqué
+				pole.InvalidateProperties();
+				return true;
+			}
+			// Si c'est le même type d'appât, on ajoute les charges
+			else if (pole.Bait == this.Bait)
+			{
+				pole.Charge += this.Charge;
+				this.Delete();
+				pole.InvalidateProperties();
+				return true;
+			}
 
-            try
-            {
-                value = m_Material[((int)m_Bait)];
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex);
-            }
+			return false;
+		}
 
-            return value;
-        }
+		public virtual string GetMaterial()
+		{
+			string value = "Aucun";
+
+			try
+			{
+				value = m_Material[(int)m_Bait];
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine(ex);
+			}
+
+			return value;
+		}
 
 		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
 		{
-            if (from.Alive && IsChildOf(from.Backpack))
-            {
-                list.Add(new ApplyBaitEntry(from, this));
-            }
+			if (from.Alive && IsChildOf(from.Backpack))
+			{
+				list.Add(new ApplyBaitEntry(from, this));
+			}
 
-            base.GetContextMenuEntries(from, list);
-        }
+			base.GetContextMenuEntries(from, list);
+		}
 
-        public void SetNewName()
-        {
-            Name = "Appât : " + m_Material;
-        }
+		public void SetNewName()
+		{
+			Name = "Appât : " + GetMaterial();
+		}
 
-        public static BaseBait CreateBait(Bait Bait, int charge)
-        {
-            switch (Bait)
-            {
-                case Bait.AutumnDragonfish: return new BaitAutumnDragonfish(charge);
-                case Bait.BlueLobster: return new BaitBlueLobster(charge);
-                case Bait.BullFish: return new BaitBullFish(charge);
-                case Bait.CrystalFish: return new BaitCrystalFish(charge);
-                case Bait.FairySalmon: return new BaitFairySalmon(charge);
-                case Bait.FireFish: return new BaitFireFish(charge);
-                case Bait.GiantKoi: return new BaitGiantKoi(charge);
-                case Bait.GreatBarracuda: return new BaitGreatBarracuda(charge);
-                case Bait.HolyMackerel: return new BaitHolyMackerel(charge);
-                case Bait.LavaFish: return new BaitLavaFish(charge);
-                case Bait.ReaperFish: return new BaitReaperFish(charge);
-                case Bait.SpiderCrab: return new BaitSpiderCrab(charge);
-                case Bait.StoneCrab: return new BaitStoneCrab(charge);
-                case Bait.SummerDragonfish: return new BaitSummerDragonfish(charge);
+		public static BaseBait CreateBait(Bait bait, int charge)
+		{
+			switch (bait)
+			{
+				case Bait.Fish: return new BaitFish(charge);
+				case Bait.AutumnDragonfish: return new BaitAutumnDragonfish(charge);
+				case Bait.BlueLobster: return new BaitBlueLobster(charge);
+				case Bait.BullFish: return new BaitBullFish(charge);
+				case Bait.CrystalFish: return new BaitCrystalFish(charge);
+				case Bait.FairySalmon: return new BaitFairySalmon(charge);
+				case Bait.FireFish: return new BaitFireFish(charge);
+				case Bait.GiantKoi: return new BaitGiantKoi(charge);
+				case Bait.GreatBarracuda: return new BaitGreatBarracuda(charge);
+				case Bait.HolyMackerel: return new BaitHolyMackerel(charge);
+				case Bait.LavaFish: return new BaitLavaFish(charge);
+				case Bait.ReaperFish: return new BaitReaperFish(charge);
+				case Bait.SpiderCrab: return new BaitSpiderCrab(charge);
+				case Bait.StoneCrab: return new BaitStoneCrab(charge);
+				case Bait.SummerDragonfish: return new BaitSummerDragonfish(charge);
 				case Bait.UnicornFish: return new BaitUnicornFish(charge);
 				case Bait.YellowtailBarracuda: return new BaitYellowtailBarracuda(charge);
 				case Bait.AbyssalDragonfish: return new BaitAbyssalDragonfish(charge);
@@ -254,52 +182,96 @@ namespace Server.Items
 				case Bait.VoidLobster: return new BaitVoidLobster(charge);
 				case Bait.WinterDragonfish: return new BaitWinterDragonfish(charge);
 				case Bait.ZombieFish: return new BaitZombieFish(charge);
-
 				default: return null;
-            }
-        }
+			}
+		}
 
-        public override void AddNameProperty(ObjectPropertyList list)
-        {
-            if (Amount > 1)
-                list.Add(1060532, String.Format("{3} {0}{1}{2}", "Appâts [", GetMaterial(), "]", Amount)); // ~1_NUMBER~ ~2_ITEMNAME~
-            else
-                list.Add(String.Format("{0}{1}{2}", "Appât [", GetMaterial(), "]")); // ingots
-        }
+		public override void AddNameProperty(ObjectPropertyList list)
+		{
+			if (Amount > 1)
+				list.Add(1060532, String.Format("{3} {0}{1}{2}", "Appâts [", GetMaterial(), "]", Amount)); // ~1_NUMBER~ ~2_ITEMNAME~
+			else
+				list.Add(String.Format("{0}{1}{2}", "Appât [", GetMaterial(), "]")); // ingots
+		}
 
-        public BaseBait(Serial serial) : base(serial)
-        {
-        }
+		public BaseBait(Serial serial) : base(serial)
+		{
+		}
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
 
-            writer.Write((int)1); // version
+			writer.Write((int)1); // version
 
-            writer.Write((int)m_Bait);
-            writer.Write(m_Charge);
-        }
+			writer.Write((int)m_Bait);
+			writer.Write(m_Charge);
+		}
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+			int version = reader.ReadInt();
 
-            switch (version)
-            {
-                case 1:
-                    {
-                        m_Bait = (Bait)reader.ReadInt();
-                        m_Charge = reader.ReadInt();
-                        goto case 0;
-                    }
-                case 0:
-                    {
-                        break;
-                    }
-            }
-        }
-    }
+			switch (version)
+			{
+				case 1:
+					{
+						m_Bait = (Bait)reader.ReadInt();
+						m_Charge = reader.ReadInt();
+						break;
+					}
+				case 0:
+					{
+						break;
+					}
+			}
+		}
+	}
+}
+
+namespace Server.ContextMenus
+{
+	public class ApplyBaitEntry : ContextMenuEntry
+	{
+		private Mobile m_From;
+		private BaseBait m_Bait;
+
+		public ApplyBaitEntry(Mobile from, BaseBait bait) : base(90, 1)
+		{
+			m_From = from;
+			m_Bait = bait;
+		}
+
+		public override void OnClick()
+		{
+			if (m_Bait.Deleted || !m_Bait.Movable || !m_From.CheckAlive())
+				return;
+
+			m_From.SendMessage("Sur quelle canne à pêche souhaitez-vous appliquer cet appât?");
+			m_From.BeginTarget(1, false, Server.Targeting.TargetFlags.None, new TargetStateCallback(Bait_OnApply), m_Bait);
+		}
+
+		private void Bait_OnApply(Mobile from, object targeted, object state)
+		{
+			if (targeted is LargeFishingPole pole)
+			{
+				BaseBait bait = state as BaseBait;
+
+				if (bait.ApplyTo(pole))
+				{
+					from.SendMessage("Vous attachez l'appât à la canne à pêche.");
+				}
+				else
+				{
+					from.SendMessage("Vous ne pouvez pas appliquer cet appât à cette canne à pêche.");
+				}
+			}
+			else
+			{
+				from.SendMessage("Vous devez choisir une canne à pêche.");
+			}
+		}
+	}
 }

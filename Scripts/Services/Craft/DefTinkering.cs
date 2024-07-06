@@ -506,6 +506,153 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(FancyWindChimes), "Luminaires et décorations", "Carillons", 80.0, 130.0, typeof(IronIngot), 1044036, 35, 1044037);
 			#endregion
 
+
+			#region Appats
+			// Appât pour Fish
+			index = AddCraft(typeof(BaitFish), "Appâts", "Appât à Poisson (1)", 00.0, 30.0, typeof(IronIngot), "Lingots de fer", 1, "Vous n'avez pas assez de lingots de fer pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour AutumnDragonfish
+			index = AddCraft(typeof(BaitAutumnDragonfish), "Appâts", "Appât à AutumnDragonFish (1)", 10.0, 30.0, typeof(Fish), "Poisson entier", 1, "Vous n'avez pas assez de poisson pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour BlueLobster
+			index = AddCraft(typeof(BaitBlueLobster), "Appâts", "Appât à Homard Bleu (1)", 10.0, 30.0, typeof(AutumnDragonfish), "AutumnDragonFish entier", 1, "Vous n'avez pas assez de AutumnDragonFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour BullFish
+			index = AddCraft(typeof(BaitBullFish), "Appâts", "Appât à BullFish (1)", 10.0, 30.0, typeof(BlueLobster), "Homard Bleu entier", 1, "Vous n'avez pas assez de Homard Bleu pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour CrystalFish
+			index = AddCraft(typeof(BaitCrystalFish), "Appâts", "Appât à CrystalFish (1)", 10.0, 30.0, typeof(BullFish), "BullFish entier", 1, "Vous n'avez pas assez de BullFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour FairySalmon
+			index = AddCraft(typeof(BaitFairySalmon), "Appâts", "Appât à FairySalmon (1)", 20.0, 40.0, typeof(CrystalFish), "CrystalFish entier", 1, "Vous n'avez pas assez de CrystalFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour FireFish
+			index = AddCraft(typeof(BaitFireFish), "Appâts", "Appât à FireFish (1)", 20.0, 40.0, typeof(FairySalmon), "FairySalmon entier", 1, "Vous n'avez pas assez de FairySalmon pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour GiantKoi
+			index = AddCraft(typeof(BaitGiantKoi), "Appâts", "Appât à GiantKoi (1)", 20.0, 40.0, typeof(FireFish), "FireFish entier", 1, "Vous n'avez pas assez de FireFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour GreatBarracuda
+			index = AddCraft(typeof(BaitGreatBarracuda), "Appâts", "Appât à GreatBarracuda (1)", 20.0, 40.0, typeof(GiantKoi), "GiantKoi entier", 1, "Vous n'avez pas assez de GiantKoi pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour HolyMackerel
+			index = AddCraft(typeof(BaitHolyMackerel), "Appâts", "Appât à HolyMackerel (1)", 35.0, 55.0, typeof(GreatBarracuda), "GreatBarracuda entier", 1, "Vous n'avez pas assez de GreatBarracuda pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour LavaFish
+			index = AddCraft(typeof(BaitLavaFish), "Appâts", "Appât à LavaFish (1)", 35.0, 55.0, typeof(HolyMackerel), "HolyMackerel entier", 1, "Vous n'avez pas assez de HolyMackerel pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour ReaperFish
+			index = AddCraft(typeof(BaitReaperFish), "Appâts", "Appât à ReaperFish (1)", 35.0, 55.0, typeof(LavaFish), "LavaFish entier", 1, "Vous n'avez pas assez de LavaFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour SpiderCrab
+			index = AddCraft(typeof(BaitSpiderCrab), "Appâts", "Appât à SpiderCrab (1)", 40.0, 60.0, typeof(ReaperFish), "ReaperFish entier", 1, "Vous n'avez pas assez de ReaperFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour StoneCrab
+			index = AddCraft(typeof(BaitStoneCrab), "Appâts", "Appât à StoneCrab (1)", 40.0, 60.0, typeof(SpiderCrab), "SpiderCrab entier", 1, "Vous n'avez pas assez de SpiderCrab pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour SummerDragonfish
+			index = AddCraft(typeof(BaitSummerDragonfish), "Appâts", "Appât à SummerDragonfish (1)", 40.0, 60.0, typeof(StoneCrab), "StoneCrab entier", 1, "Vous n'avez pas assez de StoneCrab pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour UnicornFish
+			index = AddCraft(typeof(BaitUnicornFish), "Appâts", "Appât à UnicornFish (1)", 50.0, 70.0, typeof(SummerDragonfish), "SummerDragonfish entier", 1, "Vous n'avez pas assez de SummerDragonfish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour YellowtailBarracuda
+			index = AddCraft(typeof(BaitYellowtailBarracuda), "Appâts", "Appât à YellowtailBarracuda (1)", 50.0, 70.0, typeof(UnicornFish), "UnicornFish entier", 1, "Vous n'avez pas assez de UnicornFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour AbyssalDragonfish
+			index = AddCraft(typeof(BaitAbyssalDragonfish), "Appâts", "Appât à AbyssalDragonfish (1)", 50.0, 70.0, typeof(YellowtailBarracuda), "YellowtailBarracuda entier", 1, "Vous n'avez pas assez de YellowtailBarracuda pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour BlackMarlin
+			index = AddCraft(typeof(BaitBlackMarlin), "Appâts", "Appât à BlackMarlin (1)", 50.0, 70.0, typeof(AbyssalDragonfish), "AbyssalDragonfish entier", 1, "Vous n'avez pas assez de AbyssalDragonfish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour BloodLobster
+			index = AddCraft(typeof(BaitBloodLobster), "Appâts", "Appât à BloodLobster (1)", 50.0, 70.0, typeof(BlackMarlin), "BlackMarlin entier", 1, "Vous n'avez pas assez de BlackMarlin pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour BlueMarlin
+			index = AddCraft(typeof(BaitBlueMarlin), "Appâts", "Appât à BlueMarlin (1)", 60.0, 80.0, typeof(BloodLobster), "BloodLobster entier", 1, "Vous n'avez pas assez de BloodLobster pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour DreadLobster
+			index = AddCraft(typeof(BaitDreadLobster), "Appâts", "Appât à DreadLobster (1)", 60.0, 80.0, typeof(BlueMarlin), "BlueMarlin entier", 1, "Vous n'avez pas assez de BlueMarlin pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour DungeonPike
+			index = AddCraft(typeof(BaitDungeonPike), "Appâts", "Appât à DungeonPike (1)", 60.0, 80.0, typeof(DreadLobster), "DreadLobster entier", 1, "Vous n'avez pas assez de DreadLobster pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour GiantSamuraiFish
+			index = AddCraft(typeof(BaitGiantSamuraiFish), "Appâts", "Appât à GiantSamuraiFish (1)", 60.0, 80.0, typeof(DungeonPike), "DungeonPike entier", 1, "Vous n'avez pas assez de DungeonPike pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour GoldenTuna
+			index = AddCraft(typeof(BaitGoldenTuna), "Appâts", "Appât à GoldenTuna (1)", 60.0, 80.0, typeof(GiantSamuraiFish), "GiantSamuraiFish entier", 1, "Vous n'avez pas assez de GiantSamuraiFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour Kingfish
+			index = AddCraft(typeof(BaitKingfish), "Appâts", "Appât à Kingfish (1)", 70.0, 90.0, typeof(GoldenTuna), "GoldenTuna entier", 1, "Vous n'avez pas assez de GoldenTuna pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour LanternFish
+			index = AddCraft(typeof(BaitLanternFish), "Appâts", "Appât à LanternFish (1)", 70.0, 90.0, typeof(Kingfish), "Kingfish entier", 1, "Vous n'avez pas assez de Kingfish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour RainbowFish
+			index = AddCraft(typeof(BaitRainbowFish), "Appâts", "Appât à RainbowFish (1)", 70.0, 90.0, typeof(LanternFish), "LanternFish entier", 1, "Vous n'avez pas assez de LanternFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour SeekerFish
+			index = AddCraft(typeof(BaitSeekerFish), "Appâts", "Appât à SeekerFish (1)", 70.0, 90.0, typeof(RainbowFish), "RainbowFish entier", 1, "Vous n'avez pas assez de RainbowFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour SpringDragonfish
+			index = AddCraft(typeof(BaitSpringDragonfish), "Appâts", "Appât à SpringDragonfish (1)", 70.0, 90.0, typeof(SeekerFish), "SeekerFish entier", 1, "Vous n'avez pas assez de SeekerFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour StoneFish
+			index = AddCraft(typeof(BaitStoneFish), "Appâts", "Appât à StoneFish (1)", 75.0, 95.0, typeof(SpringDragonfish), "SpringDragonfish entier", 1, "Vous n'avez pas assez de SpringDragonfish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour TunnelCrab
+			index = AddCraft(typeof(BaitTunnelCrab), "Appâts", "Appât à TunnelCrab (1)", 75.0, 95.0, typeof(StoneFish), "StoneFish entier", 1, "Vous n'avez pas assez de StoneFish pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour VoidCrab
+			index = AddCraft(typeof(BaitVoidCrab), "Appâts", "Appât à VoidCrab (1)", 75.0, 95.0, typeof(TunnelCrab), "TunnelCrab entier", 1, "Vous n'avez pas assez de TunnelCrab pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour VoidLobster
+			index = AddCraft(typeof(BaitVoidLobster), "Appâts", "Appât à VoidLobster (1)", 75.0, 95.0, typeof(VoidCrab), "VoidCrab entier", 1, "Vous n'avez pas assez de VoidCrab pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour WinterDragonfish
+			index = AddCraft(typeof(BaitWinterDragonfish), "Appâts", "Appât à WinterDragonfish (1)", 80.0, 100.0, typeof(VoidLobster), "VoidLobster entier", 1, "Vous n'avez pas assez de VoidLobster pour faire cet appât.");
+			SetUseAllRes(index, true);
+
+			// Appât pour ZombieFish
+			index = AddCraft(typeof(BaitZombieFish), "Appâts", "Appât à ZombieFish (1)", 80.0, 100.0, typeof(WinterDragonfish), "WinterDragonfish entier", 1, "Vous n'avez pas assez de WinterDragonfish pour faire cet appât.");
+			SetUseAllRes(index, true);
+			#endregion
+
 			#region Divers
 			index = AddCraft(typeof(KeyRing), "Divers", "Trousseau de clés", 10.0, 60.0, typeof(IronIngot), 1044036, 5, 1044037);
 			index = AddCraft(typeof(Key), "Divers", "Clé en fer", 20.0, 70.0, typeof(IronIngot), 1044036, 3, 1044037);
@@ -514,7 +661,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Globe), "Divers", "Globe terrestre", 55.0, 105.0, typeof(IronIngot), 1044036, 4, 1044037);
 			index = AddCraft(typeof(MagicCrystalBall), "Divers", "Boule de Cristal", 35.0, 105.0, typeof(IronIngot), 1044036, 4, 1044037);
 			index = AddCraft(typeof(DecoDeckOfTarot), "Divers", "Jeu de Tarot", 55.0, 105.0, typeof(BlankScroll), "Parchemins Vierge", 5, "Vous n'avez pas suffisament de parchemins vierge");
-
+			index = AddCraft(typeof(LargeFishingPole), "Divers", "Canne à pêche", 10.0, 30.0, typeof(RegularBoard), 1044041, 5, 1044351); //This is in the categor of Other during AoS
+			AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
 			index = AddCraft(typeof(Spyglass), "Divers", "Longue vue", 60.0, 110.0, typeof(IronIngot), 1044036, 4, 1044037);
 			index = AddCraft(typeof(Fouet4), "Divers", "Fouet 4 mètres", 50.0, 70.0, typeof(Leather), 1044462, 3, 1044463);
 			index = AddCraft(typeof(Fouet6), "Divers", "Fouet 6 mètres", 65.0, 85.0, typeof(Leather), 1044462, 4, 1044463);

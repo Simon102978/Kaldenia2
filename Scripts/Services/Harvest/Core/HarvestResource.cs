@@ -1,4 +1,5 @@
 using System;
+using Server.Items;
 
 namespace Server.Engines.Harvest
 {
@@ -19,7 +20,18 @@ namespace Server.Engines.Harvest
         public double MaxSkill { get; set; }
         public object SuccessMessage { get; }
 
-        public void SendSuccessTo(Mobile m)
+		public Bait Bait { get; set; }
+		public int MaxAmount { get; set; }
+
+		public Type SpecificFish { get; set; } // Nouvelle propriété pour le poisson spécifique associé
+
+		public HarvestResource(Bait bait, int maxAmount)
+		{
+			Bait = bait;
+			MaxAmount = maxAmount;
+		}
+
+		public void SendSuccessTo(Mobile m)
         {
             if (SuccessMessage is int)
                 m.SendLocalizedMessage((int)SuccessMessage);

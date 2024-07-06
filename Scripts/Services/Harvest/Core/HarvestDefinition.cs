@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Engines.Harvest
 {
@@ -53,46 +54,11 @@ namespace Server.Engines.Harvest
 
 		public static Bait ToBait(string name)
 		{
-			switch (name)
-			{
-				case "AutumnDragonfish": return Bait.AutumnDragonfish;
-				case "BlueLobster": return Bait.BlueLobster;
-				case "BullFish": return Bait.BullFish;
-				case "CrystalFish": return Bait.CrystalFish;
-				case "FairySalmon": return Bait.FairySalmon;
-				case "FireFish": return Bait.FireFish;
-				case "GiantKoi": return Bait.GiantKoi;
-				case "GreatBarracuda": return Bait.GreatBarracuda;
-				case "HolyMackerel": return Bait.HolyMackerel;
-				case "LavaFish": return Bait.LavaFish;
-				case "ReaperFish": return Bait.ReaperFish;
-				case "SpiderCrab": return Bait.SpiderCrab;
-				case "StoneCrab": return Bait.StoneCrab;
-				case "SummerDragonfish": return Bait.SummerDragonfish;
-				case "UnicornFish": return Bait.UnicornFish;
-				case "YellowtailBarracuda": return Bait.YellowtailBarracuda;
-				case "AbyssalDragonfish": return Bait.AbyssalDragonfish;
-				case "BlackMarlin": return Bait.BlackMarlin;
-				case "BloodLobster": return Bait.BloodLobster;
-				case "BlueMarlin": return Bait.BlueMarlin;
-				case "DreadLobster": return Bait.DreadLobster;
-				case "DungeonPike": return Bait.DungeonPike;
-				case "GiantSamuraiFish": return Bait.GiantSamuraiFish;
-				case "GoldenTuna": return Bait.GoldenTuna;
-				case "Kingfish": return Bait.Kingfish;
-				case "LanternFish": return Bait.LanternFish;
-				case "RainbowFish": return Bait.RainbowFish;
-				case "SeekerFish": return Bait.SeekerFish;
-				case "SpringDragonfish": return Bait.SpringDragonfish;
-				case "StoneFish": return Bait.StoneFish;
-				case "TunnelCrab": return Bait.TunnelCrab;
-				case "VoidCrab": return Bait.VoidCrab;
-				case "VoidLobster": return Bait.VoidLobster;
-				case "WinterDragonfish": return Bait.WinterDragonfish;
-				case "ZombieFish": return Bait.ZombieFish;
-
-				default: return Bait.Aucun;
-			}
+			// Use Enum.TryParse to make this cleaner and less error-prone
+			if (Enum.TryParse(name, out Bait bait))
+				return bait;
+			else
+				return Bait.Aucun;
 		}
 
 		public HarvestBank GetBank(Map map, int x, int y)
@@ -103,15 +69,12 @@ namespace Server.Engines.Harvest
 			x /= BankWidth;
 			y /= BankHeight;
 
-			Banks.TryGetValue(map, out Dictionary<Point2D, HarvestBank> banks);
-
-			if (banks == null)
+			if (!Banks.TryGetValue(map, out var banks))
 				Banks[map] = banks = new Dictionary<Point2D, HarvestBank>();
 
-			Point2D key = new Point2D(x, y);
-			banks.TryGetValue(key, out HarvestBank bank);
+			var key = new Point2D(x, y);
 
-			if (bank == null)
+			if (!banks.TryGetValue(key, out var bank))
 				banks[key] = bank = new HarvestBank(this, GetVeinAt(map, x, y));
 
 			return bank;
@@ -144,12 +107,12 @@ namespace Server.Engines.Harvest
 
 			randomValue *= 100;
 
-			for (int i = 0; i < Veins.Length; ++i)
+			foreach (var vein in Veins)
 			{
-				if (randomValue <= Veins[i].VeinChance)
-					return Veins[i];
+				if (randomValue <= vein.VeinChance)
+					return vein;
 
-				randomValue -= Veins[i].VeinChance;
+				randomValue -= vein.VeinChance;
 			}
 
 			return null;
@@ -162,12 +125,12 @@ namespace Server.Engines.Harvest
 
 			double randomValue = Utility.RandomDouble() * 100;
 
-			for (int i = 0; i < BonusResources.Length; ++i)
+			foreach (var bonusResource in BonusResources)
 			{
-				if (randomValue <= BonusResources[i].Chance)
-					return BonusResources[i];
+				if (randomValue <= bonusResource.Chance)
+					return bonusResource;
 
-				randomValue -= BonusResources[i].Chance;
+				randomValue -= bonusResource.Chance;
 			}
 
 			return null;
@@ -177,44 +140,38 @@ namespace Server.Engines.Harvest
 		{
 			if (RangedTiles)
 			{
-				bool contains = false;
-
-				//  for (int i = 0; !contains && i < Tiles.Length; i += 2)
-				//    contains = tileID >= Tiles[i] && tileID <= Tiles[i + 1];
-
-				for (int i = 0; !contains && i < Tiles.Length; i++)
+				foreach (var tile in Tiles)
 				{
-					contains = tileID == Tiles[i];
+					if (tileID == tile)
+						return true;
 				}
 
-				return contains;
+				return false;
 			}
 			else
 			{
-				int dist = -1;
+				foreach (var tile in Tiles)
+				{
+					if (tile == tileID)
+						return true;
+				}
 
-				for (int i = 0; dist < 0 && i < Tiles.Length; ++i)
-					dist = Tiles[i] - tileID;
-
-				return dist == 0;
+				return false;
 			}
 		}
 
-		#region High Seas
 		public bool ValidateSpecial(int tileID)
 		{
-			//No Special tiles were initiated so always true
 			if (SpecialTiles == null || SpecialTiles.Length == 0)
 				return true;
 
-			for (int i = 0; i < SpecialTiles.Length; i++)
+			foreach (var tile in SpecialTiles)
 			{
-				if (tileID == SpecialTiles[i])
+				if (tileID == tile)
 					return true;
 			}
 
 			return false;
 		}
-		#endregion
 	}
 }

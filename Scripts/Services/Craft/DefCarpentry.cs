@@ -180,7 +180,7 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Cloth), 1044286, 60, 1044287);
 			index = AddCraft(typeof(PickpocketDipSouthDeed), "Divers", "Mannequin de vol à la tir (S)", 50.0, 70.0, typeof(RegularBoard), 1044041, 65, 1044351);
 			AddRes(index, typeof(Cloth), 1044286, 60, 1044287);
-			index = AddCraft(typeof(FishingPole), "Divers", "Canne à pêche", 10.0, 30.0, typeof(RegularBoard), 1044041, 5, 1044351); //This is in the categor of Other during AoS
+			index = AddCraft(typeof(LargeFishingPole), "Divers", "Canne à pêche", 10.0, 30.0, typeof(RegularBoard), 1044041, 5, 1044351); //This is in the categor of Other during AoS
 			AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
 			index = AddCraft(typeof(PipeCourbee), "Divers", "Pipe Courbée", 30.0, 50.0, typeof(RegularBoard), "Planches", 2, "Vous n'avez pas assez de planche.");
 			index = AddCraft(typeof(PipeCourte), "Divers", "Pipe Courte ", 20.0, 40.0, typeof(RegularBoard), "Planches", 2, "Vous n'avez pas assez de planche.");
