@@ -85,10 +85,10 @@ namespace Server.Mobiles
                 {
                     switch (Utility.Random(32))
                     {
-                        case 0: c.DropItem(new AssassinChest()); break;
-                        case 1: c.DropItem(new AssassinArms()); break;
+                        case 0: c.DropItem(new SsinsChest()); break;
+                        case 1: c.DropItem(new SsinsArms()); break;
                         case 2: c.DropItem(new AssassinLegs()); break;
-                        case 3: c.DropItem(new AssassinGloves()); break;
+                        case 3: c.DropItem(new SsinsGloves()); break;
                         case 4: c.DropItem(new DeathChest()); break;
                         case 5: c.DropItem(new DeathArms()); break;
                         case 6: c.DropItem(new DeathLegs()); break;

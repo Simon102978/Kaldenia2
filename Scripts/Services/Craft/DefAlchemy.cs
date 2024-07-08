@@ -368,98 +368,76 @@ namespace Server.Engines.Craft
 			  #region Parfums
             index = AddCraft(typeof(PerfumGrisPotion), "Parfums ",                      "Sel de mer ",                  50.0, 60.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
             AddRes(index, typeof(DentDeLion), "Dent-de-lion", 1, 1044287);
-  //        AddRes(index, typeof(LarmeFiole), "Larme en fiole", 2, 1044287);
+           AddRes(index, typeof(Sage), "Sauge", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumKakiPotion), "Parfums ",                      "Fromage vieillit ",            25.0, 45.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);	
-			AddRes(index, typeof(CheeseWheel), "Mucus Noir", 2, 1044287);
+            index = AddCraft(typeof(PerfumKakiPotion), "Parfums ",                      "Fromage vieillit ",            25.0, 45.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+			AddRes(index, typeof(Fougere), "Fougère", 1, 1044287);
+			AddRes(index, typeof(Anise), "Anis", 1, 1044287);
 
-		//    AddRes(index, typeof(Fougere), "Fougère", 3, 1044287);
-  //        AddRes(index, typeof(AlgueBleu), "Algue bleu", 2, 1044287);
-  //        AddRes(index, typeof(MucusNoir), "Mucus Noir", 2, 1044287);
-  //        AddRes(index, typeof(OeufReptile), "Oeuf de reptile", 1, 1044287);
+			index = AddCraft(typeof(PerfumBrunPotion), "Parfums ",                      "Vieux musk ",                  30.0, 50.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+	        AddRes(index, typeof(Safran), "Safran", 1, 1044287);
+	        AddRes(index, typeof(Myrrh), "gomme d'épinette", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumBrunPotion), "Parfums ",                      "Vieux musk ",                  30.0, 50.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  	        AddRes(index, typeof(Garlic), "Ail", 2, 1044287);
-  //        AddRes(index, typeof(AlgueBleu), "Algue bleu", 1, 1044287);
-  //        AddRes(index, typeof(BloodCrystal), "Sang cristalisé", 1, 1044287);
+			index = AddCraft(typeof(PerfumJaunePotion), "Parfums ",                     "Agrume en folie ",             70.0, 85.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+			AddRes(index, typeof(Camomille), "Tulipe", 1, 1044287);
+			AddRes(index, typeof(Saffron), "Safran", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumJaunePotion), "Parfums ",                     "Agrume en folie ",             70.0, 85.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(Ecorce), "Écorce", 4, 1044287);
-  	        AddRes(index, typeof(Tulipe), "Tulipe", 2, 1044287);
 
-            index = AddCraft(typeof(PerfumBleuClairPotion), "Parfums ",                 "Brise d’océan ",               80.0, 90.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(AlgueBleu), "Algue bleu", 2, 1044287);
-  //        AddRes(index, typeof(LarmeFiole), "Larme en fiole", 3, 1044287);
-            AddRes(index, typeof(Lilas), "Lila", 1, 1044287);
+			index = AddCraft(typeof(PerfumBleuClairPotion), "Parfums ",                 "Brise d’océan ",               80.0, 90.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+			AddRes(index, typeof(RoseSauvage), "Rose Sauvage", 1, 1044287);
+			AddRes(index, typeof(Sage), "Sauge", 1, 1044287);
 
             index = AddCraft(typeof(PerfumMauvePotion), "Parfums ",                     "Souffle magique ",             85.3, 95.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(AlgueBleu), "Algue bleu", 3, 1044287);
-            AddRes(index, typeof(Lilas), "Lila", 2, 1044287);
-  //        AddRes(index, typeof(BloodCrystal), "Sang cristalisé", 2, 1044287);
-  //        AddRecipe(index, (int)AlchemyRecipes.PerfumMauvePotion);
+            AddRes(index, typeof(Lilas), "Lila", 1, 1044287);
+			AddRes(index, typeof(Basil), "Basilic", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumRougevifPotion), "Parfums ",                  "Désir et passion ",            86.7, 95.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(BloodCrystal), "Sang cristalisé", 3, 1044287);
-            AddRes(index, typeof(Tulipe), "Tulipe", 3, 1044287);
+			index = AddCraft(typeof(PerfumRougevifPotion), "Parfums ",                  "Désir et passion ",            86.7, 95.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+			AddRes(index, typeof(Tulipe), "Tulipe", 3, 1044287);
+			AddRes(index, typeof(Lavender), "Lavande", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumRosePotion), "Parfums ",                      "Synergie féérique ",           84.3, 95.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(LarmeFiole), "Larme en fiole", 3, 1044287);
-            AddRes(index, typeof(Lys), "Lys", 2, 1044287);
-  //        AddRes(index, typeof(BloodCrystal), "Sang cristalisé", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumTurquoisePotion), "Parfums ",                 "Menthe polaire ",              68.3, 80.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(AlgueBleu), "Algue bleu", 2, 1044287);
-  //        AddRes(index, typeof(Ecorce), "Écorce", 1, 1044287);
+			index = AddCraft(typeof(PerfumRosePotion), "Parfums ",                      "Synergie féérique ",           84.3, 95.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+            AddRes(index, typeof(Lys), "Lys", 1, 1044287);
+		    AddRes(index, typeof(Peppercorn), "grain de poivre", 1, 1044287);
+
+			index = AddCraft(typeof(PerfumTurquoisePotion), "Parfums ",                 "Menthe polaire ",              68.3, 80.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
             AddRes(index, typeof(Givrelle), "Givrelle", 1, 1044287);
-  //        AddRes(index, typeof(LarmeFiole), "Larme en fiole", 3, 1044287);
+			AddRes(index, typeof(Acacia), "Acacia", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumOrangePotion), "Parfums ",                    "Effervescence fruitée ",       73.2, 85.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(Ecorce), "Écorce", 3, 1044287);
-  //        AddRes(index, typeof(BloodCrystal), "Sang cristalisé", 2, 1044287);
-            AddRes(index, typeof(Tulipe), "Tulipe", 2, 1044287);
+			index = AddCraft(typeof(PerfumOrangePotion), "Parfums ",                    "Effervescence fruitée ",       73.2, 85.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+			AddRes(index, typeof(Camomille), "Camomille", 1, 1044287);
+			AddRes(index, typeof(Orris), "racine d'Orris", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumMarinePotion), "Parfums ",                    "Frisson obscure ",             70.0, 90.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(AlgueBleu), "Algue bleu", 3, 1044287);
-            AddRes(index, typeof(Indigo), "Indigo", 2, 1044287);
-  //        AddRes(index, typeof(PoilsGras), "Poil Gras", 2, 1044287);
+
+			index = AddCraft(typeof(PerfumMarinePotion), "Parfums ",                    "Frisson obscure ",             70.0, 90.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+            AddRes(index, typeof(Indigo), "Indigo", 1, 1044287);
+            AddRes(index, typeof(Sandelwood), "Bois de santal", 1, 1044287);
 
             index = AddCraft(typeof(PerfumVioletPotion), "Parfums ",                    "Escapade florale ",            75.0, 95.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(AlgueBleu), "Algue bleu", 3, 1044287);
-  //        AddRes(index, typeof(LarmeFiole), "Larme en fiole", 3, 1044287);
-            AddRes(index, typeof(RoseTremiere), "Rose trémière", 2, 1044287);
-  //        AddRes(index, typeof(BloodCrystal), "Sang cristalisé", 2, 1044287);
-  //        AddRecipe(index, (int)AlchemyRecipes.PerfumVioletPotion);
+            AddRes(index, typeof(RoseTremiere), "Rose trémière", 1, 1044287);
+			AddRes(index, typeof(Mint), "Menthe", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumVertpommePotion), "Parfums ",                 "Regénérescence ",              80.0, 100.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(AlgueBleu), "Algue bleu", 3, 1044287);
-            AddRes(index, typeof(Dahlia), "Dahlia", 2, 1044287);
-  //        AddRes(index, typeof(Ecorce), "Écorce", 3, 1044287);
+			index = AddCraft(typeof(PerfumVertpommePotion), "Parfums ",                 "Regénérescence ",              80.0, 100.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+            AddRes(index, typeof(Dahlia), "Dahlia", 1, 1044287);
+	        AddRes(index, typeof(Rosemary), "Romarin", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumRougevinPotion), "Parfums ",                  "Volupté charnelle ",           85.0, 105.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+			index = AddCraft(typeof(PerfumRougevinPotion), "Parfums ",                  "Volupté charnelle ",           85.0, 105.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
             AddRes(index, typeof(DentDeLion), "Dent-de-lion", 3, 1044287);
-  //        AddRes(index, typeof(PoilsGras), "Poil Gras", 2, 1044287);
-  //        AddRes(index, typeof(BloodCrystal), "Sang cristalisé", 3, 1044287);
-             AddRes(index, typeof(Safran), "Safran", 1, 1044287);
-  //        AddRecipe(index, (int)AlchemyRecipes.PerfumRougevinPotion);
+             AddRes(index, typeof(Thyme), "Thym", 1, 1044287);
 
             index = AddCraft(typeof(PerfumOcrePotion), "Parfums ",                      "Opulence ",                    90.0, 110.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
             AddRes(index, typeof(Cramelia), "Cramélia", 1, 1044287);
-  //        AddRes(index, typeof(Ecorce), "Écorce", 3, 1044287);
-  //        AddRes(index, typeof(PoilsGras), "Poil Gras", 1, 1044287);
-            AddRes(index, typeof(RoseSauvage), "Rose sauvage", 2, 1044287);
+            AddRes(index, typeof(Valerian), "Valériane", 1, 1044287);
 
             index = AddCraft(typeof(PerfumVertforêtPotion), "Parfums ",                 "Bois de santal ",              95.0, 115.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-  //        AddRes(index, typeof(AlgueBleu), "Algue bleu", 3, 1044287);
-  //        AddRes(index, typeof(Ecorce), "Écorce", 3, 1044287);
-            AddRes(index, typeof(Fougere), "Fougère", 3, 1044287);
             AddRes(index, typeof(GeuleDeDragon), "Gueule de dragon", 1, 1044287);
+			AddRes(index, typeof(Olive), "Olive", 1, 1044287);
 
-            index = AddCraft(typeof(PerfumNoirPotion), "Parfums ",                      "La fin des temps ",            99.0, 119.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(Indigo), "Indigo", 2, 1044287);
-            AddRes(index, typeof(Ombrella), "Ombrella", 3, 1044287);
-  //        AddRes(index, typeof(PoilsGras), "Poil Gras", 3, 1044287);
-  //        AddRes(index, typeof(DaemonBlood), "Sang noir", 2, 1044287);
-  //        AddRecipe(index, (int)AlchemyRecipes.PerfumNoirPotion);
+
+			index = AddCraft(typeof(PerfumNoirPotion), "Parfums ",                      "La fin des temps ",            99.0, 119.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
+            AddRes(index, typeof(Ombrella), "Ombrella", 1, 1044287);
+            AddRes(index, typeof(TribalBerry), "baie tribale", 1, 1044287);
+  
             #endregion
 		}
 	}

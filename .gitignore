@@ -58,3 +58,5 @@
 Config/DataPath.cfg
 /Config/DataPath.cfg
 /Config/Accounts.cfg
+/Scripts/Custom/TEST/TestNage/Swim.bak
+*.bak

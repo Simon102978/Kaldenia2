@@ -65,6 +65,8 @@ namespace Server.Mobiles
             AddLoot(LootPack.MageryRegs, 6);
             AddLoot(LootPack.Statue);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+			AddLoot(LootPack.LootItem<SsinsEar>(0, 2, true));
+
 
 
 			AddLoot(LootPack.RandomLootItem(new Type[] { typeof(AnimateDeadScroll), typeof(BloodOathScroll), typeof(CorpseSkinScroll),
