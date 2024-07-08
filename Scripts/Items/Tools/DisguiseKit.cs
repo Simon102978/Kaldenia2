@@ -1,8 +1,13 @@
 #region References
 using Server.Gumps;
 using Server.Mobiles;
+using Server.Network;
+using Server.SkillHandlers;
 using Server.Spells;
 using Server.Spells.Fifth;
+using Server.Spells.Seventh;
+using System;
+using System.Collections.Generic;
 #endregion
 
 namespace Server.Items
@@ -60,21 +65,21 @@ namespace Server.Items
                 // You cannot disguise yourself while incognitoed.
                 from.SendLocalizedMessage(501704);
             }
-            //else if (TransformationSpellHelper.UnderTransformation(from))
-            //{
-            //    // You cannot disguise yourself while in that form.
-            //    from.SendLocalizedMessage(1061634);
-            //}
+            else if (TransformationSpellHelper.UnderTransformation(from))
+            {
+                // You cannot disguise yourself while in that form.
+                from.SendLocalizedMessage(1061634);
+            }
             else if (from.BodyMod == 183 || from.BodyMod == 184)
             {
                 // You cannot disguise yourself while wearing body paint
                 from.SendLocalizedMessage(1040002);
             }
-            //else if (!from.CanBeginAction(typeof(PolymorphSpell)) || from.IsBodyMod)
-            //{
-            //    // You cannot disguise yourself while polymorphed.
-            //    from.SendLocalizedMessage(501705);
-            //}
+            else if (!from.CanBeginAction(typeof(PolymorphSpell)) || from.IsBodyMod)
+            {
+                // You cannot disguise yourself while polymorphed.
+                from.SendLocalizedMessage(501705);
+            }
             else
             {
                 return true;
@@ -85,22 +90,29 @@ namespace Server.Items
 
         public override void OnDoubleClick(Mobile from)
         {
-    //        if (ValidateUse(from))
-    //        {
-				//if (from is CustomPlayerMobile)
-				//{
-				//	CustomPlayerMobile cm = (CustomPlayerMobile)from;
+            if (ValidateUse(from))
+            {
+				if (from is CustomPlayerMobile)
+				{
+					CustomPlayerMobile cm = (CustomPlayerMobile)from;
 
-				//	if (cm.GetDeguisement() == null)
-				//	{
-				//		from.SendGump(new CustomDisguiseGump(cm, new Deguisement(cm)));
-				//	}
-				//	else
-				//	{
-				//		from.SendGump(new CustomDisguiseGump(cm, cm.GetDeguisement()));
-				//	}					
-				//}
-    //        }
+					if (cm.GetDeguisement() == null)
+					{
+						from.SendGump(new CustomDisguiseGump(cm, new Deguisement(cm)));
+					}
+					else
+					{
+						from.SendGump(new CustomDisguiseGump(cm, cm.GetDeguisement()));
+					}					
+				}
+				else
+				{
+					//from.SendGump(new DisguiseGump(from, this, true, false));
+				}
+
+
+               
+            }
         }
     }
 }

@@ -2709,7 +2709,7 @@ namespace Server.Mobiles
 				m_BaseHue = Hue;
 			}
 
-			writer.Write(Hue);
+			writer.Write(m_BaseHue);
 
 
 			if (m_BaseRace == null)

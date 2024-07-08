@@ -201,6 +201,7 @@ namespace Server.Gumps
 						m_Deg.Title = info.GetTextEntry(2).Text;
 					}
 				}
+				
 				switch (info.ButtonID)
 				{
 					case 1:
