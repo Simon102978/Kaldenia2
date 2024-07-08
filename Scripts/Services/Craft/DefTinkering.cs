@@ -202,6 +202,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(VinyardLabelMaker), "Outils", "Marqueur de vin", 30.0, 55.0, typeof(IronIngot), 1044036, 5, 1044037);
 			index = AddCraft(typeof(WinecraftersTools), "Outils", "Outil fabrication de vin", 30.0, 55.0, typeof(IronIngot), 1044036, 5, 1044037);
 			index = AddCraft(typeof(Boline), "Outils", "Serpe", 15.0, 30.0, typeof(IronIngot), 1044036, 4, 1044037);
+
+			index = AddCraft(typeof(DisguiseKit), "Outils",  "Trousse à déguisement", 50.0, 60.0, typeof(IronIngot), 1044036, 4, 1044037);
 			#endregion
 
 			#region Anneaux
