@@ -49,7 +49,7 @@ namespace Server
         #region ML equipment
         private static readonly Type[] m_MLWeaponTypes = new[]
         {
-            typeof(AssassinSpike), typeof(DiamondMace), typeof(ElvenMachete), typeof(ElvenSpellblade), typeof(Leafblade),
+            typeof(AssassinSpike), typeof(DiamantMace), typeof(ElvenMachete), typeof(ElvenSpellblade), typeof(Leafblade),
             typeof(OrnateAxe), typeof(RadiantScimitar), typeof(RuneBlade), typeof(WarCleaver), typeof(WildStaff)
         };
         public static Type[] MLWeaponTypes => m_MLWeaponTypes;
@@ -178,21 +178,21 @@ namespace Server
 		
         private static readonly Type[] m_GemTypes = new[]
         {
-            typeof(Amber), typeof(Amethyst), typeof(Citrine),  typeof(Ruby), typeof(Tourmaline)
+            typeof(Ambre), typeof(Amethyste), typeof(Citrine),  typeof(Rubis), typeof(Tourmaline)
         };
 
         public static Type[] GemTypes => m_GemTypes;
 
         private static readonly Type[] m_RareGemTypes =
         {
-            typeof(BlueDiamond), typeof(DarkSapphire), typeof(EcruCitrine), typeof(FireRuby), typeof(PerfectEmerald), typeof(Turquoise), typeof(WhitePearl), typeof(BrilliantAmber)
+            typeof(BlueDiamant), typeof(DarkSapphire), typeof(EcruCitrine), typeof(FireRubis), typeof(PerfectEmeraude), typeof(Turquoise), typeof(WhitePearl), typeof(BrilliantAmbre)
         };
 
         public static Type[] RareGemTypes => m_RareGemTypes;
 
         private static readonly Type[] m_MLResources =
 		{
-            typeof(BlueDiamond), typeof(DarkSapphire), typeof(EcruCitrine), typeof(FireRuby), typeof(PerfectEmerald), typeof(Turquoise), typeof(WhitePearl), typeof(BrilliantAmber),
+            typeof(BlueDiamant), typeof(DarkSapphire), typeof(EcruCitrine), typeof(FireRubis), typeof(PerfectEmeraude), typeof(Turquoise), typeof(WhitePearl), typeof(BrilliantAmbre),
             typeof(LuminescentFungi), typeof(BarkFragment), typeof(SwitchItem), typeof(ParasiticPlant),
         };
 

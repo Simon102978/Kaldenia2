@@ -204,13 +204,13 @@ namespace Server.Items
                 return 0;
 
             if (type == typeof(Tourmaline)) return 1023864;
-            if (type == typeof(Ruby)) return 1023859;
-            if (type == typeof(Diamond)) return 1023878;
+            if (type == typeof(Rubis)) return 1023859;
+            if (type == typeof(Diamant)) return 1023878;
             if (type == typeof(Sapphire)) return 1023857;
             if (type == typeof(Citrine)) return 1023861;
-            if (type == typeof(Emerald)) return 1023856;
-            if (type == typeof(StarSapphire)) return 1023855;
-            if (type == typeof(Amethyst)) return 1023862;
+            if (type == typeof(Emeraude)) return 1023856;
+            if (type == typeof(SaphirEtoile)) return 1023855;
+            if (type == typeof(Amethyste)) return 1023862;
 
             if (type == typeof(RelicFragment)) return 1031699;
             if (type == typeof(EnchantedEssence)) return 1031698;
@@ -218,12 +218,12 @@ namespace Server.Items
 
             if (type == typeof(DarkSapphire)) return 1032690;
             if (type == typeof(Turquoise)) return 1032691;
-            if (type == typeof(PerfectEmerald)) return 1032692;
+            if (type == typeof(PerfectEmeraude)) return 1032692;
             if (type == typeof(EcruCitrine)) return 1032693;
             if (type == typeof(WhitePearl)) return 1032694;
-            if (type == typeof(FireRuby)) return 1032695;
-            if (type == typeof(BlueDiamond)) return 1032696;
-            if (type == typeof(BrilliantAmber)) return 1032697;
+            if (type == typeof(FireRubis)) return 1032695;
+            if (type == typeof(BlueDiamant)) return 1032696;
+            if (type == typeof(BrilliantAmbre)) return 1032697;
 
             if (type == typeof(ParasiticPlant)) return 1032688;
             if (type == typeof(LuminescentFungi)) return 1032689;
@@ -273,31 +273,31 @@ namespace Server.Items
             Register(1, new ItemPropertyInfo(AosAttribute.DefendChance, 1075620, 110, typeof(RelicFragment), typeof(Tourmaline), typeof(EssenceSingularity), 1, 1, 15, 1111947,
                 new PropInfo(1, 15, 15, new int[] { 20 }), new PropInfo(2, 25, 25, new int[] { 30, 35 }), new PropInfo(3, 0, 5, true), new PropInfo(4, 15, 15, new int[] { 20 }), new PropInfo(5, 0, 5, true), new PropInfo(6, 15, 15, new int[] { 20 })));
 
-            Register(2, new ItemPropertyInfo(AosAttribute.AttackChance, 1075616, 130, typeof(RelicFragment), typeof(Amber), typeof(EssencePrecision), 1, 1, 15, 1111958,
+            Register(2, new ItemPropertyInfo(AosAttribute.AttackChance, 1075616, 130, typeof(RelicFragment), typeof(Ambre), typeof(EssencePrecision), 1, 1, 15, 1111958,
                 new PropInfo(1, 15, 15, new int[] { 20 }), new PropInfo(2, 25, 25, new int[] { 30, 35 }), new PropInfo(3, 0, 5, true), new PropInfo(4, 15, 15, new int[] { 20 }), new PropInfo(5, 0, 5, true), new PropInfo(6, 15, 15, new int[] { 20 })));
 
             Register(3, new ItemPropertyInfo(AosAttribute.RegenHits, 1075627, 100, typeof(EnchantedEssence), typeof(Tourmaline), typeof(SeedOfRenewal), 1, 1, 2, 1111994,
                 new PropInfo(1, 3, 0, 9), new PropInfo(2, 3, 0, 9), new PropInfo(3, 2, 2, new int[] { 4 }), new PropInfo(4, 0, 2, new int[] { 4 }), new PropInfo(5, 2, 2, new int[] { 4 })));
 
-            Register(4, new ItemPropertyInfo(AosAttribute.RegenStam, 1079411, 100, typeof(EnchantedEssence), typeof(Diamond), typeof(SeedOfRenewal), 1, 1, 3, 1112043,
+            Register(4, new ItemPropertyInfo(AosAttribute.RegenStam, 1079411, 100, typeof(EnchantedEssence), typeof(Diamant), typeof(SeedOfRenewal), 1, 1, 3, 1112043,
                 new PropInfo(1, 3, 0, 9), new PropInfo(2, 3, 0, 9), new PropInfo(3, 3, 3, new int[] { 4 }), new PropInfo(4, 0, 3, new int[] { 4 }), new PropInfo(5, 3, 3, new int[] { 4 })));
 
             Register(5, new ItemPropertyInfo(AosAttribute.RegenMana, 1079410, 100, typeof(EnchantedEssence), typeof(Sapphire), typeof(SeedOfRenewal), 1, 1, 2, 1112003,
                 new PropInfo(1, 3, 0, 9), new PropInfo(2, 3, 0, 9), new PropInfo(3, 2, 2, new int[] { 4 }), new PropInfo(4, 0, 2, new int[] { 4 }), new PropInfo(5, 2, 2, new int[] { 4 }), new PropInfo(6, 0, 2, 4)));
 
-            Register(6, new ItemPropertyInfo(AosAttribute.BonusStr, 1079767, 110, typeof(EnchantedEssence), typeof(Diamond), typeof(FireRuby), 1, 1, 8, 1112044,
+            Register(6, new ItemPropertyInfo(AosAttribute.BonusStr, 1079767, 110, typeof(EnchantedEssence), typeof(Diamant), typeof(FireRubis), 1, 1, 8, 1112044,
                 new PropInfo(1, 0, 5), new PropInfo(2, 0, 5), new PropInfo(3, 0, 5), new PropInfo(4, 0, 5), new PropInfo(5, 0, 5), new PropInfo(6, 8, 8, new int[] { 9, 10 })));
 
-            Register(7, new ItemPropertyInfo(AosAttribute.BonusDex, 1079732, 110, typeof(EnchantedEssence), typeof(Ruby), typeof(BlueDiamond), 1, 1, 8, 1111948,
+            Register(7, new ItemPropertyInfo(AosAttribute.BonusDex, 1079732, 110, typeof(EnchantedEssence), typeof(Rubis), typeof(BlueDiamant), 1, 1, 8, 1111948,
                  new PropInfo(1, 0, 5), new PropInfo(2, 0, 5), new PropInfo(3, 0, 5), new PropInfo(4, 0, 5), new PropInfo(5, 0, 5), new PropInfo(6, 8, 8, new int[] { 9, 10 })));
 
             Register(8, new ItemPropertyInfo(AosAttribute.BonusInt, 1079756, 110, typeof(EnchantedEssence), typeof(Tourmaline), typeof(Turquoise), 1, 1, 8, 1111995,
                 new PropInfo(1, 0, 5), new PropInfo(2, 0, 5), new PropInfo(3, 0, 5), new PropInfo(4, 0, 5), new PropInfo(5, 0, 5), new PropInfo(6, 8, 8, new int[] { 9, 10 })));
 
-            Register(9, new ItemPropertyInfo(AosAttribute.BonusHits, 1075630, 110, typeof(EnchantedEssence), typeof(Ruby), typeof(LuminescentFungi), 1, 1, 5, 1111993,
+            Register(9, new ItemPropertyInfo(AosAttribute.BonusHits, 1075630, 110, typeof(EnchantedEssence), typeof(Rubis), typeof(LuminescentFungi), 1, 1, 5, 1111993,
                 new PropInfo(1, 0, 5, new int[] { 6, 7 }), new PropInfo(2, 0, 5, new int[] { 6, 7 }), new PropInfo(3, 5, 5, new int[] { 6, 7 }), new PropInfo(4, 0, 5, new int[] { 6, 7 }), new PropInfo(5, 5, 5, new int[] { 6, 7 })));
 
-            Register(10, new ItemPropertyInfo(AosAttribute.BonusStam, 1075632, 110, typeof(EnchantedEssence), typeof(Diamond), typeof(LuminescentFungi), 1, 1, 8, 1112042,
+            Register(10, new ItemPropertyInfo(AosAttribute.BonusStam, 1075632, 110, typeof(EnchantedEssence), typeof(Diamant), typeof(LuminescentFungi), 1, 1, 8, 1112042,
                 new PropInfo(1, 0, 5), new PropInfo(2, 0, 5), new PropInfo(3, 8, 8, new int[] { 9, 10 }), new PropInfo(4, 0, 5), new PropInfo(5, 8, 8, new int[] { 9, 10 }), new PropInfo(6, 0, 5)));
 
             Register(11, new ItemPropertyInfo(AosAttribute.BonusMana, 1075631, 110, typeof(EnchantedEssence), typeof(Sapphire), typeof(LuminescentFungi), 1, 1, 8, 1112002,
@@ -309,19 +309,19 @@ namespace Server.Items
             Register(13, new ItemPropertyInfo(AosAttribute.WeaponSpeed, 1075629, 110, typeof(RelicFragment), typeof(Tourmaline), typeof(EssenceControl), 5, 5, 30, 1112045,
                 new PropInfo(1, 30, 30, new int[] { 35, 40 }), new PropInfo(2, 30, 30, new int[] { 35, 40 }), new PropInfo(4, 0, 5, new int[] { 10 }), new PropInfo(6, 0, 5, new int[] { 10 })));
 
-            Register(14, new ItemPropertyInfo(AosAttribute.SpellDamage, 1075628, 100, typeof(EnchantedEssence), typeof(Emerald), typeof(CrystalShards), 1, 1, 12, 1112041,
+            Register(14, new ItemPropertyInfo(AosAttribute.SpellDamage, 1075628, 100, typeof(EnchantedEssence), typeof(Emeraude), typeof(CrystalShards), 1, 1, 12, 1112041,
                 new PropInfo(6, 12, 12, new int[] { 14, 16, 18 })));
 
-            Register(15, new ItemPropertyInfo(AosAttribute.CastRecovery, 1075618, 120, typeof(RelicFragment), typeof(Amethyst), typeof(EssenceDiligence), 1, 1, 3, 1111952,
+            Register(15, new ItemPropertyInfo(AosAttribute.CastRecovery, 1075618, 120, typeof(RelicFragment), typeof(Amethyste), typeof(EssenceDiligence), 1, 1, 3, 1111952,
                 new PropInfo(6, 3, 3, new int[] { 4 })));
 
-            Register(16, new ItemPropertyInfo(AosAttribute.CastSpeed, 1075617, 140, typeof(RelicFragment), typeof(Ruby), typeof(EssenceAchievement), 0, 1, 1, 1111951,
+            Register(16, new ItemPropertyInfo(AosAttribute.CastSpeed, 1075617, 140, typeof(RelicFragment), typeof(Rubis), typeof(EssenceAchievement), 0, 1, 1, 1111951,
                 new PropInfo(1, 1, 1), new PropInfo(2, 1, 1), new PropInfo(4, 1, 1), new PropInfo(6, 1, 1)));
 
             Register(17, new ItemPropertyInfo(AosAttribute.LowerManaCost, 1075621, 110, typeof(RelicFragment), typeof(Tourmaline), typeof(EssenceOrder), 1, 1, 8, 1111996,
                 new PropInfo(1, 0, 5), new PropInfo(2, 0, 5), new PropInfo(3, 8, 8, new int[] { 10 }), new PropInfo(4, 0, 5), new PropInfo(5, 8, 8, new int[] { 10 }), new PropInfo(6, 8, 8, new int[] { 10 })));
 
-            Register(18, new ItemPropertyInfo(AosAttribute.LowerRegCost, 1075625, 100, typeof(MagicalResidue), typeof(Amber), typeof(FaeryDust), 1, 1, 20, 1111997,
+            Register(18, new ItemPropertyInfo(AosAttribute.LowerRegCost, 1075625, 100, typeof(MagicalResidue), typeof(Ambre), typeof(FaeryDust), 1, 1, 20, 1111997,
                 new PropInfo(3, 20, 20, new int[] { 25 }), new PropInfo(5, 20, 20, new int[] { 25 }), new PropInfo(6, 20, 20, new int[] { 25 })));
 
             Register(19, new ItemPropertyInfo(AosAttribute.ReflectPhysical, 1075626, 100, typeof(MagicalResidue), typeof(Citrine), typeof(ReflectiveWolfEye), 1, 1, 15, 1112006,
@@ -333,91 +333,91 @@ namespace Server.Items
             Register(21, new ItemPropertyInfo(AosAttribute.Luck, 1061153, 100, typeof(MagicalResidue), typeof(Citrine), typeof(ChagaMushroom), 1, 1, 100, 1111999,
                 new PropInfo(1, 100, 100, new int[] { 110, 120, 130, 140, 150 }), new PropInfo(2, 120, 120, new int[] { 130, 140, 150, 160, 170 }), new PropInfo(3, 100, 100, new int[] { 110, 120, 130, 140, 150 }), new PropInfo(4, 100, 100, new int[] { 110, 120, 130, 140, 150 }), new PropInfo(5, 100, 100, new int[] { 110, 120, 130, 140, 150 }), new PropInfo(6, 100, 100, new int[] { 110, 120, 130, 140, 150 })));
 
-            Register(22, new ItemPropertyInfo(AosAttribute.SpellChanneling, 1079766, 100, typeof(MagicalResidue), typeof(Diamond), typeof(SilverSnakeSkin), 0, 1, 1, 1112040,
+            Register(22, new ItemPropertyInfo(AosAttribute.SpellChanneling, 1079766, 100, typeof(MagicalResidue), typeof(Diamant), typeof(SilverSnakeSkin), 0, 1, 1, 1112040,
                 new PropInfo(1, 1, 1), new PropInfo(2, 1, 1), new PropInfo(4, 1, 1)));
 
             Register(23, new ItemPropertyInfo(AosAttribute.NightSight, 1015168, 50, typeof(MagicalResidue), typeof(Tourmaline), typeof(BottleIchor), 0, 1, 1, 1112004,
                 new PropInfo(3, 1, 1), new PropInfo(5, 1, 1), new PropInfo(6, 1, 1)));
 
-            Register(25, new ItemPropertyInfo(AosWeaponAttribute.HitLeechHits, 1079698, 110, typeof(MagicalResidue), typeof(Ruby), typeof(VoidOrb), 1, 2, 50, 1111964,
+            Register(25, new ItemPropertyInfo(AosWeaponAttribute.HitLeechHits, 1079698, 110, typeof(MagicalResidue), typeof(Rubis), typeof(VoidOrb), 1, 2, 50, 1111964,
                 new PropInfo(1, 2, 50, 50), new PropInfo(2, 2, 50, 50)));
 
-            Register(26, new ItemPropertyInfo(AosWeaponAttribute.HitLeechStam, 1079707, 100, typeof(MagicalResidue), typeof(Diamond), typeof(VoidOrb), 1, 2, 50, 1111992,
+            Register(26, new ItemPropertyInfo(AosWeaponAttribute.HitLeechStam, 1079707, 100, typeof(MagicalResidue), typeof(Diamant), typeof(VoidOrb), 1, 2, 50, 1111992,
                 new PropInfo(1, 2, 50, 50), new PropInfo(2, 2, 50, 50)));
 
             Register(27, new ItemPropertyInfo(AosWeaponAttribute.HitLeechMana, 1079701, 110, typeof(MagicalResidue), typeof(Sapphire), typeof(VoidOrb), 1, 2, 50, 1111967,
                 new PropInfo(1, 2, 50, 50), new PropInfo(2, 2, 50, 50)));
 
-            Register(28, new ItemPropertyInfo(AosWeaponAttribute.HitLowerAttack, 1079699, 110, typeof(EnchantedEssence), typeof(Emerald), typeof(ParasiticPlant), 1, 2, 50, 1111965,
+            Register(28, new ItemPropertyInfo(AosWeaponAttribute.HitLowerAttack, 1079699, 110, typeof(EnchantedEssence), typeof(Emeraude), typeof(ParasiticPlant), 1, 2, 50, 1111965,
                 new PropInfo(1, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
             Register(29, new ItemPropertyInfo(AosWeaponAttribute.HitLowerDefend, 1079700, 130, typeof(EnchantedEssence), typeof(Tourmaline), typeof(ParasiticPlant), 1, 2, 50, 1111966,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
-            Register(30, new ItemPropertyInfo(AosWeaponAttribute.HitPhysicalArea, 1079696, 100, typeof(MagicalResidue), typeof(Diamond), typeof(RaptorTeeth), 1, 2, 50, 1111956,
+            Register(30, new ItemPropertyInfo(AosWeaponAttribute.HitPhysicalArea, 1079696, 100, typeof(MagicalResidue), typeof(Diamant), typeof(RaptorTeeth), 1, 2, 50, 1111956,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
-            Register(31, new ItemPropertyInfo(AosWeaponAttribute.HitFireArea, 1079695, 100, typeof(MagicalResidue), typeof(Ruby), typeof(RaptorTeeth), 1, 2, 50, 1111955,
+            Register(31, new ItemPropertyInfo(AosWeaponAttribute.HitFireArea, 1079695, 100, typeof(MagicalResidue), typeof(Rubis), typeof(RaptorTeeth), 1, 2, 50, 1111955,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
             Register(32, new ItemPropertyInfo(AosWeaponAttribute.HitColdArea, 1079693, 100, typeof(MagicalResidue), typeof(Sapphire), typeof(RaptorTeeth), 1, 2, 50, 1111953,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
-            Register(33, new ItemPropertyInfo(AosWeaponAttribute.HitPoisonArea, 1079697, 100, typeof(MagicalResidue), typeof(Emerald), typeof(RaptorTeeth), 1, 2, 50, 1111957,
+            Register(33, new ItemPropertyInfo(AosWeaponAttribute.HitPoisonArea, 1079697, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(RaptorTeeth), 1, 2, 50, 1111957,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
-            Register(34, new ItemPropertyInfo(AosWeaponAttribute.HitEnergyArea, 1079694, 100, typeof(MagicalResidue), typeof(Amethyst), typeof(RaptorTeeth), 1, 2, 50, 1111954,
+            Register(34, new ItemPropertyInfo(AosWeaponAttribute.HitEnergyArea, 1079694, 100, typeof(MagicalResidue), typeof(Amethyste), typeof(RaptorTeeth), 1, 2, 50, 1111954,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
-            Register(35, new ItemPropertyInfo(AosWeaponAttribute.HitMagicArrow, 1079706, 120, typeof(RelicFragment), typeof(Amber), typeof(EssenceFeeling), 1, 2, 50, 1111963,
+            Register(35, new ItemPropertyInfo(AosWeaponAttribute.HitMagicArrow, 1079706, 120, typeof(RelicFragment), typeof(Ambre), typeof(EssenceFeeling), 1, 2, 50, 1111963,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
-            Register(36, new ItemPropertyInfo(AosWeaponAttribute.HitHarm, 1079704, 110, typeof(EnchantedEssence), typeof(Emerald), typeof(ParasiticPlant), 1, 2, 50, 1111961,
+            Register(36, new ItemPropertyInfo(AosWeaponAttribute.HitHarm, 1079704, 110, typeof(EnchantedEssence), typeof(Emeraude), typeof(ParasiticPlant), 1, 2, 50, 1111961,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
-            Register(37, new ItemPropertyInfo(AosWeaponAttribute.HitFireball, 1079703, 140, typeof(EnchantedEssence), typeof(Ruby), typeof(FireRuby), 1, 2, 50, 1111960,
+            Register(37, new ItemPropertyInfo(AosWeaponAttribute.HitFireball, 1079703, 140, typeof(EnchantedEssence), typeof(Rubis), typeof(FireRubis), 1, 2, 50, 1111960,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
-            Register(38, new ItemPropertyInfo(AosWeaponAttribute.HitLightning, 1079705, 140, typeof(RelicFragment), typeof(Amethyst), typeof(EssencePassion), 1, 2, 50, 1111962,
+            Register(38, new ItemPropertyInfo(AosWeaponAttribute.HitLightning, 1079705, 140, typeof(RelicFragment), typeof(Amethyste), typeof(EssencePassion), 1, 2, 50, 1111962,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
-            Register(39, new ItemPropertyInfo(AosWeaponAttribute.HitDispel, 1079702, 100, typeof(MagicalResidue), typeof(Amber), typeof(SlithTongue), 1, 2, 50, 1111959,
+            Register(39, new ItemPropertyInfo(AosWeaponAttribute.HitDispel, 1079702, 100, typeof(MagicalResidue), typeof(Ambre), typeof(SlithTongue), 1, 2, 50, 1111959,
                 new PropInfo(1, 2, 50, 50, new int[] { 55, 60, 65, 70 }), new PropInfo(2, 2, 50, 50, new int[] { 55, 60, 65, 70 })));
 
-            Register(40, new ItemPropertyInfo(AosWeaponAttribute.UseBestSkill, 1079592, 150, typeof(EnchantedEssence), typeof(Amber), typeof(DelicateScales), 0, 1, 1, 1111946,
+            Register(40, new ItemPropertyInfo(AosWeaponAttribute.UseBestSkill, 1079592, 150, typeof(EnchantedEssence), typeof(Ambre), typeof(DelicateScales), 0, 1, 1, 1111946,
                 new PropInfo(1, 1, 1)));
 
-            Register(41, new ItemPropertyInfo(AosWeaponAttribute.MageWeapon, 1079759, 100, typeof(EnchantedEssence), typeof(Emerald), typeof(ArcanicRuneStone), 1, 1, 10, 1112001,
+            Register(41, new ItemPropertyInfo(AosWeaponAttribute.MageWeapon, 1079759, 100, typeof(EnchantedEssence), typeof(Emeraude), typeof(ArcanicRuneStone), 1, 1, 10, 1112001,
                 new PropInfo(1, 10, 10, new int[] { 11, 12, 13, 14, 15 }), new PropInfo(2, 10, 10, new int[] { 11, 12, 13, 14, 15 })));
 
-            Register(42, new ItemPropertyInfo(AosWeaponAttribute.DurabilityBonus, 1017323, 100, typeof(EnchantedEssence), typeof(Diamond), typeof(PowderedIron), 10, 10, 100, 1111949,
+            Register(42, new ItemPropertyInfo(AosWeaponAttribute.DurabilityBonus, 1017323, 100, typeof(EnchantedEssence), typeof(Diamant), typeof(PowderedIron), 10, 10, 100, 1111949,
                 new PropInfo(1, 0, 100, new int[] { 110, 120, 130, 140, 150 }), new PropInfo(2, 0, 100, new int[] { 110, 120, 130, 140, 150 })));
 
-            Register(43, new ItemPropertyInfo(AosArmorAttribute.DurabilityBonus, 1017323, 100, typeof(EnchantedEssence), typeof(Diamond), typeof(PowderedIron), 10, 10, 100, 1111949,
+            Register(43, new ItemPropertyInfo(AosArmorAttribute.DurabilityBonus, 1017323, 100, typeof(EnchantedEssence), typeof(Diamant), typeof(PowderedIron), 10, 10, 100, 1111949,
                new PropInfo(3, 0, 100, new int[] { 110, 120, 130, 140, 150 }), new PropInfo(4, 100, 100, new int[] { 110, 120, 130, 140, 150 }), new PropInfo(5, 0, 100, new int[] { 110, 120, 130, 140, 150 })));
 
-            Register(44, new ItemPropertyInfo(AosWeaponAttribute.LowerStatReq, 1079757, 100, typeof(EnchantedEssence), typeof(Amethyst), typeof(ElvenFletching), 10, 10, 100, 1111998,
+            Register(44, new ItemPropertyInfo(AosWeaponAttribute.LowerStatReq, 1079757, 100, typeof(EnchantedEssence), typeof(Amethyste), typeof(ElvenFletching), 10, 10, 100, 1111998,
                 new PropInfo(1, 0, 100), new PropInfo(2, 0, 100)));
 
-            Register(45, new ItemPropertyInfo(AosArmorAttribute.LowerStatReq, 1079757, 100, typeof(EnchantedEssence), typeof(Amethyst), typeof(ElvenFletching), 10, 10, 100, 1111998,
+            Register(45, new ItemPropertyInfo(AosArmorAttribute.LowerStatReq, 1079757, 100, typeof(EnchantedEssence), typeof(Amethyste), typeof(ElvenFletching), 10, 10, 100, 1111998,
                 new PropInfo(3, 0, 100), new PropInfo(4, 0, 100), new PropInfo(5, 0, 100)));
 
-            Register(49, new ItemPropertyInfo(AosArmorAttribute.MageArmor, 1079758, 0, typeof(EnchantedEssence), typeof(Diamond), typeof(AbyssalCloth), 0, 1, 1, 1112000,
+            Register(49, new ItemPropertyInfo(AosArmorAttribute.MageArmor, 1079758, 0, typeof(EnchantedEssence), typeof(Diamant), typeof(AbyssalCloth), 0, 1, 1, 1112000,
                 new PropInfo(3, 1, 1)));
 
-            Register(51, new ItemPropertyInfo(AosElementAttribute.Physical, 1061158, 100, typeof(MagicalResidue), typeof(Diamond), typeof(BouraPelt), 1, 1, 15, 1112010,
+            Register(51, new ItemPropertyInfo(AosElementAttribute.Physical, 1061158, 100, typeof(MagicalResidue), typeof(Diamant), typeof(BouraPelt), 1, 1, 15, 1112010,
                 new PropInfo(1, 10, 100, 100), new PropInfo(2, 10, 100, 100), new PropInfo(3, 15, 15, new int[] { 20, 25, 30 }), new PropInfo(4, 15, 15), new PropInfo(5, 15, 15, new int[] { 20, 25, 30 }), new PropInfo(6, 15, 15, new int[] { 20 })));
 
-            Register(52, new ItemPropertyInfo(AosElementAttribute.Fire, 1061159, 100, typeof(MagicalResidue), typeof(Ruby), typeof(BouraPelt), 1, 1, 15, 1112009,
+            Register(52, new ItemPropertyInfo(AosElementAttribute.Fire, 1061159, 100, typeof(MagicalResidue), typeof(Rubis), typeof(BouraPelt), 1, 1, 15, 1112009,
                 new PropInfo(1, 10, 100, 100), new PropInfo(2, 10, 100, 100), new PropInfo(3, 15, 15, new int[] { 20, 25, 30 }), new PropInfo(4, 15, 15), new PropInfo(5, 15, 15, new int[] { 20, 25, 30 }), new PropInfo(6, 15, 15, new int[] { 20 })));
 
             Register(53, new ItemPropertyInfo(AosElementAttribute.Cold, 1061160, 100, typeof(MagicalResidue), typeof(Sapphire), typeof(BouraPelt), 1, 1, 15, 1112007,
                 new PropInfo(1, 10, 100, 100), new PropInfo(2, 10, 100, 100), new PropInfo(3, 15, 15, new int[] { 20, 25, 30 }), new PropInfo(4, 15, 15), new PropInfo(5, 15, 15, new int[] { 20, 25, 30 }), new PropInfo(6, 15, 15, new int[] { 20 })));
 
-            Register(54, new ItemPropertyInfo(AosElementAttribute.Poison, 1061161, 100, typeof(MagicalResidue), typeof(Emerald), typeof(BouraPelt), 1, 1, 15, 1112011,
+            Register(54, new ItemPropertyInfo(AosElementAttribute.Poison, 1061161, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(BouraPelt), 1, 1, 15, 1112011,
                 new PropInfo(1, 10, 100, 100), new PropInfo(2, 10, 100, 100), new PropInfo(3, 15, 15, new int[] { 20, 25, 30 }), new PropInfo(4, 15, 15), new PropInfo(5, 15, 15, new int[] { 20, 25, 30 }), new PropInfo(6, 15, 15, new int[] { 20 })));
 
-            Register(55, new ItemPropertyInfo(AosElementAttribute.Energy, 1061162, 100, typeof(MagicalResidue), typeof(Amethyst), typeof(BouraPelt), 1, 1, 15, 1112008,
+            Register(55, new ItemPropertyInfo(AosElementAttribute.Energy, 1061162, 100, typeof(MagicalResidue), typeof(Amethyste), typeof(BouraPelt), 1, 1, 15, 1112008,
                 new PropInfo(1, 10, 100, 100), new PropInfo(2, 10, 100, 100), new PropInfo(3, 15, 15, new int[] { 20, 25, 30 }), new PropInfo(4, 15, 15), new PropInfo(5, 15, 15, new int[] { 20, 25, 30 }), new PropInfo(6, 15, 15, new int[] { 20 })));
 
             // Non-Imbuable
@@ -427,43 +427,43 @@ namespace Server.Items
             Register(60, new ItemPropertyInfo("WeaponVelocity", 1080416, 140, typeof(RelicFragment), typeof(Tourmaline), typeof(EssenceDirection), 1, 11, 50, 1112048,
                 new PropInfo(2, 50, 50)));
 
-            Register(61, new ItemPropertyInfo(AosAttribute.BalancedWeapon, 1072792, 150, typeof(RelicFragment), typeof(Amber), typeof(EssenceBalance), 0, 1, 1, 1112047,
+            Register(61, new ItemPropertyInfo(AosAttribute.BalancedWeapon, 1072792, 150, typeof(RelicFragment), typeof(Ambre), typeof(EssenceBalance), 0, 1, 1, 1112047,
                new PropInfo(2, 1, 1)));            
 
             // Non-Imbuable, Non-Loot
             Register(62, new ItemPropertyInfo("SearingWeapon", 1151183, 150, 0, 1, 1));
 
-            Register(63, new ItemPropertyInfo(AosAttribute.BalancedWeapon, 1072792, 100, typeof(RelicFragment), typeof(Amber), typeof(EssenceBalance), 0, 1, 1, 1153740,
+            Register(63, new ItemPropertyInfo(AosAttribute.BalancedWeapon, 1072792, 100, typeof(RelicFragment), typeof(Ambre), typeof(EssenceBalance), 0, 1, 1, 1153740,
                 new PropInfo(1, 1, 1)));
 
             // Slayers
-            Register(101, new ItemPropertyInfo(SlayerName.OrcSlaying, 1079741, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111977, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(102, new ItemPropertyInfo(SlayerName.TrollSlaughter, 1079754, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111990, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(103, new ItemPropertyInfo(SlayerName.OgreTrashing, 1079739, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111975, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(104, new ItemPropertyInfo(SlayerName.DragonSlaying, 1061284, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111970, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(105, new ItemPropertyInfo(SlayerName.Terathan, 1079753, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111989, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(106, new ItemPropertyInfo(SlayerName.SnakesBane, 1079744, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111980, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(107, new ItemPropertyInfo(SlayerName.LizardmanSlaughter, 1079738, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111974, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(108, new ItemPropertyInfo(SlayerName.GargoylesFoe, 1079737, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111973, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(111, new ItemPropertyInfo(SlayerName.Ophidian, 1079740, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111976, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(112, new ItemPropertyInfo(SlayerName.SpidersDeath, 1079746, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111982, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(113, new ItemPropertyInfo(SlayerName.ScorpionsBane, 1079743, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111979, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(114, new ItemPropertyInfo(SlayerName.FlameDousing, 1079736, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111972, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(115, new ItemPropertyInfo(SlayerName.WaterDissipation, 1079755, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111991, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(116, new ItemPropertyInfo(SlayerName.Vacuum, 1079733, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111968, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(117, new ItemPropertyInfo(SlayerName.ElementalHealth, 1079742, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111978, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(118, new ItemPropertyInfo(SlayerName.EarthShatter, 1079735, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111971, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(119, new ItemPropertyInfo(SlayerName.BloodDrinking, 1079734, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111969, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(120, new ItemPropertyInfo(SlayerName.SummerWind, 1079745, 100, typeof(MagicalResidue), typeof(Emerald), typeof(WhitePearl), 0, 1, 1, 1111981, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(101, new ItemPropertyInfo(SlayerName.OrcSlaying, 1079741, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111977, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(102, new ItemPropertyInfo(SlayerName.TrollSlaughter, 1079754, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111990, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(103, new ItemPropertyInfo(SlayerName.OgreTrashing, 1079739, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111975, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(104, new ItemPropertyInfo(SlayerName.DragonSlaying, 1061284, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111970, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(105, new ItemPropertyInfo(SlayerName.Terathan, 1079753, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111989, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(106, new ItemPropertyInfo(SlayerName.SnakesBane, 1079744, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111980, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(107, new ItemPropertyInfo(SlayerName.LizardmanSlaughter, 1079738, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111974, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(108, new ItemPropertyInfo(SlayerName.GargoylesFoe, 1079737, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111973, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(111, new ItemPropertyInfo(SlayerName.Ophidian, 1079740, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111976, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(112, new ItemPropertyInfo(SlayerName.SpidersDeath, 1079746, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111982, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(113, new ItemPropertyInfo(SlayerName.ScorpionsBane, 1079743, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111979, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(114, new ItemPropertyInfo(SlayerName.FlameDousing, 1079736, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111972, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(115, new ItemPropertyInfo(SlayerName.WaterDissipation, 1079755, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111991, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(116, new ItemPropertyInfo(SlayerName.Vacuum, 1079733, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111968, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(117, new ItemPropertyInfo(SlayerName.ElementalHealth, 1079742, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111978, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(118, new ItemPropertyInfo(SlayerName.EarthShatter, 1079735, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111971, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(119, new ItemPropertyInfo(SlayerName.BloodDrinking, 1079734, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111969, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(120, new ItemPropertyInfo(SlayerName.SummerWind, 1079745, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(WhitePearl), 0, 1, 1, 1111981, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
 
             //Super Slayers
-            Register(121, new ItemPropertyInfo(SlayerName.Silver, 1079752, 130, typeof(RelicFragment), typeof(Ruby), typeof(UndyingFlesh), 0, 1, 1, 1111988, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(122, new ItemPropertyInfo(SlayerName.Repond, 1079750, 130, typeof(RelicFragment), typeof(Ruby), typeof(GoblinBlood), 0, 1, 1, 1111986, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(123, new ItemPropertyInfo(SlayerName.ReptilianDeath, 1079751, 130, typeof(RelicFragment), typeof(Ruby), typeof(LavaSerpentCrust), 0, 1, 1, 1111987, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(124, new ItemPropertyInfo(SlayerName.Exorcism, 1079748, 130, typeof(RelicFragment), typeof(Ruby), typeof(DaemonClaw), 0, 1, 1, 1111984, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(125, new ItemPropertyInfo(SlayerName.ArachnidDoom, 1079747, 130, typeof(RelicFragment), typeof(Ruby), typeof(SpiderCarapace), 0, 1, 1, 1111983, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(126, new ItemPropertyInfo(SlayerName.ElementalBan, 1079749, 130, typeof(RelicFragment), typeof(Ruby), typeof(VialOfVitriol), 0, 1, 1, 1111985, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
-            Register(127, new ItemPropertyInfo(SlayerName.Fey, 1154652, 130, typeof(RelicFragment), typeof(Ruby), typeof(FeyWings), 0, 1, 1, 1154652, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(121, new ItemPropertyInfo(SlayerName.Silver, 1079752, 130, typeof(RelicFragment), typeof(Rubis), typeof(UndyingFlesh), 0, 1, 1, 1111988, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(122, new ItemPropertyInfo(SlayerName.Repond, 1079750, 130, typeof(RelicFragment), typeof(Rubis), typeof(GoblinBlood), 0, 1, 1, 1111986, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(123, new ItemPropertyInfo(SlayerName.ReptilianDeath, 1079751, 130, typeof(RelicFragment), typeof(Rubis), typeof(LavaSerpentCrust), 0, 1, 1, 1111987, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(124, new ItemPropertyInfo(SlayerName.Exorcism, 1079748, 130, typeof(RelicFragment), typeof(Rubis), typeof(DaemonClaw), 0, 1, 1, 1111984, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(125, new ItemPropertyInfo(SlayerName.ArachnidDoom, 1079747, 130, typeof(RelicFragment), typeof(Rubis), typeof(SpiderCarapace), 0, 1, 1, 1111983, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(126, new ItemPropertyInfo(SlayerName.ElementalBan, 1079749, 130, typeof(RelicFragment), typeof(Rubis), typeof(VialOfVitriol), 0, 1, 1, 1111985, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
+            Register(127, new ItemPropertyInfo(SlayerName.Fey, 1154652, 130, typeof(RelicFragment), typeof(Rubis), typeof(FeyWings), 0, 1, 1, 1154652, new PropInfo(1, 1, 1), new PropInfo(2, 1, 1)));
 
             // Non-Imbuable, non-Loot
             Register(128, new ItemPropertyInfo(SlayerName.Dinosaur, 1156240, 130, 0, 1, 1));
@@ -485,44 +485,44 @@ namespace Server.Items
             Register(145, new ItemPropertyInfo(TalismanSlayerName.Undead, 1079752, 130, 0, 1, 1));
             Register(146, new ItemPropertyInfo(TalismanSlayerName.Goblin, 1095010, 130, 0, 1, 1));
 
-            Register(151, new ItemPropertyInfo(SkillName.Fencing, 1044102, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112012, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(152, new ItemPropertyInfo(SkillName.Macing, 1044101, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112013, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(153, new ItemPropertyInfo(SkillName.Swords, 1044100, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112016, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(154, new ItemPropertyInfo(SkillName.Musicianship, 1044089, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112015, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(155, new ItemPropertyInfo(SkillName.Magery, 1044085, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112014, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(151, new ItemPropertyInfo(SkillName.Fencing, 1044102, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112012, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(152, new ItemPropertyInfo(SkillName.Macing, 1044101, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112013, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(153, new ItemPropertyInfo(SkillName.Swords, 1044100, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112016, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(154, new ItemPropertyInfo(SkillName.Musicianship, 1044089, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112015, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(155, new ItemPropertyInfo(SkillName.Magery, 1044085, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112014, new PropInfo(6, 15, 15, new int[] { 20 })));
 
-            Register(156, new ItemPropertyInfo(SkillName.Wrestling, 1044103, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112021, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(157, new ItemPropertyInfo(SkillName.AnimalTaming, 1044095, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112017, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(158, new ItemPropertyInfo(SkillName.SpiritSpeak, 1044092, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112019, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(159, new ItemPropertyInfo(SkillName.Tactics, 1044087, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112020, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(160, new ItemPropertyInfo(SkillName.Provocation, 1044082, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112018, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(156, new ItemPropertyInfo(SkillName.Wrestling, 1044103, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112021, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(157, new ItemPropertyInfo(SkillName.AnimalTaming, 1044095, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112017, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(158, new ItemPropertyInfo(SkillName.SpiritSpeak, 1044092, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112019, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(159, new ItemPropertyInfo(SkillName.Tactics, 1044087, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112020, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(160, new ItemPropertyInfo(SkillName.Provocation, 1044082, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112018, new PropInfo(6, 15, 15, new int[] { 20 })));
 
-            Register(161, new ItemPropertyInfo(SkillName.Focus, 1044110, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112024, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(162, new ItemPropertyInfo(SkillName.Parry, 1044065, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112026, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(163, new ItemPropertyInfo(SkillName.Equitation, 1044107, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112027, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(164, new ItemPropertyInfo(SkillName.Meditation, 1044106, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112025, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(165, new ItemPropertyInfo(SkillName.AnimalLore, 1044062, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112022, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(166, new ItemPropertyInfo(SkillName.Discordance, 1044075, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112023, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(161, new ItemPropertyInfo(SkillName.Focus, 1044110, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112024, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(162, new ItemPropertyInfo(SkillName.Parry, 1044065, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112026, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(163, new ItemPropertyInfo(SkillName.Equitation, 1044107, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112027, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(164, new ItemPropertyInfo(SkillName.Meditation, 1044106, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112025, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(165, new ItemPropertyInfo(SkillName.AnimalLore, 1044062, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112022, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(166, new ItemPropertyInfo(SkillName.Discordance, 1044075, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112023, new PropInfo(6, 15, 15, new int[] { 20 })));
 
-            Register(167, new ItemPropertyInfo(SkillName.Mysticism, 1044115, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1115213, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(168, new ItemPropertyInfo(SkillName.Bushido, 1044112, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112029, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(169, new ItemPropertyInfo(SkillName.Necromancy, 1044109, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112031, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(170, new ItemPropertyInfo(SkillName.Veterinary, 1044099, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112033, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(171, new ItemPropertyInfo(SkillName.Stealing, 1044093, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112032, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(172, new ItemPropertyInfo(SkillName.EvalInt, 1044076, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112030, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(173, new ItemPropertyInfo(SkillName.Anatomy, 1044061, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112028, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(167, new ItemPropertyInfo(SkillName.Mysticism, 1044115, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1115213, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(168, new ItemPropertyInfo(SkillName.Bushido, 1044112, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112029, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(169, new ItemPropertyInfo(SkillName.Necromancy, 1044109, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112031, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(170, new ItemPropertyInfo(SkillName.Veterinary, 1044099, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112033, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(171, new ItemPropertyInfo(SkillName.Stealing, 1044093, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112032, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(172, new ItemPropertyInfo(SkillName.EvalInt, 1044076, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112030, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(173, new ItemPropertyInfo(SkillName.Anatomy, 1044061, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112028, new PropInfo(6, 15, 15, new int[] { 20 })));
 
-            Register(174, new ItemPropertyInfo(SkillName.Peacemaking, 1044069, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112038, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(175, new ItemPropertyInfo(SkillName.Ninjitsu, 1044113, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112037, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(176, new ItemPropertyInfo(SkillName.Chivalry, 1044111, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112035, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(177, new ItemPropertyInfo(SkillName.Archery, 1044091, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112034, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(178, new ItemPropertyInfo(SkillName.MagicResist, 1044086, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112039, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(179, new ItemPropertyInfo(SkillName.Healing, 1044077, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1112036, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(180, new ItemPropertyInfo(SkillName.Throwing, 1044117, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1115212, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(174, new ItemPropertyInfo(SkillName.Peacemaking, 1044069, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112038, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(175, new ItemPropertyInfo(SkillName.Ninjitsu, 1044113, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112037, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(176, new ItemPropertyInfo(SkillName.Chivalry, 1044111, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112035, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(177, new ItemPropertyInfo(SkillName.Archery, 1044091, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112034, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(178, new ItemPropertyInfo(SkillName.MagicResist, 1044086, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112039, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(179, new ItemPropertyInfo(SkillName.Healing, 1044077, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1112036, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(180, new ItemPropertyInfo(SkillName.Throwing, 1044117, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1115212, new PropInfo(6, 15, 15, new int[] { 20 })));
 
-            Register(181, new ItemPropertyInfo(SkillName.Lumberjacking, 1002100, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1002101, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(182, new ItemPropertyInfo(SkillName.Snooping, 1002138, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1002139, new PropInfo(6, 15, 15, new int[] { 20 })));
-            Register(183, new ItemPropertyInfo(SkillName.Mining, 1002111, 140, typeof(EnchantedEssence), typeof(StarSapphire), typeof(CrystallineBlackrock), 1, 1, 15, 1002112, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(181, new ItemPropertyInfo(SkillName.Lumberjacking, 1002100, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1002101, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(182, new ItemPropertyInfo(SkillName.Snooping, 1002138, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1002139, new PropInfo(6, 15, 15, new int[] { 20 })));
+            Register(183, new ItemPropertyInfo(SkillName.Mining, 1002111, 140, typeof(EnchantedEssence), typeof(SaphirEtoile), typeof(CrystallineBlackrock), 1, 1, 15, 1002112, new PropInfo(6, 15, 15, new int[] { 20 })));
 
             // Non-Imbuables for getting item intensity only
             Register(200, new ItemPropertyInfo(AosWeaponAttribute.BloodDrinker, 1017407, 140, 0, 1, 1, 1152387,
@@ -545,19 +545,19 @@ namespace Server.Items
             Register(206, new ItemPropertyInfo(AosWeaponAttribute.ReactiveParalyze, 1154660, 140, 0, 1, 1, 1152400,
                  new PropInfo(1, 0, 1)));
 
-            Register(233, new ItemPropertyInfo(AosWeaponAttribute.ResistPhysicalBonus, 1061158, 100, typeof(MagicalResidue), typeof(Diamond), typeof(BouraPelt), 1, 1, 15, 1112010,
+            Register(233, new ItemPropertyInfo(AosWeaponAttribute.ResistPhysicalBonus, 1061158, 100, typeof(MagicalResidue), typeof(Diamant), typeof(BouraPelt), 1, 1, 15, 1112010,
                 new PropInfo(1, 15, 15, new int[] { 20 }), new PropInfo(2, 15, 15, new int[] { 20 })));
 
-            Register(234, new ItemPropertyInfo(AosWeaponAttribute.ResistFireBonus, 1061159, 100, typeof(MagicalResidue), typeof(Ruby), typeof(BouraPelt), 1, 1, 15, 1112009,
+            Register(234, new ItemPropertyInfo(AosWeaponAttribute.ResistFireBonus, 1061159, 100, typeof(MagicalResidue), typeof(Rubis), typeof(BouraPelt), 1, 1, 15, 1112009,
                 new PropInfo(1, 15, 15, new int[] { 20 }), new PropInfo(2, 15, 15, new int[] { 20 })));
 
             Register(235, new ItemPropertyInfo(AosWeaponAttribute.ResistColdBonus, 1061160, 100, typeof(MagicalResidue), typeof(Sapphire), typeof(BouraPelt), 1, 1, 15, 1112007,
                 new PropInfo(1, 15, 15, new int[] { 20 }), new PropInfo(2, 15, 15, new int[] { 20 })));
 
-            Register(236, new ItemPropertyInfo(AosWeaponAttribute.ResistPoisonBonus, 1061161, 100, typeof(MagicalResidue), typeof(Emerald), typeof(BouraPelt), 1, 1, 15, 1112011,
+            Register(236, new ItemPropertyInfo(AosWeaponAttribute.ResistPoisonBonus, 1061161, 100, typeof(MagicalResidue), typeof(Emeraude), typeof(BouraPelt), 1, 1, 15, 1112011,
                 new PropInfo(1, 15, 15, new int[] { 20 }), new PropInfo(2, 15, 15, new int[] { 20 })));
 
-            Register(237, new ItemPropertyInfo(AosWeaponAttribute.ResistEnergyBonus, 1061162, 100, typeof(MagicalResidue), typeof(Amethyst), typeof(BouraPelt), 1, 1, 15, 1112008,
+            Register(237, new ItemPropertyInfo(AosWeaponAttribute.ResistEnergyBonus, 1061162, 100, typeof(MagicalResidue), typeof(Amethyste), typeof(BouraPelt), 1, 1, 15, 1112008,
                 new PropInfo(1, 15, 15, new int[] { 20 }), new PropInfo(2, 15, 15, new int[] { 20 })));
 
             Register(208, new ItemPropertyInfo(SAAbsorptionAttribute.EaterFire, 1154662, 140, 1, 1, 15, 1152390,
@@ -694,7 +694,7 @@ namespace Server.Items
             {
                 if (id == 1)
                 {
-                    typ = typeof(BrilliantAmber);
+                    typ = typeof(BrilliantAmbre);
                 }
 
                 if (id == 2)
@@ -714,7 +714,7 @@ namespace Server.Items
             {
                 if (info.ID == 1)
                 {
-                    td = info.GetName(typeof(BrilliantAmber));
+                    td = info.GetName(typeof(BrilliantAmbre));
                 }
 
                 if (info.ID == 2)

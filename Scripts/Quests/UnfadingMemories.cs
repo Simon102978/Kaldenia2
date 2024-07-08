@@ -8,7 +8,7 @@ namespace Server.Engines.Quests
         public UnfadingMemoriesOneQuest()
             : base()
         {
-            AddObjective(new ObtainObjective(typeof(PrismaticAmber), "prismatic amber", 1));
+            AddObjective(new ObtainObjective(typeof(PrismaticAmbre), "prismatic Ambre", 1));
 
             AddReward(new BaseReward(1075357)); // The joy of contributing to a noble artistic effort, however paltry the end product.
         }
@@ -19,13 +19,13 @@ namespace Server.Engines.Quests
         /* Unfading Memories */
         public override object Title => 1075355;
         /* Aargh! It’s just not right! It doesn’t capture the unique color of her hair at all! If only I had some Prismatic 
-        Amber. That would be perfect. They used to mine it in Malas, but alas, those veins ran dry some time ago. I hear it 
+        Ambre. That would be perfect. They used to mine it in Malas, but alas, those veins ran dry some time ago. I hear it 
         may have been found in the Prism of Light. Oh, if only there were a bold adventurer within earshot who would go to 
         the Prism of Light and retrieve some for me! */
         public override object Description => 1075356;
         /* Is there no one who can help a humble artist pursue his Muse? */
         public override object Refuse => 1075358;
-        /* You can find Prismatic Amber in the Prism of Light, located just north of the city of Nujel'm. */
+        /* You can find Prismatic Ambre in the Prism of Light, located just north of the city of Nujel'm. */
         public override object Uncomplete => 1075359;
         /* I knew it! See, it’s just the color I needed! Look how it brings out the highlights of her wheaten tresses! */
         public override object Complete => 1075360;
@@ -59,7 +59,7 @@ namespace Server.Engines.Quests
         public override bool DoneOnce => true;
         /* Unfading Memories */
         public override object Title => 1075367;
-        /* Finished! With the pigment I was able to create from the Prismatic Amber you brought me, I was able to complete 
+        /* Finished! With the pigment I was able to create from the Prismatic Ambre you brought me, I was able to complete 
         my humble work. I should explain. Once, I loved a noble lady of gentleness and refinement, who possessed such beauty 
         that I have found myself unable to love another to this day. But it was from afar that I admired her, for it is not 
         for one so lowly as I to pay court to the likes of her. You have heard of the fair Thalia, Lady of Nujel'm? No? Well, 

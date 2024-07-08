@@ -68,13 +68,13 @@ namespace Server.SkillHandlers
                 return 0;
 
             if (type == typeof(Tourmaline)) return 1023864;
-            if (type == typeof(Ruby)) return 1023859;
-            if (type == typeof(Diamond)) return 1023878;
+            if (type == typeof(Rubis)) return 1023859;
+            if (type == typeof(Diamant)) return 1023878;
             if (type == typeof(Sapphire)) return 1023857;
             if (type == typeof(Citrine)) return 1023861;
-            if (type == typeof(Emerald)) return 1023856;
-            if (type == typeof(StarSapphire)) return 1023855;
-            if (type == typeof(Amethyst)) return 1023862;
+            if (type == typeof(Emeraude)) return 1023856;
+            if (type == typeof(SaphirEtoile)) return 1023855;
+            if (type == typeof(Amethyste)) return 1023862;
 
             if (type == typeof(RelicFragment)) return 1031699;
             if (type == typeof(EnchantedEssence)) return 1031698;
@@ -82,12 +82,12 @@ namespace Server.SkillHandlers
 
             if (type == typeof(DarkSapphire)) return 1032690;
             if (type == typeof(Turquoise)) return 1032691;
-            if (type == typeof(PerfectEmerald)) return 1032692;
+            if (type == typeof(PerfectEmeraude)) return 1032692;
             if (type == typeof(EcruCitrine)) return 1032693;
             if (type == typeof(WhitePearl)) return 1032694;
-            if (type == typeof(FireRuby)) return 1032695;
-            if (type == typeof(BlueDiamond)) return 1032696;
-            if (type == typeof(BrilliantAmber)) return 1032697;
+            if (type == typeof(FireRubis)) return 1032695;
+            if (type == typeof(BlueDiamant)) return 1032696;
+            if (type == typeof(BrilliantAmbre)) return 1032697;
 
             if (type == typeof(ParasiticPlant)) return 1032688;
             if (type == typeof(LuminescentFungi)) return 1032689;

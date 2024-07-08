@@ -136,14 +136,14 @@ namespace Server.Mobiles
 
 
 				Add(typeof(Citrine), 5);
-				Add(typeof(Amber), 8);
+				Add(typeof(Ambre), 8);
 				Add(typeof(Tourmaline), 9);
-				Add(typeof(Ruby), 10);
-				Add(typeof(Amethyst), 12);
+				Add(typeof(Rubis), 10);
+				Add(typeof(Amethyste), 12);
 				Add(typeof(Sapphire), 15);
-				Add(typeof(StarSapphire), 20);
-				Add(typeof(Emerald), 25);
-				Add(typeof(Diamond), 35);
+				Add(typeof(SaphirEtoile), 20);
+				Add(typeof(Emeraude), 25);
+				Add(typeof(Diamant), 35);
 
 
 				Add(typeof(GoldRing), 7);

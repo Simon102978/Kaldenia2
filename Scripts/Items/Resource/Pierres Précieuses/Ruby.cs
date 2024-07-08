@@ -1,15 +1,15 @@
 namespace Server.Items
 {
-    public class Ruby : Item, IGem
+    public class Rubis : Item, IGem
     {
         [Constructable]
-        public Ruby()
+        public Rubis()
             : this(1)
         {
         }
 
         [Constructable]
-        public Ruby(int amount)
+        public Rubis(int amount)
             : base(0xF13)
         {
             Stackable = true;
@@ -17,7 +17,7 @@ namespace Server.Items
 			Name = "Rubis";
         }
 
-        public Ruby(Serial serial)
+        public Rubis(Serial serial)
             : base(serial)
         {
         }

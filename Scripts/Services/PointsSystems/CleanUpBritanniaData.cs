@@ -192,18 +192,18 @@ namespace Server.Engines.Points
             Entries[typeof(AgapiteIngot)] = 5.0;
             Entries[typeof(VeriteIngot)] = 8.50;
             Entries[typeof(ValoriteIngot)] = 10.0;
-            Entries[typeof(Amber)] = 0.30;
+            Entries[typeof(Ambre)] = 0.30;
             Entries[typeof(Citrine)] = 0.30;
-            Entries[typeof(Ruby)] = 0.30;
+            Entries[typeof(Rubis)] = 0.30;
             Entries[typeof(Tourmaline)] = 0.30;
-            Entries[typeof(Amethyst)] = 0.30;
-            Entries[typeof(Emerald)] = 0.30;
+            Entries[typeof(Amethyste)] = 0.30;
+            Entries[typeof(Emeraude)] = 0.30;
             Entries[typeof(Sapphire)] = 0.30;
-            Entries[typeof(StarSapphire)] = 0.30;
-            Entries[typeof(Diamond)] = 0.30;
-            Entries[typeof(BlueDiamond)] = 25.0;
-            Entries[typeof(FireRuby)] = 25.0;
-            Entries[typeof(PerfectEmerald)] = 25.0;
+            Entries[typeof(SaphirEtoile)] = 0.30;
+            Entries[typeof(Diamant)] = 0.30;
+            Entries[typeof(BlueDiamant)] = 25.0;
+            Entries[typeof(FireRubis)] = 25.0;
+            Entries[typeof(PerfectEmeraude)] = 25.0;
             Entries[typeof(DarkSapphire)] = 25.0;
             Entries[typeof(Turquoise)] = 25.0;
             Entries[typeof(EcruCitrine)] = 25.0;
@@ -222,7 +222,7 @@ namespace Server.Engines.Points
             Entries[typeof(LuminescentFungi)] = 2.0;
             Entries[typeof(SwitchItem)] = 3.0;
             Entries[typeof(ParasiticPlant)] = 6.0;
-            Entries[typeof(BrilliantAmber)] = 62.0;
+            Entries[typeof(BrilliantAmbre)] = 62.0;
 
             //Fletching
             Entries[typeof(Arrow)] = 0.05;
@@ -495,7 +495,7 @@ namespace Server.Engines.Points
             Entries[typeof(BladeOfBattle)] = 5000.0;
             Entries[typeof(BouraTailShield)] = 5000.0;
             Entries[typeof(BreastplateOfTheBerserker)] = 5000.0;
-            Entries[typeof(BurningAmber)] = 5000.0;
+            Entries[typeof(BurningAmbre)] = 5000.0;
             Entries[typeof(CastOffZombieSkin)] = 5000.0;
             Entries[typeof(CavalrysFolly)] = 5000.0;
             Entries[typeof(ChannelersDefender)] = 5000.0;

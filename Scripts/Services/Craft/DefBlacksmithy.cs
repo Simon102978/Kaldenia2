@@ -42,8 +42,8 @@ namespace Server.Engines.Craft
 		SingingAxe = 329,
 		ThunderingAxe = 330,
 		HeavyOrnateAxe = 331,
-		RubyMace = 332, //good
-		EmeraldMace = 333, //good
+		RubisMace = 332, //good
+		EmeraudeMace = 333, //good
 		SapphireMace = 334, //good
 		SilverEtchedMace = 335, //good
 		BoneMachete = 336,
@@ -555,7 +555,7 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(MorgensternBoules), "Masses et marteaux", "Morgenstern à Boules", 30.0, 55.0, typeof(IronIngot), "Fer", 14, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(MorgensternPointes), "Masses et marteaux", "Morgenstern à Pointes", 30.0, 55.0, typeof(IronIngot), "Fer", 14, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(Tessen), "Masses et marteaux", "Tessen", 40.0, 70.0, typeof(IronIngot), "Fer", 16, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(DiamondMace), "Masses et marteaux", "Masse diamant", 40.0, 70.0, typeof(IronIngot), "Fer", 20, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(DiamantMace), "Masses et marteaux", "Masse diamant", 40.0, 70.0, typeof(IronIngot), "Fer", 20, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(WarHammer), "Masses et marteaux", "Dispenseur", 40.0, 70.0, typeof(IronIngot), "Fer", 16, "Vous n'avez pas suffisament de lingot de Fer");
 			//AddCraft(typeof(Maul), "Masses et marteaux", "Ogrillonne", 40.0, 70.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(MarteauPointes), "Masses et marteaux", "Étoile du matin", 45.0, 70.0, typeof(IronIngot), "Fer", 14, "Vous n'avez pas suffisament de lingot de Fer");

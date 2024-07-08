@@ -15,7 +15,7 @@ namespace Server.Items
         Yellow,
         PrettyPink,
         MidnightBlue,
-        Emerald,
+        Emeraude,
         SmokyGold,
         GhostsGrey,
         OceanBlue,
@@ -109,7 +109,7 @@ namespace Server.Items
             new HoachisPigmentInfo( HaochisPigmentType.Yellow, 1169, 1071245 ), // NOT Verified
             new HoachisPigmentInfo( HaochisPigmentType.PrettyPink, 1168, 1071244 ), // Verified
             new HoachisPigmentInfo( HaochisPigmentType.MidnightBlue, 1176, 1071248 ), // NOT Verified
-            new HoachisPigmentInfo( HaochisPigmentType.Emerald, 1173, 1023856 ), // Verified
+            new HoachisPigmentInfo( HaochisPigmentType.Emeraude, 1173, 1023856 ), // Verified
             new HoachisPigmentInfo( HaochisPigmentType.SmokyGold, 1801, 1115467 ), // Verified
             new HoachisPigmentInfo( HaochisPigmentType.GhostsGrey, 1000, 1115468 ), // Verified
             new HoachisPigmentInfo( HaochisPigmentType.OceanBlue, 1195, 1115471 ), // Verified

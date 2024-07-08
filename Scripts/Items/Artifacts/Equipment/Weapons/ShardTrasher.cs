@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    public class ShardThrasher : DiamondMace
+    public class ShardThrasher : DiamantMace
     {
         public override bool IsArtifact => true;
         [Constructable]

@@ -55,7 +55,7 @@ namespace Server.Items
         {
             typeof(Haddock),            typeof(CapeCod),            typeof(BlackSeabass),
             typeof(Tarpon),             typeof(RedSnook),           typeof(GraySnapper),
-            typeof(Cobia),              typeof(MahiMahi),           typeof(Amberjack),
+            typeof(Cobia),              typeof(MahiMahi),           typeof(Ambrejack),
             typeof(Shad),               typeof(YellowfinTuna),      typeof(Bonito),
             typeof(BlueFish),           typeof(RedGrouper),         typeof(CaptainSnook),
             typeof(Bonefish),           typeof(RedDrum),            typeof(BlueGrouper),
@@ -124,16 +124,16 @@ namespace Server.Items
         }
     }
 
-    public class Amberjack : BaseHighseasFish
+    public class Ambrejack : BaseHighseasFish
     {
         public override int LabelNumber => 1116402;
 
         [Constructable]
-        public Amberjack() : base(17606)
+        public Ambrejack() : base(17606)
         {
         }
 
-        public Amberjack(Serial serial) : base(serial) { }
+        public Ambrejack(Serial serial) : base(serial) { }
 
         public override void Serialize(GenericWriter writer)
         {

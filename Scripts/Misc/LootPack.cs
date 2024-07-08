@@ -215,14 +215,14 @@ namespace Server
 
 		public static readonly LootPackItem[] Marchandise = new[] { new LootPackItem(typeof(Marchandise), 1) };
 		public static readonly LootPackItem[] Gold5 = new[] { new LootPackItem(typeof(Citrine), 1) };
-		       public static readonly LootPackItem[] Gold10 = new[] { new LootPackItem(typeof(Amber), 1) };
+		       public static readonly LootPackItem[] Gold10 = new[] { new LootPackItem(typeof(Ambre), 1) };
 		       public static readonly LootPackItem[] Gold25 = new[] { new LootPackItem(typeof(Tourmaline), 1) };
-		       public static readonly LootPackItem[] Gold50 = new[] { new LootPackItem(typeof(Ruby), 1) };
-				public static readonly LootPackItem[] Gold75 = new[] { new LootPackItem(typeof(Amethyst), 1) };
+		       public static readonly LootPackItem[] Gold50 = new[] { new LootPackItem(typeof(Rubis), 1) };
+				public static readonly LootPackItem[] Gold75 = new[] { new LootPackItem(typeof(Amethyste), 1) };
 				public static readonly LootPackItem[] Gold100 = new[] { new LootPackItem(typeof(Sapphire), 1) };
-		       public static readonly LootPackItem[] Gold150 = new[] { new LootPackItem(typeof(StarSapphire), 1) };
-		      public static readonly LootPackItem[] Gold200 = new[] { new LootPackItem(typeof(Emerald), 1) };
-		       public static readonly LootPackItem[] Gold250 = new[] { new LootPackItem(typeof(Diamond), 1) };
+		       public static readonly LootPackItem[] Gold150 = new[] { new LootPackItem(typeof(SaphirEtoile), 1) };
+		      public static readonly LootPackItem[] Gold200 = new[] { new LootPackItem(typeof(Emeraude), 1) };
+		       public static readonly LootPackItem[] Gold250 = new[] { new LootPackItem(typeof(Diamant), 1) };
 
 
 	//	public static readonly LootPackItem[] RandomFoodRecipeItems = new[]
@@ -413,10 +413,10 @@ namespace Server
         };
 
 
-        public static readonly LootPackItem[] GemItems = new[] { new LootPackItem(typeof(Amber), 1), new LootPackItem(typeof(Diamond), 1), new LootPackItem(typeof(StarSapphire), 1), new LootPackItem(typeof(Sapphire), 1),
-		new LootPackItem(typeof(Emerald), 1),new LootPackItem(typeof(Ruby), 1), new LootPackItem(typeof(Tourmaline), 1), new LootPackItem(typeof(Citrine), 1) };
+        public static readonly LootPackItem[] GemItems = new[] { new LootPackItem(typeof(Ambre), 1), new LootPackItem(typeof(Diamant), 1), new LootPackItem(typeof(SaphirEtoile), 1), new LootPackItem(typeof(Sapphire), 1),
+		new LootPackItem(typeof(Emeraude), 1),new LootPackItem(typeof(Rubis), 1), new LootPackItem(typeof(Tourmaline), 1), new LootPackItem(typeof(Citrine), 1) };
 
-        public static readonly LootPackItem[] RareGemItems = new[] { new LootPackItem(typeof(BlueDiamond), 1) };
+        public static readonly LootPackItem[] RareGemItems = new[] { new LootPackItem(typeof(BlueDiamant), 1) };
 
 
         public static readonly LootPackItem[] MageryRegItems = new[]
@@ -1500,11 +1500,11 @@ namespace Server
                 {
                     item = Loot.RandomInstrument();
                 }
-           /*     else if (Type == typeof(Amber)) // gem
+           /*     else if (Type == typeof(Ambre)) // gem
                 {
                     item = Loot.RandomGem();
                 }
-                else if (Type == typeof(BlueDiamond)) // rare gem
+                else if (Type == typeof(BlueDiamant)) // rare gem
                 {
                     item = Loot.RandomRareGem();
                 }*/

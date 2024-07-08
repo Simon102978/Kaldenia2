@@ -1,15 +1,15 @@
 namespace Server.Items
 {
-    public class Amber : Item, ICommodity
+    public class Ambre : Item, ICommodity
     {
         [Constructable]
-        public Amber()
+        public Ambre()
             : this(1)
         {
         }
 
         [Constructable]
-        public Amber(int amount)
+        public Ambre(int amount)
             : base(0xF25)
         {
             Stackable = true;
@@ -17,7 +17,7 @@ namespace Server.Items
 			Name = "Ambre";
 		}
 
-        public Amber(Serial serial)
+        public Ambre(Serial serial)
             : base(serial)
         {
         }

@@ -10,13 +10,13 @@ namespace Server.Items
         public static readonly CrystalRechargeInfo[] Table = new CrystalRechargeInfo[]
         {
             new CrystalRechargeInfo(typeof(Citrine), 500),
-            new CrystalRechargeInfo(typeof(Amber), 500),
+            new CrystalRechargeInfo(typeof(Ambre), 500),
             new CrystalRechargeInfo(typeof(Tourmaline), 750),
-            new CrystalRechargeInfo(typeof(Emerald), 1000),
+            new CrystalRechargeInfo(typeof(Emeraude), 1000),
             new CrystalRechargeInfo(typeof(Sapphire), 1000),
-            new CrystalRechargeInfo(typeof(Amethyst), 1000),
-            new CrystalRechargeInfo(typeof(StarSapphire), 1250),
-            new CrystalRechargeInfo(typeof(Diamond), 2000)
+            new CrystalRechargeInfo(typeof(Amethyste), 1000),
+            new CrystalRechargeInfo(typeof(SaphirEtoile), 1250),
+            new CrystalRechargeInfo(typeof(Diamant), 2000)
         };
         private readonly Type m_Type;
         private readonly int m_Amount;

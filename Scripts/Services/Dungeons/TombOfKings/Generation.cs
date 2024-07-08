@@ -163,10 +163,10 @@ namespace Server.Engines.TombOfKings
             st.MoveToWorld(new Point3D(28, 208, 4), Map.TerMur);
             WeakEntityCollection.Add("sa", st);
 
-            // Kings' Chambers
-            ChamberLever.Generate();
-            Chamber.Generate();
-            ChamberSpawner.Generate();
+            // Kings' ChAmbres
+            ChAmbreLever.Generate();
+            ChAmbre.Generate();
+            ChAmbreSpawner.Generate();
 
             CommandSystem.Handle(e.Mobile, CommandSystem.Prefix + "ArisenGenerate");
 

@@ -72,7 +72,7 @@ namespace Server.Mobiles
                     if (Banker.GetBalance(m_From) >= 100000)
                         m_From.SendGump(new BaseEngravingTool.ConfirmGump(Tool, m_Vendor));
                     else
-                        m_Vendor.Say(1076167); // You need a 100,000 gold and a blue diamond to recharge the weapon engraver.
+                        m_Vendor.Say(1076167); // You need a 100,000 gold and a blue Diamant to recharge the weapon engraver.
                 }
                 else
                     m_Vendor.Say(1076164); // I can only help with this if you are carrying an engraving tool that needs repair.

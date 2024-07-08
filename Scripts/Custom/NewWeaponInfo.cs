@@ -3,7 +3,6 @@ using Server.Items;
 using Server.Commands;
 using Server.Custom.Misc;
 using System.Text;
-using Server.Custom.Items.Spells;
 
 namespace Server.Custom.Weapons
 {
@@ -121,8 +120,6 @@ namespace Server.Custom.Weapons
 		{
 			if (weapon is BaseKnife)
 				return "Knife";
-			else if (weapon is BaseThrust)
-				return "Thrust";
 			else if (weapon is BaseSword)
 				return "Sword";
 			else if (weapon is BaseAxe)
@@ -160,8 +157,6 @@ namespace Server.Custom.Weapons
 
 			if (weapon is BaseKnife)
 				return typeof(InfectiousStrike);
-			else if (weapon is BaseThrust)
-				return typeof(Disarm);
 			else if (weapon is BaseSword)
 				return typeof(DoubleStrike);
 			else if (weapon is BaseAxe)

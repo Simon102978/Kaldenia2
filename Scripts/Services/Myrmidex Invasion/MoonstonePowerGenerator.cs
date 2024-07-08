@@ -251,14 +251,14 @@ namespace Server.Items
 
                 Active = reader.ReadBool();
 
-                MoonstonePowerGeneratorAddon chamber = Addon as MoonstonePowerGeneratorAddon;
+                MoonstonePowerGeneratorAddon chAmbre = Addon as MoonstonePowerGeneratorAddon;
 
-                if (chamber != null)
+                if (chAmbre != null)
                 {
-                    if (chamber.Activator1 == null)
-                        chamber.Activator1 = this;
+                    if (chAmbre.Activator1 == null)
+                        chAmbre.Activator1 = this;
                     else
-                        chamber.Activator2 = this;
+                        chAmbre.Activator2 = this;
                 }
             }
         }
@@ -298,7 +298,7 @@ namespace Server.Items
                 ResetGenerators();
             }
 
-            CommandSystem.Register("ActivateChambers", AccessLevel.Administrator, e =>
+            CommandSystem.Register("ActivateChAmbres", AccessLevel.Administrator, e =>
                 {
                     if (Boss == null)
                     {
@@ -307,7 +307,7 @@ namespace Server.Items
                     }
                 });
 
-            CommandSystem.Register("MorphChamberItems", AccessLevel.Administrator, e =>
+            CommandSystem.Register("MorphChAmbreItems", AccessLevel.Administrator, e =>
                 {
                     MorphItems();
                 });

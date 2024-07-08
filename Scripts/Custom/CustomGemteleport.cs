@@ -35,9 +35,9 @@ namespace Server.Items
 			if (from is CustomPlayerMobile cp)
 			{
 				Item citrine = (Item)cp.Backpack.FindItemByType(typeof(Server.Items.Citrine));
-				Item amethyst = (Item)cp.Backpack.FindItemByType(typeof(Server.Items.Amethyst));
+				Item Amethyste = (Item)cp.Backpack.FindItemByType(typeof(Server.Items.Amethyste));
 
-				if ((citrine != null) && (amethyst != null))
+				if ((citrine != null) && (Amethyste != null))
 				{
 					CustomGate firstGate = new CustomGate(ToLocation, ToMap);
 					firstGate.MoveToWorld(this.Location, this.Map);
@@ -48,10 +48,10 @@ namespace Server.Items
 						citrine.Delete();
 
 
-					if (amethyst.Amount > 1)
-						amethyst.Amount -= 1;
+					if (Amethyste.Amount > 1)
+						Amethyste.Amount -= 1;
 					else
-						amethyst.Delete();
+						Amethyste.Delete();
 
 					from.SendMessage("Vous déposer vos pierres précieuses dans le panier.");
 

@@ -1,15 +1,15 @@
 ﻿namespace Server.Items
 {
-    public class StarSapphire : Item, IGem
+    public class SaphirEtoile : Item, IGem
     {
         [Constructable]
-        public StarSapphire()
+        public SaphirEtoile()
             : this(1)
         {
         }
 
         [Constructable]
-        public StarSapphire(int amount)
+        public SaphirEtoile(int amount)
             : base(0x0F0F)
         {
             Stackable = true;
@@ -17,7 +17,7 @@
 			Name = "Sapphire étoilé";
 		}
 
-        public StarSapphire(Serial serial)
+        public SaphirEtoile(Serial serial)
             : base(serial)
         {
         }

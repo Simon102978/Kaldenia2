@@ -9,7 +9,7 @@ namespace Server.Items
     {
         None,
         WindAzul,
-        DullRuby,
+        DullRubis,
         PoppieWhite,
         ZentoOrchid,
         UmbranViolet
@@ -246,7 +246,7 @@ namespace Server.Items
             HueInfo = new Dictionary<DyeType, Tuple<int, int>>();
 
             HueInfo[DyeType.WindAzul] = new Tuple<int, int>(2741, 1157277);
-            HueInfo[DyeType.DullRuby] = new Tuple<int, int>(2731, 1157267);
+            HueInfo[DyeType.DullRubis] = new Tuple<int, int>(2731, 1157267);
             HueInfo[DyeType.PoppieWhite] = new Tuple<int, int>(2735, 1157271);
             HueInfo[DyeType.ZentoOrchid] = new Tuple<int, int>(2732, 1157268);
             HueInfo[DyeType.UmbranViolet] = new Tuple<int, int>(2740, 1157276);

@@ -1086,7 +1086,7 @@ namespace Server.Items
 
         [Constructable]
         public FlintLostBarrelHint()
-            : base(1094963) // The smug smell of Barley fills this chamber.
+            : base(1094963) // The smug smell of Barley fills this chAmbre.
         {
         }
 

@@ -10,7 +10,7 @@ namespace Server.Items
         public ToKTeleporter()
             : base(0x1BC3)
         {
-            Name = "Tomb of Kings Antechamber Teleporter";
+            Name = "Tomb of Kings AntechAmbre Teleporter";
 
             Visible = false;
             Movable = false;
@@ -31,7 +31,7 @@ namespace Server.Items
                 m.PlaySound(0x1FE);
                 Effects.SendLocationParticles(m, 0x3728, 10, 10, 0x139F);
 
-                m.SendLocalizedMessage(1112182); // You have been returned to the antechamber of the tomb, directly in front of the Serpent's Breath.
+                m.SendLocalizedMessage(1112182); // You have been returned to the antechAmbre of the tomb, directly in front of the Serpent's Breath.
 
                 return false;
             }

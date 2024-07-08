@@ -1,9 +1,9 @@
 namespace Server.Items
 {
-    public class PrismaticAmber : Amber
+    public class PrismaticAmbre : Ambre
     {
         [Constructable]
-        public PrismaticAmber()
+        public PrismaticAmbre()
             : base()
         {
             LootType = LootType.Blessed;
@@ -11,12 +11,12 @@ namespace Server.Items
             Weight = 1;
         }
 
-        public PrismaticAmber(Serial serial)
+        public PrismaticAmbre(Serial serial)
             : base(serial)
         {
         }
 
-        public override int LabelNumber => 1075299;// Prismatic Amber
+        public override int LabelNumber => 1075299;// Prismatic Ambre
         public override void GetProperties(ObjectPropertyList list)
         {
             base.GetProperties(list);

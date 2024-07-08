@@ -82,7 +82,7 @@ namespace Server.Items
         public virtual int SuccessMessage => 1072361;  // You engraved the object.
         public virtual int TargetMessage => 1072357;  // Select an object to engrave.
         public virtual int RemoveMessage => 1072362;  // You remove the engraving from the object.
-        public virtual int ReChargesMessage => 1076166;  // You do not have a blue diamond needed to recharge the engraving tool.
+        public virtual int ReChargesMessage => 1076166;  // You do not have a blue Diamant needed to recharge the engraving tool.
         public virtual int OutOfChargesMessage => 1076163;  // There are no charges left on this engraving tool.
         public virtual int NotAccessibleMessage => 1072310;  // The selected item is not accessible to engrave.
         public virtual int CannotEngraveMessage => 1072309;  // The selected item cannot be engraved by this engraving tool.
@@ -134,9 +134,9 @@ namespace Server.Items
                 {
                     if (CheckSkill(from))
                     {
-                        Item diamond = from.Backpack.FindItemByType(typeof(BlueDiamond));
+                        Item Diamant = from.Backpack.FindItemByType(typeof(BlueDiamant));
 
-                        if (diamond != null)
+                        if (Diamant != null)
                         {
                             from.SendGump(new ConfirmGump(this, null));
                         }
@@ -197,20 +197,20 @@ namespace Server.Items
         {
             if (from.Backpack != null)
             {
-                Item diamond = from.Backpack.FindItemByType(typeof(BlueDiamond));
+                Item Diamant = from.Backpack.FindItemByType(typeof(BlueDiamant));
 
                 if (guildmaster != null)
                 {
                     if (m_UsesRemaining <= 0)
                     {
-                        if (diamond != null && Banker.Withdraw(from, 100000))
+                        if (Diamant != null && Banker.Withdraw(from, 100000))
                         {
-                            diamond.Consume();
+                            Diamant.Consume();
                             UsesRemaining = 10;
                             guildmaster.Say(1076165); // Your weapon engraver should be good as new!
                         }
                         else
-                            guildmaster.Say(1076167); // You need a 100,000 gold and a blue diamond to recharge the weapon engraver.
+                            guildmaster.Say(1076167); // You need a 100,000 gold and a blue Diamant to recharge the weapon engraver.
                     }
                     else
                         guildmaster.Say(1076164); // I can only help with this if you are carrying an engraving tool that needs repair.
@@ -219,9 +219,9 @@ namespace Server.Items
                 {
                     if (CheckSkill(from))
                     {
-                        if (diamond != null)
+                        if (Diamant != null)
                         {
-                            diamond.Consume();
+                            Diamant.Consume();
 
                             if (Utility.RandomDouble() < from.Skills[SkillName.Tinkering].Value / 100)
                             {
@@ -229,10 +229,10 @@ namespace Server.Items
                                 from.SendLocalizedMessage(1076165); // Your engraver should be good as new!
                             }
                             else
-                                from.SendLocalizedMessage(1076175); // You cracked the diamond attempting to fix the engraver.
+                                from.SendLocalizedMessage(1076175); // You cracked the Diamant attempting to fix the engraver.
                         }
                         else
-                            from.SendLocalizedMessage(1076166); // You do not have a blue diamond needed to recharge the engraving tool.
+                            from.SendLocalizedMessage(1076166); // You do not have a blue Diamant needed to recharge the engraving tool.
                     }
                 }
             }
@@ -363,12 +363,12 @@ namespace Server.Items
 
                 if (npc != null)
                 {
-                    AddHtmlLocalized(9, 9, 272, 100, 1076169, 0x7FFF, false, false); // It will cost you 100,000 gold and a blue diamond to recharge your weapon engraver with 10 charges.
+                    AddHtmlLocalized(9, 9, 272, 100, 1076169, 0x7FFF, false, false); // It will cost you 100,000 gold and a blue Diamant to recharge your weapon engraver with 10 charges.
                     AddHtmlLocalized(195, 109, 120, 20, 1076172, 0x7FFF, false, false); // Recharge it
                 }
                 else
                 {
-                    AddHtmlLocalized(9, 9, 272, 100, 1076176, 0x7FFF, false, false); // You will need a blue diamond to repair the tip of the engraver.  A successful repair will give the engraver 10 charges.
+                    AddHtmlLocalized(9, 9, 272, 100, 1076176, 0x7FFF, false, false); // You will need a blue Diamant to repair the tip of the engraver.  A successful repair will give the engraver 10 charges.
                     AddHtmlLocalized(195, 109, 120, 20, 1076177, 0x7FFF, false, false); // Replace the tip.
                 }
 

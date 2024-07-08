@@ -6,7 +6,7 @@ namespace Server.Engines.Quests
     {
         public UnusualGoods()
         {
-            AddObjective(new ObtainObjective(typeof(PerfectEmerald), "Perfect Emerald", 2, 0x3194));
+            AddObjective(new ObtainObjective(typeof(PerfectEmeraude), "Perfect Emeraude", 2, 0x3194));
 
             AddObjective(new ObtainObjective(typeof(CrystallineBlackrock), "Crystalline Blackrock", 1, 0x5732));
 
@@ -21,7 +21,7 @@ namespace Server.Engines.Quests
 
         /*Psst. Do you want to buy something rare and valuable? Yes? Good. I have in my possession an imbuing ingredient that is highly sought after. 
         If you wish to make a trade, it will not come cheaply. 
-        Provide me with two perfect emeralds and one piece of crystalline blackrock, and what is in this box shall be yours. */
+        Provide me with two perfect Emeraudes and one piece of crystalline blackrock, and what is in this box shall be yours. */
 
         public override object Description => 1113788;
 
@@ -29,7 +29,7 @@ namespace Server.Engines.Quests
 
         public override object Refuse => 1113789;
 
-        /*In exchange for this bag, I want two perfect emeralds and one piece of crystalline blackrock. Nothing more, nothing less.*/
+        /*In exchange for this bag, I want two perfect Emeraudes and one piece of crystalline blackrock. Nothing more, nothing less.*/
 
         public override object Uncomplete => 1113790;
 

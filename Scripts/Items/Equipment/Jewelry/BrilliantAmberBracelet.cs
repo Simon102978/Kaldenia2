@@ -1,9 +1,9 @@
 namespace Server.Items
 {
-    public class BrilliantAmberBracelet : GoldBracelet
+    public class BrilliantAmbreBracelet : GoldBracelet
     {
         [Constructable]
-        public BrilliantAmberBracelet()
+        public BrilliantAmbreBracelet()
             : base()
         {
             Weight = 1.0;
@@ -27,12 +27,12 @@ namespace Server.Items
             }
         }
 
-        public BrilliantAmberBracelet(Serial serial)
+        public BrilliantAmbreBracelet(Serial serial)
             : base(serial)
         {
         }
 
-        public override int LabelNumber => 1073453;// brilliant amber bracelet
+        public override int LabelNumber => 1073453;// brilliant Ambre bracelet
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

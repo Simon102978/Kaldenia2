@@ -342,7 +342,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(MauveVelourDyeTub), "Teintures", "Mauve Velour", 80, 100.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un Bac Vide");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
-			AddRes(index, typeof(Amethyst), "Une Améthyste", 2, "Vous n'avez pas suffisament d'améthyste");
+			AddRes(index, typeof(Amethyste), "Une Améthyste", 2, "Vous n'avez pas suffisament d'améthyste");
 			#endregion
 
 			#region Teintures NEUTRE

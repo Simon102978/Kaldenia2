@@ -44,7 +44,8 @@ namespace Server.Items
         public GoldBracelet()
             : base(0x1086)
         {
-        }
+			Name = "Bracelet doré";
+		}
 
         public GoldBracelet(Serial serial)
             : base(serial)

@@ -36,9 +36,9 @@ namespace Server.Engines.Quests
         public HonorOfDeBoorsQuest()
             : base()
         {
-            AddObjective(new ObtainObjective(typeof(Diamond), "Diamonds", 10));
-            AddObjective(new ObtainObjective(typeof(Ruby), "Rubies", 10));
-            AddObjective(new ObtainObjective(typeof(Emerald), "Emeralds", 10));
+            AddObjective(new ObtainObjective(typeof(Diamant), "Diamants", 10));
+            AddObjective(new ObtainObjective(typeof(Rubis), "Rubies", 10));
+            AddObjective(new ObtainObjective(typeof(Emeraude), "Emeraudes", 10));
 
             AddReward(new BaseReward(1075418)); // Gather them quickly. Who knows how long Derek has to live?
         }

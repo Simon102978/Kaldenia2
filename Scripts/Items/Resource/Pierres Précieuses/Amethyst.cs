@@ -1,15 +1,15 @@
 namespace Server.Items
 {
-    public class Amethyst : Item, IGem
+    public class Amethyste : Item, IGem
     {
         [Constructable]
-        public Amethyst()
+        public Amethyste()
             : this(1)
         {
         }
 
         [Constructable]
-        public Amethyst(int amount)
+        public Amethyste(int amount)
             : base(0xF16)
         {
             Stackable = true;
@@ -17,7 +17,7 @@ namespace Server.Items
 			Name = "Améthyste";
 		}
 
-        public Amethyst(Serial serial)
+        public Amethyste(Serial serial)
             : base(serial)
         {
         }

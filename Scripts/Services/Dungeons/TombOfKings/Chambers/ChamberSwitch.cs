@@ -1,13 +1,13 @@
 ﻿namespace Server.Engines.TombOfKings
 {
-    public class ChamberSwitch : Item
+    public class ChAmbreSwitch : Item
     {
-        private readonly Chamber m_Chamber;
+        private readonly ChAmbre m_ChAmbre;
 
-        public ChamberSwitch(Chamber chamber, Point3D loc, int itemId)
+        public ChAmbreSwitch(ChAmbre chAmbre, Point3D loc, int itemId)
             : base(itemId)
         {
-            m_Chamber = chamber;
+            m_ChAmbre = chAmbre;
 
             Movable = false;
             MoveToWorld(loc, Map.TerMur);
@@ -15,7 +15,7 @@
 
         public override void OnDoubleClick(Mobile from)
         {
-            if (!m_Chamber.IsOpened() && from.InRange(this, 1))
+            if (!m_ChAmbre.IsOpened() && from.InRange(this, 1))
             {
                 Effects.PlaySound(Location, Map, 0x3E8);
 
@@ -27,11 +27,11 @@
                     case 0x1092: ItemID = 0x1091; break;
                 }
 
-                m_Chamber.Open();
+                m_ChAmbre.Open();
             }
         }
 
-        public ChamberSwitch(Serial serial)
+        public ChAmbreSwitch(Serial serial)
             : base(serial)
         {
         }

@@ -216,12 +216,12 @@ namespace Server.Engines.BulkOrders
             {
                 default:
                 case 0: return new SpecialNaturalDye(DyeType.WindAzul);
-                case 1: return new SpecialNaturalDye(DyeType.DullRuby);
+                case 1: return new SpecialNaturalDye(DyeType.DullRubis);
                 case 2: return new SpecialNaturalDye(DyeType.PoppieWhite);
                 case 3: return new SpecialNaturalDye(DyeType.WindAzul, true);
                 case 4: return new SpecialNaturalDye(DyeType.UmbranViolet, true);
                 case 5: return new SpecialNaturalDye(DyeType.ZentoOrchid, true);
-                case 6: return new SpecialNaturalDye(DyeType.DullRuby, true);
+                case 6: return new SpecialNaturalDye(DyeType.DullRubis, true);
                 case 7: return new SpecialNaturalDye(DyeType.PoppieWhite, true);
                 case 8: return new SpecialNaturalDye(DyeType.UmbranViolet);
                 case 9: return new SpecialNaturalDye(DyeType.ZentoOrchid);

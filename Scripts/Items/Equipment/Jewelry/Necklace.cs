@@ -63,6 +63,7 @@ namespace Server.Items
         public GoldNecklace()
             : base(0x1088)
         {
+			Name = "Collier doré";
             Weight = 0.1;
         }
 
@@ -197,15 +198,15 @@ namespace Server.Items
             {
                 default:
                 case GemType.None: Hue = 0; break;
-                case GemType.StarSapphire: Hue = 1928; break;
-                case GemType.Emerald: Hue = 1914; break;
+                case GemType.SaphirEtoile: Hue = 1928; break;
+                case GemType.Emeraude: Hue = 1914; break;
                 case GemType.Sapphire: Hue = 1926; break;
-                case GemType.Ruby: Hue = 1911; break;
+                case GemType.Rubis: Hue = 1911; break;
                 case GemType.Citrine: Hue = 1955; break;
-                case GemType.Amethyst: Hue = 1919; break;
+                case GemType.Amethyste: Hue = 1919; break;
                 case GemType.Tourmaline: Hue = 1924; break;
-                case GemType.Amber: Hue = 1923; break;
-                case GemType.Diamond: Hue = 2067; break;
+                case GemType.Ambre: Hue = 1923; break;
+                case GemType.Diamant: Hue = 2067; break;
             }
         }
 

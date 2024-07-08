@@ -144,7 +144,7 @@ namespace Server.Items
                 "boulders and stones",
                 "blocking any exit",
                 "from the",
-                "antechamber.  What",
+                "antechAmbre.  What",
                 "could have caused"),
             new BookPageInfo(
                 "such a localized",
@@ -235,7 +235,7 @@ namespace Server.Items
                 "workers set up",
                 "primitive scaffolding",
                 "in the main",
-                "antechamber so that I",
+                "antechAmbre so that I",
                 "can spend my time"),
             new BookPageInfo(
                 "pouring over the detail",
@@ -464,7 +464,7 @@ namespace Server.Items
                 "excavation of the far"),
             new BookPageInfo(
                 "western hall, another",
-                "large antechamber",
+                "large antechAmbre",
                 "was revealed.  By the",
                 "larger, mosaic style of",
                 "the wall carvings and",
@@ -595,7 +595,7 @@ namespace Server.Items
                 "are still at work",
                 "digging out the rubble",
                 "that blocks all access",
-                "to the inner chambers,",
+                "to the inner chAmbres,",
                 "I cannot help but",
                 "believe the workers"),
             new BookPageInfo(
@@ -648,7 +648,7 @@ namespace Server.Items
                 "excavating the next",
                 "main hall, and we",
                 "retired to the main",
-                "antechamber and our",
+                "antechAmbre and our",
                 "camp to rest up for",
                 "exploration on the"),
             new BookPageInfo(
@@ -668,7 +668,7 @@ namespace Server.Items
                 "number.  I cannot",
                 "fathom where he has",
                 "gone - the newly",
-                "revealed chamber"),
+                "revealed chAmbre"),
             new BookPageInfo(
                 "holds no immediate",
                 "egress, blocked again",
@@ -743,7 +743,7 @@ namespace Server.Items
                 "horror of it?  He",
                 "stands across the"),
             new BookPageInfo(
-                "chamber from me",
+                "chAmbre from me",
                 "even now, a changed",
                 "man.  His hair hangs",
                 "in grimy knots across",
@@ -966,7 +966,7 @@ namespace Server.Items
                 "That he could make us",
                 "hurry back into the"),
             new BookPageInfo(
-                "main antechamber...",
+                "main antechAmbre...",
                 "actually run back",
                 "towards those eldritch",
                 "dead that stalked us.",

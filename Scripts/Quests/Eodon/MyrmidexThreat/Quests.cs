@@ -35,19 +35,19 @@ namespace Server.Engines.Quests
         public override object Uncomplete => 1156754;       /*You must acquire the Activator from the Gemologist at the Shimmering Jewel in 
 																	   Vesper, the Regulator from the Ship Captain at the Horse's Head in Jhelom, the 
 																	   Stator from the Golem Maker at the Tinker's Guild in Britain, and Power Core 
-																	   from the Oddities Collector at the Lycaeum in Moonglow before the Stasis Chamber
+																	   from the Oddities Collector at the Lycaeum in Moonglow before the Stasis ChAmbre
 																	   can be activated and Zipactriotl can be destroyed!*/
 
         public override object Complete => 1156755;     /**Eyes widen with excitement!*  All hail the Myrmidex! All hail the Barrab! 
-																	   With these components I can bring the Stasis Chamber online and Zipactriotl can 
+																	   With these components I can bring the Stasis ChAmbre online and Zipactriotl can 
 																	   be destroyed!*/
 
         public TheZealotryOfZipactriotlQuest()
         {
-            AddObjective(new ObtainObjective(typeof(StasisChamberPowerCore), "Stasis Chamber Power Core", 1));
-            AddObjective(new ObtainObjective(typeof(StasisChamberActivator), "Stasis Chamber Activator", 1));
-            AddObjective(new ObtainObjective(typeof(StasisChamberRegulator), "Stasis Chamber Regulator", 1));
-            AddObjective(new ObtainObjective(typeof(StasisChamberStator), "Stasis Chamber Stator", 1));
+            AddObjective(new ObtainObjective(typeof(StasisChAmbrePowerCore), "Stasis ChAmbre Power Core", 1));
+            AddObjective(new ObtainObjective(typeof(StasisChAmbreActivator), "Stasis ChAmbre Activator", 1));
+            AddObjective(new ObtainObjective(typeof(StasisChAmbreRegulator), "Stasis ChAmbre Regulator", 1));
+            AddObjective(new ObtainObjective(typeof(StasisChAmbreStator), "Stasis ChAmbre Stator", 1));
 
             AddReward(new BaseReward(1156756)); // A step closer to destroying Zipactriotl...
         }
@@ -83,14 +83,14 @@ namespace Server.Engines.Quests
         public override object Title => 1156757;             // The Destruction of Zipactriotl
 
         public override object Description => 1156758;   /*All Hail the Myrmidex! All Hail the Barrab! Muwahahah! With these components 
-																		the Stasis Chamber can be reactivated and Zipactriotl shall meet DOOM! Go now 
-																		to the Kotl Antechamber and destroy Zipactriotl so the Myrmidex may once again 
+																		the Stasis ChAmbre can be reactivated and Zipactriotl shall meet DOOM! Go now 
+																		to the Kotl AntechAmbre and destroy Zipactriotl so the Myrmidex may once again 
 																		rule the Valley of Eodon with the Barrab shall be at their side!*/
 
         public override object Refuse => 1156760;            /*Only those warriors brave enough to join in the destruction of Zipactriotl 
 																		will reap in the glory!  All hail the Myrmidex! All hail the Barrab!*/
 
-        public override object Uncomplete => 1156761;        /*Zipactriotl must be destroyed...the time is NOW! Go to the Antechamber in the 
+        public override object Uncomplete => 1156761;        /*Zipactriotl must be destroyed...the time is NOW! Go to the AntechAmbre in the 
 																		Great Pyramid and restore glory to the Myrmidex!*/
 
         public override object Complete => 1156762; 		/*MUWAHAHA! ZIPACTRIOTL IS DESTROYED! THE MYRMIDEX ARE FREE TO RECLAIM EODON! 
@@ -133,7 +133,7 @@ namespace Server.Engines.Quests
 
         public override object Description => 1156801;  /*Hello there, looking to buy? Sell? Perhaps a pearl necklace for your lover - 
 																	 or maybe a fine ring to accompany your finest evening wear?  We've got it all - just let 
-																	 me know what we can do for you and I'm sure we can accomodate!  Activator? Stasis Chamber! 
+																	 me know what we can do for you and I'm sure we can accomodate!  Activator? Stasis ChAmbre! 
 																	 Why I haven't an idea what you are talking about! *leans in and whispers*  Not so 
 																	 loud - can't be too sure who's listening in these days.  Listen if you want to get 
 																	 your hands on that item I know where you might be able to find one.  I was able to
@@ -150,9 +150,9 @@ namespace Server.Engines.Quests
 
         public HiddenTreasuresQuest()
         {
-            AddObjective(new ObtainObjective(typeof(PerfectEmerald), "Perfect Emerald", 1));
+            AddObjective(new ObtainObjective(typeof(PerfectEmeraude), "Perfect Emeraude", 1));
             AddObjective(new ObtainObjective(typeof(WhitePearl), "White Pearl", 1));
-            AddObjective(new ObtainObjective(typeof(BrilliantAmber), "Brilliant Amber", 1));
+            AddObjective(new ObtainObjective(typeof(BrilliantAmbre), "Brilliant Ambre", 1));
 
             AddReward(new BaseReward(typeof(HiddenTreasuresTreasureMap), "A Special Treasure Map"));
         }
@@ -263,7 +263,7 @@ namespace Server.Engines.Quests
             AddObjective(new ObtainObjective(typeof(PowerCrystal), "Power Crystal", 5));
             AddObjective(new ObtainObjective(typeof(ClockworkAssembly), "Clockwork assembly", 2));
 
-            AddReward(new BaseReward(typeof(StasisChamberStator), "Stasis Chamber Stator"));
+            AddReward(new BaseReward(typeof(StasisChAmbreStator), "Stasis ChAmbre Stator"));
         }
 
         public override bool CanOffer()
@@ -364,7 +364,7 @@ namespace Server.Engines.Quests
         public override object Title => 1156770;           // Insecticide and Regicide
 
         public override object Description => 1156771;   /*Everything is in place.  In the depths of the Myrmidex Pits are the Queen's 
-																	  chambers, it is there that she spawns new Myrmidex to bolster the numbers within
+																	  chAmbres, it is there that she spawns new Myrmidex to bolster the numbers within
 																	  the colony.  No doubt she is powerful - the energy of the moonstones is sure to 
 																	  have seen to that.  It pains me to say this but - take no mercy, she must be 
 																	  destroyed for the safety of the peoples of Eodon.*/

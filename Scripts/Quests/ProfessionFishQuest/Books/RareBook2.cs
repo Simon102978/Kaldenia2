@@ -14,14 +14,14 @@
 
             new BookPageInfo
             (
-                "Amberjack:",
+                "Ambrejack:",
 
                 "One o’ these days I’m",
                 "going ta hang up me",
                 "fishin’ pole and start",
                 "me own brewery, and I’m",
                 "going to name me brew",
-                "amberjack."
+                "Ambrejack."
             ),
 
             new BookPageInfo

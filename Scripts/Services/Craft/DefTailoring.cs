@@ -448,7 +448,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(HalfApron), "Divers", "Demi - Tablier", 10.0, 30.0, typeof(Cloth), "Tissus", 6, "Vous n'avez pas assez de tissus.");
 			//index = AddCraft(typeof(GargoyleHalfApron), "Divers", "Demi tablier élégant", 15.0, 35.0, typeof(Cloth), "Tissus", 6   ,"Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(FullApron), "Divers", "Tablier", 20.0, 40.0, typeof(Cloth), "Tissus", 10, "Vous n'avez pas assez de tissus.");
-			index = AddCraft(typeof(SmallDiamondPillow), "Divers", "Petit Coussin Diamant", 20.0, 40.0, typeof(Cloth), "Tissus", 15, "Vous n'avez pas assez de tissus.");
+			index = AddCraft(typeof(SmallDiamantPillow), "Divers", "Petit Coussin Diamant", 20.0, 40.0, typeof(Cloth), "Tissus", 15, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(BodySash), "Divers", "Ceinture de Corps", 30.0, 50.0, typeof(Cloth), "Tissus", 4, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(Sash), "Divers", "Cocarde élégant", 35.0, 55.0, typeof(Cloth), "Tissus", 4, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(BourseCeinture), "Divers", "Bourse de Ceinture", 40.0, 60.0, typeof(Cloth), "Tissus", 10, "Vous n'avez pas assez de tissus.");
@@ -464,7 +464,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(BrocadeGozaMatSouthDeed), "Divers", "Tapis Goza Brodé Rectangle(S)", 55.0, 75.0, typeof(Cloth), "Tissus", 25, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(BrocadeSquareGozaMatEastDeed), "Divers", "Tapis Goza Carré Brodé Ligné(E)", 60.0, 80.0, typeof(Cloth), "Tissus", 25, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(BrocadeSquareGozaMatSouthDeed), "Divers", "Tapis Goza Carré Brodé Ligné(S)", 60.0, 80.0, typeof(Cloth), "Tissus", 25, "Vous n'avez pas assez de tissus.");
-			index = AddCraft(typeof(LargeDiamondPillow), "Divers", "Coussin Diamant", 60.0, 80.0, typeof(Cloth), "Tissus", 25, "Vous n'avez pas assez de tissus.");
+			index = AddCraft(typeof(LargeDiamantPillow), "Divers", "Coussin Diamant", 60.0, 80.0, typeof(Cloth), "Tissus", 25, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(LargeSquarePillow), "Divers", "Coussin Carré", 60.0, 80.0, typeof(Cloth), "Tissus", 20, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(ThrowPillow), "Divers", "Coussin à Motifs", 60.0, 80.0, typeof(Cloth), "Tissus", 20, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(Coussin1), "Divers", "Coussin Cylindré", 65.0, 85.0, typeof(Cloth), "Tissus", 20, "Vous n'avez pas assez de tissus.");

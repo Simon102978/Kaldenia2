@@ -1,9 +1,9 @@
 namespace Server.Items
 {
-    public class FireRubyBracelet : GoldBracelet
+    public class FireRubisBracelet : GoldBracelet
     {
         [Constructable]
-        public FireRubyBracelet()
+        public FireRubisBracelet()
             : base()
         {
             Weight = 1.0;
@@ -16,12 +16,12 @@ namespace Server.Items
                 Resistances.Fire += 10;
         }
 
-        public FireRubyBracelet(Serial serial)
+        public FireRubisBracelet(Serial serial)
             : base(serial)
         {
         }
 
-        public override int LabelNumber => 1073454;// fire ruby bracelet
+        public override int LabelNumber => 1073454;// fire Rubis bracelet
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
