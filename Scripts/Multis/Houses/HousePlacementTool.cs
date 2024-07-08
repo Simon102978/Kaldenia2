@@ -1074,10 +1074,10 @@ namespace Server.Items
 
                             m_House.MoveAllToCrate();
 
-                            newHouse.Friends = new List<Mobile>(m_House.Friends);
-                            newHouse.CoOwners = new List<Mobile>(m_House.CoOwners);
-                            newHouse.Bans = new List<Mobile>(m_House.Bans);
-                            newHouse.Access = new List<Mobile>(m_House.Access);
+                            newHouse.Friends = new List<Nom>(m_House.Friends);
+                            newHouse.CoOwners = new List<Nom>(m_House.CoOwners);
+                            newHouse.Bans = new List<Nom>(m_House.Bans);
+                            newHouse.Access = new List<Nom>(m_House.Access);
                             newHouse.BuiltOn = m_House.BuiltOn;
                             newHouse.LastTraded = m_House.LastTraded;
                             newHouse.Public = m_House.Public;

@@ -649,8 +649,8 @@ namespace Server.Items
                                 }
                                 else
                                 {
-                                    if (!house.Bans.Contains(poster))
-                                        house.Bans.Add(poster);
+                                    if (!house.Bans.Contains(new Nom(poster)))
+                                        house.Bans.Add(new Nom(poster));
 
                                     from.SendLocalizedMessage(1062417); // That person has been banned from this house.
 

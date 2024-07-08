@@ -319,6 +319,7 @@ namespace Server.Multis
         private HouseRegion m_Region;
         private TrashBarrel m_Trash;
         private Mobile m_Owner;
+        private int m_Identite;
         private Point3D m_RelativeBanLocation;
 
         private static readonly Dictionary<Mobile, List<BaseHouse>> m_Table = new Dictionary<Mobile, List<BaseHouse>>();
@@ -556,14 +557,14 @@ namespace Server.Multis
         }
         #endregion
 
-        public List<Mobile> AvailableVendorsFor(Mobile m)
+        public List<Nom> AvailableVendorsFor(Nom m)
         {
-            List<Mobile> list = new List<Mobile>();
+            List<Nom> list = new List<Nom>();
 
             foreach (PlayerVendor vendor in PlayerVendors.OfType<PlayerVendor>())
             {
-                if (vendor.CanInteractWith(m, false))
-                    list.Add(vendor);
+                if (vendor.CanInteractWith(m.Mobile, false))
+                    list.Add(new Nom(vendor));
             }
 
             return list;
@@ -1221,7 +1222,7 @@ namespace Server.Multis
                     return false;
 
                 // anyone can use list, house must be public or player must have access to house
-                if (IsInList(item, _AccessibleToAll) && (m_Public || Access.Contains(from)))
+                if (IsInList(item, _AccessibleToAll) && (m_Public || Access.Contains(new Nom(from))))
                     return true;
 
                 return false;
@@ -1367,10 +1368,10 @@ namespace Server.Multis
             Addons = new Dictionary<Item, Mobile>();
             Carpets = new List<Item>();
 
-            CoOwners = new List<Mobile>();
-            Friends = new List<Mobile>();
-            Bans = new List<Mobile>();
-            Access = new List<Mobile>();
+            CoOwners = new List<Nom>();
+            Friends = new List<Nom>();
+            Bans = new List<Nom>();
+            Access = new List<Nom>();
 
             VendorRentalContracts = new List<Item>();
             InternalizedVendors = new List<Mobile>();
@@ -2749,7 +2750,8 @@ namespace Server.Multis
             }
         }
 
-        public void RemoveAccess(Mobile from, Mobile targ)
+
+        public void RemoveAccess(Mobile from, Nom targ)
         {
             if (!IsFriend(from) || Access == null)
                 return;
@@ -2758,17 +2760,17 @@ namespace Server.Multis
             {
                 Access.Remove(targ);
 
-                if (!HasAccess(targ) && IsInside(targ))
+                if (!HasAccess(targ) && IsInside(targ.Mobile))
                 {
-                    targ.Location = BanLocation;
-                    targ.SendLocalizedMessage(1060734); // Your access to this house has been revoked.
+                    targ.Mobile.Location = BanLocation;
+                    targ.Mobile.SendLocalizedMessage(1060734); // Your access to this house has been revoked.
                 }
 
                 from.SendLocalizedMessage(1050051); // The invitation has been revoked.
             }
         }
 
-        public void RemoveBan(Mobile from, Mobile targ)
+        public void RemoveBan(Mobile from, Nom targ)
         {
             if (!IsCoOwner(from) || Bans == null)
                 return;
@@ -2781,12 +2783,12 @@ namespace Server.Multis
             }
         }
 
-        public void Ban(Mobile from, Mobile targ)
+        public void Ban(Mobile from, Nom targ)
         {
             if (!IsFriend(from) || Bans == null)
                 return;
 
-            if (targ.IsStaff() && from.AccessLevel <= targ.AccessLevel)
+            if (targ.Mobile.IsStaff() && from.AccessLevel <= targ.Mobile.AccessLevel)
             {
                 from.SendLocalizedMessage(501354); // Uh oh...a bigger boot may be required.
             }
@@ -2806,7 +2808,7 @@ namespace Server.Multis
             {
                 from.SendLocalizedMessage(501356); // This person is already banned!
             }
-            else if (!IsInside(targ))
+            else if (!IsInside(targ.Mobile))
             {
                 from.SendLocalizedMessage(501352); // You may not eject someone who is not in your house!
             }
@@ -2814,7 +2816,7 @@ namespace Server.Multis
             {
                 from.SendLocalizedMessage(1062521); // You cannot ban someone from a private house.  Revoke their access instead.
             }
-            else if (targ is BaseCreature && ((BaseCreature)targ).NoHouseRestrictions)
+            else if (targ is BaseCreature && ((BaseCreature)targ.Mobile).NoHouseRestrictions)
             {
                 from.SendLocalizedMessage(1062040); // You cannot ban that.
             }
@@ -2823,13 +2825,18 @@ namespace Server.Multis
                 Bans.Add(targ);
 
                 from.SendLocalizedMessage(1042839, targ.Name); // ~1_PLAYER_NAME~ has been banned from this house.
-                targ.SendLocalizedMessage(501340); // You have been banned from this house.
+                targ.Mobile.SendLocalizedMessage(501340); // You have been banned from this house.
 
-                targ.MoveToWorld(BanLocation, Map);
+                targ.Mobile.MoveToWorld(BanLocation, Map);
             }
         }
 
         public void GrantAccess(Mobile from, Mobile targ)
+        {
+            GrantAccess(from, new Nom(targ));
+        }
+
+        public void GrantAccess(Mobile from, Nom targ)
         {
             if (!IsFriend(from) || Access == null)
                 return;
@@ -2838,7 +2845,7 @@ namespace Server.Multis
             {
                 from.SendLocalizedMessage(1060729); // That person already has access to this house.
             }
-            else if (!targ.Player)
+            else if (!targ.Mobile.Player)
             {
                 from.SendLocalizedMessage(1060712); // That is not a player.
             }
@@ -2850,11 +2857,15 @@ namespace Server.Multis
             {
                 Access.Add(targ);
 
-                targ.SendLocalizedMessage(1060735); // You have been granted access to this house.
+                targ.Mobile.SendLocalizedMessage(1060735); // You have been granted access to this house.
             }
         }
+      public void AddCoOwner(Mobile from, Mobile targ)
+        {
+            AddCoOwner(from,new Nom(targ));
+        }
 
-        public void AddCoOwner(Mobile from, Mobile targ)
+        public void AddCoOwner(Mobile from, Nom targ)
         {
             if (!IsOwner(from) || CoOwners == null || Friends == null)
                 return;
@@ -2867,7 +2878,7 @@ namespace Server.Multis
             {
                 from.SendLocalizedMessage(501361); // This person is a friend of the house. Remove them first.
             }
-            else if (!targ.Player)
+            else if (!targ.Mobile.Player)
             {
                 from.SendLocalizedMessage(501362); // That can't be a co-owner of the house.
             }
@@ -2887,35 +2898,30 @@ namespace Server.Multis
             {
                 AddCoOwner(targ);
 
-                targ.Delta(MobileDelta.Noto);
-                targ.SendLocalizedMessage(501343); // You have been made a co-owner of this house.
+                targ.Mobile.Delta(MobileDelta.Noto);
+                targ.Mobile.SendLocalizedMessage(501343); // You have been made a co-owner of this house.
             }
         }
 
-        public void AddCoOwner(Mobile targ)
+        public void AddCoOwner(Nom targ)
         {
             CoOwners.Add(targ);
 
-            List<Mobile> remove = new List<Mobile>();
+            List<Nom> remove = new List<Nom>();
 
-            foreach (Mobile m in CoOwners)
+            foreach (Nom m in CoOwners)
             {
-                if (AccountHandler.CheckAccount(m, targ) && m != targ)
+                if (m != targ)
                     remove.Add(m);
             }
 
-            foreach (Mobile m in remove)
+            foreach (Nom m in remove)
                 CoOwners.Remove(m);
 
             remove.Clear();
 
-            foreach (Mobile m in Friends)
-            {
-                if (AccountHandler.CheckAccount(m, targ))
-                    remove.Add(m);
-            }
-
-            foreach (Mobile m in remove)
+         
+            foreach (Nom m in remove)
                 Friends.Remove(m);
 
             remove.Clear();
@@ -2926,8 +2932,18 @@ namespace Server.Multis
         {
             RemoveCoOwner(from, targ, true);
         }
+        public void RemoveCoOwner(Mobile from, Nom targ)
+        {
+            RemoveCoOwner(from, targ, true);
+        }
 
         public void RemoveCoOwner(Mobile from, Mobile targ, bool fromMessage)
+        {
+            RemoveCoOwner(from,new Nom(targ), fromMessage);
+        }
+
+
+        public void RemoveCoOwner(Mobile from, Nom targ, bool fromMessage)
         {
             if (!IsOwner(from) || CoOwners == null)
                 return;
@@ -2936,14 +2952,14 @@ namespace Server.Multis
             {
                 CoOwners.Remove(targ);
 
-                targ.Delta(MobileDelta.Noto);
+                targ.Mobile.Delta(MobileDelta.Noto);
 
                 if (fromMessage)
                     from.SendLocalizedMessage(501299); // Co-owner removed from list.
 
-                targ.SendLocalizedMessage(501300); // You have been removed as a house co-owner.
+                targ.Mobile.SendLocalizedMessage(501300); // You have been removed as a house co-owner.
 
-                List<SecureInfo> infos = GetSecureInfosFor(targ);
+                List<SecureInfo> infos = GetSecureInfosFor(targ.Mobile);
 
                 foreach (SecureInfo info in infos)
                 {
@@ -2965,7 +2981,14 @@ namespace Server.Multis
             }
         }
 
+
         public void AddFriend(Mobile from, Mobile targ)
+        {
+            AddFriend(from, new Nom(targ));
+        }
+
+
+        public void AddFriend(Mobile from, Nom targ)
         {
             if (!IsCoOwner(from) || Friends == null || CoOwners == null)
                 return;
@@ -2978,7 +3001,7 @@ namespace Server.Multis
             {
                 from.SendLocalizedMessage(501369); // This person is already on your co-owner list!
             }
-            else if (!targ.Player)
+            else if (!targ.Mobile.Player)
             {
                 from.SendLocalizedMessage(501371); // That can't be a friend of the house.
             }
@@ -2998,8 +3021,8 @@ namespace Server.Multis
             {
                 Friends.Add(targ);
 
-                targ.Delta(MobileDelta.Noto);
-                targ.SendLocalizedMessage(501337); // You have been made a friend of this house.
+                targ.Mobile.Delta(MobileDelta.Noto);
+                targ.Mobile.SendLocalizedMessage(501337); // You have been made a friend of this house.
             }
         }
 
@@ -3010,6 +3033,18 @@ namespace Server.Multis
 
         public void RemoveFriend(Mobile from, Mobile targ, bool fromMessage)
         {
+            RemoveFriend(from, new Nom(targ), fromMessage);
+        }
+
+
+        public void RemoveFriend(Mobile from, Nom targ)
+        {
+            RemoveFriend(from, targ, true);
+        }
+
+
+        public void RemoveFriend(Mobile from, Nom targ, bool fromMessage)
+        {
             if (!IsCoOwner(from) || Friends == null)
                 return;
 
@@ -3017,14 +3052,14 @@ namespace Server.Multis
             {
                 Friends.Remove(targ);
 
-                targ.Delta(MobileDelta.Noto);
+                targ.Mobile.Delta(MobileDelta.Noto);
 
                 if (fromMessage)
                     from.SendLocalizedMessage(501298); // Friend removed from list.
 
-                targ.SendLocalizedMessage(1060751); // You are no longer a friend of this house.
+                targ.Mobile.SendLocalizedMessage(1060751); // You are no longer a friend of this house.
 
-                List<SecureInfo> infos = GetSecureInfosFor(targ);
+                List<SecureInfo> infos = GetSecureInfosFor(targ.Mobile);
 
                 foreach (SecureInfo info in infos)
                 {
@@ -3036,7 +3071,9 @@ namespace Server.Multis
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(23); // version
+            writer.Write(24); // version
+
+            writer.Write((int)m_Identite);
 
             writer.Write((int)_CurrentDecay);
 
@@ -3088,7 +3125,10 @@ namespace Server.Multis
 
             writer.Write(Price);
 
-            writer.WriteMobileList(Access);
+            writer.Write(Access.Count);
+
+            for (int i = 0; i < Access.Count; ++i)
+                Access[i].Serialize(writer);
 
             writer.Write(BuiltOn);
             writer.Write(LastTraded);
@@ -3109,9 +3149,21 @@ namespace Server.Multis
 
             writer.Write(m_Owner);
 
-            writer.WriteMobileList(CoOwners, true);
-            writer.WriteMobileList(Friends, true);
-            writer.WriteMobileList(Bans, true);
+            writer.Write(CoOwners.Count);
+
+            for (int i = 0; i < CoOwners.Count; ++i)
+                CoOwners[i].Serialize(writer);
+
+            writer.Write(Friends.Count);
+
+            for (int i = 0; i < Friends.Count; ++i)
+                Friends[i].Serialize(writer);
+
+            writer.Write(Bans.Count);
+
+            for (int i = 0; i < Bans.Count; ++i)
+                Bans[i].Serialize(writer);
+
 
             writer.Write(Sign);
             writer.Write(m_Trash);
@@ -3166,6 +3218,11 @@ namespace Server.Multis
 
             switch (version)
             {
+                case 24:
+                {
+                    m_Identite = reader.ReadInt();
+                    goto case 23;
+                }
                 case 23: // Vendor rental contract fix
                 case 22:
                     {
@@ -3266,7 +3323,28 @@ namespace Server.Multis
                     }
                 case 7:
                     {
-                        Access = reader.ReadStrongMobileList();
+                         if (version > 24)
+                        {
+                            List<Mobile> oldAcc = reader.ReadStrongMobileList();
+
+                            Access = new List<Nom>();
+
+                            foreach (Mobile co in oldAcc)
+                                Access.Add(new Nom(co));
+                        }
+                        else
+                        {
+                            int OldAccess = reader.ReadInt();
+
+                            List<Nom> Accesslist = new List<Nom>();
+
+                            for (int i = 0; i < OldAccess; i++)
+                            {
+                                Accesslist.Add(Nom.Deserialize(reader));
+                            }
+
+                            Access = Accesslist;
+                        }
                         goto case 6;
                     }
                 case 6:
@@ -3345,9 +3423,66 @@ namespace Server.Multis
 
                         UpdateRegion();
 
-                        CoOwners = reader.ReadStrongMobileList();
-                        Friends = reader.ReadStrongMobileList();
-                        Bans = reader.ReadStrongMobileList();
+                        if (version > 24)
+                        {
+                            List<Mobile> coOwn = reader.ReadStrongMobileList();
+
+                            CoOwners = new List<Nom>();
+
+                            foreach (Mobile co in coOwn)
+                                CoOwners.Add(new Nom(co));
+
+                            List<Mobile> Oldfri = reader.ReadStrongMobileList();
+
+                            Friends = new List<Nom>();
+
+                            foreach (Mobile co in Oldfri)
+                                Friends.Add(new Nom(co));
+                          
+                            List<Mobile> OldBans = reader.ReadStrongMobileList();
+
+                            Bans = new List<Nom>();
+
+                            foreach (Mobile co in OldBans)
+                                Bans.Add(new Nom(co));                      
+                        }
+                        else
+                        {
+                            
+                                int CoOwnersN = reader.ReadInt();
+
+                                List<Nom> CoOwnersList = new List<Nom>();
+
+                                for (int i = 0; i < CoOwnersN; i++)
+                                {
+                                    CoOwnersList.Add(Nom.Deserialize(reader));
+                                }
+
+                                CoOwners = CoOwnersList;
+
+                                int FriendN = reader.ReadInt();
+
+                                List<Nom> Friendlist = new List<Nom>();
+
+                                for (int i = 0; i < FriendN; i++)
+                                {
+                                    Friendlist.Add(Nom.Deserialize(reader));
+                                }
+
+                                Friends = Friendlist;
+
+                                int BansN = reader.ReadInt();
+
+                                List<Nom> Banslist = new List<Nom>();
+
+                                for (int i = 0; i < BansN; i++)
+                                {
+                                    Banslist.Add(Nom.Deserialize(reader));
+                                }
+
+                                Bans = Banslist;
+                        }
+
 
                         Sign = reader.ReadItem() as HouseSign;
                         m_Trash = reader.ReadItem() as TrashBarrel;
@@ -3631,10 +3766,10 @@ namespace Server.Multis
         public int MaxLockDowns { get; set; }
 
         public Region Region => m_Region;
-        public List<Mobile> CoOwners { get; set; }
-        public List<Mobile> Friends { get; set; }
-        public List<Mobile> Access { get; set; }
-        public List<Mobile> Bans { get; set; }
+        public List<Nom> CoOwners { get; set; }
+        public List<Nom> Friends { get; set; }
+        public List<Nom> Access { get; set; }
+        public List<Nom> Bans { get; set; }
         public List<Item> Doors { get; set; }
 
         public int GetLockdowns()
@@ -4067,19 +4202,31 @@ namespace Server.Multis
 
             return true;
         }
-
         public bool IsOwner(Mobile m)
+        {
+            return IsOwner(new Nom(m));
+        }
+
+
+        public bool IsOwner(Nom m)
         {
             if (m == null)
                 return false;
 
-            if (m == m_Owner || m.AccessLevel >= AccessLevel.GameMaster)
+            if (m.Mobile.AccessLevel >= AccessLevel.GameMaster)
                 return true;
 
-            return AccountHandler.CheckAccount(m, m_Owner);
+            if (m.Mobile == m_Owner && m.Identite == m_Identite)
+                return true;
+
+            return false;
+        }
+        public bool IsCoOwner(Mobile m)
+        {
+            return IsCoOwner(new Nom(m));
         }
 
-        public bool IsCoOwner(Mobile m)
+        public bool IsCoOwner(Nom m)
         {
             if (m == null || CoOwners == null)
                 return false;
@@ -4087,12 +4234,22 @@ namespace Server.Multis
             if (IsOwner(m) || CoOwners.Contains(m))
                 return true;
 
-            foreach (Mobile mob in CoOwners)
+            foreach (Nom item in CoOwners)
+            {
+                if (item.Equal(m))
+                {
+                    return true;
+                }
+                
+            }
+
+/*
+            foreach (Nom mob in CoOwners)
             {
                 if (AccountHandler.CheckAccount(mob, m))
                     return true;
             }
-
+*/
             return false;
         }
 
@@ -4114,67 +4271,99 @@ namespace Server.Multis
 
         public bool IsFriend(Mobile m)
         {
+            return IsFriend(new Nom(m));
+        }
+
+
+        public bool IsFriend(Nom m)
+        {
             if (m == null || Friends == null)
                 return false;
 
+            foreach (Nom item in Friends)
+            {
+                if (item.Equal(m))
+                {
+                    return true;
+                }
+                
+            }
+
             return IsCoOwner(m) || Friends.Contains(m);
         }
-
         public bool IsBanned(Mobile m)
         {
-            if (m == null || m == Owner || m.IsStaff() || Bans == null)
-                return false;
+            return IsBanned(new Nom(m));
+        }
 
-            Account theirAccount = m.Account as Account;
+        public bool IsBanned(Nom m)
+        {
+            if (m == null || m.Mobile == Owner || m.Mobile.IsStaff() || Bans == null)
+                return false;
 
             for (int i = 0; i < Bans.Count; ++i)
             {
-                Mobile c = Bans[i];
-
-                if (c == m)
-                    return true;
-
-                Account bannedAccount = c.Account as Account;
-
-                if (bannedAccount != null && bannedAccount == theirAccount)
-                    return true;
+                if (Bans[i].Equal(m))
+                {
+                        return true;
+                }
             }
 
+            
             return false;
         }
 
+
+
         public bool HasAccess(Mobile m)
+        {
+            return HasAccess(new Nom(m));
+        }
+
+
+        public bool HasAccess(Nom m)
         {
             if (m == null)
                 return false;
 
-            if (m.IsStaff() || IsFriend(m) || (Access != null && Access.Contains(m)))
+            if (m.Mobile.IsStaff() || IsFriend(m) || (Access != null && Access.Contains(m)))
                 return true;
 
-            if (m is BaseCreature)
+            foreach (Nom item in Access)
             {
-                BaseCreature bc = (BaseCreature)m;
+                if (item.Equal(m))
+                {
+                    return true;
+                }         
+            }
+
+
+
+            if (m.Mobile is BaseCreature)
+            {
+                BaseCreature bc = (BaseCreature)m.Mobile;
 
                 if (bc.NoHouseRestrictions)
                     return true;
 
                 if (bc.Controlled || bc.Summoned)
                 {
-                    m = bc.ControlMaster;
+                    m = new Nom(bc.ControlMaster);
 
                     if (m == null)
-                        m = bc.SummonMaster;
+                        m = new Nom(bc.SummonMaster);
 
                     if (m == null)
                         return false;
 
-                    if (m.IsStaff() || IsFriend(m) || (Access != null && Access.Contains(m)))
+                    if (m.Mobile.IsStaff() || IsFriend(m) || (Access != null && Access.Contains(m)))
                         return true;
                 }
             }
 
             return false;
         }
+
 
         public new bool IsLockedDown(Item check)
         {
@@ -4525,9 +4714,9 @@ namespace Server.Multis
             if (targeted is Mobile)
             {
                 if (m_Banning)
-                    m_House.Ban(from, (Mobile)targeted);
+                     m_House.Ban(from, new Nom((Mobile)targeted));
                 else
-                    m_House.RemoveBan(from, (Mobile)targeted);
+                     m_House.RemoveBan(from, new Nom((Mobile)targeted));
             }
             else
             {

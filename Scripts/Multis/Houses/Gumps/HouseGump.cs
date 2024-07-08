@@ -45,7 +45,7 @@ namespace Server.Gumps
         private const int LabelHue = 0x481;
         private const int HighlightedLabelHue = 0x64;
 
-        private List<Mobile> m_List;
+        private List<Nom> m_List;
 
         private string GetOwnerName()
         {
@@ -91,12 +91,12 @@ namespace Server.Gumps
             AddHtmlLocalized(x + 35, y, 240, 20, number, enabled ? LabelColor : DisabledColor, false, false);
         }
 
-        public void AddList(List<Mobile> list, int button, bool accountOf, bool leadingStar, Mobile from)
+        public void AddList(List<Nom> list, int button, bool accountOf, bool leadingStar, Mobile from)
         {
             if (list == null)
                 return;
 
-            m_List = new List<Mobile>(list);
+            m_List = new List<Nom>(list);
 
             int lastPage = 0;
             int index = 0;
@@ -120,14 +120,14 @@ namespace Server.Gumps
                     lastPage = page;
                 }
 
-                Mobile m = list[i];
+                Nom m = list[i];
 
                 string name;
                 int labelHue = LabelHue;
 
-                if (m is PlayerVendor)
+                if (m.Mobile is PlayerVendor)
                 {
-                    PlayerVendor vendor = (PlayerVendor)m;
+                    PlayerVendor vendor = (PlayerVendor)m.Mobile;
 
                     name = vendor.ShopName;
 
@@ -148,10 +148,7 @@ namespace Server.Gumps
 
                 if (button != -1)
                     AddButton(10 + xoffset, 150 + yoffset, 4005, 4007, GetButtonID(button, i), GumpButtonType.Reply, 0);
-
-                if (accountOf && m.Player && m.Account != null)
-                    name = "Account of " + name;
-
+               
                 if (leadingStar)
                     name = "* " + name;
 
@@ -229,7 +226,7 @@ namespace Server.Gumps
             {
                 AddHtmlLocalized(10, 120, 400, 20, 1062428, LabelColor, false, false); // <CENTER>SHOPS</CENTER>
 
-                AddList(house.AvailableVendorsFor(from), 1, false, false, from);
+                AddList(house.AvailableVendorsFor(new Nom(from)), 1, false, false, from);
                 return;
             }
 
@@ -582,9 +579,9 @@ namespace Server.Gumps
             {
                 if (house.CoOwners != null)
                 {
-                    List<Mobile> list = new List<Mobile>(house.CoOwners);
+                    List<Nom> list = new List<Nom>(house.CoOwners);
 
-                    foreach (Mobile m in list)
+                    foreach (Nom m in list)
                     {
                         house.RemoveCoOwner(from, m, false);
                     }
@@ -609,9 +606,9 @@ namespace Server.Gumps
             {
                 if (house.Friends != null)
                 {
-                    List<Mobile> list = new List<Mobile>(house.Friends);
+                    List<Nom> list = new List<Nom>(house.Friends);
 
-                    foreach (Mobile m in list)
+                    foreach (Nom m in list)
                     {
                         house.RemoveFriend(from, m, false);
                     }
@@ -716,11 +713,10 @@ namespace Server.Gumps
                         newHouse.Price = e.Cost;
 
                         house.MoveAllToCrate();
-
-                        newHouse.Friends = new List<Mobile>(house.Friends);
-                        newHouse.CoOwners = new List<Mobile>(house.CoOwners);
-                        newHouse.Bans = new List<Mobile>(house.Bans);
-                        newHouse.Access = new List<Mobile>(house.Access);
+                        newHouse.Friends = new List<Nom>(house.Friends);
+                        newHouse.CoOwners = new List<Nom>(house.CoOwners);
+                        newHouse.Bans = new List<Nom>(house.Bans);
+                        newHouse.Access = new List<Nom>(house.Access);
                         newHouse.BuiltOn = house.BuiltOn;
                         newHouse.LastTraded = house.LastTraded;
                         newHouse.Public = house.Public;
@@ -850,7 +846,7 @@ namespace Server.Gumps
             {
                 if (index >= 0 && index < m_List.Count)
                 {
-                    PlayerVendor vendor = (PlayerVendor)m_List[index];
+                    PlayerVendor vendor = (PlayerVendor)m_List[index].Mobile;
 
                     if (!vendor.CanInteractWith(from, false))
                         return;

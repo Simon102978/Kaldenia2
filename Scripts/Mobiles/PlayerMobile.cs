@@ -2911,7 +2911,7 @@ namespace Server.Mobiles
 			if (okay && house.IsCoOwner(from))
 			{
 				if (house.CoOwners != null)
-					house.CoOwners.Remove(from);
+                    house.CoOwners.Remove(new Nom(from));
 
 				from.SendLocalizedMessage(501300); // You have been removed as a house co-owner.
 			}
