@@ -861,7 +861,23 @@ namespace Server.Items
             }
         }
 
-        public override bool OnEquip(Mobile from)
+		public override void OnDoubleClick(Mobile from)
+		{
+			var oldItem = from.FindItemOnLayer(this.Layer);
+
+			if (oldItem == this)
+				return;
+
+			if (oldItem != null)
+				from.PlaceInBackpack(oldItem);
+
+			from.EquipItem(this);
+
+			base.OnDoubleClick(from);
+		}
+
+
+		public override bool OnEquip(Mobile from)
         {
             int strBonus = m_AosAttributes.BonusStr;
             int dexBonus = m_AosAttributes.BonusDex;

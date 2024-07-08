@@ -2054,7 +2054,22 @@ namespace Server.Items
             return false;
         }
 
-        public override bool OnEquip(Mobile from)
+		public override void OnDoubleClick(Mobile from)
+		{
+			var oldItem = from.FindItemOnLayer(this.Layer);
+
+			if (oldItem == this)
+				return;
+
+			if (oldItem != null)
+				from.PlaceInBackpack(oldItem);
+
+			from.EquipItem(this);
+
+			base.OnDoubleClick(from);
+		}
+
+		public override bool OnEquip(Mobile from)
         {
             from.CheckStatTimers();
 
