@@ -7,6 +7,7 @@ using Server.Items;
 using Server.Commands;
 using Server.Mobiles;
 using Server.Targeting;
+using Server.Prompts;
 
 namespace Server.Custom.System
 {
@@ -439,7 +440,7 @@ namespace Server.Custom.System
                     continue;
 				CustomGuildMember m_Mobile = list[i];
 
-				AddButtonHtlml(x, y + (space * line) - 1, GetButtonID2(6, i), m_Mobile.GetName(), "#FFFFFF");
+				AddButtonHtlml(x, y + (space * line) - 1, GetButtonID2(6, i), m_Mobile.Name, "#FFFFFF");
 
 				if (m_Mobile.CustomRank != -2)
 				{
@@ -467,12 +468,12 @@ namespace Server.Custom.System
 
 			AddPage(0);
 
-			AddSection(x - 20, YBase, 520, 520, member.GetName());
+			AddSection(x - 20, YBase, 520, 520, member.Name);
 
 
 			if (currentMember.Mobile != null && from.IsStaff())
 			{
-				AddHtmlTexteColored(x, y + (space * line++) - 1, 300, $"Nom: {currentMember.Mobile.GetBaseName()}", "#FFFFFF");
+				AddHtmlTexteColored(x, y + (space * line++) - 1, 300, $"Nom: {currentMember.Name}", "#FFFFFF");
 			}
 			
 
@@ -497,6 +498,9 @@ namespace Server.Custom.System
 				AddButtonHtlml(x, y + (space * line++) - 1, GetButtonID2(8, 0), "Rang standard", "#FFFFFF");
 			}	
 			AddButtonHtlml(x, y + (space * line++) - 1, GetButtonID2(5, 0), "Retirer de la guilde", "#FFFFFF");
+			AddButtonHtlml(x, y + (space * line++) - 1, GetButtonID2(9, 0), "Changer le nom", "#FFFFFF");
+
+
 			AddButtonHtlml(x, y + (space * line++) - 1, GetButtonID2(7, 0), "Retour", "#FFFFFF");
         }
 
@@ -621,7 +625,53 @@ namespace Server.Custom.System
 						m_From.SendGump(new NewGuildMembersList(m_From, m_Guild,currentMember));
 						break;
 					}
+            	case 9:
+					{
+                        m_From.SendMessage("Veuillez marquer le nouveau nom.");
+                        m_From.Prompt = new SetName(m_From,currentMember,m_Guild);
+						break;
+					}
 			}
 		}
+
+        private class SetName : Prompt
+		{
+			private CustomPlayerMobile m_From; 
+            private CustomGuildMember currentMember;
+            private GuildRecruter m_Guild;
+
+
+			public SetName(CustomPlayerMobile from,CustomGuildMember member,GuildRecruter guild )
+			{
+				m_From = from;
+				currentMember = member;
+                m_Guild = guild;
+
+			}
+
+			public override void OnCancel(Mobile from)
+			{
+				m_From.SendGump(new NewGuildMembersList(m_From, m_Guild, currentMember));
+			}
+
+			public override void OnResponse(Mobile from, string text)
+			{
+
+                currentMember.Name = text;
+				m_From.SendGump(new NewGuildMembersList(m_From, m_Guild, currentMember));
+			}
+		}
+
+
+
+
+
+
+
+
+
     }
+
+	
+
 }

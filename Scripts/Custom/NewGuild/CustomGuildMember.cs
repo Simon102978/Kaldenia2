@@ -18,6 +18,8 @@ namespace Server.Mobiles
         private int m_Salaire;
 		private string m_Titre;
 
+        private string m_Name;
+
 
 
 		private int m_CustomRank;
@@ -26,7 +28,7 @@ namespace Server.Mobiles
         public CustomPlayerMobile Mobile { get => m_Mobile; set => m_Mobile = value; }
         public int Salaire { get => m_Salaire; set => m_Salaire = value; }
         public string Titre { get => m_Titre; set => m_Titre = value; }
-
+        public string Name { get => m_Name; set => m_Name = value; }
 
 		public int CustomRank { get => m_CustomRank; set => m_CustomRank = value; }
 
@@ -45,27 +47,13 @@ namespace Server.Mobiles
         public CustomGuildMember(CustomPlayerMobile player, int identite)
         {
             Mobile = player;
+            Name = player.Name;
             Identite = identite;
 			CustomRank = 0;
         }
 
 
 
-		public string GetName()
-		{
-			if (Mobile != null)
-			{
-
-				Deguisement deg = Mobile.GetDeguisement(Identite);
-
-				if (deg != null)
-				{
-					return deg.Name;
-				}
-
-			}
-			return "";
-		}
 
 		public void IncreaseRank(GuildRecruter guild)
 		{
@@ -103,7 +91,8 @@ namespace Server.Mobiles
 		public void Serialize(GenericWriter writer)
         {
 
-            writer.Write((int)0);
+            writer.Write((int)1);
+            writer.Write(m_Name);
             writer.Write(m_Titre);
             writer.Write(m_Mobile);
             writer.Write(m_identite);
@@ -121,7 +110,11 @@ namespace Server.Mobiles
 
             switch (version)
             {
-
+                case 1:
+                {
+                    CercleMember.Name = reader.ReadString();
+                    goto case 0;
+                }
                 case 0:
                     {
 						CercleMember.Titre = reader.ReadString();
