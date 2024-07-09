@@ -19,6 +19,7 @@ namespace Server.Items
             : base(0xE05)
         {
             Weight = 1.0;
+            Name = "Trousse à déguisement";
         }
 
         public DisguiseKit(Serial serial)

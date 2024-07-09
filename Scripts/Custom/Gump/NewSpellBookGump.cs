@@ -64,7 +64,7 @@ namespace Server.Gumps
 			new SpellBookEntry( 1, MagieType.Arcane,"Nourriture", new Type[] {typeof(Garlic), typeof(Ginseng), typeof(MandrakeRoot) },0x8c1, 1,767),
 			new SpellBookEntry( 1, MagieType.Arcane,"Vision de nuit", new Type[] {typeof(SulfurousAsh), typeof(SpidersSilk) },0x8c5, 1,768),
 			new SpellBookEntry( 4, MagieType.Arcane,"Guérison", new Type[] {typeof(Garlic), typeof(Ginseng), typeof(SpidersSilk) },0x8c3, 1,769),
-			new SpellBookEntry( 4, MagieType.Arcane,"Flèche magique", new Type[] {typeof(SulfurousAsh) },0x8c4, 1,770),
+			new SpellBookEntry( 3, MagieType.Arcane,"Flèche magique", new Type[] {typeof(SulfurousAsh) },0x8c4, 1,770),
 			new SpellBookEntry( 2, MagieType.Arcane,"Maladresse", new Type[] {typeof(Bloodmoss), typeof(Nightshade) },0x8C0, 1,771),
 			new SpellBookEntry( 2, MagieType.Arcane,"Abrutissement", new Type[] {typeof(Ginseng), typeof(Nightshade) },0x8C2, 1,772),
 			new SpellBookEntry( 2, MagieType.Arcane,"Faiblesse", new Type[] {typeof(Garlic), typeof(Nightshade) },0x8C7, 1,773),
