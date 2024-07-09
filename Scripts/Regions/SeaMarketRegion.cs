@@ -294,7 +294,7 @@ namespace Server.Regions
                     boat.Teleport(x - boat.X, y - boat.Y, z - boat.Z);
 
                     if (boat.Owner != null && boat.Owner.NetState != null)
-                        boat.SendMessageToAllOnPalmierBoard(1149785); //A strong tide comes and carries your boat to deeper water.
+                        boat.SendMessageToAllOnRegularBoard(1149785); //A strong tide comes and carries your boat to deeper water.
                     return true;
                 }
             }
