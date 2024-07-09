@@ -714,6 +714,7 @@ namespace Server.Items
 		{
 			var name = Name ?? String.Empty;
 
+
 			if (Quality == ItemQuality.Legendary)
 				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
 			else if (Quality == ItemQuality.Epic)
@@ -723,6 +724,9 @@ namespace Server.Items
 			else
 				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
 
+			AddCraftedProperties(list);
+
+
 			var desc = Description ?? String.Empty;
 
 			if (!String.IsNullOrWhiteSpace(desc))
@@ -730,8 +734,7 @@ namespace Server.Items
 
 			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
 
-			AddWeightProperty(list);
-			AddCraftedProperties(list);
+			//AddWeightProperty(list);
 
 			if (this is BaseBracelet || this is BaseRing)
 				list.Add($"Enchantement: {Enchantement}/1");
@@ -739,6 +742,9 @@ namespace Server.Items
 			if (GemType != GemType.None)
 			{
 				list.Add("Pierre précieuse : {0}", GemType.ToString());
+
+				if (this is BaseBracelet || this is BaseRing)
+					list.Add($"Enchantement: {Enchantement}/1");
 
 				if (m_GorgonLenseCharges > 0)
 				list.Add(1112590, m_GorgonLenseCharges.ToString()); //Gorgon Lens Charges: ~1_val~

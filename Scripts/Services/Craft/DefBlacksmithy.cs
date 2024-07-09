@@ -442,11 +442,14 @@ namespace Server.Engines.Craft
 			#endregion
 
 			#region "Armes de poings"
+
 			AddCraft(typeof(DoubleLames), "Armes de poings", "Double Lames de poing", 0.0, 25.0, typeof(IronIngot), "Fer", 15, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(Sai), "Armes de poings", "Sai", 10.0, 35.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(Kama), "Armes de poings", "Kama", 10.0, 35.0, typeof(IronIngot), "Fer", 14, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Nunchakuonehand), "Armes de poings", "Baton à une main", 20.0, 55.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(Tekagi), "Armes de poings", "Griffes", 20.0, 55.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(AnneauxCombat), "Armes de poings", "Anneaux de Combat", 20.0, 55.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(LameAffutee), "Armes de poings", "Lame Afutée 1 main", 35.0, 65.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(GriffesCombat), "Armes de poings", "Griffes de Combat", 35.0, 65.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(KamaKuya), "Armes de poings", "Kama Kuya", 35.0, 65.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(LameCirculaire), "Armes de poings", "Lame Circulaire", 50.0, 75.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
@@ -577,6 +580,8 @@ namespace Server.Engines.Craft
 			#endregion
 
 			#region "Divers"
+			AddCraft(typeof(IronIngotResourceCrate), "Divers", "Caisse de ressource", 10.0, 60.0, typeof(IronIngot), 1044036, 150, 1044037);
+
 			AddCraft(typeof(Cannonball), "Divers", "Boulet de Canon", 10.0, 60.0, typeof(IronIngot), 1044036, 5, 1044037);
 			AddCraft(typeof(Grapeshot), "Divers", "Boulet Avancé", 15.0, 70.0, typeof(IronIngot), 1044036, 5, 1044037);
 			AddRes(index, typeof(Cloth), 1044286, 2, 1044287);

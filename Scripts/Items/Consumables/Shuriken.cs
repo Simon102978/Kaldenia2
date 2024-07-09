@@ -20,7 +20,7 @@ namespace Server.Items
             : base(0x27AC)
         {
             Weight = 1.0;
-
+			Layer = Layer.OneHanded;
             m_UsesRemaining = amount;
         }
 

@@ -84,8 +84,8 @@ namespace Server.Mobiles
                 Add(typeof(ShepherdsCrook), 2);
                 Add(typeof(Club), 3);
 
-                Add(typeof(Log), 1);
-				Add(typeof(RegularBoard), 2);
+                //Add(typeof(Log), 1);
+				//Add(typeof(RegularBoard), 2);
 			}
         }
     }
