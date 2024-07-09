@@ -167,7 +167,7 @@ namespace Server.Items
                     {
                         //TODO: Message?
                     }
-                    else if (from.Backpack != null && from.Backpack.ConsumeTotal(typeof(RegularBoard), 10))
+                    else if (from.Backpack != null && from.Backpack.ConsumeTotal(typeof(PalmierBoard), 10))
                     {
                         int index = lic.KillEntry.KillIndex;
 
@@ -191,7 +191,7 @@ namespace Server.Items
                     }
                     else
                     {
-                        from.SendLocalizedMessage(1042598); // You do not have enough RegularBoards.
+                        from.SendLocalizedMessage(1042598); // You do not have enough PalmierBoards.
                         return;
                     }
                 }
@@ -211,7 +211,7 @@ namespace Server.Items
                             {
                                 Container pack = from.Backpack;
 
-                                if (pack != null && pack.ConsumeTotal(typeof(RegularBoard), 10))
+                                if (pack != null && pack.ConsumeTotal(typeof(PalmierBoard), 10))
                                 {
                                     from.SendLocalizedMessage(1042278); // You review the corpse and find it worthy of a trophy.
                                     from.SendLocalizedMessage(1042602); // You use your kit up making the trophy.
@@ -278,7 +278,7 @@ namespace Server.Items
                                 }
                                 else
                                 {
-                                    from.SendLocalizedMessage(1042598); // You do not have enough RegularBoards.
+                                    from.SendLocalizedMessage(1042598); // You do not have enough PalmierBoards.
                                     return;
                                 }
                             }

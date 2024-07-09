@@ -74,7 +74,7 @@ namespace Server.Engines.Harvest
 
 			res = new HarvestResource[]
 			{
-				new HarvestResource(00.0, 00.0, 100.0, 1072540, typeof(Log)),
+				new HarvestResource(00.0, 00.0, 100.0, 1072540, typeof(PalmierLog)),
 				new HarvestResource(65.0, 25.0, 105.0, 1072541, typeof(OakLog)),
 				new HarvestResource(80.0, 40.0, 120.0, 1072542, typeof(AshLog)),
 				new HarvestResource(95.0, 55.0, 135.0, 1072543, typeof(YewLog)),
@@ -122,8 +122,8 @@ namespace Server.Engines.Harvest
 
 			if (tool is HarvestersAxe axe && axe.Charges > 0 /*|| tool is GargishHarvestersAxe gaxe && gaxe.Charges > 0*/)
 			{
-				if (type == typeof(Log))
-					newType = typeof(RegularBoard);
+				if (type == typeof(PalmierLog))
+					newType = typeof(PalmierBoard);
 				else if (type == typeof(OakLog))
 					newType = typeof(OakBoard);
 				else if (type == typeof(AshLog))
@@ -208,7 +208,7 @@ namespace Server.Engines.Harvest
 			#region Void Pool Items
 			HarvestMap hmap = HarvestMap.CheckMapOnHarvest(from, loc, def);
 
-			if (hmap != null && hmap.Resource >= CraftResource.RegularWood && hmap.Resource <= CraftResource.Frostwood)
+			if (hmap != null && hmap.Resource >= CraftResource.PalmierWood && hmap.Resource <= CraftResource.Frostwood)
 			{
 				hmap.UsesRemaining--;
 				hmap.InvalidateProperties();

@@ -397,16 +397,16 @@ namespace Server.Engines.Craft
 
 		private static readonly Type[][] ItemTypesTable =
 		{
-			new[] {typeof(RegularBoard), typeof(Log)},
-			new[] {typeof(PlainoisBoard), typeof(PlainoisLog)},
-			new[] {typeof(CollinoisBoard), typeof(CollinoisLog)},
-			new[] {typeof(ForestierBoard), typeof(ForestierLog)},
-			new[] {typeof(SavanoisBoard), typeof(SavanoisLog)},
-			new[] {typeof(DesertiqueBoard), typeof(DesertiqueLog)},
-			new[] {typeof(MontagnardBoard), typeof(MontagnardLog)},
-			new[] {typeof(VolcaniqueBoard), typeof(VolcaniqueLog)},
-			new[] {typeof(TropicauxBoard), typeof(TropicauxLog)},
-			new[] {typeof(ToundroisBoard), typeof(ToundroisLog)},
+			new[] {typeof(PalmierBoard), typeof(PalmierLog)},
+			new[] {typeof(ÉrableBoard), typeof(ÉrableLog)},
+			new[] {typeof(CèdreBoard), typeof(CèdreLog)},
+			new[] {typeof(ChêneBoard), typeof(ChêneLog)},
+			new[] {typeof(SauleBoard), typeof(SauleLog)},
+			new[] {typeof(CyprèsBoard), typeof(CyprèsLog)},
+			new[] {typeof(AcajouBoard), typeof(AcajouLog)},
+			new[] {typeof(ÉbèneBoard), typeof(ÉbèneLog)},
+			new[] {typeof(AmaranteBoard), typeof(AmaranteLog)},
+			new[] {typeof(PinBoard), typeof(PinLog)},
 			new[] {typeof(AncienBoard), typeof(AncienLog)},
 
 			new[] {typeof(HeartwoodBoard), typeof(HeartwoodLog)},
@@ -455,7 +455,7 @@ namespace Server.Engines.Craft
 
 		private static readonly Type[] m_ColoredResourceTable =
 		{
-			typeof(RegularBoard), typeof(Log),
+			typeof(PalmierBoard), typeof(PalmierLog),
 			typeof(BaseIngot), typeof(BaseOre), typeof(BaseLeather), typeof(BaseHides), typeof(AbyssalCloth), typeof(UncutCloth), typeof(Cloth),
 			typeof(BaseGranite), typeof(BaseScales), typeof(PlantClippings), typeof(DryReeds), typeof(SoftenedReeds),
 			typeof(PlantPigment), typeof(BaseContainer),
@@ -486,18 +486,18 @@ namespace Server.Engines.Craft
 
 		private static readonly Dictionary<Type, Type> m_ResourceConversionTable = new Dictionary<Type, Type>()
 		{
-			{ typeof(RegularBoard), typeof(Log) },
+			{ typeof(PalmierBoard), typeof(PalmierLog) },
 
 
-			 {typeof(PlainoisBoard), typeof(PlainoisLog)},
-			 {typeof(CollinoisBoard), typeof(CollinoisLog)},
-			 {typeof(ForestierBoard), typeof(ForestierLog)},
-			 {typeof(SavanoisBoard), typeof(SavanoisLog)},
-			 {typeof(DesertiqueBoard), typeof(DesertiqueLog)},
-			 {typeof(MontagnardBoard), typeof(MontagnardLog)},
-			 {typeof(VolcaniqueBoard), typeof(VolcaniqueLog)},
-			 {typeof(TropicauxBoard), typeof(TropicauxLog)},
-			 {typeof(ToundroisBoard), typeof(ToundroisLog)},
+			 {typeof(ÉrableBoard), typeof(ÉrableLog)},
+			 {typeof(CèdreBoard), typeof(CèdreLog)},
+			 {typeof(ChêneBoard), typeof(ChêneLog)},
+			 {typeof(SauleBoard), typeof(SauleLog)},
+			 {typeof(CyprèsBoard), typeof(CyprèsLog)},
+			 {typeof(AcajouBoard), typeof(AcajouLog)},
+			 {typeof(ÉbèneBoard), typeof(ÉbèneLog)},
+			 {typeof(AmaranteBoard), typeof(AmaranteLog)},
+			 {typeof(PinBoard), typeof(PinLog)},
 			 {typeof(AncienBoard), typeof(AncienLog)},
 
 			{ typeof(HeartwoodBoard), typeof(HeartwoodLog) },
@@ -1574,37 +1574,37 @@ namespace Server.Engines.Craft
 
 			switch (name)
 			{
-				case "PlainoisLeather": skill += 0.0; break;
-				case "CollinoisLeather": skill += 10.0; break;
-				case "ForestierLeather": skill += 15.0; break;
-				case "SavanoisLeather": skill += 20.0; break;
-				case "DesertiqueLeather": skill += 25.0; break;
-				case "MontagnardLeather": skill += 30.0; break;
-				case "VolcaniqueLeather": skill += 35.0; break;
-				case "TropicauxLeather": skill += 40.0; break;
-				case "ToundroisLeather": skill += 45.0; break;
+				case "ÉrableLeather": skill += 0.0; break;
+				case "CèdreLeather": skill += 10.0; break;
+				case "ChêneLeather": skill += 15.0; break;
+				case "SauleLeather": skill += 20.0; break;
+				case "CyprèsLeather": skill += 25.0; break;
+				case "AcajouLeather": skill += 30.0; break;
+				case "ÉbèneLeather": skill += 35.0; break;
+				case "AmaranteLeather": skill += 40.0; break;
+				case "PinLeather": skill += 45.0; break;
 				case "AncienLeather": skill += 50.0; break;
 
-				case "PlainoisBone": skill += 0.0; break;
-				case "CollinoisBone": skill += 10.0; break;
-				case "ForestierBone": skill += 15.0; break;
-				case "SavanoisBone": skill += 20.0; break;
-				case "DesertiqueBone": skill += 25.0; break;
-				case "MontagnardBone": skill += 30.0; break;
-				case "VolcaniqueBone": skill += 35.0; break;
-				case "TropicauxBone": skill += 40.0; break;
-				case "ToundroisBone": skill += 45.0; break;
+				case "ÉrableBone": skill += 0.0; break;
+				case "CèdreBone": skill += 10.0; break;
+				case "ChêneBone": skill += 15.0; break;
+				case "SauleBone": skill += 20.0; break;
+				case "CyprèsBone": skill += 25.0; break;
+				case "AcajouBone": skill += 30.0; break;
+				case "ÉbèneBone": skill += 35.0; break;
+				case "AmaranteBone": skill += 40.0; break;
+				case "PinBone": skill += 45.0; break;
 				case "AncienBone": skill += 50.0; break;
 
-				case "PlainoisBoard": skill += 0.0; break;
-				case "CollinoisBoard": skill += 10.0; break;
-				case "ForestierBoard": skill += 15.0; break;
-				case "SavanoisBoard": skill += 20.0; break;
-				case "DesertiqueBoard": skill += 25.0; break;
-				case "MontagnardBoard": skill += 30.0; break;
-				case "VolcaniqueBoard": skill += 35.0; break;
-				case "TropicauxBoard": skill += 40.0; break;
-				case "ToundroisBoard": skill += 45.0; break;
+				case "ÉrableBoard": skill += 0.0; break;
+				case "CèdreBoard": skill += 10.0; break;
+				case "ChêneBoard": skill += 15.0; break;
+				case "SauleBoard": skill += 20.0; break;
+				case "CyprèsBoard": skill += 25.0; break;
+				case "AcajouBoard": skill += 30.0; break;
+				case "ÉbèneBoard": skill += 35.0; break;
+				case "AmaranteBoard": skill += 40.0; break;
+				case "PinBoard": skill += 45.0; break;
 				case "AncienBoard": skill += 50.0; break;
 
 				case "IronIngot": skill += 0.0; break;
@@ -2022,7 +2022,7 @@ namespace Server.Engines.Craft
 
 				if (item != null)
 				{
-					if (item is RegularBoard)
+					if (item is PalmierBoard)
 					{
 						Type resourceType = typeRes;
 
@@ -2055,7 +2055,7 @@ namespace Server.Engines.Craft
 								item = new FrostwoodBoard();
 								break;
 							default:
-								item = new RegularBoard();
+								item = new PalmierBoard();
 								break;
 						}
 

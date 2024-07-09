@@ -195,7 +195,7 @@ namespace Server.Items
 			Name = "canne à pêche";
 
 			Layer = Layer.OneHanded;
-			Resource = CraftResource.RegularWood;
+			Resource = CraftResource.PalmierWood;
 
 			m_BaitType = null;
 			m_HookType = HookType.None;
@@ -605,7 +605,7 @@ namespace Server.Items
 				m_PlayerConstructed = true;
 
 				if (m_Resource == CraftResource.None)
-					Resource = CraftResource.RegularWood;
+					Resource = CraftResource.PalmierWood;
 				else
 				{
 					DistributeMaterialBonus();

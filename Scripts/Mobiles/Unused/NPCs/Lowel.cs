@@ -17,7 +17,7 @@ namespace Server.Engines.Quests
         public override object Title => 1075517;
         /* Hail friend, hast thou a moment? A mishap with a saw hath left me in a sorry state, for it shall be a while 
         before I canst return to carpentry. In the meantime, I need a comfortable chair that I may rest. Could thou craft 
-        a straw chair?  Only a tool, such as a dovetail saw, a few RegularBoards, and some skill as a carpenter is needed. Remember, 
+        a straw chair?  Only a tool, such as a dovetail saw, a few PalmierBoards, and some skill as a carpenter is needed. Remember, 
         this is a piece of furniture, so please pay attention to detail. */
         public override object Description => 1075518;
         /* I quite understand your reluctance.  If you reconsider, I'll be here. */
@@ -103,7 +103,7 @@ namespace Server.Engines.Quests
         {
             Hue = BaseReward.SatchelHue();
 
-            AddItem(new RegularBoard(10));
+            AddItem(new PalmierBoard(10));
             AddItem(new DovetailSaw());
         }
 

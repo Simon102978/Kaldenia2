@@ -20,13 +20,13 @@ namespace Server.Items
 						new HarvestVein(NormalDropChance,       0.0, res[0],  null),   // Normal
 						new HarvestVein(PlainoisDropChance,     0.0, res[1],  res[0]), // Plainois
 						new HarvestVein(ForestierDropChance,    0.0, res[2],  res[0]), // Forestier
-						new HarvestVein(CollinoisDropChance,    0.0, res[3],  res[0]), // Collinois
-						new HarvestVein(DesertiqueDropChance,   0.0, res[4],  res[0]), // Désertique
-						new HarvestVein(SavanoisDropChance,     0.0, res[5],  res[0]), // Savanois
-						new HarvestVein(MontagnardDropChance,	0.0, res[6],  res[0]), // Montagnard
-						new HarvestVein(VolcaniqueDropChance,   0.0, res[7],  res[0]), // Volcanique
-						new HarvestVein(TropicauxDropChance,    0.0, res[8],  res[0]), // Tropicaux
-						new HarvestVein(ToundroisDropChance,    0.0, res[9],  res[0]), // Toundrois
+						new HarvestVein(CèdreDropChance,    0.0, res[3],  res[0]), // Cèdre
+						new HarvestVein(CyprèsDropChance,   0.0, res[4],  res[0]), // Cyprès
+						new HarvestVein(SauleDropChance,     0.0, res[5],  res[0]), // Saule
+						new HarvestVein(AcajouDropChance,	0.0, res[6],  res[0]), // Acajou
+						new HarvestVein(ÉbèneDropChance,   0.0, res[7],  res[0]), // Ébène
+						new HarvestVein(AmaranteDropChance,    0.0, res[8],  res[0]), // Amarante
+						new HarvestVein(PinDropChance,    0.0, res[9],  res[0]), // Pin
 						new HarvestVein(AncienDropChance,       0.0, res[10], res[0]), // Ancien
 					};
 
@@ -60,54 +60,54 @@ namespace Server.Items
 			get { return m_ForestierDropChance; }
 			set { m_ForestierDropChance = value; m_HarvestSystem = null; }
 		}
-		private double m_CollinoisDropChance = 0;
+		private double m_CèdreDropChance = 0;
 		[CommandProperty(AccessLevel.Administrator)]
-		public double CollinoisDropChance
+		public double CèdreDropChance
 		{
-			get { return m_CollinoisDropChance; }
-			set { m_CollinoisDropChance = value; m_HarvestSystem = null; }
+			get { return m_CèdreDropChance; }
+			set { m_CèdreDropChance = value; m_HarvestSystem = null; }
 		}
-		private double m_DesertiqueDropChance = 0;
+		private double m_CyprèsDropChance = 0;
 		[CommandProperty(AccessLevel.Administrator)]
-		public double DesertiqueDropChance
+		public double CyprèsDropChance
 		{
-			get { return m_DesertiqueDropChance; }
-			set { m_DesertiqueDropChance = value; m_HarvestSystem = null; }
+			get { return m_CyprèsDropChance; }
+			set { m_CyprèsDropChance = value; m_HarvestSystem = null; }
 		}
-		private double m_SavanoisDropChance = 0;
+		private double m_SauleDropChance = 0;
 		[CommandProperty(AccessLevel.Administrator)]
-		public double SavanoisDropChance
+		public double SauleDropChance
 		{
-			get { return m_SavanoisDropChance; }
-			set { m_SavanoisDropChance = value; m_HarvestSystem = null; }
+			get { return m_SauleDropChance; }
+			set { m_SauleDropChance = value; m_HarvestSystem = null; }
 		}
-		private double m_MontagnardDropChance = 0;
+		private double m_AcajouDropChance = 0;
 		[CommandProperty(AccessLevel.Administrator)]
-		public double MontagnardDropChance
+		public double AcajouDropChance
 		{
-			get { return m_MontagnardDropChance; }
-			set { m_MontagnardDropChance = value; m_HarvestSystem = null; }
+			get { return m_AcajouDropChance; }
+			set { m_AcajouDropChance = value; m_HarvestSystem = null; }
 		}
-		private double m_VolcaniqueDropChance = 0;
+		private double m_ÉbèneDropChance = 0;
 		[CommandProperty(AccessLevel.Administrator)]
-		public double VolcaniqueDropChance
+		public double ÉbèneDropChance
 		{
-			get { return m_VolcaniqueDropChance; }
-			set { m_VolcaniqueDropChance = value; m_HarvestSystem = null; }
+			get { return m_ÉbèneDropChance; }
+			set { m_ÉbèneDropChance = value; m_HarvestSystem = null; }
 		}
-		private double m_TropicauxDropChance = 0;
+		private double m_AmaranteDropChance = 0;
 		[CommandProperty(AccessLevel.Administrator)]
-		public double TropicauxDropChance
+		public double AmaranteDropChance
 		{
-			get { return m_TropicauxDropChance; }
-			set { m_TropicauxDropChance = value; m_HarvestSystem = null; }
+			get { return m_AmaranteDropChance; }
+			set { m_AmaranteDropChance = value; m_HarvestSystem = null; }
 		}
-		private double m_ToundroisDropChance = 0;
+		private double m_PinDropChance = 0;
 		[CommandProperty(AccessLevel.Administrator)]
-		public double ToundroisDropChance
+		public double PinDropChance
 		{
-			get { return m_ToundroisDropChance; }
-			set { m_ToundroisDropChance = value; m_HarvestSystem = null; }
+			get { return m_PinDropChance; }
+			set { m_PinDropChance = value; m_HarvestSystem = null; }
 		}
 		private double m_AncienDropChance = 0;
 		[CommandProperty(AccessLevel.Administrator)]
@@ -145,13 +145,13 @@ namespace Server.Items
 			writer.Write(NormalDropChance);
 			writer.Write(PlainoisDropChance);
 			writer.Write(ForestierDropChance);
-			writer.Write(CollinoisDropChance);
-			writer.Write(DesertiqueDropChance);
-			writer.Write(SavanoisDropChance);
-			writer.Write(MontagnardDropChance);
-			writer.Write(VolcaniqueDropChance);
-			writer.Write(TropicauxDropChance);
-			writer.Write(ToundroisDropChance);
+			writer.Write(CèdreDropChance);
+			writer.Write(CyprèsDropChance);
+			writer.Write(SauleDropChance);
+			writer.Write(AcajouDropChance);
+			writer.Write(ÉbèneDropChance);
+			writer.Write(AmaranteDropChance);
+			writer.Write(PinDropChance);
 			writer.Write(AncienDropChance);
 		}
 
@@ -168,13 +168,13 @@ namespace Server.Items
 						NormalDropChance = reader.ReadDouble();
 						PlainoisDropChance = reader.ReadDouble();
 						ForestierDropChance = reader.ReadDouble();
-						CollinoisDropChance = reader.ReadDouble();
-						DesertiqueDropChance = reader.ReadDouble();
-						SavanoisDropChance = reader.ReadDouble();
-						MontagnardDropChance = reader.ReadDouble();
-						VolcaniqueDropChance = reader.ReadDouble();
-						TropicauxDropChance = reader.ReadDouble();
-						ToundroisDropChance = reader.ReadDouble();
+						CèdreDropChance = reader.ReadDouble();
+						CyprèsDropChance = reader.ReadDouble();
+						SauleDropChance = reader.ReadDouble();
+						AcajouDropChance = reader.ReadDouble();
+						ÉbèneDropChance = reader.ReadDouble();
+						AmaranteDropChance = reader.ReadDouble();
+						PinDropChance = reader.ReadDouble();
 						AncienDropChance = reader.ReadDouble();
 						break;
 					}

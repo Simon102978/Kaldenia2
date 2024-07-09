@@ -197,7 +197,7 @@ namespace Server.Mobiles
 
             if (boat != null)
             {
-                foreach (Mobile mob in boat.MobilesOnRegularBoard.Where(m => CanBeHarmful(m, false) && m.Alive))
+                foreach (Mobile mob in boat.MobilesOnPalmierBoard.Where(m => CanBeHarmful(m, false) && m.Alive))
                 {
                     double damage = Math.Max(40, Utility.RandomMinMax(50, 100) * (Hits / (double)HitsMax));
 

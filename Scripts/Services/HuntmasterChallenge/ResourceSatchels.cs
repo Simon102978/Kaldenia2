@@ -147,7 +147,7 @@ namespace Server.Items
     {
         public override int LabelNumber => 1158772;  // Lumberjack's Satchel
 
-        public override Type[] HoldTypes => new Type[] { typeof(BaseLog), typeof(RegularBoard) };
+        public override Type[] HoldTypes => new Type[] { typeof(BaseLog), typeof(PalmierBoard) };
 
         [Constructable]
         public LumbjacksSatchel()

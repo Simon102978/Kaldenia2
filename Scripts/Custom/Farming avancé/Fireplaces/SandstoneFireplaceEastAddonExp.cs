@@ -51,7 +51,7 @@ namespace Server.Items
 
                         if (pack != null)
                         {
-                            int res = pack.ConsumeTotal(new Type[] { typeof(Log), typeof(MatchLight) }, new int[] { 3, 1 });
+                            int res = pack.ConsumeTotal(new Type[] { typeof(PalmierLog), typeof(MatchLight) }, new int[] { 3, 1 });
 
                             switch (res)
                             {

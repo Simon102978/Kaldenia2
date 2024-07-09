@@ -35,7 +35,7 @@ namespace Server.Gumps
 
             AddImageTiledButton(264, 44, 0x918, 0x919, 0x65, GumpButtonType.Reply, 0, 0x1950, 0x0, -4, -7);
             AddTooltip(1075573);
-            AddHtmlLocalized(348, 44, 170, 60, 1075498, 0x7FFF, false, false); // Mongbat DartRegularBoard
+            AddHtmlLocalized(348, 44, 170, 60, 1075498, 0x7FFF, false, false); // Mongbat DartPalmierBoard
 
             AddImageTiledButton(14, 108, 0x918, 0x919, 0x66, GumpButtonType.Reply, 0, 0x1947, 0x0, 18, -9);
             AddTooltip(1075564);
@@ -108,7 +108,7 @@ namespace Server.Gumps
                     cliloc = 1075492;
                     break;
                 case 0x65:
-                    types.Add(typeof(MongbatDartRegularBoard));
+                    types.Add(typeof(MongbatDartPalmierBoard));
                     cliloc = 1075498;
                     break;
                 case 0x66:

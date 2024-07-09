@@ -57,7 +57,7 @@ namespace Server.Items
 
         public void DockBoat(BaseBoat boat, BaseHouse house)
         {
-            foreach (IEntity entity in boat.GetEntitiesOnRegularBoard())
+            foreach (IEntity entity in boat.GetEntitiesOnPalmierBoard())
             {
                 if (!(entity is Item) || entity == this || boat.IsComponentItem(entity) || entity is EffectItem || entity == boat.TillerMan)
                     continue;

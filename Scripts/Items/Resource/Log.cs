@@ -12,7 +12,7 @@ namespace Server.Items
             set { m_Resource = value; InvalidateProperties(); }
         }
 
-        TextDefinition ICommodity.Description => CraftResources.IsStandard(m_Resource) ? LabelNumber : 1075062 + ((int)m_Resource - (int)CraftResource.RegularWood);
+        TextDefinition ICommodity.Description => CraftResources.IsStandard(m_Resource) ? LabelNumber : 1075062 + ((int)m_Resource - (int)CraftResource.PalmierWood);
         bool ICommodity.IsDeedable => true;
         [Constructable]
         public BaseLog() : this(1)
@@ -20,7 +20,7 @@ namespace Server.Items
         }
 
         [Constructable]
-        public BaseLog(int amount) : this(CraftResource.RegularWood, amount)
+        public BaseLog(int amount) : this(CraftResource.PalmierWood, amount)
         {
         }
 
@@ -73,7 +73,7 @@ namespace Server.Items
             m_Resource = (CraftResource)reader.ReadInt();
 
             if (version == 0)
-                m_Resource = CraftResource.RegularWood;
+                m_Resource = CraftResource.PalmierWood;
         }
 
         public virtual bool TryCreateBoards(Mobile from, double skill, Item item)
@@ -106,16 +106,16 @@ namespace Server.Items
 			switch(Resource)
 			{
 				default:
-				case CraftResource.RegularWood:		{ item = new RegularBoard();	break; }
-				case CraftResource.PlainoisWood:	{ item = new PlainoisBoard();	break; }
-				case CraftResource.ForestierWood:	{ item = new ForestierBoard();	break; }
-				case CraftResource.CollinoisWood:	{ item = new CollinoisBoard();	break; }
-				case CraftResource.DesertiqueWood:	{ item = new DesertiqueBoard(); break; }
-				case CraftResource.SavanoisWood:	{ item = new SavanoisBoard();	break; }
-				case CraftResource.MontagnardWood:	{ item = new MontagnardBoard(); break; }
-				case CraftResource.VolcaniqueWood:	{ item = new VolcaniqueBoard(); break; }
-				case CraftResource.TropicauxWood:	{ item = new TropicauxBoard();	break; }
-				case CraftResource.ToundroisWood:	{ item = new ToundroisBoard();	break; }
+				case CraftResource.PalmierWood:		{ item = new PalmierBoard();	break; }
+				case CraftResource.ÉrableWood:	{ item = new ÉrableBoard();	break; }
+				case CraftResource.ChêneWood:	{ item = new ChêneBoard();	break; }
+				case CraftResource.CèdreWood:	{ item = new CèdreBoard();	break; }
+				case CraftResource.CyprèsWood:	{ item = new CyprèsBoard(); break; }
+				case CraftResource.SauleWood:	{ item = new SauleBoard();	break; }
+				case CraftResource.AcajouWood:	{ item = new AcajouBoard(); break; }
+				case CraftResource.ÉbèneWood:	{ item = new ÉbèneBoard(); break; }
+				case CraftResource.AmaranteWood:	{ item = new AmaranteBoard();	break; }
+				case CraftResource.PinWood:	{ item = new PinBoard();	break; }
 				case CraftResource.AncienWood:		{ item = new AncienBoard();		break; }
 			}
 
@@ -126,21 +126,21 @@ namespace Server.Items
         }
     }
 
-	public class Log : BaseLog
+	public class PalmierLog : BaseLog
     {
         [Constructable]
-        public Log()
+        public PalmierLog()
             : this(1)
         {
         }
 
         [Constructable]
-        public Log(int amount)
-            : base(CraftResource.RegularWood, amount)
+        public PalmierLog(int amount)
+            : base(CraftResource.PalmierWood, amount)
         {
         }
 
-        public Log(Serial serial)
+        public PalmierLog(Serial serial)
             : base(serial)
         {
         }
@@ -163,28 +163,28 @@ namespace Server.Items
 
         public override bool Axe(Mobile from, BaseAxe axe)
         {
-            if (!TryCreateBoards(from, 0, new RegularBoard()))
+            if (!TryCreateBoards(from, 0, new PalmierBoard()))
                 return false;
 
             return true;
         }
     }
 
-	public class PlainoisLog : BaseLog
+	public class ÉrableLog : BaseLog
 	{
 		[Constructable]
-		public PlainoisLog()
+		public ÉrableLog()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public PlainoisLog(int amount)
-			: base(CraftResource.PlainoisWood, amount)
+		public ÉrableLog(int amount)
+			: base(CraftResource.ÉrableWood, amount)
 		{
 		}
 
-		public PlainoisLog(Serial serial)
+		public ÉrableLog(Serial serial)
 			: base(serial)
 		{
 		}
@@ -207,7 +207,7 @@ namespace Server.Items
 
 		public override bool Axe(Mobile from, BaseAxe axe)
 		{
-			if (!TryCreateBoards(from, 0, new PlainoisBoard()))
+			if (!TryCreateBoards(from, 0, new ÉrableBoard()))
 				return false;
 
 			return true;
@@ -466,21 +466,21 @@ namespace Server.Items
         }
     }
 
-	public class ForestierLog : BaseLog
+	public class ChêneLog : BaseLog
 	{
 		[Constructable]
-		public ForestierLog()
+		public ChêneLog()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public ForestierLog(int amount)
-			: base(CraftResource.ForestierWood, amount)
+		public ChêneLog(int amount)
+			: base(CraftResource.ChêneWood, amount)
 		{
 		}
 
-		public ForestierLog(Serial serial)
+		public ChêneLog(Serial serial)
 			: base(serial)
 		{
 		}
@@ -500,27 +500,27 @@ namespace Server.Items
 
 		public override bool Axe(Mobile from, BaseAxe axe)
 		{
-			if (!TryCreateBoards(from, 0, new ForestierBoard()))
+			if (!TryCreateBoards(from, 0, new ChêneBoard()))
 				return false;
 
 			return true;
 		}
 	}
-	public class CollinoisLog : BaseLog
+	public class CèdreLog : BaseLog
 	{
 		[Constructable]
-		public CollinoisLog()
+		public CèdreLog()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public CollinoisLog(int amount)
-			: base(CraftResource.CollinoisWood, amount)
+		public CèdreLog(int amount)
+			: base(CraftResource.CèdreWood, amount)
 		{
 		}
 
-		public CollinoisLog(Serial serial)
+		public CèdreLog(Serial serial)
 			: base(serial)
 		{
 		}
@@ -540,27 +540,27 @@ namespace Server.Items
 
 		public override bool Axe(Mobile from, BaseAxe axe)
 		{
-			if (!TryCreateBoards(from, 0, new CollinoisBoard()))
+			if (!TryCreateBoards(from, 0, new CèdreBoard()))
 				return false;
 
 			return true;
 		}
 	}
-	public class DesertiqueLog : BaseLog
+	public class CyprèsLog : BaseLog
 	{
 		[Constructable]
-		public DesertiqueLog()
+		public CyprèsLog()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public DesertiqueLog(int amount)
-			: base(CraftResource.DesertiqueWood, amount)
+		public CyprèsLog(int amount)
+			: base(CraftResource.CyprèsWood, amount)
 		{
 		}
 
-		public DesertiqueLog(Serial serial)
+		public CyprèsLog(Serial serial)
 			: base(serial)
 		{
 		}
@@ -580,27 +580,27 @@ namespace Server.Items
 
 		public override bool Axe(Mobile from, BaseAxe axe)
 		{
-			if (!TryCreateBoards(from, 0, new DesertiqueBoard()))
+			if (!TryCreateBoards(from, 0, new CyprèsBoard()))
 				return false;
 
 			return true;
 		}
 	}
-	public class MontagnardLog : BaseLog
+	public class AcajouLog : BaseLog
 	{
 		[Constructable]
-		public MontagnardLog()
+		public AcajouLog()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public MontagnardLog(int amount)
-			: base(CraftResource.MontagnardWood, amount)
+		public AcajouLog(int amount)
+			: base(CraftResource.AcajouWood, amount)
 		{
 		}
 
-		public MontagnardLog(Serial serial)
+		public AcajouLog(Serial serial)
 			: base(serial)
 		{
 		}
@@ -620,27 +620,27 @@ namespace Server.Items
 
 		public override bool Axe(Mobile from, BaseAxe axe)
 		{
-			if (!TryCreateBoards(from, 0, new MontagnardBoard()))
+			if (!TryCreateBoards(from, 0, new AcajouBoard()))
 				return false;
 
 			return true;
 		}
 	}
-	public class SavanoisLog : BaseLog
+	public class SauleLog : BaseLog
 	{
 		[Constructable]
-		public SavanoisLog()
+		public SauleLog()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public SavanoisLog(int amount)
-			: base(CraftResource.SavanoisWood, amount)
+		public SauleLog(int amount)
+			: base(CraftResource.SauleWood, amount)
 		{
 		}
 
-		public SavanoisLog(Serial serial)
+		public SauleLog(Serial serial)
 			: base(serial)
 		{
 		}
@@ -660,27 +660,27 @@ namespace Server.Items
 
 		public override bool Axe(Mobile from, BaseAxe axe)
 		{
-			if (!TryCreateBoards(from, 0, new SavanoisBoard()))
+			if (!TryCreateBoards(from, 0, new SauleBoard()))
 				return false;
 
 			return true;
 		}
 	}
-	public class VolcaniqueLog : BaseLog
+	public class ÉbèneLog : BaseLog
 	{
 		[Constructable]
-		public VolcaniqueLog()
+		public ÉbèneLog()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public VolcaniqueLog(int amount)
-			: base(CraftResource.VolcaniqueWood, amount)
+		public ÉbèneLog(int amount)
+			: base(CraftResource.ÉbèneWood, amount)
 		{
 		}
 
-		public VolcaniqueLog(Serial serial)
+		public ÉbèneLog(Serial serial)
 			: base(serial)
 		{
 		}
@@ -700,27 +700,27 @@ namespace Server.Items
 
 		public override bool Axe(Mobile from, BaseAxe axe)
 		{
-			if (!TryCreateBoards(from, 0, new VolcaniqueBoard()))
+			if (!TryCreateBoards(from, 0, new ÉbèneBoard()))
 				return false;
 
 			return true;
 		}
 	}
-	public class ToundroisLog : BaseLog
+	public class PinLog : BaseLog
 	{
 		[Constructable]
-		public ToundroisLog()
+		public PinLog()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public ToundroisLog(int amount)
-			: base(CraftResource.ToundroisWood, amount)
+		public PinLog(int amount)
+			: base(CraftResource.PinWood, amount)
 		{
 		}
 
-		public ToundroisLog(Serial serial)
+		public PinLog(Serial serial)
 			: base(serial)
 		{
 		}
@@ -740,27 +740,27 @@ namespace Server.Items
 
 		public override bool Axe(Mobile from, BaseAxe axe)
 		{
-			if (!TryCreateBoards(from, 0, new ToundroisBoard()))
+			if (!TryCreateBoards(from, 0, new PinBoard()))
 				return false;
 
 			return true;
 		}
 	}
-	public class TropicauxLog : BaseLog
+	public class AmaranteLog : BaseLog
 	{
 		[Constructable]
-		public TropicauxLog()
+		public AmaranteLog()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public TropicauxLog(int amount)
-			: base(CraftResource.TropicauxWood, amount)
+		public AmaranteLog(int amount)
+			: base(CraftResource.AmaranteWood, amount)
 		{
 		}
 
-		public TropicauxLog(Serial serial)
+		public AmaranteLog(Serial serial)
 			: base(serial)
 		{
 		}
@@ -780,7 +780,7 @@ namespace Server.Items
 
 		public override bool Axe(Mobile from, BaseAxe axe)
 		{
-			if (!TryCreateBoards(from, 0, new TropicauxBoard()))
+			if (!TryCreateBoards(from, 0, new AmaranteBoard()))
 				return false;
 
 			return true;

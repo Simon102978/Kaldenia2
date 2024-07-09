@@ -48,7 +48,7 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
-            AddLoot(LootPack.LootItem<Log>(4));
+            AddLoot(LootPack.LootItem<PalmierLog>(4));
             AddLoot(LootPack.LootItemCallback(RandomSeed));
         }
 

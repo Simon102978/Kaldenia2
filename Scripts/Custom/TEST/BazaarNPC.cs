@@ -224,18 +224,18 @@ namespace Server.Mobiles
 		[Constructable]
 		public BazaarNPC() : base("Marchand itinérant")
 		{
-			_requiredResource = typeof(Log);
+			_requiredResource = typeof(PalmierLog);
 			_requiredQuantity = 20;
 			_requiredResourceArtID = 0x1BDD;
 			_requiredResourceName = "Buche";
 
 			_offeredResources = new List<(Type, int, int, string)>
 			{
-				(typeof(Log), 10, 0x1, "Resource1"),
-				(typeof(Log), 20, 0x2, "Resource2"),
-				(typeof(Log), 30, 0x3, "Resource3"),
-				(typeof(Log), 40, 0x4, "Resource4"),
-				(typeof(Log), 50, 0x5, "Resource5")
+				(typeof(PalmierLog), 10, 0x1, "Resource1"),
+				(typeof(PalmierLog), 20, 0x2, "Resource2"),
+				(typeof(PalmierLog), 30, 0x3, "Resource3"),
+				(typeof(PalmierLog), 40, 0x4, "Resource4"),
+				(typeof(PalmierLog), 50, 0x5, "Resource5")
 			};
 
 			Hue = 0x83EA;

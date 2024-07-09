@@ -4,12 +4,12 @@ using Server.Network;
 namespace Server.Items
 {
     [Flipable(0x1950, 0x1953)]
-    public class MongbatDartRegularBoard : Item
+    public class MongbatDartPalmierBoard : Item
     {
-        public override int LabelNumber => 1075498;  // Mongbat DartRegularBoard
+        public override int LabelNumber => 1075498;  // Mongbat DartPalmierBoard
 
         [Constructable]
-        public MongbatDartRegularBoard()
+        public MongbatDartPalmierBoard()
             : base(0x1950)
         {
             LootType = LootType.Blessed;
@@ -82,7 +82,7 @@ namespace Server.Items
             }
         }
 
-        public MongbatDartRegularBoard(Serial serial)
+        public MongbatDartPalmierBoard(Serial serial)
             : base(serial)
         {
         }

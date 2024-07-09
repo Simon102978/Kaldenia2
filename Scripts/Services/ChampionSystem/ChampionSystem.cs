@@ -342,7 +342,7 @@ namespace Server.Engines.CannedEvil
 
         private class ChampionSystemGump : Gump
         {
-            private const int gRegularBoarder = 20;
+            private const int gPalmierBoarder = 20;
             private const int gRowHeight = 25;
             private const int gFontHue = 0;
             private static readonly int[] gWidths = { 20, 100, 100, 40, 40, 40, 80, 60, 50, 50, 50, 20 };
@@ -368,10 +368,10 @@ namespace Server.Engines.CannedEvil
             {
                 Spawners = m_AllSpawns.Where(spawn => spawn != null && !spawn.Deleted).ToList();
 
-                AddBackground(0, 0, gWidth, gRegularBoarder * 2 + Spawners.Count * gRowHeight + gRowHeight * 2, 0x13BE);
+                AddBackground(0, 0, gWidth, gPalmierBoarder * 2 + Spawners.Count * gRowHeight + gRowHeight * 2, 0x13BE);
 
-                int top = gRegularBoarder;
-                AddLabel(gRegularBoarder, top, gFontHue, "Champion Spawn System Gump");
+                int top = gPalmierBoarder;
+                AddLabel(gPalmierBoarder, top, gFontHue, "Champion Spawn System Gump");
                 top += gRowHeight;
 
                 AddLabel(gTab[1], top, gFontHue, "Spawn Name");

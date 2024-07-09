@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("le corps d'un arbre forestier")]
+    [CorpseName("le corps d'un arbre Chêne")]
     public class Treefellow : BaseCreature
     {
         [Constructable]
         public Treefellow()
             : base(AIType.AI_Melee, FightMode.Evil, 10, 1, 0.2, 0.4)
         {
-            Name = "un arbre forestier";
+            Name = "un arbre Chêne";
             Body = 301;
 
             SetStr(196, 220);
@@ -65,7 +65,7 @@ namespace Server.Mobiles
         {
 
 			AddLoot(LootPack.Average);
-			AddLoot(LootPack.LootItem<Log>(5, 12));
+			AddLoot(LootPack.LootItem<PalmierLog>(5, 12));
 			AddLoot(LootPack.LootItem<EcorceArbreGeant>(3, 7));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 4));
 

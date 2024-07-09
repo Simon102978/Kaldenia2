@@ -35,7 +35,7 @@ namespace Server.Items
         WoodenLogs = 1021217,
         Rope = 1020934,
         Beeswax = 1025154,
-        WoodenRegularBoards = 1021189,
+        WoodenPalmierBoards = 1021189,
         MeltedWax = 1016492,
         OilOfVitriol = 1077482,
         BlackPowder = 1112815,

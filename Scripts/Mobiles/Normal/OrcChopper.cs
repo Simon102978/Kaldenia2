@@ -58,8 +58,8 @@ namespace Server.Mobiles
             AddLoot(LootPack.Meager, 2);
  
             AddLoot(LootPack.LootItem<Yeast>(50.0, true));
-            AddLoot(LootPack.LootItem<Log>(1, 10, true));
-            AddLoot(LootPack.LootItem<RegularBoard>(10, 20, true));
+            AddLoot(LootPack.LootItem<PalmierLog>(1, 10, true));
+            AddLoot(LootPack.LootItem<PalmierBoard>(10, 20, true));
             AddLoot(LootPack.LootItem<ExecutionersAxe>());
         }
 

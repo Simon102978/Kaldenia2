@@ -94,16 +94,16 @@ namespace Server.Engines.Harvest
 
 			res = new HarvestResource[]
 			{
-				new HarvestResource(00.0, 00.0, 100.0, "Normal",        typeof(Log)),
-				new HarvestResource(00.0, 00.0, 100.0, "Plainois",      typeof(PlainoisLog)),
-				new HarvestResource(20.0, 20.0, 100.0, "Forestier",     typeof(ForestierLog)),
-				new HarvestResource(20.0, 20.0, 100.0, "Collinois",     typeof(CollinoisLog)),
-				new HarvestResource(40.0, 40.0, 100.0, "Désertique",    typeof(DesertiqueLog)),
-				new HarvestResource(40.0, 40.0, 100.0, "Savanois",      typeof(SavanoisLog)),
-				new HarvestResource(60.0, 60.0, 100.0, "Montagnard",    typeof(MontagnardLog)),
-				new HarvestResource(60.0, 60.0, 100.0, "Volcanique",    typeof(VolcaniqueLog)),
-				new HarvestResource(80.0, 80.0, 100.0, "Tropicaux",     typeof(TropicauxLog)),
-				new HarvestResource(80.0, 80.0, 100.0, "Toundrois",     typeof(ToundroisLog)),
+				new HarvestResource(00.0, 00.0, 100.0, "Palmier",        typeof(PalmierLog)),
+				new HarvestResource(00.0, 00.0, 100.0, "Érable",      typeof(ÉrableLog)),
+				new HarvestResource(20.0, 20.0, 100.0, "Chêne",     typeof(ChêneLog)),
+				new HarvestResource(20.0, 20.0, 100.0, "Cèdre",     typeof(CèdreLog)),
+				new HarvestResource(40.0, 40.0, 100.0, "Cyprès",    typeof(CyprèsLog)),
+				new HarvestResource(40.0, 40.0, 100.0, "Saule",      typeof(SauleLog)),
+				new HarvestResource(60.0, 60.0, 100.0, "Acajou",    typeof(AcajouLog)),
+				new HarvestResource(60.0, 60.0, 100.0, "Ébène",    typeof(ÉbèneLog)),
+				new HarvestResource(80.0, 80.0, 100.0, "Amarante",     typeof(AmaranteLog)),
+				new HarvestResource(80.0, 80.0, 100.0, "Pin",     typeof(PinLog)),
 				new HarvestResource(90.0, 90.0, 100.0, "Ancien",        typeof(AncienLog)),
 			};
 
@@ -140,8 +140,8 @@ namespace Server.Engines.Harvest
 
 			if (tool is HarvestersAxe axe && axe.Charges > 0 /*|| tool is GargishHarvestersAxe gaxe && gaxe.Charges > 0*/)
 			{
-				if (type == typeof(Log))
-					newType = typeof(RegularBoard);
+				if (type == typeof(PalmierLog))
+					newType = typeof(PalmierBoard);
 				else if (type == typeof(OakLog))
 					newType = typeof(OakBoard);
 				else if (type == typeof(AshLog))
@@ -226,7 +226,7 @@ namespace Server.Engines.Harvest
 			#region Void Pool Items
 			HarvestMap hmap = HarvestMap.CheckMapOnHarvest(from, loc, def);
 
-			if (hmap != null && hmap.Resource >= CraftResource.RegularWood && hmap.Resource <= CraftResource.Frostwood)
+			if (hmap != null && hmap.Resource >= CraftResource.PalmierWood && hmap.Resource <= CraftResource.Frostwood)
 			{
 				hmap.UsesRemaining--;
 				hmap.InvalidateProperties();

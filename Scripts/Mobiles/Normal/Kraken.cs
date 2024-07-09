@@ -89,7 +89,7 @@ namespace Server.Mobiles
 								SpawnTentacle();
 								break;
 							case 2:
-								JumpOnRegularBoard();
+								JumpOnPalmierBoard();
 								break;
 							default:
 								break;
@@ -149,7 +149,7 @@ namespace Server.Mobiles
 		
 
 
-		public void JumpOnRegularBoard()
+		public void JumpOnPalmierBoard()
 		{
 			if (m_NextJump < DateTime.UtcNow)
 			{

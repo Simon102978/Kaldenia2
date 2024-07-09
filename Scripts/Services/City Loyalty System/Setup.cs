@@ -57,7 +57,7 @@ namespace Server.Engines.CityLoyalty
             CityItemDonation itemdonation;
             CityPetDonation petdonation;
             BoxOfRopes box;
-            CityMessageRegularBoard RegularBoard;
+            CityMessagePalmierBoard PalmierBoard;
 
             foreach (int c in Enum.GetValues(typeof(City)))
             {
@@ -86,7 +86,7 @@ namespace Server.Engines.CityLoyalty
                     itemdonation = new CityItemDonation(sys.City, minister);
                     petdonation = new CityPetDonation(sys.City, minister);
                     box = new BoxOfRopes(sys.City);
-                    RegularBoard = new CityMessageRegularBoard(sys.City, 0xA0C5);
+                    PalmierBoard = new CityMessagePalmierBoard(sys.City, 0xA0C5);
 
                     if (!HasType(sys, minister.GetType()))
                     {
@@ -135,13 +135,13 @@ namespace Server.Engines.CityLoyalty
                     else
                         box.Delete();
 
-                    if (!HasType(sys, RegularBoard.GetType()))
+                    if (!HasType(sys, PalmierBoard.GetType()))
                     {
-                        RegularBoard.MoveToWorld(sys.Definition.RegularBoardLocation, CityLoyaltySystem.SystemMap);
-                        sys.RegularBoard = RegularBoard;
+                        PalmierBoard.MoveToWorld(sys.Definition.PalmierBoardLocation, CityLoyaltySystem.SystemMap);
+                        sys.PalmierBoard = PalmierBoard;
                     }
                     else
-                        RegularBoard.Delete();
+                        PalmierBoard.Delete();
 
                     sys.CanUtilize = true;
 

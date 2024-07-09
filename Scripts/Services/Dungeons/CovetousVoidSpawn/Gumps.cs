@@ -53,10 +53,10 @@ namespace Server.Engines.VoidPool
             }
 
             AddButton(140, 70, 4005, 4006, 1, GumpButtonType.Reply, 0);
-            AddHtmlLocalized(180, 70, 200, 16, 1152535, Orange, false, false); 		//Current Battle ScoreRegularBoard
+            AddHtmlLocalized(180, 70, 200, 16, 1152535, Orange, false, false); 		//Current Battle ScorePalmierBoard
 
             AddButton(140, 90, 4005, 4006, 2, GumpButtonType.Reply, 0);
-            AddHtmlLocalized(180, 90, 200, 16, 1152536, Orange, false, false); 		//Best Single Battle ScoreRegularBoard
+            AddHtmlLocalized(180, 90, 200, 16, 1152536, Orange, false, false); 		//Best Single Battle ScorePalmierBoard
 
             AddButton(140, 110, 4005, 4006, 3, GumpButtonType.Reply, 0);
             AddHtmlLocalized(180, 110, 200, 16, 1152537, Orange, false, false); 		//Overall Total Scores
@@ -138,7 +138,7 @@ namespace Server.Engines.VoidPool
                 case ScoreType.Current: Score = Controller.CurrentScore; loc = 1152535; break;
                 case ScoreType.BestSingle: Score = stats.BestSingle; loc = 1152536; break;
                 case ScoreType.OverallTotal: Score = stats.OverallTotal; loc = 1152537; break;
-                case ScoreType.BestWave: Score = stats.BestWave.Score; loc = "Best Wave ScoreRegularBoard"; break;
+                case ScoreType.BestWave: Score = stats.BestWave.Score; loc = "Best Wave ScorePalmierBoard"; break;
             }
 
             AddHtmlLocalized(10, 10, 200, 16, 1152531, Red, false, false); // The Void Pool
