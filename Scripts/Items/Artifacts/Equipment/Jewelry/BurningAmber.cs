@@ -1,12 +1,12 @@
 namespace Server.Items
 {
-    public class BurningAmber : GoldRing
+    public class BurningAmbre : GoldRing
     {
         public override bool IsArtifact => true;
-        public override int LabelNumber => 1114790;  // Burning Amber
+        public override int LabelNumber => 1114790;  // Burning Ambre
 
         [Constructable]
-        public BurningAmber()
+        public BurningAmbre()
         {
             Hue = 1174;
             Attributes.CastRecovery = 3;
@@ -15,7 +15,7 @@ namespace Server.Items
             Resistances.Fire = 20;
         }
 
-        public BurningAmber(Serial serial)
+        public BurningAmbre(Serial serial)
             : base(serial)
         {
         }

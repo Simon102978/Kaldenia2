@@ -138,14 +138,14 @@ namespace Server.Engines.CleanUpBritannia
             Rewards.Add(new CollectionItem(typeof(GlossyBluePigment), 0xEFF, 1151910, 1916, 250000));
             Rewards.Add(new CollectionItem(typeof(BlackAndGreenPigment), 0xEFF, 1151911, 1979, 250000));
             Rewards.Add(new CollectionItem(typeof(DeepVioletPigment), 0xEFF, 1151912, 1929, 250000));
-            Rewards.Add(new CollectionItem(typeof(AuraOfAmberPigment), 0xEFF, 1152308, 1967, 250000));
+            Rewards.Add(new CollectionItem(typeof(AuraOfAmbrePigment), 0xEFF, 1152308, 1967, 250000));
             Rewards.Add(new CollectionItem(typeof(MurkySeagreenPigment), 0xEFF, 1152309, 1992, 250000));
             Rewards.Add(new CollectionItem(typeof(ShadowyBluePigment), 0xEFF, 1152310, 1960, 250000));
             Rewards.Add(new CollectionItem(typeof(GleamingFuchsiaPigment), 0xEFF, 1152311, 1930, 250000));
             Rewards.Add(new CollectionItem(typeof(GlossyFuchsiaPigment), 0xEFF, 1152347, 1919, 250000));
             Rewards.Add(new CollectionItem(typeof(DeepBluePigment), 0xEFF, 1152348, 1939, 250000));
             Rewards.Add(new CollectionItem(typeof(VibranSeagreenPigment), 0xEFF, 1152349, 1970, 250000));
-            Rewards.Add(new CollectionItem(typeof(MurkyAmberPigment), 0xEFF, 1152350, 1989, 250000));
+            Rewards.Add(new CollectionItem(typeof(MurkyAmbrePigment), 0xEFF, 1152350, 1989, 250000));
             Rewards.Add(new CollectionItem(typeof(VibrantCrimsonPigment), 0xEFF, 1153386, 1964, 250000));
             Rewards.Add(new CollectionItem(typeof(ReflectiveShadowPigment), 0xEFF, 1153387, 1910, 250000));
             Rewards.Add(new CollectionItem(typeof(StarBluePigment), 0xEFF, 1154121, 2723, 250000));

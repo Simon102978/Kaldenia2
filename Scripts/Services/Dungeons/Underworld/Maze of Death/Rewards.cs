@@ -339,10 +339,10 @@ namespace Server.Items
         }
     }
 
-    public class LargeDiamondPillow : Item, IDyable
+    public class LargeDiamantPillow : Item, IDyable
 	{
         [Constructable]
-        public LargeDiamondPillow()
+        public LargeDiamantPillow()
             : base(5690)
         {
         }
@@ -356,7 +356,7 @@ namespace Server.Items
 			return true;
 		}
 
-		public LargeDiamondPillow(Serial serial)
+		public LargeDiamantPillow(Serial serial)
             : base(serial)
         {
         }
@@ -411,10 +411,10 @@ namespace Server.Items
 		}
 	}
 
-	public class SmallDiamondPillow : Item, IDyable
+	public class SmallDiamantPillow : Item, IDyable
 	{
 		[Constructable]
-		public SmallDiamondPillow()
+		public SmallDiamantPillow()
 			: base(0x163C)
 		{
 		}
@@ -428,7 +428,7 @@ namespace Server.Items
 			return true;
 		}
 
-		public SmallDiamondPillow(Serial serial)
+		public SmallDiamantPillow(Serial serial)
 			: base(serial)
 		{
 		}

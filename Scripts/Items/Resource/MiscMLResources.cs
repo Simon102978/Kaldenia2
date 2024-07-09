@@ -525,29 +525,29 @@ namespace Server.Items
         }
     }
 
-    public class PerfectEmerald : Item, ICommodity
+    public class PerfectEmeraude : Item, ICommodity
     {
         [Constructable]
-        public PerfectEmerald()
+        public PerfectEmeraude()
             : this(1)
         {
         }
 
         [Constructable]
-        public PerfectEmerald(int amountFrom, int amountTo)
+        public PerfectEmeraude(int amountFrom, int amountTo)
             : this(Utility.RandomMinMax(amountFrom, amountTo))
         {
         }
 
         [Constructable]
-        public PerfectEmerald(int amount)
+        public PerfectEmeraude(int amount)
             : base(0x3194)
         {
             Stackable = true;
             Amount = amount;
         }
 
-        public PerfectEmerald(Serial serial)
+        public PerfectEmeraude(Serial serial)
             : base(serial)
         {
         }
@@ -750,29 +750,29 @@ namespace Server.Items
         }
     }
 
-    public class FireRuby : Item, ICommodity
+    public class FireRubis : Item, ICommodity
     {
         [Constructable]
-        public FireRuby()
+        public FireRubis()
             : this(1)
         {
         }
 
         [Constructable]
-        public FireRuby(int amountFrom, int amountTo)
+        public FireRubis(int amountFrom, int amountTo)
             : this(Utility.RandomMinMax(amountFrom, amountTo))
         {
         }
 
         [Constructable]
-        public FireRuby(int amount)
+        public FireRubis(int amount)
             : base(0x3197)
         {
             Stackable = true;
             Amount = amount;
         }
 
-        public FireRuby(Serial serial)
+        public FireRubis(Serial serial)
             : base(serial)
         {
         }
@@ -795,29 +795,29 @@ namespace Server.Items
         }
     }
 
-    public class BlueDiamond : Item, ICommodity
+    public class BlueDiamant : Item, ICommodity
     {
         [Constructable]
-        public BlueDiamond()
+        public BlueDiamant()
             : this(1)
         {
         }
 
         [Constructable]
-        public BlueDiamond(int amountFrom, int amountTo)
+        public BlueDiamant(int amountFrom, int amountTo)
             : this(Utility.RandomMinMax(amountFrom, amountTo))
         {
         }
 
         [Constructable]
-        public BlueDiamond(int amount)
+        public BlueDiamant(int amount)
             : base(0x3198)
         {
             Stackable = true;
             Amount = amount;
         }
 
-        public BlueDiamond(Serial serial)
+        public BlueDiamant(Serial serial)
             : base(serial)
         {
         }
@@ -840,29 +840,29 @@ namespace Server.Items
         }
     }
 
-    public class BrilliantAmber : Item, ICommodity
+    public class BrilliantAmbre : Item, ICommodity
     {
         [Constructable]
-        public BrilliantAmber()
+        public BrilliantAmbre()
             : this(1)
         {
         }
 
         [Constructable]
-        public BrilliantAmber(int amountFrom, int amountTo)
+        public BrilliantAmbre(int amountFrom, int amountTo)
             : this(Utility.RandomMinMax(amountFrom, amountTo))
         {
         }
 
         [Constructable]
-        public BrilliantAmber(int amount)
+        public BrilliantAmbre(int amount)
             : base(0x3199)
         {
             Stackable = true;
             Amount = amount;
         }
 
-        public BrilliantAmber(Serial serial)
+        public BrilliantAmbre(Serial serial)
             : base(serial)
         {
         }

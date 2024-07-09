@@ -2,13 +2,13 @@
 
 namespace Server.Engines.TombOfKings
 {
-    public class ChamberLever : Item
+    public class ChAmbreLever : Item
     {
         public static void Generate()
         {
             foreach (Point3D loc in m_LeverLocations)
             {
-                ChamberLever item = new ChamberLever(loc);
+                ChAmbreLever item = new ChAmbreLever(loc);
                 WeakEntityCollection.Add("sa", item);
 
                 m_Levers.Add(item);
@@ -34,38 +34,38 @@ namespace Server.Engines.TombOfKings
             new Point3D( 45, 217, 2 ),
         };
 
-        private static readonly List<ChamberLever> m_Levers = new List<ChamberLever>();
+        private static readonly List<ChAmbreLever> m_Levers = new List<ChAmbreLever>();
 
-        public static List<ChamberLever> Levers => m_Levers;
+        public static List<ChAmbreLever> Levers => m_Levers;
 
-        private Chamber m_Chamber;
+        private ChAmbre m_ChAmbre;
 
-        public Chamber Chamber
+        public ChAmbre ChAmbre
         {
-            get { return m_Chamber; }
+            get { return m_ChAmbre; }
             set
             {
-                m_Chamber = value;
+                m_ChAmbre = value;
                 InvalidateProperties();
             }
         }
 
         public bool IsUsable()
         {
-            if (m_Chamber == null)
+            if (m_ChAmbre == null)
                 return false;
 
-            return !m_Chamber.IsOpened();
+            return !m_ChAmbre.IsOpened();
         }
 
-        public ChamberLever(Point3D loc)
+        public ChAmbreLever(Point3D loc)
             : base(Utility.RandomBool() ? 0x108C : 0x108E)
         {
             Movable = false;
             MoveToWorld(loc, Map.TerMur);
         }
 
-        public ChamberLever(Serial serial)
+        public ChAmbreLever(Serial serial)
             : base(serial)
         {
         }
@@ -81,7 +81,7 @@ namespace Server.Engines.TombOfKings
         public override void OnDoubleClick(Mobile from)
         {
             if (IsUsable() && from.InRange(this, 1))
-                m_Chamber.Open();
+                m_ChAmbre.Open();
         }
 
         public void Switch()

@@ -281,7 +281,7 @@ namespace Server.Engines.TreasuresOfKotlCity
 
             private bool CheckDrop(Mobile from, Item dropped)
             {
-                if (dropped is StasisChamberPowerCore)
+                if (dropped is StasisChAmbrePowerCore)
                 {
                     if (Addon != null && Addon.Active)
                     {

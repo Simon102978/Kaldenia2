@@ -1,15 +1,15 @@
 ﻿namespace Server.Items
 {
-    public class Emerald : Item, IGem
+    public class Emeraude : Item, IGem
     {
         [Constructable]
-        public Emerald()
+        public Emeraude()
             : this(1)
         {
         }
 
         [Constructable]
-        public Emerald(int amount)
+        public Emeraude(int amount)
             : base(0xF10)
         {
             Stackable = true;
@@ -17,7 +17,7 @@
 			Name = "Émeraude";
         }
 
-        public Emerald(Serial serial)
+        public Emeraude(Serial serial)
             : base(serial)
         {
         }

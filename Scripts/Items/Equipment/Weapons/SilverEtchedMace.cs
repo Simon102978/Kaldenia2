@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    public class SilverEtchedMace : DiamondMace
+    public class SilverEtchedMace : DiamantMace
     {
         public override int LabelNumber => 1073532; // silver-etched mace
 

@@ -6,7 +6,7 @@ namespace Server.Items
     public enum CompassionPigmentType
     {
         PhoenixRed = 0,
-        AuraOfAmber,
+        AuraOfAmbre,
         DeepViolet,
         PolishedBronze,
         VibrantCrimson,
@@ -25,7 +25,7 @@ namespace Server.Items
         SlateBlue,
         MotherOfPearl,
         StarBlue,
-        MurkyAmber,
+        MurkyAmbre,
         VibranSeagreen,
         VibrantOcher,
         MossyGreen,
@@ -61,7 +61,7 @@ namespace Server.Items
         private static readonly CompassionPigmentInfo[] m_Table = new CompassionPigmentInfo[]
         {
             new CompassionPigmentInfo( CompassionPigmentType.PhoenixRed, 1964, 1151651 ), // Phoenix Red Pigment
-			new CompassionPigmentInfo( CompassionPigmentType.AuraOfAmber, 1967, 1152308 ), // Aura of Amber Pigment
+			new CompassionPigmentInfo( CompassionPigmentType.AuraOfAmbre, 1967, 1152308 ), // Aura of Ambre Pigment
 			new CompassionPigmentInfo( CompassionPigmentType.DeepViolet, 1929, 1151912 ), // Deep Violet Pigment
 			new CompassionPigmentInfo( CompassionPigmentType.PolishedBronze, 1944, 1151909 ), // Polished Bronze Pigment
 			new CompassionPigmentInfo( CompassionPigmentType.VibrantCrimson, 1964, 1153386 ), // Vibrant Crimson Pigment
@@ -80,7 +80,7 @@ namespace Server.Items
 			new CompassionPigmentInfo( CompassionPigmentType.SlateBlue, 1983, 1151653 ), // Slate Blue Pigment
 			new CompassionPigmentInfo( CompassionPigmentType.MotherOfPearl, 2720, 1154120 ), // Mother Of Pearl Pigment
 			new CompassionPigmentInfo( CompassionPigmentType.StarBlue, 2723, 1154121 ), // Star Blue Pigment
-			new CompassionPigmentInfo( CompassionPigmentType.MurkyAmber, 1989, 1152350 ), // Murky Amber Pigment
+			new CompassionPigmentInfo( CompassionPigmentType.MurkyAmbre, 1989, 1152350 ), // Murky Ambre Pigment
 			new CompassionPigmentInfo( CompassionPigmentType.VibranSeagreen, 1970, 1152349 ), // Vibran Seagreen Pigment
             new CompassionPigmentInfo( CompassionPigmentType.VibrantOcher, 2725, 1154736 ), // Vibrant Ocher Pigment
             new CompassionPigmentInfo( CompassionPigmentType.MossyGreen, 2684, 1154731 ), // Mossy Green Pigment

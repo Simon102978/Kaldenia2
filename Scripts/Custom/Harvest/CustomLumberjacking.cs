@@ -119,7 +119,7 @@ namespace Server.Engines.Harvest
 				//new BonusHarvestResource(100, 03.0, 1072550, typeof(LuminescentFungi)),
 				//new BonusHarvestResource(100, 02.0, 1072547, typeof(SwitchItem)),
 				//new BonusHarvestResource(100, 01.0, 1072549, typeof(ParasiticPlant)),
-				//new BonusHarvestResource(100, 01.0, 1072551, typeof(BrilliantAmber)),
+				//new BonusHarvestResource(100, 01.0, 1072551, typeof(BrilliantAmbre)),
 				//new BonusHarvestResource(100, 01.0, 1113756, typeof(CrystalShards), Map.TerMur),
 			};
 

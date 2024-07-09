@@ -81,7 +81,7 @@ namespace Server.Items
         {
             typeof(VoidEssence),        typeof(SilverSerpentVenom), typeof(ScouringToxin),
             typeof(ToxicVenomSac),      typeof(MouldingRegularBoard),      typeof(DoughBowl),
-            typeof(HornedTotemPole),    typeof(LargeSquarePillow),  typeof(LargeDiamondPillow),
+            typeof(HornedTotemPole),    typeof(LargeSquarePillow),  typeof(LargeDiamantPillow),
             typeof(DustyPillow),        typeof(StatuePedestal),		typeof(FlouredBreadRegularBoard),
             typeof(LuckyCoin),
         };

@@ -23,9 +23,9 @@ namespace Server.Items
 
             if (from.InRange(Location, 2))
             {
-                if (from.Backpack.FindItemByType(typeof(PrismaticAmber), true) == null)
+                if (from.Backpack.FindItemByType(typeof(PrismaticAmbre), true) == null)
                 {
-                    if (from.PlaceInBackpack(new PrismaticAmber()))
+                    if (from.PlaceInBackpack(new PrismaticAmbre()))
                         Delete();
                     else
                         from.SendLocalizedMessage(1077971); // Make room in your backpack first!

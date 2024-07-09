@@ -163,7 +163,7 @@ namespace Server.Engines.Quests
             };
             AddItem(item);
 
-            item = new DiamondMace
+            item = new DiamantMace
             {
                 Hue = 0x96D
             };

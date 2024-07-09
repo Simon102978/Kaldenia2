@@ -2,7 +2,7 @@
 
 namespace Server.Engines.TombOfKings
 {
-    public class ChamberBarrier : Item
+    public class ChAmbreBarrier : Item
     {
         private Blocker m_Blocker;
         private LOSBlocker m_LOSBlocker;
@@ -34,7 +34,7 @@ namespace Server.Engines.TombOfKings
             }
         }
 
-        public ChamberBarrier(Point3D loc)
+        public ChAmbreBarrier(Point3D loc)
             : base(0x3979)
         {
             Light = LightType.Circle150;
@@ -49,7 +49,7 @@ namespace Server.Engines.TombOfKings
             m_LOSBlocker.MoveToWorld(loc, Map.TerMur);
         }
 
-        public ChamberBarrier(Serial serial)
+        public ChAmbreBarrier(Serial serial)
             : base(serial)
         {
         }

@@ -1,20 +1,25 @@
 namespace Server.Items
 {
-    public class MagekillerAssassinSpike : AssassinSpike
+    public class SsinsDagger : AssassinSpike
     {
         public override bool IsArtifact => true;
         [Constructable]
-        public MagekillerAssassinSpike()
+        public SsinsDagger()
         {
             WeaponAttributes.HitLeechMana = 16;
-        }
+			Name = "Dague du roi Ssins";
+			Hue = 2833;
+			SetHue = 2833;
 
-        public MagekillerAssassinSpike(Serial serial)
+		}
+
+		public SsinsDagger(Serial serial)
             : base(serial)
         {
         }
-
-        public override int LabelNumber => 1073519;// magekiller assassin spike
+		public override SetItem SetID => SetItem.Assassin;
+		public override int Pieces => 5;
+		public override int LabelNumber => 1073519;// magekiller assassin spike
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

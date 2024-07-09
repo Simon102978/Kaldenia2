@@ -1,16 +1,16 @@
 namespace Server.Items
 {
-    public class EmeraldMace : DiamondMace
+    public class EmeraudeMace : DiamantMace
     {
-        public override int LabelNumber => 1073530; // emerald mace
+        public override int LabelNumber => 1073530; // Emeraude mace
 
         [Constructable]
-        public EmeraldMace()
+        public EmeraudeMace()
         {
             WeaponAttributes.ResistPoisonBonus = 5;
         }
 
-        public EmeraldMace(Serial serial)
+        public EmeraudeMace(Serial serial)
             : base(serial)
         {
         }

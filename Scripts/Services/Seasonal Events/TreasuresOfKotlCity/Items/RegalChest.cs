@@ -49,7 +49,7 @@ namespace Server.Engines.TreasuresOfKotlCity
 
             if (0.1 > Utility.RandomDouble())
             {
-                DropItem(new StasisChamberPowerCore());
+                DropItem(new StasisChAmbrePowerCore());
             }
 
             if (0.1 > Utility.RandomDouble())

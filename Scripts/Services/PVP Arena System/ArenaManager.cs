@@ -69,11 +69,11 @@ namespace Server.Engines.ArenaSystem
 			SetWearable(new Collier8());
 
 			GoldRing ring = new GoldRing();
-			ring.GemType = GemType.Diamond;
+			ring.GemType = GemType.Diamant;
 			SetWearable(ring);
 
 			GoldBracelet bracelet = new GoldBracelet();
-			bracelet.GemType = GemType.Diamond;
+			bracelet.GemType = GemType.Diamant;
 			SetWearable(bracelet);
 
 

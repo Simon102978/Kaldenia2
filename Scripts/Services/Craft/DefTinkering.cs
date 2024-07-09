@@ -213,31 +213,31 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(Ring1), "Anneaux", "Anneau", 10.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cet anneau.");
 
 			index = AddCraft(typeof(Ring1), "Anneaux", "Anneau serti d'ambre", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cet anneau.");
-			AddRes(index, typeof(Amber), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer cet anneau.");
+			AddRes(index, typeof(Ambre), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer cet anneau.");
 
 			index = AddCraft(typeof(Ring1), "Anneaux", "Anneau serti de citrine", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cet anneau.");
 			AddRes(index, typeof(Citrine), "Citrine", 1, "Vous n'avez pas assez de citrine pour fabriquer cet anneau.");
 
 			index = AddCraft(typeof(Ring1), "Anneaux", "Anneau serti d'améthyste", 20.0, 40.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cet anneau.");
-			AddRes(index, typeof(Amethyst), "Améthyste", 1, "Vous n'avez pas assez d'améthyste pour fabriquer cet anneau.");
+			AddRes(index, typeof(Amethyste), "Améthyste", 1, "Vous n'avez pas assez d'améthyste pour fabriquer cet anneau.");
 
 			index = AddCraft(typeof(Ring1), "Anneaux", "Anneau serti de tourmaline", 20.0, 40.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cet anneau.");
 			AddRes(index, typeof(Tourmaline), "Tourmaline", 1, "Vous n'avez pas assez de tourmaline pour fabriquer cet anneau.");
 
 			index = AddCraft(typeof(Ring1), "Anneaux", "Anneau serti d'émeraude", 25.0, 45.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cet anneau.");
-			AddRes(index, typeof(Emerald), "Émeraude", 1, "Vous n'avez pas assez d'émeraude pour fabriquer cet anneau.");
+			AddRes(index, typeof(Emeraude), "Émeraude", 1, "Vous n'avez pas assez d'émeraude pour fabriquer cet anneau.");
 
 			index = AddCraft(typeof(Ring1), "Anneaux", "Anneau serti de saphir", 25.0, 45.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cet anneau.");
 			AddRes(index, typeof(Sapphire), "Saphir", 1, "Vous n'avez pas assez de saphir pour fabriquer cet anneau.");
 
 			index = AddCraft(typeof(Ring1), "Anneaux", "Anneau serti de rubis", 30.0, 50.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cet anneau.");
-			AddRes(index, typeof(Ruby), "Rubis", 1, "Vous n'avez pas assez de rubis pour fabriquer cet anneau.");
+			AddRes(index, typeof(Rubis), "Rubis", 1, "Vous n'avez pas assez de rubis pour fabriquer cet anneau.");
 
 			index = AddCraft(typeof(Ring1), "Anneaux", "Anneau serti de saphir étoilé", 35.0, 55.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cet anneau.");
-			AddRes(index, typeof(StarSapphire), "Saphir étoilé", 1, "Vous n'avez pas assez de saphir étoilé pour fabriquer cet anneau.");
+			AddRes(index, typeof(SaphirEtoile), "Saphir étoilé", 1, "Vous n'avez pas assez de saphir étoilé pour fabriquer cet anneau.");
 
 			index = AddCraft(typeof(Ring1), "Anneaux", "Anneau serti de diamant", 40.0, 60.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cet anneau.");
-			AddRes(index, typeof(Diamond), "Diamant", 1, "Vous n'avez pas assez de diamant pour fabriquer cet anneau.");
+			AddRes(index, typeof(Diamant), "Diamant", 1, "Vous n'avez pas assez de diamant pour fabriquer cet anneau.");
 			#endregion
 
 			#region Colliers
@@ -247,33 +247,33 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(Necklace1), "Colliers", "Collier", 10.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce collier.");
 
 			index = AddCraft(typeof(Necklace1), "Colliers", "Collier serti d'ambre", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce collier.");
-			AddRes(index, typeof(Amber), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer ce collier.");
+			AddRes(index, typeof(Ambre), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer ce collier.");
 
 			index = AddCraft(typeof(Necklace1), "Colliers", "Collier serti de citrine", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce collier.");
 			AddRes(index, typeof(Citrine), "Citrine", 1, "Vous n'avez pas assez de citrine pour fabriquer ce collier.");
 
 
 			index = AddCraft(typeof(Necklace1), "Colliers", "Collier serti d'améthyste", 20.0, 40.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce collier.");
-			AddRes(index, typeof(Amethyst), "Améthyste", 1, "Vous n'avez pas assez d'améthyste pour fabriquer ce collier.");
+			AddRes(index, typeof(Amethyste), "Améthyste", 1, "Vous n'avez pas assez d'améthyste pour fabriquer ce collier.");
 
 			index = AddCraft(typeof(Necklace1), "Colliers", "Collier serti de tourmaline", 20.0, 40.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce collier.");
 			AddRes(index, typeof(Tourmaline), "Tourmaline", 1, "Vous n'avez pas assez de tourmaline pour fabriquer ce collier.");
 
 
 			index = AddCraft(typeof(Necklace1), "Colliers", "Collier serti d'émeraude", 25.0, 45.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce collier.");
-			AddRes(index, typeof(Emerald), "Émeraude", 1, "Vous n'avez pas assez d'émeraude pour fabriquer ce collier.");
+			AddRes(index, typeof(Emeraude), "Émeraude", 1, "Vous n'avez pas assez d'émeraude pour fabriquer ce collier.");
 
 			index = AddCraft(typeof(Necklace1), "Colliers", "Collier serti de saphir", 25.0, 45.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce collier.");
 			AddRes(index, typeof(Sapphire), "Saphir", 1, "Vous n'avez pas assez de saphir pour fabriquer ce collier.");
 
 			index = AddCraft(typeof(Necklace1), "Colliers", "Collier serti de rubis", 30.0, 50.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce collier.");
-			AddRes(index, typeof(Ruby), "Rubis", 1, "Vous n'avez pas assez de rubis pour fabriquer ce collier.");
+			AddRes(index, typeof(Rubis), "Rubis", 1, "Vous n'avez pas assez de rubis pour fabriquer ce collier.");
 
 			index = AddCraft(typeof(Necklace1), "Colliers", "Collier serti de saphir étoilé", 35.0, 55.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce collier.");
-			AddRes(index, typeof(StarSapphire), "Saphir étoilé", 1, "Vous n'avez pas assez de saphir étoilé pour fabriquer ce collier.");
+			AddRes(index, typeof(SaphirEtoile), "Saphir étoilé", 1, "Vous n'avez pas assez de saphir étoilé pour fabriquer ce collier.");
 
 			index = AddCraft(typeof(Necklace1), "Colliers", "Collier serti de diamant", 40.0, 60.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce collier.");
-			AddRes(index, typeof(Diamond), "Diamant", 1, "Vous n'avez pas assez de diamant pour fabriquer ce collier.");
+			AddRes(index, typeof(Diamant), "Diamant", 1, "Vous n'avez pas assez de diamant pour fabriquer ce collier.");
 
 			index = AddCraft(typeof(Collier), "Colliers", "Collier massif doré", 15.0, 35.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			index = AddCraft(typeof(Collier2), "Colliers", "Collier croix Ânkh", 15.0, 35.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
@@ -303,31 +303,31 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet", 10.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
 
 			index = AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet serti d'ambre", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
-			AddRes(index, typeof(Amber), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer ce bracelet.");
+			AddRes(index, typeof(Ambre), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer ce bracelet.");
 
 			index = AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet serti de citrine", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
 			AddRes(index, typeof(Citrine), "Citrine", 1, "Vous n'avez pas assez de citrine pour fabriquer ce bracelet.");
 
 			index = AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet serti d'améthyste", 20.0, 40.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
-			AddRes(index, typeof(Amethyst), "Améthyste", 1, "Vous n'avez pas assez d'améthyste pour fabriquer ce bracelet.");
+			AddRes(index, typeof(Amethyste), "Améthyste", 1, "Vous n'avez pas assez d'améthyste pour fabriquer ce bracelet.");
 
 			index = AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet serti de tourmaline", 20.0, 40.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
 			AddRes(index, typeof(Tourmaline), "Tourmaline", 1, "Vous n'avez pas assez de tourmaline pour fabriquer ce bracelet.");
 
 			index = AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet serti d'émeraude", 25.0, 45.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
-			AddRes(index, typeof(Emerald), "Émeraude", 1, "Vous n'avez pas assez d'émeraude pour fabriquer ce bracelet.");
+			AddRes(index, typeof(Emeraude), "Émeraude", 1, "Vous n'avez pas assez d'émeraude pour fabriquer ce bracelet.");
 
 			index = AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet serti de saphir", 25.0, 45.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
 			AddRes(index, typeof(Sapphire), "Saphir", 1, "Vous n'avez pas assez de saphir pour fabriquer ce bracelet.");
 
 			index = AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet serti de rubis", 30.0, 50.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
-			AddRes(index, typeof(Ruby), "Rubis", 1, "Vous n'avez pas assez de rubis pour fabriquer ce bracelet.");
+			AddRes(index, typeof(Rubis), "Rubis", 1, "Vous n'avez pas assez de rubis pour fabriquer ce bracelet.");
 
 			index = AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet serti de saphir étoilé", 35.0, 55.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
-			AddRes(index, typeof(StarSapphire), "Saphir étoilé", 1, "Vous n'avez pas assez de saphir étoilé pour fabriquer ce bracelet.");
+			AddRes(index, typeof(SaphirEtoile), "Saphir étoilé", 1, "Vous n'avez pas assez de saphir étoilé pour fabriquer ce bracelet.");
 
 			index = AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet serti de diamant", 40.0, 60.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
-			AddRes(index, typeof(Diamond), "Diamant", 1, "Vous n'avez pas assez de diamant pour fabriquer ce bracelet.");
+			AddRes(index, typeof(Diamant), "Diamant", 1, "Vous n'avez pas assez de diamant pour fabriquer ce bracelet.");
 
 
 			#endregion
@@ -339,31 +339,31 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles", 10.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti d'ambre", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
-			AddRes(index, typeof(Amber), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer ces boucles d'oreilles.");
+			AddRes(index, typeof(Ambre), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer ces boucles d'oreilles.");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti de citrine", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
 			AddRes(index, typeof(Citrine), "Citrine", 1, "Vous n'avez pas assez de citrine pour fabriquer ces boucles d'oreilles.");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti d'améthyste", 20.0, 40.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
-			AddRes(index, typeof(Amethyst), "Améthyste", 1, "Vous n'avez pas assez d'améthyste pour fabriquer ces boucles d'oreilles.");
+			AddRes(index, typeof(Amethyste), "Améthyste", 1, "Vous n'avez pas assez d'améthyste pour fabriquer ces boucles d'oreilles.");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti de tourmaline", 20.0, 40.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
 			AddRes(index, typeof(Tourmaline), "Tourmaline", 1, "Vous n'avez pas assez de tourmaline pour fabriquer ces boucles d'oreilles.");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti d'émeraude", 25.0, 45.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
-			AddRes(index, typeof(Emerald), "Émeraude", 1, "Vous n'avez pas assez d'émeraude pour fabriquer ces boucles d'oreilles.");
+			AddRes(index, typeof(Emeraude), "Émeraude", 1, "Vous n'avez pas assez d'émeraude pour fabriquer ces boucles d'oreilles.");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti de saphir", 25.0, 45.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
 			AddRes(index, typeof(Sapphire), "Saphir", 1, "Vous n'avez pas assez de saphir pour fabriquer ces boucles d'oreilles.");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti de rubis", 30.0, 50.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
-			AddRes(index, typeof(Ruby), "Rubis", 1, "Vous n'avez pas assez de rubis pour fabriquer ces boucles d'oreilles.");
+			AddRes(index, typeof(Rubis), "Rubis", 1, "Vous n'avez pas assez de rubis pour fabriquer ces boucles d'oreilles.");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti de saphir étoilé", 35.0, 55.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
-			AddRes(index, typeof(StarSapphire), "Saphir étoilé", 1, "Vous n'avez pas assez de saphir étoilé pour fabriquer ces boucles d'oreilles.");
+			AddRes(index, typeof(SaphirEtoile), "Saphir étoilé", 1, "Vous n'avez pas assez de saphir étoilé pour fabriquer ces boucles d'oreilles.");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti de diamant", 40.0, 60.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
-			AddRes(index, typeof(Diamond), "Diamant", 1, "Vous n'avez pas assez de diamant pour fabriquer ces boucles d'oreilles.");
+			AddRes(index, typeof(Diamant), "Diamant", 1, "Vous n'avez pas assez de diamant pour fabriquer ces boucles d'oreilles.");
 
 			#endregion
 
@@ -656,6 +656,8 @@ namespace Server.Engines.Craft
 			#endregion
 
 			#region Divers
+			AddCraft(typeof(IronIngotResourceCrate), "Divers", "Caisse de ressource", 10.0, 60.0, typeof(IronIngot), 1044036, 150, 1044037);
+
 			index = AddCraft(typeof(KeyRing), "Divers", "Trousseau de clés", 10.0, 60.0, typeof(IronIngot), 1044036, 5, 1044037);
 			index = AddCraft(typeof(Key), "Divers", "Clé en fer", 20.0, 70.0, typeof(IronIngot), 1044036, 3, 1044037);
 			index = AddCraft(typeof(DyeTub), "Divers", "Bac de Teinture", 35.0, 65.0, typeof(RegularBoard), 1044041, 5, 1044351);

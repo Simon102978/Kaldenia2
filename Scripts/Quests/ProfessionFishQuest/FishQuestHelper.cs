@@ -24,7 +24,7 @@ namespace Server.Engines.Quests
             typeof(AppleCrab),       typeof(BlueCrab),          typeof(DungeonessCrab),
             typeof(KingCrab),        typeof(RockCrab),          typeof(SnowCrab),
 
-            typeof(Amberjack),         typeof(BlackSeabass),      typeof(BlueGrouper),
+            typeof(Ambrejack),         typeof(BlackSeabass),      typeof(BlueGrouper),
             typeof(BlueFish),        typeof(Bonefish),          typeof(Bonito),
             typeof(CapeCod),         typeof(CaptainSnook),      typeof(Cobia),
             typeof(GraySnapper),     typeof(Haddock),           typeof(MahiMahi),

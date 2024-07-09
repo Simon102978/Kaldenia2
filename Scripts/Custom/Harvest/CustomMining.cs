@@ -130,14 +130,14 @@ namespace Server.Engines.Harvest
 			oreAndStone.BonusResources = new BonusHarvestResource[]
 			{
 				new BonusHarvestResource(00.0, 99.1, null, null), //Nothing
-                new BonusHarvestResource(50.0, 00.1, "Amber", typeof(Amber)),
-				new BonusHarvestResource(50.0, 00.1, "Amethyst", typeof(Amethyst)),
+                new BonusHarvestResource(50.0, 00.1, "Ambre", typeof(Ambre)),
+				new BonusHarvestResource(50.0, 00.1, "Amethyste", typeof(Amethyste)),
 				new BonusHarvestResource(50.0, 00.1, "Citrine", typeof(Citrine)),
-				new BonusHarvestResource(50.0, 00.1, "Diamond", typeof(Diamond)),
-				new BonusHarvestResource(50.0, 00.1, "Emerald", typeof(Emerald)),
-				new BonusHarvestResource(50.0, 00.1, "Ruby", typeof(Ruby)),
+				new BonusHarvestResource(50.0, 00.1, "Diamant", typeof(Diamant)),
+				new BonusHarvestResource(50.0, 00.1, "Emeraude", typeof(Emeraude)),
+				new BonusHarvestResource(50.0, 00.1, "Rubis", typeof(Rubis)),
 				new BonusHarvestResource(50.0, 00.1, "Sapphire", typeof(Sapphire)),
-				new BonusHarvestResource(50.0, 00.1, "Star Sapphire", typeof(StarSapphire)),
+				new BonusHarvestResource(50.0, 00.1, "Star Sapphire", typeof(SaphirEtoile)),
 				new BonusHarvestResource(50.0, 00.1, "Tourmaline", typeof(Tourmaline))
 			};
 

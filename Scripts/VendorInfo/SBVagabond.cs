@@ -27,15 +27,15 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(Board), 3, 20, 0x1BD7, 0, true));
                 Add(new GenericBuyInfo(typeof(IronIngot), 6, 20, 0x1BF2, 0, true));
 
-                Add(new GenericBuyInfo(typeof(StarSapphire), 125, 20, 0x0F0F, 0, true));
-                Add(new GenericBuyInfo(typeof(Emerald), 100, 20, 0xF10, 0, true));
+                Add(new GenericBuyInfo(typeof(SaphirEtoile), 125, 20, 0x0F0F, 0, true));
+                Add(new GenericBuyInfo(typeof(Emeraude), 100, 20, 0xF10, 0, true));
                 Add(new GenericBuyInfo(typeof(Sapphire), 100, 20, 0xF11, 0, true));
-                Add(new GenericBuyInfo(typeof(Ruby), 75, 20, 0xF13, 0, true));
+                Add(new GenericBuyInfo(typeof(Rubis), 75, 20, 0xF13, 0, true));
                 Add(new GenericBuyInfo(typeof(Citrine), 50, 20, 0xF15, 0, true));
-                Add(new GenericBuyInfo(typeof(Amethyst), 100, 20, 0xF16, 0, true));
+                Add(new GenericBuyInfo(typeof(Amethyste), 100, 20, 0xF16, 0, true));
                 Add(new GenericBuyInfo(typeof(Tourmaline), 75, 20, 0x0F18, 0, true));
-                Add(new GenericBuyInfo(typeof(Amber), 50, 20, 0xF25, 0, true));
-                Add(new GenericBuyInfo(typeof(Diamond), 200, 20, 0xF26, 0, true));
+                Add(new GenericBuyInfo(typeof(Ambre), 50, 20, 0xF25, 0, true));
+                Add(new GenericBuyInfo(typeof(Diamant), 200, 20, 0xF26, 0, true));
 				*/
             }
         }
@@ -47,14 +47,14 @@ namespace Server.Mobiles
        /*         Add(typeof(Board), 1);
                 Add(typeof(IronIngot), 3);
 
-                Add(typeof(Amber), 25);
-                Add(typeof(Amethyst), 50);
+                Add(typeof(Ambre), 25);
+                Add(typeof(Amethyste), 50);
                 Add(typeof(Citrine), 25);
-                Add(typeof(Diamond), 100);
-                Add(typeof(Emerald), 50);
-                Add(typeof(Ruby), 37);
+                Add(typeof(Diamant), 100);
+                Add(typeof(Emeraude), 50);
+                Add(typeof(Rubis), 37);
                 Add(typeof(Sapphire), 50);
-                Add(typeof(StarSapphire), 62);
+                Add(typeof(SaphirEtoile), 62);
                 Add(typeof(Tourmaline), 47);
                 Add(typeof(GoldRing), 13);
                 Add(typeof(SilverRing), 10);

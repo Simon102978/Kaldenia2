@@ -144,6 +144,8 @@ namespace Server.Engines.Craft
 
 
 			#region Divers
+			index = AddCraft(typeof(RegularWoodResourceCrate), "Divers", "Caisse de ressource de bois", 10.0, 60.0, typeof(RegularBoard), 1044041, 150, 1044351);
+
 			index = AddCraft(typeof(BacVide), "Divers", "Bac Vide", 00.0, 20.0, typeof(RegularBoard), 1044041, 3, 1044351);
 			index = AddCraft(typeof(BarrelStaves), "Divers", "Douve de Tonneau", 10, 30.0, typeof(RegularBoard), 1044041, 5, 1044351);
 			index = AddCraft(typeof(BarrelLid), "Divers", "Couvercle de Tonneau", 10, 30.0, typeof(RegularBoard), 1044041, 4, 1044351);

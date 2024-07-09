@@ -29,10 +29,10 @@ namespace Server.Items
             {
                 switch (Utility.Random(8))
                 {
-                    case 0: DropItemStacked(new BlueDiamond()); break;
-                    case 1: DropItemStacked(new FireRuby()); break;
-                    case 2: DropItemStacked(new BrilliantAmber()); break;
-                    case 3: DropItemStacked(new PerfectEmerald()); break;
+                    case 0: DropItemStacked(new BlueDiamant()); break;
+                    case 1: DropItemStacked(new FireRubis()); break;
+                    case 2: DropItemStacked(new BrilliantAmbre()); break;
+                    case 3: DropItemStacked(new PerfectEmeraude()); break;
                     case 4: DropItemStacked(new DarkSapphire()); break;
                     case 5: DropItemStacked(new Turquoise()); break;
                     case 6: DropItemStacked(new EcruCitrine()); break;

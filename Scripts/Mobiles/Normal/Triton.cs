@@ -118,8 +118,9 @@ namespace Server.Mobiles
         {
         }
 
-        public override bool DeleteOnRelease => true;
-        public override int Meat => Utility.RandomMinMax(2, 4);
+
+		public override bool IsBondable => true; 
+		public override int Meat => Utility.RandomMinMax(2, 4);
 
 		public override int Hides => Utility.RandomMinMax(3, 7);
 
@@ -131,7 +132,7 @@ namespace Server.Mobiles
 		public override BoneType BoneType => BoneType.Reptilien;
 		public override FoodType FavoriteFood => FoodType.Meat;
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0); // version

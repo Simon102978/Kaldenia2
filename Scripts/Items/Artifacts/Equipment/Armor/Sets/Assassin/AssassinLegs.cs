@@ -1,15 +1,19 @@
 namespace Server.Items
 {
-    public class AssassinLegs : LeatherLegs
+    public class SsinsLegs : LeatherLegs
     {
         public override bool IsArtifact => true;
         [Constructable]
-        public AssassinLegs()
+        public SsinsLegs()
             : base()
         {
-            SetHue = 0x455;
 
-            Attributes.BonusStam = 2;
+			Name = "Jambières du roi Ssins";
+
+			Hue = 2833;
+			SetHue = 2833;
+
+			Attributes.BonusStam = 2;
             Attributes.WeaponSpeed = 5;
 
             SetSkillBonuses.SetValues(0, SkillName.Hiding, 30);
@@ -25,14 +29,14 @@ namespace Server.Items
             SetEnergyBonus = 4;
         }
 
-        public AssassinLegs(Serial serial)
+        public SsinsLegs(Serial serial)
             : base(serial)
         {
         }
 
-        public override int LabelNumber => 1074304;// Assassin Armor
+      //  public override int LabelNumber => 1074304;// Assassin Armor
         public override SetItem SetID => SetItem.Assassin;
-        public override int Pieces => 4;
+        public override int Pieces => 5;
         public override int BasePhysicalResistance => 9;
         public override int BaseFireResistance => 6;
         public override int BaseColdResistance => 3;

@@ -4,17 +4,17 @@ using System.Collections.Generic;
 
 namespace Server.Engines.TombOfKings
 {
-    public class ChamberSpawner : Item
+    public class ChAmbreSpawner : Item
     {
         public static void Generate()
         {
             for (int i = 0; i < m_Positions.Length; i++)
             {
-                WeakEntityCollection.Add("sa", new ChamberSpawner(m_Positions[i], Map.TerMur));
+                WeakEntityCollection.Add("sa", new ChAmbreSpawner(m_Positions[i], Map.TerMur));
             }
         }
 
-        private static readonly string _TimerID = "ChamberSpawner";
+        private static readonly string _TimerID = "ChAmbreSpawner";
 
         private static readonly Point3D[] m_Positions = new Point3D[]
         {
@@ -42,7 +42,7 @@ namespace Server.Engines.TombOfKings
 
         private List<Mobile> m_Creatures;
 
-        public ChamberSpawner(Point3D loc, Map map)
+        public ChAmbreSpawner(Point3D loc, Map map)
             : base(0x2006)
         {
             Stackable = true;
@@ -115,7 +115,7 @@ namespace Server.Engines.TombOfKings
             TimerRegistry.Register(_TimerID, this, TimeSpan.FromMinutes(15.0), TimeSpan.FromMinutes(15.0), false, spawner => spawner.CheckSpawn());
         }
 
-        public ChamberSpawner(Serial serial)
+        public ChAmbreSpawner(Serial serial)
             : base(serial)
         {
         }

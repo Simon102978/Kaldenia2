@@ -181,7 +181,7 @@ namespace Server.Items
                 "bent on giving up any",
                 "secrets.   Though the"),
             new BookPageInfo(
-                "main antechamber is",
+                "main antechAmbre is",
                 "open to us, the main",
                 "exit hall is blocked by",
                 "yet another pile of",
@@ -310,7 +310,7 @@ namespace Server.Items
                 "case, we've set to work",
                 "moving the bulk of the",
                 "exterior camp into the",
-                "main antechamber, so",
+                "main antechAmbre, so",
                 "there's no use moaning",
                 "about it now."));
         [Constructable]
@@ -492,7 +492,7 @@ namespace Server.Items
                 "the madness to piece",
                 "together a barricade,",
                 "barring access to the",
-                "camp antechamber.",
+                "camp antechAmbre.",
                 "He knows as well as I",
                 "that we cannot hold it",
                 "forever.  The dead",
@@ -592,7 +592,7 @@ namespace Server.Items
                 "there in the dark"),
             new BookPageInfo(
                 "corner of the",
-                "antechamber, his eyes",
+                "antechAmbre, his eyes",
                 "flickering in the last",
                 "dying embers of the",
                 "fire... and he stares at",

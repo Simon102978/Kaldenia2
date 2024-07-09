@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    public class SapphireMace : DiamondMace
+    public class SapphireMace : DiamantMace
     {
         public override bool IsArtifact => true;
         [Constructable]

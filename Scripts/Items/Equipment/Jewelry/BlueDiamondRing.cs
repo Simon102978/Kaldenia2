@@ -1,9 +1,9 @@
 namespace Server.Items
 {
-    public class BlueDiamondRing : GoldRing
+    public class BlueDiamantRing : GoldRing
     {
         [Constructable]
-        public BlueDiamondRing()
+        public BlueDiamantRing()
             : base()
         {
             Weight = 1.0;
@@ -27,12 +27,12 @@ namespace Server.Items
             }
         }
 
-        public BlueDiamondRing(Serial serial)
+        public BlueDiamantRing(Serial serial)
             : base(serial)
         {
         }
 
-        public override int LabelNumber => 1073458;// blue diamond ring
+        public override int LabelNumber => 1073458;// blue Diamant ring
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

@@ -32,14 +32,15 @@ namespace Server.Mobiles
         {
             public InternalSellInfo()
             {
-                Add(typeof(LeatherArms), 4);
+              //  Add(typeof(Leather), 4);
                 Add(typeof(LeatherChest), 5);
                 Add(typeof(LeatherGloves), 3);
                 Add(typeof(LeatherGorget), 3);
                 Add(typeof(LeatherLegs), 4);
                 Add(typeof(LeatherCap), 5);
+				Add(typeof(RegularLeatherResourceCrate), 100);
 
-                Add(typeof(FemaleLeatherChest), 8);
+				Add(typeof(FemaleLeatherChest), 8);
                 Add(typeof(FemaleStuddedChest), 5);
                 Add(typeof(LeatherShorts), 4);
                 Add(typeof(LeatherSkirt), 3);

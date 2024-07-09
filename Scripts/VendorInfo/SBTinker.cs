@@ -105,10 +105,15 @@ namespace Server.Mobiles
                 Add(typeof(Lockpick), 1);
                 Add(typeof(TinkerTools), 2);
 
-                Add(typeof(RegularBoard), 1);
-                Add(typeof(Log), 1);
+                //Add(typeof(RegularBoard), 1);
+				//Add(typeof(Log), 1);
+				Add(typeof(RegularWoodResourceCrate), 100);
+				Add(typeof(IronIngotResourceCrate), 100);
+				Add(typeof(RegularLeatherResourceCrate), 100);
 
-                Add(typeof(Pickaxe), 7);
+
+
+				Add(typeof(Pickaxe), 7);
                 Add(typeof(Hammer), 3);
                 Add(typeof(SmithHammer), 2);
                 Add(typeof(ButcherKnife), 3);

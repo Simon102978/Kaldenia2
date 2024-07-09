@@ -280,35 +280,35 @@ namespace Server.Items
                             switch (Utility.Random(15))
                             {
                                 case 0:
-                                    gems = new Amber();
+                                    gems = new Ambre();
                                     break;
                                 case 1:
-                                    gems = new Amethyst();
+                                    gems = new Amethyste();
                                     break;
                                 case 2:
                                     gems = new Citrine();
                                     break;
                                 case 3:
-                                    gems = new Diamond();
+                                    gems = new Diamant();
                                     break;
                                 case 4:
-                                    gems = new Emerald();
+                                    gems = new Emeraude();
                                     break;
                                 case 5:
-                                    gems = new Ruby();
+                                    gems = new Rubis();
                                     break;
                                 case 6:
                                     gems = new Sapphire();
                                     break;
                                 case 7:
-                                    gems = new StarSapphire();
+                                    gems = new SaphirEtoile();
                                     break;
                                 case 8:
                                     gems = new Tourmaline();
                                     break;
                                 // Mondain's Legacy gems
                                 case 9:
-                                    gems = new PerfectEmerald();
+                                    gems = new PerfectEmeraude();
                                     break;
                                 case 10:
                                     gems = new DarkSapphire();
@@ -320,10 +320,10 @@ namespace Server.Items
                                     gems = new EcruCitrine();
                                     break;
                                 case 13:
-                                    gems = new FireRuby();
+                                    gems = new FireRubis();
                                     break;
                                 case 14:
-                                    gems = new BlueDiamond();
+                                    gems = new BlueDiamant();
                                     break;
                             }
 

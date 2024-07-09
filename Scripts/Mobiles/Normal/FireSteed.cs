@@ -52,7 +52,7 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.LootItem<SulfurousAsh>(151, 300, true));
-            AddLoot(LootPack.LootItem<Ruby>(16, 30, true));
+            AddLoot(LootPack.LootItem<Rubis>(16, 30, true));
         }
 
         public FireSteed(Serial serial)

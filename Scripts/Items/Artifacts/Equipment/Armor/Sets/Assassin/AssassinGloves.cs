@@ -1,13 +1,17 @@
 namespace Server.Items
 {
-    public class AssassinGloves : LeatherGloves
+    public class SsinsGloves : LeatherGloves
     {
         public override bool IsArtifact => true;
         [Constructable]
-        public AssassinGloves()
+        public SsinsGloves()
             : base()
         {
-            SetHue = 0x455;
+
+			Name = "Gants du roi Ssins";
+
+			Hue = 2833;
+			SetHue = 2833;
 
             Attributes.BonusStam = 2;
             Attributes.WeaponSpeed = 5;
@@ -25,14 +29,14 @@ namespace Server.Items
             SetEnergyBonus = 4;
         }
 
-        public AssassinGloves(Serial serial)
+        public SsinsGloves(Serial serial)
             : base(serial)
         {
         }
 
-        public override int LabelNumber => 1074304;// Assassin Armor
+       // public override int LabelNumber => 1074304;// Assassin Armor
         public override SetItem SetID => SetItem.Assassin;
-        public override int Pieces => 4;
+        public override int Pieces => 5;
         public override int BasePhysicalResistance => 9;
         public override int BaseFireResistance => 6;
         public override int BaseColdResistance => 3;

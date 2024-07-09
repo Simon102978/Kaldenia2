@@ -253,7 +253,7 @@ namespace Server.Items
                 from.AddToBackpack(new ArcaneGem());
             }
 
-            from.AddToBackpack(new Diamond(SideLength));
+            from.AddToBackpack(new Diamant(SideLength));
 
             Item ore = new ShadowIronOre(9);
             ore.MoveToWorld(new Point3D(X - 1, Y, Z + 2), Map);

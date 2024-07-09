@@ -44,7 +44,7 @@ namespace Server.Items
         public GoldRing()
             : base(0x108a)
         {
-
+			Name = "Anneau doré";
         }
 
         public GoldRing(Serial serial)

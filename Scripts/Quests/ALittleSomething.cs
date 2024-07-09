@@ -7,7 +7,7 @@ namespace Server.Engines.Quests
         public ALittleSomething()
             : base()
         {
-            AddObjective(new ObtainObjective(typeof(BrilliantAmber), "Brilliant Amber", 1, 0x3199));
+            AddObjective(new ObtainObjective(typeof(BrilliantAmbre), "Brilliant Ambre", 1, 0x3199));
 
             AddReward(new BaseReward(typeof(MeagerImbuingBag), 1, "Meager Imbuing Bag"));
         }

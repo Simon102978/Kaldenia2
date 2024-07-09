@@ -1761,7 +1761,7 @@ namespace Server.SkillHandlers
             typeof(EssenceOrder),
 
             typeof(ParasiticPlant),   typeof(LuminescentFungi),
-            typeof(FireRuby),           typeof(WhitePearl),             typeof(BlueDiamond),
+            typeof(FireRubis),           typeof(WhitePearl),             typeof(BlueDiamant),
             typeof(Turquoise)
         };
 

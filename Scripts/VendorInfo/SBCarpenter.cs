@@ -80,8 +80,10 @@ namespace Server.Mobiles
                 Add(typeof(Tambourine), 10);
                 Add(typeof(Drums), 10);
 
-                Add(typeof(Log), 1);
-				Add(typeof(RegularBoard), 2);
+				//Add(typeof(Log), 1);
+				Add(typeof(RegularWoodResourceCrate), 100);
+
+				//Add(typeof(RegularBoard), 2);
 			}
         }
     }

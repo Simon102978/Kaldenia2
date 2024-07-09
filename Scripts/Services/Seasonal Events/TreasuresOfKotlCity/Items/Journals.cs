@@ -109,7 +109,7 @@ namespace Server.Engines.TreasuresOfKotlCity
          * spirit of emotion and strength<br>Motazz, spirit of battle<Br>Heluzz, spirit of knowledge and visions<br>Fabozz, spirit of nature 
          * and animals<br>Kukuzz, spirit of healing<br>What is strange is that the Pyramid does not show the symbols or images of any of 
          * these spirits. It is almost as if someone or something else built it. I must investigate further. I hope to find some way to the
-         * lower chambers of the Pyramid. */
+         * lower chAmbres of the Pyramid. */
 
         public override TextDefinition Title => 1157052;  // The Journal of Dr. Spector - Collection III
 
@@ -153,7 +153,7 @@ namespace Server.Engines.TreasuresOfKotlCity
          * The tribes had a saying, “Killing one Myrmidex brings the wrath of its thousand kin.” How much wrath have I earned by killing so
          * many?<br><br>Week 10<br><br>I am different now. My bones have reshaped themselves, and my skin is like armor. There is a charge of
          * energy around me, constantly buzzing in my ears. I am blacking out more and more, and I am losing more and more of myself. With 
-         * the changes, hidden parts of the city now allow me access. I have found what appears to be a sort of stasis chamber. I will put 
+         * the changes, hidden parts of the city now allow me access. I have found what appears to be a sort of stasis chAmbre. I will put 
          * myself inside and hope someone can help me. */
 
         public override TextDefinition Title => 1157053;  // The Journal of Dr. Spector - Collection IV
@@ -268,7 +268,7 @@ namespace Server.Engines.TreasuresOfKotlCity
         public override TextDefinition Body => 1157062;
         /*The Worldwalker and Humanity<br><br>Spoken by the Memory of Katalkotl<br><br>Transcribed by Professor Ellie Rafkin<br><br>After 
          * the failure of the Myrmidex, the Kotl took more care in their manipulation of living things. They turned the power of the
-         * moonstone outward beyond Eodon. They constructed the Moon Chamber as a focal point for all of Eodon’s mana. The artificial origin 
+         * moonstone outward beyond Eodon. They constructed the Moon ChAmbre as a focal point for all of Eodon’s mana. The artificial origin 
          * of Eodon made travel across the void between worlds difficult. However, with the awesome power of the Great Moonstone, it was
          * possible. The Kotl sent their bravest general out across the Ethereal Void: Katalkotl the Worldwalker. He and his warriors traveled
          * to dozens of worlds, bringing treasures and curiosities back to Eodon. Eventually, Katalkotl found several worlds with an 

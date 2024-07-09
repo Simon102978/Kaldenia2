@@ -21,7 +21,7 @@ namespace Server.Mobiles
 				Add(new GenericBuyInfo(typeof(RecycleBag), 50, 20, 0xE76, 0));
 				Add(new GenericBuyInfo(typeof(Recycleur), 50, 20, 0x12B3, 0));
 				Add(new GenericBuyInfo(typeof(Boline), 50, 20, 0xEC5, 1940));
-			//	Add(new GenericBuyInfo(typeof(BedrollTent), 3000, 20, 0xA57, 0));
+				Add(new GenericBuyInfo(typeof(BedrollTent), 10000, 20, 0xA57, 0));
 			//	Add(new GenericBuyInfo(typeof(GardenDeed), 3000, 20, 0xE88, 1164));
 
 
@@ -136,14 +136,14 @@ namespace Server.Mobiles
 
 
 				Add(typeof(Citrine), 5);
-				Add(typeof(Amber), 8);
+				Add(typeof(Ambre), 8);
 				Add(typeof(Tourmaline), 9);
-				Add(typeof(Ruby), 10);
-				Add(typeof(Amethyst), 12);
+				Add(typeof(Rubis), 10);
+				Add(typeof(Amethyste), 12);
 				Add(typeof(Sapphire), 15);
-				Add(typeof(StarSapphire), 20);
-				Add(typeof(Emerald), 25);
-				Add(typeof(Diamond), 35);
+				Add(typeof(SaphirEtoile), 20);
+				Add(typeof(Emeraude), 25);
+				Add(typeof(Diamant), 35);
 
 
 				Add(typeof(GoldRing), 7);

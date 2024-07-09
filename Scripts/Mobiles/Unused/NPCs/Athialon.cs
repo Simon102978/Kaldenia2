@@ -40,7 +40,7 @@ namespace Server.Mobiles
         public override void InitOutfit()
         {
             AddItem(new ElvenBoots(0x901));
-            AddItem(new DiamondMace());
+            AddItem(new DiamantMace());
             AddItem(new WoodlandBelt());
 
             Item item;

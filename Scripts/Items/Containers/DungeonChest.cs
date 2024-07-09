@@ -20,7 +20,7 @@ namespace Server.Items
 			DropItem(new Arrow(10));
 
 			DropItem(new Tourmaline(Utility.Random(3)));
-			DropItem(new Amber(Utility.Random(2)));
+			DropItem(new Ambre(Utility.Random(2)));
 			DropItem(new Citrine(Utility.Random(5)));
 
 			//     for (int i = Utility.Random(3) + 1; i > 0; i--) // random 1 to 3
@@ -61,7 +61,7 @@ namespace Server.Items
 
 	//		DropItem(new Gold(50, 75));
 			DropItem(new Tourmaline(Utility.Random(3)));
-			DropItem(new Amber(Utility.Random(2)));
+			DropItem(new Ambre(Utility.Random(2)));
 			DropItem(new Citrine(Utility.Random(5)));
 			DropItem(new DragonBlood(Utility.Random(0, 1)));
 

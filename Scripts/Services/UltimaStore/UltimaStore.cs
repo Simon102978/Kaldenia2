@@ -162,7 +162,7 @@ namespace Server.Engines.UOStore
             Register<HaochisPigment>(new TextDefinition[] { 1071249, 1071245 }, 1156671, 0, 0x9C85, 0, 400, cat, ConstructHaochisPigment); // Yellow
             Register<HaochisPigment>(new TextDefinition[] { 1071249, 1071244 }, 1156671, 0, 0x9C80, 0, 400, cat, ConstructHaochisPigment); // Pretty Pink
             Register<HaochisPigment>(new TextDefinition[] { 1071249, 1071248 }, 1156671, 0, 0x9C81, 0, 400, cat, ConstructHaochisPigment); // Midnight Blue
-            Register<HaochisPigment>(new TextDefinition[] { 1071249, 1023856 }, 1156671, 0, 0x9C7F, 0, 400, cat, ConstructHaochisPigment); // Emerald
+            Register<HaochisPigment>(new TextDefinition[] { 1071249, 1023856 }, 1156671, 0, 0x9C7F, 0, 400, cat, ConstructHaochisPigment); // Emeraude
             Register<HaochisPigment>(new TextDefinition[] { 1071249, 1115467 }, 1156671, 0, 0x9C82, 0, 400, cat, ConstructHaochisPigment); // Smoky Gold
             Register<HaochisPigment>(new TextDefinition[] { 1071249, 1115468 }, 1156671, 0, 0x9C7E, 0, 400, cat, ConstructHaochisPigment); // Ghost's Grey
             Register<HaochisPigment>(new TextDefinition[] { 1071249, 1115471 }, 1156671, 0, 0x9C84, 0, 400, cat, ConstructHaochisPigment); // Ocean Blue   

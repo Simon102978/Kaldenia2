@@ -43,7 +43,7 @@ namespace Server.Items
             base.OnMapComplete(from, chest);
 
             if (chest != null)
-                chest.DropItem(new StasisChamberActivator());
+                chest.DropItem(new StasisChAmbreActivator());
         }
 
         public override void GetProperties(ObjectPropertyList list)
@@ -148,7 +148,7 @@ namespace Server.Items
             base.OnSOSComplete(chest);
 
             if (chest != null)
-                chest.DropItem(new StasisChamberRegulator());
+                chest.DropItem(new StasisChAmbreRegulator());
         }
 
         public SaltySeaSOS(Serial serial) : base(serial)
@@ -217,17 +217,17 @@ namespace Server.Items
         }
     }
 
-    public class StasisChamberPowerCore : Item
+    public class StasisChAmbrePowerCore : Item
     {
         public override int LabelNumber => 1156623;
 
         [Constructable]
-        public StasisChamberPowerCore()
+        public StasisChAmbrePowerCore()
             : base(40155)
         {
         }
 
-        public StasisChamberPowerCore(Serial serial) : base(serial)
+        public StasisChAmbrePowerCore(Serial serial) : base(serial)
         {
         }
 
@@ -244,17 +244,17 @@ namespace Server.Items
         }
     }
 
-    public class StasisChamberActivator : Item
+    public class StasisChAmbreActivator : Item
     {
         public override int LabelNumber => 1156624;
 
         [Constructable]
-        public StasisChamberActivator()
+        public StasisChAmbreActivator()
             : base(40158)
         {
         }
 
-        public StasisChamberActivator(Serial serial)
+        public StasisChAmbreActivator(Serial serial)
             : base(serial)
         {
         }
@@ -272,17 +272,17 @@ namespace Server.Items
         }
     }
 
-    public class StasisChamberRegulator : Item
+    public class StasisChAmbreRegulator : Item
     {
         public override int LabelNumber => 1156626;
 
         [Constructable]
-        public StasisChamberRegulator()
+        public StasisChAmbreRegulator()
             : base(40157)
         {
         }
 
-        public StasisChamberRegulator(Serial serial)
+        public StasisChAmbreRegulator(Serial serial)
             : base(serial)
         {
         }
@@ -300,17 +300,17 @@ namespace Server.Items
         }
     }
 
-    public class StasisChamberStator : Item
+    public class StasisChAmbreStator : Item
     {
         public override int LabelNumber => 1156628;
 
         [Constructable]
-        public StasisChamberStator()
+        public StasisChAmbreStator()
             : base(40156)
         {
         }
 
-        public StasisChamberStator(Serial serial)
+        public StasisChAmbreStator(Serial serial)
             : base(serial)
         {
         }

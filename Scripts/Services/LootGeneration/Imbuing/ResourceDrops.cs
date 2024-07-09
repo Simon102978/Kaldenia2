@@ -242,9 +242,9 @@ namespace Server.Items
 
         public static Type[] ImbuingGems =
         {
-            typeof(FireRuby),
+            typeof(FireRubis),
             typeof(WhitePearl),
-            typeof(BlueDiamond),
+            typeof(BlueDiamant),
             typeof(Turquoise)
         };
     }

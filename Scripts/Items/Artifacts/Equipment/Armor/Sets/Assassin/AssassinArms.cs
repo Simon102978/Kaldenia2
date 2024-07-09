@@ -1,13 +1,16 @@
 namespace Server.Items
 {
-    public class AssassinArms : LeatherArms
+    public class SsinsArms : LeatherArms
     {
         public override bool IsArtifact => true;
         [Constructable]
-        public AssassinArms()
+        public SsinsArms()
             : base()
         {
-            SetHue = 0x455;
+
+			Name = "Brassards du roi Ssins";
+			Hue = 2833;
+			SetHue = 2833;
 
             Attributes.BonusStam = 2;
             Attributes.WeaponSpeed = 5;
@@ -25,14 +28,14 @@ namespace Server.Items
             SetEnergyBonus = 4;
         }
 
-        public AssassinArms(Serial serial)
+        public SsinsArms(Serial serial)
             : base(serial)
         {
         }
 
-        public override int LabelNumber => 1074304;// Assassin Armor
+       // public override int LabelNumber => 1074304;// Assassin Armor
         public override SetItem SetID => SetItem.Assassin;
-        public override int Pieces => 4;
+        public override int Pieces => 5;
         public override int BasePhysicalResistance => 9;
         public override int BaseFireResistance => 6;
         public override int BaseColdResistance => 3;

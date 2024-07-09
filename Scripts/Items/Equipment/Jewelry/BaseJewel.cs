@@ -12,15 +12,15 @@ namespace Server.Items
 	public enum GemType
 	{
 		None,
-		StarSapphire,
-		Emerald,
+		SaphirEtoile,
+		Emeraude,
 		Sapphire,
-		Ruby,
+		Rubis,
 		Citrine,
-		Amethyst,
+		Amethyste,
 		Tourmaline,
-		Amber,
-		Diamond
+		Ambre,
+		Diamant
 	}
 
 	public abstract class BaseJewel : Item, ICraftable, ISetItem, IWearableDurability, IResource, IVvVItem, IOwnerRestricted, ITalismanProtection, IArtifact, ICombatEquipment, IQuality
@@ -714,6 +714,7 @@ namespace Server.Items
 		{
 			var name = Name ?? String.Empty;
 
+
 			if (Quality == ItemQuality.Legendary)
 				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
 			else if (Quality == ItemQuality.Epic)
@@ -723,6 +724,9 @@ namespace Server.Items
 			else
 				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
 
+			AddCraftedProperties(list);
+
+
 			var desc = Description ?? String.Empty;
 
 			if (!String.IsNullOrWhiteSpace(desc))
@@ -730,13 +734,19 @@ namespace Server.Items
 
 			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
 
-			AddWeightProperty(list);
-			AddCraftedProperties(list);
+			//AddWeightProperty(list);
 
 			if (this is BaseBracelet || this is BaseRing)
 				list.Add($"Enchantement: {Enchantement}/1");
 
-			if (m_GorgonLenseCharges > 0)
+			if (GemType != GemType.None)
+			{
+				list.Add("Pierre précieuse : {0}", GemType.ToString());
+
+				if (this is BaseBracelet || this is BaseRing)
+					list.Add($"Enchantement: {Enchantement}/1");
+
+				if (m_GorgonLenseCharges > 0)
 				list.Add(1112590, m_GorgonLenseCharges.ToString()); //Gorgon Lens Charges: ~1_val~
 
 			#region Mondain's Legacy Sets
@@ -892,6 +902,7 @@ namespace Server.Items
 				SetHelper.GetSetProperties(list, this);
 			}
 		}
+		}
 
 		public override void AddCraftedProperties(ObjectPropertyList list)
 		{
@@ -910,7 +921,13 @@ namespace Server.Items
 
 			if (IsImbued)
 				list.Add(1080418); // (Imbued)
+		
+
+		
+        
 		}
+
+
 		//public override void AddWeightProperty(ObjectPropertyList list)
 		//{
 		//	base.AddWeightProperty(list);
@@ -940,15 +957,15 @@ namespace Server.Items
 			{
 				default:
 				case GemType.None: return 0;
-				case GemType.StarSapphire: return 1023867;
-				case GemType.Emerald: return 1023887;
+				case GemType.SaphirEtoile: return 1023867;
+				case GemType.Emeraude: return 1023887;
 				case GemType.Sapphire: return 1023887;
-				case GemType.Ruby: return 1023868;
+				case GemType.Rubis: return 1023868;
 				case GemType.Citrine: return 1023875;
-				case GemType.Amethyst: return 1023863;
+				case GemType.Amethyste: return 1023863;
 				case GemType.Tourmaline: return 1023872;
-				case GemType.Amber: return 1062607;
-				case GemType.Diamond: return 1062608;
+				case GemType.Ambre: return 1062607;
+				case GemType.Diamant: return 1062608;
 			}
 		}
 
@@ -1220,24 +1237,24 @@ namespace Server.Items
 			{
 				resourceType = craftItem.Resources.GetAt(1).ItemType;
 
-				if (resourceType == typeof(StarSapphire))
-					GemType = GemType.StarSapphire;
-				else if (resourceType == typeof(Emerald))
-					GemType = GemType.Emerald;
+				if (resourceType == typeof(SaphirEtoile))
+					GemType = GemType.SaphirEtoile;
+				else if (resourceType == typeof(Emeraude))
+					GemType = GemType.Emeraude;
 				else if (resourceType == typeof(Sapphire))
 					GemType = GemType.Sapphire;
-				else if (resourceType == typeof(Ruby))
-					GemType = GemType.Ruby;
+				else if (resourceType == typeof(Rubis))
+					GemType = GemType.Rubis;
 				else if (resourceType == typeof(Citrine))
 					GemType = GemType.Citrine;
-				else if (resourceType == typeof(Amethyst))
-					GemType = GemType.Amethyst;
+				else if (resourceType == typeof(Amethyste))
+					GemType = GemType.Amethyste;
 				else if (resourceType == typeof(Tourmaline))
 					GemType = GemType.Tourmaline;
-				else if (resourceType == typeof(Amber))
-					GemType = GemType.Amber;
-				else if (resourceType == typeof(Diamond))
-					GemType = GemType.Diamond;
+				else if (resourceType == typeof(Ambre))
+					GemType = GemType.Ambre;
+				else if (resourceType == typeof(Diamant))
+					GemType = GemType.Diamant;
 			}
 
 			#region Mondain's Legacy

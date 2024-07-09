@@ -4,16 +4,16 @@ namespace Server.Items
 {
     [Alterable(typeof(DefBlacksmithy), typeof(DiscMace))]
     [Flipable(0x2D24, 0x2D30)]
-    public class DiamondMace : BaseBashing
+    public class DiamantMace : BaseBashing
     {
         [Constructable]
-        public DiamondMace()
+        public DiamantMace()
             : base(0x2D24)
         {
             Weight = 10.0;
         }
 
-        public DiamondMace(Serial serial)
+        public DiamantMace(Serial serial)
             : base(serial)
         {
         }

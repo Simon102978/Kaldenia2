@@ -1,16 +1,16 @@
 namespace Server.Items
 {
-    public class RubyMace : DiamondMace
+    public class RubisMace : DiamantMace
     {
-        public override int LabelNumber => 1073529; // ruby mace
+        public override int LabelNumber => 1073529; // Rubis mace
 
         [Constructable]
-        public RubyMace()
+        public RubisMace()
         {
             Attributes.WeaponDamage = 5;
         }
 
-        public RubyMace(Serial serial)
+        public RubisMace(Serial serial)
             : base(serial)
         {
         }

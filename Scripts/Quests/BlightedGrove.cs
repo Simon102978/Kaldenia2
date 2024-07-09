@@ -56,7 +56,7 @@ namespace Server.Engines.Quests
             : base()
         {
             AddObjective(new ObtainObjective(typeof(Granite), "rocks", 4, 0x1779));
-            AddObjective(new ObtainObjective(typeof(BlueDiamond), "blue diamonds", 2, 0x3198));
+            AddObjective(new ObtainObjective(typeof(BlueDiamant), "blue Diamants", 2, 0x3198));
 
             AddReward(new BaseReward(1074962)); // A step closer to entering Blighted Grove.
         }
@@ -65,7 +65,7 @@ namespace Server.Engines.Quests
         public override Type NextQuest => typeof(SympatheticMagicQuest);
         /* A Rock and a Hard Place */
         public override object Title => 1074951;
-        /* Hmm, I've never even heard of something that can damage diamond like that.  I guess we'll have to go with plan 
+        /* Hmm, I've never even heard of something that can damage Diamant like that.  I guess we'll have to go with plan 
         B.  Let's try something similar.  Sometimes there's a natural immunity to be found when you use a substance that's 
         like the one you're trying to cut.  A sort of "sympathetic" thing.  Y'know? */
         public override object Description => 1074958;
@@ -74,7 +74,7 @@ namespace Server.Engines.Quests
         /* If you're a miner, you should have no trouble getting that stuff.  If not, you can probably buy some 
         samples from a miner? */
         public override object Uncomplete => 1074969;
-        /* Have you got the granite and diamonds?  Great, let me see them and we'll see what effect this venom has upon them. */
+        /* Have you got the granite and Diamants?  Great, let me see them and we'll see what effect this venom has upon them. */
         public override object Complete => 1074992;
         public override bool CanOffer()
         {
@@ -112,7 +112,7 @@ namespace Server.Engines.Quests
         public override object Title => 1074952;
         /* This is some nasty stuff, that's for certain.  I don't even want to think about what sort of blight 
         caused this venomous reaction from that old tree.  Let's get to work  we'll need to try something really 
-        hard but still workable as our base material.  Nothing's harder than stone and diamond.  Let's try them first. */
+        hard but still workable as our base material.  Nothing's harder than stone and Diamant.  Let's try them first. */
         public override object Description => 1074957;
         /* Sure, no problem.  I thought you were interested in figuring this out. */
         public override object Refuse => 1074965;
@@ -155,7 +155,7 @@ namespace Server.Engines.Quests
         /* Already Dead */
         public override object Title => 1074953;
         /* Amazing!  The bark was reduced to ash in seconds.  Whatever this taint is, it plays havok with living things.  
-        And of course, it took the edge off both diamonds and granite even faster.  What we need is something workable but 
+        And of course, it took the edge off both Diamants and granite even faster.  What we need is something workable but 
         dead; something that can hold an edge without melting.  See what you can come up with, please. */
         public override object Description => 1074959;
         /* Sure, no problem.  I thought you were interested in figuring this out. */

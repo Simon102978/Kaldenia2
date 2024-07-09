@@ -1,33 +1,35 @@
+using System;
+using Server;
+using Server.Items;
+
 namespace Server.Items
 {
-    public class Rubis : Item, IGem
+    public class SsinsEar : BaseReagent
     {
         [Constructable]
-        public Rubis()
-            : this(1)
+        public SsinsEar() : this(1)
         {
         }
 
         [Constructable]
-        public Rubis(int amount)
-            : base(0xF13)
+        public SsinsEar(int amount) : base(0xF78, amount)
         {
-            Stackable = true;
-            Amount = amount;
-			Name = "Rubis";
-        }
+            Hue = 2833;
+            Name = "Oreille de Ssins";
+			
+		}
 
-        public Rubis(Serial serial)
-            : base(serial)
+        public SsinsEar(Serial serial) : base(serial)
         {
         }
 
-        public override double DefaultWeight => 1.0;
+       
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-            writer.Write(0); // version
+            writer.Write((int)0); // version
         }
 
         public override void Deserialize(GenericReader reader)

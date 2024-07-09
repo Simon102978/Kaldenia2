@@ -1,15 +1,15 @@
 namespace Server.Items
 {
-    public class Diamond : Item, IGem
+    public class Diamant : Item, IGem
     {
         [Constructable]
-        public Diamond()
+        public Diamant()
             : this(1)
         {
         }
 
         [Constructable]
-        public Diamond(int amount)
+        public Diamant(int amount)
             : base(0xF26)
         {
             Stackable = true;
@@ -17,7 +17,7 @@ namespace Server.Items
 			Name = "Diamant";
         }
 
-        public Diamond(Serial serial)
+        public Diamant(Serial serial)
             : base(serial)
         {
         }

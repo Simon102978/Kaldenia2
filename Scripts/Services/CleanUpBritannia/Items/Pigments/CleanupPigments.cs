@@ -280,15 +280,15 @@
         }
     }
 
-    public class AuraOfAmberPigment : CompassionPigment
+    public class AuraOfAmbrePigment : CompassionPigment
     {
         [Constructable]
-        public AuraOfAmberPigment()
-            : base(CompassionPigmentType.AuraOfAmber)
+        public AuraOfAmbrePigment()
+            : base(CompassionPigmentType.AuraOfAmbre)
         {
         }
 
-        public AuraOfAmberPigment(Serial serial)
+        public AuraOfAmbrePigment(Serial serial)
             : base(serial)
         {
         }
@@ -476,15 +476,15 @@
         }
     }
 
-    public class MurkyAmberPigment : CompassionPigment
+    public class MurkyAmbrePigment : CompassionPigment
     {
         [Constructable]
-        public MurkyAmberPigment()
-            : base(CompassionPigmentType.MurkyAmber)
+        public MurkyAmbrePigment()
+            : base(CompassionPigmentType.MurkyAmbre)
         {
         }
 
-        public MurkyAmberPigment(Serial serial)
+        public MurkyAmbrePigment(Serial serial)
             : base(serial)
         {
         }

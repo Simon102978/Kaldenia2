@@ -1,9 +1,9 @@
 namespace Server.Items
 {
-    public class PerfectEmeraldRing : GoldRing
+    public class PerfectEmeraudeRing : GoldRing
     {
         [Constructable]
-        public PerfectEmeraldRing()
+        public PerfectEmeraudeRing()
             : base()
         {
             Weight = 1.0;
@@ -16,12 +16,12 @@ namespace Server.Items
                 Attributes.SpellDamage += 5;
         }
 
-        public PerfectEmeraldRing(Serial serial)
+        public PerfectEmeraudeRing(Serial serial)
             : base(serial)
         {
         }
 
-        public override int LabelNumber => 1073459;// perfect emerald ring
+        public override int LabelNumber => 1073459;// perfect Emeraude ring
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

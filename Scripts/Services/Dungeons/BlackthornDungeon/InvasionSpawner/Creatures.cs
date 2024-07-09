@@ -376,7 +376,7 @@ namespace Server.Engines.Blackthorn
 
         public Item RandomMaceWeapon()
         {
-            return Loot.Construct(new Type[] { typeof(Mace), typeof(WarHammer), typeof(WarAxe), typeof(BlackStaff), typeof(QuarterStaff), typeof(WarMace), typeof(DiamondMace), typeof(Scepter) });
+            return Loot.Construct(new Type[] { typeof(Mace), typeof(WarHammer), typeof(WarAxe), typeof(BlackStaff), typeof(QuarterStaff), typeof(WarMace), typeof(DiamantMace), typeof(Scepter) });
         }
 
         public Item RandomArhceryWeapon()
