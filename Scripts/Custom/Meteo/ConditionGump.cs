@@ -101,6 +101,7 @@ namespace Server.Gumps
 				"Hiver"
 			};
 
+		
 		public ConditionGump(Mobile from) : base(0, 0)
 		{
 			m_From = from;
@@ -142,7 +143,7 @@ namespace Server.Gumps
 
 				if (weather != null)
 				{
-					TimeOfDay t = Time.GetTimeofDay();
+					TimeOfDay t = GetTimeofDay(from); // Utilisez la nouvelle méthode ici
 					Season s = (Season)Map.Felucca.Season;
 					DensityOfCloud c = weather.Cloud;
 					string[] cloud;
@@ -305,6 +306,22 @@ namespace Server.Gumps
 			//Image
 			//AddBackground(200, 145, 170, 133, 2620);
 			//AddButton(205, 150, 1536, 1536, 1, GumpButtonType.Reply, 0);
+		}
+
+		public static TimeOfDay GetTimeofDay(Mobile m)
+		{
+			int hours, minutes;
+			Server.Items.Clock.GetTime(m.Map, m.X, m.Y, out hours, out minutes);
+
+			if (hours < 5)
+				return TimeOfDay.Night;
+			if (hours < 8)
+				return TimeOfDay.ScaleToDay;
+			if (hours < 20)
+				return TimeOfDay.Day;
+			if (hours < 24)
+				return TimeOfDay.ScaleToNight;
+			return TimeOfDay.Night;
 		}
 
 		public override void OnResponse(NetState sender, RelayInfo info)

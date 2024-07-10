@@ -32,7 +32,11 @@ namespace Server.Items
         private BaseDoor m_Link;
         private uint m_KeyValue;
 
-        public BaseDoor(int closedID, int openedID, int openedSound, int closedSound, Point3D offset)
+		private bool m_IsNpcDoor;
+
+		private Timer m_Timer;
+
+		public BaseDoor(int closedID, int openedID, int openedSound, int closedSound, Point3D offset)
             : base(closedID)
         {
             m_OpenedID = openedID;
@@ -167,7 +171,21 @@ namespace Server.Items
                 m_Offset = value;
             }
         }
-        [CommandProperty(AccessLevel.GameMaster)]
+
+		[CommandProperty(AccessLevel.Administrator)]
+		public bool IsNpcDoor
+		{
+			get
+			{
+				return m_IsNpcDoor;
+			}
+			set
+			{
+				m_IsNpcDoor = value;
+			}
+		}
+
+		[CommandProperty(AccessLevel.GameMaster)]
         public BaseDoor Link
         {
             get
@@ -258,19 +276,104 @@ namespace Server.Items
             Use(from);
         }
 
-        public virtual bool IsInside(Mobile from)
-        {
-            return false;
-        }
+		public static DoorFacing GetFacing(Point3D offset)
+		{
+			for (int i = 0; i < m_Offsets.Length; ++i)
+				if (m_Offsets[i] == offset)
+					return (DoorFacing)i;
 
-        public virtual bool UseLocks()
+			return DoorFacing.EastCCW;
+		}
+		private class InternalTimer : Timer
+		{
+			private BaseDoor m_Door;
+
+			public InternalTimer(BaseDoor door) : base(TimeSpan.FromSeconds(20.0), TimeSpan.FromSeconds(10.0))
+			{
+				Priority = TimerPriority.OneSecond;
+				m_Door = door;
+			}
+		}
+		public virtual bool IsInside(Mobile from)
+        {
+			if (m_IsNpcDoor)
+			{
+				int x, y, w, h;
+
+				const int r = 2;
+				const int bs = r * 2 + 1;
+				const int ss = r + 1;
+
+				switch (GetFacing(m_Offset))
+				{
+					case DoorFacing.WestCW:
+					case DoorFacing.EastCCW: x = -r; y = -r; w = bs; h = ss; break;
+
+					case DoorFacing.EastCW:
+					case DoorFacing.WestCCW: x = -r; y = 0; w = bs; h = ss; break;
+
+					case DoorFacing.SouthCW:
+					case DoorFacing.NorthCCW: x = -r; y = -r; w = ss; h = bs; break;
+
+					case DoorFacing.NorthCW:
+					case DoorFacing.SouthCCW: x = 0; y = -r; w = ss; h = bs; break;
+
+					//No way to test the 'insideness' of SE Sliding doors on OSI, so leaving them default to false until furthur information gained
+
+					default: return false;
+				}
+
+				int rx = from.X - X;
+				int ry = from.Y - Y;
+				int az = Math.Abs(from.Z - Z);
+
+				return (rx >= x && rx < (x + w) && ry >= y && ry < (y + h) && az <= 4);
+			}
+			else
+			{
+				return false;
+			}
+		}
+
+
+		public virtual bool UseLocks()
         {
             return true;
         }
 
-        public virtual void Use(Mobile from)
+		public virtual bool IsNight(Mobile from)
+		{
+			if (from == null || from.Map == null)
+				return false; // ou true, selon votre logique par défaut
+
+			int hours, minutes;
+			Server.Items.Clock.GetTime(from.Map, from.X, from.Y, out hours, out minutes);
+			return hours >= 22 || hours < 6;
+		}
+
+		public virtual void Use(Mobile from)
         {
-            if (m_Locked && !m_Open && UseLocks())
+
+			if (m_IsNpcDoor)
+		  {
+			  if (IsNight(from))
+			  {
+				  if (!m_Locked)
+					  m_Locked = true;
+
+				  if (!IsInside(from))
+				  {
+					  from.SendMessage("Ce batiment est fermé pour la nuit. Revenez au lever du soleil.");
+					  return;
+				  }
+			  }
+			  else
+			  {
+				  if (m_Locked)
+					  m_Locked = false;
+			  }
+		  }
+			if (m_Locked && !m_Open && UseLocks())
             {
                 if (from.AccessLevel >= AccessLevel.GameMaster)
                 {
@@ -344,9 +447,12 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(0); // version
+			writer.Write((int)1);  // version
 
-            writer.Write(m_KeyValue);
+			writer.Write(m_IsNpcDoor);
+
+
+			writer.Write(m_KeyValue);
 
             writer.Write(m_Open);
             writer.Write(m_Locked);
@@ -362,9 +468,20 @@ namespace Server.Items
         {
             base.Deserialize(reader);
 
-            reader.ReadInt();
+			int version = reader.ReadInt();
 
-            m_KeyValue = reader.ReadUInt();
+			switch (version)
+			{
+				case 1:
+					{
+						m_IsNpcDoor = reader.ReadBool();
+
+						goto case 0;
+					}
+				case 0:
+					{
+
+						m_KeyValue = reader.ReadUInt();
             m_Open = reader.ReadBool();
             m_Locked = reader.ReadBool();
             m_OpenedID = reader.ReadInt();
@@ -374,13 +491,24 @@ namespace Server.Items
             m_Offset = reader.ReadPoint3D();
             m_Link = reader.ReadItem() as BaseDoor;
 
-            if (m_Open)
-            {
-                TimerRegistry.Register(m_TimerID, this, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(10), false, TimerPriority.OneSecond, door => door.InternalClose());
-            }
-        }
+						m_Timer = new InternalTimer(this);
 
-        [Usage("Link")]
+						if (m_Open)
+							m_Timer.Start();
+
+						break;
+					}
+				}
+			}
+		
+
+
+
+
+
+
+
+[Usage("Link")]
         [Description("Links two targeted doors together.")]
         private static void Link_OnCommand(CommandEventArgs e)
         {

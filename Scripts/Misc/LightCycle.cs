@@ -7,12 +7,20 @@ using System;
 
 namespace Server
 {
-    public static class LightCycle
+	public enum TimeOfDay
+	{
+		Night,
+		ScaleToDay,
+		Day,
+		ScaleToNight
+	}
+
+	public static class LightCycle
     {
         public const int DayLevel = 0;
-        public const int NightLevel = 12;
-        public const int DungeonLevel = 26;
-        public const int JailLevel = 9;
+        public const int NightLevel = 26; //12
+        public const int DungeonLevel = 26; //26
+        public const int JailLevel = 0; //9
 
         private static int _LevelOverride = int.MinValue;
 
@@ -23,11 +31,18 @@ namespace Server
             {
                 _LevelOverride = value;
 
-                CheckLightLevels();
-            }
-        }
+				for (int i = 0; i < NetState.Instances.Count; ++i)
+				{
+					NetState ns = (NetState)NetState.Instances[i];
+					Mobile m = ns.Mobile;
 
-        public static void Initialize()
+					if (m != null)
+						m.CheckLightLevels(false);
+				}
+			}
+		}
+
+		public static void Initialize()
         {
             new LightCycleTimer(Clock.SecondsPerUOMinute).Start();
 
@@ -44,16 +59,127 @@ namespace Server
                 m.CheckLightLevels(true);
         }
 
-        public static int ComputeLevelFor(Mobile from)
+		public static TimeOfDay GetTimeofDay()
+		{
+			
+				int hours, minutes;
+				Map map = Map.Felucca; // Utilisez la carte appropriée
+				int x = 1000, y = 1000; // Utilisez des coordonnées représentatives
+
+				Server.Items.Clock.GetTime(map, x, y, out hours, out minutes);
+
+				switch (Map.Felucca.Season)
+			{
+				case 0: // Printemps
+					{
+						if (hours < 5)
+							return TimeOfDay.Night;
+
+						if (hours < 8)
+							return TimeOfDay.ScaleToDay;
+
+						if (hours < 19)
+							return TimeOfDay.Day;
+
+						if (hours < 23)
+							return TimeOfDay.ScaleToNight;
+
+						if (hours < 24)
+							return TimeOfDay.Night;
+
+						break;
+					}
+				case 1: // Été
+					{
+						if (hours < 5)
+							return TimeOfDay.Night;
+
+						if (hours < 8)
+							return TimeOfDay.ScaleToDay;
+
+						if (hours < 20)
+							return TimeOfDay.Day;
+
+						if (hours < 24)
+							return TimeOfDay.ScaleToNight;
+
+						break;
+					}
+				case 2: // Automne
+					{
+						if (hours < 5)
+							return TimeOfDay.Night;
+
+						if (hours < 8)
+							return TimeOfDay.ScaleToDay;
+
+						if (hours < 19)
+							return TimeOfDay.Day;
+
+						if (hours < 23)
+							return TimeOfDay.ScaleToNight;
+
+						if (hours < 24)
+							return TimeOfDay.Night;
+
+						break;
+					}
+				case 3: // Hiver
+					{
+						if (hours < 6)
+							return TimeOfDay.Night;
+
+						if (hours < 9)
+							return TimeOfDay.ScaleToDay;
+
+						if (hours < 18)
+							return TimeOfDay.Day;
+
+						if (hours < 22)
+							return TimeOfDay.ScaleToNight;
+
+						if (hours < 24)
+							return TimeOfDay.Night;
+
+						break;
+					}
+				case 4: // Abyss
+					{
+						if (hours < 7)
+							return TimeOfDay.Night;
+
+						if (hours < 10)
+							return TimeOfDay.ScaleToDay;
+
+						if (hours < 17)
+							return TimeOfDay.Day;
+
+						if (hours < 20)
+							return TimeOfDay.ScaleToNight;
+
+						if (hours < 24)
+							return TimeOfDay.Night;
+
+						break;
+					}
+			}
+
+			return TimeOfDay.Night; // should never be
+		}
+
+		public static int ComputeLevelFor(Mobile from)
         {
             if (_LevelOverride > int.MinValue)
                 return _LevelOverride;
 
             int hours, minutes;
 
-            Clock.GetTime(from.Map, from.X, from.Y, out hours, out minutes);
+			int level = NightLevel;
 
-            /* OSI times:
+
+			Clock.GetTime(from.Map, from.X, from.Y, out hours, out minutes);
+
+			/* OSI times:
             * 
             * Midnight ->  3:59 AM : Night
             *  4:00 AM -> 11:59 PM : Day
@@ -66,22 +192,95 @@ namespace Server
             *  6:00 AM ->  9:59 PM : Day
             */
 
-            if (hours < 4)
-                return NightLevel;
+			int season = Map.Felucca.Season;
 
-            if (hours < 6)
-                return NightLevel + (((((hours - 4) * 60) + minutes) * (DayLevel - NightLevel)) / 120);
+			if (season == 0) // Printemps
+			{
+				if (hours < 5)
+					level = NightLevel;
 
-            if (hours < 22)
-                return DayLevel;
+				else if (hours < 8)
+					level = NightLevel + (((((hours - 5) * 60) + minutes) * (DayLevel - NightLevel)) / 180);
 
-            if (hours < 24)
-                return DayLevel + (((((hours - 22) * 60) + minutes) * (NightLevel - DayLevel)) / 120);
+				else if (hours < 19)
+					level = DayLevel;
 
-            return NightLevel; // should never be
-        }
+				else if (hours < 23)
+					level = DayLevel + (((((hours - 19) * 60) + minutes) * (NightLevel - DayLevel)) / 240);
 
-        public static void CheckLightLevels()
+				else if (hours < 24)
+					level = NightLevel;
+			}
+			else if (season == 1) // Été
+			{
+				if (hours < 5)
+					level = NightLevel;
+
+				else if (hours < 8)
+					level = NightLevel + (((((hours - 5) * 60) + minutes) * (DayLevel - NightLevel)) / 180);
+
+				else if (hours < 20)
+					level = DayLevel;
+
+				else if (hours < 24)
+					level = DayLevel + (((((hours - 20) * 60) + minutes) * (NightLevel - DayLevel)) / 240);
+			}
+			else if (season == 2) // Automne
+			{
+				if (hours < 5)
+					level = NightLevel;
+
+				else if (hours < 8)
+					level = NightLevel + (((((hours - 5) * 60) + minutes) * (DayLevel - NightLevel)) / 180);
+
+				else if (hours < 19)
+					level = DayLevel;
+
+				else if (hours < 23)
+					level = DayLevel + (((((hours - 19) * 60) + minutes) * (NightLevel - DayLevel)) / 240);
+
+				else if (hours < 24)
+					level = NightLevel;
+			}
+			else if (season == 3) // Hiver
+			{
+				if (hours < 6)
+					level = NightLevel;
+
+				else if (hours < 9)
+					level = NightLevel + (((((hours - 6) * 60) + minutes) * (DayLevel - NightLevel)) / 180);
+
+				else if (hours < 18)
+					level = DayLevel;
+
+				else if (hours < 22)
+					level = DayLevel + (((((hours - 18) * 60) + minutes) * (NightLevel - DayLevel)) / 240);
+
+				else if (hours < 24)
+					level = NightLevel;
+			}
+			else if (season == 4) // Abyss
+			{
+				if (hours < 7)
+					level = NightLevel;
+
+				else if (hours < 10)
+					level = NightLevel + (((((hours - 7) * 60) + minutes) * (DayLevel - NightLevel)) / 180);
+
+				else if (hours < 17)
+					level = DayLevel;
+
+				else if (hours < 20)
+					level = DayLevel + (((((hours - 17) * 60) + minutes) * (NightLevel - DayLevel)) / 180);
+
+				else if (hours < 24)
+					level = NightLevel;
+			}
+
+			return level;
+		}
+
+		public static void CheckLightLevels()
         {
             int i = NetState.Instances.Count;
 
@@ -144,13 +343,20 @@ namespace Server
             public LightCycleTimer(double interval)
                 : base(TimeSpan.Zero, TimeSpan.FromSeconds(interval))
             {
-                Priority = TimerPriority.OneSecond;
-            }
+				Priority = TimerPriority.FiveSeconds;
+			}
 
-            protected override void OnTick()
-            {
-                CheckLightLevels();
-            }
-        }
-    }
+			protected override void OnTick()
+			{
+				for (int i = 0; i < NetState.Instances.Count; ++i)
+				{
+					NetState ns = (NetState)NetState.Instances[i];
+					Mobile m = ns.Mobile;
+
+					if (m != null)
+						m.CheckLightLevels(false);
+				}
+			}
+		}
+	}
 }
