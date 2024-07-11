@@ -129,8 +129,10 @@ namespace Server.Engines.Harvest
 
 			oreAndStone.BonusResources = new BonusHarvestResource[]
 			{
-				new BonusHarvestResource(00.0, 99.1, null, null), //Nothing
-                new BonusHarvestResource(50.0, 00.1, "Ambre", typeof(Ambre)),
+				new BonusHarvestResource(00.0, 90.0, null, null), //Nothing
+         		new BonusHarvestResource(10.0, 3.0, "Vous minez, vous déterrez une géode!", typeof(BirdNest)),
+
+				/*new BonusHarvestResource(50.0, 00.1, "Ambre", typeof(Ambre)),
 				new BonusHarvestResource(50.0, 00.1, "Amethyste", typeof(Amethyste)),
 				new BonusHarvestResource(50.0, 00.1, "Citrine", typeof(Citrine)),
 				new BonusHarvestResource(50.0, 00.1, "Diamant", typeof(Diamant)),
@@ -138,7 +140,7 @@ namespace Server.Engines.Harvest
 				new BonusHarvestResource(50.0, 00.1, "Rubis", typeof(Rubis)),
 				new BonusHarvestResource(50.0, 00.1, "Sapphire", typeof(Sapphire)),
 				new BonusHarvestResource(50.0, 00.1, "Star Sapphire", typeof(SaphirEtoile)),
-				new BonusHarvestResource(50.0, 00.1, "Tourmaline", typeof(Tourmaline))
+				new BonusHarvestResource(50.0, 00.1, "Tourmaline", typeof(Tourmaline)) */
 			};
 
 			oreAndStone.RaceBonus = true;

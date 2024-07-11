@@ -242,7 +242,41 @@ namespace Server
             typeof(StatueEast2), typeof(StatueSouthEast), typeof(BustSouth), typeof(BustEast)
         };
 
-        public static Type[] StatueTypes => m_StatueTypes;
+		public static Type[] StealableArtifactTypes => m_StealableArtifact;
+		private static readonly Type[] m_StealableArtifact = new[]
+		{
+	typeof(BottleArtifact), typeof(DamagedBooksArtifact), typeof(RockArtifact), typeof(SkullCandleArtifact),
+	typeof(Basket1Artifact), typeof(Basket2Artifact), typeof(Basket3NorthArtifact), typeof(BrazierArtifact),
+	typeof(StretchedHideArtifact), typeof(Basket3WestArtifact), typeof(Basket4Artifact), typeof(Basket5NorthArtifact),
+	typeof(Basket5WestArtifact), typeof(Basket6Artifact), typeof(ZenRock1Artifact), typeof(ZenRock2Artifact),
+	typeof(ZenRock3Artifact), typeof(BooksFaceDownArtifact), typeof(BooksNorthArtifact), typeof(BooksWestArtifact),
+	typeof(LampPostArtifact), typeof(BowlArtifact), typeof(FanNorthArtifact), typeof(FanWestArtifact),
+	typeof(Sculpture1Artifact), typeof(Sculpture2Artifact), typeof(TowerLanternArtifact), typeof(TeapotNorthArtifact),
+	typeof(TeapotWestArtifact), typeof(Urn1Artifact), typeof(Urn2Artifact), typeof(JugsOfGoblinRotgutArtifact),
+	typeof(MysteriousSupperArtifact), typeof(CupsArtifact), typeof(BowlsVerticalArtifact), typeof(Painting1NorthArtifact),
+	typeof(Painting1WestArtifact), typeof(SakeArtifact), typeof(BottlesOfSpoiledWine1Artifact),
+	typeof(BottlesOfSpoiledWine2Artifact), typeof(BottlesOfSpoiledWine3Artifact), typeof(StolenBottlesOfLiquor1Artifact),
+	typeof(StolenBottlesOfLiquor2Artifact), typeof(StolenBottlesOfLiquor3Artifact), typeof(StolenBottlesOfLiquor4Artifact),
+	typeof(BloodyWaterArtifact), typeof(BackpackArtifact), typeof(EggCaseArtifact), typeof(GruesomeStandardArtifact),
+	typeof(SkinnedGoatArtifact), typeof(StuddedLeggingsArtifact), typeof(TarotCardsArtifact),
+	typeof(SwordDisplay1NorthArtifact), typeof(SwordDisplay1WestArtifact), typeof(SwordDisplay2NorthArtifact),
+	typeof(SwordDisplay2WestArtifact), typeof(SwordDisplay3EastArtifact), typeof(SwordDisplay3SouthArtifact),
+	typeof(SwordDisplay4NorthArtifact), typeof(SwordDisplay4WestArtifact), typeof(SwordDisplay5NorthArtifact),
+	typeof(SwordDisplay5WestArtifact), typeof(BloodySpoonArtifact), typeof(DyingPlantArtifact),
+	typeof(HalfEatenSupperArtifact), typeof(LargePewterBowlArtifact), typeof(RemnantsOfMeatLoafArtifact),
+	typeof(BambooStoolArtifact), typeof(BatteredPanArtifact), typeof(BookOfTruthArtifact),
+	typeof(GargishLuckTotemArtifact), typeof(GargishProtectiveTotemArtifact), typeof(GargishTraditionalVaseArtifact),
+	typeof(LargeDyingPlantArtifact), typeof(RustedPanArtifact), typeof(CocoonArtifact), typeof(LeatherTunicArtifact),
+	typeof(StuddedTunicArtifact), typeof(FlowersArtifact), typeof(DriedUpInkWellArtifact),
+	typeof(FakeCopperIngotsArtifact), typeof(GargishBentasVaseArtifact), typeof(GargishKnowledgeTotemArtifact),
+	typeof(GargishMemorialStatueArtifact), typeof(GargishPortraitArtifact), typeof(SkinnedDeerArtifact),
+	typeof(AcademicBooksArtifact), typeof(PricelessTreasureArtifact), typeof(PushmePullyuArtifact),
+	typeof(RottedOarsArtifact), typeof(BlanketOfDarkness), typeof(FigureheadOfBmvArarat), typeof(ShipsBellOfBmvArarat),
+	typeof(SternAnchorOfBmvArarat), typeof(SaddleArtifact), typeof(BlockAndTackleArtifact),
+	typeof(TyballsFlaskStandArtifact), typeof(RuinedPaintingArtifact)
+};
+
+		public static Type[] StatueTypes => m_StatueTypes;
 
         #region Spell Scrolls
         private static readonly Type[] m_MageryScrollTypes = new[]
@@ -373,7 +407,12 @@ namespace Server
             return Construct(m_NewWandTypes) as BaseWand;
         }
 
-        public static BaseClothing RandomClothing(bool inTokuno = false, bool isMondain = false, bool isStygian = false)
+		public static Item RandomStealableArtifact()
+		{
+			return Construct(m_StealableArtifact) as Item;
+		}
+
+		public static BaseClothing RandomClothing(bool inTokuno = false, bool isMondain = false, bool isStygian = false)
         {
            
             if (isMondain)

@@ -114,13 +114,51 @@ namespace Server.Engines.Harvest
 
 			lumber.BonusResources = new BonusHarvestResource[]
 			{
-				new BonusHarvestResource(0, 82.0, null, null), //Nothing
+				new BonusHarvestResource(0, 90.0, null, null), //Nothing
+				new BonusHarvestResource(10.0, 3.0, "Vous buchez, un nid d'oiseau tombe au sol!", typeof(BirdNest)),
+
     //            new BonusHarvestResource(100, 10.0, 1072548, typeof(BarkFragment)),
 				//new BonusHarvestResource(100, 03.0, 1072550, typeof(LuminescentFungi)),
 				//new BonusHarvestResource(100, 02.0, 1072547, typeof(SwitchItem)),
 				//new BonusHarvestResource(100, 01.0, 1072549, typeof(ParasiticPlant)),
 				//new BonusHarvestResource(100, 01.0, 1072551, typeof(BrilliantAmbre)),
 				//new BonusHarvestResource(100, 01.0, 1113756, typeof(CrystalShards), Map.TerMur),
+
+/*new BonusHarvestResource(0, 1.0, "Vous avez trouvé de l'acacia ", typeof(Acacia)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de l'anis ", typeof(Anise)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé du basilic ", typeof(Basil)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé des feuilles de laurier ", typeof(BayLeaf)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la camomille ", typeof(Chamomile)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé du cumin ", typeof(Caraway)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la coriandre ", typeof(Cilantro)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la cannelle ", typeof(Cinnamon)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé des clous de girofle ", typeof(Clove)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la résine ", typeof(Copal)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé du cerfeuil ", typeof(Coriander)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de l'aneth ", typeof(Dill)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé du sang de dragon ", typeof(Dragonsblood)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de l'encens ", typeof(Frankincense)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la lavande ", typeof(Lavender)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la marjolaine ", typeof(Marjoram)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la reine-des-prés ", typeof(Meadowsweet)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la menthe ", typeof(Mint)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de l'armoise commune ", typeof(Mugwort)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé des graines de moutarde ", typeof(Mustard)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la gomme d'épinette ", typeof(Myrrh)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé des olives ", typeof(Olive)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de l'origan ", typeof(Oregano)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la racine d'orris ", typeof(Orris)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé du patchouli ", typeof(Patchouli)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé des grains de poivre ", typeof(Peppercorn)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé des roses ", typeof(RoseHerb)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé du romarin ", typeof(Rosemary)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé du safran ", typeof(Saffron)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé du bois de santal ", typeof(Sandelwood)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de l'orme glissante ", typeof(SlipperyElm)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé du thym ", typeof(Thyme)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de la valériane ", typeof(Valerian)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé de l'écorce de saule ", typeof(WillowBark)),
+new BonusHarvestResource(0, 1.0, "Vous avez trouvé des baies tribales ", typeof(TribalBerry))*/
 			};
 
 			lumber.Resources = res;
@@ -316,7 +354,7 @@ namespace Server.Engines.Harvest
 			0X144B, 5195,
 			0X144C, 5196, 
 			
-			19626,19606,19605, 19624,19624,21580,22,19767,21572,21575,21574,
+			19626,19606,19605, 19624,19624,21580,22,19767,21572,21575,21574, 21573, 21578, 21579, 19613, 21576, 21803, 19627, 21851,
 
 
 		};

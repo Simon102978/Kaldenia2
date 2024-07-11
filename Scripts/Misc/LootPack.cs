@@ -3,6 +3,13 @@ using Server.Items;
 using Server.Mobiles;
 using System;
 using Server.Custom.Packaging.Packages;
+using Arya.Chess;
+using Server.Engines.VvV;
+using Server.Scripts.Commands;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
+using System.Threading.Tasks;
+using System.Web.UI.WebControls.WebParts;
+
 #endregion
 
 namespace Server
@@ -560,6 +567,39 @@ namespace Server
 				new LootPackItem( typeof(TanBook), 1 ),
 				new LootPackItem( typeof(BrownBook), 1 ),
 				new LootPackItem( typeof(IronWire), 1 ),
+				new LootPackItem(typeof(StrawHat), 1),
+			new LootPackItem(typeof(AquariumFishNet), 1),
+			new LootPackItem(typeof(DecoArrowShafts), 1),
+			new LootPackItem(typeof(Shaft), 4),
+			new LootPackItem(typeof(BasketOfHerbs), 1),
+			new LootPackItem(typeof(Branch), 1),
+			new LootPackItem(typeof(BlueScales), 1),
+			new LootPackItem(typeof(Bloodmoss), 1),
+			new LootPackItem(typeof(Candle), 1),
+			new LootPackItem(typeof(CandleLong), 1),
+			new LootPackItem(typeof(CandleLarge), 1),
+			new LootPackItem(typeof(Citrine), 1),
+			new LootPackItem(typeof(Crossbow), 1),
+			new LootPackItem(typeof(Garlic), 1),
+			new LootPackItem(typeof(Gold), 1),
+			new LootPackItem(typeof(GoldRing), 1),
+			new LootPackItem(typeof(GoldBracelet), 1),
+			new LootPackItem(typeof(GoldNecklace), 1),
+			new LootPackItem(typeof(GoldEarrings), 1),
+			new LootPackItem(typeof(Helmet), 1),
+			new LootPackItem(typeof(Lantern), 1),
+			new LootPackItem(typeof(LargeFlask), 1),
+			new LootPackItem(typeof(Pitcher), 1),
+			new LootPackItem(typeof(Sapphire), 1),
+			new LootPackItem(typeof(SilverBracelet), 1),
+			new LootPackItem(typeof(SilverEarrings), 1),
+			new LootPackItem(typeof(SilverNecklace), 1),
+			new LootPackItem(typeof(SilverRing), 1),
+			new LootPackItem(typeof(SmallFlask), 1),
+			new LootPackItem(typeof(Lantern), 1),
+			new LootPackItem(typeof(Torch), 1),
+			
+
 	};
 
 		public static readonly LootPack Others = new LootPack(new LootPackEntry[]
@@ -567,6 +607,114 @@ namespace Server
 				new LootPackEntry( true,false, OtherItems,    100.00, 1 )
 	});
 
+		#region Stealables
+
+
+		public static readonly LootPackItem[] StealableArtifacts = new LootPackItem[]
+	{
+	new LootPackItem( typeof( BottleArtifact ), 1 ),
+	new LootPackItem( typeof( DamagedBooksArtifact ), 1 ),
+	new LootPackItem( typeof( RockArtifact ), 1 ),
+	new LootPackItem( typeof( SkullCandleArtifact ), 1 ),
+	new LootPackItem( typeof( Basket1Artifact ), 1 ),
+	new LootPackItem( typeof( Basket2Artifact ), 1 ),
+	new LootPackItem( typeof( Basket3NorthArtifact ), 1 ),
+	new LootPackItem( typeof( BrazierArtifact ), 1 ),
+	new LootPackItem( typeof( StretchedHideArtifact ), 1 ),
+	new LootPackItem( typeof( Basket3WestArtifact ), 1 ),
+	new LootPackItem( typeof( Basket4Artifact ), 1 ),
+	new LootPackItem( typeof( Basket5NorthArtifact ), 1 ),
+	new LootPackItem( typeof( Basket5WestArtifact ), 1 ),
+	new LootPackItem( typeof( Basket6Artifact ), 1 ),
+	new LootPackItem( typeof( ZenRock1Artifact ), 1 ),
+	new LootPackItem( typeof( ZenRock2Artifact ), 1 ),
+	new LootPackItem( typeof( ZenRock3Artifact ), 1 ),
+	new LootPackItem( typeof( BooksFaceDownArtifact ), 1 ),
+	new LootPackItem( typeof( BooksNorthArtifact ), 1 ),
+	new LootPackItem( typeof( BooksWestArtifact ), 1 ),
+	new LootPackItem( typeof( LampPostArtifact ), 1 ),
+	new LootPackItem( typeof( BowlArtifact ), 1 ),
+	new LootPackItem( typeof( FanNorthArtifact ), 1 ),
+	new LootPackItem( typeof( FanWestArtifact ), 1 ),
+	new LootPackItem( typeof( Sculpture1Artifact ), 1 ),
+	new LootPackItem( typeof( Sculpture2Artifact ), 1 ),
+	new LootPackItem( typeof( TowerLanternArtifact ), 1 ),
+	new LootPackItem( typeof( TeapotNorthArtifact ), 1 ),
+	new LootPackItem( typeof( TeapotWestArtifact ), 1 ),
+	new LootPackItem( typeof( Urn1Artifact ), 1 ),
+	new LootPackItem( typeof( Urn2Artifact ), 1 ),
+	new LootPackItem( typeof( JugsOfGoblinRotgutArtifact ), 1 ),
+	new LootPackItem( typeof( MysteriousSupperArtifact ), 1 ),
+	new LootPackItem( typeof( CupsArtifact ), 1 ),
+	new LootPackItem( typeof( BowlArtifact ), 1 ),
+	new LootPackItem( typeof( BowlsVerticalArtifact ), 1 ),
+	new LootPackItem( typeof( Painting1NorthArtifact ), 1 ),
+	new LootPackItem( typeof( Painting1WestArtifact ), 1 ),
+	new LootPackItem( typeof( SakeArtifact ), 1 ),
+	new LootPackItem( typeof( BottlesOfSpoiledWine1Artifact ), 1 ),
+	new LootPackItem( typeof( BottlesOfSpoiledWine2Artifact ), 1 ),
+	new LootPackItem( typeof( BottlesOfSpoiledWine3Artifact ), 1 ),
+	new LootPackItem( typeof( StolenBottlesOfLiquor1Artifact ), 1 ),
+	new LootPackItem( typeof( StolenBottlesOfLiquor2Artifact ), 1 ),
+	new LootPackItem( typeof( StolenBottlesOfLiquor3Artifact ), 1 ),
+	new LootPackItem( typeof( StolenBottlesOfLiquor4Artifact ), 1 ),
+	new LootPackItem( typeof( BloodyWaterArtifact ), 1 ),
+	new LootPackItem( typeof( BackpackArtifact ), 1 ),
+	new LootPackItem( typeof( EggCaseArtifact ), 1 ),
+	new LootPackItem( typeof( GruesomeStandardArtifact ), 1 ),
+	new LootPackItem( typeof( SkinnedGoatArtifact ), 1 ),
+	new LootPackItem( typeof( StuddedLeggingsArtifact ), 1 ),
+	new LootPackItem( typeof( TarotCardsArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay1NorthArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay1NorthArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay1WestArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay2NorthArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay2WestArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay3EastArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay3SouthArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay4NorthArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay4WestArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay5NorthArtifact ), 1 ),
+	new LootPackItem( typeof( SwordDisplay5WestArtifact ), 1 ),
+	new LootPackItem( typeof( BloodySpoonArtifact ), 1 ),
+	new LootPackItem( typeof( DyingPlantArtifact ), 1 ),
+	new LootPackItem( typeof( HalfEatenSupperArtifact ), 1 ),
+	new LootPackItem( typeof( LargePewterBowlArtifact ), 1 ),
+	new LootPackItem( typeof( RemnantsOfMeatLoafArtifact ), 1 ),
+	new LootPackItem( typeof( BambooStoolArtifact ), 1 ),
+	new LootPackItem( typeof( BatteredPanArtifact ), 1 ),
+	new LootPackItem( typeof( BookOfTruthArtifact ), 1 ),
+	new LootPackItem( typeof( GargishLuckTotemArtifact ), 1 ),
+	new LootPackItem( typeof( GargishProtectiveTotemArtifact ), 1 ),
+	new LootPackItem( typeof( GargishTraditionalVaseArtifact ), 1 ),
+	new LootPackItem( typeof( LargeDyingPlantArtifact ), 1 ),
+	new LootPackItem( typeof( RustedPanArtifact ), 1 ),
+	new LootPackItem( typeof( CocoonArtifact ), 1 ),
+	new LootPackItem( typeof( LeatherTunicArtifact ), 1 ),
+	new LootPackItem( typeof( StuddedTunicArtifact ), 1 ),
+	new LootPackItem( typeof( FlowersArtifact ), 1 ),
+	new LootPackItem( typeof( DriedUpInkWellArtifact ), 1 ),
+	new LootPackItem( typeof( FakeCopperIngotsArtifact ), 1 ),
+	new LootPackItem( typeof( GargishBentasVaseArtifact ), 1 ),
+	new LootPackItem( typeof( GargishKnowledgeTotemArtifact ), 1 ),
+	new LootPackItem( typeof( GargishMemorialStatueArtifact ), 1 ),
+	new LootPackItem( typeof( GargishPortraitArtifact ), 1 ),
+	new LootPackItem( typeof( SkinnedDeerArtifact ), 1 ),
+	new LootPackItem( typeof( AcademicBooksArtifact ), 1 ),
+	new LootPackItem( typeof( PricelessTreasureArtifact ), 1 ),
+	new LootPackItem( typeof( PushmePullyuArtifact ), 1 ),
+	new LootPackItem( typeof( RottedOarsArtifact ), 1 ),
+	new LootPackItem( typeof( BlanketOfDarkness ), 1 ),
+	new LootPackItem( typeof( FigureheadOfBmvArarat ), 1 ),
+	new LootPackItem( typeof( ShipsBellOfBmvArarat ), 1 ),
+	new LootPackItem( typeof( SternAnchorOfBmvArarat ), 1 ),
+	new LootPackItem( typeof( SaddleArtifact ), 1 ),
+	new LootPackItem( typeof( BlockAndTackleArtifact ), 1 ),
+	new LootPackItem( typeof( TyballsFlaskStandArtifact ), 1 ),
+	new LootPackItem( typeof( RuinedPaintingArtifact ), 1 )
+	};
+
+		#endregion Stealables
 
 		#region Magic Items
 		public static readonly LootPackItem[] MagicItemsPoor = new[]

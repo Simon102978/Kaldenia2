@@ -237,7 +237,7 @@ namespace Server.Regions
         {
             if (!m_Controller.CanUseStuckMenu)
             {
-                m.SendMessage("You cannot use the Stuck menu here.");
+                m.SendMessage("Vous ne pouvez pas vous déprendre ici.");
             }
             return m_Controller.CanUseStuckMenu;
         }
@@ -246,7 +246,7 @@ namespace Server.Regions
         {
             if (!m_Controller.CanBeDamaged)
             {
-                m.SendMessage("You cannot be damaged here.");
+                m.SendMessage("Vous ne pouvez pas être blessé ici.");
             }
 
             return m_Controller.CanBeDamaged;
@@ -256,7 +256,7 @@ namespace Server.Regions
         {
             if (!m_Controller.CanRessurect && m.AccessLevel == AccessLevel.Player)
             {
-                m.SendMessage("You cannot ressurect here.");
+                m.SendMessage("Vous ne pouvez pas vous soigner ici.");
             }
             return m_Controller.CanRessurect;
         }
@@ -270,7 +270,7 @@ namespace Server.Regions
             bool restricted = m_Controller.IsRestrictedSpell(s);
             if (restricted)
             {
-                @from.SendMessage("You cannot cast that spell here.");
+                @from.SendMessage("Vous ne pouvez pas lancer de sort ici.");
                 return false;
             }
        
@@ -291,7 +291,7 @@ namespace Server.Regions
         {
             if (!m_Controller.CanHeal)
             {
-                m.SendMessage("You cannot be healed here.");
+                m.SendMessage("Vous ne pouvez pas être soigné ici");
             }
 
             return m_Controller.CanHeal;
@@ -304,7 +304,7 @@ namespace Server.Regions
             {
                 return base.OnSkillUse(m, skill);
             }
-            m.SendMessage("You cannot use that skill here.");
+            m.SendMessage("vous ne pouvez pas utiliser ce skill ici.");
             return false;
         }
 
@@ -312,7 +312,7 @@ namespace Server.Regions
         {
             if (m_Controller.ShowExitMessage)
             {
-                m.SendMessage("You have left {0}", this.Name);
+                m.SendMessage("Vous sortez de {0}", this.Name);
             }
 
             base.OnExit(m);
@@ -322,7 +322,7 @@ namespace Server.Regions
         {
             if (m_Controller.ShowEnterMessage)
             {
-                m.SendMessage("You have entered {0}", this.Name);
+                m.SendMessage("Vous entrez dans {0}", this.Name);
             }
 
             base.OnEnter(m);
@@ -334,7 +334,7 @@ namespace Server.Regions
             {
                 return true;
             }
-            m.SendMessage("You cannot enter this area.");
+            m.SendMessage("Vous ne pouvez pas entrer dans cette zone.");
             return false;
         }
 
@@ -347,7 +347,7 @@ namespace Server.Regions
         {
             if (o is BasePotion && !m_Controller.CanUsePotions)
             {
-                m.SendMessage("You cannot drink potions here.");
+                m.SendMessage("Vous ne pouvez pas boire de potions ici.");
                 return false;
             }
 
@@ -375,14 +375,14 @@ namespace Server.Regions
 
             if (!canLoot)
             {
-                m.SendMessage("You cannot loot that corpse here.");
+                m.SendMessage("Vous ne pouvez pas prendre de biens sur le cadavre.");
             }
 
             if (m.AccessLevel < AccessLevel.GameMaster || canLoot)
             {
                 return canLoot;
             }
-            m.SendMessage("This is unlootable to players.");
+            m.SendMessage("Impossible à atteindre.");
             return true;
         }
 
