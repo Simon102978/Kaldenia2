@@ -35,7 +35,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public BaseBait(Bait bait, int charge) : base(0xDCE)
+		public BaseBait(Bait bait, int charge) : base(0x4B46)
 		{
 			Name = "Appât";
 			Weight = 0.5;
