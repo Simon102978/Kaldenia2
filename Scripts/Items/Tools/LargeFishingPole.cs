@@ -94,7 +94,7 @@ namespace Server.Items
 			{ Bait.VoidLobster, new Type[] { typeof(VoidLobster) } },
 			{ Bait.WinterDragonfish, new Type[] { typeof(WinterDragonfish) } },
 			{ Bait.ZombieFish, new Type[] { typeof(ZombieFish) } }
-            // Ajoutez d'autres mappages pour d'autres types d'appâts si nécessaire
+            // Ajoutez d'autres mappages pour d'autres types d'appï¿½ts si nï¿½cessaire
         };
 
 		public Bait CurrentBait { get { return m_Bait; } }
@@ -121,7 +121,7 @@ namespace Server.Items
 		[Constructable]
 		public LargeFishingPole() : base(0x0DC0)
 		{
-			Name = "canne à pêche";
+			Name = "canne ï¿½ pï¿½che";
 			Layer = Layer.OneHanded;
 		}
 
@@ -140,7 +140,7 @@ namespace Server.Items
 			if (Bait == Bait.Aucun || Charge <= 0)
 			{
 				from.Target = new BaitTarget(this);
-				from.SendMessage("Sélectionnez l'appât que vous voulez utiliser.");
+				from.SendMessage("Sï¿½lectionnez l'appï¿½t que vous voulez utiliser.");
 				return;
 			}
 
@@ -161,16 +161,16 @@ namespace Server.Items
 				{
 					if (bait.ApplyTo(m_Pole))
 					{
-						from.SendMessage($"Vous avez appliqué {bait.Name} à votre canne à pêche.");
+						from.SendMessage($"Vous avez appliquï¿½ {bait.Name} ï¿½ votre canne ï¿½ pï¿½che.");
 					}
 					else
 					{
-						from.SendMessage("Vous ne pouvez pas appliquer cet appât.");
+						from.SendMessage("Vous ne pouvez pas appliquer cet appï¿½t.");
 					}
 				}
 				else
 				{
-					from.SendMessage("Ce n'est pas un appât valide.");
+					from.SendMessage("Ce n'est pas un appï¿½t valide.");
 				}
 			}
 		}
@@ -181,50 +181,50 @@ namespace Server.Items
 			Type fishType = null;
 			double chance = Utility.RandomDouble();
 
-			// Vérifier la compétence de pêche
+			// Vï¿½rifier la compï¿½tence de pï¿½che
 			from.CheckSkill(SkillName.Fishing, 0, 100);
 
 			double fishingSkill = from.Skills[SkillName.Fishing].Value;
 
-			// Calculer les chances basées sur le skill
+			// Calculer les chances basï¿½es sur le skill
 			double chanceSpecificFish = (fishingSkill / 10.0) + 5.0;
 			double chanceNormalFish = (fishingSkill / 5.0) + 20.0;
 
-			// Vérifier si le joueur peut pêcher une carte au trésor
+			// Vï¿½rifier si le joueur peut pï¿½cher une carte au trï¿½sor
 			bool canFishTreasureMap = fishingSkill >= 50 && from.Map == Map.Felucca;
 			if (canFishTreasureMap && chance < 0.005) // 0.5% de chance
 			{
-				// Pêcher une carte au trésor
+				// Pï¿½cher une carte au trï¿½sor
 				int level = Utility.RandomMinMax(1, 3); // Niveau 1, 2 ou 3
 				TreasureMap treasureMap = new TreasureMap(level, from.Map);
 				if (from.AddToBackpack(treasureMap))
 				{
-					from.SendMessage("Vous avez pêché une carte au trésor !");
-					return; // Terminer la méthode ici, pas besoin de pêcher un poisson
+					from.SendMessage("Vous avez pï¿½chï¿½ une carte au trï¿½sor !");
+					return; // Terminer la mï¿½thode ici, pas besoin de pï¿½cher un poisson
 				}
 				else
 				{
-					treasureMap.Delete(); // Supprimer la carte si elle ne peut pas être ajoutée au sac
-					from.SendMessage("Vous avez pêché une carte au trésor, mais votre sac est plein. La carte est perdue.");
+					treasureMap.Delete(); // Supprimer la carte si elle ne peut pas ï¿½tre ajoutï¿½e au sac
+					from.SendMessage("Vous avez pï¿½chï¿½ une carte au trï¿½sor, mais votre sac est plein. La carte est perdue.");
 				}
 			}
 
-			// Logique pour pêcher un poisson normal
+			// Logique pour pï¿½cher un poisson normal
 			if (m_Bait != Bait.Aucun && m_Charge > 0)
 			{
-				if (chance * 100 < chanceSpecificFish) // Chance basée sur le skill de pêcher le poisson spécifique
+				if (chance * 100 < chanceSpecificFish) // Chance basï¿½e sur le skill de pï¿½cher le poisson spï¿½cifique
 				{
 					if (baitFishMap.TryGetValue(m_Bait, out Type[] fishTypes))
 					{
 						fishType = fishTypes[0];
 					}
 				}
-				else if (chance * 100 < (chanceSpecificFish + chanceNormalFish)) // Chance additionnelle de pêcher un poisson normal
+				else if (chance * 100 < (chanceSpecificFish + chanceNormalFish)) // Chance additionnelle de pï¿½cher un poisson normal
 				{
 					fishType = typeof(Fish);
 				}
-				// Le reste résulte en aucune prise
-				// Consommer l'appât
+				// Le reste rï¿½sulte en aucune prise
+				// Consommer l'appï¿½t
 				m_Charge--;
 				if (m_Charge == 0)
 				{
@@ -233,7 +233,7 @@ namespace Server.Items
 			}
 			else
 			{
-				// Sans appât, uniquement la chance de pêcher un poisson normal
+				// Sans appï¿½t, uniquement la chance de pï¿½cher un poisson normal
 				if (chance * 100 < chanceNormalFish)
 				{
 					fishType = typeof(Fish);
@@ -242,7 +242,7 @@ namespace Server.Items
 
 			if (fishType != null)
 			{
-				// Créer le poisson
+				// Crï¿½er le poisson
 				Item harvested = Activator.CreateInstance(fishType) as Item;
 				if (harvested != null)
 				{
@@ -256,9 +256,9 @@ namespace Server.Items
 						rarefish.Weight = Math.Max(1, 200 - (int)Math.Sqrt(Utility.RandomMinMax(0, 40000)));
 						weight = (int)rarefish.Weight;
 					}
-					// Nous ne définissons plus de poids aléatoire pour les poissons non-rares
+					// Nous ne dï¿½finissons plus de poids alï¿½atoire pour les poissons non-rares
 
-					// Vérifier si le joueur peut porter le poisson
+					// Vï¿½rifier si le joueur peut porter le poisson
 					int currentWeight = from.TotalWeight;
 					int maxWeight = from.MaxWeight;
 					if (currentWeight + weight <= maxWeight)
@@ -282,43 +282,35 @@ namespace Server.Items
 						else
 						{
 							harvested.MoveToWorld(from.Location, from.Map);
-							from.SendMessage($"Votre sac est plein. Le {fishType.Name} tombe à vos pieds.");
+							from.SendMessage($"Votre sac est plein. Le {fishType.Name} tombe ï¿½ vos pieds.");
 						}
 					}
 					else
 					{
 						harvested.MoveToWorld(from.Location, from.Map);
-						from.SendMessage($"Le {fishType.Name} est trop lourd pour vous. Il tombe à vos pieds.");
+						from.SendMessage($"Le {fishType.Name} est trop lourd pour vous. Il tombe ï¿½ vos pieds.");
 					}
 				}
 			}
 			else
 			{
-				from.SendMessage("Vous n'avez rien attrapé cette fois-ci.");
+				from.SendMessage("Vous n'avez rien attrapÃ© cette fois-ci.");
 			}
 
-			// Notifier le joueur du statut de l'appât et de la charge
+			// Notifier le joueur du statut de l'appï¿½t et de la charge
 			if (m_Bait != Bait.Aucun && m_Charge > 0)
 			{
 				from.SendMessage($"[{m_Bait} / {m_Charge} charge{(m_Charge > 1 ? "s" : "")}]");
 			}
 			else
 			{
-				from.SendMessage("[ aucun appât ]");
+				from.SendMessage("[ aucun appÃ¢t ]");
 			}
 		
 
 
 
-// Notifier le joueur du statut de l'appât et de la charge
-if (m_Bait != Bait.Aucun && m_Charge > 0)
-			{
-				from.SendMessage($"[{m_Bait} / {m_Charge} charge{(m_Charge > 1 ? "s" : "")}]");
-			}
-			else
-			{
-				from.SendMessage("[ aucun appât ]");
-			}
+
 		}
 		
 
@@ -343,7 +335,7 @@ if (m_Bait != Bait.Aucun && m_Charge > 0)
 			}
 			else
 			{
-				list.Add("[ aucun appât ]");
+				list.Add("[ aucun appï¿½t ]");
 			}
 }
 	
@@ -367,7 +359,7 @@ public LargeFishingPole(Serial serial) : base(serial)
 			int version = reader.ReadInt();
 			m_Bait = (Bait)reader.ReadInt();
 			m_Charge = reader.ReadInt();
-			Name = "canne à pêche"; // Nom correct pour une canne à pêche
+			Name = "canne ï¿½ pï¿½che"; // Nom correct pour une canne ï¿½ pï¿½che
 		}
 	}
 
@@ -398,7 +390,7 @@ public LargeFishingPole(Serial serial) : base(serial)
 			m_Pole.Bait = Bait.Aucun;
 			m_Pole.Charge = 0;
 
-			m_From.SendMessage("Vous enlevez l'appât.");
+			m_From.SendMessage("Vous enlevez l'appï¿½t.");
 		}
 	}
 }
