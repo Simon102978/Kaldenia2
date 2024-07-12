@@ -115,7 +115,7 @@ namespace Server.Engines.Harvest
 			lumber.BonusResources = new BonusHarvestResource[]
 			{
 				new BonusHarvestResource(0, 90.0, null, null), //Nothing
-				new BonusHarvestResource(10.0, 3.0, "Vous buchez, un nid d'oiseau tombe au sol!", typeof(BirdNest)),
+				new BonusHarvestResource(10.0, 3.0, "Vous bucher, un nid d'oiseau tombe au sol!", typeof(BirdNest)),
 
     //            new BonusHarvestResource(100, 10.0, 1072548, typeof(BarkFragment)),
 				//new BonusHarvestResource(100, 03.0, 1072550, typeof(LuminescentFungi)),
@@ -226,7 +226,7 @@ new BonusHarvestResource(0, 1.0, "Vous avez trouvé des baies tribales ", typeof
 						{
 							if (item.GetType() == type)
 							{
-								res.SendSuccessTo(from);
+								//res.SendSuccessTo(from);
 								return;
 							}
 						}
