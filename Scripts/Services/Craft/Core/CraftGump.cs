@@ -477,7 +477,7 @@ namespace Server.Engines.Craft
 
                 CraftItem craftItem = craftItemCol.GetAt(i);
 
-				if (m_From.Skills[m_CraftSystem.MainSkill].Base >= craftItem.MinSkillRequired)
+				if (craftItem.MinSkillRequired < 50 || m_From.Skills[m_CraftSystem.MainSkill].Base >= craftItem.MinSkillRequired)
 				{
 
 					if (index == 0)
@@ -502,40 +502,42 @@ namespace Server.Engines.Craft
                     }
                 }
 
-                if (i < (maxItemPerPage / 2 + ((numberOfPage - 1) * maxItemPerPage)))
-                {
-                    AddButton(220, 60 + (index * 20), 4005, 4007, GetButtonID(1, i), GumpButtonType.Reply, 0);
+					bool hasRequiredSkill = m_From.Skills[m_CraftSystem.MainSkill].Base >= craftItem.MinSkillRequired;
+					string color = hasRequiredSkill ? "#FFFFFF" : "#FF0000";
 
-                    if (craftItem.NameNumber > 0)
-                        AddHtmlLocalized(255, 63 + (index * 20), 220, 18, craftItem.NameNumber, LabelColor, false, false);
-                    else
-                        //AddLabel( 255, 60 + (index * 20), LabelHue, craftItem.NameString );
-                        AddHtml(255, 60 + (index * 20), 200, 20, "<h3><basefont color=#FFFFFF>" + craftItem.NameString + "<basefont></h3>", false, false);
+					if (i < (maxItemPerPage / 2 + ((numberOfPage - 1) * maxItemPerPage)))
+					{
+						AddButton(220, 60 + (index * 20), 4005, 4007, GetButtonID(1, i), GumpButtonType.Reply, 0);
 
-                    AddButton(480, 60 + (index * 20), 4011, 4012, GetButtonID(2, i), GumpButtonType.Reply, 0);
-                }
-                else
-                {
-                    AddButton(520, 60 + ((index - maxItemPerPage / 2) * 20), 4005, 4007, GetButtonID(1, i), GumpButtonType.Reply, 0);
+						if (craftItem.NameNumber > 0)
+							AddHtmlLocalized(255, 63 + (index * 20), 220, 18, craftItem.NameNumber, hasRequiredSkill ? LabelColor : 0xFF0000, false, false);
+						else
+							AddHtml(255, 60 + (index * 20), 200, 20, $"<h3><basefont color={color}>{craftItem.NameString}</basefont></h3>", false, false);
 
-                    if (craftItem.NameNumber > 0)
-                        AddHtmlLocalized(555, 63 + ((index - maxItemPerPage / 2) * 20), 220, 18, craftItem.NameNumber, LabelColor, false, false);
-                    else
-                        //AddLabel( 255, 60 + (index * 20), LabelHue, craftItem.NameString );
-                        AddHtml(555, 60 + ((index - maxItemPerPage / 2) * 20), 200, 20, "<h3><basefont color=#FFFFFF>" + craftItem.NameString + "<basefont></h3>", false, false);
+						AddButton(480, 60 + (index * 20), 4011, 4012, GetButtonID(2, i), GumpButtonType.Reply, 0);
+					}
+					else
+					{
+						AddButton(520, 60 + ((index - maxItemPerPage / 2) * 20), 4005, 4007, GetButtonID(1, i), GumpButtonType.Reply, 0);
 
-                    AddButton(780, 60 + ((index - maxItemPerPage / 2) * 20), 4011, 4012, GetButtonID(2, i), GumpButtonType.Reply, 0);
-                }
+						if (craftItem.NameNumber > 0)
+							AddHtmlLocalized(555, 63 + ((index - maxItemPerPage / 2) * 20), 220, 18, craftItem.NameNumber, hasRequiredSkill ? LabelColor : 0xFF0000, false, false);
+						else
+							AddHtml(555, 60 + ((index - maxItemPerPage / 2) * 20), 200, 20, $"<h3><basefont color={color}>{craftItem.NameString}</basefont></h3>", false, false);
 
-            /*    AddButton(220, 60 + (index * 20), 4005, 4007, GetButtonID(1, i), GumpButtonType.Reply, 0);
+						AddButton(780, 60 + ((index - maxItemPerPage / 2) * 20), 4011, 4012, GetButtonID(2, i), GumpButtonType.Reply, 0);
+					}
+				
 
-                if (craftItem.NameNumber > 0)
-                    AddHtmlLocalized(255, 63 + (index * 20), 220, 18, craftItem.NameNumber, LabelColor, false, false);
-                else
-                    AddLabel(255, 60 + (index * 20), LabelHue, craftItem.NameString);
+				/*    AddButton(220, 60 + (index * 20), 4005, 4007, GetButtonID(1, i), GumpButtonType.Reply, 0);
 
-                AddButton(480, 60 + (index * 20), 4011, 4012, GetButtonID(2, i), GumpButtonType.Reply, 0);*/
-            }
+					if (craftItem.NameNumber > 0)
+						AddHtmlLocalized(255, 63 + (index * 20), 220, 18, craftItem.NameNumber, LabelColor, false, false);
+					else
+						AddLabel(255, 60 + (index * 20), LabelHue, craftItem.NameString);
+
+					AddButton(480, 60 + (index * 20), 4011, 4012, GetButtonID(2, i), GumpButtonType.Reply, 0);*/
+			}
         }
 		}
 
