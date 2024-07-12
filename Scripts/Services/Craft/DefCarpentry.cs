@@ -459,11 +459,11 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
 			index = AddCraft(typeof(CèdreBoisDyeTub), "Teintures Bois", "Teinture Bois Cèdre", 20.0, 40.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
-			AddRes(index, typeof(CèdreBoard), "Planches Cèdre", 50, "Vous n'avez pas assez de planche.");
+			AddRes(index, typeof(CedreBoard), "Planches Cèdre", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
 			index = AddCraft(typeof(ChêneBoisDyeTub), "Teintures Bois", "Teinture Bois Chêne", 20.0, 40.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
-			AddRes(index, typeof(ChêneBoard), "Planches Chêne", 50, "Vous n'avez pas assez de planche.");
+			AddRes(index, typeof(CheneBoard), "Planches Chêne", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
 			index = AddCraft(typeof(SauleBoisDyeTub), "Teintures Bois", "Teinture Bois Saule", 40.0, 60.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
@@ -471,15 +471,15 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
 			index = AddCraft(typeof(CyprèsBoisDyeTub), "Teintures Bois", "Teinture Bois Cyprès", 40.0, 60.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
-			AddRes(index, typeof(CyprèsBoard), "Planches Cyprès", 50, "Vous n'avez pas assez de planche.");
+			AddRes(index, typeof(CypresBoard), "Planches Cyprès", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
 			index = AddCraft(typeof(AcajouBoisDyeTub), "Teintures Bois", "Teinture Bois Acajou", 50.0, 70.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
 			AddRes(index, typeof(AcajouBoard), "Planches Acajou", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
-			index = AddCraft(typeof(ÉbèneBoisDyeTub), "Teintures Bois", "Teinture Bois Ébène", 50.0, 70.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
-			AddRes(index, typeof(ÉbèneBoard), "Planches Ébène", 50, "Vous n'avez pas assez de planche.");
+			index = AddCraft(typeof(EbeneBoisDyeTub), "Teintures Bois", "Teinture Bois Ébène", 50.0, 70.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(EbeneBoard), "Planches Ébène", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
 			index = AddCraft(typeof(AmaranteBoisDyeTub), "Teintures Bois", "Teinture Bois Amarante", 60.0, 80.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
@@ -509,13 +509,13 @@ namespace Server.Engines.Craft
 			// Add every material you want the player to be able to choose from
 			// This will override the overridable material
 			AddSubRes(typeof(PalmierBoard), "Palmier", 0.0, "Vous ne savez pas travailler le bois Commun");
-			AddSubRes(typeof(ÉrableBoard), "Érable", 0.0, "Vous ne savez pas travailler le bois Érable");
-			AddSubRes(typeof(CèdreBoard), "Cèdre", 20.0, "Vous ne savez pas travailler le bois Cèdre");
-			AddSubRes(typeof(ChêneBoard), "Chêne", 20.0, "Vous ne savez pas travailler le bois Chêne");
+			AddSubRes(typeof(ErableBoard), "Érable", 0.0, "Vous ne savez pas travailler le bois Érable");
+			AddSubRes(typeof(CedreBoard), "Cèdre", 20.0, "Vous ne savez pas travailler le bois Cèdre");
+			AddSubRes(typeof(CheneBoard), "Chêne", 20.0, "Vous ne savez pas travailler le bois Chêne");
 			AddSubRes(typeof(SauleBoard), "Saule", 40.0, "Vous ne savez pas travailler le bois Saule");
-			AddSubRes(typeof(CyprèsBoard), "Cyprès", 40.0, "Vous ne savez pas travailler le bois Cyprès");
+			AddSubRes(typeof(CypresBoard), "Cyprès", 40.0, "Vous ne savez pas travailler le bois Cyprès");
 			AddSubRes(typeof(AcajouBoard), "Acajou", 60.0, "Vous ne savez pas travailler le bois Acajou");
-			AddSubRes(typeof(ÉbèneBoard), "Ébène", 60.0, "Vous ne savez pas travailler le bois Ébène");
+			AddSubRes(typeof(EbeneBoard), "Ébène", 60.0, "Vous ne savez pas travailler le bois Ébène");
 			AddSubRes(typeof(AmaranteBoard), "Amarante", 80.0, "Vous ne savez pas travailler le bois Amarante");
 			AddSubRes(typeof(PinBoard), "Pin", 80.0, "Vous ne savez pas travailler le bois Pin");
 			AddSubRes(typeof(AncienBoard), "Ancien", 100.0, "Vous ne savez pas travailler le bois ancien");

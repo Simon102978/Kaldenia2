@@ -211,10 +211,10 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class ÉbèneBoisDyeTub : FurnitureDyeTub
+	public class EbeneBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public ÉbèneBoisDyeTub()
+		public EbeneBoisDyeTub()
 		{
 			Hue = DyedHue = 1109;
 			Redyable = false;
@@ -222,7 +222,7 @@ namespace Server.Items
 			Name = "Teinture Bois Ébène";
 		}
 
-		public ÉbèneBoisDyeTub(Serial serial)
+		public EbeneBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}

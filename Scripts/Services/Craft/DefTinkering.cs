@@ -729,13 +729,13 @@ namespace Server.Engines.Craft
 			// Add every material you want the player to be able to choose from
 			// This will override the overridable material
 			AddSubRes2(typeof(PalmierBoard), "Palmier", 0.0, "Vous ne savez pas travailler le bois Commun");
-			//AddSubRes2(typeof(ÉrableBoard), "Érable", 0.0, "Vous ne savez pas travailler le bois Érable");
-			//AddSubRes2(typeof(CèdreBoard), "Cèdre", 20.0, "Vous ne savez pas travailler le bois Cèdre");
-			//AddSubRes2(typeof(ChêneBoard), "Chêne", 20.0, "Vous ne savez pas travailler le bois Chêne");
+			//AddSubRes2(typeof(ErableBoard), "Érable", 0.0, "Vous ne savez pas travailler le bois Érable");
+			//AddSubRes2(typeof(CedreBoard), "Cèdre", 20.0, "Vous ne savez pas travailler le bois Cèdre");
+			//AddSubRes2(typeof(CheneBoard), "Chêne", 20.0, "Vous ne savez pas travailler le bois Chêne");
 			//AddSubRes2(typeof(SauleBoard), "Saule", 40.0, "Vous ne savez pas travailler le bois Saule");
-			//AddSubRes2(typeof(CyprèsBoard), "Cyprès", 40.0, "Vous ne savez pas travailler le bois Cyprès");
+			//AddSubRes2(typeof(CypresBoard), "Cyprès", 40.0, "Vous ne savez pas travailler le bois Cyprès");
 			//AddSubRes2(typeof(AcajouBoard), "Acajou", 60.0, "Vous ne savez pas travailler le bois Acajou");
-			//AddSubRes2(typeof(ÉbèneBoard), "Ébène", 60.0, "Vous ne savez pas travailler le bois Ébène");
+			//AddSubRes2(typeof(EbeneBoard), "Ébène", 60.0, "Vous ne savez pas travailler le bois Ébène");
 			//AddSubRes2(typeof(AmaranteBoard), "Amarante", 80.0, "Vous ne savez pas travailler le bois Amarante");
 			//AddSubRes2(typeof(PinBoard), "Pin", 80.0, "Vous ne savez pas travailler le bois Pin");
 			//AddSubRes2(typeof(AncienBoard), "Ancien", 100.0, "Vous ne savez pas travailler le bois ancien");

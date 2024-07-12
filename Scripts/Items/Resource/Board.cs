@@ -146,21 +146,21 @@ namespace Server.Items
     }
 
 
-	public class ÉrableBoard : BaseWoodBoard
+	public class ErableBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public ÉrableBoard()
+		public ErableBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public ÉrableBoard(int amount)
-			: base(CraftResource.ÉrableWood, amount)
+		public ErableBoard(int amount)
+			: base(CraftResource.ErableWood, amount)
 		{
 		}
 
-		public ÉrableBoard(Serial serial)
+		public ErableBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -385,21 +385,21 @@ namespace Server.Items
         }
     }
 
-	public class ChêneBoard : BaseWoodBoard
+	public class CheneBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public ChêneBoard()
+		public CheneBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public ChêneBoard(int amount)
-			: base(CraftResource.ChêneWood, amount)
+		public CheneBoard(int amount)
+			: base(CraftResource.CheneWood, amount)
 		{
 		}
 
-		public ChêneBoard(Serial serial)
+		public CheneBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -419,21 +419,21 @@ namespace Server.Items
 		}
 	}
 
-	public class CèdreBoard : BaseWoodBoard
+	public class CedreBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public CèdreBoard()
+		public CedreBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public CèdreBoard(int amount)
-			: base(CraftResource.CèdreWood, amount)
+		public CedreBoard(int amount)
+			: base(CraftResource.CedreWood, amount)
 		{
 		}
 
-		public CèdreBoard(Serial serial)
+		public CedreBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -453,21 +453,21 @@ namespace Server.Items
 		}
 	}
 
-	public class CyprèsBoard : BaseWoodBoard
+	public class CypresBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public CyprèsBoard()
+		public CypresBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public CyprèsBoard(int amount)
-			: base(CraftResource.CyprèsWood, amount)
+		public CypresBoard(int amount)
+			: base(CraftResource.CypresWood, amount)
 		{
 		}
 
-		public CyprèsBoard(Serial serial)
+		public CypresBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -555,21 +555,21 @@ namespace Server.Items
 		}
 	}
 
-	public class ÉbèneBoard : BaseWoodBoard
+	public class EbeneBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public ÉbèneBoard()
+		public EbeneBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public ÉbèneBoard(int amount)
-			: base(CraftResource.ÉbèneWood, amount)
+		public EbeneBoard(int amount)
+			: base(CraftResource.EbeneWood, amount)
 		{
 		}
 
-		public ÉbèneBoard(Serial serial)
+		public EbeneBoard(Serial serial)
 			: base(serial)
 		{
 		}

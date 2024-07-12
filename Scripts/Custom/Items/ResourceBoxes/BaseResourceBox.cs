@@ -82,7 +82,7 @@
 
 		[Constructable]
 		public PalmierWoodResourceCrate(int amount)
-			: base(CraftResource.ÉrableWood, 0xA004, amount)
+			: base(CraftResource.ErableWood, 0xA004, amount)
 		{
 		}
 
@@ -107,21 +107,21 @@
 	}
 
 	[Flipable(0xA004, 0xA004)]
-	public class ÉrableWoodResourceCrate : BaseResourceCrate
+	public class ErableWoodResourceCrate : BaseResourceCrate
 	{
 		[Constructable]
-		public ÉrableWoodResourceCrate()
+		public ErableWoodResourceCrate()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public ÉrableWoodResourceCrate(int amount)
-			: base(CraftResource.ÉrableWood, 0xA004, amount)
+		public ErableWoodResourceCrate(int amount)
+			: base(CraftResource.ErableWood, 0xA004, amount)
 		{
 		}
 
-		public ÉrableWoodResourceCrate(Serial serial)
+		public ErableWoodResourceCrate(Serial serial)
 			: base(serial)
 		{
 		}
@@ -144,21 +144,21 @@
 
 
 	[Flipable(0xA004, 0xA004)]
-	public class ChêneWoodResourceCrate : BaseResourceCrate
+	public class CheneWoodResourceCrate : BaseResourceCrate
 	{
 		[Constructable]
-		public ChêneWoodResourceCrate()
+		public CheneWoodResourceCrate()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public ChêneWoodResourceCrate(int amount)
-			: base(CraftResource.ChêneWood, 0xA004, amount)
+		public CheneWoodResourceCrate(int amount)
+			: base(CraftResource.CheneWood, 0xA004, amount)
 		{
 		}
 
-		public ChêneWoodResourceCrate(Serial serial)
+		public CheneWoodResourceCrate(Serial serial)
 			: base(serial)
 		{
 		}
@@ -179,21 +179,21 @@
 	}
 
 	[Flipable(0xA004, 0xA004)]
-	public class CèdreWoodResourceCrate : BaseResourceCrate
+	public class CedreWoodResourceCrate : BaseResourceCrate
 	{
 		[Constructable]
-		public CèdreWoodResourceCrate()
+		public CedreWoodResourceCrate()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public CèdreWoodResourceCrate(int amount)
-			: base(CraftResource.CèdreWood, 0xA004, amount)
+		public CedreWoodResourceCrate(int amount)
+			: base(CraftResource.CedreWood, 0xA004, amount)
 		{
 		}
 
-		public CèdreWoodResourceCrate(Serial serial)
+		public CedreWoodResourceCrate(Serial serial)
 			: base(serial)
 		{
 		}
@@ -214,21 +214,21 @@
 	}
 
 	[Flipable(0xA004, 0xA004)]
-	public class CyprèsWoodResourceCrate : BaseResourceCrate
+	public class CypresWoodResourceCrate : BaseResourceCrate
 	{
 		[Constructable]
-		public CyprèsWoodResourceCrate()
+		public CypresWoodResourceCrate()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public CyprèsWoodResourceCrate(int amount)
-			: base(CraftResource.CyprèsWood, 0xA004, amount)
+		public CypresWoodResourceCrate(int amount)
+			: base(CraftResource.CypresWood, 0xA004, amount)
 		{
 		}
 
-		public CyprèsWoodResourceCrate(Serial serial)
+		public CypresWoodResourceCrate(Serial serial)
 			: base(serial)
 		{
 		}
@@ -319,21 +319,21 @@
 	}
 
 	[Flipable(0xA004, 0xA004)]
-	public class ÉbèneWoodResourceCrate : BaseResourceCrate
+	public class EbeneWoodResourceCrate : BaseResourceCrate
 	{
 		[Constructable]
-		public ÉbèneWoodResourceCrate()
+		public EbeneWoodResourceCrate()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public ÉbèneWoodResourceCrate(int amount)
-			: base(CraftResource.ÉbèneWood, 0xA004, amount)
+		public EbeneWoodResourceCrate(int amount)
+			: base(CraftResource.EbeneWood, 0xA004, amount)
 		{
 		}
 
-		public ÉbèneWoodResourceCrate(Serial serial)
+		public EbeneWoodResourceCrate(Serial serial)
 			: base(serial)
 		{
 		}

@@ -398,13 +398,13 @@ namespace Server.Engines.Craft
 		private static readonly Type[][] ItemTypesTable =
 		{
 			new[] {typeof(PalmierBoard), typeof(PalmierLog)},
-			new[] {typeof(ÉrableBoard), typeof(ÉrableLog)},
-			new[] {typeof(CèdreBoard), typeof(CèdreLog)},
-			new[] {typeof(ChêneBoard), typeof(ChêneLog)},
+			new[] {typeof(ErableBoard), typeof(ErableLog)},
+			new[] {typeof(CedreBoard), typeof(CedreLog)},
+			new[] {typeof(CheneBoard), typeof(CheneLog)},
 			new[] {typeof(SauleBoard), typeof(SauleLog)},
-			new[] {typeof(CyprèsBoard), typeof(CyprèsLog)},
+			new[] {typeof(CypresBoard), typeof(CypresLog)},
 			new[] {typeof(AcajouBoard), typeof(AcajouLog)},
-			new[] {typeof(ÉbèneBoard), typeof(ÉbèneLog)},
+			new[] {typeof(EbeneBoard), typeof(EbeneLog)},
 			new[] {typeof(AmaranteBoard), typeof(AmaranteLog)},
 			new[] {typeof(PinBoard), typeof(PinLog)},
 			new[] {typeof(AncienBoard), typeof(AncienLog)},
@@ -489,13 +489,13 @@ namespace Server.Engines.Craft
 			{ typeof(PalmierBoard), typeof(PalmierLog) },
 
 
-			 {typeof(ÉrableBoard), typeof(ÉrableLog)},
-			 {typeof(CèdreBoard), typeof(CèdreLog)},
-			 {typeof(ChêneBoard), typeof(ChêneLog)},
+			 {typeof(ErableBoard), typeof(ErableLog)},
+			 {typeof(CedreBoard), typeof(CedreLog)},
+			 {typeof(CheneBoard), typeof(CheneLog)},
 			 {typeof(SauleBoard), typeof(SauleLog)},
-			 {typeof(CyprèsBoard), typeof(CyprèsLog)},
+			 {typeof(CypresBoard), typeof(CypresLog)},
 			 {typeof(AcajouBoard), typeof(AcajouLog)},
-			 {typeof(ÉbèneBoard), typeof(ÉbèneLog)},
+			 {typeof(EbeneBoard), typeof(EbeneLog)},
 			 {typeof(AmaranteBoard), typeof(AmaranteLog)},
 			 {typeof(PinBoard), typeof(PinLog)},
 			 {typeof(AncienBoard), typeof(AncienLog)},
@@ -1596,13 +1596,13 @@ namespace Server.Engines.Craft
 				case "PinBone": skill += 45.0; break;
 				case "AncienBone": skill += 50.0; break;
 
-				case "ÉrableBoard": skill += 0.0; break;
-				case "CèdreBoard": skill += 10.0; break;
-				case "ChêneBoard": skill += 15.0; break;
+				case "ErableBoard": skill += 0.0; break;
+				case "CedreBoard": skill += 10.0; break;
+				case "CheneBoard": skill += 15.0; break;
 				case "SauleBoard": skill += 20.0; break;
-				case "CyprèsBoard": skill += 25.0; break;
+				case "CypresBoard": skill += 25.0; break;
 				case "AcajouBoard": skill += 30.0; break;
-				case "ÉbèneBoard": skill += 35.0; break;
+				case "EbeneBoard": skill += 35.0; break;
 				case "AmaranteBoard": skill += 40.0; break;
 				case "PinBoard": skill += 45.0; break;
 				case "AncienBoard": skill += 50.0; break;

@@ -95,13 +95,13 @@ namespace Server.Engines.Harvest
 			res = new HarvestResource[]
 			{
 				new HarvestResource(00.0, 00.0, 100.0, "Palmier",        typeof(PalmierLog)),
-				new HarvestResource(00.0, 00.0, 100.0, "Érable",      typeof(ÉrableLog)),
-				new HarvestResource(20.0, 20.0, 100.0, "Chêne",     typeof(ChêneLog)),
-				new HarvestResource(20.0, 20.0, 100.0, "Cèdre",     typeof(CèdreLog)),
-				new HarvestResource(40.0, 40.0, 100.0, "Cyprès",    typeof(CyprèsLog)),
+				new HarvestResource(00.0, 00.0, 100.0, "Érable",      typeof(ErableLog)),
+				new HarvestResource(20.0, 20.0, 100.0, "Chêne",     typeof(CheneLog)),
+				new HarvestResource(20.0, 20.0, 100.0, "Cèdre",     typeof(CedreLog)),
+				new HarvestResource(40.0, 40.0, 100.0, "Cyprès",    typeof(CypresLog)),
 				new HarvestResource(40.0, 40.0, 100.0, "Saule",      typeof(SauleLog)),
 				new HarvestResource(60.0, 60.0, 100.0, "Acajou",    typeof(AcajouLog)),
-				new HarvestResource(60.0, 60.0, 100.0, "Ébène",    typeof(ÉbèneLog)),
+				new HarvestResource(60.0, 60.0, 100.0, "Ébène",    typeof(EbeneLog)),
 				new HarvestResource(80.0, 80.0, 100.0, "Amarante",     typeof(AmaranteLog)),
 				new HarvestResource(80.0, 80.0, 100.0, "Pin",     typeof(PinLog)),
 				new HarvestResource(90.0, 90.0, 100.0, "Ancien",        typeof(AncienLog)),
