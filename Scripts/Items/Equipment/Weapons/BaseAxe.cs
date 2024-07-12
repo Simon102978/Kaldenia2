@@ -9,11 +9,13 @@ namespace Server.Items
         bool Axe(Mobile from, BaseAxe axe);
     }
 
-    public abstract class BaseAxe : BaseMeleeWeapon, IHarvestTool
+    public abstract class BaseAxe : BaseMeleeWeapon, IHarvestTool, IUsesRemaining
     {
         public BaseAxe(int itemID)
             : base(itemID)
         {
+             UsesRemaining = 50;
+             ShowUsesRemaining = true;
         }
 
         public BaseAxe(Serial serial)

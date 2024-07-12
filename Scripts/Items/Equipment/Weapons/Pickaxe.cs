@@ -10,8 +10,8 @@ namespace Server.Items
         public Pickaxe() : base(0xE86)
         {
             Weight = 11.0;
-            UsesRemaining = 50;
-            ShowUsesRemaining = true;
+     //       UsesRemaining = 50;
+     //       ShowUsesRemaining = true;
 			Name = "Pioche";
 			Layer = Layer.TwoHanded;
 
