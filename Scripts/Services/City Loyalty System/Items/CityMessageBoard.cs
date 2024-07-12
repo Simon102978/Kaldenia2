@@ -2,19 +2,19 @@ using Server.Engines.CityLoyalty;
 
 namespace Server.Items
 {
-    public class CityMessageRegularBoard : BasePlayerBB
+    public class CityMessagePalmierBoard : BasePlayerBB
     {
         public City City { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public CityLoyaltySystem CitySystem { get { return CityLoyaltySystem.GetCityInstance(City); } set { } }
 
-        public override int LabelNumber => 1027774;  // bulletin RegularBoard
+        public override int LabelNumber => 1027774;  // bulletin PalmierBoard
         public override bool Public => true;
         public override bool ForceShowProperties => true;
 
         [Constructable]
-        public CityMessageRegularBoard(City city, int id) : base(id)
+        public CityMessagePalmierBoard(City city, int id) : base(id)
         {
             Movable = false;
             City = city;
@@ -62,7 +62,7 @@ namespace Server.Items
                     m.SendLocalizedMessage(1079166); // You already have a text entry request pending.
                 else if (CitySystem.Herald != null)
                 {
-                    m.SendMessage("Enter message RegularBoard headline:");
+                    m.SendMessage("Enter message PalmierBoard headline:");
                     m.BeginPrompt(
                         (mob, text) =>
                         {
@@ -86,7 +86,7 @@ namespace Server.Items
                     m.SendLocalizedMessage(1079166); // You already have a text entry request pending.
                 else
                 {
-                    m.SendMessage("Enter message RegularBoard headline:");
+                    m.SendMessage("Enter message PalmierBoard headline:");
                     m.BeginPrompt(
                         (mob, text) =>
                         {
@@ -97,13 +97,13 @@ namespace Server.Items
                                     CitySystem.Headline = null;
                                     CitySystem.Body = null;
                                     CitySystem.PostedOn = DateTime.Now;
-                                    mob.SendMessage("{0} message RegularBoard headline removed!", CitySystem.Definition.Name);
+                                    mob.SendMessage("{0} message PalmierBoard headline removed!", CitySystem.Definition.Name);
                                 }
                                 else
                                 {
                                     CitySystem.Headline = text;
                                     CitySystem.PostedOn = DateTime.Now;
-                                    mob.SendMessage("{0} message RegularBoard headline changed!", CitySystem.Definition.Name);
+                                    mob.SendMessage("{0} message PalmierBoard headline changed!", CitySystem.Definition.Name);
                                 }
                             }
                             else
@@ -122,7 +122,7 @@ namespace Server.Items
                     m.SendLocalizedMessage(1079166); // You already have a text entry request pending.
                 else
                 {
-                    m.SendMessage("Enter message RegularBoard body:");
+                    m.SendMessage("Enter message PalmierBoard body:");
                     m.BeginPrompt(
                         (mob, text) =>
                         {
@@ -132,13 +132,13 @@ namespace Server.Items
                                 {
                                     CitySystem.Body = null;
                                     CitySystem.PostedOn = DateTime.Now;
-                                    mob.SendMessage("{0} message RegularBoard body removed!", CitySystem.Definition.Name);
+                                    mob.SendMessage("{0} message PalmierBoard body removed!", CitySystem.Definition.Name);
                                 }
                                 else
                                 {
                                     CitySystem.Body = text;
                                     CitySystem.PostedOn = DateTime.Now;
-                                    mob.SendMessage("{0} message RegularBoard body removed!", CitySystem.Definition.Name);
+                                    mob.SendMessage("{0} message PalmierBoard body removed!", CitySystem.Definition.Name);
                                 }
                             }
                             else
@@ -152,7 +152,7 @@ namespace Server.Items
             }));
         }*/
 
-        public CityMessageRegularBoard(Serial serial)
+        public CityMessagePalmierBoard(Serial serial)
             : base(serial)
         {
         }
@@ -171,7 +171,7 @@ namespace Server.Items
             int version = reader.ReadInt();
 
             City = (City)reader.ReadInt();
-            CitySystem.RegularBoard = this;
+            CitySystem.PalmierBoard = this;
         }
     }
 }

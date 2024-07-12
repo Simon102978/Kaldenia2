@@ -31,18 +31,18 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class PlainoisBoisDyeTub : FurnitureDyeTub
+	public class ÉrableBoisDyeTub : FurnitureDyeTub
     {
         [Constructable]
-        public PlainoisBoisDyeTub()
+        public ÉrableBoisDyeTub()
         {
             Hue = DyedHue = 1355;
             Redyable = false;
 			Charges = 1;
-			Name = "Teinture Bois Plainois";
+			Name = "Teinture Bois Érable";
 		}
 
-        public PlainoisBoisDyeTub(Serial serial)
+        public ÉrableBoisDyeTub(Serial serial)
             : base(serial)
         {
         }
@@ -61,18 +61,18 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-	public class CollinoisBoisDyeTub : FurnitureDyeTub
+	public class CèdreBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public CollinoisBoisDyeTub()
+		public CèdreBoisDyeTub()
 		{
 			Hue = DyedHue = 1191;
 			Redyable = false;
 			Charges = 1;
-			Name = "Teinture Bois Collinois";
+			Name = "Teinture Bois Cèdre";
 		}
 
-		public CollinoisBoisDyeTub(Serial serial)
+		public CèdreBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}
@@ -91,18 +91,18 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class ForestierBoisDyeTub : FurnitureDyeTub
+	public class ChêneBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public ForestierBoisDyeTub()
+		public ChêneBoisDyeTub()
 		{
 			Hue = DyedHue = 1411;
 			Redyable = false;
 			Charges = 1;
-			Name = "Teinture Bois Forestier";
+			Name = "Teinture Bois Chêne";
 		}
 
-		public ForestierBoisDyeTub(Serial serial)
+		public ChêneBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}
@@ -121,18 +121,18 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class SavanoisBoisDyeTub : FurnitureDyeTub
+	public class SauleBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public SavanoisBoisDyeTub()
+		public SauleBoisDyeTub()
 		{
 			Hue = DyedHue = 1008;
 			Redyable = false;
 			Charges = 1;
-			Name = "Teinture Bois Savanois";
+			Name = "Teinture Bois Saule";
 		}
 
-		public SavanoisBoisDyeTub(Serial serial)
+		public SauleBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}
@@ -151,18 +151,18 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class DesertiqueBoisDyeTub : FurnitureDyeTub
+	public class CyprèsBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public DesertiqueBoisDyeTub()
+		public CyprèsBoisDyeTub()
 		{
 			Hue = DyedHue = 1126;
 			Redyable = false;
 			Charges = 1;
-			Name = "Teinture Bois Désertique";
+			Name = "Teinture Bois Cyprès";
 		}
 
-		public DesertiqueBoisDyeTub(Serial serial)
+		public CyprèsBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}
@@ -181,18 +181,18 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class MontagnardBoisDyeTub : FurnitureDyeTub
+	public class AcajouBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public MontagnardBoisDyeTub()
+		public AcajouBoisDyeTub()
 		{
 			Hue = DyedHue = 2219;
 			Redyable = false;
 			Charges = 1;
-			Name = "Teinture Bois Montagnard";
+			Name = "Teinture Bois Acajou";
 		}
 
-		public MontagnardBoisDyeTub(Serial serial)
+		public AcajouBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}
@@ -211,18 +211,18 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class VolcaniqueBoisDyeTub : FurnitureDyeTub
+	public class ÉbèneBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public VolcaniqueBoisDyeTub()
+		public ÉbèneBoisDyeTub()
 		{
 			Hue = DyedHue = 1109;
 			Redyable = false;
 			Charges = 1;
-			Name = "Teinture Bois Volcanique";
+			Name = "Teinture Bois Ébène";
 		}
 
-		public VolcaniqueBoisDyeTub(Serial serial)
+		public ÉbèneBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}
@@ -241,18 +241,18 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class TropicauxBoisDyeTub : FurnitureDyeTub
+	public class AmaranteBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public TropicauxBoisDyeTub()
+		public AmaranteBoisDyeTub()
 		{
 			Hue = DyedHue = 2210;
 			Redyable = false;
 			Charges = 1;
-			Name = "Teinture Bois Tropicaux";
+			Name = "Teinture Bois Amarante";
 		}
 
-		public TropicauxBoisDyeTub(Serial serial)
+		public AmaranteBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}
@@ -273,18 +273,18 @@ namespace Server.Items
 	}
 
 
-	public class ToundroisBoisDyeTub : FurnitureDyeTub
+	public class PinBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public ToundroisBoisDyeTub()
+		public PinBoisDyeTub()
 		{
 			Hue = DyedHue = 2500;
 			Redyable = false;
 			Charges = 1;
-			Name = "Teinture Bois Toundrois";
+			Name = "Teinture Bois Pin";
 		}
 
-		public ToundroisBoisDyeTub(Serial serial)
+		public PinBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}

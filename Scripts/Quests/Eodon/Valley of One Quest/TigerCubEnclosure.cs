@@ -395,7 +395,7 @@ namespace Server.Items
                         case 4: pick = current - 1; break;
                     }
 
-                    if (Progress.Contains(pick) || pick < 0 || pick > 15)      //Off RegularBoard or already chosen spot
+                    if (Progress.Contains(pick) || pick < 0 || pick > 15)      //Off PalmierBoard or already chosen spot
                     {
                         User.PlaySound(0x5B6);
                         Refresh();

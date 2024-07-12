@@ -1081,7 +1081,7 @@ namespace Server.Items
                 new FillableEntry(2, typeof(SmoothingPlane)),
                 new FillableEntry(2, typeof(Saw)),
                 new FillableEntry(2, typeof(DrawKnife)),
-                new FillableEntry(1, typeof(Log)),
+                new FillableEntry(1, typeof(PalmierLog)),
                 new FillableEntry(1, typeof(Froe)),
                 new FillableEntry(1, typeof(Inshave)),
                 new FillableEntry(1, typeof(Scorp))

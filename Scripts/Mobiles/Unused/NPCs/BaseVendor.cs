@@ -1,4 +1,5 @@
 #region References
+using Discord;
 using Server.Accounting;
 using Server.ContextMenus;
 using Server.Engines.BulkOrders;
@@ -12,7 +13,9 @@ using Server.Targeting;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
+using static Server.Engines.XmlSpawner2.XmlDialog;
 #endregion
 
 namespace Server.Mobiles
@@ -153,7 +156,11 @@ namespace Server.Mobiles
                 m_Vendor = vendor;
             }
 
-            public override void OnClick()
+		
+
+
+
+			public override void OnClick()
             {
                 if (!m_From.InRange(m_Vendor.Location, 20))
                     return;
@@ -866,9 +873,40 @@ namespace Server.Mobiles
 
         private static readonly TimeSpan InventoryDecayTime = TimeSpan.FromHours(1.0);
 
-        public virtual void VendorBuy(Mobile from)
-        {
-            if (!IsActiveSeller)
+		public virtual bool IsNight(Mobile from)
+		{
+			if (from == null || from.Map == null)
+				return false; // ou true, selon votre logique par défaut
+
+			int hours, minutes;
+			Server.Items.Clock.GetTime(from.Map, from.X, from.Y, out hours, out minutes);
+			return hours >= 22 || hours < 6;
+		}
+
+		public static List<Type> NightExemptTypes = new List<Type>
+{
+	typeof(InnKeeper),
+	typeof(TavernKeeper),
+	typeof(Barkeeper),
+	typeof(AnimalTrainer),
+	typeof(Healer)
+};
+
+		private bool IsExemptFromNightRestriction()
+		{
+			return NightExemptTypes.Any(t => t.IsInstanceOfType(this));
+		}
+
+
+		public virtual void VendorBuy(Mobile from)
+		{
+			if (IsNight(from) && !IsExemptFromNightRestriction())
+			{
+				Say("Il est trop tard pour faire des affaires. Revenez à l'aube pour acheter.");
+				return;
+			}
+
+			if (!IsActiveSeller)
             {
                 return;
             }
@@ -1085,7 +1123,12 @@ namespace Server.Mobiles
 
         public virtual void VendorSell(Mobile from)
         {
-            if (!IsActiveBuyer)
+			if (IsNight(from) && !IsExemptFromNightRestriction())
+				{
+				Say("Il est trop tard pour faire des affaires. Revenez à l'aube pour vendre vos articles.");
+				return;
+			}
+			if (!IsActiveBuyer)
             {
                 return;
             }
@@ -1335,8 +1378,8 @@ namespace Server.Mobiles
 
             if (!string.IsNullOrEmpty(name))
             {
-                PrivateOverheadMessage(MessageType.Regular, 0x3B2, true, string.Format("Thou art giving me {0}.", name), from.NetState);
-            }
+				PrivateOverheadMessage(0x00, 0x3B2, true, string.Format("Thou art giving me {0}.", name), from.NetState);
+			}
             else
             {
                 SayTo(from, 1071971, string.Format("#{0}", dropped.LabelNumber.ToString()), 0x3B2); // Thou art giving me ~1_VAL~?
@@ -1618,7 +1661,9 @@ namespace Server.Mobiles
 
         public virtual bool OnBuyItems(Mobile buyer, List<BuyItemResponse> list)
         {
-            if (!IsActiveSeller)
+			 if (IsNight(buyer) && !IsExemptFromNightRestriction())
+					return false;
+			if (!IsActiveSeller)
             {
                 return false;
             }
@@ -2096,7 +2141,9 @@ namespace Server.Mobiles
 
         public virtual bool OnSellItems(Mobile seller, List<SellItemResponse> list)
         {
-            if (!IsActiveBuyer)
+		 if (IsNight(seller) && !IsExemptFromNightRestriction())
+					return false;
+			if (!IsActiveBuyer)
             {
                 return false;
             }

@@ -172,7 +172,7 @@ namespace Server.Gumps
                     case 4: pick = current - 1; break;
                 }
 
-                if (pick < 0 || pick > count - 1)      //Off RegularBoard or already chosen spot
+                if (pick < 0 || pick > count - 1)      //Off PalmierBoard or already chosen spot
                 {
                     User.PlaySound(0x5B6);
                     Refresh();

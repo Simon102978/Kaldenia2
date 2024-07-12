@@ -14,7 +14,7 @@ namespace Server.Items
         
 			DropItem(new Bottle(amount));
       		DropItem(new IronIngot(amount));
-			DropItem(new RegularBoard(amount));
+			DropItem(new PalmierBoard(amount));
 			DropItem(new Leather(amount));
 			DropItem(new BlankScroll(amount));
 			DropItem(new Cloth(amount));

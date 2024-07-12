@@ -8,7 +8,7 @@ namespace Server.Engines.Quests
         public ChopChopOnTheDoubleQuest()
             : base()
         {
-            AddObjective(new ObtainObjective(typeof(Log), "log", 60, 0x1BDD));
+            AddObjective(new ObtainObjective(typeof(PalmierLog), "log", 60, 0x1BDD));
 
             AddReward(new BaseReward(typeof(LumberjacksSatchel), 1074282)); // Craftsman's Satchel
         }

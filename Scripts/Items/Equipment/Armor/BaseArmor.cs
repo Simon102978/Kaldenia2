@@ -2776,7 +2776,7 @@ namespace Server.Items
 					break;
 				case CraftResource.BlueScales:
 					break;
-				case CraftResource.RegularWood:
+				case CraftResource.PalmierWood:
 					break;
 				case CraftResource.OakWood:
 					break;

@@ -32,7 +32,7 @@ namespace Server.Items
             OfDreamsAndVisions,
             HotAirBalloonConstruction,
             PlantLore,
-            RegularBoardgameStrategy,
+            PalmierBoardgameStrategy,
             TanglesTales,
             BookOfAdministration,
             //BookOfCircles,
@@ -293,9 +293,9 @@ namespace Server.Items
 
             new string[]
                 {
-                    "Snilwit's Big Book Of RegularBoardgame Strategy",
+                    "Snilwit's Big Book Of PalmierBoardgame Strategy",
                     "Snilwit",
-                    "Chess: Try to control the middle of the RegularBoard with your knights, bishops, and pawns. Nine Men's Morris: Don't let any of your pieces get trapped in the corners. Draughts: Keep your pieces along the sides of the RegularBoard, where they can't be captured.",
+                    "Chess: Try to control the middle of the PalmierBoard with your knights, bishops, and pawns. Nine Men's Morris: Don't let any of your pieces get trapped in the corners. Draughts: Keep your pieces along the sides of the PalmierBoard, where they can't be captured.",
                 },
 
             new string[]

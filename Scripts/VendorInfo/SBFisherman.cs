@@ -18,7 +18,7 @@ namespace Server.Mobiles
 
 				Add(new GenericBuyInfo("Cage à Homards Vide", typeof(LobsterTrap), 10, 50, 17615, 0));
 				Add(new GenericBuyInfo(typeof(LargeFishingPole), 15, 20, 0xDC0, 0));
-				Add(new GenericBuyInfo(typeof(BaitFish), 15, 30, 0xDCE, 0));
+				Add(new GenericBuyInfo(typeof(BaitFish), 15, 30, 0x4B46, 0));
 
             }
         }
@@ -27,7 +27,7 @@ namespace Server.Mobiles
 		{
 			public InternalSellInfo()
 			{
-				Add(typeof(RawFishSteak), 1);
+				Add(typeof(FishSteakResourceCrate), 100);
 				Add(typeof(Fish), 2);
 				Add(typeof(AutumnDragonfish), 2);
 				Add(typeof(BlueLobster), 2);

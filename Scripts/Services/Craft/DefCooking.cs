@@ -1124,6 +1124,8 @@ namespace Server.Engines.Craft
 			#endregion
 
 			#region Meli Melo
+			index = AddCraft(typeof(FishSteakResourceCrate), "Meli Melo", "Caisse de Poissons frais", 0.0, 60.0, typeof(RawFishSteak), "Steak de poisson", 150, "Vous n'avez pas suffisament de steak de poisson");
+
 			index = AddCraft(typeof(GreenTea), "Meli Melo", "Thé Vert", 80.0, 120.0, typeof(GreenTeaBasket), 1030316, 1, 1044253);
 			AddRes(index, typeof(Pitcher), 1046458, 1, 1044253);
 			SetNeedOven(index, true);
@@ -1161,7 +1163,7 @@ namespace Server.Engines.Craft
 			SetRequireResTarget(index);
 			index = AddCraft(typeof(WoodPulp), "Teinture", "Pulpe de bois", 50.0, 70.0, typeof(BarkFragment), "Morceau d’écorce", 1, 1044253);
 			AddRes(index, typeof(Pitcher), 1046458, 1, 1044253);
-			index = AddCraft(typeof(Charcoal), "Teinture", "Charbon", 0.0, 50.0, typeof(RegularBoard), "Planche", 1, 1044351);
+			index = AddCraft(typeof(Charcoal), "Teinture", "Charbon", 0.0, 50.0, typeof(PalmierBoard), "Planche", 1, 1044351);
 			SetUseAllRes(index, true);
 			SetNeedHeat(index, true);
 			#endregion

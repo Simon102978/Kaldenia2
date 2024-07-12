@@ -32,7 +32,7 @@ namespace Server.Mobiles
 
 				
 				Add(new GenericBuyInfo(typeof(TinkerTools), 20, 20, 0x1EB8, 0));
-                Add(new GenericBuyInfo(typeof(RegularBoard), 3, 50, 0x1BD7, 0, true));
+                Add(new GenericBuyInfo(typeof(PalmierBoard), 3, 50, 0x1BD7, 0, true));
                 Add(new GenericBuyInfo(typeof(IronIngot), 3, 50, 0x1BF2, 0, true));
                 Add(new GenericBuyInfo(typeof(SewingKit), 20, 20, 0xF9D, 0));
 				Add(new GenericBuyInfo(typeof(LeatherSewingKit), 20, 20, 0xF9D, 0xF9D));
@@ -105,9 +105,9 @@ namespace Server.Mobiles
                 Add(typeof(Lockpick), 1);
                 Add(typeof(TinkerTools), 2);
 
-                //Add(typeof(RegularBoard), 1);
-				//Add(typeof(Log), 1);
-				Add(typeof(RegularWoodResourceCrate), 100);
+                //Add(typeof(PalmierBoard), 1);
+				//Add(typeof(PalmierLog), 1);
+				Add(typeof(PalmierWoodResourceCrate), 100);
 				Add(typeof(IronIngotResourceCrate), 100);
 				Add(typeof(RegularLeatherResourceCrate), 100);
 

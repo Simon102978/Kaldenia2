@@ -22,7 +22,7 @@ namespace Server.Engines.CityLoyalty
         public Point3D GuardsmanLocation { get; private set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public Point3D RegularBoardLocation { get; private set; }
+        public Point3D PalmierBoardLocation { get; private set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public string Name { get; private set; }
@@ -57,14 +57,14 @@ namespace Server.Engines.CityLoyalty
             return "...";
         }
 
-        public CityDefinition(City city, Point3D stoneLoc, Point3D tradeloc, Point3D heraldLoc, Point3D guardsmanloc, Point3D RegularBoardloc, string name, int locname, int battleloc)
+        public CityDefinition(City city, Point3D stoneLoc, Point3D tradeloc, Point3D heraldLoc, Point3D guardsmanloc, Point3D PalmierBoardloc, string name, int locname, int battleloc)
         {
             City = city;
             StoneLocation = stoneLoc;
             TradeMinisterLocation = tradeloc;
             HeraldLocation = heraldLoc;
             GuardsmanLocation = guardsmanloc;
-            RegularBoardLocation = RegularBoardloc;
+            PalmierBoardLocation = PalmierBoardloc;
             Name = name;
             LocalizedName = locname;
             BattleMessage = battleloc;

@@ -105,26 +105,26 @@ namespace Server.Items
 		WhiteScales,
 		BlueScales,
 
-		[Description("Régulier")]
-		RegularWood = 401,
-		[Description("Plainois")]
-		PlainoisWood,
-		[Description("Forestier")]
-		ForestierWood,
-		[Description("Collinois")]
-		CollinoisWood,
-		[Description("Désertique")]
-		DesertiqueWood,
-		[Description("Savanois")]
-		SavanoisWood,
-		[Description("Montagnard")]
-		MontagnardWood,
-		[Description("Volcanique")]
-		VolcaniqueWood,
-		[Description("Tropicaux")]
-		TropicauxWood,
-		[Description("Toundrois")]
-		ToundroisWood,
+		[Description("Palmier")]
+		PalmierWood = 401,
+		[Description("Érable")]
+		ÉrableWood,
+		[Description("Chêne")]
+		ChêneWood,
+		[Description("Cèdre")]
+		CèdreWood,
+		[Description("Cyprès")]
+		CyprèsWood,
+		[Description("Saule")]
+		SauleWood,
+		[Description("Acajou")]
+		AcajouWood,
+		[Description("Ébène")]
+		ÉbèneWood,
+		[Description("Amarante")]
+		AmaranteWood,
+		[Description("Pin")]
+		PinWood,
 		[Description("Ancien")]
 		AncienWood,
 		OakWood,
@@ -323,7 +323,7 @@ namespace Server.Items
 		public static readonly CraftAttributeInfo LupusLeather, ReptilienLeather, GeantLeather, OphidienLeather, ArachnideLeather, DragoniqueLeather, DemoniaqueLeather, AncienLeather;
 		public static readonly CraftAttributeInfo RedScales, YellowScales, BlackScales, GreenScales, WhiteScales, BlueScales;
 		public static readonly CraftAttributeInfo OakWood, AshWood, YewWood, Heartwood, Bloodwood, Frostwood;
-		public static readonly CraftAttributeInfo RegularWood, PlainoisWood, ForestierWood, DesertiqueWood, CollinoisWood, SavanoisWood, MontagnardWood, VolcaniqueWood, TropicauxWood, ToundroisWood, AncienWood;
+		public static readonly CraftAttributeInfo PalmierWood, ÉrableWood, ChêneWood, CyprèsWood, CèdreWood, SauleWood, AcajouWood, ÉbèneWood, AmaranteWood, PinWood, AncienWood;
 		public static readonly CraftAttributeInfo LupusBone, ReptilienBone, GeantBone, OphidienBone, ArachnideBone, DragoniqueBone, DemoniaqueBone, AncienBone;
 
 		static CraftAttributeInfo()
@@ -909,81 +909,81 @@ namespace Server.Items
 
 
 			// Os
-			CraftAttributeInfo plainoisWood = PlainoisWood = new CraftAttributeInfo();
+			CraftAttributeInfo ÉrableWood = ÉrableWood = new CraftAttributeInfo();
 
-			plainoisWood.ArmorPhysicalResist = 1;
+			ÉrableWood.ArmorPhysicalResist = 1;
 
-			CraftAttributeInfo forestierWood = ForestierWood = new CraftAttributeInfo();
+			CraftAttributeInfo ChêneWood = ChêneWood = new CraftAttributeInfo();
 
-			forestierWood.ArmorPhysicalResist = 2;
-			forestierWood.ArmorPoisonResist = 2;
-			forestierWood.ArmorColdResist = 2;
+			ChêneWood.ArmorPhysicalResist = 2;
+			ChêneWood.ArmorPoisonResist = 2;
+			ChêneWood.ArmorColdResist = 2;
 
-			forestierWood.WeaponPoisonDamage = 20;
-			forestierWood.WeaponColdDamage = 20;
+			ChêneWood.WeaponPoisonDamage = 20;
+			ChêneWood.WeaponColdDamage = 20;
 
-			CraftAttributeInfo collinoisWood = CollinoisWood = new CraftAttributeInfo();
+			CraftAttributeInfo CèdreWood = CèdreWood = new CraftAttributeInfo();
 
-			collinoisWood.ArmorPhysicalResist = 2;
-			collinoisWood.ArmorColdResist = 2;
-			collinoisWood.ArmorEnergyResist = 2;
+			CèdreWood.ArmorPhysicalResist = 2;
+			CèdreWood.ArmorColdResist = 2;
+			CèdreWood.ArmorEnergyResist = 2;
 
-			collinoisWood.WeaponPoisonDamage = 20;
-			collinoisWood.WeaponEnergyDamage = 20;
+			CèdreWood.WeaponPoisonDamage = 20;
+			CèdreWood.WeaponEnergyDamage = 20;
 
-			CraftAttributeInfo desertiqueWood = DesertiqueWood = new CraftAttributeInfo();
+			CraftAttributeInfo CyprèsWood = CyprèsWood = new CraftAttributeInfo();
 
-			desertiqueWood.ArmorPhysicalResist = 3;
-			desertiqueWood.ArmorFireResist = 3;
-			desertiqueWood.ArmorPoisonResist = 3;
+			CyprèsWood.ArmorPhysicalResist = 3;
+			CyprèsWood.ArmorFireResist = 3;
+			CyprèsWood.ArmorPoisonResist = 3;
 
-			desertiqueWood.WeaponFireDamage = 30;
-			desertiqueWood.WeaponPoisonDamage = 30;
+			CyprèsWood.WeaponFireDamage = 30;
+			CyprèsWood.WeaponPoisonDamage = 30;
 
-			CraftAttributeInfo savanoisWood = SavanoisWood = new CraftAttributeInfo();
+			CraftAttributeInfo SauleWood = SauleWood = new CraftAttributeInfo();
 
-			savanoisWood.ArmorPhysicalResist = 3;
-			savanoisWood.ArmorFireResist = 3;
-			savanoisWood.ArmorEnergyResist = 3;
+			SauleWood.ArmorPhysicalResist = 3;
+			SauleWood.ArmorFireResist = 3;
+			SauleWood.ArmorEnergyResist = 3;
 
-			savanoisWood.WeaponFireDamage = 30;
-			savanoisWood.WeaponEnergyDamage = 30;
+			SauleWood.WeaponFireDamage = 30;
+			SauleWood.WeaponEnergyDamage = 30;
 
-			CraftAttributeInfo toundroisWood = ToundroisWood = new CraftAttributeInfo();
+			CraftAttributeInfo PinWood = PinWood = new CraftAttributeInfo();
 
-			toundroisWood.ArmorPhysicalResist = 4;
-			toundroisWood.ArmorPoisonResist = 4;
-			toundroisWood.ArmorColdResist = 4;
+			PinWood.ArmorPhysicalResist = 4;
+			PinWood.ArmorPoisonResist = 4;
+			PinWood.ArmorColdResist = 4;
 
-			toundroisWood.WeaponPoisonDamage = 40;
-			toundroisWood.WeaponColdDamage = 40;
+			PinWood.WeaponPoisonDamage = 40;
+			PinWood.WeaponColdDamage = 40;
 
-			CraftAttributeInfo tropicauxWood = TropicauxWood = new CraftAttributeInfo();
+			CraftAttributeInfo AmaranteWood = AmaranteWood = new CraftAttributeInfo();
 
-			tropicauxWood.ArmorPhysicalResist = 4;
-			tropicauxWood.ArmorFireResist = 4;
-			tropicauxWood.ArmorEnergyResist = 4;
+			AmaranteWood.ArmorPhysicalResist = 4;
+			AmaranteWood.ArmorFireResist = 4;
+			AmaranteWood.ArmorEnergyResist = 4;
 
-			tropicauxWood.WeaponFireDamage = 40;
-			tropicauxWood.WeaponEnergyDamage = 40;
+			AmaranteWood.WeaponFireDamage = 40;
+			AmaranteWood.WeaponEnergyDamage = 40;
 
-			CraftAttributeInfo montagnardWood = MontagnardWood = new CraftAttributeInfo();
+			CraftAttributeInfo AcajouWood = AcajouWood = new CraftAttributeInfo();
 
-			montagnardWood.ArmorPhysicalResist = 5;
-			montagnardWood.ArmorColdResist = 5;
-			montagnardWood.ArmorPoisonResist = 5;
+			AcajouWood.ArmorPhysicalResist = 5;
+			AcajouWood.ArmorColdResist = 5;
+			AcajouWood.ArmorPoisonResist = 5;
 
-			montagnardWood.WeaponColdDamage = 50;
-			montagnardWood.WeaponPoisonDamage = 50;
+			AcajouWood.WeaponColdDamage = 50;
+			AcajouWood.WeaponPoisonDamage = 50;
 
-			CraftAttributeInfo volcaniqueWood = VolcaniqueWood = new CraftAttributeInfo();
+			CraftAttributeInfo ÉbèneWood = ÉbèneWood = new CraftAttributeInfo();
 
-			volcaniqueWood.ArmorPhysicalResist = 5;
-			volcaniqueWood.ArmorFireResist = 5;
-			volcaniqueWood.ArmorEnergyResist = 5;
+			ÉbèneWood.ArmorPhysicalResist = 5;
+			ÉbèneWood.ArmorFireResist = 5;
+			ÉbèneWood.ArmorEnergyResist = 5;
 
-			volcaniqueWood.WeaponFireDamage = 50;
-			volcaniqueWood.WeaponEnergyDamage = 50;
+			ÉbèneWood.WeaponFireDamage = 50;
+			ÉbèneWood.WeaponEnergyDamage = 50;
 
 			CraftAttributeInfo ancienWood = AncienWood = new CraftAttributeInfo();
 
@@ -1293,16 +1293,16 @@ namespace Server.Items
 
 		private static readonly CraftResourceInfo[] m_WoodInfo = new[]
 		{
-			new CraftResourceInfo(0000, 0, "Commun",      0,    CraftAttributeInfo.Blank,               CraftResource.RegularWood,      typeof( RegularBoard ),			   typeof(Log)),
-			new CraftResourceInfo(1355, 0, "Plainois",    0,    CraftAttributeInfo.Blank,               CraftResource.PlainoisWood,     typeof( PlainoisBoard ),    typeof(PlainoisLog)),
-			new CraftResourceInfo(1411, 0, "Forestier",   1,    CraftAttributeInfo.ForestierWood,       CraftResource.ForestierWood,    typeof( ForestierBoard ),   typeof(ForestierLog)),
-			new CraftResourceInfo(1191, 0, "Collinois",   1,    CraftAttributeInfo.CollinoisWood,       CraftResource.CollinoisWood,    typeof( CollinoisBoard ),   typeof(CollinoisLog)),
-			new CraftResourceInfo(1126, 0, "Désertique",  2,    CraftAttributeInfo.DesertiqueWood,      CraftResource.DesertiqueWood,   typeof( DesertiqueBoard ),  typeof(DesertiqueLog)),
-			new CraftResourceInfo(1008, 0, "Savanois",    2,    CraftAttributeInfo.SavanoisWood,        CraftResource.SavanoisWood,     typeof( SavanoisBoard ),    typeof(SavanoisLog)),
-			new CraftResourceInfo(2219, 0, "Montagnard",  3,    CraftAttributeInfo.MontagnardWood,      CraftResource.MontagnardWood,   typeof( MontagnardBoard ),  typeof(MontagnardLog)),
-			new CraftResourceInfo(1109, 0, "Volcanique",  3,    CraftAttributeInfo.VolcaniqueWood,      CraftResource.VolcaniqueWood,   typeof( VolcaniqueBoard ),  typeof(VolcaniqueLog)),
-			new CraftResourceInfo(2210, 0, "Tropicaux",   4,    CraftAttributeInfo.TropicauxWood,       CraftResource.TropicauxWood,    typeof( TropicauxBoard ),   typeof(TropicauxLog)),
-			new CraftResourceInfo(2500, 0, "Toundrois",   4,    CraftAttributeInfo.ToundroisWood,       CraftResource.ToundroisWood,    typeof( ToundroisBoard ),   typeof(ToundroisLog)),
+			new CraftResourceInfo(0000, 0, "Palmier",      0,    CraftAttributeInfo.Blank,               CraftResource.PalmierWood,      typeof( PalmierBoard ),			   typeof(PalmierLog)),
+			new CraftResourceInfo(1355, 0, "Érable",    0,    CraftAttributeInfo.Blank,               CraftResource.ÉrableWood,     typeof( ÉrableBoard ),    typeof(ÉrableLog)),
+			new CraftResourceInfo(1411, 0, "Chêne",   1,    CraftAttributeInfo.ChêneWood,       CraftResource.ChêneWood,    typeof( ChêneBoard ),   typeof(ChêneLog)),
+			new CraftResourceInfo(1191, 0, "Cèdre",   1,    CraftAttributeInfo.CèdreWood,       CraftResource.CèdreWood,    typeof( CèdreBoard ),   typeof(CèdreLog)),
+			new CraftResourceInfo(1126, 0, "Cyprès",  2,    CraftAttributeInfo.CyprèsWood,      CraftResource.CyprèsWood,   typeof( CyprèsBoard ),  typeof(CyprèsLog)),
+			new CraftResourceInfo(1008, 0, "Saule",    2,    CraftAttributeInfo.SauleWood,        CraftResource.SauleWood,     typeof( SauleBoard ),    typeof(SauleLog)),
+			new CraftResourceInfo(2219, 0, "Acajou",  3,    CraftAttributeInfo.AcajouWood,      CraftResource.AcajouWood,   typeof( AcajouBoard ),  typeof(AcajouLog)),
+			new CraftResourceInfo(1109, 0, "Ébène",  3,    CraftAttributeInfo.ÉbèneWood,      CraftResource.ÉbèneWood,   typeof( ÉbèneBoard ),  typeof(ÉbèneLog)),
+			new CraftResourceInfo(2210, 0, "Amarante",   4,    CraftAttributeInfo.AmaranteWood,       CraftResource.AmaranteWood,    typeof( AmaranteBoard ),   typeof(AmaranteLog)),
+			new CraftResourceInfo(2500, 0, "Pin",   4,    CraftAttributeInfo.PinWood,       CraftResource.PinWood,    typeof( PinBoard ),   typeof(PinLog)),
 			new CraftResourceInfo(1779, 0, "Ancien",      5,    CraftAttributeInfo.AncienWood,          CraftResource.AncienWood,       typeof( AncienBoard ),      typeof(AncienLog)),
 
 			new CraftResourceInfo(0x7DA, 0, "Oak",        99, CraftAttributeInfo.OakWood,      CraftResource.OakWood,      typeof(OakLog),         typeof(OakBoard)),
@@ -1362,11 +1362,11 @@ namespace Server.Items
 		}
 
 		/// <summary>
-		/// Returns true if '<paramref name="resource"/>' is None, Iron, RegularLeather or RegularWood. False if otherwise.
+		/// Returns true if '<paramref name="resource"/>' is None, Iron, RegularLeather or PalmierWood. False if otherwise.
 		/// </summary>
 		public static bool IsStandard(CraftResource resource)
 		{
-			return (resource == CraftResource.None || resource == CraftResource.Iron || resource == CraftResource.RegularLeather || resource == CraftResource.RegularWood);
+			return (resource == CraftResource.None || resource == CraftResource.Iron || resource == CraftResource.RegularLeather || resource == CraftResource.PalmierWood);
 		}
 
 		private static Hashtable m_TypeTable;
@@ -1452,7 +1452,7 @@ namespace Server.Items
 			if (resource >= CraftResource.RedScales && resource <= CraftResource.BlueScales)
 				return CraftResourceType.Scales;
 
-			if (resource >= CraftResource.RegularWood && resource <= CraftResource.Frostwood)
+			if (resource >= CraftResource.PalmierWood && resource <= CraftResource.Frostwood)
 				return CraftResourceType.Wood;
 
 
@@ -1479,7 +1479,7 @@ namespace Server.Items
 				case CraftResourceType.Scales:
 					return CraftResource.RedScales;
 				case CraftResourceType.Wood:
-					return CraftResource.RegularWood;
+					return CraftResource.PalmierWood;
 				case CraftResourceType.Bone:
 					return CraftResource.RegularBone;
 			}

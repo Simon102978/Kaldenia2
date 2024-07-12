@@ -145,7 +145,7 @@ namespace Server.Engines.CityLoyalty
         public CityStone Stone { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public CityMessageRegularBoard RegularBoard { get; set; }
+        public CityMessagePalmierBoard PalmierBoard { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public string Headline { get; set; }
@@ -1297,14 +1297,14 @@ namespace Server.Engines.CityLoyalty
                 }
             }
 
-            // City Bulletin RegularBoard Location
+            // City Bulletin PalmierBoard Location
             if (version == 1)
             {
                 Timer.DelayCall(TimeSpan.FromSeconds(10), () =>
                     {
-                        RegularBoard = new CityMessageRegularBoard(City, 0xA0C5);
-                        RegularBoard.MoveToWorld(Definition.RegularBoardLocation, SystemMap);
-                        Console.WriteLine("City Message RegularBoard for {0} Converted!", City.ToString());
+                        PalmierBoard = new CityMessagePalmierBoard(City, 0xA0C5);
+                        PalmierBoard.MoveToWorld(Definition.PalmierBoardLocation, SystemMap);
+                        Console.WriteLine("City Message PalmierBoard for {0} Converted!", City.ToString());
                     });
             }
         }

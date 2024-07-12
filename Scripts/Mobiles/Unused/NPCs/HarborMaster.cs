@@ -166,7 +166,7 @@ namespace Server.Mobiles
                 AddImageTiled(6, 6, 228, 100, 0xA40);
                 AddImageTiled(6, 116, 228, 20, 0xA40);
                 AddAlphaRegion(6, 6, 228, 142);
-                AddHtmlLocalized(8, 8, 228, 100, 1150112, 0x7FFF, false, false); // WARNING: Your ship and all items aRegularBoard it or in its cargo hold will be deleted if you continue. Make certain you wish to abandon your ship before proceeding. Are you sure you wish to abandon your ship?
+                AddHtmlLocalized(8, 8, 228, 100, 1150112, 0x7FFF, false, false); // WARNING: Your ship and all items aPalmierBoard it or in its cargo hold will be deleted if you continue. Make certain you wish to abandon your ship before proceeding. Are you sure you wish to abandon your ship?
                 AddButton(114, 116, 0xFA5, 0xFA7, 1, GumpButtonType.Reply, 0);
                 AddHtmlLocalized(148, 118, 450, 20, 1073996, 0x7FFF, false, false); // ACCEPT
                 AddButton(6, 116, 0xFB1, 0xFB2, 0, GumpButtonType.Reply, 0);

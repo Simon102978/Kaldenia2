@@ -35,8 +35,8 @@ namespace Server.Multis
         private static readonly Rectangle2D[] m_IlshWrap = new Rectangle2D[] { new Rectangle2D(16, 16, 2304 - 32, 1600 - 32) };
         private static readonly Rectangle2D[] m_TokunoWrap = new Rectangle2D[] { new Rectangle2D(16, 16, 1448 - 32, 1448 - 32) };
 
-        private static readonly Type[] WoodTypes = new Type[] { typeof(RegularBoard),  typeof(OakBoard), typeof(AshBoard), typeof(YewBoard), typeof(HeartwoodBoard), typeof(BloodwoodBoard), typeof(FrostwoodBoard),
-                                                typeof(Log), typeof(OakLog), typeof(AshLog), typeof(YewLog), typeof(HeartwoodLog), typeof(BloodwoodLog), typeof(FrostwoodLog), };
+        private static readonly Type[] WoodTypes = new Type[] { typeof(PalmierBoard),  typeof(OakBoard), typeof(AshBoard), typeof(YewBoard), typeof(HeartwoodBoard), typeof(BloodwoodBoard), typeof(FrostwoodBoard),
+                                                typeof(PalmierLog), typeof(OakLog), typeof(AshLog), typeof(YewLog), typeof(HeartwoodLog), typeof(BloodwoodLog), typeof(FrostwoodLog), };
 
         private static readonly Type[] ClothTypes = new Type[] { typeof(Cloth), typeof(UncutCloth) };
 
@@ -1752,8 +1752,8 @@ namespace Server.Multis
             Container hold = this is BaseGalleon ? ((BaseGalleon)this).GalleonHold : null;
             TimeSpan ts = EmergencyRepairSpan;
 
-            int wood1 = pack.GetAmount(typeof(RegularBoard));
-            int wood2 = pack.GetAmount(typeof(Log));
+            int wood1 = pack.GetAmount(typeof(PalmierBoard));
+            int wood2 = pack.GetAmount(typeof(PalmierLog));
             int wood3 = 0; int wood4 = 0;
 
             int cloth1 = pack.GetAmount(typeof(Cloth));
@@ -1762,8 +1762,8 @@ namespace Server.Multis
 
             if (hold != null)
             {
-                wood3 = hold.GetAmount(typeof(RegularBoard));
-                wood4 = hold.GetAmount(typeof(Log));
+                wood3 = hold.GetAmount(typeof(PalmierBoard));
+                wood4 = hold.GetAmount(typeof(PalmierLog));
                 cloth3 = hold.GetAmount(typeof(Cloth));
                 cloth4 = hold.GetAmount(typeof(UncutCloth));
             }
@@ -1778,25 +1778,25 @@ namespace Server.Multis
                 if (woodNeeded > 0 && wood1 > 0)
                 {
                     toConsume = Math.Min(woodNeeded, wood1);
-                    pack.ConsumeTotal(typeof(RegularBoard), toConsume);
+                    pack.ConsumeTotal(typeof(PalmierBoard), toConsume);
                     woodNeeded -= toConsume;
                 }
                 if (woodNeeded > 0 && wood2 > 0)
                 {
                     toConsume = Math.Min(woodNeeded, wood2);
-                    pack.ConsumeTotal(typeof(Log), toConsume);
+                    pack.ConsumeTotal(typeof(PalmierLog), toConsume);
                     woodNeeded -= toConsume;
                 }
                 if (hold != null && woodNeeded > 0 && wood3 > 0)
                 {
                     toConsume = Math.Min(woodNeeded, wood3);
-                    hold.ConsumeTotal(typeof(RegularBoard), toConsume);
+                    hold.ConsumeTotal(typeof(PalmierBoard), toConsume);
                     woodNeeded -= toConsume;
                 }
                 if (hold != null && woodNeeded > 0 && wood4 > 0)
                 {
                     toConsume = Math.Min(woodNeeded, wood4);
-                    hold.ConsumeTotal(typeof(Log), toConsume);
+                    hold.ConsumeTotal(typeof(PalmierLog), toConsume);
                 }
                 if (clothNeeded > 0 && cloth1 > 0)
                 {

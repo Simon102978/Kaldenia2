@@ -63,7 +63,7 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
-            AddLoot(LootPack.LootItem<Log>(5, 12));
+            AddLoot(LootPack.LootItem<PalmierLog>(5, 12));
 			AddLoot(LootPack.LootItem<EcorceArbreGeant>(3, 7));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 4));
 

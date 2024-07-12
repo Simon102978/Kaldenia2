@@ -3,12 +3,12 @@ using Server.Mobiles;
 
 namespace Server.Items
 {
-    public class BestWaveRegularBoard : Item
+    public class BestWavePalmierBoard : Item
     {
         public override bool ForceShowProperties => true;
 
         [Constructable]
-        public BestWaveRegularBoard() : base(7774)
+        public BestWavePalmierBoard() : base(7774)
         {
             Name = "Void Pool - Best Wave";
             Movable = false;
@@ -20,7 +20,7 @@ namespace Server.Items
                 m.SendGump(new ScoresGump(m.Map == Map.Felucca ? VoidPoolController.InstanceFel : VoidPoolController.InstanceTram, m as PlayerMobile, ScoreType.BestWave));
         }
 
-        public BestWaveRegularBoard(Serial serial)
+        public BestWavePalmierBoard(Serial serial)
             : base(serial)
         {
         }

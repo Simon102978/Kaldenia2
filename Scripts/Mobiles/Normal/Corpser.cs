@@ -49,7 +49,7 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.LootItem<MandrakeRoot>(3, true));
-            AddLoot(LootPack.LootItems(new[] { new LootPackItem(typeof(RegularBoard), 1), new LootPackItem(typeof(Log), 3) }, 10));
+            AddLoot(LootPack.LootItems(new[] { new LootPackItem(typeof(PalmierBoard), 1), new LootPackItem(typeof(PalmierLog), 3) }, 10));
         }
 
         public override void Serialize(GenericWriter writer)

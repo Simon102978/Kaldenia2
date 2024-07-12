@@ -61,7 +61,7 @@ namespace Server.Items
                     int res = pack.ConsumeTotal(
                     new Type[]
 				    {
-					   typeof( Log )
+					   typeof( PalmierLog )
 				    },
                     new int[]
 				    {

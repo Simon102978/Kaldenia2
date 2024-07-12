@@ -1439,7 +1439,7 @@ namespace Server.Engines.CannedEvil
                 }
 
             }
-            private const int gRegularBoarder = 20;
+            private const int gPalmierBoarder = 20;
             private const int gRowHeight = 25;
             private const int gFontHue = 0;
             private static readonly int[] gWidths = { 20, 160, 160, 20 };
@@ -1465,10 +1465,10 @@ namespace Server.Engines.CannedEvil
             {
                 m_Spawn = spawn;
 
-                AddBackground(0, 0, gWidth, gRegularBoarder * 2 + gRowHeight * (8 + spawn.m_DamageEntries.Count), 0x13BE);
+                AddBackground(0, 0, gWidth, gPalmierBoarder * 2 + gRowHeight * (8 + spawn.m_DamageEntries.Count), 0x13BE);
 
-                int top = gRegularBoarder;
-                AddLabel(gRegularBoarder, top, gFontHue, "Champion Spawn Info Gump");
+                int top = gPalmierBoarder;
+                AddLabel(gPalmierBoarder, top, gFontHue, "Champion Spawn Info Gump");
                 top += gRowHeight;
 
                 AddLabel(gTab[1], top, gFontHue, "Kills");
@@ -1509,8 +1509,8 @@ namespace Server.Engines.CannedEvil
                     top += gRowHeight;
                 }
 
-                AddButton(gWidth - (gRegularBoarder + 30), top, 0xFA5, 0xFA7, 1, GumpButtonType.Reply, 0);
-                AddLabel(gWidth - (gRegularBoarder + 100), top, gFontHue, "Refresh");
+                AddButton(gWidth - (gPalmierBoarder + 30), top, 0xFA5, 0xFA7, 1, GumpButtonType.Reply, 0);
+                AddLabel(gWidth - (gPalmierBoarder + 100), top, gFontHue, "Refresh");
             }
 
             public override void OnResponse(Network.NetState sender, RelayInfo info)

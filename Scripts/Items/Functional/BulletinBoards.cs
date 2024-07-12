@@ -16,15 +16,15 @@ namespace Server.Items
     }
 
     [Flipable(0x1E5E, 0x1E5F)]
-    public class BulletinRegularBoard : BaseBulletinRegularBoard
+    public class BulletinPalmierBoard : BaseBulletinPalmierBoard
     {
         [Constructable]
-        public BulletinRegularBoard()
+        public BulletinPalmierBoard()
             : base(0x1E5E)
         {
         }
 
-        public BulletinRegularBoard(Serial serial)
+        public BulletinPalmierBoard(Serial serial)
             : base(serial)
         {
         }
@@ -44,7 +44,7 @@ namespace Server.Items
         }
     }
 
-    public abstract class BaseBulletinRegularBoard : Item
+    public abstract class BaseBulletinPalmierBoard : Item
     {
         // Threads will be removed six hours after the last post was made
         private static readonly TimeSpan ThreadDeletionTime = TimeSpan.FromHours(6.0);
@@ -52,29 +52,29 @@ namespace Server.Items
         private static readonly TimeSpan ThreadCreateTime = TimeSpan.FromMinutes(2.0);
         // A player may only reply once every thirty seconds
         private static readonly TimeSpan ThreadReplyTime = TimeSpan.FromSeconds(30.0);
-        private string m_RegularBoardName;
-        public BaseBulletinRegularBoard(int itemID)
+        private string m_PalmierBoardName;
+        public BaseBulletinPalmierBoard(int itemID)
             : base(itemID)
         {
-            m_RegularBoardName = "bulletin RegularBoard";
+            m_PalmierBoardName = "bulletin PalmierBoard";
             Movable = false;
         }
 
-        public BaseBulletinRegularBoard(Serial serial)
+        public BaseBulletinPalmierBoard(Serial serial)
             : base(serial)
         {
         }
 
         [CommandProperty(AccessLevel.GameMaster)]
-        public string RegularBoardName
+        public string PalmierBoardName
         {
             get
             {
-                return m_RegularBoardName;
+                return m_PalmierBoardName;
             }
             set
             {
-                m_RegularBoardName = value;
+                m_PalmierBoardName = value;
             }
         }
         public static bool CheckTime(DateTime time, TimeSpan range)
@@ -106,53 +106,53 @@ namespace Server.Items
             Mobile from = state.Mobile;
 
             int packetID = pvSrc.ReadByte();
-            BaseBulletinRegularBoard RegularBoard = World.FindItem(pvSrc.ReadInt32()) as BaseBulletinRegularBoard;
+            BaseBulletinPalmierBoard PalmierBoard = World.FindItem(pvSrc.ReadInt32()) as BaseBulletinPalmierBoard;
 
-            if (RegularBoard == null || !RegularBoard.CheckRange(from))
+            if (PalmierBoard == null || !PalmierBoard.CheckRange(from))
                 return;
 
             switch (packetID)
             {
                 case 3:
-                    BBRequestContent(from, RegularBoard, pvSrc);
+                    BBRequestContent(from, PalmierBoard, pvSrc);
                     break;
                 case 4:
-                    BBRequestHeader(from, RegularBoard, pvSrc);
+                    BBRequestHeader(from, PalmierBoard, pvSrc);
                     break;
                 case 5:
-                    BBPostMessage(from, RegularBoard, pvSrc);
+                    BBPostMessage(from, PalmierBoard, pvSrc);
                     break;
                 case 6:
-                    BBRemoveMessage(from, RegularBoard, pvSrc);
+                    BBRemoveMessage(from, PalmierBoard, pvSrc);
                     break;
             }
         }
 
-        public static void BBRequestContent(Mobile from, BaseBulletinRegularBoard RegularBoard, PacketReader pvSrc)
+        public static void BBRequestContent(Mobile from, BaseBulletinPalmierBoard PalmierBoard, PacketReader pvSrc)
         {
             BulletinMessage msg = World.FindItem(pvSrc.ReadInt32()) as BulletinMessage;
 
-            if (msg == null || msg.Parent != RegularBoard)
+            if (msg == null || msg.Parent != PalmierBoard)
                 return;
 
-            from.Send(new BBMessageContent(RegularBoard, msg));
+            from.Send(new BBMessageContent(PalmierBoard, msg));
         }
 
-        public static void BBRequestHeader(Mobile from, BaseBulletinRegularBoard RegularBoard, PacketReader pvSrc)
+        public static void BBRequestHeader(Mobile from, BaseBulletinPalmierBoard PalmierBoard, PacketReader pvSrc)
         {
             BulletinMessage msg = World.FindItem(pvSrc.ReadInt32()) as BulletinMessage;
 
-            if (msg == null || msg.Parent != RegularBoard)
+            if (msg == null || msg.Parent != PalmierBoard)
                 return;
 
-            from.Send(new BBMessageHeader(RegularBoard, msg));
+            from.Send(new BBMessageHeader(PalmierBoard, msg));
         }
 
-        public static void BBPostMessage(Mobile from, BaseBulletinRegularBoard RegularBoard, PacketReader pvSrc)
+        public static void BBPostMessage(Mobile from, BaseBulletinPalmierBoard PalmierBoard, PacketReader pvSrc)
         {
             BulletinMessage thread = World.FindItem(pvSrc.ReadInt32()) as BulletinMessage;
 
-            if (thread != null && thread.Parent != RegularBoard)
+            if (thread != null && thread.Parent != PalmierBoard)
                 thread = null;
 
             int breakout = 0;
@@ -162,7 +162,7 @@ namespace Server.Items
 
             DateTime lastPostTime = DateTime.MinValue;
 
-            if (RegularBoard.GetLastPostTime(from, (thread == null), ref lastPostTime))
+            if (PalmierBoard.GetLastPostTime(from, (thread == null), ref lastPostTime))
             {
                 if (!CheckTime(lastPostTime, (thread == null ? ThreadCreateTime : ThreadReplyTime)))
                 {
@@ -188,14 +188,14 @@ namespace Server.Items
             for (int i = 0; i < lines.Length; ++i)
                 lines[i] = pvSrc.ReadUTF8StringSafe(pvSrc.ReadByte());
 
-            RegularBoard.PostMessage(from, thread, subject, lines);
+            PalmierBoard.PostMessage(from, thread, subject, lines);
         }
 
-        public static void BBRemoveMessage(Mobile from, BaseBulletinRegularBoard RegularBoard, PacketReader pvSrc)
+        public static void BBRemoveMessage(Mobile from, BaseBulletinPalmierBoard PalmierBoard, PacketReader pvSrc)
         {
             BulletinMessage msg = World.FindItem(pvSrc.ReadInt32()) as BulletinMessage;
 
-            if (msg == null || msg.Parent != RegularBoard)
+            if (msg == null || msg.Parent != PalmierBoard)
                 return;
 
             if (from.AccessLevel < AccessLevel.GameMaster && msg.Poster != from)
@@ -259,7 +259,7 @@ namespace Server.Items
 
                 NetState state = from.NetState;
 
-                state.Send(new BBDisplayRegularBoard(this));
+                state.Send(new BBDisplayPalmierBoard(this));
                 state.Send(new ContainerContent(from, this));
             }
             else
@@ -290,7 +290,7 @@ namespace Server.Items
 
             writer.Write(0); // version
 
-            writer.Write(m_RegularBoardName);
+            writer.Write(m_PalmierBoardName);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -303,7 +303,7 @@ namespace Server.Items
             {
                 case 0:
                     {
-                        m_RegularBoardName = reader.ReadString();
+                        m_PalmierBoardName = reader.ReadString();
                         break;
                     }
             }
@@ -492,17 +492,17 @@ namespace Server.Items
 
         public void Validate()
         {
-            if (!(Parent is BulletinRegularBoard && ((BulletinRegularBoard)Parent).Items.Contains(this)))
+            if (!(Parent is BulletinPalmierBoard && ((BulletinPalmierBoard)Parent).Items.Contains(this)))
                 Delete();
         }
     }
 
-    public class BBDisplayRegularBoard : Packet
+    public class BBDisplayPalmierBoard : Packet
     {
-        public BBDisplayRegularBoard(BaseBulletinRegularBoard RegularBoard)
+        public BBDisplayPalmierBoard(BaseBulletinPalmierBoard PalmierBoard)
             : base(0x71)
         {
-            string name = RegularBoard.RegularBoardName;
+            string name = PalmierBoard.PalmierBoardName;
 
             if (name == null)
                 name = "";
@@ -512,9 +512,9 @@ namespace Server.Items
             byte[] buffer = Utility.UTF8.GetBytes(name);
 
             m_Stream.Write((byte)0x00); // PacketID
-            m_Stream.Write(RegularBoard.Serial); // Bulletin RegularBoard serial
+            m_Stream.Write(PalmierBoard.Serial); // Bulletin PalmierBoard serial
 
-            // Bulletin RegularBoard name
+            // Bulletin PalmierBoard name
             if (buffer.Length >= 29)
             {
                 m_Stream.Write(buffer, 0, 29);
@@ -530,7 +530,7 @@ namespace Server.Items
 
     public class BBMessageHeader : Packet
     {
-        public BBMessageHeader(BaseBulletinRegularBoard RegularBoard, BulletinMessage msg)
+        public BBMessageHeader(BaseBulletinPalmierBoard PalmierBoard, BulletinMessage msg)
             : base(0x71)
         {
             string poster = SafeString(msg.PostedName);
@@ -540,7 +540,7 @@ namespace Server.Items
             EnsureCapacity(22 + poster.Length + subject.Length + time.Length);
 
             m_Stream.Write((byte)0x01); // PacketID
-            m_Stream.Write(RegularBoard.Serial); // Bulletin RegularBoard serial
+            m_Stream.Write(PalmierBoard.Serial); // Bulletin PalmierBoard serial
             m_Stream.Write(msg.Serial); // Message serial
 
             BulletinMessage thread = msg.Thread;
@@ -579,7 +579,7 @@ namespace Server.Items
 
     public class BBMessageContent : Packet
     {
-        public BBMessageContent(BaseBulletinRegularBoard RegularBoard, BulletinMessage msg)
+        public BBMessageContent(BaseBulletinPalmierBoard PalmierBoard, BulletinMessage msg)
             : base(0x71)
         {
             string poster = SafeString(msg.PostedName);
@@ -589,7 +589,7 @@ namespace Server.Items
             EnsureCapacity(22 + poster.Length + subject.Length + time.Length);
 
             m_Stream.Write((byte)0x02); // PacketID
-            m_Stream.Write(RegularBoard.Serial); // Bulletin RegularBoard serial
+            m_Stream.Write(PalmierBoard.Serial); // Bulletin PalmierBoard serial
             m_Stream.Write(msg.Serial); // Message serial
 
             WriteString(poster);

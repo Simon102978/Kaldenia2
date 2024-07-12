@@ -42,7 +42,7 @@ namespace Server.Items
 
         [Constructable]
         public BaseWoodBoard(int amount)
-            : this(CraftResource.RegularWood, amount)
+            : this(CraftResource.PalmierWood, amount)
         {
         }
 
@@ -106,25 +106,25 @@ namespace Server.Items
                 Weight = -1;
 
             if (version <= 1)
-                m_Resource = CraftResource.RegularWood;
+                m_Resource = CraftResource.PalmierWood;
         }
     }
 
-	public class RegularBoard : BaseWoodBoard
+	public class PalmierBoard : BaseWoodBoard
     {
         [Constructable]
-        public RegularBoard()
+        public PalmierBoard()
             : this(1)
         {
         }
 
         [Constructable]
-        public RegularBoard(int amount)
-            : base(CraftResource.RegularWood, amount)
+        public PalmierBoard(int amount)
+            : base(CraftResource.PalmierWood, amount)
         {
         }
 
-        public RegularBoard(Serial serial)
+        public PalmierBoard(Serial serial)
             : base(serial)
         {
         }
@@ -146,21 +146,21 @@ namespace Server.Items
     }
 
 
-	public class PlainoisBoard : BaseWoodBoard
+	public class ÉrableBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public PlainoisBoard()
+		public ÉrableBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public PlainoisBoard(int amount)
-			: base(CraftResource.PlainoisWood, amount)
+		public ÉrableBoard(int amount)
+			: base(CraftResource.ÉrableWood, amount)
 		{
 		}
 
-		public PlainoisBoard(Serial serial)
+		public ÉrableBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -385,21 +385,21 @@ namespace Server.Items
         }
     }
 
-	public class ForestierBoard : BaseWoodBoard
+	public class ChêneBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public ForestierBoard()
+		public ChêneBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public ForestierBoard(int amount)
-			: base(CraftResource.ForestierWood, amount)
+		public ChêneBoard(int amount)
+			: base(CraftResource.ChêneWood, amount)
 		{
 		}
 
-		public ForestierBoard(Serial serial)
+		public ChêneBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -419,21 +419,21 @@ namespace Server.Items
 		}
 	}
 
-	public class CollinoisBoard : BaseWoodBoard
+	public class CèdreBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public CollinoisBoard()
+		public CèdreBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public CollinoisBoard(int amount)
-			: base(CraftResource.CollinoisWood, amount)
+		public CèdreBoard(int amount)
+			: base(CraftResource.CèdreWood, amount)
 		{
 		}
 
-		public CollinoisBoard(Serial serial)
+		public CèdreBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -453,21 +453,21 @@ namespace Server.Items
 		}
 	}
 
-	public class DesertiqueBoard : BaseWoodBoard
+	public class CyprèsBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public DesertiqueBoard()
+		public CyprèsBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public DesertiqueBoard(int amount)
-			: base(CraftResource.DesertiqueWood, amount)
+		public CyprèsBoard(int amount)
+			: base(CraftResource.CyprèsWood, amount)
 		{
 		}
 
-		public DesertiqueBoard(Serial serial)
+		public CyprèsBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -487,21 +487,21 @@ namespace Server.Items
 		}
 	}
 
-	public class MontagnardBoard : BaseWoodBoard
+	public class AcajouBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public MontagnardBoard()
+		public AcajouBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public MontagnardBoard(int amount)
-			: base(CraftResource.MontagnardWood, amount)
+		public AcajouBoard(int amount)
+			: base(CraftResource.AcajouWood, amount)
 		{
 		}
 
-		public MontagnardBoard(Serial serial)
+		public AcajouBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -521,21 +521,21 @@ namespace Server.Items
 		}
 	}
 
-	public class SavanoisBoard : BaseWoodBoard
+	public class SauleBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public SavanoisBoard()
+		public SauleBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public SavanoisBoard(int amount)
-			: base(CraftResource.SavanoisWood, amount)
+		public SauleBoard(int amount)
+			: base(CraftResource.SauleWood, amount)
 		{
 		}
 
-		public SavanoisBoard(Serial serial)
+		public SauleBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -555,21 +555,21 @@ namespace Server.Items
 		}
 	}
 
-	public class VolcaniqueBoard : BaseWoodBoard
+	public class ÉbèneBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public VolcaniqueBoard()
+		public ÉbèneBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public VolcaniqueBoard(int amount)
-			: base(CraftResource.VolcaniqueWood, amount)
+		public ÉbèneBoard(int amount)
+			: base(CraftResource.ÉbèneWood, amount)
 		{
 		}
 
-		public VolcaniqueBoard(Serial serial)
+		public ÉbèneBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -589,21 +589,21 @@ namespace Server.Items
 		}
 	}
 
-	public class ToundroisBoard : BaseWoodBoard
+	public class PinBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public ToundroisBoard()
+		public PinBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public ToundroisBoard(int amount)
-			: base(CraftResource.ToundroisWood, amount)
+		public PinBoard(int amount)
+			: base(CraftResource.PinWood, amount)
 		{
 		}
 
-		public ToundroisBoard(Serial serial)
+		public PinBoard(Serial serial)
 			: base(serial)
 		{
 		}
@@ -623,21 +623,21 @@ namespace Server.Items
 		}
 	}
 
-	public class TropicauxBoard : BaseWoodBoard
+	public class AmaranteBoard : BaseWoodBoard
 	{
 		[Constructable]
-		public TropicauxBoard()
+		public AmaranteBoard()
 			: this(1)
 		{
 		}
 
 		[Constructable]
-		public TropicauxBoard(int amount)
-			: base(CraftResource.TropicauxWood, amount)
+		public AmaranteBoard(int amount)
+			: base(CraftResource.AmaranteWood, amount)
 		{
 		}
 
-		public TropicauxBoard(Serial serial)
+		public AmaranteBoard(Serial serial)
 			: base(serial)
 		{
 		}

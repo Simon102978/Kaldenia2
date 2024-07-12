@@ -104,7 +104,7 @@ namespace Server.Items
                     switch (Utility.Random(7))
                     {
                         case 0:
-                            logs = new Log();
+                            logs = new PalmierLog();
                             break;
                         case 1:
                             logs = new AshLog();

@@ -548,7 +548,7 @@ namespace Server.Commands
                                 item = new TrainingDummySouthAddon();
                             }
                             break;
-                        case "DartRegularBoard":
+                        case "DartPalmierBoard":
                             if (m_ItemID == 0x1E2F)
                             {
                                 item = new DartBoardEastAddon();

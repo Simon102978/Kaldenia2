@@ -126,7 +126,7 @@ namespace Server.Items
                     case CraftResource.DemoniaqueBone:           m_CraftSystem = DefBoneTailoring.CraftSystem; break;
                     case CraftResource.AncienBone:          m_CraftSystem = DefBoneTailoring.CraftSystem; break;
 
-                    case CraftResource.RegularWood:          m_CraftSystem = DefBowFletching.CraftSystem; break;
+                    case CraftResource.PalmierWood:          m_CraftSystem = DefBowFletching.CraftSystem; break;
 					case CraftResource.OakWood:	        m_CraftSystem = DefBowFletching.CraftSystem; break;
 					case CraftResource.AshWood:	    m_CraftSystem = DefBowFletching.CraftSystem; break;
                     case CraftResource.YewWood:           m_CraftSystem = DefBowFletching.CraftSystem; break;
@@ -181,7 +181,7 @@ namespace Server.Items
 
 
 
-						case CraftResource.RegularWood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.PalmierWood: m_CraftSystem = DefTinkering.CraftSystem; break;
 						case CraftResource.OakWood: m_CraftSystem = DefTinkering.CraftSystem; break;
 						case CraftResource.AshWood: m_CraftSystem = DefTinkering.CraftSystem; break;
 						case CraftResource.YewWood: m_CraftSystem = DefTinkering.CraftSystem; break;
@@ -230,7 +230,7 @@ namespace Server.Items
                 {
                     switch (resource)
                     {
-                        case CraftResource.RegularWood:      resItem = new RegularBoard(); break;
+                        case CraftResource.PalmierWood:      resItem = new PalmierBoard(); break;
                         case CraftResource.OakWood:       resItem = new OakBoard(); break;
                         case CraftResource.AshWood:    resItem = new AshBoard(); break;
                         case CraftResource.YewWood:       resItem = new YewBoard(); break;

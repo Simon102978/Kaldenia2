@@ -59,10 +59,49 @@
 			</parent>
 
 <parent name="Mines">
-				<child name="Mine 1" x="1431" y="2785" z="-5" />
-				<child name="Mine 2" x="1217" y="2651" z="0" />
+			<child name="Mine en Mirage" x="1431" y="2785" z="-5" />
+			<child name="Abyssium" x="2122" y="1560" z="-22" /> 
+			<child name="Acier" x="1518" y="3638" z="0" /> 
+			<child name="Argent" x="5242" y="4038" z="17" /> 
+			<child name="Bloodirium" x="1974" y="1718" z="0" /> 
+			<child name="Boreale" x="1167" y="1925" z="-20" />
+			<child name="Bronze" x="1218" y="2650" z="0" /> 
+			<child name="Chrysteliar" x="874" y="2088" z="-33" /> 
+			<child name="Cuivre" x="1357" y="2673" z="0" /> 
+			<child name="Durian" x="740" y="3303" z="0" /> 
+			<child name="Equilbrium" x="409" y="3660" z="-19" /> 
+			<child name="Glacias" x="831" y="2181" z="-66" /> 
+			<child name="Herborite" x="2173" y="1206" z="3" /> 
+			<child name="Jolinar" x="1210" y="3408" z="1" /> 
+			<child name="Justicium" x="1672" y="3085" z="37" /> 
+			<child name="Khandarium" x="2680" y="1675" z="-2" /> 
+			<child name="Lithiar" x="1022" y="2240" z="-20" /> 
+			<child name="Mytheril" x="2323" y="1305" z="1" /> 
+			<child name="Or" x="511" y="2637" z="-35" /> 
+			<child name="Sombralir" x="2262" y="1757" z="20" /> 
+			<child name="Sonne" x="908" y="2076" z="-104" /> 
+
 				
 		 </parent>
+
+
+<parent name="Bois">
+			<child name="Acajou" x="0" y="0" z="0" /> 
+			<child name="Amarante" x="1585" y="2279" z="0" /> ---
+			<child name="Ancien" x="2571" y="920" z="2" /> ---
+			<child name="Chene" x="0" y="0" z="0" /> 
+			<child name="Cypres" x="1392" y="2975" z="2" /> ---
+			<child name="Cypres2" x="2793" y="1325" z="0" /> --- 
+ 
+			<child name="Cedre" x="0" y="0" z="0" /> 
+			<child name="Erable" x="0" y="0" z="0" /> 
+			<child name="Pin" x="0" y="0" z="0" /> 
+			<child name="Saule" x="0" y="0" z="0" /> 
+			<child name="Ebene/Érable" x="1022" y="2239" z="-20" /> 
+			
+				
+		 </parent>
+
 
 <parent name="Dongeons">
 			<child name="Dongeon Rat" x="1105" y="2527" z="25" />

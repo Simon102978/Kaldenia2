@@ -45,7 +45,7 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.FilthyRich);         
-            AddLoot(LootPack.RandomLootItem(new[] { typeof(RegularBoard), typeof(Log) }, 100.0, 5, false, true));
+            AddLoot(LootPack.RandomLootItem(new[] { typeof(PalmierBoard), typeof(PalmierLog) }, 100.0, 5, false, true));
             AddLoot(LootPack.LootItem<MandrakeRoot>(3, true));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 

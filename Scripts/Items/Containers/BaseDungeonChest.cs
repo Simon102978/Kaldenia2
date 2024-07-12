@@ -32,6 +32,45 @@ namespace Server.Items
         {
         }
 
+		private void AddRandomLoot(int minItems, int maxItems)
+		{
+			int itemCount = Utility.RandomMinMax(minItems, maxItems);
+			for (int i = 0; i < itemCount; i++)
+			{
+				switch (Utility.Random(10))
+				{
+					case 0:
+						DropItem(new Bandage(Utility.RandomMinMax(1, 5)));
+						break;
+					case 1:
+						DropItem(Loot.RandomPotion());
+						break;
+					case 2:
+						DropItem(Loot.RandomReagent());
+						break;
+					case 3:
+						DropItem(Loot.RandomGem());
+						break;
+					case 4:
+						DropItem(Loot.RandomJewelry());
+						break;
+				
+					case 5:
+						DropItem(Loot.RandomScroll(0, 39, SpellbookType.Regular));
+						break;
+					case 6:
+						DropItem(Loot.RandomArmorOrShieldOrWeaponOrJewelry());
+						break;
+						case 7:
+						DropItem(Loot.RandomWeapon());
+						break;
+					case 8:
+						DropItem(new Bottle());
+						break;
+				}
+			}
+		}
+
 		public override void Open(Mobile from)
 		{
 			if (CheckLocked(from))
