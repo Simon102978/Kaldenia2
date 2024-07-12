@@ -31,10 +31,10 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class ÉrableBoisDyeTub : FurnitureDyeTub
+	public class ErableBoisDyeTub : FurnitureDyeTub
     {
         [Constructable]
-        public ÉrableBoisDyeTub()
+        public ErableBoisDyeTub()
         {
             Hue = DyedHue = 1355;
             Redyable = false;
@@ -42,7 +42,7 @@ namespace Server.Items
 			Name = "Teinture Bois Érable";
 		}
 
-        public ÉrableBoisDyeTub(Serial serial)
+        public ErableBoisDyeTub(Serial serial)
             : base(serial)
         {
         }
@@ -61,10 +61,10 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
-	public class CèdreBoisDyeTub : FurnitureDyeTub
+	public class CedreBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public CèdreBoisDyeTub()
+		public CedreBoisDyeTub()
 		{
 			Hue = DyedHue = 1191;
 			Redyable = false;
@@ -72,7 +72,7 @@ namespace Server.Items
 			Name = "Teinture Bois Cèdre";
 		}
 
-		public CèdreBoisDyeTub(Serial serial)
+		public CedreBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}
@@ -91,10 +91,10 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class ChêneBoisDyeTub : FurnitureDyeTub
+	public class CheneBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public ChêneBoisDyeTub()
+		public CheneBoisDyeTub()
 		{
 			Hue = DyedHue = 1411;
 			Redyable = false;
@@ -102,7 +102,7 @@ namespace Server.Items
 			Name = "Teinture Bois Chêne";
 		}
 
-		public ChêneBoisDyeTub(Serial serial)
+		public CheneBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}
@@ -151,10 +151,10 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class CyprèsBoisDyeTub : FurnitureDyeTub
+	public class CypresBoisDyeTub : FurnitureDyeTub
 	{
 		[Constructable]
-		public CyprèsBoisDyeTub()
+		public CypresBoisDyeTub()
 		{
 			Hue = DyedHue = 1126;
 			Redyable = false;
@@ -162,7 +162,7 @@ namespace Server.Items
 			Name = "Teinture Bois Cyprès";
 		}
 
-		public CyprèsBoisDyeTub(Serial serial)
+		public CypresBoisDyeTub(Serial serial)
 			: base(serial)
 		{
 		}

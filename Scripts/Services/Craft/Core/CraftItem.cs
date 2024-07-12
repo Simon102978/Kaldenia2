@@ -1574,24 +1574,24 @@ namespace Server.Engines.Craft
 
 			switch (name)
 			{
-				case "ÉrableLeather": skill += 0.0; break;
-				case "CèdreLeather": skill += 10.0; break;
-				case "ChêneLeather": skill += 15.0; break;
+				case "ErableLeather": skill += 0.0; break;
+				case "CedreLeather": skill += 10.0; break;
+				case "CheneLeather": skill += 15.0; break;
 				case "SauleLeather": skill += 20.0; break;
-				case "CyprèsLeather": skill += 25.0; break;
+				case "CypresLeather": skill += 25.0; break;
 				case "AcajouLeather": skill += 30.0; break;
-				case "ÉbèneLeather": skill += 35.0; break;
+				case "EbeneLeather": skill += 35.0; break;
 				case "AmaranteLeather": skill += 40.0; break;
 				case "PinLeather": skill += 45.0; break;
 				case "AncienLeather": skill += 50.0; break;
 
-				case "ÉrableBone": skill += 0.0; break;
-				case "CèdreBone": skill += 10.0; break;
-				case "ChêneBone": skill += 15.0; break;
+				case "ErableBone": skill += 0.0; break;
+				case "CedreBone": skill += 10.0; break;
+				case "CheneBone": skill += 15.0; break;
 				case "SauleBone": skill += 20.0; break;
-				case "CyprèsBone": skill += 25.0; break;
+				case "CypresBone": skill += 25.0; break;
 				case "AcajouBone": skill += 30.0; break;
-				case "ÉbèneBone": skill += 35.0; break;
+				case "EbeneBone": skill += 35.0; break;
 				case "AmaranteBone": skill += 40.0; break;
 				case "PinBone": skill += 45.0; break;
 				case "AncienBone": skill += 50.0; break;

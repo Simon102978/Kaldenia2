@@ -454,23 +454,23 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(PalmierBoard), "Planches Communes", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
-			index = AddCraft(typeof(ÉrableBoisDyeTub), "Teintures Bois", "Teinture Bois Érable", 0.0, 0.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
+			index = AddCraft(typeof(ErableBoisDyeTub), "Teintures Bois", "Teinture Bois Érable", 0.0, 0.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
 			AddRes(index, typeof(PalmierBoard), "Planches Érable", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
-			index = AddCraft(typeof(CèdreBoisDyeTub), "Teintures Bois", "Teinture Bois Cèdre", 20.0, 40.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
+			index = AddCraft(typeof(CedreBoisDyeTub), "Teintures Bois", "Teinture Bois Cèdre", 20.0, 40.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
 			AddRes(index, typeof(CedreBoard), "Planches Cèdre", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
-			index = AddCraft(typeof(ChêneBoisDyeTub), "Teintures Bois", "Teinture Bois Chêne", 20.0, 40.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
-			AddRes(index, typeof(CheneBoard), "Planches Chêne", 50, "Vous n'avez pas assez de planche.");
+			index = AddCraft(typeof(CheneBoisDyeTub), "Teintures Bois", "Teinture Bois Chêne", 20.0, 40.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(CheneBoard), "Planches Chene", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
 			index = AddCraft(typeof(SauleBoisDyeTub), "Teintures Bois", "Teinture Bois Saule", 40.0, 60.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
 			AddRes(index, typeof(SauleBoard), "Planches Saule", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
-			index = AddCraft(typeof(CyprèsBoisDyeTub), "Teintures Bois", "Teinture Bois Cyprès", 40.0, 60.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
+			index = AddCraft(typeof(CypresBoisDyeTub), "Teintures Bois", "Teinture Bois Cyprès", 40.0, 60.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac de teinture");
 			AddRes(index, typeof(CypresBoard), "Planches Cyprès", 50, "Vous n'avez pas assez de planche.");
 			AddRes(index, typeof(Pitcher), "Unité de pichet d'eau", 10, "Vous n'avez pas suffisament d'eau");
 
