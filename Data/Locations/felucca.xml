@@ -87,17 +87,16 @@
 
 <parent name="Bois">
 			<child name="Acajou" x="0" y="0" z="0" /> 
-			<child name="Amarante" x="1585" y="2279" z="0" /> ---
-			<child name="Ancien" x="2571" y="920" z="2" /> ---
+			<child name="Amarante" x="1585" y="2279" z="0" /> 
+			<child name="Ancien" x="2571" y="920" z="2" /> 
 			<child name="Chene" x="0" y="0" z="0" /> 
-			<child name="Cypres" x="1392" y="2975" z="2" /> ---
-			<child name="Cypres2" x="2793" y="1325" z="0" /> --- 
- 
-			<child name="Cedre" x="0" y="0" z="0" /> 
+			<child name="Cypres" x="1392" y="2975" z="2" /> 
+			<child name="Cypres2" x="2793" y="1325" z="0" />  
+ 			<child name="Cedre" x="0" y="0" z="0" /> 
 			<child name="Erable" x="0" y="0" z="0" /> 
 			<child name="Pin" x="0" y="0" z="0" /> 
 			<child name="Saule" x="0" y="0" z="0" /> 
-			<child name="Ebene/Érable" x="1022" y="2239" z="-20" /> 
+			<child name="Ebene/Erable" x="1022" y="2239" z="-20" /> 
 			
 				
 		 </parent>
