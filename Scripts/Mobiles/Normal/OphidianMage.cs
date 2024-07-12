@@ -49,8 +49,8 @@ namespace Server.Mobiles
         {
         }
 
-        public override int Meat => 1;
-        public override int TreasureMapLevel => 2;
+        public override int Meat => Utility.RandomMinMax(2, 3);
+        public override int TreasureMapLevel => Utility.RandomMinMax(1, 2);
 
 		public override void GenerateLootParagon()
 		{
@@ -60,11 +60,11 @@ namespace Server.Mobiles
 
 		public override TribeType Tribe => TribeType.Ophidian;
 
-		public override int Hides => Utility.RandomMinMax(1, 3);
+		public override int Hides => 0;
 		public override HideType HideType => HideType.Ophidien;
 
 
-		public override int Bones => Utility.RandomMinMax(1, 3);
+		public override int Bones => 0;
 		public override BoneType BoneType => BoneType.Ophidien;
 
 		public override void GenerateLoot()
