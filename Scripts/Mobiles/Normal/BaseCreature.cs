@@ -1681,7 +1681,7 @@ namespace Server.Mobiles
 					}
               	case TribeType.Kepush:
 					{
-			            lTribe.Add(TribeType.Kepush);
+			            lTribe.Add(TribeType.Kuya);
 
 
 						break;
