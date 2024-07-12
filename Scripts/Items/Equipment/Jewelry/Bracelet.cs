@@ -75,6 +75,7 @@ namespace Server.Items
         public SilverBracelet()
             : base(0x1F06)
         {
+			Name = "Bracelet argenté";
         }
 
         public SilverBracelet(Serial serial)

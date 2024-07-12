@@ -75,7 +75,7 @@ namespace Server.Items
         public SilverRing()
             : base(0x1F09)
         {
-
+			Name = "Anneau argenté";
         }
 
         public SilverRing(Serial serial)

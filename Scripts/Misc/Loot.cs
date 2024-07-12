@@ -273,7 +273,9 @@ namespace Server
 	typeof(AcademicBooksArtifact), typeof(PricelessTreasureArtifact), typeof(PushmePullyuArtifact),
 	typeof(RottedOarsArtifact), typeof(BlanketOfDarkness), typeof(FigureheadOfBmvArarat), typeof(ShipsBellOfBmvArarat),
 	typeof(SternAnchorOfBmvArarat), typeof(SaddleArtifact), typeof(BlockAndTackleArtifact),
-	typeof(TyballsFlaskStandArtifact), typeof(RuinedPaintingArtifact)
+	typeof(TyballsFlaskStandArtifact), typeof(RuinedPaintingArtifact), typeof(CreepingVine), typeof(GhostShipAnchor),
+	typeof(CandelabraOfSouls), typeof(AdmiralsHeartyRum), typeof(ShipModelOfTheHMSCape), typeof(GoldBricks), typeof(PhillipsWoodenSteed),
+	typeof(AncientUrn), 
 };
 
 		public static Type[] StatueTypes => m_StatueTypes;

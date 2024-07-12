@@ -62,6 +62,7 @@ namespace Server.Items
             : base(0x1F07)
         {
             Weight = 0.1;
+			Name = "Boucles d'oreilles argentées";
         }
 
         public SilverEarrings(Serial serial)
