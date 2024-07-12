@@ -90,6 +90,9 @@ namespace Server.Engines.Craft
 		public bool NeedWater { get; set; }
 		public int ItemHue { get; set; }
 
+		public double MinSkillRequired { get; set; }
+
+
 		public Action<Mobile, Item, ITool> MutateAction { get; set; }
 
 		public void AddRecipe(int id, CraftSystem system)

@@ -103,10 +103,11 @@ namespace Server.Engines.Craft
 
         public bool QuestOption { get; set; }
 
-        #endregion
 
-        #region Constructor
-        public CraftSystem(int minCraftEffect, int maxCraftEffect, double delay)
+		#endregion
+
+		#region Constructor
+		public CraftSystem(int minCraftEffect, int maxCraftEffect, double delay)
         {
             MinCraftEffect = minCraftEffect;
             MaxCraftEffect = maxCraftEffect;
@@ -275,7 +276,9 @@ namespace Server.Engines.Craft
             craftItem.AddRes(typeRes, nameRes, amount, message);
             craftItem.AddSkill(skillToMake, minSkill, maxSkill);
 
-            DoGroup(group, craftItem);
+			craftItem.MinSkillRequired = minSkill;
+
+			DoGroup(group, craftItem);
             return CraftItems.Add(craftItem);
         }
 

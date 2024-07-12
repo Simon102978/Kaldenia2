@@ -447,7 +447,13 @@ namespace Server.Engines.Craft
             }
         }
 
-        public void CreateItemList(int selectedGroup)
+		public void RefreshGump()
+		{
+			m_From.CloseGump(typeof(CraftGump));
+			m_From.SendGump(new CraftGump(m_From, m_CraftSystem, m_Tool, null));
+		}
+
+		public void CreateItemList(int selectedGroup)
         {
             int numberOfPage = 0;
 
@@ -471,7 +477,10 @@ namespace Server.Engines.Craft
 
                 CraftItem craftItem = craftItemCol.GetAt(i);
 
-                if (index == 0)
+				if (m_From.Skills[m_CraftSystem.MainSkill].Base >= craftItem.MinSkillRequired)
+				{
+
+					if (index == 0)
                 {
                     if (i > 0)
                     {
@@ -528,8 +537,9 @@ namespace Server.Engines.Craft
                 AddButton(480, 60 + (index * 20), 4011, 4012, GetButtonID(2, i), GumpButtonType.Reply, 0);*/
             }
         }
+		}
 
-        public int CreateGroupList()
+		public int CreateGroupList()
         {
             CraftGroupCol craftGroupCol = m_CraftSystem.CraftGroups;
 
@@ -539,8 +549,9 @@ namespace Server.Engines.Craft
             for (int i = 0; i < craftGroupCol.Count; i++)
             {
                 CraftGroup craftGroup = craftGroupCol.GetAt(i);
+				
 
-                AddButton(15, 80 + (i * 20), 4005, 4007, GetButtonID(0, i), GumpButtonType.Reply, 0);
+					AddButton(15, 80 + (i * 20), 4005, 4007, GetButtonID(0, i), GumpButtonType.Reply, 0);
 
                 if (craftGroup.NameNumber > 0)
                     AddHtmlLocalized(50, 83 + (i * 20), 150, 18, craftGroup.NameNumber, LabelColor, false, false);
@@ -551,8 +562,9 @@ namespace Server.Engines.Craft
 
             return craftGroupCol.Count;
         }
-
-        public static int GetButtonID(int type, int index)
+		
+	
+	public static int GetButtonID(int type, int index)
         {
             return 1 + type + (index * 7);
         }
