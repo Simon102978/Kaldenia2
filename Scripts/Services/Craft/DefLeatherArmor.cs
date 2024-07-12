@@ -97,46 +97,41 @@ namespace Server.Engines.Craft
             int index = -1;
 
 			#region Bottes
-			index = AddCraft(typeof(Bottes), "Bottes", "Bottes à talon", 10.0, 30.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(Bottes2), "Bottes", "Bottes en cuir", 10.0, 30.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(Bottes3), "Bottes", "Bottes ajustées", 20.0, 40.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(Bottes4), "Bottes", "Bottes lacées", 20.0, 40.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(Bottes5), "Bottes", "Bottes à Sangles", 20.0, 40.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(Bottes6), "Bottes", "Bottes en cuir large", 25.0, 45.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(Bottes7), "Bottes", "Bottes en fourrure", 25.0, 45.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(Bottes8), "Bottes", "Bottes en tissus", 25.0, 45.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(Bottes9), "Bottes", "Bottes à rebord", 30.0, 50.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(Bottes10), "Bottes", "Botte haute à sangles", 30.0, 50.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(BottesPoils), "Bottes", "Bottes de Poils", 35.0, 55.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(SoulierTissus), "Bottes", "Soulier en Tissus", 40.0, 60.0, typeof(Leather), 1044462, 15, 1044463);
-			index = AddCraft(typeof(SandaleCuir), "Bottes", "Sandales en cuir", 40.0, 60.0, typeof(Leather), 1044462, 10, 1044463);
-			index = AddCraft(typeof(ElvenBoots), "Bottes", "Bottes délicate", 45.0, 65.0, typeof(Leather), 1044462, 15, 1044463);
-
-
-			AddCraft(typeof(Sandals), "Bottes", "Sandales", 45.0, 65.0, typeof(Leather), 1044462, 15, 1044463);
-			AddCraft(typeof(Shoes), "Bottes", "Souliers", 45.0, 65.0, typeof(Leather), 1044462, 15, 1044463);
-			AddCraft(typeof(Boots), "Bottes", "Bottes simples", 50.0, 70.0, typeof(Leather), 1044462, 15, 1044463);
-			AddCraft(typeof(ThighBoots), "Bottes", "Cuissardes", 50.0, 70.0, typeof(Leather), 1044462, 15, 1044463);
-
-			AddCraft(typeof(LeatherTalons), "Bottes", "Soulier en cuir", 50.0, 70.0, typeof(Leather), 1044462, 15, 1044463);
-
+			AddCraft(typeof(Sandals), "Bottes", "Sandales", 10.0, 30.0, typeof(Leather), 1044462, 15, 1044463);
+			AddCraft(typeof(Shoes), "Bottes", "Souliers", 10.0, 30.0, typeof(Leather), 1044462, 15, 1044463);
+			AddCraft(typeof(Boots), "Bottes", "Bottes simples",20.0, 40.0,  typeof(Leather), 1044462, 15, 1044463);
+			AddCraft(typeof(ThighBoots), "Bottes", "Cuissardes", 20.0, 40.0,typeof(Leather), 1044462, 15, 1044463);
+			AddCraft(typeof(LeatherTalons), "Bottes", "Soulier en cuir", 20.0, 40.0, typeof(Leather), 1044462, 15, 1044463);
+			index = AddCraft(typeof(SandaleCuir), "Bottes", "Sandales en cuir", 40.0, 60.0, typeof(Leather), 1044462, 10, 1044463);	
+			index = AddCraft(typeof(SoulierTissus), "Bottes", "Soulier en Tissus", 40.0, 60.0, typeof(Leather), 1044462, 15, 1044463);	
+			index = AddCraft(typeof(ElvenBoots), "Bottes", "Bottes délicate", 45.0, 65.0, typeof(Leather), 1044462, 15, 1044463);		
+			index = AddCraft(typeof(Bottes4), "Bottes", "Bottes lacées", 50.0, 70.0,  typeof(Leather), 1044462, 15, 1044463);
+			index = AddCraft(typeof(Bottes), "Bottes", "Bottes à talon", 55.0, 75.0, typeof(Leather), 1044462, 15, 1044463);			
+			index = AddCraft(typeof(Bottes9), "Bottes", "Bottes à rebord", 60.0, 70.0, typeof(Leather), 1044462, 15, 1044463);
+			index = AddCraft(typeof(Bottes8), "Bottes", "Bottes en tissus", 65.0, 85.0, typeof(Leather), 1044462, 15, 1044463);
+			index = AddCraft(typeof(Bottes2), "Bottes", "Bottes en cuir", 70.0, 90.0, typeof(Leather), 1044462, 15, 1044463);
+			index = AddCraft(typeof(Bottes6), "Bottes", "Bottes en cuir large", 70.0, 90.0, typeof(Leather), 1044462, 15, 1044463);
+			index = AddCraft(typeof(Bottes3), "Bottes", "Bottes ajustées", 75.0, 95.0, typeof(Leather), 1044462, 15, 1044463);
+			index = AddCraft(typeof(Bottes5), "Bottes", "Bottes à Sangles", 60.0, 80.0, typeof(Leather), 1044462, 15, 1044463);
+			index = AddCraft(typeof(Bottes7), "Bottes", "Bottes en fourrure", 80.0, 100.0, typeof(Leather), 1044462, 15, 1044463);
+			index = AddCraft(typeof(Bottes10), "Bottes", "Botte haute à sangles", 85.0, 105.0, typeof(Leather), 1044462, 15, 1044463);
+			index = AddCraft(typeof(BottesPoils), "Bottes", "Bottes de Poils", 85.0, 105.0, typeof(Leather), 1044462, 15, 1044463);
 			#endregion
 
 			#region Ceintures
 
-			index = AddCraft(typeof(Ceinture), "Ceintures", "Ceinture boucle ronde", 10.0, 30.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Ceinture2), "Ceintures", "Ceinture boucle carrée", 10.0, 30.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Ceinture3), "Ceintures", "Ceinture d'artisan", 20.0, 40.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Ceinture4), "Ceintures", "Ceinture à pochettes", 20.0, 40.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Ceinture5), "Ceintures", "Ceinture mince", 30.0, 50.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Ceinture6), "Ceintures", "Ceinture poche à gauche", 30.0, 50.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Ceinture7), "Ceintures", "Ceinture en tissu", 30.0, 50.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Ceinture8), "Ceintures", "Ceinture en bandouillère", 40.0, 60.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Ceinture9), "Ceintures", "Bourse carrée", 40.0, 60.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(CeintureBaril), "Ceintures", "Ceinture Barril", 40.0, 60.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(CeintureMetal), "Ceintures", "Ceinture Métalique", 50.0, 70.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Ceinture), "Ceintures", "Ceinture boucle ronde", 40.0, 60.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(CentureDoreeLarge), "Ceintures", "Ceinture Dorée Large", 50.0, 70.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-
+			index = AddCraft(typeof(CeintureMetal), "Ceintures", "Ceinture Métalique", 50.0, 70.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(CeintureBaril), "Ceintures", "Ceinture Barril", 60.0, 80.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Ceinture2), "Ceintures", "Ceinture boucle carrée", 60.0, 80.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Ceinture4), "Ceintures", "Ceinture à pochettes", 65.0, 85.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Ceinture7), "Ceintures", "Ceinture en tissu", 70.0, 90.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");							
 			#endregion
 
 
@@ -147,29 +142,31 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(TribalMask), "Masques", "Masque Tribal", 20.0, 40.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(HornedTribalMask), "Masques", "Masque tribal Ornée", 20.0, 40.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(CoiffeGuepard), "Chapeaux", "Coiffe Guepard", 30.0, 50.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(CoiffeLoupBlanc), "Chapeaux", "Coiffe Loup Blanc", 30.0, 50.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(CoiffeLion), "Chapeaux", "Coiffe Lion", 30.0, 50.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(CoiffeSanglier), "Chapeaux", "Coiffe Sanglier", 30.0, 50.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(TeteCoyote), "Chapeaux", "Tete de Coyote", 40.0, 60.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(TeteTaureau), "Chapeaux", "Tete de Taureau", 40.0, 60.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque1), "Chapeaux", "Masque ossement de cerf", 10.0, 30.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(CoiffeSanglier), "Chapeaux", "Coiffe Sanglier", 55.0, 75.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");		
+			index = AddCraft(typeof(CoiffeLoupBlanc), "Chapeaux", "Coiffe Loup Blanc", 60.0, 80.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");	
+			index = AddCraft(typeof(CoiffeLion), "Chapeaux", "Coiffe Lion", 65.0, 85.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");	
+			index = AddCraft(typeof(TeteTaureau), "Chapeaux", "Tete de Taureau", 70.0, 90.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+
+
+			index = AddCraft(typeof(Masque11), "Chapeaux", "Bandeau oeil droit", 10, 30, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Masque2), "Chapeaux", "Masque Ossement d'élan", 10.0, 30.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque3), "Chapeaux", "Masque Crâne", 25.0, 35.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque4), "Chapeaux", "Masque Crâne à piques", 25.0, 35.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque5), "Chapeaux", "Masque du Sage à cornes", 35.0, 55.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque6), "Chapeaux", "Masque de plumes fines", 40, 60, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Masque7), "Chapeaux", "Masque simple", 40, 60, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Masque8), "Chapeaux", "Masque Vénitien", 40, 60, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque9), "Chapeaux", "Masque-foulard", 40, 60, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Masque10), "Chapeaux", "Lunettes d'aveugle", 40, 60, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque11), "Chapeaux", "Bandeau oeil droit", 50, 70, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque12), "Chapeaux", "Masque Crâne a foulard", 50, 70, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Masque9), "Chapeaux", "Masque-foulard", 50, 70, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Masque3), "Chapeaux", "Masque Crâne", 50.0, 70.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Masque5), "Chapeaux", "Masque du Sage à cornes", 50.0, 75.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");	
+			index = AddCraft(typeof(Masque6), "Chapeaux", "Masque de plumes fines", 50, 70, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Masque13), "Chapeaux", "Masque de soirée", 50, 70, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque14), "Chapeaux", "Masque Festif", 50, 70, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Masque4), "Chapeaux", "Masque Crâne à piques", 55.0, 70.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Masque1), "Chapeaux", "Masque ossement de cerf", 60.0, 80.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Masque16), "Chapeaux", "Masque simple à foulard",60, 80, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Masque15), "Chapeaux", "Masque du phénix", 70, 90, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque16), "Chapeaux", "Masque simple à foulard", 70, 90, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque17), "Chapeaux", "Masque doré", 70, 90, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Masque18), "Chapeaux", "Masque partiel orné", 70, 90, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Masque12), "Chapeaux", "Masque Crâne a foulard", 75, 95, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Masque14), "Chapeaux", "Masque Festif", 80, 90, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");	
+			index = AddCraft(typeof(Masque17), "Chapeaux", "Masque doré", 85, 105, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Masque18), "Chapeaux", "Masque partiel orné", 90, 110, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			//index = AddCraft(typeof(Masque19), "Chapeaux", "Masque", 70, 90, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 
 
@@ -288,7 +285,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Pouch), "Divers", "Bourse", 0.0, 25.0, typeof(Leather), 1044462, 3, 1044463);
 			index = AddCraft(typeof(Bag), "Divers", "Sac", 5, 30.0, typeof(Leather), 1044462, 4, 1044463);
 
-			index = AddCraft(typeof(Carquois), "Divers", "Carquois", 30.0, 80.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Carquois), "Divers", "Carquois", 80.0, 100.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(fourreau), "Divers", "Fourreau épée longue", 30.0, 80.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(fourreau2), "Divers", "Fourreau croisé", 30.0, 80.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(fourreau3), "Divers", "Fourreau bandouillère", 40.0, 90.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
