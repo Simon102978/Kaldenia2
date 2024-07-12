@@ -28,7 +28,7 @@ namespace Server.Mobiles
             public InternalSellInfo()
             {
 				Add(typeof(FishSteakResourceCrate), 100);
-				Add(typeof(Fish), 2);
+			/*	Add(typeof(Fish), 2);
 				Add(typeof(AutumnDragonfish), 2);
 				Add(typeof(BlueLobster), 2);
 				Add(typeof(BullFish), 2);
@@ -72,7 +72,7 @@ namespace Server.Mobiles
 
 				Add(typeof(StoneCrabMeat), 5);
 				Add(typeof(SpiderCrabMeat), 5);
-				Add(typeof(BlueLobsterMeat), 5);
+				Add(typeof(BlueLobsterMeat), 5);*/
 			}
         }
     }
