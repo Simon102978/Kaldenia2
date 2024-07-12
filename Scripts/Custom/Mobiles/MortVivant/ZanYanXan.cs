@@ -182,10 +182,7 @@ namespace Server.Mobiles
 		{
 			base.OnDamage(amount, from, willKill);
 		
-			
-
-			Say (amount);
-
+		
 
 			Parole();
 		}
@@ -230,6 +227,20 @@ namespace Server.Mobiles
 		{
 
 			Parole();
+
+			int ToAbsorbe = 0;
+
+			if (to.Mana < damage)
+			{
+				ToAbsorbe = to.Mana;
+			}
+			else
+			{
+				ToAbsorbe = damage;
+			}
+
+			Mana += ToAbsorbe;
+			to.Mana -= ToAbsorbe;
 
 
 			base.AlterMeleeDamageTo(to, ref damage);

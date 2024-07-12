@@ -113,6 +113,11 @@ namespace Server.Items
 
         public static bool CheckBloodDrink(Mobile attacker)
         {
+            if (attacker is KepushBase)
+            {
+                return true;
+            }
+
             return attacker.Weapon is BaseWeapon && ((BaseWeapon)attacker.Weapon).WeaponAttributes.BloodDrinker > 0;
         }
 

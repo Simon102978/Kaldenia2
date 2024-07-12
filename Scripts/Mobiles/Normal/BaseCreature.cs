@@ -168,7 +168,8 @@ namespace Server.Mobiles
 		Brigand,
 		Pirate,
 		Titusien,
-        Geant
+        Geant,
+        Kepush
     }
 
     public enum LootStage
@@ -1658,7 +1659,7 @@ namespace Server.Mobiles
 				case TribeType.Kuya:
 					{
 						// Pas d'ennemis, car il protège la valorite, et renderait le tout trop simple.
-
+                        lTribe.Add(TribeType.Kepush);
 
 
 						break;
@@ -1675,6 +1676,13 @@ namespace Server.Mobiles
 					{
 				//		lTribe.Add(TribeType.Brigand);
 				//		lTribe.Add(TribeType.Savage);
+
+						break;
+					}
+              	case TribeType.Kepush:
+					{
+			            lTribe.Add(TribeType.Kepush);
+
 
 						break;
 					}
