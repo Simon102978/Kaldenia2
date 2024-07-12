@@ -11,7 +11,7 @@ namespace Server.Spells.Third
             9041,
             Reagent.BlackPearl);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 8) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 6) }; } }
 		public FireballSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
         {

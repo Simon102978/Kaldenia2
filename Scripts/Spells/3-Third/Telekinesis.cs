@@ -12,7 +12,7 @@ namespace Server.Spells.Third
             Reagent.Bloodmoss,
             Reagent.MandrakeRoot);
 
-		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 5) }; } }
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 7) }; } }
 		public TelekinesisSpell(Mobile caster, Item scroll)
             : base(caster, scroll, m_Info)
         {

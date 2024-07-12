@@ -1287,6 +1287,72 @@ public override void Deserialize(GenericReader reader)
 	int version = reader.ReadInt();
 }
 	}
+
+	public class BombardementScroll : SpellScroll
+	{
+		[Constructable]
+		public BombardementScroll() : this(1)
+		{
+		}
+
+		[Constructable]
+		public BombardementScroll(int amount) : base(688, 7993, amount)
+		{
+		Name ="Bombardement";
+		Hue = 498;
+		}
+
+		public BombardementScroll(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	public class MassSleepScroll : SpellScroll
+	{
+		[Constructable]
+		public MassSleepScroll() : this(1)
+		{
+		}
+
+		[Constructable]
+		public MassSleepScroll(int amount) : base(857, 7993, amount)
+		{
+		Name ="Sommeil de masse";
+		Hue = 498;
+		}
+
+		public MassSleepScroll(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+	
 public class EarthElementalScroll : SpellScroll
 	{
 	[Constructable]

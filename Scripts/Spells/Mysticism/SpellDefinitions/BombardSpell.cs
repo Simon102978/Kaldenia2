@@ -15,10 +15,10 @@ namespace Server.Spells.Mysticism
                 9022,
                 Reagent.Bloodmoss,
                 Reagent.Garlic,
-                Reagent.SulfurousAsh,
-                Reagent.DragonBlood
+                Reagent.SulfurousAsh
             );
 
+	    public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 11) }; } }
         public BombardSpell(Mobile caster, Item scroll) : base(caster, scroll, m_Info)
         {
         }

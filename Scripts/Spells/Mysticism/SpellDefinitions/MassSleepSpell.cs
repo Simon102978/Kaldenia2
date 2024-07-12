@@ -17,6 +17,7 @@ namespace Server.Spells.Mysticism
                 Reagent.SpidersSilk
             );
 
+		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Arcane, 9) }; } }
         public MassSleepSpell(Mobile caster, Item scroll) : base(caster, scroll, m_Info)
         {
         }

@@ -326,6 +326,9 @@ namespace Server.Spells
 			Register(854, typeof(Sixth.EnergyBoltSpell));
 			Register(855, typeof(Seventh.EnergyFieldSpell));
 			Register(856, typeof(Mysticism.RisingColossusSpell));
+            Register(857, typeof(Mysticism.MassSleepSpell));
+
+          
 
 		}
 

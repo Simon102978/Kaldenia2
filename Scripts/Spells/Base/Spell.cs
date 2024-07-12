@@ -649,6 +649,8 @@ namespace Server.Spells
 						{
 							m_Caster.SendMessage(item.RequiredAffinity + ":" + item.RequiredValue.ToString());
 						}
+
+                        return true;
 					}
 					return false;
 				}
@@ -661,6 +663,12 @@ namespace Server.Spells
 
 		public virtual bool VerifyAffinity(CustomPlayerMobile pm, MagicAptitudeRequirement[] affinity)
 		{
+
+            if (pm.IsStaff())
+            {
+                return true;
+            }
+
 			bool valid = false;
 
 			for (int i = 0; !valid && i < affinity.Length; ++i)

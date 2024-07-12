@@ -286,6 +286,26 @@ namespace Server.Engines.Craft
 			craftItem = CraftItems.GetAt(index);
 			craftItem.Mana = 20;
 
+
+
+
+			index = AddCraft(typeof(MassSleepScroll),"Arcane","Sommeil de masse", 46.4, 96.4, typeof(BlankScroll), 1044377, 1, 1044378);
+			AddRes(index, typeof(SpidersSilk),"SpidersSilk", 1,"Vous n'avez pas assez de SpidersSilk.");
+			AddRes(index, typeof(Nightshade),"Nightshade", 1,"Vous n'avez pas assez de Nightshade.");
+			AddRes(index, typeof(Ginseng),"Ginseng", 1,"Vous n'avez pas assez de Ginseng.");
+			craftItem = CraftItems.GetAt(index);
+			craftItem.Mana = 20;
+
+
+
+
+
+
+
+
+
+
+
 			index = AddCraft(typeof(ManaVampireScroll),"Anarchique","Drain vampirique", 60.7, 110.7, typeof(BlankScroll), 1044377, 1, 1044378);
 			AddRes(index, typeof(BlackPearl),"BlackPearl", 1,"Vous n'avez pas assez de BlackPearl.");
 			AddRes(index, typeof(Bloodmoss),"Bloodmoss", 1,"Vous n'avez pas assez de Bloodmoss.");
@@ -816,6 +836,13 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(AnimalFormScroll),"Anarchique","Forme animale", -25.0, 25, typeof(BlankScroll), 1044377, 1, 1044378);
 			craftItem = CraftItems.GetAt(index);
 			craftItem.Mana = 4;
+
+			index = AddCraft(typeof(BombardementScroll),"Arcane","Bombardement", 60.7, 110.7, typeof(BlankScroll), 1044377, 1, 1044378);
+			AddRes(index, typeof(Bloodmoss),"Bloodmoss", 1,"Vous n'avez pas assez de Bloodmoss.");
+			AddRes(index, typeof(Garlic),"Garlic", 1,"Vous n'avez pas assez de Garlic.");
+			AddRes(index, typeof(SulfurousAsh),"SulfurousAsh", 1,"Vous n'avez pas assez de SulfurousAsh.");
+			craftItem = CraftItems.GetAt(index);
+			craftItem.Mana = 40;
 
 			index = AddCraft(typeof(ArchCureScroll),"Vie","Antidote de masse", 17.8, 67.8, typeof(BlankScroll), 1044377, 1, 1044378);
 			AddRes(index, typeof(Garlic),"Garlic", 1,"Vous n'avez pas assez de Garlic.");
