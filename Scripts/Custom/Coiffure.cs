@@ -133,7 +133,24 @@ namespace Server.Misc
 			Coiffure.Register(new Coiffure(0x204B, 30, true, true, 50));
 			Coiffure.Register(new Coiffure(0x204C, 30, true, true, 50));
 			Coiffure.Register(new Coiffure(0x204D, 30, true,true,50));
-			
+
+// Cheveux ajouté K2 
+
+			Coiffure.Register(new Coiffure(0xA4BE, 0, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4BF, 15, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4C0, 20, false));
+			Coiffure.Register(new Coiffure(0xA4C1, 25, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4C2, 30, false));
+			Coiffure.Register(new Coiffure(0xA4C3, 35, false));
+			Coiffure.Register(new Coiffure(0xA4C4, 40, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4C5, 45, false));
+			Coiffure.Register(new Coiffure(0xA4C6, 50, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4C7, 55, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4C8, 60, false));
+			Coiffure.Register(new Coiffure(0xA4C9, 65, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4CA, 70, false, true, 50));
+			Coiffure.Register(new Coiffure(0xA4CB, 75, false));
+
 
 
 
