@@ -14,7 +14,7 @@ namespace JournalCommand
 {
 	public class CJournalGump : BaseProjectMGump
 	{
-		public static string Path => "journalEntries.json";
+		public static string Path => "Logs/journalEntries.json";
 
 		public static void Initialize()
 		{
@@ -34,7 +34,24 @@ namespace JournalCommand
 			List<JournalEntry> journalEntries = new List<JournalEntry>();
 
 			// Charger les articles existants � partir du fichier JSON
-			string json = File.ReadAllText(Path);
+
+			string DirectoryPath = "Logs/";
+		
+			
+			if (!Directory.Exists(DirectoryPath))
+			{
+				Directory.CreateDirectory(DirectoryPath);
+			}
+
+			if(!File.Exists(Path))
+			{
+				var NewJson = JsonConvert.SerializeObject(journalEntries, Formatting.Indented);
+				File.WriteAllText(CJournalGump.Path, NewJson);
+			}
+
+							
+			string json = File.ReadAllText(Path);	
+
 			if (!string.IsNullOrEmpty(json))
 				journalEntries = JsonConvert.DeserializeObject<List<JournalEntry>>(json);
 
