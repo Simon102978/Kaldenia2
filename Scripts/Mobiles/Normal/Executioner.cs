@@ -7,7 +7,6 @@ namespace Server.Mobiles
     {
 		public DateTime DelayCharge;
 		public DateTime TuerSummoneur;
-		private DateTime m_GlobalTimer;
 
 		[Constructable]
         public Executioner()
@@ -84,8 +83,6 @@ namespace Server.Mobiles
 
 			if (Combatant != null)
 			{
-				if (m_GlobalTimer < DateTime.UtcNow)
-				{
 
 					if (!this.InRange(Combatant.Location, 3) && this.InRange(Combatant.Location, 10))
 					{
@@ -96,9 +93,7 @@ namespace Server.Mobiles
 						AntiSummon();
 					}
 
-					m_GlobalTimer = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(10, 15));
-				}
-
+				
 
 			}
 		}
@@ -107,8 +102,6 @@ namespace Server.Mobiles
 		{
 			if (DelayCharge < DateTime.UtcNow)
 			{
-				if (TuerSummoneur < DateTime.UtcNow)
-				{
 					if (Combatant is CustomPlayerMobile cp)
 					{
 
@@ -120,7 +113,7 @@ namespace Server.Mobiles
 
 						this.Location = cp.Location;
 					}
-				}
+				
 
 				DelayCharge = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(30, 50));
 			}
