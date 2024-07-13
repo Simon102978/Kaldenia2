@@ -104,6 +104,12 @@ namespace Server.Items.Crops
 				return;
 			}
 
+			if (from.Skills[SkillName.Botanique].Base < MinSkill)
+			{
+				from.SendMessage("Vous ne savez pas comment planter cela.");
+				return;
+			}
+
 			
 			if (from.CheckSkill(SkillName.Botanique,MinSkill,MaxSkill))
 			{
@@ -127,6 +133,7 @@ namespace Server.Items.Crops
 			else
 			{
 				from.SendMessage("Vous échouez à planter la graine.");
+				this.Consume();
 			}
 		
 			from.NextSkillTime = Core.TickCount + 1500;
