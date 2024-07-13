@@ -17,7 +17,7 @@ namespace Server.Mobiles
             {
                 Add(new GenericBuyInfo(typeof(Nails), 3, 20, 0x102E, 0));
                 Add(new GenericBuyInfo(typeof(Axle), 2, 20, 0x105B, 0, true));
-                Add(new GenericBuyInfo(typeof(PalmierBoard), 3, 20, 0x1BD7, 0, true));
+       //         Add(new GenericBuyInfo(typeof(PalmierBoard), 3, 20, 0x1BD7, 0, true));
                 Add(new GenericBuyInfo(typeof(DrawKnife), 10, 20, 0x10E4, 0));
                 Add(new GenericBuyInfo(typeof(Froe), 10, 20, 0x10E5, 0));
                 Add(new GenericBuyInfo(typeof(Scorp), 10, 20, 0x10E7, 0));
