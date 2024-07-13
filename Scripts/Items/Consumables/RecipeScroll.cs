@@ -79,7 +79,7 @@ namespace Server.Items
 
                     if (allRequiredSkills && chance >= 0.0)
                     {
-                        pm.SendLocalizedMessage(1073451, r.TextDefinition.ToString()); // You have learned a new recipe: ~1_RECIPE~
+                        pm.SendMessage("Vous venez d'apprendre la recette : " +  r.TextDefinition.ToString()); // You have learned a new recipe: ~1_RECIPE~
                         pm.AcquireRecipe(r);
                         Delete();
                     }

@@ -15,7 +15,8 @@ namespace Server.Engines.Craft
 {
 	public enum TailorRecipe
 	{
-		ElvenQuiver = 501,
+		[Description("Bustier ailé")]
+		BustierAile = 501,
 		QuiverOfFire = 502,
 		QuiverOfIce = 503,
 		QuiverOfBlight = 504,
@@ -310,8 +311,9 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Tabar11), "Hauts", "Grand tabar simple", 85.0, 105.0, typeof(Cloth), "Tissus", 12, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(Tabar8), "Hauts", "Tabar doré capitoné", 85.0, 105.0, typeof(Cloth), "Tissus", 12, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(ChemiseCorset2), "Hauts", "Chemise à Corset 2", 90.0, 110.0, typeof(Cloth), "Tissus", 8, "Vous n'avez pas assez de tissus.");
+			
 			index = AddCraft(typeof(Bustier), "Hauts", "Bustier ailé", 90.0, 110.0, typeof(Cloth), "Tissus", 8, "Vous n'avez pas assez de tissus.");
-
+			AddRecipe(index, (int)TailorRecipe.BustierAile);
 
 			index = AddCraft(typeof(PlainDress), "Robes", "Robe Paysane", 0.0, 20.0, typeof(Cloth), "Tissus", 10, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(FancyDress), "Robes", "Robe élégante", 10.0, 30.0, typeof(Cloth), "Tissus", 12, "Vous n'avez pas assez de tissus.");
