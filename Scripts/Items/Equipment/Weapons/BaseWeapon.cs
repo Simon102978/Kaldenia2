@@ -5416,10 +5416,22 @@ namespace Server.Items
 
             if (Quality == ItemQuality.Exceptional)
             {
-                Attributes.WeaponDamage += 35;
+                Attributes.WeaponDamage += 15;
             }
+			if (Quality == ItemQuality.Epic)
+			{
+				Attributes.WeaponDamage += 30;
+			}
+			if (Quality == ItemQuality.Legendary)
+			{
+				Attributes.WeaponDamage += 50;
+			}
 
-            if (!craftItem.ForceNonExceptional)
+
+
+
+
+			if (!craftItem.ForceNonExceptional)
             {
                 if (tool is BaseRunicTool)
                 {

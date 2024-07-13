@@ -74,7 +74,7 @@ namespace Server.Mobiles
                 Add(typeof(JointingPlane), 6);
                 Add(typeof(MouldingPlane), 6);
                 Add(typeof(DovetailSaw), 7);
-                Add(typeof(PalmierBoard), 2);
+                ////Add(typeof(PalmierBoard), 2);
                 Add(typeof(Axle), 1);
 
                 Add(typeof(WoodenShield), 3);
@@ -85,7 +85,7 @@ namespace Server.Mobiles
                 Add(typeof(Club), 3);
 
                 //Add(typeof(PalmierLog), 1);
-				//Add(typeof(PalmierBoard), 2);
+				////Add(typeof(PalmierBoard), 2);
 			}
         }
     }
