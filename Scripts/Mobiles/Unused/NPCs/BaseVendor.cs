@@ -880,7 +880,7 @@ namespace Server.Mobiles
 
 			int hours, minutes;
 			Server.Items.Clock.GetTime(from.Map, from.X, from.Y, out hours, out minutes);
-			return hours >= 22 || hours < 6;
+			return hours >= 24 || hours < 4;
 		}
 
 		public static List<Type> NightExemptTypes = new List<Type>
@@ -894,6 +894,9 @@ namespace Server.Mobiles
 
 		private bool IsExemptFromNightRestriction()
 		{
+			if (this is BaseVendor vendor && vendor.ContreBandier)
+				return true;
+
 			return NightExemptTypes.Any(t => t.IsInstanceOfType(this));
 		}
 

@@ -38,7 +38,7 @@ namespace Server.Mobiles
                 Add(typeof(Bag), 3);
                 Add(typeof(Pouch), 3);
                 Add(typeof(Backpack), 7);
-                Add(typeof(LupusLeather), 5);
+                Add(typeof(Leather), 5);
                 Add(typeof(Dagger), 10);
 
 
