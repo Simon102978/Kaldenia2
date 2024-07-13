@@ -3264,8 +3264,8 @@ namespace Server.Items
 				// Solution non elegante pour booster les dégats des joueurs du double.
 
 
-				anatomyBonus *= 2;
-				tacticsBonus *= 2;
+				anatomyBonus *= 1.5;
+				tacticsBonus *= 1.5;
 			}
 
 
@@ -3303,7 +3303,7 @@ namespace Server.Items
 			{
 				//	totalBonus = totalBonus * 70 / 100;
 
-				totalBonus = totalBonus * 60 / 100;
+				totalBonus = totalBonus * 80 / 100;
 			}
 
 
