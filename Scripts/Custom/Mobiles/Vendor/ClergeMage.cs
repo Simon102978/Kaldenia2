@@ -58,9 +58,14 @@ namespace Server.Mobiles
         {
                 if (NewGuild != null && NewGuild.VerifyMemberShip(cm))
                 {
-                    return true;
+                    CustomGuildMember cgm = NewGuild.GetMobileInfo(cm);
+
+                    if (cgm.CustomRank > 0)
+                    {
+                        return true;
+                    }      
                 }
-                
+
                 return base.CanBuyPlayer(cm);
 
         }
