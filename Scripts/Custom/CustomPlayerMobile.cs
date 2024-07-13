@@ -968,12 +968,6 @@ namespace Server.Mobiles
 			int GainGold = gold;
 			int taxesGold = 0;
 
-
-			if (Race.RaceID != 0)
-			{
-				taxesGold = (int)Math.Round((GainGold * 0.1), 0, MidpointRounding.AwayFromZero);
-			}
-
 			switch (m_StatutSocial)
 			{
 				case StatutSocialEnum.Aucun:
