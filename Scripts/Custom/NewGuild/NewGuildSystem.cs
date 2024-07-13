@@ -188,6 +188,23 @@ namespace Server.Custom.System
 			return null;
 
 		}
+        public bool VerifyMemberShip(CustomPlayerMobile cm)
+        {
+          return VerifyMemberShip(cm, cm.IdentiteID);
+        }
+
+        public bool VerifyMemberShip(CustomPlayerMobile cm, int identite)
+        {
+            foreach (CustomGuildMember item in m_Members)
+			{
+				if (item.Mobile == cm && item.Identite == identite)
+				{
+					return true;
+				}
+			}
+
+            return false;
+        }
 
 
 		#endregion

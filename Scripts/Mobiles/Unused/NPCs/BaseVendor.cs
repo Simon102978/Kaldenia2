@@ -930,13 +930,11 @@ namespace Server.Mobiles
                 Restock();
             }
 
-			if (from is CustomPlayerMobile)
+			if (from is CustomPlayerMobile cm) 
 			{
-				CustomPlayerMobile cm = (CustomPlayerMobile)from;
-
-				if (cm.StatutSocial < MinBuyClasse && !m_Contrebandier)
+				
+				if (!CanBuyPlayer(cm))
 				{
-					Say("Seul les " + MinBuyClasse + "s et les classes supérieurs peuvent acheter ici");
 					return;
 				}
 			}
@@ -1122,6 +1120,21 @@ namespace Server.Mobiles
             }
 
             from.Send(new EquipUpdate(pack));
+        }
+
+        public virtual bool CanBuyPlayer(CustomPlayerMobile cm)
+        {
+                if (cm.StatutSocial < MinBuyClasse && !m_Contrebandier)
+				{
+					Say("Seul les " + MinBuyClasse + "s et les classes supérieurs peuvent acheter ici");
+					return false;
+				}
+
+
+
+
+                return true;
+
         }
 
         public virtual void VendorSell(Mobile from)
