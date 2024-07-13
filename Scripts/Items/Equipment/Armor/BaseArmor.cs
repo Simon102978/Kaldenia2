@@ -1046,9 +1046,9 @@ namespace Server.Items
 			{
 				case ItemQuality.Low: return -1;
 				case ItemQuality.Normal: return 0;
-				case ItemQuality.Exceptional: return 1;
-				case ItemQuality.Epic: return 3;
-				case ItemQuality.Legendary: return 5;
+				case ItemQuality.Exceptional: return 3;
+				case ItemQuality.Epic: return 5;
+				case ItemQuality.Legendary: return 7;
 			}
 
 			return 0;
