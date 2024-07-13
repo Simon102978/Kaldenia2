@@ -105,7 +105,7 @@ namespace Server.Mobiles
                 Add(typeof(Lockpick), 1);
                 Add(typeof(TinkerTools), 2);
 
-                //Add(typeof(PalmierBoard), 1);
+                ////Add(typeof(PalmierBoard), 1);
 				//Add(typeof(PalmierLog), 1);
 				Add(typeof(PalmierWoodResourceCrate), 100);
 				Add(typeof(IronIngotResourceCrate), 100);
