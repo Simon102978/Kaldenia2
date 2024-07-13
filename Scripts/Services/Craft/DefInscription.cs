@@ -902,27 +902,8 @@ namespace Server.Engines.Craft
 
 
 
-	/*		index = AddCraft(typeof(EnchantedSwitch), 1044294, 1072893, 45.0, 95.0, typeof(BlankScroll), 1044377, 1, 1044378);
-			AddRes(index, typeof(SpidersSilk), 1044360, 1, 1044253);
-			AddRes(index, typeof(BlackPearl), 1044353, 1, 1044253);
-			AddRes(index, typeof(SwitchItem), 1073464, 1, 1044253);
-			ForceNonExceptional(index);
+	
 
-			index = AddCraft(typeof(RunedPrism), 1044294, 1073465, 45.0, 95.0, typeof(BlankScroll), 1044377, 1, 1044378);
-			AddRes(index, typeof(SpidersSilk), 1044360, 1, 1044253);
-			AddRes(index, typeof(BlackPearl), 1044353, 1, 1044253);
-			AddRes(index, typeof(HollowPrism), 1072895, 1, 1044253);
-			ForceNonExceptional(index);*/
-
-		/*	index = AddCraft(typeof(Runebook), "Autres", 1041267, 45.0, 95.0, typeof(BlankScroll), 1044377, 8, 1044378);
-			AddRes(index, typeof(RecallScroll), 1044445, 1, 1044253);
-			AddRes(index, typeof(GateTravelScroll), 1044446, 1, 1044253);
-*/
-			///index = AddCraft(typeof(BulkOrders.BulkOrderBook), "Autres", 1028793, 65.0, 115.0, typeof(BlankScroll), 1044377, 10, 1044378);
-
-			index = AddCraft(typeof(NewSpellbook), "Autres", "Livre de sort", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
-
-			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre de Barde", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
 
 			index = AddCraft(typeof(LivreClasse0Oubli), "Livre de Classe", "livre de l'oubli de classe 0", 50.0, 60, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
@@ -940,8 +921,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LivreMetier1Oubli), "Livre de Classe", "livre de l'oubli de métier 1", 70.0, 90, typeof(BlankScroll), 1044377, 10, 1044378);
 			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
-						index = AddCraft(typeof(LivreMetier2Oubli), "Livre de Classe", "livre de l'oubli de métier 2", 90.0, 100, typeof(BlankScroll), 1044377, 10, 1044378);
-		AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			index = AddCraft(typeof(LivreMetier2Oubli), "Livre de Classe", "livre de l'oubli de métier 2", 90.0, 100, typeof(BlankScroll), 1044377, 10, 1044378);
+			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
 
 
 			#region Skills
@@ -997,11 +978,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LivreSkillsWrestling), "Livre d'étude (skills)", "Wrestling", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			#endregion
 
-			index = AddCraft(typeof(BlankScroll), "Autres", "Parchemin Vierge", 10.0, 20.0, typeof(Kindling), "Kindling", 5, "Vous n'avez pas assez de Petit Bois.");
-			index = AddCraft(typeof(Missive), "Autres", "Missive", 15.0, 50.0, typeof(BlankScroll), 1044377, 1, 1044378);
 
-			index = AddCraft(typeof(CarnetAdresse), "Autres", "Carnet Adresse", 25.0, 50.0, typeof(BlankScroll), 1044377, 10, 1044378);
-			index = AddCraft(typeof(Calendrier), "Autres", "Calendrier", 0.0, 25.0, typeof(BlankScroll), 1044377, 5, 1044378);
 
 			/*
 						index = AddCraft(typeof(LivreArcher), "Livre de Classe", "livre d'archer", 90.0, 120, typeof(BlankScroll), 1044377, 10, 1044378);
@@ -1095,19 +1072,21 @@ namespace Server.Engines.Craft
 						AddRes(index, typeof(WoodPulp), 1113136, 10, 1113289);
 						AddRes(index, typeof(Beeswax), 1025154, 5, 1044253);*/
 
-			index = AddCraft(typeof(BlankScroll), "Autres", "Parchemin Vierge", 10.0, 30.0, typeof(Kindling), "Kindling", 1, "Vous n'avez pas assez de Petit Bois.");
+			#region Autres
+
+			index = AddCraft(typeof(NewSpellbook), "Autres", "Livre de sort", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
+
+			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre de Barde", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
+			index = AddCraft(typeof(BlankScroll), "Autres", "Parchemin Vierge", 10.0, 20.0, typeof(Kindling), "Kindling", 5, "Vous n'avez pas assez de Petit Bois.");
 			index = AddCraft(typeof(Missive), "Autres", "Missive", 15.0, 50.0, typeof(BlankScroll), 1044377, 1, 1044378);
+
+			index = AddCraft(typeof(CarnetAdresse), "Autres", "Carnet Adresse", 25.0, 50.0, typeof(BlankScroll), 1044377, 10, 1044378);
+			index = AddCraft(typeof(Calendrier), "Autres", "Calendrier", 0.0, 25.0, typeof(BlankScroll), 1044377, 5, 1044378);
+
 			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre  Barde", 15.0, 50.0, typeof(BlankScroll), 1044377, 20, 1044378);
-
-
-			/*			index = AddCraft(typeof(ScrollBinderDeed), 1044294, 1113135, 75.0, 125.0, typeof(WoodPulp), 1113136, 1, 1044253);
-						SetItemHue(index, 1641);*/
 
 			index = AddCraft(typeof(GargoyleBook100), "Autres", "Livre 100 pages", 60.0, 100.0, typeof(BlankScroll), 1044377, 40, 1044378);
 			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
-
-			//index = AddCraft(typeof(GargoyleBook200), "Autres", 1113291, 72.0, 100.0, typeof(BlankScroll), 1044377, 40, 1044378);
-		//	AddRes(index, typeof(Beeswax), 1025154, 4, 1053098);
 
 			index = AddCraft(typeof(CarnetAdresse), "Autres", "Carn Adresse", 25.0, 50.0, typeof(BlankScroll), 1044377, 40, 1044378);
 			AddRes(index, typeof(Beeswax), 1025154, 4, 1053098);
@@ -1124,7 +1103,8 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(GemMiningBook), "Autres", "Conn Gems", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
 
-			
+#endregion
+
 
 			MarkOption = true;
         }

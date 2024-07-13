@@ -113,8 +113,12 @@ namespace Server.Items
 			set
 			{
 				m_Charge = value;
+				if (m_Charge <= 0)
+				{
+					m_Charge = 0;
+					m_Bait = Bait.Aucun;
+				}
 				InvalidateProperties();
-
 			}
 		}
 

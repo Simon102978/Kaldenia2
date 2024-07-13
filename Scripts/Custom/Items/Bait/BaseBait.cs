@@ -29,8 +29,6 @@ namespace Server.Items
 
 				if (m_Charge <= 0)
 					Delete();
-				else if (m_Charge > 20)
-					m_Charge = 20;
 			}
 		}
 
@@ -99,7 +97,7 @@ namespace Server.Items
 				pole.InvalidateProperties();
 				return true;
 			}
-			// Si c'est le même type d'appât, on ajoute les charges
+			// Si c'est le même type d'appât, on ajoute les charges sans limite
 			else if (pole.Bait == this.Bait)
 			{
 				pole.Charge += this.Charge;
