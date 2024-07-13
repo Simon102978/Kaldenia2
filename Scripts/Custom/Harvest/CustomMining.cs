@@ -130,7 +130,7 @@ namespace Server.Engines.Harvest
 			oreAndStone.BonusResources = new BonusHarvestResource[]
 			{
 				new BonusHarvestResource(00.0, 90.0, null, null), //Nothing
-         		new BonusHarvestResource(10.0, 3.0, "Vous miner, vous avez déterré une géode!", typeof(BirdNest)),
+         		new BonusHarvestResource(10.0, 3.0, "Vous miner, vous avez déterré une géode!", typeof(Geode)),
 
 				/*new BonusHarvestResource(50.0, 00.1, "Ambre", typeof(Ambre)),
 				new BonusHarvestResource(50.0, 00.1, "Amethyste", typeof(Amethyste)),

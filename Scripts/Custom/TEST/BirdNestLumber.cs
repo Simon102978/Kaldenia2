@@ -38,9 +38,8 @@ public class BirdNest : Item
 			from.SendMessage("Vous avez trouvé une carte au trésor!");
 		}
 
-		// Le nid devient vide
-		this.ItemID = 0x1AD5; // ID graphique du nid vide
-		this.Name = "un nid d'oiseau vide";
+		this.Delete(); // le nid est détruit après inspection
+
 	}
 
 	private Item GetRandomHerb()

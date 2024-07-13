@@ -18,7 +18,7 @@ namespace Server
 	public static class LightCycle
     {
         public const int DayLevel = 0;
-        public const int NightLevel = 26; //12
+        public const int NightLevel = 20; //12
         public const int DungeonLevel = 26; //26
         public const int JailLevel = 0; //9
 
