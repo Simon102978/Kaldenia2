@@ -17,7 +17,7 @@ namespace Server.Gumps
 		private int m_Page;
 
         public StatutGump(CustomPlayerMobile from, int page = 0)
-            : base("Mobiles", 260, 322, true)
+            : base("Mobiles", 450, 322, true)
         {
 
 			m_From = from;
@@ -42,11 +42,12 @@ namespace Server.Gumps
 					if (item is CustomPlayerMobile cp)
 					{
 						AddHtmlTexteColored(x + 10, y + 20 + line * 25, 250, cp.Name, "#ffffff");
-						AddHtmlTexteColored(x + 175, y + 20 + line * 25, 100, cp.StatutSocial.ToString(), "#ffffff");
+						AddHtmlTexteColored(x + 250, y + 20 + line * 25, 100, cp.StatutSocial.ToString(), "#ffffff");
 						line++;
 					}
-					i++;
+					
 				}
+				i++;
 			}
 
 			if (page != 0)
