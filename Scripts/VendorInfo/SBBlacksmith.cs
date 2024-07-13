@@ -158,10 +158,10 @@ namespace Server.Mobiles
                 Add(typeof(Axe), 8);
                 Add(typeof(Bardiche), 11);
                 Add(typeof(Halberd), 11);
-                Add(typeof(ButcherKnife), 7);
-                Add(typeof(Cleaver), 7);
+                Add(typeof(ButcherKnife), 1);
+                Add(typeof(Cleaver), 1);
                 Add(typeof(Dagger), 1);
-                Add(typeof(SkinningKnife), 7);
+                Add(typeof(SkinningKnife), 1);
                 Add(typeof(Club), 8);
                 Add(typeof(HammerPick), 3);
                 Add(typeof(Mace), 4);
