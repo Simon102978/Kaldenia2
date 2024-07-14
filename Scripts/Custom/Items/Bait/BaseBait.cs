@@ -93,7 +93,7 @@ namespace Server.Items
 			{
 				pole.Bait = this.Bait;
 				pole.Charge = this.Charge;
-				this.Delete(); // On supprime l'objet appât une fois appliqué
+				this.Consume(); // On supprime l'objet appât une fois appliqué
 				pole.InvalidateProperties();
 				return true;
 			}
@@ -101,7 +101,7 @@ namespace Server.Items
 			else if (pole.Bait == this.Bait)
 			{
 				pole.Charge += this.Charge;
-				this.Delete();
+				this.Consume();
 				pole.InvalidateProperties();
 				return true;
 			}
