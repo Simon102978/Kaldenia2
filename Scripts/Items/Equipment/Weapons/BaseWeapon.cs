@@ -5416,15 +5416,15 @@ namespace Server.Items
 
             if (Quality == ItemQuality.Exceptional)
             {
-                Attributes.WeaponDamage += 15;
+                Attributes.WeaponDamage += 20;
             }
 			if (Quality == ItemQuality.Epic)
 			{
-				Attributes.WeaponDamage += 30;
+				Attributes.WeaponDamage += 60;
 			}
 			if (Quality == ItemQuality.Legendary)
 			{
-				Attributes.WeaponDamage += 50;
+				Attributes.WeaponDamage += 100;
 			}
 
 

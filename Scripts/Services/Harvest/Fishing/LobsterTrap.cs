@@ -14,7 +14,7 @@ namespace Server.Items
         public static readonly int BuoyID = 17611;
         public static readonly int MaxCatch = 5;
 
-        private Type m_BaitType;
+        //private Type m_BaitType;
         private bool m_EnhancedBait;
         private int m_BaitUses;
         private bool m_InUse;
@@ -22,7 +22,7 @@ namespace Server.Items
         private Mobile m_Owner;
         private int m_Bobs;
 
-        [CommandProperty(AccessLevel.GameMaster)]
+    /*    [CommandProperty(AccessLevel.GameMaster)]
         public Type BaitType
         {
             get { return m_BaitType; }
@@ -39,13 +39,13 @@ namespace Server.Items
                 InvalidateProperties();
             }
         }
-
-        [CommandProperty(AccessLevel.GameMaster)]
+	*/
+      /*  [CommandProperty(AccessLevel.GameMaster)]
         public bool EnhancedBait { get { return m_EnhancedBait; } set { m_EnhancedBait = value; InvalidateProperties(); } }
 
         [CommandProperty(AccessLevel.GameMaster)]
         public int BaitUses { get { return m_BaitUses; } set { m_BaitUses = value; InvalidateProperties(); } }
-
+	  */
         [CommandProperty(AccessLevel.GameMaster)]
         public bool InUse { get { return m_InUse; } set { m_InUse = value; InvalidateProperties(); } }
 
@@ -105,7 +105,7 @@ namespace Server.Items
         {
             base.GetProperties(list);
 
-            if (m_BaitType != null)
+    /*        if (m_BaitType != null)
             {
                 object label = FishInfo.GetFishLabel(m_BaitType);
                 if (label is int)
@@ -115,6 +115,7 @@ namespace Server.Items
 
                 list.Add(1116466, m_BaitUses.ToString());
             }
+	*/
         }
 
         public override void OnDoubleClick(Mobile from)
@@ -284,7 +285,7 @@ namespace Server.Items
                 if (m_Owner != null)
                     m_Owner.SendMessage("It looks like you caught something!");
 
-                CheckBait();
+              //  CheckBait();
             }
             else if (Utility.RandomBool())
             {
@@ -299,28 +300,30 @@ namespace Server.Items
                     m_Owner.SendMessage("It looks like you caught something!");
 
                 DropItem(item);
-                CheckBait();
+                //CheckBait();
             }
         }
 
-        private void CheckBait()
-        {
-            if (m_BaitType != null)
-            {
-                BaitUses--;
+		/*     private void CheckBait()
+			 {
+				 if (m_BaitType != null)
+				 {
+					 BaitUses--;
 
-                if (m_BaitUses == 0)
-                {
-                    BaitType = null;
-                    EnhancedBait = false;
+					 if (m_BaitUses == 0)
+					 {
+						 BaitType = null;
+						 EnhancedBait = false;
 
-                    if (m_Owner != null)
-                        m_Owner.SendMessage("You have used up the bait on your lobster trap.");
-                }
-            }
-        }
+						 if (m_Owner != null)
+							 m_Owner.SendMessage("You have used up the bait on your lobster trap.");
+					 }
+				 }
 
-        public void OnTrapLost()
+			 }
+		   */
+
+		public void OnTrapLost()
         {
             if (m_Timer != null)
                 m_Timer.Stop();
@@ -439,13 +442,13 @@ namespace Server.Items
             base.Serialize(writer);
             writer.Write(0);
 
-            int index = FishInfo.GetIndexFromType(m_BaitType);
-            writer.Write(index);
+          //  int index = FishInfo.GetIndexFromType(m_BaitType);
+          //  writer.Write(index);
             writer.Write(m_Bobs);
             writer.Write(m_InUse);
             writer.Write(m_Owner);
-            writer.Write(m_BaitUses);
-            writer.Write(m_EnhancedBait);
+         //   writer.Write(m_BaitUses);
+        //    writer.Write(m_EnhancedBait);
         }
 
         public override void Deserialize(GenericReader reader)
@@ -454,16 +457,16 @@ namespace Server.Items
             int version = reader.ReadInt();
 
             int index = reader.ReadInt();
-            m_BaitType = FishInfo.GetTypeFromIndex(index);
+          //  m_BaitType = FishInfo.GetTypeFromIndex(index);
 
             m_Bobs = reader.ReadInt();
             m_InUse = reader.ReadBool();
             m_Owner = reader.ReadMobile();
-            m_BaitUses = reader.ReadInt();
-            m_EnhancedBait = reader.ReadBool();
+          //  m_BaitUses = reader.ReadInt();
+          //  m_EnhancedBait = reader.ReadBool();
 
-            if (m_BaitType != null && m_BaitUses <= 0)
-                BaitType = null;
+           // if (m_BaitType != null && m_BaitUses <= 0)
+            //    BaitType = null;
 
             if (m_InUse)
                 StartTimer();

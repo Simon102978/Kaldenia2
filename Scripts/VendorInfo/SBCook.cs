@@ -39,8 +39,8 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(WoodenBowlOfTomatoSoup), 3, 20, 0x1606, 0));
 
                 Add(new GenericBuyInfo(typeof(RoastPig), 106, 20, 0x9BB, 0, true));
-                Add(new GenericBuyInfo(typeof(SackFlour), 3, 20, 0x1039, 0, true));
-                Add(new GenericBuyInfo(typeof(JarHoney), 3, 20, 0x9EC, 0, true));
+                Add(new GenericBuyInfo(typeof(SackFlour), 20, 20, 0x1039, 0, true));
+                Add(new GenericBuyInfo(typeof(JarHoney), 40, 20, 0x9EC, 0, true));
                 Add(new GenericBuyInfo(typeof(RollingPin), 2, 20, 0x1043, 0));
                 Add(new GenericBuyInfo(typeof(FlourSifter), 2, 20, 0x103E, 0));
                 Add(new GenericBuyInfo("1044567", typeof(Skillet), 3, 20, 0x97F, 0));
@@ -51,20 +51,20 @@ namespace Server.Mobiles
         {
             public InternalSellInfo()
             {
-                Add(typeof(CheeseWheel), 1);
-                Add(typeof(CookedBird), 1);
+                Add(typeof(CheeseWheel), 4);
+                Add(typeof(CookedBird), 3);
                 Add(typeof(RoastPig), 1);
-                Add(typeof(Cake), 1);
-                Add(typeof(JarHoney), 1);
-                Add(typeof(SackFlour), 1);
+                Add(typeof(Cake), 3);
+                Add(typeof(JarHoney), 15);
+                Add(typeof(SackFlour), 5);
                 Add(typeof(BreadLoaf), 1);
-                Add(typeof(ChickenLeg), 1);
+                Add(typeof(ChickenLeg), 3);
                 Add(typeof(LambLeg), 1);
                 Add(typeof(Skillet), 1);
                 Add(typeof(FlourSifter), 1);
                 Add(typeof(RollingPin), 1);
                 Add(typeof(Muffins), 1);
-                Add(typeof(ApplePie), 1);
+                Add(typeof(ApplePie), 15);
 
                 Add(typeof(WoodenBowlOfCarrots), 1);
                 Add(typeof(WoodenBowlOfCorn), 1);
