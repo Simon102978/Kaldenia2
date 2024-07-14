@@ -372,21 +372,21 @@ namespace Server.Engines.Craft
 			//#endregion
 
 			#region Volaille
-			index = AddCraft(typeof(CookedBird), "Viandes", "Volaille cuite", 25.0, 70.0, typeof(RawBird), "Volaille cru", 1, 1044253);
+			index = AddCraft(typeof(CookedBird), "Viandes", "Volaille cuite", 0.0, 70.0, typeof(RawBird), "Volaille cru", 1, 1044253);
 			////AddRecipe(index, (int)CookRecipesExp.CookedBird);
 			SetNeedHeat(index, true);
 			SetUseAllRes(index, true);
 			#endregion
 
 			#region Viande générique
-			index = AddCraft(typeof(Ribs), "Viandes", "Côtes levées", 25.0, 70.0, typeof(RawRibs), "Côtes levées crues", 1, 1044253);
+			index = AddCraft(typeof(Ribs), "Viandes", "Côtes levées", 0.0, 70.0, typeof(RawRibs), "Côtes levées crues", 1, 1044253);
 			//////AddRecipe(index, (int)CookRecipesExp.Ribs);
 			SetNeedHeat(index, true);
 			SetUseAllRes(index, true);
 			//index = AddCraft(typeof(CookedSteak), "Viandes", "Steak", 25.0, 70.0, typeof(RawSteakExp), "Steak cru", 1, "You need more Raw Steak");
 			//////AddRecipe(index, (int)CookRecipesExp.CookedSteak);
 			//SetNeedHeat(index, true);
-			index = AddCraft(typeof(FishSteak), "Viandes", "Poisson cuit", 25.0, 70.0, typeof(RawFishSteak), 1044476, 1, 1044253);
+			index = AddCraft(typeof(FishSteak), "Viandes", "Poisson cuit", 0.0, 70.0, typeof(RawFishSteak), 1044476, 1, 1044253);
 			SetNeedHeat(index, true);
 			SetUseAllRes(index, true);
 			ForceNonExceptional(index);
