@@ -272,213 +272,213 @@ public class CustomRecipeScrolls
 		public CoffreMaritimeRecipeScroll(Serial serial) : base(serial) { }
 		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
 		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		
-		}
 
-		public class FinishedWoodenChestRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public FinishedWoodenChestRecipeScroll() : base(50002) { }
-			public FinishedWoodenChestRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class ChickenCoopRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public ChickenCoopRecipeScroll() : base(50003) { }
-			public ChickenCoopRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class PoteauChaineRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public PoteauChaineRecipeScroll() : base(50004) { }
-			public PoteauChaineRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class MountedDreadHornRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public MountedDreadHornRecipeScroll() : base(50005) { }
-			public MountedDreadHornRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class FoliereRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public FoliereRecipeScroll() : base(60001) { }
-			public FoliereRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class CompositeRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public CompositeRecipeScroll() : base(60002) { }
-			public CompositeRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class PieuseRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public PieuseRecipeScroll() : base(60003) { }
-			public PieuseRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class ArbaviveRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public ArbaviveRecipeScroll() : base(60004) { }
-			public ArbaviveRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class LumitraitRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public LumitraitRecipeScroll() : base(60005) { }
-			public LumitraitRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class SuperiorRefreshPotionRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public SuperiorRefreshPotionRecipeScroll() : base(70001) { }
-			public SuperiorRefreshPotionRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class SuperiorHealPotionRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public SuperiorHealPotionRecipeScroll() : base(70002) { }
-			public SuperiorHealPotionRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class SuperiorCurePotionRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public SuperiorCurePotionRecipeScroll() : base(70003) { }
-			public SuperiorCurePotionRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class SuperiorAgilityPotionRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public SuperiorAgilityPotionRecipeScroll() : base(70004) { }
-			public SuperiorAgilityPotionRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class SuperiorStrengthPotionRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public SuperiorStrengthPotionRecipeScroll() : base(70005) { }
-			public SuperiorStrengthPotionRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class InvisibilityPotionRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public InvisibilityPotionRecipeScroll() : base(70006) { }
-			public InvisibilityPotionRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class PetBondingPotionRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public PetBondingPotionRecipeScroll() : base(70007) { }
-			public PetBondingPotionRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class AutoResPotionRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public AutoResPotionRecipeScroll() : base(70008) { }
-			public AutoResPotionRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class ForgeRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public ForgeRecipeScroll() : base(80001) { }
-			public ForgeRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class EnclumeRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public EnclumeRecipeScroll() : base(80002) { }
-			public EnclumeRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class CoffreFortRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public CoffreFortRecipeScroll() : base(80003) { }
-			public CoffreFortRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class CoffreMetalVisqueuxRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public CoffreMetalVisqueuxRecipeScroll() : base(80004) { }
-			public CoffreMetalVisqueuxRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class CoffreMetalRouilleRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public CoffreMetalRouilleRecipeScroll() : base(80005) { }
-			public CoffreMetalRouilleRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
-
-		public class CoffreMetalDoreRecipeScroll : RecipeScroll
-		{
-			[Constructable]
-			public CoffreMetalDoreRecipeScroll() : base(80006) { }
-			public CoffreMetalDoreRecipeScroll(Serial serial) : base(serial) { }
-			public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
-			public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
-		}
 	}
+
+	public class FinishedWoodenChestRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public FinishedWoodenChestRecipeScroll() : base(50002) { }
+		public FinishedWoodenChestRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class ChickenCoopRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public ChickenCoopRecipeScroll() : base(50003) { }
+		public ChickenCoopRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class PoteauChaineRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public PoteauChaineRecipeScroll() : base(50004) { }
+		public PoteauChaineRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class MountedDreadHornRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public MountedDreadHornRecipeScroll() : base(50005) { }
+		public MountedDreadHornRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class FoliereRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public FoliereRecipeScroll() : base(60001) { }
+		public FoliereRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class CompositeRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public CompositeRecipeScroll() : base(60002) { }
+		public CompositeRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class PieuseRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public PieuseRecipeScroll() : base(60003) { }
+		public PieuseRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class ArbaviveRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public ArbaviveRecipeScroll() : base(60004) { }
+		public ArbaviveRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class LumitraitRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public LumitraitRecipeScroll() : base(60005) { }
+		public LumitraitRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class SuperiorRefreshPotionRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public SuperiorRefreshPotionRecipeScroll() : base(70001) { }
+		public SuperiorRefreshPotionRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class SuperiorHealPotionRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public SuperiorHealPotionRecipeScroll() : base(70002) { }
+		public SuperiorHealPotionRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class SuperiorCurePotionRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public SuperiorCurePotionRecipeScroll() : base(70003) { }
+		public SuperiorCurePotionRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class SuperiorAgilityPotionRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public SuperiorAgilityPotionRecipeScroll() : base(70004) { }
+		public SuperiorAgilityPotionRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class SuperiorStrengthPotionRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public SuperiorStrengthPotionRecipeScroll() : base(70005) { }
+		public SuperiorStrengthPotionRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class InvisibilityPotionRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public InvisibilityPotionRecipeScroll() : base(70006) { }
+		public InvisibilityPotionRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class PetBondingPotionRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public PetBondingPotionRecipeScroll() : base(70007) { }
+		public PetBondingPotionRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class AutoResPotionRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public AutoResPotionRecipeScroll() : base(70008) { }
+		public AutoResPotionRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class ForgeRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public ForgeRecipeScroll() : base(80011) { }
+		public ForgeRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class EnclumeRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public EnclumeRecipeScroll() : base(80010) { }
+		public EnclumeRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class CoffreFortRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public CoffreFortRecipeScroll() : base(80003) { }
+		public CoffreFortRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class CoffreMetalVisqueuxRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public CoffreMetalVisqueuxRecipeScroll() : base(80004) { }
+		public CoffreMetalVisqueuxRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class CoffreMetalRouilleRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public CoffreMetalRouilleRecipeScroll() : base(80005) { }
+		public CoffreMetalRouilleRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class CoffreMetalDoreRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public CoffreMetalDoreRecipeScroll() : base(80006) { }
+		public CoffreMetalDoreRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+}

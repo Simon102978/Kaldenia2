@@ -215,14 +215,11 @@ namespace Server.Engines.Harvest
 			{
 				#region Void Pool Items
 				var hmap = HarvestMap.CheckMapOnHarvest(from, loc, def);
-
 				if (hmap != null && hmap.Resource >= CraftResource.Iron && hmap.Resource <= CraftResource.Valorite)
 				{
 					hmap.UsesRemaining--;
 					hmap.InvalidateProperties();
-
 					var info = CraftResources.GetInfo(hmap.Resource);
-
 					if (info != null)
 						return info.ResourceTypes[1];
 				}
@@ -240,9 +237,71 @@ namespace Server.Engines.Harvest
 					return Loot.GemTypes[Utility.Random(Loot.GemTypes.Length)];
 
 				var chance = tool is RockHammer ? 0.50 : 0.15;
-
 				if (pm != null && pm.StoneMining && (pm.ToggleMiningStone || pm.ToggleStoneOnly) && from.Skills[SkillName.Mining].Base >= 100.0 && chance > Utility.RandomDouble())
+				{
+					// Ajout de la logique pour les types de granit personnalisés
+					if (resource.Types.Length > 1 && resource.Types[1] != null)
+					{
+						Type stoneType = resource.Types[1];
+						if (stoneType == typeof(Granite))
+							return typeof(Granite);
+						else if (stoneType == typeof(BronzeGranite))
+							return typeof(BronzeGranite);
+						else if (stoneType == typeof(CopperGranite))
+							return typeof(CopperGranite);
+						else if (stoneType == typeof(SonneGranite))
+							return typeof(SonneGranite);
+						else if (stoneType == typeof(ArgentGranite))
+							return typeof(ArgentGranite);
+						else if (stoneType == typeof(BorealeGranite))
+							return typeof(BorealeGranite);
+						else if (stoneType == typeof(ChrysteliarGranite))
+							return typeof(ChrysteliarGranite);
+						else if (stoneType == typeof(GlaciasGranite))
+							return typeof(GlaciasGranite);
+						else if (stoneType == typeof(LithiarGranite))
+							return typeof(LithiarGranite);
+						else if (stoneType == typeof(AcierGranite))
+							return typeof(AcierGranite);
+						else if (stoneType == typeof(DurianGranite))
+							return typeof(DurianGranite);
+						else if (stoneType == typeof(EquilibrumGranite))
+							return typeof(EquilibrumGranite);
+						else if (stoneType == typeof(GoldGranite))
+							return typeof(GoldGranite);
+						else if (stoneType == typeof(JolinarGranite))
+							return typeof(JolinarGranite);
+						else if (stoneType == typeof(JusticiumGranite))
+							return typeof(JusticiumGranite);
+						else if (stoneType == typeof(AbyssiumGranite))
+							return typeof(AbyssiumGranite);
+						else if (stoneType == typeof(BloodiriumGranite))
+							return typeof(BloodiriumGranite);
+						else if (stoneType == typeof(HerbrositeGranite))
+							return typeof(HerbrositeGranite);
+						else if (stoneType == typeof(KhandariumGranite))
+							return typeof(KhandariumGranite);
+						else if (stoneType == typeof(MytherilGranite))
+							return typeof(MytherilGranite);
+						else if (stoneType == typeof(SombralirGranite))
+							return typeof(SombralirGranite);
+						else if (stoneType == typeof(DraconyrGranite))
+							return typeof(DraconyrGranite);
+						else if (stoneType == typeof(HeptazionGranite))
+							return typeof(HeptazionGranite);
+						else if (stoneType == typeof(OceanisGranite))
+							return typeof(OceanisGranite);
+						else if (stoneType == typeof(BraziumGranite))
+							return typeof(BraziumGranite);
+						else if (stoneType == typeof(LuneriumGranite))
+							return typeof(LuneriumGranite);
+						else if (stoneType == typeof(MarinarGranite))
+							return typeof(MarinarGranite);
+						else if (stoneType == typeof(NostalgiumGranite))
+							return typeof(NostalgiumGranite);
+					}
 					return resource.Types[1];
+				}
 
 				if (pm != null && pm.ToggleStoneOnly)
 					return null;
