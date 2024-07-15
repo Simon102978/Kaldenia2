@@ -28,7 +28,9 @@ namespace Server.Mobiles
 				//this.Add( new GenericBuyInfo( typeof( MilkBucket ), 300, 10, 0x0FFA, 0 ) );
 				//this.Add( new GenericBuyInfo( typeof( CheeseForm ), 300, 10, 0x0E78, 0 ) );
 
-					this.Add( new GenericBuyInfo( "Plant Bowl", typeof( Engines.Plants.PlantBowl ), 10, 50, 0x15FD, 0 ) );
+				this.Add(new GenericBuyInfo("Outil de Jardinage", typeof(OutilsJardin), 20, 20, 0x15FD, 0));
+
+				this.Add( new GenericBuyInfo( "Plant Bowl", typeof( Engines.Plants.PlantBowl ), 10, 50, 0x15FD, 0 ) );
 					this.Add( new GenericBuyInfo( "Terre Fertile", typeof( FertileDirt ), 3, 999, 0xF81, 0 ) );
 					this.Add( new GenericBuyInfo( "Random Plant Seed", typeof( Engines.Plants.Seed ), 20, 100, 0xDCF, 0 ) );
 
