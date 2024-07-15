@@ -7,469 +7,466 @@ using System.Collections.Generic;
 
 namespace Server.Items
 {
-    [Flipable(17615, 17616)]
-    public class LobsterTrap : Container, ITelekinesisable
-    {
-        public static readonly int TrapID = Utility.RandomMinMax(17615, 17616);
-        public static readonly int BuoyID = 17611;
-        public static readonly int MaxCatch = 5;
+	[Flipable(17615, 17616)]
+	public class LobsterTrap : Container, ITelekinesisable
+	{
+		public static readonly int TrapID = Utility.RandomMinMax(17615, 17616);
+		public static readonly int BuoyID = 17611;
+		public static readonly int MaxCatch = 5;
 
-        //private Type m_BaitType;
-        private bool m_EnhancedBait;
-        private int m_BaitUses;
-        private bool m_InUse;
-        private Timer m_Timer;
-        private Mobile m_Owner;
-        private int m_Bobs;
+		private Type m_BaitType;
+		private bool m_EnhancedBait;
+		private int m_BaitUses;
+		private bool m_InUse;
+		private Timer m_Timer;
+		private Mobile m_Owner;
+		private int m_Bobs;
 
-    /*    [CommandProperty(AccessLevel.GameMaster)]
-        public Type BaitType
-        {
-            get { return m_BaitType; }
-            set
-            {
-                m_BaitType = value;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public Type BaitType
+		{
+			get { return m_BaitType; }
+			set
+			{
+				m_BaitType = value;
 
-                if (m_BaitType == null)
-                {
-                    m_EnhancedBait = false;
-                    m_BaitUses = 0;
-                }
+				if (m_BaitType == null)
+				{
+					m_EnhancedBait = false;
+					m_BaitUses = 0;
+				}
 
-                InvalidateProperties();
-            }
-        }
-	*/
-      /*  [CommandProperty(AccessLevel.GameMaster)]
-        public bool EnhancedBait { get { return m_EnhancedBait; } set { m_EnhancedBait = value; InvalidateProperties(); } }
+				InvalidateProperties();
+			}
+		}
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int BaitUses { get { return m_BaitUses; } set { m_BaitUses = value; InvalidateProperties(); } }
-	  */
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool InUse { get { return m_InUse; } set { m_InUse = value; InvalidateProperties(); } }
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool EnhancedBait { get { return m_EnhancedBait; } set { m_EnhancedBait = value; InvalidateProperties(); } }
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public Mobile Owner { get { return m_Owner; } set { m_Owner = value; InvalidateProperties(); } }
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int BaitUses { get { return m_BaitUses; } set { m_BaitUses = value; InvalidateProperties(); } }
 
-        public override int LabelNumber { get { if (m_Owner == null) return 1096487; else return 0; } }
-        public override bool DisplaysContent => false;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool InUse { get { return m_InUse; } set { m_InUse = value; InvalidateProperties(); } }
 
-        [Constructable]
-        public LobsterTrap() : base(17615)
-        {
-        }
+		[CommandProperty(AccessLevel.GameMaster)]
+		public Mobile Owner { get { return m_Owner; } set { m_Owner = value; InvalidateProperties(); } }
 
-        public void OnTelekinesis(Mobile from)
-        {
-            if (m_InUse && ItemID == BuoyID && CanUseTrap(from))
-                EndTimer(from);
-        }
+		public override int LabelNumber { get { if (m_Owner == null) return 1096487; else return 0; } }
+		public override bool DisplaysContent => false;
 
-        public override bool OnDragDropInto(Mobile from, Item item, Point3D p)
-        {
-            return false;
-        }
+		[Constructable]
+		public LobsterTrap() : base(17615)
+		{
+		}
 
-        public override bool OnDragDrop(Mobile from, Item dropped)
-        {
-            return false;
-        }
+		public void OnTelekinesis(Mobile from)
+		{
+			if (m_InUse && ItemID == BuoyID && CanUseTrap(from))
+				EndTimer(from);
+		}
 
-        public override bool TryDropItem(Mobile from, Item dropped, bool sendFullMessage)
-        {
-            return false;
-        }
+		public override bool OnDragDropInto(Mobile from, Item item, Point3D p)
+		{
+			return false;
+		}
 
-        public override void AddNameProperty(ObjectPropertyList list)
-        {
-            if (ItemID == TrapID)
-            {
-                if (Items.Count == 0)
-                    list.Add(1116389); //empty lobster trap
-                else if (Items.Count >= MaxCatch)
-                    list.Add(1149599); //full lobster trap
-                else
-                    list.Add(1096487); //lobster trap
-            }
-            else
-            {
-                if (m_Owner == null)
-                    list.Add(1096487); //lobster trap
-                else
-                    list.Add(1116390, m_Owner.Name);
-            }
-        }
+		public override bool OnDragDrop(Mobile from, Item dropped)
+		{
+			return false;
+		}
 
-        public override void GetProperties(ObjectPropertyList list)
-        {
-            base.GetProperties(list);
+		public override bool TryDropItem(Mobile from, Item dropped, bool sendFullMessage)
+		{
+			return false;
+		}
 
-    /*        if (m_BaitType != null)
-            {
-                object label = FishInfo.GetFishLabel(m_BaitType);
-                if (label is int)
-                    list.Add(1116468, string.Format("#{0}", (int)label)); //baited to attract: ~1_val~
-                else if (label is string)
-                    list.Add(1116468, (string)label);
+		public override void AddNameProperty(ObjectPropertyList list)
+		{
+			if (ItemID == TrapID)
+			{
+				if (Items.Count == 0)
+					list.Add(1116389); //empty lobster trap
+				else if (Items.Count >= MaxCatch)
+					list.Add(1149599); //full lobster trap
+				else
+					list.Add(1096487); //lobster trap
+			}
+			else
+			{
+				if (m_Owner == null)
+					list.Add(1096487); //lobster trap
+				else
+					list.Add(1116390, m_Owner.Name);
+			}
+		}
 
-                list.Add(1116466, m_BaitUses.ToString());
-            }
-	*/
-        }
+		public override void GetProperties(ObjectPropertyList list)
+		{
+			base.GetProperties(list);
 
-        public override void OnDoubleClick(Mobile from)
-        {
-            if (IsChildOf(from.Backpack))
-            {
-                if (ItemID == BuoyID)
-                    ItemID = TrapID;
+			if (m_BaitType != null)
+			{
+				object label = FishInfo.GetFishLabel(m_BaitType);
+				if (label is int)
+					list.Add(1116468, string.Format("#{0}", (int)label)); //baited to attract: ~1_val~
+				else if (label is string)
+					list.Add(1116468, (string)label);
 
-                if (Items.Count > 0)
-                {
-                    DumpContents(from);
-                    from.SendMessage("You dump the contents of the lobster trap into your pack.");
-                }
-                else
-                {
-                    from.SendLocalizedMessage(500974); //What water do you want to fish in?
-                    from.BeginTarget(-1, true, TargetFlags.None, OnTarget);
-                }
-            }
-            else if (ItemID == BuoyID)
-            {
-                if (RootParent != null)
-                    ItemID = TrapID;
+				list.Add(1116466, m_BaitUses.ToString());
+			}
+		}
 
-                InvalidateProperties();
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (IsChildOf(from.Backpack))
+			{
+				if (ItemID == BuoyID)
+					ItemID = TrapID;
 
-                if (CanUseTrap(from))
-                    EndTimer(from);
+				if (Items.Count > 0)
+				{
+					DumpContents(from);
+					from.SendMessage("You dump the contents of the lobster trap into your pack.");
+				}
+				else
+				{
+					from.SendLocalizedMessage(500974); //What water do you want to fish in?
+					from.BeginTarget(-1, true, TargetFlags.None, OnTarget);
+				}
+			}
+			else if (ItemID == BuoyID)
+			{
+				if (RootParent != null)
+					ItemID = TrapID;
 
-                InvalidateProperties();
-            }
-            else
-            {
-                from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
-            }
-        }
+				InvalidateProperties();
 
-        private void DumpContents(Mobile from)
-        {
-            Container pack = from.Backpack;
+				if (CanUseTrap(from))
+					EndTimer(from);
 
-            foreach (Item item in new List<Item>(Items))
-            {
-                if (item == null)
-                    continue;
+				InvalidateProperties();
+			}
+			else
+			{
+				from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
+			}
+		}
 
-                if (!pack.TryDropItem(from, item, false))
-                    item.MoveToWorld(from.Location, from.Map);
+		private void DumpContents(Mobile from)
+		{
+			Container pack = from.Backpack;
 
-                from.SendLocalizedMessage(1116386, string.Format("#{0}", item.LabelNumber));
-            }
-        }
+			foreach (Item item in new List<Item>(Items))
+			{
+				if (item == null)
+					continue;
 
-        public void OnTarget(Mobile from, object targeted)
-        {
-            if (Deleted || m_InUse)
-                return;
+				if (!pack.TryDropItem(from, item, false))
+					item.MoveToWorld(from.Location, from.Map);
 
-            IPoint3D pnt = (IPoint3D)targeted;
-            Map map = from.Map;
+				from.SendLocalizedMessage(1116386, string.Format("#{0}", item.LabelNumber));
+			}
+		}
 
-            if (map == null || map == Map.Internal)
-                return;
+		public void OnTarget(Mobile from, object targeted)
+		{
+			if (Deleted || m_InUse)
+				return;
 
-            int x = pnt.X; int y = pnt.Y; int z = pnt.Z;
+			IPoint3D pnt = (IPoint3D)targeted;
+			Map map = from.Map;
 
-            if (!from.InRange(pnt, 6))
-            {
-                from.SendLocalizedMessage(1116388); // The trap is too cumbersome to deploy that far away.
-            }
-            else if (!IsValidTile(targeted, map))
-                from.SendMessage("You cannot deploy a trap there!"); //TODO: Get Cliloc
-            else if (!IsValidLocation(x, y, z, map))
-                from.SendLocalizedMessage(1116393); //The location is too close to another trap.
-            else
-            {
-                m_Owner = from;
-                ItemID = BuoyID;
-                InvalidateProperties();
-                Movable = false;
-                MoveToWorld(new Point3D(x, y, z), map);
-                m_Bobs = 0;
-                m_InUse = true;
-                StartTimer();
+			if (map == null || map == Map.Internal)
+				return;
 
-                Effects.PlaySound(this, map, Utility.Random(0x025, 3));
-                Effects.SendMovingEffect(from, this, TrapID, 7, 0, false, false);
-            }
-        }
+			int x = pnt.X; int y = pnt.Y; int z = pnt.Z;
 
-        public void StartTimer()
-        {
-            if (m_Timer != null)
-                m_Timer.Stop();
+			if (!from.InRange(pnt, 6))
+			{
+				from.SendLocalizedMessage(1116388); // The trap is too cumbersome to deploy that far away.
+			}
+			else if (!IsValidTile(targeted, map))
+				from.SendMessage("You cannot deploy a trap there!"); //TODO: Get Cliloc
+			else if (!IsValidLocation(x, y, z, map))
+				from.SendLocalizedMessage(1116393); //The location is too close to another trap.
+			else
+			{
+				m_Owner = from;
+				ItemID = BuoyID;
+				InvalidateProperties();
+				Movable = false;
+				MoveToWorld(new Point3D(x, y, z), map);
+				m_Bobs = 0;
+				m_InUse = true;
+				StartTimer();
 
-            m_Timer = Timer.DelayCall(TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1), OnTick);
-        }
+				Effects.PlaySound(this, map, Utility.Random(0x025, 3));
+				Effects.SendMovingEffect(from, this, TrapID, 7, 0, false, false);
+			}
+		}
 
-        public void EndTimer(Mobile from)
-        {
-            if (m_Timer != null)
-            {
-                m_Timer.Stop();
-                m_Timer = null;
-            }
+		public void StartTimer()
+		{
+			if (m_Timer != null)
+				m_Timer.Stop();
 
-            if (from == null) from = m_Owner;
-            if (from == null)
-                return;
+			m_Timer = Timer.DelayCall(TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1), OnTick);
+		}
 
-            Movable = true;
-            ItemID = TrapID;
-            InvalidateProperties();
-            m_InUse = false;
+		public void EndTimer(Mobile from)
+		{
+			if (m_Timer != null)
+			{
+				m_Timer.Stop();
+				m_Timer = null;
+			}
 
-            if (RootParent == null)
-            {
-                if (from.Backpack == null || !from.Backpack.TryDropItem(from, this, false))
-                    MoveToWorld(from.Location, from.Map);
-            }
-        }
+			if (from == null) from = m_Owner;
+			if (from == null)
+				return;
 
-        public void OnTick()
-        {
-            m_Bobs++;
+			Movable = true;
+			ItemID = TrapID;
+			InvalidateProperties();
+			m_InUse = false;
 
-            PublicOverheadMessage(MessageType.Regular, 0, 1116364); //**bob**
+			if (RootParent == null)
+			{
+				if (from.Backpack == null || !from.Backpack.TryDropItem(from, this, false))
+					MoveToWorld(from.Location, from.Map);
+			}
+		}
 
-            if (m_Owner != null && (!SpecialFishingNet.ValidateDeepWater(Map, X, Y) || m_Owner.Skills[SkillName.Fishing].Base >= 75.0))
-            {
-                m_Owner.CheckSkill(SkillName.Fishing, 0, m_Owner.Skills[SkillName.Fishing].Cap);
-            }
+		public void OnTick()
+		{
+			m_Bobs++;
 
-            if (!m_InUse)
-            {
-                EndTimer(null);
-                return;
-            }
+			PublicOverheadMessage(MessageType.Regular, 0, 1116364); //**bob**
 
-            if (m_Bobs * 5 > Utility.Random(100))
-            {
-                OnTrapLost();
-                return;
-            }
+			if (m_Owner != null && (!SpecialFishingNet.ValidateDeepWater(Map, X, Y) || m_Owner.Skills[SkillName.Fishing].Base >= 75.0))
+			{
+				m_Owner.CheckSkill(SkillName.Fishing, 0, m_Owner.Skills[SkillName.Fishing].Cap);
+			}
 
-            bool rare = true;
-            double bump = m_Bobs / 100.0;
+			if (!m_InUse)
+			{
+				EndTimer(null);
+				return;
+			}
 
-            Type type = FishInfo.GetSpecialItem(m_Owner, this, Location, bump, this is LavaLobsterTrap);
+			if (m_Bobs * 5 > Utility.Random(100))
+			{
+				OnTrapLost();
+				return;
+			}
 
-            if (type != null)
-            {
-                Item item = Loot.Construct(type);
-                DropItem(item);
+			bool rare = true;
+			double bump = m_Bobs / 100.0;
 
-                if (item is RareCrabAndLobster && rare)
-                {
-                    RareCrabAndLobster fish = (RareCrabAndLobster)item;
+			Type type = FishInfo.GetSpecialItem(m_Owner, this, Location, bump, this is LavaLobsterTrap);
 
-                    fish.Fisher = m_Owner;
-                    fish.DateCaught = DateTime.UtcNow;
-                    fish.Weight = Utility.RandomMinMax(10, 200);
-                    fish.Stackable = false;
-                }
+			if (type != null)
+			{
+				Item item = Loot.Construct(type);
+				DropItem(item);
 
-                if (m_Owner != null)
-                    m_Owner.SendMessage("It looks like you caught something!");
+				if (item is RareCrabAndLobster && rare)
+				{
+					RareCrabAndLobster fish = (RareCrabAndLobster)item;
 
-              //  CheckBait();
-            }
-            else if (Utility.RandomBool())
-            {
-                Item item;
+					fish.Fisher = m_Owner;
+					fish.DateCaught = DateTime.UtcNow;
+					fish.Weight = Utility.RandomMinMax(10, 200);
+					fish.Stackable = false;
+				}
 
-                if (Utility.RandomBool())
-                    item = new Crab();
-                else
-                    item = new Lobster();
+				if (m_Owner != null)
+					m_Owner.SendMessage("It looks like you caught something!");
 
-                if (m_Owner != null)
-                    m_Owner.SendMessage("It looks like you caught something!");
+				CheckBait();
+			}
+			else if (Utility.RandomBool())
+			{
+				Item item;
 
-                DropItem(item);
-                //CheckBait();
-            }
-        }
+				if (Utility.RandomBool())
+					item = new Crab();
+				else
+					item = new Lobster();
 
-		/*     private void CheckBait()
-			 {
-				 if (m_BaitType != null)
-				 {
-					 BaitUses--;
+				if (m_Owner != null)
+					m_Owner.SendMessage("It looks like you caught something!");
 
-					 if (m_BaitUses == 0)
-					 {
-						 BaitType = null;
-						 EnhancedBait = false;
+				DropItem(item);
+				CheckBait();
+			}
+		}
 
-						 if (m_Owner != null)
-							 m_Owner.SendMessage("You have used up the bait on your lobster trap.");
-					 }
-				 }
+		private void CheckBait()
+		{
+			if (m_BaitType != null)
+			{
+				BaitUses--;
 
-			 }
-		   */
+				if (m_BaitUses == 0)
+				{
+					BaitType = null;
+					EnhancedBait = false;
+
+					if (m_Owner != null)
+						m_Owner.SendMessage("You have used up the bait on your lobster trap.");
+				}
+			}
+		}
 
 		public void OnTrapLost()
-        {
-            if (m_Timer != null)
-                m_Timer.Stop();
+		{
+			if (m_Timer != null)
+				m_Timer.Stop();
 
-            Effects.PlaySound(this, Map, Utility.Random(0x025, 3));
+			Effects.PlaySound(this, Map, Utility.Random(0x025, 3));
 
-            IPooledEnumerable eable = GetMobilesInRange(12);
-            foreach (Mobile mob in eable)
-            {
-                if (mob is PlayerMobile && m_Owner != null)
-                    mob.SendLocalizedMessage(1116385, m_Owner.Name); //~1_NAME~'s trap bouy is pulled beneath the waves.
-            }
-            eable.Free();
+			IPooledEnumerable eable = GetMobilesInRange(12);
+			foreach (Mobile mob in eable)
+			{
+				if (mob is PlayerMobile && m_Owner != null)
+					mob.SendLocalizedMessage(1116385, m_Owner.Name); //~1_NAME~'s trap bouy is pulled beneath the waves.
+			}
+			eable.Free();
 
-            Delete();
-        }
+			Delete();
+		}
 
-        private bool CanUseTrap(Mobile from)
-        {
-            if (m_Owner == null || RootParent != null)
-                return false;
+		private bool CanUseTrap(Mobile from)
+		{
+			if (m_Owner == null || RootParent != null)
+				return false;
 
-            if (!from.InRange(Location, 6))
-            {
-                from.SendLocalizedMessage(500295); //You are too far away to do that.
-                return false;
-            }
+			if (!from.InRange(Location, 6))
+			{
+				from.SendLocalizedMessage(500295); //You are too far away to do that.
+				return false;
+			}
 
-            //is owner, or in same guild
-            if (m_Owner == from || (from.Guild != null && from.Guild == m_Owner.Guild))
-                return true;
+			//is owner, or in same guild
+			if (m_Owner == from || (from.Guild != null && from.Guild == m_Owner.Guild))
+				return true;
 
-            //partied
-            if (Party.Get(from) == Party.Get(m_Owner))
-                return true;
+			//partied
+			if (Party.Get(from) == Party.Get(m_Owner))
+				return true;
 
-            //fel rules
-            if (from.Map != null && from.Map.Rules == MapRules.FeluccaRules)
-            {
-                from.CriminalAction(true);
-                from.SendLocalizedMessage(1149823); //The owner of the lobster trap notices you committing a criminal act!
+			//fel rules
+			if (from.Map != null && from.Map.Rules == MapRules.FeluccaRules)
+			{
+				from.CriminalAction(true);
+				from.SendLocalizedMessage(1149823); //The owner of the lobster trap notices you committing a criminal act!
 
-                if (m_Owner != null)
-                    m_Owner.SendMessage("You notice {0} taking your lobster trap out of the water!", from.Name);
+				if (m_Owner != null)
+					m_Owner.SendMessage("You notice {0} taking your lobster trap out of the water!", from.Name);
 
-                return true;
-            }
+				return true;
+			}
 
-            from.SendLocalizedMessage(1116391); //You realize that the trap isn't yours so you leave it alone.
-            return false;
-        }
+			from.SendLocalizedMessage(1116391); //You realize that the trap isn't yours so you leave it alone.
+			return false;
+		}
 
-        public virtual bool IsValidTile(object targeted, Map map)
-        {
-            int tileID = 0;
+		public virtual bool IsValidTile(object targeted, Map map)
+		{
+			int tileID = 0;
 
-            if (targeted is LandTarget)
-            {
-                LandTarget obj = (LandTarget)targeted;
-                tileID = obj.TileID;
-            }
+			if (targeted is LandTarget)
+			{
+				LandTarget obj = (LandTarget)targeted;
+				tileID = obj.TileID;
+			}
 
-            else if (targeted is StaticTarget)
-            {
-                StaticTarget obj = (StaticTarget)targeted;
-                tileID = obj.ItemID;
-            }
+			else if (targeted is StaticTarget)
+			{
+				StaticTarget obj = (StaticTarget)targeted;
+				tileID = obj.ItemID;
+			}
 
-            for (int i = 0; i < UseableTiles.Length; i++)
-            {
-                if (UseableTiles[i] == tileID)
-                    return true;
-            }
-            return false;
-        }
+			for (int i = 0; i < UseableTiles.Length; i++)
+			{
+				if (UseableTiles[i] == tileID)
+					return true;
+			}
+			return false;
+		}
 
-        public bool IsValidLocation(int x, int y, int z, Map map)
-        {
-            IPooledEnumerable eable = map.GetItemsInRange(new Point3D(x, y, z), 1);
+		public bool IsValidLocation(int x, int y, int z, Map map)
+		{
+			IPooledEnumerable eable = map.GetItemsInRange(new Point3D(x, y, z), 1);
 
-            foreach (Item item in eable)
-            {
-                if (item is LobsterTrap)
-                {
-                    eable.Free();
-                    return false;
-                }
-            }
-            eable.Free();
-            return true;
-        }
+			foreach (Item item in eable)
+			{
+				if (item is LobsterTrap)
+				{
+					eable.Free();
+					return false;
+				}
+			}
+			eable.Free();
+			return true;
+		}
 
-        public virtual int[] UseableTiles => m_WaterTiles;
-        private readonly int[] m_WaterTiles = new int[]
-        {
+		public virtual int[] UseableTiles => m_WaterTiles;
+		private readonly int[] m_WaterTiles = new int[]
+		{
             //Deep Water
             0x00AA, 0x00A9,
-            0x00A8, 0x00AB,
-            0x0136, 0x0137,
+			0x00A8, 0x00AB,
+			0x0136, 0x0137,
             //Shallow Water
             0x5797, 0x579C,
-            0x746E, 0x7485,
-            0x7490, 0x74AB,
-            0x74B5, 0x75D5,
+			0x746E, 0x7485,
+			0x7490, 0x74AB,
+			0x74B5, 0x75D5,
             //Static tiles
             0x1797, 0x1798,
-            0x1799, 0x179A,
-            0x179B, 0x179C,
+			0x1799, 0x179A,
+			0x179B, 0x179C,
 
-        };
+		};
 
-        public LobsterTrap(Serial serial) : base(serial) { }
+		public LobsterTrap(Serial serial) : base(serial) { }
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(0);
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
 
-          //  int index = FishInfo.GetIndexFromType(m_BaitType);
-          //  writer.Write(index);
-            writer.Write(m_Bobs);
-            writer.Write(m_InUse);
-            writer.Write(m_Owner);
-         //   writer.Write(m_BaitUses);
-        //    writer.Write(m_EnhancedBait);
-        }
+			int index = FishInfo.GetIndexFromType(m_BaitType);
+			writer.Write(index);
+			writer.Write(m_Bobs);
+			writer.Write(m_InUse);
+			writer.Write(m_Owner);
+			writer.Write(m_BaitUses);
+			writer.Write(m_EnhancedBait);
+		}
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            int version = reader.ReadInt();
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
 
-            int index = reader.ReadInt();
-          //  m_BaitType = FishInfo.GetTypeFromIndex(index);
+			int index = reader.ReadInt();
+			m_BaitType = FishInfo.GetTypeFromIndex(index);
 
-            m_Bobs = reader.ReadInt();
-            m_InUse = reader.ReadBool();
-            m_Owner = reader.ReadMobile();
-          //  m_BaitUses = reader.ReadInt();
-          //  m_EnhancedBait = reader.ReadBool();
+			m_Bobs = reader.ReadInt();
+			m_InUse = reader.ReadBool();
+			m_Owner = reader.ReadMobile();
+			m_BaitUses = reader.ReadInt();
+			m_EnhancedBait = reader.ReadBool();
 
-           // if (m_BaitType != null && m_BaitUses <= 0)
-            //    BaitType = null;
+			if (m_BaitType != null && m_BaitUses <= 0)
+				BaitType = null;
 
-            if (m_InUse)
-                StartTimer();
-        }
-    }
+			if (m_InUse)
+				StartTimer();
+		}
+	}
 }

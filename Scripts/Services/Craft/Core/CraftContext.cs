@@ -194,6 +194,8 @@ namespace Server.Engines.Craft
             _Systems[9] = DefTailoring.CraftSystem;
             _Systems[10] = DefTinkering.CraftSystem;
 			_Systems[11] = DefPeinture.CraftSystem;
+			_Systems[12] = DefBotanique.CraftSystem;
+
 
 			EventSink.WorldSave += OnSave;
             EventSink.WorldLoad += OnLoad;

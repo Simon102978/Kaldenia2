@@ -1,6 +1,10 @@
 ﻿using Server.Items;
 using Server.Mobiles;
 using System;
+using System.Collections.Generic;
+using System.Collections;
+
+
 
 namespace Server.Engines.Craft
 {
@@ -112,25 +116,30 @@ namespace Server.Engines.Craft
 		{
 			int index;
 			// Décorations
-			AddCraft(typeof(Vase), "Décorations", "Vase", 52.5, 102.5, typeof(Granite), 1044514, 1, 1044513);
-
-			AddCraft(typeof(Vase1), "Décorations", "Vase 1", 52.5, 102.5, typeof(Granite), 1044514, 1, 1044513);
-			AddCraft(typeof(Vase2), "Décorations", "Vase 2", 52.5, 102.5, typeof(Granite), 1044514, 1, 1044513);
-			AddCraft(typeof(Vase3), "Décorations", "Vase 3", 52.5, 102.5, typeof(Granite), 1044514, 1, 1044513);
-			AddCraft(typeof(Vase4), "Décorations", "Vase 4", 52.5, 102.5, typeof(Granite), 1044514, 1, 1044513);
-			AddCraft(typeof(Vase5), "Décorations", "Vase 5", 52.5, 102.5, typeof(Granite), 1044514, 1, 1044513);
-
-			AddCraft(typeof(VaseTresor), "Décorations", "Vase Trésor", 52.5, 102.5, typeof(Granite), 1044514, 1, 1044513);
-			AddCraft(typeof(Urne), "Décorations", "Urne", 52.5, 102.5, typeof(Granite), 1044514, 1, 1044513);
-			AddCraft(typeof(Urne2), "Décorations", "Urne 2", 52.5, 102.5, typeof(Granite), 1044514, 1, 1044513);
-
-
-			AddCraft(typeof(LargeVase), "Décorations", "Grand vase", 52.5, 102.5, typeof(Granite), 1044514, 3, 1044513);
-			AddCraft(typeof(SmallUrn), "Décorations", "Petite urne", 82.0, 125.0, typeof(Granite), 1044514, 3, 1044513);
-			AddCraft(typeof(TeteBuffle), "Décorations", "Tête de Buffle", 82.0, 125.0, typeof(Granite), 1044514, 3, 1044513);
-			AddCraft(typeof(SmallTowerSculpture), "Décorations", "Monolite", 82.0, 125.0, typeof(Granite), 1044514, 3, 1044513);
-			AddCraft(typeof(GargoylePainting), "Décorations", "Sculpture murale", 83.0, 125.0, typeof(Granite), 1044514, 5, 1044513);
-			AddCraft(typeof(GargoyleVase), "Décorations", "Vase sculpté", 80.0, 125.0, typeof(Granite), 1044514, 3, 1044513);
+			index = AddCraft(typeof(VaseEndommage), "Décorations", "Vase Endommagé", 30.0, 80.0, typeof(Granite), 1044514, 2, 1044513);
+			index = AddCraft(typeof(PetitVaseLigne), "Décorations", "Petit Vase Ligné", 33.0, 83.0, typeof(Granite), 1044514, 2, 1044513);
+			index = AddCraft(typeof(Vase), "Décorations", "Vase", 36.0, 86.0, typeof(Granite), 1044514, 1, 1044513);
+			index = AddCraft(typeof(LargeVase), "Décorations", "Grand vase", 39.0, 89.0, typeof(Granite), 1044514, 3, 1044513);
+			index = AddCraft(typeof(LargeVase2), "Décorations", "Grand Vase 2", 45.0, 95.0, typeof(Granite), 1044514, 4, 1044513);
+			index = AddCraft(typeof(GrandVaseLigne), "Décorations", "Grand Vase Ligné", 48.0, 98.0, typeof(Granite), 1044514, 4, 1044513);
+			index = AddCraft(typeof(VaseGobelet), "Décorations", "Vase Gobelet", 51.0, 101.0, typeof(Granite), 1044514, 4, 1044513);
+			index = AddCraft(typeof(Urne3), "Décorations", "Urne 3", 54.0, 104.0, typeof(Granite), 1044514, 5, 1044513);
+			index = AddCraft(typeof(VaseAnthracite), "Décorations", "Vase Anthracite", 57.0, 107.0, typeof(Granite), 1044514, 5, 1044513);
+			index = AddCraft(typeof(VaseDore), "Décorations", "Vase Doré", 60.0, 110.0, typeof(Granite), 1044514, 5, 1044513);
+			index = AddCraft(typeof(UrneBleue), "Décorations", "Urne Bleue", 63.0, 113.0, typeof(Granite), 1044514, 6, 1044513);
+			index = AddCraft(typeof(VaseDecoratif), "Décorations", "Vase Décoratif", 66.0, 116.0, typeof(Granite), 1044514, 5, 1044513);
+			index = AddCraft(typeof(UrneEvasee), "Décorations", "Urne Évasée", 69.0, 119.0, typeof(Granite), 1044514, 6, 1044513);
+			index = AddCraft(typeof(VaseTravaille), "Décorations", "Vase Travaillé", 72.0, 122.0, typeof(Granite), 1044514, 6, 1044513);
+			index = AddCraft(typeof(GrandeUrne), "Décorations", "Grande Urne", 75.0, 125.0, typeof(Granite), 1044514, 7, 1044513);
+			index = AddCraft(typeof(VaseEgyptien), "Décorations", "Vase Egyptien", 78.0, 128.0, typeof(Granite), 1044514, 7, 1044513);
+			index = AddCraft(typeof(VaseRunique), "Décorations", "Vase Runique", 81.0, 131.0, typeof(Granite), 1044514, 8, 1044513);
+			index = AddCraft(typeof(VaseEgyptien2), "Décorations", "Vase Egyptien 2", 84.0, 134.0, typeof(Granite), 1044514, 8, 1044513);
+			index = AddCraft(typeof(VaseRunique2), "Décorations", "Vase Runique 2", 87.0, 137.0, typeof(Granite), 1044514, 9, 1044513);
+			index = AddCraft(typeof(VaseTresor), "Décorations", "Vase Trésor", 90.0, 140.0, typeof(Granite), 1044514, 10, 1044513);
+			index = AddCraft(typeof(GargoyleVase), "Décorations", "Vase sculpté", 93.0, 143.0, typeof(Granite), 1044514, 3, 1044513);
+			index = AddCraft(typeof(GargoylePainting), "Décorations", "Sculpture murale", 95.0, 152.0, typeof(Granite), 1044514, 5, 1044513);
+			index = AddCraft(typeof(SmallUrn), "Décorations", "Petite urne", 96.0, 146.0, typeof(Granite), 1044514, 3, 1044513);
+			index = AddCraft(typeof(SmallTowerSculpture), "Décorations", "Monolite", 99.0, 149.0, typeof(Granite), 1044514, 3, 1044513); 
 			/*
 						index = AddCraft(typeof(AnniversaryVaseTall), 1044501, 1156147, 60.0, 110.0, typeof(Granite), 1044514, 6, 1044513);
 						AddRecipe(index, (int)MasonryRecipes.AnniversaryVaseTall);
@@ -154,20 +163,27 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Cloth), 1044286, 100, 1044287);
 
 			// Statues
-			AddCraft(typeof(StatueSouth), "Statues", "Statue 1", 60.0, 110.0, typeof(Granite), 1044514, 5, 1044513);
-			AddCraft(typeof(StatueNorth), "Statues", "Statue 2", 60.0, 110.0, typeof(Granite), 1044514, 5, 1044513);
-			AddCraft(typeof(StatueEast), "Statues", "Statue 3", 60.0, 110.0, typeof(Granite), 1044514, 5, 1044513);
-			AddCraft(typeof(StatuePegasusSouth), "Statues", "Statue 4", 70.0, 110.0, typeof(Granite), 1044514, 10, 1044513);
-			AddCraft(typeof(StatueGargoyleEast), "Statues", "Statue 5", 54.5, 104.5, typeof(Granite), 1044514, 20, 1044513);
-			AddCraft(typeof(StatueGryphonEast), "Statues", "Statue 6", 54.5, 104.5, typeof(Granite), 1044514, 15, 1044513);
-			AddCraft(typeof(StatueLion), "Statues", "Statue de Lion", 54.5, 104.5, typeof(Granite), 1044514, 15, 1044513);
-			AddCraft(typeof(StatueEgypt), "Statues", "Statue Egyptienne", 54.5, 104.5, typeof(Granite), 1044514, 15, 1044513);
-
-			AddCraft(typeof(StatueAnge), "Statues", "Statue Ange", 54.5, 104.5, typeof(Granite), 1044514, 15, 1044513);
-			AddCraft(typeof(StatueSirene), "Statues", "Statue Sirene", 54.5, 104.5, typeof(Granite), 1044514, 15, 1044513);
-			AddCraft(typeof(StatueEgypOr), "Statues", "Statue Egypt Or", 54.5, 104.5, typeof(Granite), 1044514, 15, 1044513);
-
-			AddCraft(typeof(ColoneMarbre), "Statues", "Colonne de Marbre", 54.5, 104.5, typeof(Granite), 1044514, 15, 1044513);
+			AddCraft(typeof(StatueGargoyleEast), "Statues", "Statue 5", 30.0, 80.0, typeof(Granite), 1044514, 20, 1044513);
+			AddCraft(typeof(StatueGryphonEast), "Statues", "Statue 6", 35.0, 85.0, typeof(Granite), 1044514, 15, 1044513);
+			AddCraft(typeof(StatueSouth), "Statues", "Statue 1", 40.0, 90.0, typeof(Granite), 1044514, 5, 1044513);
+			AddCraft(typeof(StatueNorth), "Statues", "Statue 2", 42.0, 92.0, typeof(Granite), 1044514, 5, 1044513);
+			AddCraft(typeof(StatueEast), "Statues", "Statue 3", 44.0, 94.0, typeof(Granite), 1044514, 5, 1044513);
+			AddCraft(typeof(StatueSwan), "Statues", "Statue Swan", 46.0, 96.0, typeof(Granite), 1044514, 8, 1044513);
+			AddCraft(typeof(StatueSwanNoir), "Statues", "Statue Swan Noir", 48.0, 98.0, typeof(Granite), 1044514, 9, 1044513);
+			AddCraft(typeof(FauconDore), "Statues", "Faucon Doré", 50.0, 100.0, typeof(Granite), 1044514, 7, 1044513);
+			AddCraft(typeof(StatueDon), "Statues", "Statue Don", 52.0, 102.0, typeof(Granite), 1044514, 10, 1044513);
+			AddCraft(typeof(StatueJackal), "Statues", "Statue Jackal", 54.0, 104.0, typeof(Granite), 1044514, 11, 1044513);
+			AddCraft(typeof(StatuePegasusSouth), "Statues", "Statue 4", 56.0, 106.0, typeof(Granite), 1044514, 10, 1044513);
+			AddCraft(typeof(LutrinMarbre), "Statues", "Lutrin Marbre", 58.0, 108.0, typeof(Granite), 1044514, 15, 1044513);
+			AddCraft(typeof(StatueMeduse), "Statues", "Statue Meduse", 60.0, 110.0, typeof(Granite), 1044514, 12, 1044513);
+			AddCraft(typeof(StatueLion), "Statues", "Statue Lion", 62.0, 112.0, typeof(Granite), 1044514, 13, 1044513);
+			AddCraft(typeof(StatueEgypte), "Statues", "Statue Egypte", 64.0, 114.0, typeof(Granite), 1044514, 14, 1044513);
+			AddCraft(typeof(ColonneMarbre), "Statues", "Colonne Marbre", 66.0, 116.0, typeof(Granite), 1044514, 25, 1044513);
+			AddCraft(typeof(StatueCheval), "Statues", "Statue Cheval", 68.0, 118.0, typeof(Granite), 1044514, 15, 1044513);
+			AddCraft(typeof(StatueAnge), "Statues", "Statue Ange", 70.0, 120.0, typeof(Granite), 1044514, 16, 1044513);
+			AddCraft(typeof(StatueGuerrier), "Statues", "Statue Guerrier", 72.0, 122.0, typeof(Granite), 1044514, 18, 1044513);
+			AddCraft(typeof(AltarBlanc), "Statues", "Autel Blanc", 74.0, 124.0, typeof(Granite), 1044514, 30, 1044513);
+			AddCraft(typeof(StatueDieu), "Statues", "Statue Dieu", 76.0, 126.0, typeof(Granite), 1044514, 20, 1044513); 
 
 			// Paliers
 			index = AddCraft(typeof(CraftableHouseItem), "Paliers", "Palier 1", 60.0, 110.0, typeof(Granite), 1044514, 5, 1044513);
@@ -227,10 +243,10 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(StoneAnvilEastDeed), "Forge", "Anclume en granite (E)", 90.0, 115.0, typeof(Granite), 1044514, 30, 1044513);
 
 
-			/*
+			
 						// Stone Weapons
-						AddCraft(typeof(StoneWarSword), 1111719, 1022304, 55.0, 105.0, typeof(Granite), 1044514, 18, 1044513);
-			*/
+				//		AddCraft(typeof(StoneWarSword), 1111719, 1022304, 55.0, 105.0, typeof(Granite), 1044514, 18, 1044513);
+			
 			/*          // Stone Walls
 					  index = AddCraft(typeof(CraftableHouseItem), 1155792, 1155794, 60.0, 110.0, typeof(Granite), 1044514, 10, 1044513);
 					  SetData(index, CraftableItemType.RoughWindowless);
@@ -301,17 +317,37 @@ namespace Server.Engines.Craft
 			Repair = true;
 			CanEnhance = true;
 
-			SetSubRes(typeof(Granite), 1044525);
+			SetSubRes(typeof(Granite), "Granite");
 
-			AddSubRes(typeof(Granite), 1044525, 00.0, 1044514, 1044526);
-			AddSubRes(typeof(DullCopperGranite), 1044023, 65.0, 1044514, 1044526);
-			AddSubRes(typeof(ShadowIronGranite), 1044024, 70.0, 1044514, 1044526);
-			AddSubRes(typeof(CopperGranite), 1044025, 75.0, 1044514, 1044526);
-			AddSubRes(typeof(BronzeGranite), 1044026, 80.0, 1044514, 1044526);
-			AddSubRes(typeof(GoldGranite), 1044027, 85.0, 1044514, 1044526);
-			AddSubRes(typeof(AgapiteGranite), 1044028, 90.0, 1044514, 1044526);
-			AddSubRes(typeof(VeriteGranite), 1044029, 95.0, 1044514, 1044526);
-			AddSubRes(typeof(ValoriteGranite), 1044030, 99.0, 1044514, 1044526);
+			AddSubRes(typeof(Granite), "Granite", 0.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(BronzeGranite), "Granite de Bronze", 0.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(CopperGranite), "Granite de Copper", 0.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(SonneGranite), "Granite de Sonne", 20.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(ArgentGranite), "Granite de Argent", 20.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(BorealeGranite), "Granite de Boréale", 20.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(ChrysteliarGranite), "Granite de Chrysteliar", 20.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(GlaciasGranite), "Granite de Glacias", 20.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(LithiarGranite), "Granite de Lithiar", 20.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(AcierGranite), "Granite de Acier", 40.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(DurianGranite), "Granite de Durian", 40.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(EquilibrumGranite), "Granite de Équilibrum", 40.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(GoldGranite), "Granite de Or", 40.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(JolinarGranite), "Granite de Jolinar", 40.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(JusticiumGranite), "Granite de Justicium", 40.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(AbyssiumGranite), "Granite de Abyssium", 60.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(BloodiriumGranite), "Granite de Bloodirium", 60.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(HerbrositeGranite), "Granite de Herbrosite", 60.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(KhandariumGranite), "Granite de Khandarium", 60.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(MytherilGranite), "Granite de Mytheril", 60.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(SombralirGranite), "Granite de Sombralir", 60.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(DraconyrGranite), "Granite de Draconyr", 80.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(HeptazionGranite), "Granite de Heptazion", 80.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(OceanisGranite), "Granite de Océanis", 80.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(BraziumGranite), "Granite de Brazium", 80.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(LuneriumGranite), "Granite de Lunerium", 80.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(MarinarGranite), "Granite de Marinar", 80.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(NostalgiumGranite), "Granite de Nostalgium", 100.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+		
 		}
 	}
 }

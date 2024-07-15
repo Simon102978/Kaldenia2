@@ -359,12 +359,21 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ItemQuality Quality
         {
-            get { return m_Quality; }
-            set
-            {
-                UnscaleDurability();
+			get { return m_Quality; }
+			set
+			{
+				m_Quality = value;
+
+				if (Quality == ItemQuality.Legendary)
+					Attributes.WeaponDamage = 60;
+				else if (Quality == ItemQuality.Epic)
+					Attributes.WeaponDamage = 40;
+				else if (Quality == ItemQuality.Exceptional)
+					Attributes.WeaponDamage = 20;
+
+
+				UnscaleDurability();
                 UnscaleUses();
-                m_Quality = value;
                 ScaleDurability();
                 ScaleUses();
                 InvalidateProperties();
@@ -665,11 +674,11 @@ namespace Server.Items
 		public void ScaleWeaponDamage()
 		{
 			if (m_Quality == ItemQuality.Legendary)
-				Attributes.WeaponDamage = 100;
-			else if (m_Quality == ItemQuality.Epic)
 				Attributes.WeaponDamage = 60;
+			else if (m_Quality == ItemQuality.Epic)
+				Attributes.WeaponDamage = 40;
 			else if (m_Quality == ItemQuality.Exceptional)
-				Attributes.WeaponDamage = 30;
+				Attributes.WeaponDamage = 20;
 
 			CraftResourceInfo info = CraftResources.GetInfo(m_Resource);
 
@@ -5420,11 +5429,11 @@ namespace Server.Items
             }
 			if (Quality == ItemQuality.Epic)
 			{
-				Attributes.WeaponDamage += 60;
+				Attributes.WeaponDamage += 40;
 			}
 			if (Quality == ItemQuality.Legendary)
 			{
-				Attributes.WeaponDamage += 100;
+				Attributes.WeaponDamage += 60;
 			}
 
 

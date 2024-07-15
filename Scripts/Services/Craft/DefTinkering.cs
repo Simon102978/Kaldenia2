@@ -193,6 +193,15 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(EmptyAleBottle), "Outils", "Bouteille de Bière Vide", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
 			index = AddCraft(typeof(SewingKit), "Outils", "Kit de couture (Tissus)", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
 			index = AddCraft(typeof(BoneSewingKit), "Outils", "Kit de couture (Os)", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
+			index = AddCraft(typeof(Pinceaux), "Outils", "Pinceaux", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
+			index = AddCraft(typeof(Blowpipe), "Outils", "Soufflage de verre", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
+			index = AddCraft(typeof(OutilsJardin), "Outils", "Outils de Jardinage", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
+
+			index = AddCraft(typeof(ToileVierge), "Outils", "Toile Vierge (Peinture)", 10.0, 50.0, typeof(PalmierBoard), "Planche de Palmier", 5, "Vous n'avez pas suffisament de planche de palmier");
+
+
+			index = AddCraft(typeof(MalletAndChisel), "Outils", "Maillet et Ciseau (Pierre)", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
+
 			index = AddCraft(typeof(LeatherSewingKit), "Outils", "Kit de couture (Cuir)", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
 			index = AddCraft(typeof(Hatchet), "Outils", "Hachette", 20.0, 40.0, typeof(IronIngot), 1044036, 4, 1044037);
 			index = AddCraft(typeof(Shovel), "Outils", "Pelle", 20.0, 40.0, typeof(IronIngot), 1044036, 4, 1044037);

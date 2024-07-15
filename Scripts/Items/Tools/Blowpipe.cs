@@ -20,6 +20,7 @@ namespace Server.Items
         {
             Weight = 1.0;
             Hue = 0x3B9;
+			Name = "Tube à souffler le verre";
         }
 
         public Blowpipe(Serial serial)

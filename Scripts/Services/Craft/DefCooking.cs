@@ -187,7 +187,6 @@ namespace Server.Engines.Craft
 			#region Ingrédients humides
 			index = AddCraft(typeof(CocoaButter), "Ingrédients humides", "Beurre de cacao", 0.0, 50.0, typeof(BagOfCocoa), 1080530, 1, 1044253);
 			SetItemHue(index, 0x457);
-			SetNeedOven(index, true);
 			//index = AddCraft(typeof(CocoaLiquor), "Ingrédients humides", "Liqueur de cacao", 0.0, 50.0, typeof(BagOfCocoa), 1080530, 1, 1044253);
 			//AddRes(index, typeof(EmptyPewterBowl), 1025629, 1, 1044253);
 			//SetItemHue(index, 0x46A);
@@ -1195,7 +1194,10 @@ namespace Server.Engines.Craft
 			SetRequireResTarget(index);
 			index = AddCraft(typeof(WoodPulp), "Teinture", "Pulpe de bois", 50.0, 70.0, typeof(BarkFragment), "Morceau d’écorce", 1, 1044253);
 			AddRes(index, typeof(Pitcher), 1046458, 1, 1044253);
-			index = AddCraft(typeof(Charcoal), "Teinture", "Charbon", 0.0, 50.0, typeof(PalmierBoard), "Planche", 1, 1044351);
+			index = AddCraft(typeof(Charcoal), "Teinture", "Charbon de palmier", 0.0, 50.0, typeof(PalmierBoard), "Planche", 1, 1044351);
+			SetUseAllRes(index, true);
+			SetNeedHeat(index, true);
+			index = AddCraft(typeof(Charcoal), "Teinture", "Charbon d'érable", 0.0, 50.0, typeof(ErableBoard), "Planche", 1, 1044351);
 			SetUseAllRes(index, true);
 			SetNeedHeat(index, true);
 			#endregion
