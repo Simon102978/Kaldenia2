@@ -874,11 +874,29 @@ namespace Server.Items
 					DistributeExceptionalBonuses(true);
 				}
 
+				if (m_Quality != ItemQuality.Epic && value == ItemQuality.Epic)
+				{
+					DistributeEpicBonuses(false);
+				}
+				else if (m_Quality == ItemQuality.Exceptional && value != ItemQuality.Exceptional)
+				{
+					DistributeEpicBonuses(true);
+				}
+
+				if (m_Quality != ItemQuality.Legendary && value == ItemQuality.Legendary)
+				{
+					DistributeLegendaryBonuses(false);
+				}
+				else if (m_Quality == ItemQuality.Legendary && value != ItemQuality.Legendary)
+				{
+					DistributeLegendaryBonuses(true);
+				}
 
 
 
 
-                m_Quality = value;
+
+				m_Quality = value;
                 Invalidate();
                 InvalidateProperties();
                 ScaleDurability();
@@ -2675,8 +2693,16 @@ namespace Server.Items
             {
                 DistributeExceptionalBonuses(false); // Not sure since when, but right now 15 points are added, not 14.
             }
+			if (Quality == ItemQuality.Epic && !craftItem.ForceNonExceptional)
+			{
+				DistributeEpicBonuses(false); // Not sure since when, but right now 15 points are added, not 14.
+			}
+			if (Quality == ItemQuality.Legendary && !craftItem.ForceNonExceptional)
+			{
+				DistributeLegendaryBonuses(false); // Not sure since when, but right now 15 points are added, not 14.
+			}
 
-            if (tool is BaseRunicTool && !craftItem.ForceNonExceptional)
+			if (tool is BaseRunicTool && !craftItem.ForceNonExceptional)
                 ((BaseRunicTool)tool).ApplyAttributesTo(this);
 
             if (!craftItem.ForceNonExceptional)
@@ -2705,37 +2731,91 @@ namespace Server.Items
 			switch (Resource)
 			{
 				case CraftResource.None:
-					Mod += 1;
+					Mod += 1; // Fer
 					break;
 				case CraftResource.Iron:
-					Mod += 1;
-					break;
-				case CraftResource.DullCopper:
-					Mod += 1;
-					break;
-				case CraftResource.ShadowIron:
-					Mod += 1;
-					break;
-				case CraftResource.Copper:
-					Mod += 2;
+					Mod += 1; // Fer
 					break;
 				case CraftResource.Bronze:
-					Mod += 2;
+					Mod += 1; // Bronze
+					break;
+				case CraftResource.Copper:
+					Mod += 1; // Cuivre
+					break;
+				case CraftResource.Sonne:
+					Mod += 2; // Sonne
+					break;
+				case CraftResource.Argent:
+					Mod += 2; // Argent
+					break;
+				case CraftResource.Boreale:
+					Mod += 2; // Boréale
+					break;
+				case CraftResource.Chrysteliar:
+					Mod += 2; // Chrysteliar
+					break;
+				case CraftResource.Glacias:
+					Mod += 2; // Glacias
+					break;
+				case CraftResource.Lithiar:
+					Mod += 2; // Lithiar
+					break;
+				case CraftResource.Acier:
+					Mod += 3; // Acier
+					break;
+				case CraftResource.Durian:
+					Mod += 3; // Durian
+					break;
+				case CraftResource.Equilibrum:
+					Mod += 3; // Equilibrum
 					break;
 				case CraftResource.Gold:
-					Mod += 2;
+					Mod += 3; // Or
 					break;
-				case CraftResource.Agapite:
-					Mod += 2;
+				case CraftResource.Jolinar:
+					Mod += 3; // Jolinar
 					break;
-				case CraftResource.Verite:
-					Mod += 2;
+				case CraftResource.Justicium:
+					Mod += 3; // Justicium	
+					break;
+				case CraftResource.Abyssium:
+					Mod += 3; // Abyssium
+					break;
+				case CraftResource.Bloodirium:
+					Mod += 3; // Bloodirium
+					break;
+				case CraftResource.Herbrosite:
+					Mod += 3; // Herbrosite
+					break;
+				case CraftResource.Khandarium:
+					Mod += 3; // Khandarium
 					break;
 				case CraftResource.Mytheril:
-					Mod += 2;
+					Mod += 3; // Mytheril
 					break;
-				case CraftResource.Valorite:
-					Mod += 3;
+				case CraftResource.Sombralir:
+					Mod += 3; // Sombralir
+					break;
+				case CraftResource.Draconyr:
+					Mod += 4; // Draconyr
+					break;
+				case CraftResource.Heptazion:
+					Mod += 4; // Heptazion
+					break;
+				case CraftResource.Oceanis:
+					Mod += 4; // Oceanis
+					break;
+				case CraftResource.Brazium:
+					Mod += 4; // Brazium
+					break;
+				case CraftResource.Lunerium:
+					Mod += 4; // Lunerium
+					break;
+				case CraftResource.Marinar:
+					Mod += 4; // Marinar
+					break;
+				case CraftResource.Nostalgium:
+					Mod += 5; // Nostalgium
 					break;
 				case CraftResource.RegularLeather:
 					Mod += 1;
@@ -2816,6 +2896,385 @@ namespace Server.Items
 					break;
 				case CraftResource.AncienBone:
 					Mod += 3;
+					break;
+				default:
+					break;
+			}
+
+
+
+			if (negatif)
+			{
+				m_PhysicalBonus -= Mod;
+			}
+			else
+			{
+				m_PhysicalBonus += Mod;
+			}
+		}
+
+		public virtual void DistributeEpicBonuses(bool negatif)
+		{
+
+			int Mod = 0;
+
+			switch (Resource)
+			{
+				case CraftResource.None:
+					Mod += 2; // Fer
+					break;
+				case CraftResource.Iron:
+					Mod += 2; // Fer
+					break;
+				case CraftResource.Bronze:
+					Mod += 2; // Bronze
+					break;
+				case CraftResource.Copper:
+					Mod += 2; // Cuivre
+					break;
+				case CraftResource.Sonne:
+					Mod += 3; // Sonne
+					break;
+				case CraftResource.Argent:
+					Mod += 3; // Argent
+					break;
+				case CraftResource.Boreale:
+					Mod += 3; // Boréale
+					break;
+				case CraftResource.Chrysteliar:
+					Mod += 3; // Chrysteliar
+					break;
+				case CraftResource.Glacias:
+					Mod += 3; // Glacias
+					break;
+				case CraftResource.Lithiar:
+					Mod += 3; // Lithiar
+					break;
+				case CraftResource.Acier:
+					Mod += 4; // Acier
+					break;
+				case CraftResource.Durian:
+					Mod += 4; // Durian
+					break;
+				case CraftResource.Equilibrum:
+					Mod += 4; // Equilibrum
+					break;
+				case CraftResource.Gold:
+					Mod += 4; // Or
+					break;
+				case CraftResource.Jolinar:
+					Mod += 4; // Jolinar
+					break;
+				case CraftResource.Justicium:
+					Mod += 4; // Justicium	
+					break;
+				case CraftResource.Abyssium:
+					Mod += 4; // Abyssium
+					break;
+				case CraftResource.Bloodirium:
+					Mod += 4; // Bloodirium
+					break;
+				case CraftResource.Herbrosite:
+					Mod += 4; // Herbrosite
+					break;
+				case CraftResource.Khandarium:
+					Mod += 4; // Khandarium
+					break;
+				case CraftResource.Mytheril:
+					Mod += 4; // Mytheril
+					break;
+				case CraftResource.Sombralir:
+					Mod += 4; // Sombralir
+					break;
+				case CraftResource.Draconyr:
+					Mod += 5; // Draconyr
+					break;
+				case CraftResource.Heptazion:
+					Mod += 5; // Heptazion
+					break;
+				case CraftResource.Oceanis:
+					Mod += 5; // Oceanis
+					break;
+				case CraftResource.Brazium:
+					Mod += 5; // Brazium
+					break;
+				case CraftResource.Lunerium:
+					Mod += 5; // Lunerium
+					break;
+				case CraftResource.Marinar:
+					Mod += 5; // Marinar
+					break;
+				case CraftResource.Nostalgium:
+					Mod += 6; // Nostalgium
+					break;
+				case CraftResource.RegularLeather:
+					Mod += 2;
+					break;
+				case CraftResource.LupusLeather:
+					Mod += 2;
+					break;
+				case CraftResource.ReptilienLeather:
+					Mod += 2;
+					break;
+				case CraftResource.GeantLeather:
+					Mod += 3;
+					break;
+				case CraftResource.OphidienLeather:
+					Mod += 3;
+					break;
+				case CraftResource.ArachnideLeather:
+					Mod += 3;
+					break;
+				case CraftResource.DragoniqueLeather:
+					Mod += 3;
+					break;
+				case CraftResource.DemoniaqueLeather:
+					Mod += 3;
+					break;
+				case CraftResource.AncienLeather:
+					Mod += 4;
+					break;
+				case CraftResource.RedScales:
+					break;
+				case CraftResource.YellowScales:
+					break;
+				case CraftResource.BlackScales:
+					break;
+				case CraftResource.GreenScales:
+					break;
+				case CraftResource.WhiteScales:
+					break;
+				case CraftResource.BlueScales:
+					break;
+				case CraftResource.PalmierWood:
+					break;
+				case CraftResource.OakWood:
+					break;
+				case CraftResource.AshWood:
+					break;
+				case CraftResource.YewWood:
+					break;
+				case CraftResource.Heartwood:
+					break;
+				case CraftResource.Bloodwood:
+					break;
+				case CraftResource.Frostwood:
+					break;
+				case CraftResource.RegularBone:
+					Mod += 2;
+					break;
+				case CraftResource.LupusBone:
+					Mod += 2;
+					break;
+				case CraftResource.ReptilienBone:
+					Mod += 2;
+					break;
+				case CraftResource.GeantBone:
+					Mod += 3;
+					break;
+				case CraftResource.OphidienBone:
+					Mod += 3;
+					break;
+				case CraftResource.ArachnideBone:
+					Mod += 3;
+					break;
+				case CraftResource.DragoniqueBone:
+					Mod += 3;
+					break;
+				case CraftResource.DemoniaqueBone:
+					Mod += 3;
+					break;
+				case CraftResource.AncienBone:
+					Mod += 4;
+					break;
+				default:
+					break;
+			}
+
+
+
+			if (negatif)
+			{
+				m_PhysicalBonus -= Mod;
+			}
+			else
+			{
+				m_PhysicalBonus += Mod;
+			}
+		}
+		public virtual void DistributeLegendaryBonuses(bool negatif)
+		{
+
+			int Mod = 0;
+
+			switch (Resource)
+			{
+				case CraftResource.None:
+					Mod += 3; // Fer
+					break;
+				case CraftResource.Iron:
+					Mod += 3; // Fer
+					break;
+				case CraftResource.Bronze:
+					Mod += 3; // Bronze
+					break;
+				case CraftResource.Copper:
+					Mod += 3; // Cuivre
+					break;
+				case CraftResource.Sonne:
+					Mod += 4; // Sonne
+					break;
+				case CraftResource.Argent:
+					Mod += 4; // Argent
+					break;
+				case CraftResource.Boreale:
+					Mod += 4; // Boréale
+					break;
+				case CraftResource.Chrysteliar:
+					Mod += 4; // Chrysteliar
+					break;
+				case CraftResource.Glacias:
+					Mod += 4; // Glacias
+					break;
+				case CraftResource.Lithiar:
+					Mod += 4; // Lithiar
+					break;
+				case CraftResource.Acier:
+					Mod += 5; // Acier
+					break;
+				case CraftResource.Durian:
+					Mod += 5; // Durian
+					break;
+				case CraftResource.Equilibrum:
+					Mod += 5; // Equilibrum
+					break;
+				case CraftResource.Gold:
+					Mod += 5; // Or
+					break;
+				case CraftResource.Jolinar:
+					Mod += 5; // Jolinar
+					break;
+				case CraftResource.Justicium:
+					Mod += 5; // Justicium	
+					break;
+				case CraftResource.Abyssium:
+					Mod += 5; // Abyssium
+					break;
+				case CraftResource.Bloodirium:
+					Mod += 5; // Bloodirium
+					break;
+				case CraftResource.Herbrosite:
+					Mod += 5; // Herbrosite
+					break;
+				case CraftResource.Khandarium:
+					Mod += 5; // Khandarium
+					break;
+				case CraftResource.Mytheril:
+					Mod += 5; // Mytheril
+					break;
+				case CraftResource.Sombralir:
+					Mod += 5; // Sombralir
+					break;
+				case CraftResource.Draconyr:
+					Mod += 6; // Draconyr
+					break;
+				case CraftResource.Heptazion:
+					Mod += 6; // Heptazion
+					break;
+				case CraftResource.Oceanis:
+					Mod += 6; // Oceanis
+					break;
+				case CraftResource.Brazium:
+					Mod += 6; // Brazium
+					break;
+				case CraftResource.Lunerium:
+					Mod += 6; // Lunerium
+					break;
+				case CraftResource.Marinar:
+					Mod += 6; // Marinar
+					break;
+				case CraftResource.Nostalgium:
+					Mod += 7; // Nostalgium
+					break;
+				case CraftResource.RegularLeather:
+					Mod += 3;
+					break;
+				case CraftResource.LupusLeather:
+					Mod += 3;
+					break;
+				case CraftResource.ReptilienLeather:
+					Mod += 3;
+					break;
+				case CraftResource.GeantLeather:
+					Mod += 4;
+					break;
+				case CraftResource.OphidienLeather:
+					Mod += 4;
+					break;
+				case CraftResource.ArachnideLeather:
+					Mod += 4;
+					break;
+				case CraftResource.DragoniqueLeather:
+					Mod += 4;
+					break;
+				case CraftResource.DemoniaqueLeather:
+					Mod += 4;
+					break;
+				case CraftResource.AncienLeather:
+					Mod += 5;
+					break;
+				case CraftResource.RedScales:
+					break;
+				case CraftResource.YellowScales:
+					break;
+				case CraftResource.BlackScales:
+					break;
+				case CraftResource.GreenScales:
+					break;
+				case CraftResource.WhiteScales:
+					break;
+				case CraftResource.BlueScales:
+					break;
+				case CraftResource.PalmierWood:
+					break;
+				case CraftResource.OakWood:
+					break;
+				case CraftResource.AshWood:
+					break;
+				case CraftResource.YewWood:
+					break;
+				case CraftResource.Heartwood:
+					break;
+				case CraftResource.Bloodwood:
+					break;
+				case CraftResource.Frostwood:
+					break;
+				case CraftResource.RegularBone:
+					Mod += 3;
+					break;
+				case CraftResource.LupusBone:
+					Mod += 3;
+					break;
+				case CraftResource.ReptilienBone:
+					Mod += 3;
+					break;
+				case CraftResource.GeantBone:
+					Mod += 4;
+					break;
+				case CraftResource.OphidienBone:
+					Mod += 4;
+					break;
+				case CraftResource.ArachnideBone:
+					Mod += 4;
+					break;
+				case CraftResource.DragoniqueBone:
+					Mod += 4;
+					break;
+				case CraftResource.DemoniaqueBone:
+					Mod += 4;
+					break;
+				case CraftResource.AncienBone:
+					Mod += 5;
 					break;
 				default:
 					break;
