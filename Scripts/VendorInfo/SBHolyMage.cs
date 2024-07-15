@@ -70,7 +70,7 @@ namespace Server.Mobiles
                 Add(typeof(SulfurousAsh), 2);
                 Add(typeof(RecallRune), 8);
                 Add(typeof(Spellbook), 9);
-                Add(typeof(BlankScroll), 3);
+                Add(typeof(BlankScroll), 2);
 
                 Add(typeof(NightSightPotion), 7);
                 Add(typeof(AgilityPotion), 7);

@@ -81,7 +81,7 @@ namespace Server.Mobiles
             {
            //     Add(typeof(Bandage), 1);
 
-                Add(typeof(BlankScroll), 1);
+                Add(typeof(BlankScroll), 2);
 
      /*           Add(typeof(NightSightPotion), 7);
                 Add(typeof(AgilityPotion), 7);
@@ -108,7 +108,7 @@ namespace Server.Mobiles
                 Add(typeof(Backpack), 3);
                 Add(typeof(RecallRune), 3);
                 Add(typeof(Spellbook), 5);
-                Add(typeof(BlankScroll), 3);
+
 				/*
 								Add(typeof(BatWing), 1);
 								Add(typeof(GraveDust), 1);
