@@ -277,12 +277,12 @@ namespace Server.Mobiles
 		public override void GenerateLoot()
         {
 
-            AddLoot(LootPack.MedScrolls, 2);
+            AddLoot(LootPack.MedScrolls, 1);
             AddLoot(LootPack.NecroRegs, 100, 200);
 			AddLoot(LootPack.BodyPartsAndBones, Utility.RandomMinMax(3, 5));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
-	  		AddLoot(LootPack.FilthyRich, 2);
-			AddLoot(LootPack.LootItem<Items.Gold>(250, 400));
+	  		AddLoot(LootPack.Rich, 2);
+			AddLoot(LootPack.LootItem<Items.Gold>(50, 100));
 		}
 
         public override void Serialize(GenericWriter writer)

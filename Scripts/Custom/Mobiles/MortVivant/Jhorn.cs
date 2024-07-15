@@ -303,10 +303,10 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
         {
-			AddLoot(LootPack.Rich, 5);
+			AddLoot(LootPack.Rich, 3);
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.PeculiarSeed1);
-			AddLoot(LootPack.LootItem<Items.Gold>(250, 400));
+			AddLoot(LootPack.LootItem<Items.Gold>(50, 100));
 
 		}
 

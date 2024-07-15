@@ -91,8 +91,8 @@ namespace Server.Mobiles
             SetSkill(SkillName.Necromancy, 120.1, 130.0);
             SetSkill(SkillName.SpiritSpeak, 120.1, 130.0);
 
-            Fame = 23000;
-            Karma = -23000;
+            Fame = 10000;
+            Karma = -10000;
 
 		     AddItem(new GantZanYanXan());
 		}
@@ -467,10 +467,10 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
         {
-			AddLoot(LootPack.SuperBoss, 2);
+			AddLoot(LootPack.SuperBoss, 1);
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.PeculiarSeed1);
-			AddLoot(LootPack.LootItem<Items.Gold>(500, 1000));
+			AddLoot(LootPack.LootItem<Items.Gold>(250, 500));
 
 		}
 
