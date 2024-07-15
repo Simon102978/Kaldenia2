@@ -22,7 +22,29 @@ namespace Server.Engines.Craft
 
 		GrilledSerpentSteak = 608,
 		BBQDinoRibs = 609,
-		WakuChicken = 610
+		WakuChicken = 610,
+
+
+		////K2
+
+		[Description("Constitution")]
+		HitsMaxBuffFood = 40001,
+
+		[Description("Constitution Majeure")]
+		GreaterHitsMaxBuffFood = 40002,
+
+		[Description("Endurance")]
+		StamMaxBuffFood = 40003,
+
+		[Description("Endurance majeure")]
+		GreaterStamMaxBuffFood = 40004,
+
+		[Description("Sagesse")]
+		ManaMaxBuffFood = 40005,
+
+		[Description("Sagesse majeure")]
+		GreaterManaMaxBuffFood = 40006,
+
 	}
 	#endregion
 
@@ -117,20 +139,30 @@ namespace Server.Engines.Craft
 			SetNeedOven(index, true);
 			index = AddCraft(typeof(HitsMaxBuffFood), "Plats réconfortants", "Constitution", 65.0, 80.0, typeof(RawRibs), "Côtes levées crues", 20, "Vous avez besoin de plus de côtes levées crues.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.HitsMaxBuffFood);
 			index = AddCraft(typeof(GreaterHitsMaxBuffFood), "Plats réconfortants", "Constitution majeure", 80.0, 20.0, typeof(RawRibs), "Côtes levées crues", 30, "Vous avez besoin de plus de côtes levées crues.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.GreaterHitsMaxBuffFood);
+
 			index = AddCraft(typeof(LesserStamMaxBuffFood), "Plats réconfortants", "Endurance mineure", 50.0, 65.0, typeof(RawBird), "Volaille cru", 10, "Vous avez besoin de plus de côtes vollaille crue.");
 			SetNeedOven(index, true);
 			index = AddCraft(typeof(StamMaxBuffFood), "Plats réconfortants", "Endurance", 65.0, 80.0, typeof(RawBird), "Volaille cru", 20, "Vous avez besoin de plus de vollaille crue.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.StamMaxBuffFood);
 			index = AddCraft(typeof(GreaterStamMaxBuffFood), "Plats réconfortants", "Endurance majeure", 80.0, 20.0, typeof(RawBird), "Volaille cru", 30, "Vous avez besoin de plus de côtes vollaille crue.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.GreaterStamMaxBuffFood);
+
 			index = AddCraft(typeof(LesserManaMaxBuffFood), "Plats réconfortants", "Sagesse mineure", 50.0, 65.0, typeof(RawFishSteak), "Filets de poisson cru", 10, "Vous avez besoin de plus de filets de poisson crues.");
 			SetNeedOven(index, true);
+
 			index = AddCraft(typeof(ManaMaxBuffFood), "Plats réconfortants", "Sagesse", 65.0, 80.0, typeof(RawFishSteak), "Filets de poisson cru", 20, "Vous avez besoin de plus de filets de poisson crues.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.ManaMaxBuffFood);
 			index = AddCraft(typeof(GreaterManaMaxBuffFood), "Plats réconfortants", "Sagesse majeure", 80.0, 20.0, typeof(RawFishSteak), "Filets de poisson cru", 30, "Vous avez besoin de plus de filets de poisson crues.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.GreaterManaMaxBuffFood);
+
 			#endregion
 
 			#region Ingrédients secs

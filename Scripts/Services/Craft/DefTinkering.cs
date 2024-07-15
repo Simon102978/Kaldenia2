@@ -39,6 +39,26 @@ namespace Server.Engines.Craft
 		BarbedWhip = 466,
 		SpikedWhip = 467,
 		BladedWhip = 468,
+
+
+		//K2
+
+		[Description("épaulette Dorée")]
+		EpauletteDoree = 10001,
+
+		[Description("Diadème Feuille d'Or")]
+		DiademeFeuilleOr = 10002,
+
+		[Description("Tiare")]
+		Tiare = 10003,
+
+		[Description("Menottes Dorées")]
+		MenotteDoree = 10004,
+
+		[Description("Chandelier Élégant")]
+		TerMurStyleCandelabra = 10005,
+
+
 	}
 
 	public class DefTinkering : CraftSystem
@@ -288,7 +308,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Collier11), "Colliers", "Collier simple", 35.0, 55.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			index = AddCraft(typeof(Collier12), "Colliers", "Grand collier doré avec pendentif", 40.0, 60.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			index = AddCraft(typeof(DiademeFeuilleOr), "Colliers", "Collier doré avec pendentif", 40.0, 60.0, typeof(GoldIngot), "lingots d'or", 3, "Vous n'avez pas assez de lingots.");
+			AddRecipe(index, (int)TinkerRecipes.DiademeFeuilleOr);
+
+
 			index = AddCraft(typeof(EpauletteDoree), "Colliers", "Grand collier Usekh", 40.0, 60.0, typeof(GoldIngot), "lingots d'or", 5, "Vous n'avez pas assez de lingots.");
+			AddRecipe(index, (int)TinkerRecipes.EpauletteDoree);
 
 
 
@@ -373,8 +397,14 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Couronne4), "Bijoux Divers", "Grande couronne", 35.0, 85.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			index = AddCraft(typeof(Lunettes), "Bijoux Divers", "Lunette dorée", 35.0, 85.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			index = AddCraft(typeof(Tiare), "Bijoux Divers", "Tiare", 35.0, 85.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
+			AddRecipe(index, (int)TinkerRecipes.Tiare);
+
+
 			index = AddCraft(typeof(Ceinture10), "Bijoux Divers", "Ceinture de feuilles dorées", 40.0, 90.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			index = AddCraft(typeof(MenotteDoree), "Bijoux Divers", "Menotte dorée", 40.0, 90.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
+			AddRecipe(index, (int)TinkerRecipes.MenotteDoree);
+
+
 			#endregion
 
 			#region Paniers et boîtes
@@ -499,7 +529,12 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Brazier), "Luminaires et décorations", "Brasero", 45.0, 100.0, typeof(IronIngot), 1044036, 55, 1044253);
 			index = AddCraft(typeof(BrazierTall), "Luminaires et décorations", "Brasero Long", 65.0, 100.0, typeof(IronIngot), 1044036, 55, 1044253);
 			index = AddCraft(typeof(DragonBrazier), "Luminaires et décorations", "Brasero Cage", 85.0, 100.0, typeof(IronIngot), 1044036, 55, 1044253);
+
 			index = AddCraft(typeof(TerMurStyleCandelabra), "Luminaires et décorations", "Chandelier élégant", 55.0, 105.0, typeof(IronIngot), 1044036, 4, 1044037);
+			AddRecipe(index, (int)TinkerRecipes.TerMurStyleCandelabra);
+
+
+
 			index = AddCraft(typeof(PaperLantern), "Luminaires et décorations", "Lanterne en papier", 65.0, 115.0, typeof(IronIngot), 1044036, 30, 1044037);
 			AddRes(index, typeof(PalmierBoard), 1044041, 5, 1044351);
 			index = AddCraft(typeof(RoundPaperLantern), "Luminaires et décorations", "Lanterne en papier ronde", 65.0, 115.0, typeof(IronIngot), 1044036, 30, 1044037);

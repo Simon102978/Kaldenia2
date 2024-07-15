@@ -1158,31 +1158,67 @@ namespace Server.Engines.Craft
 
             int index = 0;
 
-            // Consume ALL
-            if (consumeType == ConsumeType.All)
-            {
-                m_ResHue = 0;
-                m_ResAmount = 0;
-                m_System = craftSystem;
-                CaddelliteCraft = true;
+			// Consume ALL
+			if (consumeType == ConsumeType.All)
+			{
+				m_ResHue = 0;
+				m_ResAmount = 0;
+				m_System = craftSystem;
+				CaddelliteCraft = true;
 
-                if (IsQuantityType(types))
-                {
-                    index = ConsumeQuantity(ourPack, types, amounts);
-                }
-                else if (IsPlantHueType(types))
-                {
-                    index = ConsumeQuantityByPlantHue(from, craftSystem, ourPack, types, amounts);
-                }
-                else
-                {
-                    index = ourPack.ConsumeTotalGrouped(types, amounts, true, ResourceValidator, OnResourceConsumed, CheckHueGrouping);
-                }
+				// Adjust resource amounts on failure
+				if (isFailure)
+				{
+					PlayerMobile pm = from as PlayerMobile;
 
-                resHue = m_ResHue;
-            }
-            // Consume Half ( for use all resource craft type )
-            else if (consumeType == ConsumeType.Half)
+					if (pm != null)
+					{
+						double diminution = 1 - ((pm.Dex + pm.Int) * 0.005);
+
+						if (diminution < 0.05)
+						{
+							diminution = 0.05; // Ensure reduction doesn't drop below 5%
+						}
+
+						for (int i = 0; i < amounts.Length; ++i)
+						{
+							int max = amounts[i];
+
+							// Reduce the amount of consumed materials
+							amounts[i] = (int)(amounts[i] * diminution);
+							amounts[i] += Utility.RandomMinMax(1, 3); // Add a random factor
+
+							// Ensure the amount doesn't exceed the maximum and doesn't fall below 1
+							if (amounts[i] > max)
+							{
+								amounts[i] = max;
+							}
+							if (amounts[i] < 1)
+							{
+								amounts[i] = 1;
+							}
+						}
+					}
+				}
+
+				// Consume resources based on type and amount
+				if (IsQuantityType(types))
+				{
+					index = ConsumeQuantity(ourPack, types, amounts);
+				}
+				else if (IsPlantHueType(types))
+				{
+					index = ConsumeQuantityByPlantHue(from, craftSystem, ourPack, types, amounts);
+				}
+				else
+				{
+					index = ourPack.ConsumeTotalGrouped(types, amounts, true, ResourceValidator, OnResourceConsumed, CheckHueGrouping);
+				}
+
+				resHue = m_ResHue;
+			}
+			// Consume Half ( for use all resource craft type )
+			else if (consumeType == ConsumeType.Half)
             {
                 for (int i = 0; i < amounts.Length; i++)
                 {
