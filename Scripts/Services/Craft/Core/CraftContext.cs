@@ -178,7 +178,7 @@ namespace Server.Engines.Craft
         }
 
         public static CraftSystem[] Systems => _Systems;
-        private static readonly CraftSystem[] _Systems = new CraftSystem[12];
+        private static readonly CraftSystem[] _Systems = new CraftSystem[13];
 
         public static void Configure()
         {
