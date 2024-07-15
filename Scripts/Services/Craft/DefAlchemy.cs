@@ -13,6 +13,26 @@ namespace Server.Engines.Craft
 		BarakoDraftOfMight = 903,
 		UraliTranceTonic = 904,
 		SakkhraProphylaxisPotion = 905,
+
+
+		//K2
+		[Description("Potion de rafrai. supérieure")]
+		SuperiorRefreshPotion = 70001,
+		[Description("Potion de soin supérieure")]
+		SuperiorHealPotion = 70002,
+		[Description("Potion antidote supérieure")]
+		SuperiorCurePotion = 70003,
+		[Description("Potion d'agilité supérieure")]
+		SuperiorAgilityPotion = 70004,
+		[Description("Potion de force supérieure")]
+		SuperiorStrengthPotion = 70005,
+		[Description("Potion Invisibilité")]
+		InvisibilityPotion = 70006,
+		[Description("Potion de lien animal")]
+		PetBondingPotion = 70007,
+		[Description("Potion d'auto résurection")]
+		AutoResPotion = 70008,
+
 	}
 
 	public class DefAlchemy : CraftSystem
@@ -121,6 +141,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(SuperiorRefreshPotion), "Rafraichissement", "Potion de rafrai. supérieure", 75.0, 100.0, typeof(BlackPearl), "Perle noire", 7, "Vous n'avez pas suffisament de perle noire");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			AddRecipe(index, (int)AlchemyRecipes.SuperiorRefreshPotion);
 
 			index = AddCraft(typeof(LesserHealPotion), "Soin", "Potion de soin mineure", 0.0, 25.0, typeof(Ginseng), "Ginseng", 1, "Vous n'avez pas suffisament de Ginseng");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
@@ -133,6 +154,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(SuperiorHealPotion), "Soin", "Potion de soin supérieure", 75.0, 100.0, typeof(Ginseng), "Ginseng", 7, "Vous n'avez pas suffisament de Ginseng");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			AddRecipe(index, (int)AlchemyRecipes.SuperiorHealPotion);
 
 			index = AddCraft(typeof(LesserCurePotion), "Antidote", "Potion d'antidote mineure", 0.0, 25.0, typeof(Garlic), "Ail", 1, "Vous n'avez pas suffisament d'Ail");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
@@ -145,6 +167,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(SuperiorCurePotion), "Antidote", "Potion d'antidote supérieure", 75.0, 100.0, typeof(Garlic), "Ail", 7, "Vous n'avez pas suffisament d'Ail");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			AddRecipe(index, (int)AlchemyRecipes.SuperiorCurePotion);
 
 			index = AddCraft(typeof(LesserAgilityPotion), "Dextérité", "Potion de dextérité mineure", 0.0, 25.0, typeof(Bloodmoss), "Mousse de Sang", 1, "Vous n'avez pas suffisament de Mousse de sang");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
@@ -157,6 +180,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(SuperiorAgilityPotion), "Dextérité", "Potion de dextérité supérieure", 75.0, 100.0, typeof(Bloodmoss), "Mousse de Sang", 7, "Vous n'avez pas suffisament de Mousse de sang");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			AddRecipe(index, (int)AlchemyRecipes.SuperiorAgilityPotion);
 
 			index = AddCraft(typeof(LesserStrengthPotion), "Force", "Potion de force mineure", 0.0, 25.0, typeof(MandrakeRoot), "Racine de Mandragore", 1, "Vous n'avez pas suffisament de Racine de Mandragore");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
@@ -169,6 +193,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(SuperiorStrengthPotion), "Force", "Potion de force supérieure", 75.0, 100.0, typeof(MandrakeRoot), "Racine de Mandragore", 7, "Vous n'avez pas suffisament de Racine de Mandragore");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			AddRecipe(index, (int)AlchemyRecipes.SuperiorStrengthPotion);
 
 			// Explosive
 			index = AddCraft(typeof(LesserExplosionPotion), "Explosion", "Potion explosive mineure", 5.0, 55.0, typeof(SulfurousAsh), "Cendres sulfureuses", 3, "Vous n'avez pas assez de Cendres sulfureuses");
@@ -192,6 +217,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(InvisibilityPotion), "Autres", "Potion d'invisibilité", 65.0, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRes(index, typeof(Bloodmoss), "Mousse de Sang", 4, "Vous n'avez pas suffisament de Mousse de sang");
 			AddRes(index, typeof(Nightshade), "Belladone", 3, "Vous n'avez pas suffisament de Belladone");
+			AddRecipe(index, (int)AlchemyRecipes.InvisibilityPotion);
+
 
 			index = AddCraft(typeof(NightSightPotion), "Autres", "Potion de vision de nuit", -25.0, 25.0, typeof(SpidersSilk), "Soie d'araignée", 1, "Vous n'avez pas suffisament de Soie d'araignée");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
@@ -200,12 +227,16 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(PlumesSaliva), "Plume de saliva", 10, "Vous n'avez pas suffisament de plume de Saliva");
 			AddRes(index, typeof(SangAnguille), "Sang Anguille", 5, "Vous n'avez pas suffisament de Sang Anguille");
 			AddRes(index, typeof(GraisseSole), "Graisse de Sole", 5, "Vous n'avez pas suffisament de Graisse de Sole");
+			AddRecipe(index, (int)AlchemyRecipes.PetBondingPotion);
+
 
 
 
 			index = AddCraft(typeof(AutoResPotion), "Autres", "Potion d'auto résurrection", 70.0, 120.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRes(index, typeof(SangDragon), "Sang de Dragon", 5, "Vous n'avez pas suffisament de Sang de Dragon");
 			AddRes(index, typeof(MucusDemon), "Mucus de Démon", 5, "Vous n'avez pas suffisament de Mucus de Démon");
+			AddRecipe(index, (int)AlchemyRecipes.AutoResPotion);
+
 
 			index = AddCraft(typeof(HairDye), "Teinture pour cheveux", "Teinture à Cheveux", 75.0, 100.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac vide");
 			AddRes(index, typeof(Charcoal), "Charbon", 5, "Vous n'avez pas suffisament de charbon");

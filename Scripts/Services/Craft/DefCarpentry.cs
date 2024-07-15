@@ -42,6 +42,22 @@ namespace Server.Engines.Craft
 
 		KotlBlackRod = 170,
 		KotlAutomaton = 171,
+
+		// K2
+		[Description("Coffre Maritime")]
+		CoffreMaritime = 50001,
+		[Description("Grand Coffre")]
+		FinishedWoodenChest = 50002,
+		[Description("poulailler")]
+		ChickenCoop = 50003,
+		[Description("Poteau avec Chaine")]
+		PoteauChaine = 50004,
+		[Description("Tête de Licorne empaillée")]
+		MountedDreadHorn = 50005,
+
+
+
+
 	}
 	#endregion
 
@@ -262,10 +278,13 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GildedWoodenChest), "Caisses et coffres", "Grand coffre renforcé", 50.0, 80.0, typeof(PalmierBoard), 1044041, 30, 1044351);
 			index = AddCraft(typeof(WoodenFootLocker), "Caisses et coffres", "Coffre à chaussures", 50.0, 80.0, typeof(PalmierBoard), 1044041, 30, 1044351);
 			index = AddCraft(typeof(CoffreMaritime), "Caisses et coffres", "Coffre Maritime", 60.0, 90.0, typeof(PalmierBoard), 1044041, 40, 1044351);
+			AddRecipe(index, (int)CarpRecipes.CoffreMaritime);
 
 
 
 			index = AddCraft(typeof(FinishedWoodenChest), "Caisses et coffres", "Grand coffre", 70.0, 90.0, typeof(PalmierBoard), 1044041, 30, 1044351);
+			AddRecipe(index, (int)CarpRecipes.FinishedWoodenChest);
+
 
 			index = AddCraft(typeof(OrnateElvenChestSouthDeed), "Caisses et coffres", "Coffre elfique orné (S)", 90.0, 115.0, typeof(PalmierBoard), 1044041, 40, 1044351);
 			ForceNonExceptional(index);
@@ -405,6 +424,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Paravent), "Décorations", "Paravent de bois", 60.0, 80.0, typeof(PalmierBoard), 1044041, 50, 1044351);
 			index = AddCraft(typeof(Incubator), "Décorations", "Présentoir", 60.0, 115.0, typeof(PalmierBoard), 1044041, 100, 1044351);
 			index = AddCraft(typeof(ChickenCoop), "Décorations", "Poulailler", 60.0, 115.0, typeof(PalmierBoard), 1044041, 150, 1044351);
+			AddRecipe(index, (int)CarpRecipes.ChickenCoop);
 
 
 			index = AddCraft(typeof(DartBoardSouthDeed), "Décorations", "Jeu de dards (S)", 20.0, 40.0, typeof(PalmierBoard), 1044041, 5, 1044351);
@@ -415,6 +435,8 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(PoteauChaine), "Décorations", "Poteau avec Chaine", 90.0, 115.0, typeof(PalmierBoard), 1044041, 10, 1044351);
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 3, "Vous n'avez pas suffisament de lingot de fer");
+			AddRecipe(index, (int)CarpRecipes.PoteauChaine);
+
 			#endregion Decoration
 
 			#region Statues et Trophées
@@ -426,6 +448,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(SquirrelStatueEastDeed), "Statues et trophés", "L'Écureuil (E)", 50.0, 70.0, typeof(PalmierBoard), 1044041, 250, 1044351);
 			index = AddCraft(typeof(GiantReplicaAcorn), "Statues et trophés", "Gland géant sculpté", 80.0, 105.0, typeof(PalmierBoard), 1044041, 35, 1044351);
 			index = AddCraft(typeof(MountedDreadHorn), "Statues et trophés", "Tête de licorne sculptée", 90.0, 115.0, typeof(PalmierBoard), 1044041, 50, 1044351);
+			AddRecipe(index, (int)CarpRecipes.MountedDreadHorn);
+
 			#endregion
 			#region Grands Outils
 			index = AddCraft(typeof(SewingMachineDeed), "Grands outils", "Machine à Coudre", 40.0, 60.0, typeof(PalmierBoard), 1044041, 30, 1044351);

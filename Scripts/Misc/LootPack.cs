@@ -9,6 +9,8 @@ using Server.Scripts.Commands;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls.WebParts;
+using static CustomRecipeScrolls;
+
 
 #endregion
 
@@ -715,6 +717,85 @@ namespace Server
 	};
 
 		#endregion Stealables
+
+		#region CustomRecipes
+
+		public static readonly LootPackItem[] CustomRecipesScroll1 = new LootPackItem[]
+{
+	new LootPackItem(typeof(EnclumeRecipeScroll), 1),
+	new LootPackItem(typeof(MasonryBookRecipeScroll), 1),
+	new LootPackItem(typeof(ChickenCoopRecipeScroll), 1),
+	new LootPackItem(typeof(LumitraitRecipeScroll), 1),
+	new LootPackItem(typeof(CacheOeil3RecipeScroll), 1),
+	new LootPackItem(typeof(SuperiorHealPotionRecipeScroll), 1),
+	new LootPackItem(typeof(PetBondingPotionRecipeScroll), 1),
+	new LootPackItem(typeof(RobeBleudecolteRecipeScroll), 1),
+	new LootPackItem(typeof(PoteauChaineRecipeScroll), 1),
+	new LootPackItem(typeof(MenotteDoreeRecipeScroll), 1),
+	new LootPackItem(typeof(FinishedWoodenChestRecipeScroll), 1),
+	new LootPackItem(typeof(SandMiningBookRecipeScroll), 1),
+	new LootPackItem(typeof(GreaterHitsMaxBuffFoodRecipeScroll), 1),
+	new LootPackItem(typeof(CompositeRecipeScroll), 1),
+	new LootPackItem(typeof(TiareRecipeScroll), 1),
+	new LootPackItem(typeof(PieuseRecipeScroll), 1),
+	new LootPackItem(typeof(GlassblowingBookRecipeScroll), 1),
+	new LootPackItem(typeof(EpauletteDoreeRecipeScroll), 1),
+	new LootPackItem(typeof(Pantalon3RecipeScroll), 1),
+	new LootPackItem(typeof(GreaterManaMaxBuffFoodRecipeScroll), 1)
+};
+
+		public static readonly LootPackItem[] CustomRecipesScroll2 = new LootPackItem[]
+{
+	new LootPackItem(typeof(Pantalon1RecipeScroll), 1),
+	new LootPackItem(typeof(RobeNimRecipeScroll), 1),
+	new LootPackItem(typeof(SuperiorAgilityPotionRecipeScroll), 1),
+	new LootPackItem(typeof(ArbaviveRecipeScroll), 1),
+	new LootPackItem(typeof(FoliereRecipeScroll), 1),
+	new LootPackItem(typeof(InvisibilityPotionRecipeScroll), 1),
+	new LootPackItem(typeof(ForgeRecipeScroll), 1),
+	new LootPackItem(typeof(FourreauDoreeRecipeScroll), 1),
+	new LootPackItem(typeof(HitsMaxBuffFoodRecipeScroll), 1),
+	new LootPackItem(typeof(CoffreFortRecipeScroll), 1),
+	new LootPackItem(typeof(CoffreMetalRouilleRecipeScroll), 1),
+	new LootPackItem(typeof(PeauOursPolaireRecipeScroll), 1),
+	new LootPackItem(typeof(MountedDreadHornRecipeScroll), 1),
+	new LootPackItem(typeof(Jupe10RecipeScroll), 1),
+	new LootPackItem(typeof(StoneMiningBookRecipeScroll), 1),
+	new LootPackItem(typeof(CoffreMaritimeRecipeScroll), 1),
+	new LootPackItem(typeof(ManteauVoyageurRecipeScroll), 1),
+	new LootPackItem(typeof(CoffreMetalVisqueuxRecipeScroll), 1),
+	new LootPackItem(typeof(StamMaxBuffFoodRecipeScroll), 1),
+	new LootPackItem(typeof(SuperiorCurePotionRecipeScroll), 1)
+};
+
+	public static readonly LootPackItem[] CustomRecipesScroll3 = new LootPackItem[]
+{
+	new LootPackItem(typeof(GemMiningBookRecipeScroll), 1),
+	new LootPackItem(typeof(TerMurStyleCandelabraRecipeScroll), 1),
+	new LootPackItem(typeof(AutoResPotionRecipeScroll), 1),
+	new LootPackItem(typeof(CoffreMetalDoreRecipeScroll), 1),
+	new LootPackItem(typeof(FourreauDoreeRecipeScroll), 1),
+	new LootPackItem(typeof(Jupe8RecipeScroll), 1),
+	new LootPackItem(typeof(CapePaonRecipeScroll), 1),
+	new LootPackItem(typeof(PeauOursRecipeScroll), 1),
+	new LootPackItem(typeof(DiademeFeuilleOrRecipeScroll), 1),
+	new LootPackItem(typeof(CoffreMetalVisqueuxRecipeScroll), 1),
+	new LootPackItem(typeof(SuperiorRefreshPotionRecipeScroll), 1),
+	new LootPackItem(typeof(GreaterStamMaxBuffFoodRecipeScroll), 1),
+	new LootPackItem(typeof(FoliereRecipeScroll), 1),
+	new LootPackItem(typeof(ManteauDoreRecipeScroll), 1),
+	new LootPackItem(typeof(SuperiorStrengthPotionRecipeScroll), 1),
+	new LootPackItem(typeof(ChickenCoopRecipeScroll), 1),
+	new LootPackItem(typeof(GreaterHitsMaxBuffFoodRecipeScroll), 1),
+	new LootPackItem(typeof(CoffreFortRecipeScroll), 1),
+	new LootPackItem(typeof(SuperiorHealPotionRecipeScroll), 1),
+	new LootPackItem(typeof(EnclumeRecipeScroll), 1)
+};
+
+
+
+
+		#endregion
 
 		#region Magic Items
 		public static readonly LootPackItem[] MagicItemsPoor = new[]

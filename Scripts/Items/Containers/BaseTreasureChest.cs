@@ -1,4 +1,5 @@
 using System;
+using static Server.Loot;
 
 namespace Server.Items
 {
@@ -273,9 +274,14 @@ namespace Server.Items
 				}
 			}
 
-			if (Utility.RandomDouble() < 0.10) // Augmenté à 10%
+			if (Utility.RandomDouble() < 0.05) // Augmenté à 10%
 				DropItem(Loot.RandomStealableArtifact());
+
+			if (Utility.RandomDouble() < 0.05) // 5% de chance
+				DropItem(Loot.RandomRecipes1());
 		}
+
+			
 
 		private void GenerateLevel2Loot()
 		{
@@ -323,7 +329,12 @@ namespace Server.Items
 
 			if (Utility.RandomDouble() < 0.20) // Augmenté à 20%
 				DropItem(Loot.RandomStealableArtifact());
+
+
+			if (Utility.RandomDouble() < 0.10) // 5% de chance
+				DropItem(Loot.RandomRecipes1());
 		}
+
 
 		private void GenerateLevel3Loot()
 		{
@@ -372,6 +383,9 @@ namespace Server.Items
 
 			if (Utility.RandomDouble() < 0.35) // Augmenté à 35%
 				DropItem(Loot.RandomStealableArtifact());
+
+			if (Utility.RandomDouble() < 0.20) // 5% de chance
+				DropItem(Loot.RandomRecipes1());
 		}
 
 		private void GenerateLevel4Loot()
@@ -421,6 +435,9 @@ namespace Server.Items
 
 			if (Utility.RandomDouble() < 0.50) // Augmenté à 50%
 				DropItem(Loot.RandomStealableArtifact());
+
+			if (Utility.RandomDouble() < 0.35) // 5% de chance
+				DropItem(Loot.RandomRecipes1());
 		}
 
 		private void GenerateLevel5Loot()
@@ -471,6 +488,10 @@ namespace Server.Items
 
 			if (Utility.RandomDouble() < 0.75) // 75% de chance
 				DropItem(Loot.RandomStealableArtifact());
+
+
+			if (Utility.RandomDouble() < 0.50) // 5% de chance
+				DropItem(Loot.RandomRecipes1());
 		}
 
 		private void GenerateLevel6Loot()
@@ -522,6 +543,9 @@ namespace Server.Items
 
 			if (Utility.RandomDouble() < 1.00) // 100% de chance
 				DropItem(Loot.RandomStealableArtifact());
+
+			if (Utility.RandomDouble() < 0.50) // 5% de chance
+				DropItem(Loot.RandomRecipes1());
 		}
 
 		private void StartResetTimer()

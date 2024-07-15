@@ -42,6 +42,9 @@ namespace Server.Items
 			// 1% de chance d'obtenir un item Stealable
 			if (Utility.RandomDouble() < 0.01)
 				DropItem(Loot.RandomStealableArtifact());
+
+			if (Utility.RandomDouble() < 0.01) // 0.5% de chance
+				DropItem(Loot.RandomRecipes1());
 		}
 	
 
@@ -125,6 +128,9 @@ namespace Server.Items
 			// 3% de chance d'obtenir un item Stealable
 			if (Utility.RandomDouble() < 0.03)
 				DropItem(Loot.RandomStealableArtifact());
+
+			if (Utility.RandomDouble() < 0.01) // 0.5% de chance
+				DropItem(Loot.RandomRecipes1());
 		}
 
 		public TreasureLevel2(Serial serial) : base(serial)
@@ -210,6 +216,9 @@ namespace Server.Items
 			// 5% de chance d'obtenir un item Stealable
 			if (Utility.RandomDouble() < 0.05)
 				DropItem(Loot.RandomStealableArtifact());
+
+			if (Utility.RandomDouble() < 0.01) // 0.5% de chance
+				DropItem(Loot.RandomRecipes1());
 		}
 
 		public TreasureLevel3(Serial serial) : base(serial)
@@ -293,6 +302,9 @@ namespace Server.Items
 			// 10% de chance d'obtenir un item Stealable
 			if (Utility.RandomDouble() < 0.10)
 				DropItem(Loot.RandomStealableArtifact());
+
+			if (Utility.RandomDouble() < 0.01) // 0.5% de chance
+				DropItem(Loot.RandomRecipes1());
 		}
 
 		public TreasureLevel4(Serial serial) : base(serial)
