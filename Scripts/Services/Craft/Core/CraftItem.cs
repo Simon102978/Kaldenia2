@@ -1405,25 +1405,18 @@ namespace Server.Engines.Craft
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
 
-			if (ForceExceptional)
-			{
-				bool allRequiredSkills = false;
-				GetSuccessChance(from, null, system, false, ref allRequiredSkills);
-
-				if (allRequiredSkills)
-					return 100.0;
-			}
-
 			var chanceLegendary = 0.0;
-
 			if (from is CustomPlayerMobile pm)
 			{
-				double mainSkillFactor = pm.Skills[system.MainSkill].Value / 100.0;
+				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
 				double dexFactor = pm.Dex / 100.0;
-				chanceLegendary = 0.0001 * Math.Pow(mainSkillFactor, 3) * Math.Pow(dexFactor, 2);
+
+				// Base chance at 100 skill, 0 dex: 0.001%
+				// Max chance at 100 skill, 100 dex: 0.002%
+				chanceLegendary = 0.00001 * skillFactor * (1 + 0.1 * dexFactor);
 			}
 
-			return Math.Min(chanceLegendary, 0.02); // Max 2%
+			return Math.Min(chanceLegendary, 0.00002); // Max 0.002%
 		}
 
 		public double GetEpicChance(CraftSystem system, double successChance, Mobile from)
@@ -1431,25 +1424,18 @@ namespace Server.Engines.Craft
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
 
-			if (ForceExceptional)
-			{
-				bool allRequiredSkills = false;
-				GetSuccessChance(from, null, system, false, ref allRequiredSkills);
-
-				if (allRequiredSkills)
-					return 100.0;
-			}
-
 			var chanceEpic = 0.0;
-
 			if (from is CustomPlayerMobile pm)
 			{
-				double mainSkillFactor = pm.Skills[system.MainSkill].Value / 100.0;
+				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
 				double dexFactor = pm.Dex / 100.0;
-				chanceEpic = 0.001 * Math.Pow(mainSkillFactor, 2) * Math.Pow(dexFactor, 1.5);
+
+				// Base chance at 100 skill, 0 dex: 0.2%
+				// Max chance at 100 skill, 100 dex: 0.4%
+				chanceEpic = 0.002 * skillFactor * (1 + 0.1 * dexFactor);
 			}
 
-			return Math.Min(chanceEpic, 0.05); // Max 5%
+			return Math.Min(chanceEpic, 0.004); // Max 0.4%
 		}
 
 		public double GetExceptionalChance(CraftSystem system, double successChance, Mobile from)
@@ -1457,25 +1443,19 @@ namespace Server.Engines.Craft
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
 
-			if (ForceExceptional)
-			{
-				bool allRequiredSkills = false;
-				GetSuccessChance(from, null, system, false, ref allRequiredSkills);
-
-				if (allRequiredSkills)
-					return 100.0;
-			}
-
 			var exceptionalChance = 0.0;
-
 			if (from is CustomPlayerMobile pm)
 			{
-				double mainSkillFactor = pm.Skills[system.MainSkill].Value / 100.0;
+				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
 				double dexFactor = pm.Dex / 100.0;
-				exceptionalChance = 0.05 * mainSkillFactor * Math.Sqrt(dexFactor);
+
+				// Base chance at 100 skill, 0 dex: 5%
+				// Max chance at 100 skill, 100 dex: 10%
+				// At 0 skill, 100 dex: 5%
+				exceptionalChance = 0.05 * (skillFactor + 0.5 * dexFactor);
 			}
 
-			return Math.Min(exceptionalChance, 0.20); // Max 20%
+			return Math.Min(exceptionalChance, 0.10); // Max 10%
 		}
 
 		public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills, int maxAmount)

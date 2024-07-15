@@ -8,7 +8,7 @@ namespace Server.Items
         public MalletAndChisel()
             : base(0x12B3)
         {
-            Weight = 1.0;
+	
         }
 
         [Constructable]
@@ -16,7 +16,8 @@ namespace Server.Items
             : base(uses, 0x12B3)
         {
             Weight = 1.0;
-        }
+			Name = "Maillet et Ciseau";
+		}
 
         public MalletAndChisel(Serial serial)
             : base(serial)
