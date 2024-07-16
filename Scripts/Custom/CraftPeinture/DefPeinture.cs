@@ -247,25 +247,25 @@ namespace Server.Engines.Craft
 
 	    index = AddCraft(typeof(PeintureSud28), "Peinture Sud", "Peinture28", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureSud29), "Peinture Sud", "Peinture29", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	   // index = AddCraft(typeof(PeintureSud29), "Peinture Sud", "Peinture29", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureSud30), "Peinture Sud", "Peinture30", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	    //index = AddCraft(typeof(PeintureSud30), "Peinture Sud", "Peinture30", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureSud31), "Peinture Sud", "Peinture31", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+//	    index = AddCraft(typeof(PeintureSud31), "Peinture Sud", "Peinture31", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureSud32), "Peinture Sud", "Peinture32", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+//	    index = AddCraft(typeof(PeintureSud32), "Peinture Sud", "Peinture32", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureSud33), "Peinture Sud", "Peinture33", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	//    index = AddCraft(typeof(PeintureSud33), "Peinture Sud", "Peinture33", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureSud34), "Peinture Sud", "Peinture34", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	//    index = AddCraft(typeof(PeintureSud34), "Peinture Sud", "Peinture34", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureSud35), "Peinture Sud", "Peinture35", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	  //  index = AddCraft(typeof(PeintureSud35), "Peinture Sud", "Peinture35", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureSud36), "Peinture Sud", "Peinture36", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	    //index = AddCraft(typeof(PeintureSud36), "Peinture Sud", "Peinture36", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureSud37), "Peinture Sud", "Peinture37", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+//	    index = AddCraft(typeof(PeintureSud37), "Peinture Sud", "Peinture37", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureSud38), "Peinture Sud", "Peinture38", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	//    index = AddCraft(typeof(PeintureSud38), "Peinture Sud", "Peinture38", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
         #endregion
 
@@ -329,23 +329,23 @@ namespace Server.Engines.Craft
 
 	    index = AddCraft(typeof(PeintureEst29), "Peinture Est", "Peinture29", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureEst30), "Peinture Est", "Peinture30", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	  //  index = AddCraft(typeof(PeintureEst30), "Peinture Est", "Peinture30", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureEst31), "Peinture Est", "Peinture31", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+//	    index = AddCraft(typeof(PeintureEst31), "Peinture Est", "Peinture31", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureEst32), "Peinture Est", "Peinture32", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	//    index = AddCraft(typeof(PeintureEst32), "Peinture Est", "Peinture32", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureEst33), "Peinture Est", "Peinture33", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	  //  index = AddCraft(typeof(PeintureEst33), "Peinture Est", "Peinture33", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureEst34), "Peinture Est", "Peinture34", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	  //  index = AddCraft(typeof(PeintureEst34), "Peinture Est", "Peinture34", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureEst35), "Peinture Est", "Peinture35", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	   // index = AddCraft(typeof(PeintureEst35), "Peinture Est", "Peinture35", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureEst36), "Peinture Est", "Peinture36", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	  //  index = AddCraft(typeof(PeintureEst36), "Peinture Est", "Peinture36", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureEst37), "Peinture Est", "Peinture37", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	   // index = AddCraft(typeof(PeintureEst37), "Peinture Est", "Peinture37", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 
-	    index = AddCraft(typeof(PeintureEst38), "Peinture Est", "Peinture38", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
+	   // index = AddCraft(typeof(PeintureEst38), "Peinture Est", "Peinture38", 80, 110, typeof(ToileVierge), "Toile Vierge", 1, "Vous n'avez pas de Toile Vierge");
 			
         #endregion
 

@@ -946,7 +946,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PortraitSud10(int hue) : base( 15604, hue )
+		public PortraitSud10(int hue) : base(0x0C2C, hue )
 		{
 			Weight = 1.0;
 			
@@ -979,7 +979,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PortraitSud11(int hue) : base( 10853, hue )
+		public PortraitSud11(int hue) : base(0x0EC8, hue )
 		{
 			Weight = 1.0;
 			
@@ -1441,7 +1441,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud02(int hue) : base( 15600, hue)
+		public PeintureSud02(int hue) : base(0x240D, hue)
 		{
 			Weight = 1.0;
 			
@@ -1474,7 +1474,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud03(int hue) : base( 15585, hue )
+		public PeintureSud03(int hue) : base(0x240F, hue )
 		{
 			Weight = 1.0;
 			
@@ -1507,7 +1507,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud04(int hue) : base( 15591 , hue)
+		public PeintureSud04(int hue) : base(0x2411, hue)
 		{
 			Weight = 1.0;
 			
@@ -1540,7 +1540,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud05(int hue) : base( 15614, hue )
+		public PeintureSud05(int hue) : base(0x2413, hue )
 		{
 			Weight = 1.0;
 			
@@ -1573,7 +1573,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud06(int hue) : base( 15616, hue )
+		public PeintureSud06(int hue) : base(0x2415, hue )
 		{
 			Weight = 1.0;
 			
@@ -1607,7 +1607,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud07(int hue) : base( 15610, hue )
+		public PeintureSud07(int hue) : base(0x2417, hue )
 		{
 			Weight = 1.0;
 			
@@ -1640,7 +1640,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud08(int hue) : base( 15598, hue )
+		public PeintureSud08(int hue) : base(0x2887, hue )
 		{
 			Weight = 1.0;
 			
@@ -1673,7 +1673,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud09(int hue) : base( 15608, hue )
+		public PeintureSud09(int hue) : base(0x403D, hue )
 		{
 			Weight = 1.0;
 			
@@ -1707,7 +1707,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud10(int hue) : base( 15624, hue )
+		public PeintureSud10(int hue) : base(0x4C20, hue )
 		{
 			Weight = 1.0;
 			
@@ -1741,7 +1741,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud11(int hue) : base( 15632, hue )
+		public PeintureSud11(int hue) : base(0x4C22, hue )
 		{
 			Weight = 1.0;
 			
@@ -1775,7 +1775,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud12(int hue) : base( 15618 , hue)
+		public PeintureSud12(int hue) : base(0x4C26, hue)
 		{
 			Weight = 1.0;
 			
@@ -1808,7 +1808,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud13(int hue) : base( 15620 , hue)
+		public PeintureSud13(int hue) : base(0x4C28, hue)
 		{
 			Weight = 1.0;
 			
@@ -1842,7 +1842,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst02(int hue) : base( 15599 , hue)
+		public PeintureEst02(int hue) : base(0x240E, hue)
 		{
 			Weight = 1.0;
 			
@@ -1875,7 +1875,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst03(int hue) : base( 15584 , hue)
+		public PeintureEst03(int hue) : base(0x2410, hue)
 		{
 			Weight = 1.0;
 			
@@ -1909,7 +1909,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst04(int hue) : base( 15590, hue )
+		public PeintureEst04(int hue) : base(0x2412, hue )
 		{
 			Weight = 1.0;
 			
@@ -1943,7 +1943,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst05(int hue) : base( 15613, hue )
+		public PeintureEst05(int hue) : base(0x2414, hue )
 		{
 			Weight = 1.0;
 			
@@ -1977,7 +1977,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst06(int hue) : base( 15615, hue )
+		public PeintureEst06(int hue) : base(0x2416, hue )
 		{
 			Weight = 1.0;
 			
@@ -2010,7 +2010,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst07(int hue) : base( 15609, hue )
+		public PeintureEst07(int hue) : base(0x2418, hue )
 		{
 			Weight = 1.0;
 			
@@ -2044,7 +2044,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst08(int hue) : base( 15597, hue )
+		public PeintureEst08(int hue) : base(0x2886, hue )
 		{
 			Weight = 1.0;
 			
@@ -2077,7 +2077,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst09(int hue) : base( 15607, hue )
+		public PeintureEst09(int hue) : base(0x403E, hue )
 		{
 			Weight = 1.0;
 			
@@ -2110,7 +2110,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst10(int hue) : base( 15623, hue )
+		public PeintureEst10(int hue) : base(0x4C21, hue )
 		{
 			Weight = 1.0;
 			
@@ -2143,7 +2143,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst11(int hue) : base( 15631, hue )
+		public PeintureEst11(int hue) : base(0x4C23, hue )
 		{
 			Weight = 1.0;
 			
@@ -2176,7 +2176,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst12(int hue) : base( 15617, hue )
+		public PeintureEst12(int hue) : base(0x4C27, hue )
 		{
 			Weight = 1.0;
 			
@@ -2209,7 +2209,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst13(int hue) : base( 15619, hue )
+		public PeintureEst13(int hue) : base(0x4C29, hue )
 		{
 			Weight = 1.0;
 			
@@ -2242,7 +2242,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud14(int hue) : base( 15583, hue )
+		public PeintureSud14(int hue) : base(0x4C35, hue )
 		{
 			Weight = 1.0;
 			
@@ -2275,7 +2275,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud15(int hue) : base( 15606, hue )
+		public PeintureSud15(int hue) : base(0x4C36, hue )
 		{
 			Weight = 1.0;
 			
@@ -2308,7 +2308,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud16(int hue) : base( 15593, hue )
+		public PeintureSud16(int hue) : base(0x4C37, hue )
 		{
 			Weight = 1.0;
 			
@@ -2342,7 +2342,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud17(int hue) : base( 15589, hue )
+		public PeintureSud17(int hue) : base(0x9CA8, hue )
 		{
 			Weight = 1.0;
 			
@@ -2375,7 +2375,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud18(int hue) : base( 15622, hue )
+		public PeintureSud18(int hue) : base(0x9E2D, hue )
 		{
 			Weight = 1.0;
 			
@@ -2409,7 +2409,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud19(int hue) : base( 15611, hue )
+		public PeintureSud19(int hue) : base(0x9E2F, hue )
 		{
 			Weight = 1.0;
 			
@@ -2443,7 +2443,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud20(int hue) : base( 15633, hue )
+		public PeintureSud20(int hue) : base(0x9E31, hue )
 		{
 			Weight = 1.0;
 			
@@ -2476,7 +2476,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud21(int hue) : base( 15626 , hue)
+		public PeintureSud21(int hue) : base(0x9D53, hue)
 		{
 			Weight = 1.0;
 			
@@ -2509,7 +2509,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud22(int hue) : base( 15630 , hue)
+		public PeintureSud22(int hue) : base(0x9D55, hue)
 		{
 			Weight = 1.0;
 			
@@ -2542,7 +2542,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud23(int hue) : base( 15628, hue )
+		public PeintureSud23(int hue) : base(0x9D57, hue )
 		{
 			Weight = 1.0;
 			
@@ -2575,7 +2575,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud24(int hue) : base( 15602, hue )
+		public PeintureSud24(int hue) : base(0x9D59, hue )
 		{
 			Weight = 1.0;
 			
@@ -2608,7 +2608,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud25(int hue) : base( 15587 , hue)
+		public PeintureSud25(int hue) : base(0x9D5B, hue)
 		{
 			Weight = 1.0;
 			
@@ -2641,7 +2641,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud26(int hue) : base( 11632 , hue)
+		public PeintureSud26(int hue) : base(0x9E33, hue)
 		{
 			Weight = 1.0;
 			
@@ -2674,7 +2674,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst14(int hue) : base( 15582 , hue)
+		public PeintureEst14(int hue) : base(0x4C32, hue)
 		{
 			Weight = 1.0;
 			
@@ -2707,7 +2707,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst15(int hue) : base( 15605, hue )
+		public PeintureEst15(int hue) : base(0x4C33, hue )
 		{
 			Weight = 1.0;
 			
@@ -2740,7 +2740,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst16(int hue) : base( 15592, hue )
+		public PeintureEst16(int hue) : base(0x4C34, hue )
 		{
 			Weight = 1.0;
 			
@@ -2773,7 +2773,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst17(int hue) : base( 15588, hue )
+		public PeintureEst17(int hue) : base(0x9CA9, hue )
 		{
 			Weight = 1.0;
 			
@@ -2806,7 +2806,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst18(int hue) : base( 15621, hue )
+		public PeintureEst18(int hue) : base(0x9E2E, hue )
 		{
 			Weight = 1.0;
 			
@@ -2839,7 +2839,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst19(int hue) : base( 15596 , hue)
+		public PeintureEst19(int hue) : base(0x9E30, hue)
 		{
 			Weight = 1.0;
 			
@@ -2873,7 +2873,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst20(int hue) : base( 15612 , hue)
+		public PeintureEst20(int hue) : base(0x9E32, hue)
 		{
 			Weight = 1.0;
 			
@@ -2907,7 +2907,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst21(int hue) : base( 15625 , hue)
+		public PeintureEst21(int hue) : base(0x9E34, hue)
 		{
 			Weight = 1.0;
 			
@@ -2941,7 +2941,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst22(int hue) : base( 15629 , hue)
+		public PeintureEst22(int hue) : base(0x9D54, hue)
 		{
 			Weight = 1.0;
 			
@@ -2975,7 +2975,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst23(int hue) : base( 15627, hue )
+		public PeintureEst23(int hue) : base(0x9D56, hue )
 		{
 			Weight = 1.0;
 			
@@ -3008,7 +3008,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst24(int hue) : base( 15601 , hue)
+		public PeintureEst24(int hue) : base(0x9D58, hue)
 		{
 			Weight = 1.0;
 			
@@ -3042,7 +3042,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst25(int hue) : base( 15586 , hue)
+		public PeintureEst25(int hue) : base(0x9D5A, hue)
 		{
 			Weight = 1.0;
 			
@@ -3075,7 +3075,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst26(int hue) : base( 11631, hue )
+		public PeintureEst26(int hue) : base(0x9D5C, hue )
 		{
 			Weight = 1.0;
 			
@@ -3108,7 +3108,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud27(int hue) : base( 15646 , hue)
+		public PeintureSud27(int hue) : base(0x2D74, hue)
 		{
 			Weight = 1.0;
 			
@@ -3142,7 +3142,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud28(int hue) : base( 15648, hue )
+		public PeintureSud28(int hue) : base(0x9D3C, hue )
 		{
 			Weight = 1.0;
 			
@@ -3512,7 +3512,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst27(int hue) : base( 15645 , hue)
+		public PeintureEst27(int hue) : base(0x9D5E, hue)
 		{
 			Weight = 1.0;
 			
@@ -3546,7 +3546,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst28(int hue) : base( 15647, hue )
+		public PeintureEst28(int hue) : base(0x2D74, hue )
 		{
 			Weight = 1.0;
 			
@@ -3580,7 +3580,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst29(int hue) : base( 15649, hue )
+		public PeintureEst29(int hue) : base(0x9D3D, hue )
 		{
 			Weight = 1.0;
 			
