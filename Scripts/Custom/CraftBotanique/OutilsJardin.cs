@@ -19,7 +19,7 @@ namespace Server.Items
 		[Constructable]
 		public OutilsJardin( int uses ) : base( uses, 0x194F)
         {
-            Name = "Pinceaux";
+            Name = "Outils Jardinage";
 			Weight = 2.0;
 		}
 
