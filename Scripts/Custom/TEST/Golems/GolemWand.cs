@@ -5,19 +5,21 @@ using Server.Gumps;
 using Server.Mobiles;
 using Server.Items;
 using System.Collections.Generic;
+using Server.ContextMenus;
 
 namespace Server.Custom
 {
-	public class SpiritWand : Item
+	public class GolemSpiritWand : Item
 	{
 		[Constructable]
-		public SpiritWand() : base(0x0DF2)
+		public GolemSpiritWand() : base(0x0DF2)
 		{
 			Name = "Baguette des esprits";
 			Weight = 1.0;
+			Layer = Layer.OneHanded;
 		}
 
-		public SpiritWand(Serial serial) : base(serial)
+		public GolemSpiritWand(Serial serial) : base(serial)
 		{
 		}
 
@@ -29,9 +31,9 @@ namespace Server.Custom
 
 		private class InternalTarget : Target
 		{
-			private SpiritWand m_Wand;
+			private GolemSpiritWand m_Wand;
 
-			public InternalTarget(SpiritWand wand) : base(3, false, TargetFlags.None)
+			public InternalTarget(GolemSpiritWand wand) : base(3, false, TargetFlags.None)
 			{
 				m_Wand = wand;
 			}
@@ -74,12 +76,22 @@ namespace Server.Custom
 
 	public class CreatureSpirit : Item
 	{
-		private int m_Str;
-		private int m_Dex;
-		private int m_Int;
-		private int m_AR;
+		private int m_Str, m_Dex, m_Int, m_AR;
 		private Dictionary<SkillName, double> m_Skills;
-		private int m_Percentage;
+
+		public int m_Percentage { get; private set; }
+
+		public int GetStrength() { return m_Str; }
+		public int GetDexterity() { return m_Dex; }
+		public int GetIntelligence() { return m_Int; }
+		public int GetAR() { return m_AR; }
+
+		public double GetSkillValue(SkillName skillName)
+		{
+			if (m_Skills != null && m_Skills.TryGetValue(skillName, out double value))
+				return value;
+			return 0.0;
+		}
 
 		[Constructable]
 		public CreatureSpirit(Corpse corpse) : base(0x186F)
@@ -107,12 +119,43 @@ namespace Server.Custom
 
 				m_Percentage = 1;
 			}
+			else
+			{
+				m_Str = 0;
+				m_Dex = 0;
+				m_Int = 0;
+				m_AR = 0;
+				m_Percentage = 0;
+			}
 
 			UpdateHue();
 		}
 
 		public CreatureSpirit(Serial serial) : base(serial)
 		{
+		}
+
+		private class SpiritInfoEntry : ContextMenuEntry
+		{
+			private Mobile m_From;
+			private CreatureSpirit m_Spirit;
+
+			public SpiritInfoEntry(Mobile from, CreatureSpirit spirit) : base(6103, 3)
+			{
+				m_From = from;
+				m_Spirit = spirit;
+			}
+
+			public override void OnClick()
+			{
+				m_From.SendGump(new SpiritInfoGump(m_Spirit));
+			}
+		}
+
+		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+		{
+			base.GetContextMenuEntries(from, list);
+			list.Add(new SpiritInfoEntry(from, this));
 		}
 
 		private void UpdateHue()
@@ -127,6 +170,12 @@ namespace Server.Custom
 
 		public override void OnDoubleClick(Mobile from)
 		{
+			if (this.Deleted)
+			{
+				from.SendMessage("Cet esprit n'existe plus.");
+				return;
+			}
+
 			from.SendMessage("Ciblez un autre esprit pour les combiner.");
 			from.Target = new InternalTarget(this);
 		}
@@ -142,8 +191,20 @@ namespace Server.Custom
 
 			protected override void OnTarget(Mobile from, object targeted)
 			{
+				if (m_Spirit.Deleted)
+				{
+					from.SendMessage("L'esprit source n'existe plus.");
+					return;
+				}
+
 				if (targeted is CreatureSpirit otherSpirit)
 				{
+					if (m_Spirit == otherSpirit)
+					{
+						from.SendMessage("Vous ne pouvez pas combiner un esprit avec lui-même.");
+						return;
+					}
+
 					if (m_Spirit.m_Percentage + otherSpirit.m_Percentage > 100)
 					{
 						from.SendMessage("La combinaison dépasserait 100%. Impossible de combiner.");
@@ -156,15 +217,21 @@ namespace Server.Custom
 					m_Spirit.m_AR = (m_Spirit.m_AR + otherSpirit.m_AR) / 2;
 					m_Spirit.m_Percentage += otherSpirit.m_Percentage;
 
-					foreach (var skill in otherSpirit.m_Skills)
+					if (m_Spirit.m_Skills == null)
+						m_Spirit.m_Skills = new Dictionary<SkillName, double>();
+
+					if (otherSpirit.m_Skills != null)
 					{
-						if (m_Spirit.m_Skills.ContainsKey(skill.Key))
+						foreach (var skill in otherSpirit.m_Skills)
 						{
-							m_Spirit.m_Skills[skill.Key] = (m_Spirit.m_Skills[skill.Key] + skill.Value) / 2;
-						}
-						else
-						{
-							m_Spirit.m_Skills[skill.Key] = skill.Value;
+							if (m_Spirit.m_Skills.ContainsKey(skill.Key))
+							{
+								m_Spirit.m_Skills[skill.Key] = (m_Spirit.m_Skills[skill.Key] + skill.Value) / 2;
+							}
+							else
+							{
+								m_Spirit.m_Skills[skill.Key] = skill.Value;
+							}
 						}
 					}
 
@@ -210,11 +277,14 @@ namespace Server.Custom
 				AddHtml(120, 130, 100, 20, $"{spirit.m_Percentage}%", false, false);
 
 				int y = 150;
-				foreach (var skill in spirit.m_Skills)
+				if (spirit.m_Skills != null)
 				{
-					AddHtml(20, y, 150, 20, $"{skill.Key}:", false, false);
-					AddHtml(170, y, 100, 20, skill.Value.ToString("F1"), false, false);
-					y += 20;
+					foreach (var skill in spirit.m_Skills)
+					{
+						AddHtml(20, y, 150, 20, $"{skill.Key}:", false, false);
+						AddHtml(170, y, 100, 20, skill.Value.ToString("F1"), false, false);
+						y += 20;
+					}
 				}
 			}
 		}
