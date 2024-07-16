@@ -14,7 +14,7 @@ namespace Server.Mobiles
 
         [Constructable]
         public Scorpion()
-            : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Closest, 10, 2, 0.2, 0.4)
         {
             Name = "un scorpion";
             Body = 48;
@@ -38,7 +38,7 @@ namespace Server.Mobiles
             SetResistance(ResistanceType.Poison, 40, 50);
             SetResistance(ResistanceType.Energy, 10, 15);
 
-            SetSkill(SkillName.Poisoning, 80.1, 100.0);
+            SetSkill(SkillName.Poisoning, 60.1, 80.0);
             SetSkill(SkillName.MagicResist, 30.1, 35.0);
             SetSkill(SkillName.Tactics, 60.3, 75.0);
             SetSkill(SkillName.Wrestling, 50.3, 65.0);
@@ -48,8 +48,8 @@ namespace Server.Mobiles
             Karma = -2000;
 
             Tamable = true;
-            ControlSlots = 1;
-            MinTameSkill = 47.1;
+            ControlSlots = 2;
+            MinTameSkill = 77.1;
         }
 
         public Scorpion(Serial serial)
@@ -153,7 +153,7 @@ namespace Server.Mobiles
 		public override FoodType FavoriteFood => FoodType.Meat;
         public override PackInstinct PackInstinct => PackInstinct.Arachnid;
         public override Poison PoisonImmune => Poison.Greater;
-        public override Poison HitPoison => (0.8 >= Utility.RandomDouble() ? Poison.Greater : Poison.Deadly);
+        public override Poison HitPoison => (0.8 >= Utility.RandomDouble() ? Poison.Regular : Poison.Greater);
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);
