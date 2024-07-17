@@ -44,13 +44,14 @@ public class GolemAsh : Item
 	}
 
 	[Constructable]
-	public GolemAsh(AshType type, int amount) : base(0x0F7C)
+	public GolemAsh(AshType type, int Amount) : base(0x0F7C)
 	{
 		Stackable = true;
 		m_Type = type;
-		Amount = amount;
-		Name = $"Cendres de {type}";
+		//Amount = amount;
+		Name = $"Cendres"; // Name = $"Cendres de {type}";
 		Hue = GetHueForType(type);
+		Weight = 1.0;
 	}
 
 	public GolemAsh(Serial serial) : base(serial)
@@ -59,7 +60,7 @@ public class GolemAsh : Item
 
 	public override void GetProperties(ObjectPropertyList list)
 	{
-		base.GetProperties(list);
+	//	base.GetProperties(list);
 		list.Add($"Type: {m_Type}");
 		list.Add($"Quantité: {Amount}");
 	}

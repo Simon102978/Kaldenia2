@@ -342,7 +342,7 @@ namespace Server.Custom
 				AddHtml(320, y, 35, 18, spirit.GetAR().ToString(), false, false);
 				y += 18;
 
-				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#0x7FFF>Pourcentage de vos esprits:</BASEFONT>", false, false);
+				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#0x7FFF>% Total:</BASEFONT>", false, false);
 				AddHtml(320, y, 35, 18, $"{spirit.Percentage}%", false, false);
 
 				AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, page + 1);
