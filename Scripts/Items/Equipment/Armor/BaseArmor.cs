@@ -2259,6 +2259,7 @@ namespace Server.Items
 
 			var desc = Description ?? String.Empty;
 
+
 			int oreType;
 
             switch (m_Resource)
@@ -2412,6 +2413,7 @@ namespace Server.Items
 			if (QuestItem)
 				AddQuestItemProperty(list);
 
+			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
 
 
 			if (m_GorgonLenseCharges > 0)

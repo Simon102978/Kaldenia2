@@ -199,7 +199,7 @@ namespace Server.Items
 		{
 			Weight = 9.0;
 			Name = "Jambière Broigne";
-			Layer = Layer.OuterLegs;
+			Layer = Layer.Pants;
 		}
 
 		public JambiereMailleRenforce(Serial serial)

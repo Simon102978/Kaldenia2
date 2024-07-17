@@ -122,6 +122,7 @@ namespace Server.Items
 		{
 			Weight = 7.0;
 			Name = "Jambière de Maille";
+			Layer = Layer.Pants;
 		}
 
 		public JambiereMaille(Serial serial)
