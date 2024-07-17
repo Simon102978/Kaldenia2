@@ -397,77 +397,77 @@ namespace Server.Engines.Craft
 			#endregion
 
 			  #region Parfums
-            index = AddCraft(typeof(PerfumGrisPotion), "Parfums ",                      "Sel de mer ",                  50.0, 60.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(DentDeLion), "Dent-de-lion", 1, 1044287);
-           AddRes(index, typeof(Sage), "Sauge", 1, 1044287);
+            index = AddCraft(typeof(PerfumGrisPotion), "Parfums ",                      "Sel de mer ",                  50.0, 60.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(DentDeLion), "Dent-de-lion", 1, "Manque : Dent-de-lion");
+           AddRes(index, typeof(Sage), "Sauge", 1, "Il Vous manque :  Sauge");
 
-            index = AddCraft(typeof(PerfumKakiPotion), "Parfums ",                      "Fromage vieillit ",            25.0, 45.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-			AddRes(index, typeof(Fougere), "Fougère", 1, 1044287);
-			AddRes(index, typeof(Anise), "Anis", 1, 1044287);
+            index = AddCraft(typeof(PerfumKakiPotion), "Parfums ",                      "Fromage vieillit ",            25.0, 45.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+			AddRes(index, typeof(Fougere), "Fougère", 1, "Il Vous manque : Fougere");
+			AddRes(index, typeof(Anise), "Anis", 1, "Il Vous manque : Anis");
 
-			index = AddCraft(typeof(PerfumBrunPotion), "Parfums ",                      "Vieux musk ",                  30.0, 50.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-	        AddRes(index, typeof(Safran), "Safran", 1, 1044287);
-	        AddRes(index, typeof(Myrrh), "gomme d'épinette", 1, 1044287);
+			index = AddCraft(typeof(PerfumBrunPotion), "Parfums ",                      "Vieux musk ",                  30.0, 50.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+	        AddRes(index, typeof(Safran), "Safran", 1, "Il Vous manque : Safran, la plante.");
+	        AddRes(index, typeof(Myrrh), "gomme d'épinette", 1, "Il Vous manque :  gomme d'épinette");
 
-			index = AddCraft(typeof(PerfumJaunePotion), "Parfums ",                     "Agrume en folie ",             70.0, 85.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-			AddRes(index, typeof(Camomille), "Tulipe", 1, 1044287);
-			AddRes(index, typeof(Saffron), "Safran", 1, 1044287);
-
-
-			index = AddCraft(typeof(PerfumBleuClairPotion), "Parfums ",                 "Brise d’océan ",               80.0, 90.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-			AddRes(index, typeof(RoseSauvage), "Rose Sauvage", 1, 1044287);
-			AddRes(index, typeof(Sage), "Sauge", 1, 1044287);
-
-            index = AddCraft(typeof(PerfumMauvePotion), "Parfums ",                     "Souffle magique ",             85.3, 95.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(Lilas), "Lila", 1, 1044287);
-			AddRes(index, typeof(Basil), "Basilic", 1, 1044287);
-
-			index = AddCraft(typeof(PerfumRougevifPotion), "Parfums ",                  "Désir et passion ",            86.7, 95.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-			AddRes(index, typeof(Tulipe), "Tulipe", 3, 1044287);
-			AddRes(index, typeof(Lavender), "Lavande", 1, 1044287);
+			index = AddCraft(typeof(PerfumJaunePotion), "Parfums ",                     "Agrume en folie ",             70.0, 85.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+			AddRes(index, typeof(Camomille), "Tulipe", 1, "Il Vous manque :  Tulipe");
+			AddRes(index, typeof(Saffron), "Safran", 1, "Il Vous manque :  Safran l'épice.");
 
 
-			index = AddCraft(typeof(PerfumRosePotion), "Parfums ",                      "Synergie féérique ",           84.3, 95.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(Lys), "Lys", 1, 1044287);
-		    AddRes(index, typeof(Peppercorn), "grain de poivre", 1, 1044287);
+			index = AddCraft(typeof(PerfumBleuClairPotion), "Parfums ",                 "Brise d’océan ",               80.0, 90.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+			AddRes(index, typeof(RoseSauvage), "Rose Sauvage", 1, "Il Vous manque :  Rose Sauvage");
+			AddRes(index, typeof(Sage), "Sauge", 1, "Il Vous manque :  Sauge");
 
-			index = AddCraft(typeof(PerfumTurquoisePotion), "Parfums ",                 "Menthe polaire ",              68.3, 80.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(Givrelle), "Givrelle", 1, 1044287);
-			AddRes(index, typeof(Acacia), "Acacia", 1, 1044287);
+            index = AddCraft(typeof(PerfumMauvePotion), "Parfums ",                     "Souffle magique ",             85.3, 95.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(Lilas), "Lila", 1, "Il Vous manque :  Lila");
+			AddRes(index, typeof(Basil), "Basilic", 1, "Il Vous manque : Basilic");
 
-			index = AddCraft(typeof(PerfumOrangePotion), "Parfums ",                    "Effervescence fruitée ",       73.2, 85.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-			AddRes(index, typeof(Camomille), "Camomille", 1, 1044287);
-			AddRes(index, typeof(Orris), "racine d'Orris", 1, 1044287);
-
-
-			index = AddCraft(typeof(PerfumMarinePotion), "Parfums ",                    "Frisson obscure ",             70.0, 90.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(Indigo), "Indigo", 1, 1044287);
-            AddRes(index, typeof(Sandelwood), "Bois de santal", 1, 1044287);
-
-            index = AddCraft(typeof(PerfumVioletPotion), "Parfums ",                    "Escapade florale ",            75.0, 95.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(RoseTremiere), "Rose trémière", 1, 1044287);
-			AddRes(index, typeof(Mint), "Menthe", 1, 1044287);
-
-			index = AddCraft(typeof(PerfumVertpommePotion), "Parfums ",                 "Regénérescence ",              80.0, 100.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(Dahlia), "Dahlia", 1, 1044287);
-	        AddRes(index, typeof(Rosemary), "Romarin", 1, 1044287);
-
-			index = AddCraft(typeof(PerfumRougevinPotion), "Parfums ",                  "Volupté charnelle ",           85.0, 105.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(DentDeLion), "Dent-de-lion", 3, 1044287);
-             AddRes(index, typeof(Thyme), "Thym", 1, 1044287);
-
-            index = AddCraft(typeof(PerfumOcrePotion), "Parfums ",                      "Opulence ",                    90.0, 110.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(Cramelia), "Cramélia", 1, 1044287);
-            AddRes(index, typeof(Valerian), "Valériane", 1, 1044287);
-
-            index = AddCraft(typeof(PerfumVertforêtPotion), "Parfums ",                 "Bois de santal ",              95.0, 115.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(GeuleDeDragon), "Gueule de dragon", 1, 1044287);
-			AddRes(index, typeof(Olive), "Olive", 1, 1044287);
+			index = AddCraft(typeof(PerfumRougevifPotion), "Parfums ",                  "Désir et passion ",            86.7, 95.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+			AddRes(index, typeof(Tulipe), "Tulipe", 3, "Il Vous manque :  Tulipe");
+			AddRes(index, typeof(Lavender), "Lavande", 1, "Il Vous manque :  Lavande");
 
 
-			index = AddCraft(typeof(PerfumNoirPotion), "Parfums ",                      "La fin des temps ",            99.0, 119.0, typeof(Bottle),"Bouteille vide ", 1, 1044287);
-            AddRes(index, typeof(Ombrella), "Ombrella", 1, 1044287);
-            AddRes(index, typeof(TribalBerry), "baie tribale", 1, 1044287);
+			index = AddCraft(typeof(PerfumRosePotion), "Parfums ",                      "Synergie féérique ",           84.3, 95.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(Lys), "Lys", 1, "Il Vous manque :  Lys");
+		    AddRes(index, typeof(Peppercorn), "grain de poivre", 1, "Il Vous manque :  grain de poivre");
+
+			index = AddCraft(typeof(PerfumTurquoisePotion), "Parfums ",                 "Menthe polaire ",              68.3, 80.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(Givrelle), "Givrelle", 1, "Il Vous manque :  Givrelle");
+			AddRes(index, typeof(Acacia), "Acacia", 1, "Il Vous manque :  Acacia");
+
+			index = AddCraft(typeof(PerfumOrangePotion), "Parfums ",                    "Effervescence fruitée ",       73.2, 85.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+			AddRes(index, typeof(Camomille), "Camomille", 1, "Il Vous manque : Camomille");
+			AddRes(index, typeof(Orris), "racine d'Orris", 1, "Il Vous manque :  racine d'Orris");
+
+
+			index = AddCraft(typeof(PerfumMarinePotion), "Parfums ",                    "Frisson obscure ",             70.0, 90.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(Indigo), "Indigo", 1, "Il Vous manque :  Indigo");
+            AddRes(index, typeof(Sandelwood), "Bois de santal", 1, "Il Vous manque :  Bois de santal");
+
+            index = AddCraft(typeof(PerfumVioletPotion), "Parfums ",                    "Escapade florale ",            75.0, 95.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(RoseTremiere), "Rose trémière", 1, "Il Vous manque :  Rose trémière");
+			AddRes(index, typeof(Mint), "Menthe", 1, "Il Vous manque :  Menthe");
+
+			index = AddCraft(typeof(PerfumVertpommePotion), "Parfums ",                 "Regénérescence ",              80.0, 100.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(Dahlia), "Dahlia", 1, "Il Vous manque :  Dahlia");
+	        AddRes(index, typeof(Rosemary), "Romarin", 1, "Il Vous manque :  Romarin");
+
+			index = AddCraft(typeof(PerfumRougevinPotion), "Parfums ",                  "Volupté charnelle ",           85.0, 105.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(DentDeLion), "Dent-de-lion", 3, "Il Vous manque :  Dent-de-lion");
+             AddRes(index, typeof(Thyme), "Thym", 1, "Il Vous manque :  Thym");
+
+            index = AddCraft(typeof(PerfumOcrePotion), "Parfums ",                      "Opulence ",                    90.0, 110.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(Cramelia), "Cramélia", 1, "Il Vous manque :  Cramélia");
+            AddRes(index, typeof(Valerian), "Valériane", 1, "Il Vous manque :  Valériane");
+
+            index = AddCraft(typeof(PerfumVertforêtPotion), "Parfums ",                 "Bois de santal ",              95.0, 115.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(GeuleDeDragon), "Gueule de dragon", 1, "Il Vous manque :  Gueule de dragon");
+			AddRes(index, typeof(Olive), "Olive", 1, "Il Vous manque :  Olive");
+
+
+			index = AddCraft(typeof(PerfumNoirPotion), "Parfums ",                      "La fin des temps ",            99.0, 119.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+            AddRes(index, typeof(Ombrella), "Ombrella", 1, "Il Vous manque :  Ombrella");
+            AddRes(index, typeof(TribalBerry), "baie tribale", 1, "Il Vous manque :  baie tribale");
   
             #endregion
 		}
