@@ -1,4 +1,5 @@
 using Server.Commands;
+using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
 using System;
@@ -30,9 +31,9 @@ namespace Server.Items
         private int m_ClosedID, m_ClosedSound;
         private Point3D m_Offset;
         private BaseDoor m_Link;
-        private uint m_KeyValue;
 
-		private bool m_IsNpcDoor;
+        private BaseVendor m_Vendor;
+        private uint m_KeyValue;
 
 		private Timer m_Timer;
 
@@ -53,16 +54,44 @@ namespace Server.Items
         {
         }
 
-        [CommandProperty(AccessLevel.GameMaster)]
+         [CommandProperty(AccessLevel.GameMaster)]
         public bool Locked
         {
             get
             {
+
                 return m_Locked;
             }
             set
             {
                 m_Locked = value;
+            }
+        }
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public BaseVendor Vendor
+        {
+            get
+            {
+
+                return m_Vendor;
+            }
+            set
+            {
+                if (m_Vendor != null)
+                {
+                    m_Vendor.RemoveDoor(this);
+                   
+                }
+
+                m_Vendor = value;
+
+                if (value != null)
+                {
+                   value.AddDoor(this);
+                }
+
+                
             }
         }
         [CommandProperty(AccessLevel.GameMaster)]
@@ -171,19 +200,6 @@ namespace Server.Items
                 m_Offset = value;
             }
         }
-
-		[CommandProperty(AccessLevel.Administrator)]
-		public bool IsNpcDoor
-		{
-			get
-			{
-				return m_IsNpcDoor;
-			}
-			set
-			{
-				m_IsNpcDoor = value;
-			}
-		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
         public BaseDoor Link
@@ -295,44 +311,8 @@ namespace Server.Items
 			}
 		}
 		public virtual bool IsInside(Mobile from)
-        {
-			if (m_IsNpcDoor)
-			{
-				int x, y, w, h;
-
-				const int r = 2;
-				const int bs = r * 2 + 1;
-				const int ss = r + 1;
-
-				switch (GetFacing(m_Offset))
-				{
-					case DoorFacing.WestCW:
-					case DoorFacing.EastCCW: x = -r; y = -r; w = bs; h = ss; break;
-
-					case DoorFacing.EastCW:
-					case DoorFacing.WestCCW: x = -r; y = 0; w = bs; h = ss; break;
-
-					case DoorFacing.SouthCW:
-					case DoorFacing.NorthCCW: x = -r; y = -r; w = ss; h = bs; break;
-
-					case DoorFacing.NorthCW:
-					case DoorFacing.SouthCCW: x = 0; y = -r; w = ss; h = bs; break;
-
-					//No way to test the 'insideness' of SE Sliding doors on OSI, so leaving them default to false until furthur information gained
-
-					default: return false;
-				}
-
-				int rx = from.X - X;
-				int ry = from.Y - Y;
-				int az = Math.Abs(from.Z - Z);
-
-				return (rx >= x && rx < (x + w) && ry >= y && ry < (y + h) && az <= 4);
-			}
-			else
-			{
-				return false;
-			}
+        {		
+				return false;		
 		}
 
 
@@ -343,36 +323,26 @@ namespace Server.Items
 
 		public virtual bool IsNight(Mobile from)
 		{
+          
 			if (from == null || from.Map == null)
-				return false; // ou true, selon votre logique par défaut
+				return false; // ou true, selon votre logique par dï¿½faut
 
 			int hours, minutes;
 			Server.Items.Clock.GetTime(from.Map, from.X, from.Y, out hours, out minutes);
-			return hours >= 22 || hours < 6;
+			return hours >= 24 || hours < 4;
 		}
 
 		public virtual void Use(Mobile from)
         {
 
-			if (m_IsNpcDoor)
-		  {
-			  if (IsNight(from))
-			  {
-				  if (!m_Locked)
-					  m_Locked = true;
+			if (Vendor != null && IsNight(from) && !m_Locked && from.IsPlayer())
+            {
+                from.SendMessage("Ce batiment est fermÃ© pour la nuit. Revenez au lever du soleil.");
+                return;
+            }          
+            
 
-				  if (!IsInside(from))
-				  {
-					  from.SendMessage("Ce batiment est fermé pour la nuit. Revenez au lever du soleil.");
-					  return;
-				  }
-			  }
-			  else
-			  {
-				  if (m_Locked)
-					  m_Locked = false;
-			  }
-		  }
+
 			if (m_Locked && !m_Open && UseLocks())
             {
                 if (from.AccessLevel >= AccessLevel.GameMaster)
@@ -398,7 +368,7 @@ namespace Server.Items
                     return;
                 }
             }
-
+            
             if (m_Open && !IsFreeToClose())
                 return;
 
@@ -406,6 +376,16 @@ namespace Server.Items
                 OnClosed(from);
             else
                 OnOpened(from);
+
+
+            OpenByPass();
+
+
+        }
+
+        public virtual void OpenByPass()
+        {
+
 
             if (UseChainedFunctionality)
             {
@@ -443,13 +423,37 @@ namespace Server.Items
                 Use(from);
         }
 
+          public override void OnDelete()
+        {
+            base.OnDelete();
+
+            if(Vendor != null)
+            {
+                
+                 Vendor.RemoveDoor(this);
+                 Vendor = null;
+            }
+        }
+
+        public override void OnAfterDelete()
+        {
+            base.OnAfterDelete();
+
+            if(Vendor != null)
+            {
+                Vendor.RemoveDoor(this);
+                Vendor = null;
+            }
+                
+        }
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
-			writer.Write((int)1);  // version
+			writer.Write((int)2);  // version
 
-			writer.Write(m_IsNpcDoor);
+            writer.Write(m_Vendor);
 
 
 			writer.Write(m_KeyValue);
@@ -472,9 +476,14 @@ namespace Server.Items
 
 			switch (version)
 			{
+                case 2:
+                {
+                    m_Vendor = (BaseVendor)reader.ReadMobile();
+                    goto case 0;
+                }
 				case 1:
 					{
-						m_IsNpcDoor = reader.ReadBool();
+					    reader.ReadBool();
 
 						goto case 0;
 					}
@@ -482,14 +491,14 @@ namespace Server.Items
 					{
 
 						m_KeyValue = reader.ReadUInt();
-            m_Open = reader.ReadBool();
-            m_Locked = reader.ReadBool();
-            m_OpenedID = reader.ReadInt();
-            m_ClosedID = reader.ReadInt();
-            m_OpenedSound = reader.ReadInt();
-            m_ClosedSound = reader.ReadInt();
-            m_Offset = reader.ReadPoint3D();
-            m_Link = reader.ReadItem() as BaseDoor;
+                        m_Open = reader.ReadBool();
+                        m_Locked = reader.ReadBool();
+                        m_OpenedID = reader.ReadInt();
+                        m_ClosedID = reader.ReadInt();
+                        m_OpenedSound = reader.ReadInt();
+                        m_ClosedSound = reader.ReadInt();
+                        m_Offset = reader.ReadPoint3D();
+                        m_Link = reader.ReadItem() as BaseDoor;
 
 						m_Timer = new InternalTimer(this);
 
