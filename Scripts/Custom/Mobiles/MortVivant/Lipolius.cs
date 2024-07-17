@@ -56,9 +56,12 @@ namespace Server.Mobiles
 			Hue = 1667;
 
 			SetStr(208, 319);
-            SetInt(45, 91);
+            SetDex(126, 145);
+            SetInt(276, 305);
 
             SetHits(200, 300);
+
+			SetDamage(15, 20);
 
         	SetDamageType(ResistanceType.Physical, 10);
             SetDamageType(ResistanceType.Cold, 40);
