@@ -36,19 +36,7 @@ public class GolemAsh : Item
 
 
 
-	private int m_Amount;
-
-
-	[CommandProperty(AccessLevel.GameMaster)]
-	public int Amount
-	{
-		get { return m_Amount; }
-		set
-		{
-			m_Amount = value;
-			InvalidateProperties();
-		}
-	}
+	
 
 	[Constructable]
 	public GolemAsh(AshType type) : this(type, 1)
@@ -60,7 +48,7 @@ public class GolemAsh : Item
 	{
 		Stackable = true;
 		m_Type = type;
-		m_Amount = amount;
+		Amount = amount;
 		Name = $"Cendres de {type}";
 		Hue = GetHueForType(type);
 	}
@@ -73,8 +61,11 @@ public class GolemAsh : Item
 	{
 		base.GetProperties(list);
 		list.Add($"Type: {m_Type}");
-		list.Add($"Quantité: {m_Amount}");
+		list.Add($"Quantité: {Amount}");
 	}
+
+	
+
 
 	private int GetHueForType(AshType type)
 	{
@@ -187,7 +178,7 @@ public class GolemAsh : Item
 		base.Serialize(writer);
 		writer.Write((int)1); // version
 		writer.Write((int)m_Type);
-		writer.Write(m_Amount);
+		writer.Write(Amount);
 	}
 
 	public override void Deserialize(GenericReader reader)
@@ -197,7 +188,7 @@ public class GolemAsh : Item
 		m_Type = (AshType)reader.ReadInt();
 		if (version > 0)
 		{
-			m_Amount = reader.ReadInt();
+			Amount = reader.ReadInt();
 		}
 	}
 }
