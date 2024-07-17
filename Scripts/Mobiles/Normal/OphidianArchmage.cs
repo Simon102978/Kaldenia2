@@ -41,6 +41,8 @@ namespace Server.Mobiles
             SetSkill(SkillName.Tactics, 65.0, 87.5);
             SetSkill(SkillName.Wrestling, 85.1, 100.0);
 
+           AddItem(new BardicheOphidian());
+
             Fame = 11500;
             Karma = -11500;
         }

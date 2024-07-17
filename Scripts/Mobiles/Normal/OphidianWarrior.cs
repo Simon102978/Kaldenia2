@@ -43,6 +43,8 @@ namespace Server.Mobiles
 
 			Fame = 4500;
             Karma = -4500;
+
+            AddItem(new BardicheOphidian());
         }
 
         public OphidianWarrior(Serial serial)

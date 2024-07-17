@@ -38,6 +38,8 @@ namespace Server.Mobiles
 
             Fame = 16000;
             Karma = -16000;
+
+            AddItem(new BardicheOphidian());
         }
 
         public OphidianMatriarch(Serial serial)

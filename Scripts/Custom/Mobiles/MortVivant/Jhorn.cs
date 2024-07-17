@@ -46,7 +46,7 @@ namespace Server.Mobiles
 
 		[Constructable]
 		public Jhorn()
-			: base(AIType.AI_Archer, FightMode.Closest, 10, 1, 0.2, 0.4)
+			: base(AIType.AI_Archer, FightMode.Closest, 10, 5, 0.2, 0.4)
 		{
 			Name = "Jhorn";
 			Title = "Briseur De Vent";
