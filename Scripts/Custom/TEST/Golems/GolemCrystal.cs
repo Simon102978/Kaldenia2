@@ -11,51 +11,54 @@ namespace Server.Custom
 {
 	public class GolemCrystal : Item
 	{
-
 		public enum CrystalType
 		{
 			Citrine,
-			Ruby,
-			Amber,
+			Rubis,
+			Ambre,
 			Tourmaline,
-			Sapphire,
-			Emerald,
-			Amethyst,
-			StarSapphire,
-			Diamond
+			Saphire,
+			Emeraude,
+			Amethyste,
+			SaphireEtoile,
+			Diamant
 		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public CrystalType Type { get; set; }
 
-	
-
 		private GolemAsh.AshType m_AshType;
-
 		[CommandProperty(AccessLevel.GameMaster)]
 		public GolemAsh.AshType AshType
 		{
 			get { return m_AshType; }
 			set { m_AshType = value; InvalidateProperties(); }
 		}
+
 		private int m_SuccessChance;
 		private int m_AshQuantity;
 		private CreatureSpirit m_Spirit;
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public int SuccessChance { get { return m_SuccessChance; } set { m_SuccessChance = value; InvalidateProperties(); } }
-
-	
+		public int SuccessChance
+		{
+			get { return m_SuccessChance; }
+			set { m_SuccessChance = value; InvalidateProperties(); }
+		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public int AshQuantity { get { return m_AshQuantity; } set { m_AshQuantity = value; InvalidateProperties(); } }
+		public int AshQuantity
+		{
+			get { return m_AshQuantity; }
+			set { m_AshQuantity = value; InvalidateProperties(); }
+		}
 
 		[Constructable]
 		public GolemCrystal(CrystalType type) : base(0x1F1C)
 		{
 			Type = type;
-			Name = $"Cristal de {Type}";
 			SuccessChance = GetSuccessChanceForType(type);
+			UpdateName();
 		}
 
 		public GolemCrystal(Serial serial) : base(serial) { }
@@ -63,7 +66,29 @@ namespace Server.Custom
 		public override void GetProperties(ObjectPropertyList list)
 		{
 			base.GetProperties(list);
-			list.Add($"Chance de réussite: {SuccessChance}%");
+			list.Add(1060658, "Chance de réussite\t{0}%", SuccessChance.ToString());
+		}
+
+		private void UpdateName()
+		{
+			Name = $"Cristal de {GetFrenchName(Type)}";
+		}
+
+		private string GetFrenchName(CrystalType type)
+		{
+			switch (type)
+			{
+				case CrystalType.Citrine: return "Citrine";
+				case CrystalType.Rubis: return "Rubis";
+				case CrystalType.Ambre: return "Ambre";
+				case CrystalType.Tourmaline: return "Tourmaline";
+				case CrystalType.Saphire: return "Saphir";
+				case CrystalType.Emeraude: return "Émeraude";
+				case CrystalType.Amethyste: return "Améthyste";
+				case CrystalType.SaphireEtoile: return "Saphir Étoilé";
+				case CrystalType.Diamant: return "Diamant";
+				default: return "Inconnu";
+			}
 		}
 
 		private int GetSuccessChanceForType(CrystalType type)
@@ -71,14 +96,14 @@ namespace Server.Custom
 			switch (type)
 			{
 				case CrystalType.Citrine: return 75;
-				case CrystalType.Ruby:
-				case CrystalType.Amber:
+				case CrystalType.Rubis:
+				case CrystalType.Ambre:
 				case CrystalType.Tourmaline: return 85;
-				case CrystalType.Sapphire:
-				case CrystalType.Emerald:
-				case CrystalType.Amethyst: return 90;
-				case CrystalType.StarSapphire: return 95;
-				case CrystalType.Diamond: return 100;
+				case CrystalType.Saphire:
+				case CrystalType.Emeraude:
+				case CrystalType.Amethyste: return 90;
+				case CrystalType.SaphireEtoile: return 95;
+				case CrystalType.Diamant: return 100;
 				default: return 0;
 			}
 		}
@@ -98,7 +123,7 @@ namespace Server.Custom
 			base.Serialize(writer);
 			writer.Write((int)0); // version
 			writer.Write((int)Type);
-			writer.Write(SuccessChance); 
+			writer.Write(SuccessChance);
 			writer.Write((int)m_AshType);
 			writer.Write(m_AshQuantity);
 			writer.Write(m_Spirit);
@@ -109,54 +134,62 @@ namespace Server.Custom
 			base.Deserialize(reader);
 			int version = reader.ReadInt();
 			Type = (CrystalType)reader.ReadInt();
-			SuccessChance = reader.ReadInt(); 
+			SuccessChance = reader.ReadInt();
 			m_AshType = (GolemAsh.AshType)reader.ReadInt();
 			m_AshQuantity = reader.ReadInt();
 			m_Spirit = reader.ReadItem() as CreatureSpirit;
+			UpdateName();
 		}
 
-		public class GolemCreationGump : Gump
+		public class GolemCreationGump : BaseProjectMGump
 		{
 			private Mobile m_From;
 			private GolemCrystal m_Crystal;
 
-			public GolemCreationGump(Mobile from, GolemCrystal crystal) : base(50, 50)
+			public GolemCreationGump(Mobile from, GolemCrystal crystal) : base("Création de Golem", 600, 450)
 			{
 				m_From = from;
 				m_Crystal = crystal;
 
 				AddPage(0);
-				AddBackground(0, 0, 600, 450, 9270);
-				AddImageTiled(10, 10, 580, 430, 2624);
-				AddAlphaRegion(10, 10, 580, 430);
-				AddImage(0, 0, 10440);
-				AddImage(554, 0, 10441);
-				AddImage(0, 405, 10442);
-				AddImage(554, 405, 10443);
 
-				AddHtml(10, 12, 580, 20, $"<CENTER><BASEFONT COLOR=#FFFFFF>Création de Golem : {crystal.SuccessChance}% chance de réussite</BASEFONT></CENTER>", false, false);
+				// Titre
+				AddHtml(0, 25, 600, 25, $"<CENTER><BASEFONT COLOR=#FFFFFF>Création de Golem : {crystal.SuccessChance}% chance de réussite</BASEFONT></CENTER>", false, false);
 
-				AddButton(20, 40, 4005, 4007, 1, GumpButtonType.Reply, 0);
-				AddHtml(55, 40, 200, 20, $"<BASEFONT COLOR=#FFFFFF>Choisissez les cendres à utiliser: {crystal.AshQuantity} {GetAshTypeName(crystal.AshType)}</BASEFONT>", false, false);
+				// Section des cendres
+				AddButtonHtlml(50, 60, 1, "Choisissez les cendres à utiliser: " + (crystal.AshQuantity > 0 ? $"{crystal.AshQuantity} {GetAshTypeName(crystal.AshType)}" : "Non sélectionné"));
 
-				AddHtml(20, 70, 560, 100, $"<BASEFONT COLOR=#FFFFFF>Énergie : {GetEnergyForAshType(crystal.AshType)}<br>Pouvoir : {GetPowerForAshType(crystal.AshType)}<br><br>{GolemAsh.GetAshBonusDescription(crystal.AshType)}</BASEFONT>", false, false);
+				if (crystal.AshQuantity > 0)
+				{
+					int energy = crystal.AshQuantity * 7;
+					AddSection(50, 90, 500, 140, "Informations sur les cendres");
+					AddHtml(60, 120, 480, 20, $"<BASEFONT COLOR=#FFFFFF>Énergie : {crystal.AshQuantity} cendre * 7 énergie = {energy}</BASEFONT>", false, false);
+					AddHtml(60, 140, 480, 20, $"<BASEFONT COLOR=#FFFFFF>Pouvoir : {GetAshTypeName(crystal.AshType)}</BASEFONT>", false, false);
+					AddHtml(60, 160, 480, 60, $"<BASEFONT COLOR=#FFFFFF>{GolemAsh.GetAshBonusDescription(crystal.AshType).Replace("\n", "<BR>")}</BASEFONT>", false, false);
+				}
 
-				AddButton(20, 180, 4005, 4007, 2, GumpButtonType.Reply, 0);
-				AddHtml(55, 180, 200, 20, $"<BASEFONT COLOR=#FFFFFF>Choisissez l'esprit à utiliser: {(crystal.m_Spirit != null ? "Sélectionné" : "Non sélectionné")}</BASEFONT>", false, false);
+				// Section de l'esprit
+				AddButtonHtlml(50, 240, 2, "Choisissez l'esprit à utiliser: " + (crystal.m_Spirit != null ? "Sélectionné" : "Non sélectionné"));
 
 				if (crystal.m_Spirit != null)
 				{
-					AddHtml(20, 210, 560, 100, $"<BASEFONT COLOR=#FFFFFF>STR: {crystal.m_Spirit.GetStrength()} DEX: {crystal.m_Spirit.GetDexterity()} INT: {crystal.m_Spirit.GetIntelligence()}<br>Armor: {crystal.m_Spirit.GetAR()}<br>Wrestling: {crystal.m_Spirit.GetSkillValue(SkillName.Wrestling)} Tactics: {crystal.m_Spirit.GetSkillValue(SkillName.Tactics)} MagicResist: {crystal.m_Spirit.GetSkillValue(SkillName.MagicResist)}</BASEFONT>", false, false);
+					AddSection(50, 270, 500, 100, "Informations sur l'esprit");
+					AddHtml(60, 300, 240, 20, $"<BASEFONT COLOR=#FFFFFF>STR: {crystal.m_Spirit.GetStrength()}</BASEFONT>", false, false);
+					AddHtml(310, 300, 240, 20, $"<BASEFONT COLOR=#FFFFFF>Wrestling: {crystal.m_Spirit.GetSkillValue(SkillName.Wrestling):F1}</BASEFONT>", false, false);
+					AddHtml(60, 320, 240, 20, $"<BASEFONT COLOR=#FFFFFF>DEX: {crystal.m_Spirit.GetDexterity()}</BASEFONT>", false, false);
+					AddHtml(310, 320, 240, 20, $"<BASEFONT COLOR=#FFFFFF>Tactics: {crystal.m_Spirit.GetSkillValue(SkillName.Tactics):F1}</BASEFONT>", false, false);
+					AddHtml(60, 340, 240, 20, $"<BASEFONT COLOR=#FFFFFF>INT: {crystal.m_Spirit.GetIntelligence()}</BASEFONT>", false, false);
+					AddHtml(310, 340, 240, 20, $"<BASEFONT COLOR=#FFFFFF>Magic Resist: {crystal.m_Spirit.GetSkillValue(SkillName.MagicResist):F1}</BASEFONT>", false, false);
+					AddHtml(60, 360, 240, 20, $"<BASEFONT COLOR=#FFFFFF>Armor: {crystal.m_Spirit.GetAR()}</BASEFONT>", false, false);
 				}
 
-				AddButton(250, 320, 4005, 4007, 3, GumpButtonType.Reply, 0);
-				AddHtml(285, 320, 200, 20, "<BASEFONT COLOR=#FFFFFF>Construire le Golem</BASEFONT>", false, false);
+				// Bouton de construction
+				AddButtonHtlml(250, 400, 3, "Construire le Golem");
 			}
 
 			public override void OnResponse(NetState sender, RelayInfo info)
 			{
 				Mobile from = sender.Mobile;
-
 				switch (info.ButtonID)
 				{
 					case 1: // Choisir les cendres
@@ -172,6 +205,8 @@ namespace Server.Custom
 						break;
 				}
 			}
+
+			
 
 			private void TryCreateGolem(Mobile from)
 			{

@@ -239,23 +239,26 @@ namespace Server.Custom
 						from.SendMessage("La fusion ne peut pas dépasser 100%.");
 						return;
 					}
-					m_Spirit.Percentage += targetSpirit.Percentage;
-					m_Spirit.m_Str += targetSpirit.m_Str;
-					m_Spirit.m_Dex += targetSpirit.m_Dex;
-					m_Spirit.m_Int += targetSpirit.m_Int;
-					m_Spirit.m_AR += targetSpirit.m_AR;
+					int totalPercentage = m_Spirit.Percentage + targetSpirit.Percentage;
+					double ratio = (double)targetSpirit.Percentage / totalPercentage;
+
+					m_Spirit.m_Str = (int)(m_Spirit.m_Str * (1 - ratio) + targetSpirit.m_Str * ratio);
+					m_Spirit.m_Dex = (int)(m_Spirit.m_Dex * (1 - ratio) + targetSpirit.m_Dex * ratio);
+					m_Spirit.m_Int = (int)(m_Spirit.m_Int * (1 - ratio) + targetSpirit.m_Int * ratio);
+					m_Spirit.m_AR = (int)(m_Spirit.m_AR * (1 - ratio) + targetSpirit.m_AR * ratio);
+
 					foreach (var skill in targetSpirit.m_Skills)
 					{
 						if (m_Spirit.m_Skills.ContainsKey(skill.Key))
-							m_Spirit.m_Skills[skill.Key] += skill.Value;
+							m_Spirit.m_Skills[skill.Key] = m_Spirit.m_Skills[skill.Key] * (1 - ratio) + skill.Value * ratio;
 						else
-							m_Spirit.m_Skills[skill.Key] = skill.Value;
+							m_Spirit.m_Skills[skill.Key] = skill.Value * ratio;
 					}
 
+					m_Spirit.Percentage += targetSpirit.Percentage;
 					m_Spirit.UpdateHue();
 					m_Spirit.InvalidateProperties();
 					targetSpirit.Delete();
-
 
 					from.SendMessage("Les esprits ont été fusionnés avec succès.");
 				}
@@ -267,56 +270,74 @@ namespace Server.Custom
 			}
 		}
 
-		private class SpiritInfoGump : Gump
+		public class SpiritInfoGump : Gump
 		{
+			private static readonly int LabelColor = 0x7FFF;
+
 			public SpiritInfoGump(CreatureSpirit spirit) : base(250, 50)
 			{
 				AddPage(0);
 
-				AddBackground(0, 0, 304, 454, 9380);
-				AddImage(0, 0, 10000);
-				AddImage(204, 0, 10001);
-				AddImage(0, 254, 10002);
-				AddImage(204, 254, 10003);
+				AddImage(100, 100, 2080);
+				AddImage(118, 137, 2081);
+				AddImage(118, 207, 2081);
+				AddImage(118, 277, 2081);
+				AddImage(118, 347, 2083);
 
-				AddHtml(10, 10, 285, 18, "<div align=center><font color=#28453C><u>Force de l'Esprit</u></font></div>", false, false);
+				AddHtml(147, 108, 210, 18, "<center><i>Force de l'Esprit</i></center>", false, false);
 
-				int y = 35;
+				AddButton(240, 77, 2093, 2093, 2, GumpButtonType.Reply, 0);
 
-				AddSpiritInfo(spirit, ref y);
-				AddSkills(spirit, ref y);
-			}
+				AddImage(140, 138, 2091);
+				AddImage(140, 335, 2091);
 
-			private void AddSpiritInfo(CreatureSpirit spirit, ref int y)
-			{
-				AddLabel(50, y, 28453, "Attributes:");
-				y += 20;
+				int pages = 2;
+				int page = 0;
 
-				AddLabeledText("Strength:", spirit.GetStrength().ToString(), ref y);
-				AddLabeledText("Dexterity:", spirit.GetDexterity().ToString(), ref y);
-				AddLabeledText("Intelligence:", spirit.GetIntelligence().ToString(), ref y);
-				AddLabeledText("Armor:", spirit.GetAR().ToString(), ref y);
-				AddLabeledText("Spirit Percentage:", $"{spirit.Percentage}%", ref y);
+				// Page 1: Attributes
+				AddPage(++page);
 
-				y += 10;
-			}
+				AddImage(128, 152, 2086);
+				AddHtmlLocalized(147, 150, 160, 18, 1049593, 200, false, false); // Attributes
 
-			private void AddSkills(CreatureSpirit spirit, ref int y)
-			{
-				AddLabel(50, y, 28453, "Skills:");
-				y += 20;
+				int y = 168;
+				AddHtmlLocalized(153, y, 160, 18, 1028335, LabelColor, false, false); // Strength
+				AddHtml(320, y, 35, 18, spirit.GetStrength().ToString(), false, false);
+				y += 18;
 
+				AddHtmlLocalized(153, y, 160, 18, 3000113, LabelColor, false, false); // Dexterity
+				AddHtml(320, y, 35, 18, spirit.GetDexterity().ToString(), false, false);
+				y += 18;
+
+				AddHtmlLocalized(153, y, 160, 18, 3000112, LabelColor, false, false); // Intelligence
+				AddHtml(320, y, 35, 18, spirit.GetIntelligence().ToString(), false, false);
+				y += 18;
+
+				AddHtmlLocalized(153, y, 160, 18, 1062760, LabelColor, false, false); // Armor
+				AddHtml(320, y, 35, 18, spirit.GetAR().ToString(), false, false);
+				y += 18;
+
+				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#CCCCCC>Spirit Percentage:</BASEFONT>", false, false);
+				AddHtml(320, y, 35, 18, $"{spirit.Percentage}%", false, false);
+
+				AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, page + 1);
+				AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, pages);
+
+				// Page 2: Skills
+				AddPage(++page);
+
+				AddImage(128, 152, 2086);
+				AddHtmlLocalized(147, 150, 160, 18, 3001030, 200, false, false); // Skills
+
+				y = 168;
 				foreach (var skill in spirit.m_Skills)
 				{
-					AddLabeledText(skill.Key.ToString() + ":", $"{skill.Value:F1}", ref y);
+					AddHtml(153, y, 160, 18, $"<BASEFONT COLOR=#CCCCCC>{skill.Key}:</BASEFONT>", false, false);
+					AddHtml(320, y, 35, 18, $"{skill.Value:F1}", false, false);
+					y += 18;
 				}
-			}
 
-			private void AddLabeledText(string label, string text, ref int y)
-			{
-				AddLabel(50, y, 1150, label);
-				AddLabel(160, y, 28453, text);
-				y += 20;
+				AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, page - 1);
 			}
 		}
 
