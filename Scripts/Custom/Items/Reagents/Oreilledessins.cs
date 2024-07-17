@@ -16,7 +16,8 @@ namespace Server.Items
         {
             Hue = 2833;
             Name = "Oreille de Ssins";
-			Stackable = true;	
+			Stackable = true;
+			Weight = 1;
 			
 		}
 

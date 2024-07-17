@@ -146,7 +146,7 @@ namespace Server.Custom
 			private Mobile m_From;
 			private GolemCrystal m_Crystal;
 
-			public GolemCreationGump(Mobile from, GolemCrystal crystal) : base("Création de Golem", 600, 450)
+			public GolemCreationGump(Mobile from, GolemCrystal crystal) : base("", 500, 400)
 			{
 				m_From = from;
 				m_Crystal = crystal;
@@ -154,37 +154,44 @@ namespace Server.Custom
 				AddPage(0);
 
 				// Titre
-				AddHtml(0, 25, 600, 25, $"<CENTER><BASEFONT COLOR=#FFFFFF>Création de Golem : {crystal.SuccessChance}% chance de réussite</BASEFONT></CENTER>", false, false);
-
+				AddHtml(0, 10, 500, 25, $"<CENTER><BASEFONT COLOR=#FFFFFF>Création de Golem : {crystal.SuccessChance}% chance de réussite</BASEFONT></CENTER>", false, false);
 				// Section des cendres
-				AddButtonHtlml(50, 60, 1, "Choisissez les cendres à utiliser: " + (crystal.AshQuantity > 0 ? $"{crystal.AshQuantity} {GetAshTypeName(crystal.AshType)}" : "Non sélectionné"));
-
+				AddButton(50, 50, 0xFA5, 0xFA7, 1, GumpButtonType.Reply, 0);
+				AddHtml(85, 50, 400, 20, $"<BASEFONT COLOR=#FFFFFF>Choisissez les cendres à utiliser: " + (crystal.AshQuantity > 0 ? $"{crystal.AshQuantity} {GetAshTypeName(crystal.AshType)}" : "Non sélectionné") + "</BASEFONT>", false, false);
 				if (crystal.AshQuantity > 0)
 				{
-					int energy = crystal.AshQuantity * 7;
-					AddSection(50, 90, 500, 140, "Informations sur les cendres");
-					AddHtml(60, 120, 480, 20, $"<BASEFONT COLOR=#FFFFFF>Énergie : {crystal.AshQuantity} cendre * 7 énergie = {energy}</BASEFONT>", false, false);
-					AddHtml(60, 140, 480, 20, $"<BASEFONT COLOR=#FFFFFF>Pouvoir : {GetAshTypeName(crystal.AshType)}</BASEFONT>", false, false);
-					AddHtml(60, 160, 480, 60, $"<BASEFONT COLOR=#FFFFFF>{GolemAsh.GetAshBonusDescription(crystal.AshType).Replace("\n", "<BR>")}</BASEFONT>", false, false);
+					int energy = crystal.AshQuantity * 5;
+					AddBackground(50, 80, 400, 120, 0x2486);
+					AddHtml(60, 90, 380, 20, "<CENTER><BASEFONT COLOR=#FFFFFF>Informations sur les cendres</BASEFONT></CENTER>", false, false);
+					AddHtml(60, 110, 380, 20, $"<BASEFONT COLOR=#FFFFFF>Énergie : {crystal.AshQuantity} cendre * 5 énergie = {energy}</BASEFONT>", false, false);
+					AddHtml(60, 130, 380, 20, $"<BASEFONT COLOR=#FFFFFF>Pouvoir : {GetAshTypeName(crystal.AshType)}</BASEFONT>", false, false);
+					AddHtml(60, 150, 380, 40, $"<BASEFONT COLOR=#FFFFFF>{GolemAsh.GetAshBonusDescription(crystal.AshType).Replace("\n", "<BR>")}</BASEFONT>", false, false);
 				}
 
 				// Section de l'esprit
-				AddButtonHtlml(50, 240, 2, "Choisissez l'esprit à utiliser: " + (crystal.m_Spirit != null ? "Sélectionné" : "Non sélectionné"));
+				AddButton(50, 210, 0xFA5, 0xFA7, 2, GumpButtonType.Reply, 0);
+				AddHtml(85, 210, 400, 20, $"<BASEFONT COLOR=#FFFFFF>Choisissez l'esprit à utiliser: " + (crystal.m_Spirit != null ? "Sélectionné" : "Non sélectionné") + "</BASEFONT>", false, false);
 
 				if (crystal.m_Spirit != null)
 				{
-					AddSection(50, 270, 500, 100, "Informations sur l'esprit");
-					AddHtml(60, 300, 240, 20, $"<BASEFONT COLOR=#FFFFFF>STR: {crystal.m_Spirit.GetStrength()}</BASEFONT>", false, false);
-					AddHtml(310, 300, 240, 20, $"<BASEFONT COLOR=#FFFFFF>Wrestling: {crystal.m_Spirit.GetSkillValue(SkillName.Wrestling):F1}</BASEFONT>", false, false);
-					AddHtml(60, 320, 240, 20, $"<BASEFONT COLOR=#FFFFFF>DEX: {crystal.m_Spirit.GetDexterity()}</BASEFONT>", false, false);
-					AddHtml(310, 320, 240, 20, $"<BASEFONT COLOR=#FFFFFF>Tactics: {crystal.m_Spirit.GetSkillValue(SkillName.Tactics):F1}</BASEFONT>", false, false);
-					AddHtml(60, 340, 240, 20, $"<BASEFONT COLOR=#FFFFFF>INT: {crystal.m_Spirit.GetIntelligence()}</BASEFONT>", false, false);
-					AddHtml(310, 340, 240, 20, $"<BASEFONT COLOR=#FFFFFF>Magic Resist: {crystal.m_Spirit.GetSkillValue(SkillName.MagicResist):F1}</BASEFONT>", false, false);
-					AddHtml(60, 360, 240, 20, $"<BASEFONT COLOR=#FFFFFF>Armor: {crystal.m_Spirit.GetAR()}</BASEFONT>", false, false);
+					AddBackground(50, 240, 400, 120, 0x2486);
+					AddHtml(60, 250, 380, 20, "<CENTER><BASEFONT COLOR=#FFFFFF>Informations sur l'esprit</BASEFONT></CENTER>", false, false);
+
+					AddHtml(60, 280, 190, 20, $"<BASEFONT COLOR=#FFFFFF>STR: {crystal.m_Spirit.GetStrength()}</BASEFONT>", false, false);
+					AddHtml(260, 280, 190, 20, $"<BASEFONT COLOR=#FFFFFF>Wrestling: {crystal.m_Spirit.GetSkillValue(SkillName.Wrestling):F1}</BASEFONT>", false, false);
+
+					AddHtml(60, 300, 190, 20, $"<BASEFONT COLOR=#FFFFFF>DEX: {crystal.m_Spirit.GetDexterity()}</BASEFONT>", false, false);
+					AddHtml(260, 300, 190, 20, $"<BASEFONT COLOR=#FFFFFF>Tactics: {crystal.m_Spirit.GetSkillValue(SkillName.Tactics):F1}</BASEFONT>", false, false);
+
+					AddHtml(60, 320, 190, 20, $"<BASEFONT COLOR=#FFFFFF>INT: {crystal.m_Spirit.GetIntelligence()}</BASEFONT>", false, false);
+					AddHtml(260, 320, 190, 20, $"<BASEFONT COLOR=#FFFFFF>Magic Resist: {crystal.m_Spirit.GetSkillValue(SkillName.MagicResist):F1}</BASEFONT>", false, false);
+
+					AddHtml(60, 340, 190, 20, $"<BASEFONT COLOR=#FFFFFF>Armor: {crystal.m_Spirit.GetAR()}</BASEFONT>", false, false);
 				}
 
 				// Bouton de construction
-				AddButtonHtlml(250, 400, 3, "Construire le Golem");
+				AddButton(50, 350, 0xFA5, 0xFA7, 3, GumpButtonType.Reply, 0);
+				AddHtml(85, 350, 100, 20, "<BASEFONT COLOR=#FFFFFF>Construire le Golem</BASEFONT>", false, false);
 			}
 
 			public override void OnResponse(NetState sender, RelayInfo info)

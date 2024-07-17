@@ -60,6 +60,8 @@ namespace Server.Mobiles
             AddLoot(LootPack.LootItem<Nightshade>(4, true));
             AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 7));
+			PackItem(new GolemAsh(GolemAsh.AshType.Poison, Utility.RandomMinMax(0, 5)));
+
 
 		}
 

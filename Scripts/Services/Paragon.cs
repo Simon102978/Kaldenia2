@@ -166,7 +166,7 @@ namespace Server.Mobiles
 			double change = Utility.RandomDouble();*/
 
 
-			return (Utility.RandomDouble() <= 0.03);
+			return (Utility.RandomDouble() <= 0.01);
         }
 
         public static bool CheckArtifactChance(Mobile m, BaseCreature bc)

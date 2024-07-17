@@ -37,6 +37,12 @@ namespace Server.Custom
 
 		public override void OnDoubleClick(Mobile from)
 		{
+			if (from.Skills[SkillName.Inscribe].Base < 50.0)
+			{
+				from.SendMessage("Vous avez besoin d'au moins 50 en Inscription pour utiliser cette baguette.");
+				return;
+			}
+
 			from.SendMessage("Ciblez un cadavre pour en extraire l'esprit.");
 			from.Target = new InternalTarget(this);
 		}
@@ -57,20 +63,34 @@ namespace Server.Custom
 				{
 					if (corpse.Owner is BaseCreature creature)
 					{
-						CreatureSpirit spirit = new CreatureSpirit(creature);
-						if (from.AddToBackpack(spirit))
+						if (Utility.RandomBool()) // 50% de chance de capturer l'esprit
 						{
-							from.SendMessage("Vous avez extrait l'esprit du cadavre.");
-							corpse.Delete();
-							m_Wand.Charges--;
-							if (m_Wand.Charges <= 0)
-								m_Wand.Delete();
+							CreatureSpirit spirit = new CreatureSpirit(creature);
+							if (from.AddToBackpack(spirit))
+							{
+								from.SendMessage("Vous avez extrait l'esprit du cadavre.");
+								corpse.Delete();
+								m_Wand.Charges--;
+								m_Wand.UpdateProperties(); 
+								if (m_Wand.Charges <= 0)
+									m_Wand.Delete();
+							}
+							else
+							{
+								from.SendMessage("Votre sac est plein.");
+								spirit.Delete();
+								m_Wand.Charges--;
+								m_Wand.UpdateProperties(); 
+								if (m_Wand.Charges <= 0)
+									m_Wand.Delete();
+							}
 						}
 						else
 						{
-							from.SendMessage("Votre sac est plein.");
-							spirit.Delete();
+							from.SendMessage("Vous avez échoué à capturer l'esprit.");
+							corpse.Delete();
 							m_Wand.Charges--;
+							m_Wand.UpdateProperties();
 							if (m_Wand.Charges <= 0)
 								m_Wand.Delete();
 						}
@@ -85,6 +105,11 @@ namespace Server.Custom
 					from.SendMessage("Vous devez cibler un cadavre.");
 				}
 			}
+		}
+		public void UpdateProperties()
+		{
+			InvalidateProperties();
+			Delta(ItemDelta.Update);
 		}
 
 		public override void Serialize(GenericWriter writer)
@@ -130,7 +155,7 @@ namespace Server.Custom
 		}
 
 		[Constructable]
-		public CreatureSpirit(BaseCreature creature) : base(0x186F)
+		public CreatureSpirit(BaseCreature creature) : base(0x3198)
 		{
 			Name = "Esprit de créature";
 			Weight = 0.1;
@@ -168,11 +193,11 @@ namespace Server.Custom
 		private void UpdateHue()
 		{
 			if (Percentage == 1)
-				Hue = 0x89F; // Light blue
+				Hue = 0; // Light blue
 			else if (Percentage >= 2 && Percentage <= 99)
-				Hue = 0x8FD; // Purple
+				Hue = 0x20D; // Purple
 			else if (Percentage == 100)
-				Hue = 0x84; // Dark blue
+				Hue = 0x1F1; // Dark blue
 		}
 
 		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
@@ -284,7 +309,7 @@ namespace Server.Custom
 				AddImage(118, 277, 2081);
 				AddImage(118, 347, 2083);
 
-				AddHtml(147, 108, 210, 18, "<center><i>Force de l'Esprit</i></center>", false, false);
+				AddHtml(147, 108, 210, 18, "<center><i>Force de votre Esprit</i></center>", false, false);
 
 				AddButton(240, 77, 2093, 2093, 2, GumpButtonType.Reply, 0);
 
@@ -317,7 +342,7 @@ namespace Server.Custom
 				AddHtml(320, y, 35, 18, spirit.GetAR().ToString(), false, false);
 				y += 18;
 
-				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#CCCCCC>Spirit Percentage:</BASEFONT>", false, false);
+				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#0x7FFF>Pourcentage de vos esprits:</BASEFONT>", false, false);
 				AddHtml(320, y, 35, 18, $"{spirit.Percentage}%", false, false);
 
 				AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, page + 1);
@@ -332,7 +357,7 @@ namespace Server.Custom
 				y = 168;
 				foreach (var skill in spirit.m_Skills)
 				{
-					AddHtml(153, y, 160, 18, $"<BASEFONT COLOR=#CCCCCC>{skill.Key}:</BASEFONT>", false, false);
+					AddHtml(153, y, 160, 18, $"<BASEFONT COLOR=#0x7FFF>{skill.Key}:</BASEFONT>", false, false);
 					AddHtml(320, y, 35, 18, $"{skill.Value:F1}", false, false);
 					y += 18;
 				}

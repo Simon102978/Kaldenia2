@@ -28,6 +28,20 @@ namespace Server.Custom
 		private int m_MaxHitPoints;
 		private CreatureSpirit m_Spirit;
 
+		private int m_CurrentHits;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int CurrentHits
+		{
+			get { return m_CurrentHits; }
+			set
+			{
+				m_CurrentHits = Math.Max(0, Math.Min(value, m_MaxHitPoints));
+				Delta(MobileDelta.Hits);
+				InvalidateProperties();
+			}
+		}
+
 		[CommandProperty(AccessLevel.GameMaster)]
 		public Mobile Owner
 		{
@@ -59,15 +73,19 @@ namespace Server.Custom
 			Owner = owner;
 			m_AshType = ashType;
 			m_Spirit = spirit;
-			Name = $"{ashType} Golem";
+			Name = $"Golem de {ashType}";
 			Body = 14; // Adjust as needed
 			BaseSoundID = 268; // Adjust as needed
+
+			ControlSlots = 3;
+
 
 			SetStr(spirit.GetStrength());
 			SetDex(spirit.GetDexterity());
 			SetInt(spirit.GetIntelligence());
 
-			m_MaxHitPoints = ashQuantity * 10; // Example: 10 hit points per ash unit
+			m_MaxHitPoints = ashQuantity * 5; 
+			CurrentHits = m_MaxHitPoints;
 			SetHits(m_MaxHitPoints);
 			SetMana(0);
 
@@ -119,6 +137,8 @@ namespace Server.Custom
 		public override bool BleedImmune { get { return true; } }
 		public override Poison PoisonImmune { get { return Poison.Lethal; } }
 
+
+
 		public override void OnDoubleClick(Mobile from)
 		{
 			if (from == Owner)
@@ -150,13 +170,13 @@ namespace Server.Custom
 			switch (ashType)
 			{
 				case GolemAsh.AshType.Feu: return 1161;
-				case GolemAsh.AshType.Eau: return 1153;
+				case GolemAsh.AshType.Eau: return 1156;
 				case GolemAsh.AshType.Glace: return 1152;
-				case GolemAsh.AshType.Poison: return 1167;
-				case GolemAsh.AshType.Sang: return 1157;
-				case GolemAsh.AshType.Sylvestre: return 1171;
-				case GolemAsh.AshType.Terre: return 1147;
-				case GolemAsh.AshType.Vent: return 1154;
+				case GolemAsh.AshType.Poison: return 1193;
+				case GolemAsh.AshType.Sang: return 1194;
+				case GolemAsh.AshType.Sylvestre: return 1190;
+				case GolemAsh.AshType.Terre: return 1175;
+				case GolemAsh.AshType.Vent: return -1;
 				default: return 0;
 			}
 		}
@@ -164,6 +184,33 @@ namespace Server.Custom
 		public override void OnHeal(ref int amount, Mobile from)
 		{
 			amount = 0;
+			if (from != null && from.Player)
+			{
+				
+				from.SendMessage("Ce golem ne peut pas être soigné.");
+			}
+		}
+
+		public virtual bool CanRegenHits() { return false; }
+
+		
+
+		public override void OnDamage(int amount, Mobile from, bool willKill)
+		{
+			if (Deleted || !Alive)
+				return;
+
+			CurrentHits -= amount;
+
+			if (CurrentHits <= 0)
+			{
+				Kill();
+			}
+
+			if (m_MiniGolem != null)
+			{
+				m_MiniGolem.InvalidateProperties();
+			}
 		}
 
 		public override bool CanBeDamaged()
@@ -176,26 +223,16 @@ namespace Server.Custom
 			get { return m_MaxHitPoints; }
 		}
 
-		public override void OnDamage(int amount, Mobile from, bool willKill)
-		{
-			base.OnDamage(amount, from, willKill);
-			if (Hits > m_MaxHitPoints)
-			{
-				Hits = m_MaxHitPoints;
-			}
-			if (m_MiniGolem != null)
-			{
-				m_MiniGolem.InvalidateProperties();
-			}
-		}
+	
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-			writer.Write((int)0); // version
+			writer.Write((int)1); // version
 			writer.Write(m_MiniGolem);
 			writer.Write((int)m_AshType);
 			writer.Write(m_MaxHitPoints);
+			writer.Write(m_CurrentHits);
 		}
 
 		public override void Deserialize(GenericReader reader)
@@ -205,8 +242,17 @@ namespace Server.Custom
 			m_MiniGolem = reader.ReadItem() as MiniGolem;
 			m_AshType = (GolemAsh.AshType)reader.ReadInt();
 			m_MaxHitPoints = reader.ReadInt();
+			if (version >= 1)
+			{
+				m_CurrentHits = reader.ReadInt();
+			}
+			else
+			{
+				m_CurrentHits = m_MaxHitPoints;
+			}
 		}
 	}
+
 
 
 
@@ -333,7 +379,7 @@ namespace Server.Custom
 		[CommandProperty(AccessLevel.GameMaster)]
 		public GolemAsh.AshType AshType { get { return m_AshType; } set { m_AshType = value; InvalidateProperties(); } }
 
-		public MiniGolem(GolemZyX golem, GolemAsh.AshType ashType) : base(0x20D9)
+		public MiniGolem(GolemZyX golem, GolemAsh.AshType ashType) : base(0x20D7)
 		{
 			m_Golem = golem;
 			m_AshType = ashType;
@@ -380,14 +426,29 @@ namespace Server.Custom
 					return;
 				}
 
-				if (m_Golem.Controlled)
+				if (m_Golem.ControlMaster != null) // Le golem est matérialisé
 				{
-					m_Golem.SetControlMaster(null);
-					from.SendMessage("Vous avez dématérialisé le golem.");
-				}
-				else
-				{
+					// "Shrink" le golem
+					m_Golem.ControlMaster = null;
+					m_Golem.Controlled = false;
 					m_Golem.SetControlMaster(from);
+					m_Golem.IsStabled = true;
+
+					from.AddToBackpack(this);
+					m_Golem.Map = Map.Internal;
+
+					from.SendMessage("Vous avez dématérialisé le golem et l'avez remis dans votre sac.");
+				}
+				else // Le golem est dématérialisé
+				{
+					// Matérialiser le golem
+					m_Golem.IsStabled = false;
+					m_Golem.SetControlMaster(from);
+					m_Golem.Controlled = true;
+					m_Golem.Map = from.Map;
+					m_Golem.Location = from.Location;
+
+					this.Delete(); // Supprimer le MiniGolem de l'inventaire
 					from.SendMessage("Vous avez matérialisé le golem.");
 				}
 			}
@@ -416,13 +477,13 @@ namespace Server.Custom
 			switch (ashType)
 			{
 				case GolemAsh.AshType.Feu: return 1161;
-				case GolemAsh.AshType.Eau: return 1153;
+				case GolemAsh.AshType.Eau: return 1156;
 				case GolemAsh.AshType.Glace: return 1152;
-				case GolemAsh.AshType.Poison: return 1167;
-				case GolemAsh.AshType.Sang: return 1157;
-				case GolemAsh.AshType.Sylvestre: return 1171;
-				case GolemAsh.AshType.Terre: return 1147;
-				case GolemAsh.AshType.Vent: return 1154;
+				case GolemAsh.AshType.Poison: return 1193;
+				case GolemAsh.AshType.Sang: return 1194;
+				case GolemAsh.AshType.Sylvestre: return 1190;
+				case GolemAsh.AshType.Terre: return 1175;
+				case GolemAsh.AshType.Vent: return -1;
 				default: return 0;
 			}
 		}

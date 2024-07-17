@@ -1,9 +1,10 @@
 using System;
 using System.Collections;
+using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("an energy vortex corpse")]
+    [CorpseName("Le corps d'un elementaire")]
     public class EnergyVortex : BaseCreature
     {
         [Constructable]
@@ -15,17 +16,17 @@ namespace Server.Mobiles
         public EnergyVortex(bool summoned)
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "un vortex d'energie";
+            Name = "un elementaire de vent";
 
             if (0.002 > Utility.RandomDouble()) // Per OSI FoF, it's a 1/500 chance.
             {
                 // Llama vortex!
                 Body = 0xDC;
-                Hue = 0x76;
+                Hue = -1;
             }
             else
             {
-                Body = 164;
+                Body = -1;
             }
 
             bool weak = summoned && Siege.SiegeShard;
@@ -90,8 +91,14 @@ namespace Server.Mobiles
         {
             return 0x28;
         }
-
-        public override void OnThink()
+		public override void GenerateLoot()
+		{
+			AddLoot(LootPack.Average);
+			AddLoot(LootPack.Meager);
+			AddLoot(LootPack.LootItem<SulfurousAsh>(3, true));
+			PackItem(new GolemAsh(GolemAsh.AshType.Vent, Utility.RandomMinMax(0, 5)));
+		}
+		public override void OnThink()
         {
             if (Summoned)
             {

@@ -56,7 +56,7 @@ public class GolemAsh : Item
 	}
 
 	[Constructable]
-	public GolemAsh(AshType type, int amount) : base(0x26B8)
+	public GolemAsh(AshType type, int amount) : base(0x0F7C)
 	{
 		Stackable = true;
 		m_Type = type;
@@ -81,13 +81,13 @@ public class GolemAsh : Item
 		switch (type)
 		{
 			case AshType.Feu: return 1161;
-			case AshType.Eau: return 1153;
+			case AshType.Eau: return 1156;
 			case AshType.Glace: return 1152;
-			case AshType.Poison: return 1167;
-			case AshType.Sang: return 1157;
-			case AshType.Sylvestre: return 1171;
-			case AshType.Terre: return 1147;
-			case AshType.Vent: return 1154;
+			case AshType.Poison: return 1193;
+			case AshType.Sang: return 1194;
+			case AshType.Sylvestre: return 1190;
+			case AshType.Terre: return 1175;
+			case AshType.Vent: return -1;
 			default: return 0;
 		}
 	}
@@ -119,7 +119,7 @@ public class GolemAsh : Item
 
 	public static void ApplyAshBonuses(GolemZyX golem, AshType ashType, int ashQuantity, double inscribeSkill)
 	{
-		int baseBonus = ashQuantity * 7;
+		int baseBonus = ashQuantity * 5;
 		int skillBonus = (int)(inscribeSkill * 0.1);
 
 		switch (ashType)

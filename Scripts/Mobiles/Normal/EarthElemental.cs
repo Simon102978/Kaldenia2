@@ -56,9 +56,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.LootItemCallback(SpawnOre, 100.0, 5, false, true));
             AddLoot(LootPack.LootItem<FertileDirt>(1, 4, true));
             AddLoot(LootPack.LootItem<MandrakeRoot>(true));
-        }
+			PackItem(new GolemAsh(GolemAsh.AshType.Terre, Utility.RandomMinMax(0, 5)));
 
-        private Item SpawnOre(IEntity e)
+		}
+
+		private Item SpawnOre(IEntity e)
         {
             Item ore = new IronOre
             {
