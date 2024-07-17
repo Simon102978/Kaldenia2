@@ -85,7 +85,7 @@ namespace Server.Mobiles
                 //Add(typeof(Nails), 1);
                 //Add(typeof(JointingPlane), 6);
                 //Add(typeof(SmoothingPlane), 6);
-                Add(typeof(Saw), 7);
+                Add(typeof(Saw), 2);
 
                 Add(typeof(Clock), 10);
                 Add(typeof(ClockParts), 1);

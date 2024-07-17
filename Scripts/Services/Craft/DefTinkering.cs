@@ -4,6 +4,7 @@ using Server.Targeting;
 using System;
 using Server.Services.BasketWeaving.Baskets;
 using Xanthos.ShrinkSystem;
+using Server.Custom;
 
 namespace Server.Engines.Craft
 {
@@ -696,11 +697,39 @@ namespace Server.Engines.Craft
 
 			// Appât pour ZombieFish
 			index = AddCraft(typeof(BaitZombieFish), "Appâts", "Appât à ZombieFish (1)", 80.0, 100.0, typeof(WinterDragonfish), "WinterDragonfish entier", 1, "Vous n'avez pas assez de WinterDragonfish pour faire cet appât.");
-			
-			#endregion
 
-			#region Divers
-			AddCraft(typeof(IronIngotResourceCrate), "Divers", "Caisse de ressource", 10.0, 60.0, typeof(IronIngot), 1044036, 150, 1044037);
+			#endregion
+		/*	#region Cristaux de Golem
+			 index = AddCraft(typeof(GolemCrystal), 1044050, "Cristal de Golem en Citrine", 80.0, 130.0, typeof(Citrine), 1044231, 25, 1044253);
+			AddRes(index, typeof(IronIngot), 1044036, 5, 1044037);
+
+			index = AddCraft(typeof(GolemCrystal), 1044050, "Cristal de Golem en Rubis", 85.0, 135.0, typeof(Rubis), 1044231, 25, 1044253);
+			AddRes(index, typeof(IronIngot), 1044036, 5, 1044037);
+
+			index = AddCraft(typeof(GolemCrystal), 1044050, "Cristal de Golem en Ambre", 85.0, 135.0, typeof(Ambre), 1044231, 25, 1044253);
+			AddRes(index, typeof(IronIngot), 1044036, 5, 1044037);
+
+			index = AddCraft(typeof(GolemCrystal), 1044050, "Cristal de Golem en Tourmaline", 85.0, 135.0, typeof(Tourmaline), 1044231, 25, 1044253);
+			AddRes(index, typeof(IronIngot), 1044036, 5, 1044037);
+
+			index = AddCraft(typeof(GolemCrystal), 1044050, "Cristal de Golem en Saphir", 90.0, 140.0, typeof(Sapphire), 1044231, 25, 1044253);
+			AddRes(index, typeof(IronIngot), 1044036, 5, 1044037);
+
+			index = AddCraft(typeof(GolemCrystal), 1044050, "Cristal de Golem en Emeraude", 90.0, 140.0, typeof(Emeraude), 1044231, 25, 1044253);
+			AddRes(index, typeof(IronIngot), 1044036, 5, 1044037);
+
+			index = AddCraft(typeof(GolemCrystal), 1044050, "Cristal de Golem en Améthyste", 90.0, 140.0, typeof(Amethyste), 1044231, 25, 1044253);
+			AddRes(index, typeof(IronIngot), 1044036, 5, 1044037);
+
+			index = AddCraft(typeof(GolemCrystal), 1044050, "Cristal de Golem en Saphir d'Étoile", 95.0, 145.0, typeof(SaphirEtoile), 1044231, 25, 1044253);
+			AddRes(index, typeof(IronIngot), 1044036, 5, 1044037);
+
+			index = AddCraft(typeof(GolemCrystal), 1044050, "Cristal de Golem en Diamant", 100.0, 150.0, typeof(Diamant), 1044231, 25, 1044253);
+			AddRes(index, typeof(IronIngot), 1044036, 5, 1044037);
+		
+		#endregion */
+		#region Divers
+		AddCraft(typeof(IronIngotResourceCrate), "Divers", "Caisse de ressource", 10.0, 60.0, typeof(IronIngot), 1044036, 150, 1044037);
 
 			index = AddCraft(typeof(KeyRing), "Divers", "Trousseau de clés", 10.0, 60.0, typeof(IronIngot), 1044036, 5, 1044037);
 			index = AddCraft(typeof(Key), "Divers", "Clé en fer", 20.0, 70.0, typeof(IronIngot), 1044036, 3, 1044037);
