@@ -85,6 +85,7 @@ namespace Server.Items
 		{
 			Weight = 15.0;
 			Name = "Jambière d'anneaux fins";
+			Layer = Layer.Pants;
 		}
 
 		public JambiereMaille2(Serial serial)

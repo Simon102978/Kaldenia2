@@ -197,6 +197,7 @@ namespace Server.Items
 		{
 			Weight = 9.0;
 			Name = "Jambière Barbaresque";
+			Layer = Layer.Pants;
 		}
 
 		public JambiereMailleBarbare(Serial serial)

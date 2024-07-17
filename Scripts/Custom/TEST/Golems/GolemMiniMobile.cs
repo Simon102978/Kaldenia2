@@ -7,6 +7,8 @@ using Server.Custom;
 using Server.Multis;
 using static Server.Custom.GolemSpiritWand;
 using System.Collections.Generic;
+using Server.ContextMenus;
+using Server.Engines.Quests;
 
 namespace Server.Custom
 {
@@ -211,60 +213,111 @@ namespace Server.Custom
 
 	public class GolemZyXAttributesGump : Gump
 	{
+		private static readonly int LabelColor = 0x7FFF;
+
 		public GolemZyXAttributesGump(GolemZyX golem) : base(250, 50)
 		{
 			AddPage(0);
-			AddBackground(0, 0, 250, 355, 5054);
-			AddImage(10, 10, 2086);
-			AddHtmlLocalized(95, 15, 150, 20, 1049593, 0x80, false, false); // Attributes
 
-			int y = 50;
+			AddImage(100, 100, 2080);
+			AddImage(118, 137, 2081);
+			AddImage(118, 207, 2081);
+			AddImage(118, 277, 2081);
+			AddImage(118, 347, 2083);
 
-			AddHtmlLocalized(45, y, 100, 20, 3000111, 0x88, false, false); // Strength
-			AddLabel(150, y, 0x481, golem.Str.ToString());
-			y += 20;
+			AddHtml(147, 108, 210, 18, String.Format("<center><i>{0}</i></center>", golem.Name), false, false);
 
-			AddHtmlLocalized(45, y, 100, 20, 3000112, 0x88, false, false); // Dexterity
-			AddLabel(150, y, 0x481, golem.Dex.ToString());
-			y += 20;
+			AddButton(240, 77, 2093, 2093, 2, GumpButtonType.Reply, 0);
 
-			AddHtmlLocalized(45, y, 100, 20, 3000113, 0x88, false, false); // Intelligence
-			AddLabel(150, y, 0x481, golem.Int.ToString());
-			y += 20;
+			AddImage(140, 138, 2091);
+			AddImage(140, 335, 2091);
 
-			AddHtmlLocalized(45, y, 100, 20, 3000109, 0x88, false, false); // Hits
-			AddLabel(150, y, 0x481, $"{golem.Hits}/{golem.HitsMax}");
-			y += 20;
+			int pages = 3;
+			int page = 0;
 
-			AddHtmlLocalized(45, y, 100, 20, 1062760, 0x88, false, false); // Armor
-			AddLabel(150, y, 0x481, golem.VirtualArmor.ToString());
-			y += 20;
+			// Page 1: Attributes
+			AddPage(++page);
 
-			AddHtmlLocalized(45, y, 100, 20, 1061646, 0x88, false, false); // Damage
-			AddLabel(150, y, 0x481, $"{golem.DamageMin}-{golem.DamageMax}");
-			y += 20;
+			AddImage(128, 152, 2086);
+			AddHtmlLocalized(147, 150, 160, 18, 1049593, 200, false, false); // Attributes
 
-			AddHtml(45, y, 100, 20, "<BASEFONT COLOR=#CCCCCC>Type de dégâts:</BASEFONT>", false, false);
-			AddLabel(150, y, 0x481, golem.AshType.ToString());
-			y += 20;
+			AddHtmlLocalized(153, 168, 160, 18, 1049578, LabelColor, false, false); // Hits
+			AddHtml(280, 168, 75, 18, FormatAttributes(golem.Hits, golem.HitsMax), false, false);
 
-			AddHtml(45, y, 100, 20, "<BASEFONT COLOR=#CCCCCC>Pénalité:</BASEFONT>", false, false);
-			AddLabel(150, y, 0x481, golem.Penalty.ToString());
-			y += 30;
+			AddHtmlLocalized(153, 186, 160, 18, 1028335, LabelColor, false, false); // Strength
+			AddHtml(320, 186, 35, 18, FormatStat(golem.Str), false, false);
 
-			AddHtmlLocalized(45, y, 150, 20, 3001016, 0x88, false, false); // Skills
-			y += 20;
+			AddHtmlLocalized(153, 204, 160, 18, 3000113, LabelColor, false, false); // Dexterity
+			AddHtml(320, 204, 35, 18, FormatStat(golem.Dex), false, false);
 
+			AddHtmlLocalized(153, 222, 160, 18, 3000112, LabelColor, false, false); // Intelligence
+			AddHtml(320, 222, 35, 18, FormatStat(golem.Int), false, false);
+
+			AddHtmlLocalized(153, 240, 160, 18, 1062760, LabelColor, false, false); // Armor
+			AddHtml(320, 240, 35, 18, FormatStat(golem.VirtualArmor), false, false);
+
+			AddHtmlLocalized(153, 258, 160, 18, 1061646, LabelColor, false, false); // Damage
+			AddHtml(300, 258, 55, 18, FormatDamage(golem.DamageMin, golem.DamageMax), false, false);
+
+			AddHtml(153, 276, 160, 18, "<BASEFONT COLOR=#CCCCCC>Type de dégâts:</BASEFONT>", false, false);
+			AddHtml(320, 276, 35, 18, golem.AshType.ToString(), false, false);
+
+			AddHtml(153, 294, 160, 18, "<BASEFONT COLOR=#CCCCCC>Pénalité:</BASEFONT>", false, false);
+			AddHtml(320, 294, 35, 18, golem.Penalty.ToString(), false, false);
+
+			AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, page + 1);
+			AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, pages);
+
+			// Page 2: Skills
+			AddPage(++page);
+
+			AddImage(128, 152, 2086);
+			AddHtmlLocalized(147, 150, 160, 18, 3001030, 200, false, false); // Skills
+
+			int y = 168;
 			foreach (SkillName skillName in Enum.GetValues(typeof(SkillName)))
 			{
 				Skill skill = golem.Skills[skillName];
 				if (skill.Base > 0)
 				{
-					AddHtmlLocalized(45, y, 100, 20, SkillInfo.Table[(int)skillName].Localization, 0x88, false, false);
-					AddLabel(150, y, 0x481, skill.Base.ToString("F1"));
-					y += 20;
+					AddHtmlLocalized(153, y, 160, 18, SkillInfo.Table[(int)skillName].Localization, LabelColor, false, false);
+					AddHtml(320, y, 35, 18, FormatSkill(golem, skillName), false, false);
+					y += 18;
 				}
 			}
+
+			AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, page + 1);
+			AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, page - 1);
+
+			// Page 3: Additional Information (if needed)
+			AddPage(++page);
+
+			AddImage(128, 152, 2086);
+			AddHtmlLocalized(147, 150, 160, 18, 1049594, 200, false, false); // Informations supplémentaires
+
+			// Add any additional information you want to display here
+
+			AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, page - 1);
+		}
+
+		private string FormatAttributes(int current, int max)
+		{
+			return String.Format("{0}/{1}", current, max);
+		}
+
+		private string FormatStat(int value)
+		{
+			return value.ToString();
+		}
+
+		private string FormatDamage(int min, int max)
+		{
+			return String.Format("{0}-{1}", min, max);
+		}
+
+		private string FormatSkill(GolemZyX golem, SkillName skillName)
+		{
+			return golem.Skills[skillName].Base.ToString("F1");
 		}
 	}
 
@@ -284,36 +337,74 @@ namespace Server.Custom
 		{
 			m_Golem = golem;
 			m_AshType = ashType;
-			Name = $"Mini {ashType} Golem";
+			Name = $"Mini Golem de {ashType}";
 			Hue = GetHueForAshType(ashType);
 			LootType = LootType.Blessed;
 		}
 
 		public MiniGolem(Serial serial) : base(serial) { }
 
+		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+		{
+			base.GetContextMenuEntries(from, list);
+			if (m_Golem != null && from == m_Golem.ControlMaster)
+			{
+				list.Add(new OpenAttributesGumpEntry(from, m_Golem));
+			}
+		}
+
+		private class OpenAttributesGumpEntry : ContextMenuEntry
+		{
+			private Mobile m_From;
+			private GolemZyX m_Golem;
+
+			public OpenAttributesGumpEntry(Mobile from, GolemZyX golem) : base(6200, 3)
+			{
+				m_From = from;
+				m_Golem = golem;
+			}
+
+			public override void OnClick()
+			{
+				m_From.SendGump(new GolemZyXAttributesGump(m_Golem));
+			}
+		}
+
 		public override void OnDoubleClick(Mobile from)
 		{
-			if (m_Golem != null && !m_Golem.Deleted)
+			if (m_Golem != null && from == m_Golem.ControlMaster)
 			{
-				from.SendGump(new GolemZyXAttributesGump(m_Golem));
+				if (m_Golem.Deleted || !m_Golem.Alive)
+				{
+					from.SendMessage("Ce golem n'est plus fonctionnel.");
+					return;
+				}
+
+				if (m_Golem.Controlled)
+				{
+					m_Golem.SetControlMaster(null);
+					from.SendMessage("Vous avez dématérialisé le golem.");
+				}
+				else
+				{
+					m_Golem.SetControlMaster(from);
+					from.SendMessage("Vous avez matérialisé le golem.");
+				}
 			}
 			else
 			{
-				from.SendMessage("Ce mini golem n'est plus lié à un golem actif.");
+				base.OnDoubleClick(from);
 			}
 		}
 
 		public override void GetProperties(ObjectPropertyList list)
 		{
 			base.GetProperties(list);
-
 			if (m_Golem != null && !m_Golem.Deleted)
 			{
 				list.Add($"Énergie : [{m_Golem.Hits}/{m_Golem.HitsMax}]");
 				list.Add("[astral]");
 			}
-			
-		
 			else
 			{
 				list.Add("[Golem inactif]");
@@ -353,4 +444,3 @@ namespace Server.Custom
 		}
 	}
 }
-
