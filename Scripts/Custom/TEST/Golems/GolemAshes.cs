@@ -62,7 +62,7 @@ public class GolemAsh : Item
 	{
 		base.GetProperties(list);
 		list.Add($"Type: {m_Type}");
-		list.Add($"Quantité: {Amount}");
+		//list.Add($"Quantité: {Amount}");
 	}
 
 	
