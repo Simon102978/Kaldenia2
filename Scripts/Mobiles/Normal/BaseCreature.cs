@@ -5759,8 +5759,8 @@ namespace Server.Mobiles
 				PackItem((Item)Activator.CreateInstance(scrollType));
 
 				if (m_Paragon)
-            {
-				GenerateLootParagon();
+                {
+				    GenerateLootParagon();
 
 					/*		if (Utility.RandomDouble() < 0.10) // 10% de chance
 					{
@@ -5769,36 +5769,15 @@ namespace Server.Mobiles
 
 					if (Utility.RandomDouble() < 0.10) // 10% de chance, ajustez selon vos besoins
 					{
-						Type[] recipeScrolls = CustomRecipeScrollTypes2;
+					//	Type[] recipeScrolls = CustomRecipeScrollTypes2;
 
 						// Sélectionner un scroll de recette aléatoire
-						Type scrollType = recipeScrolls[Utility.Random(recipeScrolls.Length)];
-						PackItem((Item)Activator.CreateInstance(scrollType));
-
-
-						/*
-						if (Fame < 1250)
-						{
-							AddLoot(LootPack.Meager);
-						}
-						else if (Fame < 2500)
-						{
-							AddLoot(LootPack.Average);
-						}
-						else if (Fame < 5000)
-						{
-							AddLoot(LootPack.Rich);
-						}
-						else if (Fame < 10000)
-						{
-							AddLoot(LootPack.FilthyRich);
-						}
-						else
-						{
-							AddLoot(LootPack.UltraRich);
-						}*/
+						Type scrollType2 = recipeScrolls[Utility.Random(recipeScrolls.Length)];
+						PackItem((Item)Activator.CreateInstance(scrollType2));
+	
 					}
-
+                }
+            }
             KillersLuck = 0;
         }
 
