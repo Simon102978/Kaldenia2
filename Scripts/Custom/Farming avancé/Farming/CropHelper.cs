@@ -260,8 +260,15 @@ namespace Server.Items.Crops
 					if (Utility.RandomDouble() <= chance)
 					{
 						from.SendMessage("Vous retirez le plant avec succès.");
-						DandelionSeed fruit = new DandelionSeed();
+						DandelionSeed fruit = new DandelionSeed(Utility.RandomMinMax(0, 1));
+						FertileDirt terre = new FertileDirt(Utility.RandomMinMax(0, 1));
+						Sand sable = new Sand(Utility.RandomMinMax(0, 1));
+
+
 						from.AddToBackpack(fruit);
+						from.AddToBackpack(terre);
+						from.AddToBackpack(sable);
+
 						this.Delete();
 
 						// Gain de compétence

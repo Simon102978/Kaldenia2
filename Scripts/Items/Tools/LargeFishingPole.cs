@@ -103,7 +103,11 @@ namespace Server.Items
 		public Bait Bait
 		{
 			get { return m_Bait; }
-			set { m_Bait = value; InvalidateProperties(); }
+			set
+			{
+				m_Bait = value;
+				InvalidateProperties();
+			}
 		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -125,7 +129,7 @@ namespace Server.Items
 		[Constructable]
 		public LargeFishingPole() : base(0x0DC0)
 		{
-			Name = "canne � p�che";
+			Name = "canne à pêche";
 			Layer = Layer.OneHanded;
 		}
 
@@ -139,8 +143,16 @@ namespace Server.Items
 			}
 		}
 
+		private Timer m_UpdateTimer;
+
 		public override void OnDoubleClick(Mobile from)
 		{
+			base.OnDoubleClick(from);
+
+			if (m_UpdateTimer == null)
+			{
+				m_UpdateTimer = Timer.DelayCall(TimeSpan.FromSeconds(5), TimeSpan.FromSeconds(5), new TimerCallback(UpdateProperties));
+			}
 			if (Bait == Bait.Aucun || Charge <= 0)
 			{
 				from.Target = new BaitTarget(this);
@@ -165,20 +177,48 @@ namespace Server.Items
 				{
 					if (bait.ApplyTo(m_Pole))
 					{
-						from.SendMessage($"Vous avez appliqu� {bait.Name} � votre canne � p�che.");
+						from.SendMessage($"Vous avez appliqué {bait.Name} à votre canne à pêche.");
 					}
 					else
 					{
-						from.SendMessage("Vous ne pouvez pas appliquer cet app�t.");
+						from.SendMessage("Vous ne pouvez pas appliquer cet appât.");
 					}
 				}
 				else
 				{
-					from.SendMessage("Ce n'est pas un app�t valide.");
+					from.SendMessage("Ce n'est pas un appât valide.");
 				}
 			}
 		}
 
+		private void UpdateProperties()
+		{
+			InvalidateProperties();
+		}
+
+		public override void OnDelete()
+		{
+			if (m_UpdateTimer != null)
+			{
+				m_UpdateTimer.Stop();
+				m_UpdateTimer = null;
+			}
+
+			base.OnDelete();
+		}
+
+		public void UseBait()
+		{
+			if (m_Charge > 0)
+			{
+				m_Charge--;
+				if (m_Charge == 0)
+				{
+					m_Bait = Bait.Aucun;
+				}
+				InvalidateProperties();
+			}
+		}
 
 		public void FinishFishing(Mobile from)
 		{
@@ -229,11 +269,7 @@ namespace Server.Items
 				}
 				// Le reste r�sulte en aucune prise
 				// Consommer l'app�t
-				m_Charge--;
-				if (m_Charge == 0)
-				{
-					m_Bait = Bait.Aucun;
-				}
+				UseBait();
 			}
 			else
 			{
@@ -339,7 +375,7 @@ namespace Server.Items
 			}
 			else
 			{
-				list.Add("[ aucun app�t ]");
+				list.Add("[ aucun appât ]");
 			}
 }
 	
@@ -363,7 +399,7 @@ public LargeFishingPole(Serial serial) : base(serial)
 			int version = reader.ReadInt();
 			m_Bait = (Bait)reader.ReadInt();
 			m_Charge = reader.ReadInt();
-			Name = "canne � p�che"; // Nom correct pour une canne � p�che
+			Name = "canne à pêche"; // Nom correct pour une canne � p�che
 		}
 	}
 
@@ -394,7 +430,7 @@ public LargeFishingPole(Serial serial) : base(serial)
 			m_Pole.Bait = Bait.Aucun;
 			m_Pole.Charge = 0;
 
-			m_From.SendMessage("Vous enlevez l'app�t.");
+			m_From.SendMessage("Vous enlevez l'appât.");
 		}
 	}
 }

@@ -42,22 +42,41 @@ namespace Server.Custom
 			}
 		}
 
+		/*	[CommandProperty(AccessLevel.GameMaster)]
+			public Mobile Owner
+			{
+				get { return m_Owner; }
+				set
+				{
+					m_Owner = value;
+					if (m_Owner != null)
+					{
+						ControlMaster = m_Owner;
+						Controlled = true;
+						ControlTarget = m_Owner;
+						ControlOrder = OrderType.Follow;
+					}
+				}
+			}*/
+
 		[CommandProperty(AccessLevel.GameMaster)]
-		public Mobile Owner
+		public Mobile SummonMaster
 		{
-			get { return m_Owner; }
+			get { return m_SummonMaster; }
 			set
 			{
-				m_Owner = value;
-				if (m_Owner != null)
+				m_SummonMaster = value;
+				if (m_SummonMaster != null)
 				{
-					ControlMaster = m_Owner;
+					ControlMaster = m_SummonMaster;
 					Controlled = true;
-					ControlTarget = m_Owner;
+					ControlTarget = m_SummonMaster;
 					ControlOrder = OrderType.Follow;
 				}
 			}
 		}
+
+		private Mobile m_SummonMaster;
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public MiniGolem MiniGolem { get { return m_MiniGolem; } set { m_MiniGolem = value; } }
@@ -70,14 +89,13 @@ namespace Server.Custom
 		public GolemZyX(CreatureSpirit spirit, GolemAsh.AshType ashType, int ashQuantity, Mobile owner)
 			: base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
 		{
-			Owner = owner;
+			SummonMaster = owner;
 			m_AshType = ashType;
 			m_Spirit = spirit;
 			Name = $"Golem de {ashType}";
 			Body = 14; // Adjust as needed
 			BaseSoundID = 268; // Adjust as needed
 
-			ControlSlots = 3;
 
 
 			SetStr(spirit.GetStrength());
@@ -88,6 +106,16 @@ namespace Server.Custom
 			CurrentHits = m_MaxHitPoints;
 			SetHits(m_MaxHitPoints);
 			SetMana(0);
+
+			Summoned = true;
+			SummonMaster = owner;
+			ControlOrder = OrderType.Follow;
+			ControlSlots = 3;
+			Controlled = true;
+
+		
+
+
 
 			SetDamage(10, 23);
 
@@ -137,11 +165,23 @@ namespace Server.Custom
 		public override bool BleedImmune { get { return true; } }
 		public override Poison PoisonImmune { get { return Poison.Lethal; } }
 
+		public override bool NoHouseRestrictions { get { return true; } }
+		public override bool IsInvulnerable { get { return false; } }
+		public override bool IsBondable { get { return false; } }
+		public override bool Unprovokable { get { return true; } }
+		public override bool CanRummageCorpses { get { return false; } }
+		public override bool BardImmune { get { return true; } }
+
+		public override bool DeleteCorpseOnDeath => true;
+		public override bool CanBeRenamedBy(Mobile from) => true;
+		public override bool IsDispellable => false; // Empêche le golem d'être 
+
+
 
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			if (from == Owner)
+			if (from == SummonMaster)
 			{
 				from.SendGump(new GolemZyXAttributesGump(this));
 			}
@@ -154,11 +194,26 @@ namespace Server.Custom
 		public override void OnDeath(Container c)
 		{
 			base.OnDeath(c);
-			if (m_MiniGolem != null && !m_MiniGolem.Deleted)
+
+			if (SummonMaster != null && Map != null && Map != Map.Internal)
 			{
-				m_MiniGolem.Delete();
+				SummonMaster.SendLocalizedMessage(1006265, Name); // ~1_NAME~ has been killed.
 			}
+
+			// Ne pas dissiper le golem à la mort
+			Delete();
 		}
+
+		public override bool OnBeforeDeath()
+		{
+			return base.OnBeforeDeath();
+		}
+
+		public override bool CanBeControlledBy(Mobile m)
+		{
+			return m == SummonMaster;
+		}
+
 
 		public override int GetIdleSound() { return 268; }
 		public override int GetAngerSound() { return 267; }
@@ -191,7 +246,7 @@ namespace Server.Custom
 			}
 		}
 
-		public virtual bool CanRegenHits() { return false; }
+		public virtual bool  CanRegenHits() { return false; }
 
 		
 
@@ -211,6 +266,16 @@ namespace Server.Custom
 			{
 				m_MiniGolem.InvalidateProperties();
 			}
+			{
+				if (AshType == GolemAsh.AshType.Glace)
+				AttemptParalyze(from);
+			}
+			{
+				if (AshType == GolemAsh.AshType.Poison)
+				AttemptPoison(from);
+				{
+				}
+			}
 		}
 
 		public override bool CanBeDamaged()
@@ -223,35 +288,111 @@ namespace Server.Custom
 			get { return m_MaxHitPoints; }
 		}
 
-	
+		public void AttemptParalyze(Mobile target)
+		{
+			if (AshType != GolemAsh.AshType.Glace)
+				return;
+
+			if (target != null && target.Alive && !target.Paralyzed)
+			{
+				double skill = Skills[SkillName.Wrestling].Value;
+				if (skill / 150.0 > Utility.RandomDouble())
+				{
+					target.Paralyze(TimeSpan.FromSeconds(3 + skill / 50));
+					target.PlaySound(0x204);
+					target.FixedEffect(0x376A, 6, 1);
+				}
+			}
+		}
+
+		public void RangedAttack(Mobile target)
+		{
+			if (AshType != GolemAsh.AshType.Sylvestre)
+				return;
+
+			if (target != null && target.Alive && InRange(target, 5))
+			{
+				Direction = GetDirectionTo(target);
+				MovingEffect(target, 0xF42, 7, 1, false, false);
+				DoHarmful(target);
+				AOS.Damage(target, this, Utility.RandomMinMax(DamageMin, DamageMax), 100, 0, 0, 0, 0);
+			}
+		}
+		public void AttemptPoison(Mobile target)
+		{
+			if (AshType != GolemAsh.AshType.Poison)
+				return;
+
+			if (target != null && target.Alive && !target.Poisoned)
+			{
+				double skill = Skills[SkillName.Poisoning].Value;
+				if (skill / 100.0 > Utility.RandomDouble())
+				{
+					int level = (int)(skill / 30.0);
+					target.ApplyPoison(this, Poison.GetPoison(Math.Min(level, 3)));
+					target.PlaySound(0x205);
+					target.FixedEffect(0x3779, 1, 10);
+				}
+			}
+		}
+
+
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
 			writer.Write((int)1); // version
+
 			writer.Write(m_MiniGolem);
 			writer.Write((int)m_AshType);
 			writer.Write(m_MaxHitPoints);
 			writer.Write(m_CurrentHits);
+			writer.Write(m_SummonMaster);
+			writer.Write(m_Penalty);
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
 			int version = reader.ReadInt();
-			m_MiniGolem = reader.ReadItem() as MiniGolem;
-			m_AshType = (GolemAsh.AshType)reader.ReadInt();
-			m_MaxHitPoints = reader.ReadInt();
-			if (version >= 1)
+
+			switch (version)
 			{
-				m_CurrentHits = reader.ReadInt();
+				case 1:
+					m_MiniGolem = reader.ReadItem() as MiniGolem;
+					m_AshType = (GolemAsh.AshType)reader.ReadInt();
+					m_MaxHitPoints = reader.ReadInt();
+					m_CurrentHits = reader.ReadInt();
+					m_SummonMaster = reader.ReadMobile();
+					m_Penalty = reader.ReadInt();
+					break;
+				case 0:
+					m_MiniGolem = reader.ReadItem() as MiniGolem;
+					m_AshType = (GolemAsh.AshType)reader.ReadInt();
+					m_MaxHitPoints = reader.ReadInt();
+					m_CurrentHits = m_MaxHitPoints;
+					break;
 			}
-			else
+
+			if (version < 1)
 			{
-				m_CurrentHits = m_MaxHitPoints;
+				m_SummonMaster = null;
+				m_Penalty = 0;
+			}
+
+			Summoned = true;
+			ControlSlots = 3;
+			Controlled = true;
+
+			if (m_SummonMaster != null)
+			{
+				ControlMaster = m_SummonMaster;
+				ControlTarget = m_SummonMaster;
+				ControlOrder = OrderType.Follow;
 			}
 		}
 	}
+
 
 
 
@@ -426,29 +567,25 @@ namespace Server.Custom
 					return;
 				}
 
-				if (m_Golem.ControlMaster != null) // Le golem est matérialisé
+				if (m_Golem.Map != Map.Internal) // Le golem est matérialisé
 				{
-					// "Shrink" le golem
+					// Dématérialiser le golem
 					m_Golem.ControlMaster = null;
 					m_Golem.Controlled = false;
 					m_Golem.SetControlMaster(from);
-					m_Golem.IsStabled = true;
-
-					from.AddToBackpack(this);
 					m_Golem.Map = Map.Internal;
+					m_Golem.Location = new Point3D(0, 0, 0);
 
-					from.SendMessage("Vous avez dématérialisé le golem et l'avez remis dans votre sac.");
+					from.SendMessage("Vous avez dématérialisé le golem.");
 				}
 				else // Le golem est dématérialisé
 				{
 					// Matérialiser le golem
-					m_Golem.IsStabled = false;
 					m_Golem.SetControlMaster(from);
 					m_Golem.Controlled = true;
 					m_Golem.Map = from.Map;
 					m_Golem.Location = from.Location;
 
-					this.Delete(); // Supprimer le MiniGolem de l'inventaire
 					from.SendMessage("Vous avez matérialisé le golem.");
 				}
 			}
@@ -500,8 +637,19 @@ namespace Server.Custom
 		{
 			base.Deserialize(reader);
 			int version = reader.ReadInt();
-			m_Golem = reader.ReadMobile() as GolemZyX;
-			m_AshType = (GolemAsh.AshType)reader.ReadInt();
+
+			switch (version)
+			{
+				case 0:
+					m_Golem = reader.ReadMobile() as GolemZyX;
+					m_AshType = (GolemAsh.AshType)reader.ReadInt();
+					break;
+			}
+
+			if (m_Golem == null || m_Golem.Deleted)
+			{
+				Delete();
+			}
 		}
 	}
 }

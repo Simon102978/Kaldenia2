@@ -3,6 +3,10 @@ using Server.Items;
 using Server.Commands;
 using Server.Custom.Misc;
 using System.Text;
+using Server.Spells;
+using Server.Spells.Chivalry;
+using Server.Spells.Necromancy;
+using Server.Spells.Spellweaving;
 
 namespace Server.Custom.Weapons
 {
@@ -10,22 +14,23 @@ namespace Server.Custom.Weapons
 	{
 		public static void Initialize()
 		{
-			CommandSystem.Register("DPS", AccessLevel.GameMaster, new CommandEventHandler(DPS_OnCommand));
+			CommandSystem.Register("DPS", AccessLevel.Player, new CommandEventHandler(DPS_OnCommand));
 		}
 
 		[Usage("DPS")]
-		[Description("Permet de connaitre le Damage Par Second d'une arme.")]
+		[Description("Permet de connaitre le Damage Par Second d'une arme en tenant compte des buffs.")]
 		public static void DPS_OnCommand(CommandEventArgs e)
 		{
 			Mobile from = e.Mobile;
 
-			from.SendMessage(HueManager.GetHue(HueManagerList.Blue), "DPS: {0}", NewWeaponInfo.GetDPS((BaseWeapon)from.Weapon).ToString("0.00"));
+			double dps = NewWeaponInfo.GetDPS((BaseWeapon)from.Weapon, from);
+			from.SendMessage(HueManager.GetHue(HueManagerList.Blue), "DPS: {0}", dps.ToString("0.00"));
 		}
 	}
 
 	class NewWeaponInfo
 	{
-		public static double GetDPS(BaseWeapon weapon)
+		public static double GetDPS(BaseWeapon weapon, Mobile from)
 		{
 			double dps = 0.0;
 
@@ -35,10 +40,45 @@ namespace Server.Custom.Weapons
 				var maxDamage = weapon.MaxDamage;
 				var speed = weapon.Speed;
 				double dSpeed = Convert.ToDouble(speed.ToString());
-				dps = ((double)minDamage + (double)maxDamage) / 2.0 * 1.0 / dSpeed;
+
+				// Appliquer les modificateurs de dégâts des buffs
+				double damageModifier = GetDamageModifier(from);
+
+				dps = ((double)minDamage + (double)maxDamage) / 2.0 * damageModifier * 1.0 / dSpeed;
 			}
 
 			return dps;
+		}
+
+		private static double GetDamageModifier(Mobile from)
+		{
+			double modifier = 1.0;
+
+			// Vérifier les buffs et appliquer les modificateurs
+			if (DivineFurySpell.UnderEffect(from))
+				modifier *= 1.1; // +10% de dégâts
+
+			if (EnemyOfOneSpell.UnderEffect(from))
+			{
+				var context = EnemyOfOneSpell.GetContext(from);
+				if (context != null)
+					modifier *= (1 + (context.DamageScalar / 100.0));
+			}
+
+			if (BloodOathSpell.GetBloodOath(from) != null)
+				modifier *= 1.1; // +10% de dégâts
+
+			if (EssenceOfWindSpell.IsDebuffed(from))
+			{
+				// Notez que Essence of Wind est en fait un debuff qui réduit les dégâts
+				// Nous allons supposer une réduction de 5% par niveau de Focus
+				int focusLevel = EssenceOfWindSpell.GetFCMalus(from) - 1; // Le malus FC est FocusLevel + 1
+				modifier *= (1 - (0.05 * focusLevel));
+			}
+
+			// Ajoutez d'autres vérifications de buffs ici
+
+			return modifier;
 		}
 
 		//public static float GetSpeed(BaseWeapon weapon)

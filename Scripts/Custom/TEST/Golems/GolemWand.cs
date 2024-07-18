@@ -17,9 +17,9 @@ namespace Server.Custom
 		public int Charges { get; set; }
 
 		[Constructable]
-		public GolemSpiritWand() : base(0x0DF2)
+		public GolemSpiritWand() : base(0x0DF3)
 		{
-			Name = "Baguette des esprits";
+			Name = "Collecteur d'Ether";
 			Weight = 1.0;
 			Layer = Layer.OneHanded;
 			Charges = 100;
@@ -37,9 +37,9 @@ namespace Server.Custom
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			if (from.Skills[SkillName.Inscribe].Base < 50.0)
+			if (from.Skills[SkillName.AnimalTaming].Base < 50.0)
 			{
-				from.SendMessage("Vous avez besoin d'au moins 50 en Inscription pour utiliser cette baguette.");
+				from.SendMessage("Vous avez besoin d'au moins 50 en Animal Taming pour utiliser cette baguette.");
 				return;
 			}
 

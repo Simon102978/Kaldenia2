@@ -46,10 +46,10 @@ public class GolemAsh : Item
 	[Constructable]
 	public GolemAsh(AshType type, int Amount) : base(0x0F7C)
 	{
+		Name = "Cendres Élémentaires"; // Name = $"Cendres de {type}";
 		Stackable = true;
 		m_Type = type;
 		//Amount = amount;
-		Name = $"Cendres"; // Name = $"Cendres de {type}";
 		Hue = GetHueForType(type);
 		Weight = 1.0;
 	}
@@ -60,7 +60,7 @@ public class GolemAsh : Item
 
 	public override void GetProperties(ObjectPropertyList list)
 	{
-	//	base.GetProperties(list);
+		base.GetProperties(list);
 		list.Add($"Type: {m_Type}");
 		list.Add($"Quantité: {Amount}");
 	}
@@ -109,10 +109,10 @@ public class GolemAsh : Item
 		}
 	}
 
-	public static void ApplyAshBonuses(GolemZyX golem, AshType ashType, int ashQuantity, double inscribeSkill)
+	public static void ApplyAshBonuses(GolemZyX golem, AshType ashType, int ashQuantity, double animaltamingSkill)
 	{
 		int baseBonus = ashQuantity * 5;
-		int skillBonus = (int)(inscribeSkill * 0.1);
+		int skillBonus = (int)(animaltamingSkill * 0.1);
 
 		switch (ashType)
 		{
