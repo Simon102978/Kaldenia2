@@ -698,15 +698,22 @@ namespace Server.Engines.Craft
                         if (context == null)
                             break;
 
-                        int groupIndex = context.LastGroupIndex;
 
-                        if (groupIndex >= 0 && groupIndex < groups.Count)
+
+                       if (index >= 0 && index < m_list.Count)
+                                m_From.SendGump(new CraftGumpItem(m_From, system, m_list[index], m_Tool));
+
+                //        int groupIndex = context.LastGroupIndex;
+
+
+
+     /*                 if (groupIndex >= 0 && groupIndex < groups.Count)
                         {
                             CraftGroup group = groups.GetAt(groupIndex);
 
                             if (index >= 0 && index < group.CraftItems.Count)
                                 m_From.SendGump(new CraftGumpItem(m_From, system, group.CraftItems.GetAt(index), m_Tool));
-                        }
+                        }*/
 
                         break;
                     }
