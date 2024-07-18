@@ -9,6 +9,7 @@ public class SkillCard : Item
 	private int m_Level;
 	private SkillName m_Skill;
 	private bool m_Decrypted;
+	private static Dictionary<SkillName, List<Mobile>> s_ActiveCards = new Dictionary<SkillName, List<Mobile>>();
 
 	[Constructable]
 	public SkillCard() : base(0x9C14)
@@ -16,6 +17,7 @@ public class SkillCard : Item
 		Name = "Carte mystérieuse";
 		m_Level = Utility.RandomMinMax(1, 5);
 		m_Decrypted = false;
+		Stackable = false;
 		Hue = 0;
 		Weight = 1.0;
 	}
@@ -219,12 +221,57 @@ public class SkillCard : Item
 			return;
 		}
 
-		from.AddSkillMod(new TimedSkillMod(m_Skill, true, m_Level, TimeSpan.FromHours(1)));
-		from.SendMessage($"Votre compétence {m_Skill} a été augmentée de {m_Level}% pour 1 heure.");
-		from.SendMessage("La carte se désintègre après avoir libérée son pouvoir.");
+		if (IsSkillCardActive(from, m_Skill))
+		{
+			from.SendMessage($"Vous avez déjà une carte de compétence {m_Skill} active.");
+			return;
+		}
 
-		// Détruire la carte après utilisation
+		TimedSkillMod skillMod = new TimedSkillMod(m_Skill, true, m_Level, TimeSpan.FromHours(1));
+		from.AddSkillMod(skillMod);
+		from.SendMessage($"Votre compétence {m_Skill} a été augmentée de {m_Level}% pour 1 heure.");
+
+		AddActiveCard(from, m_Skill);
+
+		Timer.DelayCall(TimeSpan.FromHours(1), () =>
+		{
+			RemoveActiveCard(from, m_Skill);
+			from.RemoveSkillMod(skillMod);
+			from.SendMessage($"Le bonus de compétence {m_Skill} s'est dissipé.");
+		});
+
+		from.SendMessage("La carte se désintègre après avoir libéré son pouvoir.");
 		this.Delete();
+	}
+
+	private static bool IsSkillCardActive(Mobile from, SkillName skill)
+	{
+		if (s_ActiveCards.TryGetValue(skill, out List<Mobile> activeUsers))
+		{
+			return activeUsers.Contains(from);
+		}
+		return false;
+	}
+
+	private static void AddActiveCard(Mobile from, SkillName skill)
+	{
+		if (!s_ActiveCards.ContainsKey(skill))
+		{
+			s_ActiveCards[skill] = new List<Mobile>();
+		}
+		s_ActiveCards[skill].Add(from);
+	}
+
+	private static void RemoveActiveCard(Mobile from, SkillName skill)
+	{
+		if (s_ActiveCards.TryGetValue(skill, out List<Mobile> activeUsers))
+		{
+			activeUsers.Remove(from);
+			if (activeUsers.Count == 0)
+			{
+				s_ActiveCards.Remove(skill);
+			}
+		}
 	}
 
 	public override void OnDoubleClick(Mobile from)
