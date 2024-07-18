@@ -62,7 +62,7 @@ public class GolemAsh : Item
 	{
 	//	base.GetProperties(list);
 		list.Add($"Type: {m_Type}");
-		list.Add($"Quantité: {Amount}");
+		list.Add($"Quantitï¿½: {Amount}");
 	}
 
 	
@@ -89,23 +89,23 @@ public class GolemAsh : Item
 		switch (type)
 		{
 			case AshType.Feu:
-				return "Bonus de 20 points à la STR\nBonus de 10 points à la Tactics\nPénalité: 4";
+				return "Bonus de 20 points Ã  la STR\nBonus de 10 points Ã  la Tactics\nPÃ©nalitÃ©: 4";
 			case AshType.Eau:
-				return "Bonus de 20 points à la DEX\nBonus de 10 points au Wrestling\nPénalité: 3";
+				return "Bonus de 20 points Ã  la DEX\nBonus de 10 points au Wrestling\nPÃ©nalitÃ©: 3";
 			case AshType.Glace:
-				return "Attaque de paralysie\nBonus de 20 points au Wrestling\nPénalité: 2";
+				return "Attaque de paralysie\nBonus de 20 points au Wrestling\nPÃ©nalitÃ©: 2";
 			case AshType.Poison:
-				return "Attaque de poison\nBonus de 20 points à la Tactics\nPénalité: 2";
+				return "Attaque de poison\nBonus de 20 points Ã  la Tactics\nPÃ©nalitÃ©: 2";
 			case AshType.Sang:
-				return "Double armure\nBonus de 20 points au Wrestling\nPénalité: 2";
+				return "Double armure\nBonus de 20 points au Wrestling\nPÃ©nalitÃ©: 2";
 			case AshType.Sylvestre:
-				return "Attaque de longue portée\nBonus de 20 points au Magic Resist\nPénalité: 3";
+				return "Attaque de longue portÃ©e\nBonus de 20 points au Magic Resist\nPÃ©nalitÃ©: 3";
 			case AshType.Terre:
-				return "Bonus de 20 points à la Tactics\nBonus de 20 points au Wrestling\nPénalité: 3";
+				return "Bonus de 20 points Ã  la Tactics\nBonus de 20 points au Wrestling\nPÃ©nalitÃ©: 3";
 			case AshType.Vent:
-				return "Double DEX\nBonus de 20 points à la Tactics\nPénalité: 2";
+				return "Double DEX\nBonus de 20 points Ã  la Tactics\nPÃ©nalitÃ©: 2";
 			default:
-				return "Aucun bonus spécifique";
+				return "Aucun bonus spÃ©cifique";
 		}
 	}
 

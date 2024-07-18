@@ -87,7 +87,7 @@ namespace Server.Custom
 						}
 						else
 						{
-							from.SendMessage("Vous avez échoué à capturer l'esprit.");
+							from.SendMessage("Vous avez Ã©chouÃ© Ã  capturer l'esprit.");
 							corpse.Delete();
 							m_Wand.Charges--;
 							m_Wand.UpdateProperties();
@@ -129,7 +129,7 @@ namespace Server.Custom
 					Charges = reader.ReadInt();
 					break;
 				case 0:
-					Charges = 100; // Valeur par défaut
+					Charges = 100; // Valeur par dï¿½faut
 					break;
 			}
 		}
@@ -140,12 +140,20 @@ namespace Server.Custom
 		private int m_Str, m_Dex, m_Int, m_AR;
 		private Dictionary<SkillName, double> m_Skills;
 
-		public int Percentage { get; private set; }
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Percentage { get;  set; }
 
 		public int GetStrength() { return m_Str; }
 		public int GetDexterity() { return m_Dex; }
 		public int GetIntelligence() { return m_Int; }
 		public int GetAR() { return m_AR; }
+
+		public Dictionary<SkillName, double> Skills
+		{
+			get { return m_Skills; }
+			
+		}
+
 
 		public double GetSkillValue(SkillName skillName)
 		{
@@ -157,7 +165,7 @@ namespace Server.Custom
 		[Constructable]
 		public CreatureSpirit(BaseCreature creature) : base(0x3198)
 		{
-			Name = "Esprit de créature";
+			Name = "Esprit de crÃ©ature";
 			Weight = 0.1;
 			m_Skills = new Dictionary<SkillName, double>();
 			if (creature != null)
@@ -237,7 +245,7 @@ namespace Server.Custom
 				return;
 			}
 			from.Target = new InternalSpiritTarget(this);
-			from.SendMessage("Sélectionnez un autre esprit à fusionner avec celui-ci.");
+			from.SendMessage("SÃ©lectionnez un autre esprit Ã  fusionner avec celui-ci.");
 		}
 
 		private class InternalSpiritTarget : Target
@@ -255,13 +263,13 @@ namespace Server.Custom
 				{
 					if (targetSpirit == m_Spirit)
 					{
-						from.SendMessage("Vous devez sélectionner un esprit différent.");
+						from.SendMessage("Vous devez sÃ©lectionner un esprit diffÃ©rent.");
 						from.Target = new InternalSpiritTarget(m_Spirit);
 						return;
 					}
 					if (m_Spirit.Percentage + targetSpirit.Percentage > 100)
 					{
-						from.SendMessage("La fusion ne peut pas dépasser 100%.");
+						from.SendMessage("La fusion ne peut pas dÃ©passer 100%.");
 						return;
 					}
 					int totalPercentage = m_Spirit.Percentage + targetSpirit.Percentage;
@@ -285,11 +293,11 @@ namespace Server.Custom
 					m_Spirit.InvalidateProperties();
 					targetSpirit.Delete();
 
-					from.SendMessage("Les esprits ont été fusionnés avec succès.");
+					from.SendMessage("Les esprits ont Ã©tÃ© fusionnÃ©s avec succÃ¨s.");
 				}
 				else
 				{
-					from.SendMessage("Vous devez cibler un autre esprit de créature.");
+					from.SendMessage("Vous devez cibler un autre esprit de crÃ©ature.");
 					from.Target = new InternalSpiritTarget(m_Spirit);
 				}
 			}

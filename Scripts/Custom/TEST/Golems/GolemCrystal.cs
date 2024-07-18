@@ -66,7 +66,7 @@ namespace Server.Custom
 		public override void GetProperties(ObjectPropertyList list)
 		{
 			base.GetProperties(list);
-			list.Add(1060658, "Chance de rÈussite\t{0}%", SuccessChance.ToString());
+			list.Add(1060658, "Chance de r√©ussite\t{0}%", SuccessChance.ToString());
 		}
 
 		private void UpdateName()
@@ -83,9 +83,9 @@ namespace Server.Custom
 				case CrystalType.Ambre: return "Ambre";
 				case CrystalType.Tourmaline: return "Tourmaline";
 				case CrystalType.Saphire: return "Saphir";
-				case CrystalType.Emeraude: return "…meraude";
-				case CrystalType.Amethyste: return "AmÈthyste";
-				case CrystalType.SaphireEtoile: return "Saphir …toilÈ";
+				case CrystalType.Emeraude: return "√âmeraude";
+				case CrystalType.Amethyste: return "Am√©thyste";
+				case CrystalType.SaphireEtoile: return "Saphir √âtoil√©";
 				case CrystalType.Diamant: return "Diamant";
 				default: return "Inconnu";
 			}
@@ -149,7 +149,7 @@ namespace Server.Custom
 			private GolemCrystal m_Crystal;
 
 			public GolemCreationGump(Mobile from, GolemCrystal crystal)
-				: base("CrÈation de Golem", 560, 622, false)
+				: base("Cr√©ation de Golem", 560, 450, false)
 			{
 				m_From = from;
 				m_Crystal = crystal;
@@ -157,38 +157,50 @@ namespace Server.Custom
 				int x = XBase;
 				int y = YBase;
 
-				AddSection(x - 10, y, 605, 240, "Informations");
-				AddHtmlTexte(x + 10, y + 20, 300, $"Chance de rÈussite: {crystal.SuccessChance}%");
+				AddBackground(x - 10, y, 605, 55, 9270);
 
-				// Section des cendres
-				AddSection(x - 10, y + 245, 300, 300, "Cendres");
-				AddButtonHtlml(x + 10, y + 265, 1, "Choisir les cendres", "#FFFFFF");
+				AddHtmlTexte(x + 10, y + 20, 595, $"<h3><center>Cr√©ation de Golem: {crystal.SuccessChance}% Chance de r√©ussite</center></h3>");
+
+				string Cendredescription = "";
+
 				if (crystal.AshQuantity > 0)
 				{
 					int energy = crystal.AshQuantity * 5;
-					AddHtmlTexte(x + 10, y + 285, 280, $"QuantitÈ: {crystal.AshQuantity} {GetAshTypeName(crystal.AshType)}");
-					AddHtmlTexte(x + 10, y + 305, 280, $"…nergie: {energy}");
-					AddHtmlTexte(x + 10, y + 325, 280, $"Pouvoir: {GetAshTypeName(crystal.AshType)}");
-					AddHtmlTexte(x + 10, y + 345, 280, GolemAsh.GetAshBonusDescription(crystal.AshType));
+
+					Cendredescription = Cendredescription + $"Quantit√©:\n {crystal.AshQuantity} {GetAshTypeName(crystal.AshType)}\n\n";
+					Cendredescription = Cendredescription + $"√ânergie:\n {crystal.AshQuantity} cendre * 5 √©nergie = {energy}\n\n";
+					Cendredescription = Cendredescription + $"Pouvoir: {GetAshTypeName(crystal.AshType)}\n";
+					Cendredescription = Cendredescription + GolemAsh.GetAshBonusDescription(crystal.AshType);
+
 				}
 
-				// Section de l'esprit
-				AddSection(x + 295, y + 245, 300, 300, "Esprit");
-				AddButtonHtlml(x + 305, y + 265, 2, "Choisir l'esprit", "#FFFFFF");
+				// Section des cendres
+				AddSection(x - 10, y + 60, 300, 300, "Cendres",Cendredescription);
+			
+				string Espritdescription = "";
+				
 				if (crystal.m_Spirit != null)
 				{
-					AddHtmlTexte(x + 305, y + 285, 140, $"STR: {crystal.m_Spirit.GetStrength()}");
-					AddHtmlTexte(x + 445, y + 285, 140, $"Wrestling: {crystal.m_Spirit.GetSkillValue(SkillName.Wrestling):F1}");
-					AddHtmlTexte(x + 305, y + 305, 140, $"DEX: {crystal.m_Spirit.GetDexterity()}");
-					AddHtmlTexte(x + 445, y + 305, 140, $"Tactics: {crystal.m_Spirit.GetSkillValue(SkillName.Tactics):F1}");
-					AddHtmlTexte(x + 305, y + 325, 140, $"INT: {crystal.m_Spirit.GetIntelligence()}");
-					AddHtmlTexte(x + 445, y + 325, 140, $"Magic Resist: {crystal.m_Spirit.GetSkillValue(SkillName.MagicResist):F1}");
-					AddHtmlTexte(x + 305, y + 345, 140, $"Armor: {crystal.m_Spirit.GetAR()}");
+					Espritdescription = $"Statistique: \nSTR: {crystal.m_Spirit.GetStrength()}" + $"\nDEX: {crystal.m_Spirit.GetDexterity()}" + $"\nINT: {crystal.m_Spirit.GetIntelligence()}" + $"\nArmor: {crystal.m_Spirit.GetAR()}\n\n" + "Comp√©tences:\n";
+
+
+
+
+				foreach (var skill in crystal.m_Spirit.Skills)
+				{
+					Espritdescription = Espritdescription + skill.Key + ": " + $"{skill.Value:F1}\n";
 				}
 
+
+				}
+
+				AddSection(x + 295, y + 60, 300, 300, "Esprit", Espritdescription);
+
 				// Bouton de construction
-				AddBackground(x - 10, y + 550, 605, 55, 9270);
-				AddButtonHtlml(x + 150, y + 568, 3, "Construire le Golem", "#FFFFFF");
+				AddSection(x - 10, y + 365, 605, 125,  "Commandes");
+				AddButtonHtlml(x + 10, y + 400, 3, "Construire le Golem", "#FFFFFF");
+				AddButtonHtlml(x + 10, y + 425, 1, "Choisir les cendres", "#FFFFFF");
+				AddButtonHtlml(x + 10, y + 450, 2, "Choisir l'esprit", "#FFFFFF");
 			}
 
 			public override void OnResponse(NetState sender, RelayInfo info)
@@ -198,11 +210,11 @@ namespace Server.Custom
 				{
 					case 1: // Choisir les cendres
 						from.Target = new InternalAshTarget(m_Crystal);
-						from.SendMessage("Choisissez les cendres ‡ utiliser.");
+						from.SendMessage("Choisissez les cendres √† utiliser.");
 						break;
 					case 2: // Choisir l'esprit
 						from.Target = new InternalSpiritTarget(m_Crystal);
-						from.SendMessage("Choisissez l'esprit ‡ utiliser.");
+						from.SendMessage("Choisissez l'esprit √† utiliser.");
 						break;
 					case 3: // Construire le Golem
 						TryCreateGolem(from);
@@ -216,14 +228,14 @@ namespace Server.Custom
 			{
 				if (m_Crystal.m_Spirit == null || m_Crystal.AshQuantity == 0)
 				{
-					from.SendMessage("Vous devez sÈlectionner un esprit et des cendres.");
+					from.SendMessage("Vous devez s√©lectionner un esprit et des cendres.");
 					from.SendGump(new GolemCreationGump(from, m_Crystal));
 					return;
 				}
 
 				if (m_Crystal.m_Spirit.Percentage < 100)
 				{
-					from.SendMessage("L'esprit doit Ítre complet (100 sur 100) pour Ítre utilisÈ.");
+					from.SendMessage("L'esprit doit √™tre complet (100 sur 100) pour √™tre utilis√©.");
 					from.SendGump(new GolemCreationGump(from, m_Crystal));
 					return;
 				}
@@ -240,11 +252,11 @@ namespace Server.Custom
 				{
 					GolemZyX golem = new GolemZyX(m_Crystal.m_Spirit, m_Crystal.AshType, m_Crystal.AshQuantity, from);
 					golem.MoveToWorld(from.Location, from.Map);
-					from.SendMessage("Vous avez crÈÈ un Golem avec succËs!");
+					from.SendMessage("Vous avez cr√©√© un Golem avec succ√®s!");
 				}
 				else
 				{
-					from.SendMessage("La crÈation du Golem a ÈchouÈ.");
+					from.SendMessage("La cr√©ation du Golem a √©chou√©.");
 				}
 
 				// Consommer les ressources
@@ -271,14 +283,14 @@ namespace Server.Custom
 
 			private string GetEnergyForAshType(GolemAsh.AshType ashType)
 			{
-				// ImplÈmentez cette mÈthode selon vos besoins
-				return "¿ dÈfinir";
+				// ImplÔøΩmentez cette mÔøΩthode selon vos besoins
+				return "√Ä d√©finir";
 			}
 
 			private string GetPowerForAshType(GolemAsh.AshType ashType)
 			{
-				// ImplÈmentez cette mÈthode selon vos besoins
-				return "¿ dÈfinir";
+				// ImplÔøΩmentez cette mÔøΩthode selon vos besoins
+				return "√Ä d√©finir";
 			}
 		}
 
@@ -298,7 +310,7 @@ namespace Server.Custom
 				{
 					m_Crystal.AshType = ash.Type;
 					m_Crystal.AshQuantity = ash.Amount;
-					from.SendMessage($"Vous avez sÈlectionnÈ {ash.Amount} {(ash.Type)}.");
+					from.SendMessage($"Vous avez s√©lectionn√© {ash.Amount} {(ash.Type)}.");
 				}
 				else
 				{
@@ -339,17 +351,17 @@ namespace Server.Custom
 				{
 					if (spirit.Percentage < 100)
 					{
-						from.SendMessage("L'esprit doit Ítre complet (100 sur 100) pour Ítre utilisÈ.");
+						from.SendMessage("L'esprit doit √™tre complet (100 sur 100) pour √™tre utilis√©.");
 					}
 					else
 					{
 						m_Crystal.m_Spirit = spirit;
-						from.SendMessage("Vous avez sÈlectionnÈ un esprit de crÈature.");
+						from.SendMessage("Vous avez s√©lectionn√© un esprit de cr√©ature.");
 					}
 				}
 				else
 				{
-					from.SendMessage("Cela n'est pas un esprit de crÈature valide.");
+					from.SendMessage("Cela n'est pas un esprit de cr√©ature valide.");
 				}
 
 				from.SendGump(new GolemCreationGump(from, m_Crystal));
