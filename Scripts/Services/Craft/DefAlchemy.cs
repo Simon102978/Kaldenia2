@@ -468,7 +468,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(PerfumNoirPotion), "Parfums ",                      "La fin des temps ",            99.0, 119.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
             AddRes(index, typeof(Ombrella), "Ombrella", 1, "Il Vous manque :  Ombrella");
             AddRes(index, typeof(TribalBerry), "baie tribale", 1, "Il Vous manque :  baie tribale");
-  
+
+			index = AddCraft(typeof(PerfumRemoval), "Parfums ", "Potion de retrait des parfums", 51.4, 70.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
+			AddRes(index, typeof(PlumesSaliva), "Plume de saliva", 3, "Vous n'avez pas suffisament de plumes de Saliva");
+		    AddRes(index, typeof(DentDeLion), "Dent-de-lion", 3, "Il Vous manque :  Dent-de-lion");
+          	AddRes(index, typeof(Fougere), "Fougère", 3, "Il Vous manque : Fougere");
             #endregion
 		}
 	}
