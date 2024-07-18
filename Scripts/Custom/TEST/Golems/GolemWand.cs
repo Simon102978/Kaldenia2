@@ -129,7 +129,7 @@ namespace Server.Custom
 					Charges = reader.ReadInt();
 					break;
 				case 0:
-					Charges = 100; // Valeur par d�faut
+					Charges = 100; // Valeur par défaut
 					break;
 			}
 		}

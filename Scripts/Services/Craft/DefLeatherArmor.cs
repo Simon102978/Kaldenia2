@@ -101,7 +101,7 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(Shoes), "Bottes", "Souliers", 10.0, 30.0, typeof(Leather), 1044462, 15, 1044463);
 			AddCraft(typeof(Boots), "Bottes", "Bottes simples",20.0, 40.0,  typeof(Leather), 1044462, 15, 1044463);
 			AddCraft(typeof(ThighBoots), "Bottes", "Cuissardes", 20.0, 40.0,typeof(Leather), 1044462, 15, 1044463);
-			AddCraft(typeof(LeatherTalons), "Bottes", "Soulier en cuir", 20.0, 40.0, typeof(Leather), 1044462, 15, 1044463);
+			//AddCraft(typeof(LeatherTalons), "Bottes", "Soulier en cuir", 20.0, 40.0, typeof(Leather), 1044462, 15, 1044463);
 			index = AddCraft(typeof(SandaleCuir), "Bottes", "Sandales en cuir", 40.0, 60.0, typeof(Leather), 1044462, 10, 1044463);	
 			index = AddCraft(typeof(SoulierTissus), "Bottes", "Soulier en Tissus", 40.0, 60.0, typeof(Leather), 1044462, 15, 1044463);	
 			index = AddCraft(typeof(ElvenBoots), "Bottes", "Bottes délicate", 45.0, 65.0, typeof(Leather), 1044462, 15, 1044463);		

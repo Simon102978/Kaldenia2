@@ -15,6 +15,7 @@ namespace Server.Items
         {
             Weight = 3.0;
 			Name = "Soulier en cuir";
+			
 		}
 
         public LeatherTalons(Serial serial)
