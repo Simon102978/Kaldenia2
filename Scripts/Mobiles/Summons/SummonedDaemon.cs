@@ -14,6 +14,7 @@ namespace Server.Mobiles
             SetStr(200);
             SetDex(110);
             SetInt(150);
+            SetHits(400);
 
             SetDamage(14, 21);
 
@@ -45,7 +46,7 @@ namespace Server.Mobiles
 
         public override double DispelFocus => 45.0;
 
-        public override Poison PoisonImmune => Poison.Regular;
+        public override Poison PoisonImmune => Poison.Greater;
 
         public override bool CanFly => true;
 
