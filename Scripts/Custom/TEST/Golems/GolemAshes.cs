@@ -9,6 +9,7 @@ using Server.ContextMenus;
 using Server.Network;
 using Server.Multis;
 using Server.Custom;
+using Server.Prompts;
 
 public class GolemAsh : Item, ICommodity
 {
@@ -195,9 +196,95 @@ private int GetHueForType(AshType type)
 		return true;
 	}
 
-	
+	public override bool OnDragDrop(Mobile from, Item dropped)
+	{
+		GolemAsh ash = dropped as GolemAsh;
 
-	
+		if (ash != null && ash.Type == this.Type)
+		{
+			Amount += ash.Amount;
+			ash.Delete();
+			return true;
+		}
 
-	
+		return false;
+	}
+
+	public override void OnDoubleClick(Mobile from)
+	{
+		if (!Movable)
+			return;
+
+		if (Amount > 1)
+		{
+			from.SendMessage("Entrez la quantité que vous souhaitez prendre :");
+			from.Prompt = new InternalPrompt(this);
+		}
+		else
+		{
+			base.OnDoubleClick(from);
+		}
+	}
+
+	private class InternalPrompt : Prompt
+	{
+		private GolemAsh m_Ash;
+
+		public InternalPrompt(GolemAsh ash)
+		{
+			m_Ash = ash;
+		}
+
+		public override void OnResponse(Mobile from, string text)
+		{
+			if (!m_Ash.Deleted && m_Ash.IsAccessibleTo(from))
+			{
+				if (int.TryParse(text, out int amount))
+				{
+					if (amount < 1 || amount > m_Ash.Amount)
+					{
+						from.SendMessage("Quantité invalide.");
+					}
+					else if (amount == m_Ash.Amount)
+					{
+						from.SendMessage("Vous prenez toutes les cendres.");
+						from.AddToBackpack(m_Ash);
+					}
+					else
+					{
+						m_Ash.Amount -= amount;
+						GolemAsh newAsh = new GolemAsh(m_Ash.Type, amount);
+						from.AddToBackpack(newAsh);
+						from.SendMessage($"Vous prenez {amount} cendres.");
+					}
+				}
+				else
+				{
+					from.SendMessage("Quantité invalide. Veuillez entrer un nombre.");
+				}
+			}
+		}
+
+		public override void OnCancel(Mobile from)
+		{
+			from.SendLocalizedMessage(502980); // Message canceled.
+		}
+	}
+
+	public override void OnAfterDuped(Item newItem)
+	{
+		GolemAsh newAsh = newItem as GolemAsh;
+		if (newAsh != null)
+		{
+			newAsh.Type = this.Type;
+		}
+	}
+
+
+
+
+
+
+
+
 }
