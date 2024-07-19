@@ -6186,7 +6186,7 @@ namespace Server.Mobiles
 
 		private void AddRecipeScrollToLoot()
 		{
-			if (Utility.RandomDouble() < 0.1) // 10% de chance, ajustez selon vos besoins
+			if (Utility.RandomDouble() < 0.03) // 3% de chance, ajustez selon vos besoins
 			{
 				Type[] recipeScrolls = CustomRecipeScrollTypes2;
 
@@ -6248,8 +6248,12 @@ namespace Server.Mobiles
 
                         PackItem(new TreasureMap(treasureLevel, map, SpellHelper.IsEodon(map, Location)));
 						// Ajouter une chance de drop pour un scroll de recette
-						AddRecipeScrollToLoot();
-					}
+						if (treasureLevel >= 3)
+						{
+							AddRecipeScrollToLoot();
+						}
+					
+				}
                 }
 
                 if (m_Paragon && Paragon.ChocolateIngredientChance > Utility.RandomDouble())

@@ -60,6 +60,14 @@ public class GolemAsh : Item, ICommodity
 	}
 	TextDefinition ICommodity.Description => LabelNumber;
 	bool ICommodity.IsDeedable => true;
+
+	public override void AddNameProperty(ObjectPropertyList list)
+	{
+		if (Amount > 1)
+			list.Add(1050039, "{0}\t{1}", Amount.ToString(), $"Cendres Élémentaires [{m_Type}]"); // ~1_NUMBER~ ~2_ITEMNAME~
+		else
+			list.Add($"Cendres Élémentaires [{m_Type}]");
+	}
 	public override void GetProperties(ObjectPropertyList list)
 	{
 		base.GetProperties(list);
@@ -222,7 +230,11 @@ private int GetHueForType(AshType type)
 		}
 		else
 		{
-			base.OnDoubleClick(from);
+			// Comportement par défaut pour un seul objet
+			if (!from.InRange(GetWorldLocation(), 1))
+				from.SendLocalizedMessage(500446); // That is too far away.
+			else
+				from.SendAsciiMessage($"Vous prenez {Amount} cendre{(Amount > 1 ? "s" : "")} de type {m_Type}.");
 		}
 	}
 
@@ -264,6 +276,8 @@ private int GetHueForType(AshType type)
 				}
 			}
 		}
+
+	
 
 		public override void OnCancel(Mobile from)
 		{

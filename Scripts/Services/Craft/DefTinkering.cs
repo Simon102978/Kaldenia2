@@ -202,6 +202,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Blowpipe), "Outils", "Soufflage de verre", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
 			index = AddCraft(typeof(OutilsJardin), "Outils", "Outils de Jardinage", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
 			index = AddCraft(typeof(GolemSpiritWand), "Outils", "Baguette des Esprits", 10.0, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
+			index = AddCraft(typeof(OutilDeTanneur), "Outils", "Outil de Tanner", 30.0, 60.0, typeof(PalmierBoard), "Planches de Palmier", 5, "Vous n'avez pas suffisament de planche de palmier");
+
 
 
 			index = AddCraft(typeof(ToileVierge), "Outils", "Toile Vierge (Peinture)", 10.0, 50.0, typeof(PalmierBoard), "Planche de Palmier", 5, "Vous n'avez pas suffisament de planche de palmier");

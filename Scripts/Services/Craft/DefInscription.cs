@@ -915,23 +915,23 @@ namespace Server.Engines.Craft
 
 
 			index = AddCraft(typeof(LivreClasse0Oubli), "Livre de Classe", "livre de l'oubli de classe 0", 50.0, 60, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(Tourmaline), "Tourmaline", 10, "Vous n'avez pas assez de Tourmaline.");
 
 			index = AddCraft(typeof(LivreClasse1Oubli), "Livre de Classe", "livre de l'oubli de classe 1", 70.0, 90, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(Rubis), "Rubis", 10, "Vous n'avez pas assez de Rubis.");
 
 			index = AddCraft(typeof(LivreClasse2Oubli), "Livre de Classe", "livre de l'oubli de classe 2", 90.0, 100, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(DragonBlood), "Sang de Dragon", 5, "Vous n'avez pas assez de Sand de Dragon.");
 
 
 			index = AddCraft(typeof(LivreMetier0Oubli), "Livre de Classe", "livre de l'oubli de métier 0", 50.0, 60, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(Citrine), "Citrine", 10, "Vous n'avez pas assez de Citrine.");
 
 			index = AddCraft(typeof(LivreMetier1Oubli), "Livre de Classe", "livre de l'oubli de métier 1", 70.0, 90, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(Ambre), "Ambre", 10, "Vous n'avez pas assez d'Ambre.");
 
 			index = AddCraft(typeof(LivreMetier2Oubli), "Livre de Classe", "livre de l'oubli de métier 2", 90.0, 100, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(DragonBlood), "Sang de Dragon", 5, "Vous n'avez pas assez de Sang de Dragon.");
 
 
 			#region Skills

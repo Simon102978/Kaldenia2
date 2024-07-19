@@ -5,75 +5,85 @@ using System;
 
 namespace Server.Spells.Spellweaving
 {
-    public class NatureFurySpell : ArcanistSpell
-    {
-        private static readonly SpellInfo m_Info = new SpellInfo(
-            "Nature's Fury", "Rauvvrae",
-            -1,
-            false,
-					Reagent.Bloodmoss,
-				  Reagent.MandrakeRoot,
-				  Reagent.SpidersSilk);
-        public NatureFurySpell(Mobile caster, Item scroll)
-            : base(caster, scroll, m_Info)
-        {
-        }
+	public class NatureFurySpell : ArcanistSpell
+	{
+		private static readonly SpellInfo m_Info = new SpellInfo(
+			"Nature's Fury", "Rauvvrae",
+			-1,
+			false,
+			Reagent.Bloodmoss,
+			Reagent.MandrakeRoot,
+			Reagent.SpidersSilk);
+
+		public NatureFurySpell(Mobile caster, Item scroll)
+			: base(caster, scroll, m_Info)
+		{
+		}
 
 		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Cycle, 3) }; } }
 
 		public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(1.5);
-        public override double RequiredSkill => 0.0;
-        public override int RequiredMana => 24;
-        public override bool CheckCast()
-        {
-            if (!base.CheckCast())
-                return false;
+		public override double RequiredSkill => 0.0;
+		public override int RequiredMana => 24;
 
-            if ((Caster.Followers + 3) > Caster.FollowersMax)
-            {
-                Caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
-                return false;
-            }
+		public override bool CheckCast()
+		{
+			if (!base.CheckCast())
+				return false;
 
-            return true;
-        }
+			if ((Caster.Followers + 3) > Caster.FollowersMax)
+			{
+				Caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
+				return false;
+			}
 
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
+			return true;
+		}
 
-        public void Target(IPoint3D point)
-        {
-            Point3D p = new Point3D(point);
-            Map map = Caster.Map;
+		public override void OnCast()
+		{
+			Caster.Target = new InternalTarget(this);
+		}
 
-            if (map == null)
-                return;
+		public void Target(IPoint3D point)
+		{
+			Point3D p = new Point3D(point);
+			Map map = Caster.Map;
 
-            HouseRegion r = Region.Find(p, map).GetRegion(typeof(HouseRegion)) as HouseRegion;
+			if (map == null)
+				return;
 
-            if (r != null && r.House != null && !r.House.IsFriend(Caster))
-                return;
+			HouseRegion r = Region.Find(p, map).GetRegion(typeof(HouseRegion)) as HouseRegion;
 
-            if (!map.CanSpawnMobile(p.X, p.Y, p.Z))
-            {
-                Caster.SendLocalizedMessage(501942); // That location is blocked.
-            }
-            else if (SpellHelper.CheckTown(p, Caster) && CheckSequence())
-            {
-                TimeSpan duration = TimeSpan.FromSeconds(Caster.Skills.EvalInt.Value / 24 + 25 + FocusLevel * 2);
+			if (r != null && r.House != null && !r.House.IsFriend(Caster))
+				return;
 
-                NatureFury nf = new NatureFury();
-                BaseCreature.Summon(nf, false, Caster, p, 0x5CB, duration);
+			if (!map.CanSpawnMobile(p.X, p.Y, p.Z))
+			{
+				Caster.SendLocalizedMessage(501942); // That location is blocked.
+			}
+			else if (SpellHelper.CheckTown(p, Caster) && CheckSequence())
+			{
+				TimeSpan duration = TimeSpan.FromSeconds(Caster.Skills.EvalInt.Value / 24 + 25 + FocusLevel * 2);
 
-                new InternalTimer(nf).Start();
-            }
+				NatureFury nf = new NatureFury();
+				BaseCreature.Summon(nf, true, Caster, p, 0x5CB, duration);
 
-            FinishSequence();
-        }
+				// Rendre la créature contrôlable
+				nf.ControlMaster = Caster;
+				nf.Controlled = true;
+				nf.ControlOrder = OrderType.Follow;
 
-        public class InternalTarget : Target
+				// Retirer le statut criminel
+				nf.Criminal = false;
+
+				new InternalTimer(nf).Start();
+			}
+
+			FinishSequence();
+		}
+
+		public class InternalTarget : Target
         {
             private readonly NatureFurySpell m_Owner;
             public InternalTarget(NatureFurySpell owner)
