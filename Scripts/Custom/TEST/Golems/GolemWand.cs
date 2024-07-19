@@ -219,7 +219,7 @@ namespace Server.Custom
 			private Mobile m_From;
 			private CreatureSpirit m_Spirit;
 
-			public SpiritInfoEntry(Mobile from, CreatureSpirit spirit) : base(6200, 3)
+			public SpiritInfoEntry(Mobile from, CreatureSpirit spirit) : base(3006150, 1)
 			{
 				m_From = from;
 				m_Spirit = spirit;

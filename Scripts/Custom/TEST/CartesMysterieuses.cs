@@ -7,8 +7,10 @@ using Server.Mobiles;
 public class SkillCard : Item
 {
 	private int m_Level;
+	private double m_Bonus;
 	private SkillName m_Skill;
 	private bool m_Decrypted;
+
 	private static Dictionary<SkillName, List<Mobile>> s_ActiveCards = new Dictionary<SkillName, List<Mobile>>();
 
 	[Constructable]
@@ -16,11 +18,20 @@ public class SkillCard : Item
 	{
 		Name = "Carte mystérieuse";
 		m_Level = Utility.RandomMinMax(1, 5);
+		m_Bonus = GenerateBonus(m_Level);
 		m_Decrypted = false;
 		Stackable = false;
 		Hue = 0;
 		Weight = 1.0;
 	}
+
+	private double GenerateBonus(int level)
+	{
+		double minBonus = (level - 1) * 2 + 1;
+		double maxBonus = level * 2;
+		return Math.Round(Utility.RandomMinMax((int)(minBonus * 10), (int)(maxBonus * 10)) / 10.0, 1);
+	}
+
 
 	public SkillCard(Serial serial) : base(serial)
 	{
@@ -63,18 +74,18 @@ public class SkillCard : Item
 	private void AssignSkill()
 	{
 		SkillName[] skills = {
-			SkillName.Alchemy, SkillName.Anatomy, SkillName.AnimalLore, SkillName.ItemID,
-			SkillName.ArmsLore, SkillName.Parry, SkillName.Blacksmith, SkillName.Peacemaking,
+			SkillName.Alchemy, SkillName.Anatomy, SkillName.AnimalLore, 
+		SkillName.Parry, SkillName.Blacksmith, SkillName.Peacemaking,
 			SkillName.Camping, SkillName.Carpentry, SkillName.Cartography, SkillName.Cooking,
-			SkillName.DetectHidden, SkillName.Discordance, SkillName.EvalInt, SkillName.Healing,
-			SkillName.Fishing, SkillName.Forensics, SkillName.Hiding, SkillName.Provocation,
+			 SkillName.Discordance, SkillName.EvalInt, SkillName.Healing,
+			SkillName.Fishing,  SkillName.Hiding, SkillName.Provocation,
 			SkillName.Inscribe, SkillName.Lockpicking, SkillName.Magery, SkillName.MagicResist,
 			SkillName.Tactics, SkillName.Snooping, SkillName.Musicianship, SkillName.Poisoning,
-			SkillName.Archery, SkillName.SpiritSpeak, SkillName.Stealing, SkillName.Tailoring,
-			SkillName.AnimalTaming, SkillName.TasteID, SkillName.Tinkering, SkillName.Tracking,
+			SkillName.Archery,  SkillName.Stealing, SkillName.Tailoring,
+			SkillName.AnimalTaming,  SkillName.Tinkering, SkillName.Tracking,
 			SkillName.Veterinary, SkillName.Swords, SkillName.Macing, SkillName.Fencing,
 			SkillName.Wrestling, SkillName.Lumberjacking, SkillName.Mining, SkillName.Meditation,
-			SkillName.RemoveTrap, SkillName.Necromancy, SkillName.Concentration, SkillName.Equitation,
+			  SkillName.Concentration, SkillName.Equitation,
 			SkillName.Botanique
 		};
 
@@ -205,11 +216,10 @@ public class SkillCard : Item
 	public override void GetProperties(ObjectPropertyList list)
 	{
 		base.GetProperties(list);
-
 		if (m_Decrypted)
 		{
 			list.Add($"Compétence: {m_Skill}");
-			list.Add($"Bonus: +{m_Level}%");
+			list.Add($"Bonus: +{m_Bonus:F1}%");
 		}
 	}
 
@@ -227,10 +237,9 @@ public class SkillCard : Item
 			return;
 		}
 
-		TimedSkillMod skillMod = new TimedSkillMod(m_Skill, true, m_Level, TimeSpan.FromHours(1));
+		TimedSkillMod skillMod = new TimedSkillMod(m_Skill, true, m_Bonus, TimeSpan.FromHours(1));
 		from.AddSkillMod(skillMod);
-		from.SendMessage($"Votre compétence {m_Skill} a été augmentée de {m_Level}% pour 1 heure.");
-
+		from.SendMessage($"Votre compétence {m_Skill} a été augmentée de {m_Bonus:F1}% pour 1 heure.");
 		AddActiveCard(from, m_Skill);
 
 		Timer.DelayCall(TimeSpan.FromHours(1), () =>
@@ -289,8 +298,9 @@ public class SkillCard : Item
 	public override void Serialize(GenericWriter writer)
 	{
 		base.Serialize(writer);
-		writer.Write((int)0); // version
+		writer.Write((int)1); // version
 		writer.Write(m_Level);
+		writer.Write(m_Bonus);
 		writer.Write((int)m_Skill);
 		writer.Write(m_Decrypted);
 	}
@@ -299,7 +309,18 @@ public class SkillCard : Item
 	{
 		base.Deserialize(reader);
 		int version = reader.ReadInt();
-		m_Level = reader.ReadInt();
+
+		if (version >= 1)
+		{
+			m_Level = reader.ReadInt();
+			m_Bonus = reader.ReadDouble();
+		}
+		else
+		{
+			m_Level = reader.ReadInt();
+			m_Bonus = m_Level; // Pour la compatibilité avec l'ancienne version
+		}
+
 		m_Skill = (SkillName)reader.ReadInt();
 		m_Decrypted = reader.ReadBool();
 	}
@@ -309,7 +330,7 @@ public class SkillCard : Item
 		private Mobile m_From;
 		private SkillCard m_Card;
 
-		public DecryptCardEntry(Mobile from, SkillCard card) : base(6216, 3)
+		public DecryptCardEntry(Mobile from, SkillCard card) : base(3006150, 1)
 		{
 			m_From = from;
 			m_Card = card;
@@ -326,7 +347,7 @@ public class SkillCard : Item
 		private Mobile m_From;
 		private SkillCard m_Card;
 
-		public UseCardEntry(Mobile from, SkillCard card) : base(6217, 3)
+		public UseCardEntry(Mobile from, SkillCard card) : base(3006150, 1)
 		{
 			m_From = from;
 			m_Card = card;

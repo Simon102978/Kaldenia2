@@ -13,7 +13,6 @@ namespace Server.Items
             : base(0x4077, amount)
         {
 			Name = "Sang de Dragon";
-			Weight = 0.2;
 			Stackable = true;
         }
 
@@ -21,9 +20,10 @@ namespace Server.Items
             : base(serial)
         {
         }
+		public override double DefaultWeight => 1.0;
 
-        TextDefinition ICommodity.Description => LabelNumber;
-        bool ICommodity.IsDeedable => true;
+		TextDefinition ICommodity.Description => LabelNumber;
+       bool ICommodity.IsDeedable => true;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

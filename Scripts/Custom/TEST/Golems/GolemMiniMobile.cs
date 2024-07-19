@@ -545,7 +545,7 @@ namespace Server.Custom
 			private Mobile m_From;
 			private GolemZyX m_Golem;
 
-			public OpenAttributesGumpEntry(Mobile from, GolemZyX golem) : base(6200, 3)
+			public OpenAttributesGumpEntry(Mobile from, GolemZyX golem) : base(3006150, 1)
 			{
 				m_From = from;
 				m_Golem = golem;

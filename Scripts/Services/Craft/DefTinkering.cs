@@ -223,6 +223,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(MortarPestlePoisoning), "Outils", "Mortier et pilon (Poison)", 15.0, 35.0, typeof(IronIngot), 1044036, 3, 1044037);
 			index = AddCraft(typeof(FletcherTools), "Outils", "Outil fabrication d'arc", 15.0, 35.0, typeof(IronIngot), 1044036, 3, 1044037);
 			index = AddCraft(typeof(ScribesPen), "Outils", "Plume d'écriture", 15.0, 35.0, typeof(IronIngot), 1044036, 3, 1044037);
+			index = AddCraft(typeof(MapmakersPen), "Outils", "Plume de cartographe", 15.0, 35.0, typeof(IronIngot), 1044036, 3, 1044037);
+
 			//index = AddCraft(typeof(SpellsPen), "Outils", "Cristal de compétences", 15.0, 35.0, typeof(IronIngot), 1044036, 3, 1044037);
 			//index = AddCraft(typeof(SoulsPen), "Outils", "Plume de reviviscence", 50.0, 75.0, typeof(IronIngot), 1044036, 3, 1044037);
 			index = AddCraft(typeof(Lockpick), "Outils", "Crochets", 10.0, 30.0, typeof(IronIngot), 1044036, 3, 1044037);

@@ -5745,12 +5745,12 @@ namespace Server.Mobiles
 
             GenerateLoot();
 
-			/*		if (Utility.RandomDouble() < 0.03) // 3% de chance
+					if (Utility.RandomDouble() < 0.01) // 1% de chance
 					{
 						PackItem(new SkillCard());
-					}*/
+					}
 
-			if (Utility.RandomDouble() < 0.1) // 10% de chance, ajustez selon vos besoins
+			if (Utility.RandomDouble() < 0.01) //  1% de chance
 			{
 				Type[] recipeScrolls = CustomRecipeScrollTypes2;
 
@@ -5762,12 +5762,12 @@ namespace Server.Mobiles
                 {
 				    GenerateLootParagon();
 
-					/*		if (Utility.RandomDouble() < 0.10) // 10% de chance
+						if (Utility.RandomDouble() < 0.10) // 10% de chance
 					{
 						PackItem(new SkillCard());
-					}*/
+					}
 
-					if (Utility.RandomDouble() < 0.10) // 10% de chance, ajustez selon vos besoins
+					if (Utility.RandomDouble() < 0.10) // 10% de chance
 					{
 					//	Type[] recipeScrolls = CustomRecipeScrollTypes2;
 

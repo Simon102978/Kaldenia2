@@ -10,7 +10,7 @@ using Server.Network;
 using Server.Multis;
 using Server.Custom;
 
-public class GolemAsh : Item
+public class GolemAsh : Item, ICommodity
 {
 
 	public enum AshType
@@ -36,7 +36,7 @@ public class GolemAsh : Item
 
 
 
-	
+
 
 	[Constructable]
 	public GolemAsh(AshType type) : this(type, 1)
@@ -44,31 +44,34 @@ public class GolemAsh : Item
 	}
 
 	[Constructable]
-	public GolemAsh(AshType type, int Amount) : base(0x0F7C)
+	public GolemAsh(AshType type, int amount) : base(0x0F7C)
 	{
-		Name = "Cendres Élémentaires"; // Name = $"Cendres de {type}";
+		Name = "Cendres Élémentaires";
 		Stackable = true;
 		m_Type = type;
-		//Amount = amount;
+		Amount = amount;
 		Hue = GetHueForType(type);
-		Weight = 1.0;
+		Weight = 0.1;
 	}
 
 	public GolemAsh(Serial serial) : base(serial)
 	{
 	}
-
+	TextDefinition ICommodity.Description => LabelNumber;
+	bool ICommodity.IsDeedable => true;
 	public override void GetProperties(ObjectPropertyList list)
 	{
 		base.GetProperties(list);
 		list.Add($"Type: {m_Type}");
-		//list.Add($"Quantité: {Amount}");
-	}
-
 	
 
+	//list.Add($"Quantité: {Amount}");
+	}
 
-	private int GetHueForType(AshType type)
+
+
+
+private int GetHueForType(AshType type)
 	{
 		switch (type)
 		{
@@ -179,7 +182,6 @@ public class GolemAsh : Item
 		base.Serialize(writer);
 		writer.Write((int)1); // version
 		writer.Write((int)m_Type);
-		writer.Write(Amount);
 	}
 
 	public override void Deserialize(GenericReader reader)
@@ -187,9 +189,15 @@ public class GolemAsh : Item
 		base.Deserialize(reader);
 		int version = reader.ReadInt();
 		m_Type = (AshType)reader.ReadInt();
-		if (version > 0)
-		{
-			Amount = reader.ReadInt();
-		}
 	}
+	public override bool OnDragLift(Mobile from)
+	{
+		return true;
+	}
+
+	
+
+	
+
+	
 }
