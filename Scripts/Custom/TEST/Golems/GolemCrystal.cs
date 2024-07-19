@@ -11,6 +11,178 @@ namespace Server.Custom
 {
 	public class GolemCrystal : Item
 	{
+
+		public class GolemCrystalCitrine : GolemCrystal
+		{
+			[Constructable]
+			public GolemCrystalCitrine() : base(CrystalType.Citrine) { }
+			public GolemCrystalCitrine(Serial serial) : base(serial) { }
+
+			public override void Serialize(GenericWriter writer)
+			{
+				base.Serialize(writer);
+				writer.Write((int)0); // version
+			}
+
+			public override void Deserialize(GenericReader reader)
+			{
+				base.Deserialize(reader);
+				int version = reader.ReadInt();
+			}
+		}
+
+		public class GolemCrystalRubis : GolemCrystal
+		{
+			[Constructable]
+			public GolemCrystalRubis() : base(CrystalType.Rubis) { }
+			public GolemCrystalRubis(Serial serial) : base(serial) { }
+
+			public override void Serialize(GenericWriter writer)
+			{
+				base.Serialize(writer);
+				writer.Write((int)0); // version
+			}
+
+			public override void Deserialize(GenericReader reader)
+			{
+				base.Deserialize(reader);
+				int version = reader.ReadInt();
+			}
+		}
+
+		public class GolemCrystalAmbre : GolemCrystal
+		{
+			[Constructable]
+			public GolemCrystalAmbre() : base(CrystalType.Ambre) { }
+			public GolemCrystalAmbre(Serial serial) : base(serial) { }
+
+			public override void Serialize(GenericWriter writer)
+			{
+				base.Serialize(writer);
+				writer.Write((int)0); // version
+			}
+
+			public override void Deserialize(GenericReader reader)
+			{
+				base.Deserialize(reader);
+				int version = reader.ReadInt();
+			}
+		}
+
+		public class GolemCrystalTourmaline : GolemCrystal
+		{
+			[Constructable]
+			public GolemCrystalTourmaline() : base(CrystalType.Tourmaline) { }
+			public GolemCrystalTourmaline(Serial serial) : base(serial) { }
+
+			public override void Serialize(GenericWriter writer)
+			{
+				base.Serialize(writer);
+				writer.Write((int)0); // version
+			}
+
+			public override void Deserialize(GenericReader reader)
+			{
+				base.Deserialize(reader);
+				int version = reader.ReadInt();
+			}
+		}
+
+		public class GolemCrystalSaphire : GolemCrystal
+		{
+			[Constructable]
+			public GolemCrystalSaphire() : base(CrystalType.Saphire) { }
+			public GolemCrystalSaphire(Serial serial) : base(serial) { }
+
+			public override void Serialize(GenericWriter writer)
+			{
+				base.Serialize(writer);
+				writer.Write((int)0); // version
+			}
+
+			public override void Deserialize(GenericReader reader)
+			{
+				base.Deserialize(reader);
+				int version = reader.ReadInt();
+			}
+		}
+
+		public class GolemCrystalEmeraude : GolemCrystal
+		{
+			[Constructable]
+			public GolemCrystalEmeraude() : base(CrystalType.Emeraude) { }
+			public GolemCrystalEmeraude(Serial serial) : base(serial) { }
+
+			public override void Serialize(GenericWriter writer)
+			{
+				base.Serialize(writer);
+				writer.Write((int)0); // version
+			}
+
+			public override void Deserialize(GenericReader reader)
+			{
+				base.Deserialize(reader);
+				int version = reader.ReadInt();
+			}
+		}
+
+		public class GolemCrystalAmethyste : GolemCrystal
+		{
+			[Constructable]
+			public GolemCrystalAmethyste() : base(CrystalType.Amethyste) { }
+			public GolemCrystalAmethyste(Serial serial) : base(serial) { }
+
+			public override void Serialize(GenericWriter writer)
+			{
+				base.Serialize(writer);
+				writer.Write((int)0); // version
+			}
+
+			public override void Deserialize(GenericReader reader)
+			{
+				base.Deserialize(reader);
+				int version = reader.ReadInt();
+			}
+		}
+
+		public class GolemCrystalSaphireEtoile : GolemCrystal
+		{
+			[Constructable]
+			public GolemCrystalSaphireEtoile() : base(CrystalType.SaphireEtoile) { }
+			public GolemCrystalSaphireEtoile(Serial serial) : base(serial) { }
+
+			public override void Serialize(GenericWriter writer)
+			{
+				base.Serialize(writer);
+				writer.Write((int)0); // version
+			}
+
+			public override void Deserialize(GenericReader reader)
+			{
+				base.Deserialize(reader);
+				int version = reader.ReadInt();
+			}
+		}
+
+		public class GolemCrystalDiamant : GolemCrystal
+		{
+			[Constructable]
+			public GolemCrystalDiamant() : base(CrystalType.Diamant) { }
+			public GolemCrystalDiamant(Serial serial) : base(serial) { }
+
+			public override void Serialize(GenericWriter writer)
+			{
+				base.Serialize(writer);
+				writer.Write((int)0); // version
+			}
+
+			public override void Deserialize(GenericReader reader)
+			{
+				base.Deserialize(reader);
+				int version = reader.ReadInt();
+			}
+		}
+
 		public enum CrystalType
 		{
 			Citrine,
@@ -23,7 +195,10 @@ namespace Server.Custom
 			SaphireEtoile,
 			Diamant
 		}
-
+		public static GolemCrystal CreateCrystal(CrystalType type)
+		{
+			return new GolemCrystal(type);
+		}
 		[CommandProperty(AccessLevel.GameMaster)]
 		public CrystalType Type { get; set; }
 

@@ -140,7 +140,7 @@ namespace Server.Custom
 		private int m_Str, m_Dex, m_Int, m_AR;
 		private Dictionary<SkillName, double> m_Skills;
 
-		[CommandProperty(AccessLevel.GameMaster)]
+		[CommandProperty(AccessLevel.Owner)]
 		public int Percentage { get;  set; }
 
 		public int GetStrength() { return m_Str; }
@@ -153,6 +153,9 @@ namespace Server.Custom
 			get { return m_Skills; }
 			
 		}
+
+
+		
 
 
 		public double GetSkillValue(SkillName skillName)
