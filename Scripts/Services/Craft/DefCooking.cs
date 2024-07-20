@@ -133,7 +133,6 @@ namespace Server.Engines.Craft
 		{
 			int index = -1;
 
-
 			#region Plats réconfortants
 			index = AddCraft(typeof(LesserHitsMaxBuffFood), "Plats réconfortants", "Constitution mineure", 50.0, 65.0, typeof(RawRibs), "Côtes levées crues", 10, "Vous avez besoin de plus de côtes levées crues.");
 			SetNeedOven(index, true);
@@ -171,11 +170,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(BagOfSugar), "Ingrédients secs", "Sac de sucre", 0.0, 20.0, typeof(Sugarcane), "Canne à  sucre", 10, "Vous n'avez pas suffisament de canne à sucre");
 			SetNeedMill(index, true);
 			index = AddCraft(typeof(WheatWort), "Ingrédients secs", "Mout de Blé", 0.0, 20.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
-			AddRes(index, typeof(Pitcher), "Eau", 5, "Vous n'avez pas suffisament d'eau");
+AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
 			index = AddCraft(typeof(Yeast), "Ingrédients secs", "Levure", 0.0, 20.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
-			AddRes(index, typeof(Pitcher), "Eau", 5, "Vous n'avez pas suffisament d'eau");
+AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
 			index = AddCraft(typeof(BrewersYeast), "Ingrédients secs", "Levure à fermentation", 0.0, 20.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
-			AddRes(index, typeof(Pitcher), "Eau", 5, "Vous n'avez pas suffisament d'eau");
+AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
 			index = AddCraft(typeof(DriedOnions), "Ingrédients secs", "Onions Déshydratés", 20.0, 40.0, typeof(Onion), "Onions", 5, 1044253);
 			index = AddCraft(typeof(DriedHerbs), "Ingrédients secs", "Herbes sèches", 20.0, 40.0, typeof(Garlic), "Garlic", 2, 1044253);
 			AddRes(index, typeof(Ginseng), "Ginseng", 2, 1044253);
@@ -193,14 +192,13 @@ namespace Server.Engines.Craft
 			//SetNeedOven(index, true);
 			index = AddCraft(typeof(Batter), "Ingrédients humides", "Mélange à crêpes", 20.0, 60.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
 			AddRes(index, typeof(Eggs), "Oeufs", 1, 1044253);
-			AddRes(index, typeof(Pitcher), "Eau", 2, "Vous n'avez pas suffisament d'eau dans votre pichet");
+			AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253); 
 			index = AddCraft(typeof(Butter), "Ingrédients humides", "Beurre", 20.0, 60.0, typeof(Cream), "Cream", 1, 1044253);
 			////AddRecipe(index, (int)CookRecipesExp.Butter);
 			SetNeedHeat(index, true);
-			index = AddCraft(typeof(Cream), "Ingrédients humides", "Crème", 20.0, 60.0, typeof(Vanilla), "Lait", 1, 1044253);
-			AddRes(index, typeof(Pitcher), 1022544, 1, 1044253);
-			SetBeverageType(index, BeverageType.Milk);
+			index = AddCraft(typeof(Cream), "Ingrédients humides", "Crème", 20.0, 60.0, typeof(BaseBeverage), "Milk", 1, "Vous n'avez pas suffisament de lait");
 			SetNeedHeat(index, true);
+
 			index = AddCraft(typeof(CookingOil), "Ingrédients humides", "Huile d'arachide", 25.0, 60.0, typeof(Peanut), "Peanut", 10, 1044253);
 			////AddRecipe(index, (int)CookRecipesExp.CookingOil);
 			SetNeedHeat(index, true);
@@ -666,7 +664,7 @@ namespace Server.Engines.Craft
 			SetNeedCauldron(index, true);
 			index = AddCraft(typeof(BowlMashedPotatos), "Aliments bouillis", "Bol de patates pilées", 30.0, 65.0, typeof(Potato), "Potato", 5, 1044253);
 			AddRes(index, typeof(Butter), "Butter", 1, 1044253);
-			AddRes(index, typeof(Pitcher), "Milk", 1, 1044253);
+			AddRes(index,typeof(BaseBeverage), "Milk", 1, "Vous n'avez pas suffisament de lait");
 			//AddRecipe(index, (int)CookRecipesExp.BowlMashedPotatos);
 			SetNeedCauldron(index, true);
 			index = AddCraft(typeof(BowlCookedVeggies), "Aliments bouillis", "Bol de légume cuits", 30.0, 65.0, typeof(MixedVegetables), "Mixed Vegetables", 1, 1044253);
