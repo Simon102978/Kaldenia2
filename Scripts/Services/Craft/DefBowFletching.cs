@@ -22,6 +22,20 @@ namespace Server.Engines.Craft
 		SilvanisFeywoodBow = 252,
 		MischiefMaker = 253,
 		TheNightReaper = 254,
+
+		// K2
+		[Description("Arc : Folière")]
+		Foliere = 60001,
+		[Description("Arc : Composite")]
+		Composite = 60002,
+		[Description("Arc : Pieuse")]
+		Pieuse = 60003,
+		[Description("Arbalète : Arbavive")]
+		Arbavive = 60004,
+		[Description("Arbalète : Lumitrait")]
+		Lumitrait = 60005,
+
+
 	}
 	#endregion
 
@@ -160,8 +174,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Sifflecrin), "Arcs", "Sifflecrin", 45.0, 75.0, typeof(PalmierBoard), 1044041, 8, 1044351);
 			index = AddCraft(typeof(Maegie), "Arcs", "Maegie", 45.0, 75.0, typeof(PalmierBoard), 1044041, 8, 1044351);
 			index = AddCraft(typeof(Foliere), "Arcs", "Foliere", 45.0, 75.0, typeof(PalmierBoard), 1044041, 8, 1044351);
+			AddRecipe(index, (int)BowRecipes.Foliere);
 			index = AddCraft(typeof(Composite), "Arcs", "Composite", 50.0, 80.0, typeof(PalmierBoard), 1044041, 8, 1044351);
+			AddRecipe(index, (int)BowRecipes.Composite);
 			index = AddCraft(typeof(Pieuse), "Arcs", "Pieuse", 50.0, 80.0, typeof(PalmierBoard), 1044041, 8, 1044351);
+			AddRecipe(index, (int)BowRecipes.Pieuse);
 			#endregion
 			// Arbalètes	
 			index = AddCraft(typeof(Crossbow), "Arbalètes", "Arbalète simple", 10.0, 40.0, typeof(PalmierBoard), 1044041, 7, 1044351);
@@ -174,7 +191,9 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(ArbaletteLourde), "Arbalètes", "Arbalète à Méchanisme", 40.0, 70.0, typeof(PalmierBoard), 1044041, 7, 1044351);
 			index = AddCraft(typeof(Percemurs), "Arbalètes", "Percemurs", 40.0, 70.0, typeof(PalmierBoard), 1044041, 7, 1044351);
 			index = AddCraft(typeof(Arbavive), "Arbalètes", "Arbavive", 50.0, 80.0, typeof(PalmierBoard), 1044041, 7, 1044351);
+			AddRecipe(index, (int)BowRecipes.Arbavive);
 			index = AddCraft(typeof(Lumitrait), "Arbalètes", "Lumitrait", 50.0, 80.0, typeof(PalmierBoard), 1044041, 10, 1044351);
+			AddRecipe(index, (int)BowRecipes.Lumitrait);
 
 			/*          index = index = AddCraft(typeof(BlightGrippedLongbow), 1044566, 1072907, 75.0, 125.0, typeof(PalmierBoard), 1044041, 20, 1044351);
 					  AddRes(index, typeof(LardOfParoxysmus), 1032681, 1, 1053098);

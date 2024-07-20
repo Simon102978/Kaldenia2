@@ -1699,7 +1699,90 @@ namespace Server.Items
         }
     }
 
-    [FlipableAttribute(0xFBE, 0xFBD)]
+	
+
+	[FlipableAttribute(0xFBE, 0xFBD)]
+	public class LivreSkillsCarpentry : LivreSkills
+	{
+		[Constructable]
+		public LivreSkillsCarpentry() : this(SkillName.Carpentry, 0.0, 0.0) { }
+
+		[Constructable]
+		public LivreSkillsCarpentry(SkillName skill, double value, double growvalue) : base(skill, value, growvalue)
+		{
+			Name = "Étude : Carpentry";
+		}
+
+		public LivreSkillsCarpentry(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[FlipableAttribute(0xFBE, 0xFBD)]
+	public class LivreSkillsEquitation : LivreSkills
+	{
+		[Constructable]
+		public LivreSkillsEquitation() : this(SkillName.Equitation, 0.0, 0.0) { }
+
+		[Constructable]
+		public LivreSkillsEquitation(SkillName skill, double value, double growvalue) : base(skill, value, growvalue)
+		{
+			Name = "Étude : Equitation";
+		}
+
+		public LivreSkillsEquitation(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[FlipableAttribute(0xFBE, 0xFBD)]
+	public class LivreSkillsBotanique : LivreSkills
+	{
+		[Constructable]
+		public LivreSkillsBotanique() : this(SkillName.Botanique, 0.0, 0.0) { }
+
+		[Constructable]
+		public LivreSkillsBotanique(SkillName skill, double value, double growvalue) : base(skill, value, growvalue)
+		{
+			Name = "Étude : Botanique";
+		}
+
+		public LivreSkillsBotanique(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[FlipableAttribute(0xFBE, 0xFBD)]
     public class LivreSkillsMeditation : LivreSkills
     {
         [Constructable]

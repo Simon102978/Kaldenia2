@@ -72,13 +72,13 @@ namespace Server.Mobiles
             SetResistance(ResistanceType.Poison, 40, 50);
             SetResistance(ResistanceType.Energy, 50, 60);
 
-            SetSkill(SkillName.Wrestling, 75.3, 90.5);
+              SetSkill(SkillName.Wrestling, 85.1, 95.0);
             SetSkill(SkillName.Tactics, 75.5, 90.8);
             SetSkill(SkillName.MagicResist, 102.8, 117.9);
             SetSkill(SkillName.Anatomy, 75.5, 90.2);
 
-            Fame = 18000;
-            Karma = -18000;
+            Fame = 8000;
+            Karma = -8000;
 
             SetSpecialAbility(SpecialAbility.LifeDrain);
 		}
@@ -264,13 +264,12 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
         {
-            AddLoot(LootPack.UltraRich, 2);
-            AddLoot(LootPack.ArcanistScrolls);
+        
 		    AddLoot(LootPack.LootItem<Scimitar>());
             AddLoot(LootPack.LootItem<WoodenShield>());
 			AddLoot(LootPack.Bones, Utility.RandomMinMax(3, 5));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
-			AddLoot(LootPack.LootItem<Items.Gold>(250, 400));
+			AddLoot(LootPack.LootItem<Items.Gold>(50, 100));
 
 		}
 

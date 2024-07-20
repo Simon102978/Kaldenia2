@@ -128,9 +128,9 @@ namespace Server.Items
 
             if (from.Skills[SkillName.Lockpicking].Value < lockpickable.RequiredSkill - SkillBonus)
             {
-                /*
+                
                 // Do some training to gain skills
-                from.CheckSkill( SkillName.Lockpicking, 0, lockpickable.LockLevel );*/
+                from.CheckSkill( SkillName.Lockpicking, 0, lockpickable.LockLevel );
                 // The LockLevel is higher thant the LockPicking of the player
                 item.SendLocalizedMessageTo(from, 502072); // You don't see how that lock can be manipulated.
                 return;

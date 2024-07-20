@@ -411,6 +411,11 @@ namespace Server.Items
 			//		case "Stealth": m_Skill = SkillName.Stealth; break;
 					case "RemoveTrap": m_Skill = SkillName.RemoveTrap; break;
 					case "Necromancy": m_Skill = SkillName.Necromancy; break;
+					case "Concentration": m_Skill = SkillName.Concentration; break;
+					case "Equitation": m_Skill = SkillName.Equitation; break;
+					case "Botanique": m_Skill = SkillName.Botanique; break;
+
+
 				}
 			}
 

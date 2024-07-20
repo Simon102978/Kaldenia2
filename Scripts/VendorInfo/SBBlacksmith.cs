@@ -196,7 +196,7 @@ namespace Server.Mobiles
                 Add(typeof(Katana), 6);
                 Add(typeof(Kryss), 6);
                 Add(typeof(Longsword), 7);
-                Add(typeof(Scimitar), 8);
+                Add(typeof(Scimitar), 3);
                 Add(typeof(VikingSword), 7);
             }
         }

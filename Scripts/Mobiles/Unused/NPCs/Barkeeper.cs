@@ -21,6 +21,9 @@ namespace Server.Mobiles
         public override VendorShoeType ShoeType => Utility.RandomBool() ? VendorShoeType.ThighBoots : VendorShoeType.Boots;
         protected override List<SBInfo> SBInfos => m_SBInfos;
 
+        public override bool NightExempt => true;
+
+
         public override void InitSBInfo()
         {
             m_SBInfos.Add(new SBBarkeeper());

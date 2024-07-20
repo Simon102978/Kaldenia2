@@ -56,9 +56,12 @@ namespace Server.Mobiles
 			Hue = 1667;
 
 			SetStr(208, 319);
-            SetInt(45, 91);
+            SetDex(126, 145);
+            SetInt(276, 305);
 
             SetHits(200, 300);
+
+			SetDamage(15, 20);
 
         	SetDamageType(ResistanceType.Physical, 10);
             SetDamageType(ResistanceType.Cold, 40);
@@ -277,12 +280,12 @@ namespace Server.Mobiles
 		public override void GenerateLoot()
         {
 
-            AddLoot(LootPack.MedScrolls, 2);
+            AddLoot(LootPack.MedScrolls, 1);
             AddLoot(LootPack.NecroRegs, 100, 200);
 			AddLoot(LootPack.BodyPartsAndBones, Utility.RandomMinMax(3, 5));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
-	  		AddLoot(LootPack.FilthyRich, 2);
-			AddLoot(LootPack.LootItem<Items.Gold>(250, 400));
+	  		AddLoot(LootPack.Rich, 2);
+			AddLoot(LootPack.LootItem<Items.Gold>(50, 100));
 		}
 
         public override void Serialize(GenericWriter writer)

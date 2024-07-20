@@ -51,9 +51,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.Rich);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 7));
-        }
+			PackItem(new GolemAsh(GolemAsh.AshType.Sang, Utility.RandomMinMax(0, 5)));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

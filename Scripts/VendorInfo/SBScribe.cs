@@ -49,7 +49,7 @@ namespace Server.Mobiles
             Add(typeof(BrownBook), 2);
             Add(typeof(TanBook), 2);
 			Add(typeof(BlueBook), 2);
-            Add(typeof(BlankScroll), 1);
+            Add(typeof(BlankScroll), 2);
         }
     }
 }

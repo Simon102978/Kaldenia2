@@ -233,35 +233,71 @@ namespace Server.Items.Crops
 			public Weeds( Mobile sower ) : base( Utility.RandomList( 0xCAD, 0xCAE, 0xCAF ) )
 			{
 				Movable = false;
-				Name = "Weed";
+				Name = "Mauvaise Herbe";
 				m_sower = sower;
                 planted = DateTime.UtcNow;
 			}
 			public override void OnDoubleClick(Mobile from)
 			{
-				if ( from.Mounted && !CropHelper.CanWorkMounted )
+				if (from.Mounted && !CropHelper.CanWorkMounted)
 				{
-					from.SendMessage( "Vous ne pouvez pas arracher un plant lorsque vous êtes sur votre monture." );
+					from.SendMessage("Vous ne pouvez pas arracher un plant lorsque vous êtes sur votre monture.");
 					return;
 				}
-				if ( from.InRange( this.GetWorldLocation(), 1 ) )
+
+				if (from.InRange(this.GetWorldLocation(), 1))
 				{
-                    if ((from == m_sower) || (DateTime.UtcNow >= planted.AddDays(3)))
+					from.Direction = from.GetDirectionTo(this);
+					from.Animate(from.Mounted ? 29 : 32, 5, 1, true, false, 0);
+
+					// Vérification du skill en botanique
+					double skill = from.Skills[SkillName.Botanique].Value;
+					double chance = skill / 100.0; // 100 en botanique = 100% de chance
+
+					// Perte d'endurance de base
+					int staminaLoss = 5;
+
+					if (Utility.RandomDouble() <= chance)
 					{
-						from.Direction = from.GetDirectionTo( this );
-						from.Animate( from.Mounted ? 29:32, 5, 1, true, false, 0 );
-						from.SendMessage("Vous retirez le plant.");
-						DandelionSeed fruit = new DandelionSeed();
-						from.AddToBackpack( fruit );
+						from.SendMessage("Vous retirez le plant avec succès.");
+						DandelionSeed fruit = new DandelionSeed(Utility.RandomMinMax(0, 1));
+						FertileDirt terre = new FertileDirt(Utility.RandomMinMax(0, 1));
+						Sand sable = new Sand(Utility.RandomMinMax(0, 1));
+
+
+						from.AddToBackpack(fruit);
+						from.AddToBackpack(terre);
+						from.AddToBackpack(sable);
+
 						this.Delete();
+
+						// Gain de compétence
+						from.CheckSkill(SkillName.Botanique, 0, 100);
 					}
-					else from.SendMessage("L'herbe est encore trop dure à arracher.");
+					else
+					{
+						from.SendMessage("Vous n'avez pas réussi à retirer la mauvaise herbe correctement.");
+						// Perte d'endurance supplémentaire en cas d'échec
+						staminaLoss += 5;
+					}
+
+					// Application de la perte d'endurance
+					from.Stam -= staminaLoss;
+					from.SendMessage($"Vous forcez mais en vain. Vous perdez {staminaLoss} de Stamina");
+
+					// Vérification si le joueur est épuisé
+					if (from.Stam == 0)
+					{
+						from.SendMessage("Vous êtes épuisé et devez vous reposer avant de continuer.");
+					}
 				}
 				else
 				{
-					from.SendMessage( "Vous êtes trop loin pour récolter quelque chose." );
+					from.SendMessage("Vous êtes trop loin pour récolter quelque chose.");
 				}
 			}
+
+
 
 			public Weeds( Serial serial ) : base( serial ) { }
 

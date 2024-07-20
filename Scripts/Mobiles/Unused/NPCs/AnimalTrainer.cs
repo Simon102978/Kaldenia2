@@ -31,6 +31,8 @@ namespace Server.Mobiles
 
         protected override List<SBInfo> SBInfos => m_SBInfos;
         public override VendorShoeType ShoeType => Female ? VendorShoeType.ThighBoots : VendorShoeType.Boots;
+        public override bool NightExempt => true;
+
 
         public override void InitSBInfo()
         {

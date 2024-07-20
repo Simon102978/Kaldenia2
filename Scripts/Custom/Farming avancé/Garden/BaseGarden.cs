@@ -236,8 +236,9 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(0); // version
-
+            writer.Write(1); // version
+            
+            writer.Write(m_Public);
             writer.Write(Price);
             writer.Write(Sign);
             writer.Write(BuiltOn);
@@ -256,6 +257,11 @@ namespace Server.Items
 
             switch (version)
             {
+                    case 1:
+                    {
+                        m_Public = reader.ReadBool();
+                        goto case 0;
+                    }
                     case 0:
                     {
                        Price = reader.ReadInt();

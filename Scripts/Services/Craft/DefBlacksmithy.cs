@@ -58,6 +58,26 @@ namespace Server.Engines.Craft
 		// doom
 		BritchesOfWarding = 355,
 		GlovesOfFeudalGrip = 356,
+
+		//K2
+		[Description("Forge")]
+		ForgeCust = 80011,
+		[Description("Enclume")]
+		EnclumeCust = 80010,
+
+		[Description("Coffre Fort")]
+		CoffreFort = 80003,
+		[Description("Coffre Metal Visqueux")]
+		CoffreMetalVisqueux = 80004,
+
+		[Description("Coffre Metal Rouillé")]
+		CoffreMetalRouille = 80005,
+		[Description("Coffre Metal Doré")]
+		CoffreMetalDore = 80006,
+
+
+	
+
 	}
 	#endregion
 
@@ -580,31 +600,49 @@ namespace Server.Engines.Craft
 			#endregion
 
 			#region "Divers"
-			AddCraft(typeof(IronIngotResourceCrate), "Divers", "Caisse de ressource", 10.0, 60.0, typeof(IronIngot), 1044036, 150, 1044037);
+			index = AddCraft(typeof(IronIngotResourceCrate), "Divers", "Caisse de ressource", 10.0, 60.0, typeof(IronIngot), 1044036, 150, 1044037);
 
-			AddCraft(typeof(Cannonball), "Divers", "Boulet de Canon", 10.0, 60.0, typeof(IronIngot), 1044036, 5, 1044037);
-			AddCraft(typeof(Grapeshot), "Divers", "Boulet Avancé", 15.0, 70.0, typeof(IronIngot), 1044036, 5, 1044037);
+			index = AddCraft(typeof(Cannonball), "Divers", "Boulet de Canon", 10.0, 60.0, typeof(IronIngot), 1044036, 5, 1044037);
+			index = AddCraft(typeof(Grapeshot), "Divers", "Boulet Avancé", 15.0, 70.0, typeof(IronIngot), 1044036, 5, 1044037);
 			AddRes(index, typeof(Cloth), 1044286, 2, 1044287);
-			AddCraft(typeof(LightShipCannonDeed), "Divers", "Canon Léger", 75.0, 110.0, typeof(IronIngot), 1044036, 500, 1044037);
-			AddCraft(typeof(HeavyShipCannonDeed), "Divers", "Canon Lourd", 90.0, 110.0, typeof(IronIngot), 1044036, 800, 1044037);
-			AddCraft(typeof(Ancre), "Divers", "Ancre", 90.0, 110.0, typeof(IronIngot), 1044036, 15, 1044037);
-			AddCraft(typeof(CoffreFort), "Divers", "Coffre Fort", 80.0, 115.0, typeof(IronIngot), 1044036, 25, 1044037);
+			index = AddCraft(typeof(LightShipCannonDeed), "Divers", "Canon Léger", 75.0, 110.0, typeof(IronIngot), 1044036, 500, 1044037);
+			index = AddCraft(typeof(HeavyShipCannonDeed), "Divers", "Canon Lourd", 90.0, 110.0, typeof(IronIngot), 1044036, 800, 1044037);
+			index = AddCraft(typeof(Ancre), "Divers", "Ancre", 90.0, 110.0, typeof(IronIngot), 1044036, 15, 1044037);
+			index = AddCraft(typeof(CoffreFort), "Divers", "Coffre Fort", 80.0, 115.0, typeof(IronIngot), 1044036, 25, 1044037);
+			AddRecipe(index, (int)SmithRecipes.CoffreFort);
 
-			AddCraft(typeof(AnvilEastDeed), "Divers", "Enclume (Est)", 52.0, 100.0, typeof(IronIngot), "Fer", 100, "Vous n'avez pas suffisament de lingot de Fer");
 
-			AddCraft(typeof(AnvilSouthDeed), "Divers", "Enclume (Sud)", 52.0, 100.0, typeof(IronIngot), "Fer", 100, "Vous n'avez pas suffisament de lingot de Fer");
+			index = AddCraft(typeof(AnvilEastDeed), "Divers", "Enclume (Est)", 52.0, 100.0, typeof(IronIngot), "Fer", 100, "Vous n'avez pas suffisament de lingot de Fer");
+			//AddRecipe(index, (int)SmithRecipes.EnclumeCust);
 
-			AddCraft(typeof(SmallForgeDeed), "Divers", "Petite Forge", 52.0, 100.0, typeof(IronIngot), "Fer", 150, "Vous n'avez pas suffisament de lingot de Fer");
+
+			index = AddCraft(typeof(AnvilSouthDeed), "Divers", "Enclume (Sud)", 52.0, 100.0, typeof(IronIngot), "Fer", 100, "Vous n'avez pas suffisament de lingot de Fer");
+			//AddRecipe(index, (int)SmithRecipes.EnclumeCust);
+
+
+			index = AddCraft(typeof(SmallForgeDeed), "Divers", "Petite Forge", 52.0, 100.0, typeof(IronIngot), "Fer", 150, "Vous n'avez pas suffisament de lingot de Fer");
+			//AddRecipe(index, (int)SmithRecipes.ForgeCust);
+
 
 			index = AddCraft(typeof(CoffreMetalVisqueux), "Divers", "Coffre Métal Visqueux", 55.0, 85.0, typeof(IronIngot), "Fer", 30, "Vous n'avez pas suffisament de lingot de Fer");
+			AddRecipe(index, (int)SmithRecipes.CoffreMetalVisqueux);
+
 
 			index = AddCraft(typeof(CoffreMetalRouille), "Divers", "Coffre Métal Rouillé", 60.0, 90.0, typeof(IronIngot), "Fer", 30, "Vous n'avez pas suffisament de lingot de Fer");
+			AddRecipe(index, (int)SmithRecipes.CoffreMetalRouille);
+
 
 			index = AddCraft(typeof(CoffreMetalDore), "Divers", "Coffre Metal Doré", 65.0, 95.0, typeof(IronIngot), "Fer", 30, "Vous n'avez pas suffisament de lingot de Fer");
+			AddRecipe(index, (int)SmithRecipes.CoffreMetalDore);
 
-			AddCraft(typeof(LargeForgeEastDeed), "Divers", "Grande Forge (Est)", 72.0, 120.0, typeof(IronIngot), "Fer", 200, "Vous n'avez pas suffisament de lingot de Fer");
 
-			AddCraft(typeof(LargeForgeSouthDeed), "Divers", "Grande Forge (Sud)", 72.0, 120.0, typeof(IronIngot), "Fer", 200, "Vous n'avez pas suffisament de lingot de Fer");
+			index = AddCraft(typeof(LargeForgeEastDeed), "Divers", "Grande Forge (Est)", 72.0, 120.0, typeof(IronIngot), "Fer", 200, "Vous n'avez pas suffisament de lingot de Fer");
+			//AddRecipe(index, (int)SmithRecipes.ForgeCust);
+
+
+			index = AddCraft(typeof(LargeForgeSouthDeed), "Divers", "Grande Forge (Sud)", 72.0, 120.0, typeof(IronIngot), "Fer", 200, "Vous n'avez pas suffisament de lingot de Fer");
+			//AddRecipe(index, (int)SmithRecipes.ForgeCust);
+
 			#endregion
 
 			#region Alliages

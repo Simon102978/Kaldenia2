@@ -8,8 +8,6 @@ namespace Server.Items
 
         public virtual Perfume Perfume { get { return new Perfume(); } }
 
-
-        [Constructable]
         public BasePerfumePotion()
             : base(0xF06, PotionEffect.Perfume)
         {
@@ -691,4 +689,6 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
+
+    
 }

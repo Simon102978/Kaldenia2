@@ -42,6 +42,22 @@ namespace Server.Engines.Craft
 
 		KotlBlackRod = 170,
 		KotlAutomaton = 171,
+
+		// K2
+		[Description("Coffre Maritime")]
+		CoffreMaritime = 50001,
+		[Description("Grand Coffre")]
+		FinishedWoodenChest = 50002,
+		[Description("poulailler")]
+		ChickenCoop = 50003,
+		[Description("Poteau avec Chaine")]
+		PoteauChaine = 50004,
+		[Description("Tête de Licorne empaillée")]
+		MountedDreadHorn = 50005,
+
+
+
+
 	}
 	#endregion
 
@@ -144,35 +160,26 @@ namespace Server.Engines.Craft
 
 
 			#region Divers
-			index = AddCraft(typeof(PalmierWoodResourceCrate), "Divers", "Caisse de ressource de bois", 10.0, 60.0, typeof(PalmierBoard), 1044041, 150, 1044351);
 
+		
+
+			
+			index = AddCraft(typeof(MatchLight), "Divers", "Allumettes", 0.0, 30.0, typeof(Kindling), "Petit Bois", 1, "Vous n'avez pas assez de petit bois.");
 			index = AddCraft(typeof(BacVide), "Divers", "Bac Vide", 00.0, 20.0, typeof(PalmierBoard), 1044041, 3, 1044351);
+			index = AddCraft(typeof(PalmierWoodResourceCrate), "Divers", "Caisse de ressource de bois", 10.0, 60.0, typeof(PalmierBoard), 1044041, 150, 1044351);
 			index = AddCraft(typeof(BarrelStaves), "Divers", "Douve de Tonneau", 10, 30.0, typeof(PalmierBoard), 1044041, 5, 1044351);
 			index = AddCraft(typeof(BarrelLid), "Divers", "Couvercle de Tonneau", 10, 30.0, typeof(PalmierBoard), 1044041, 4, 1044351);
 			index = AddCraft(typeof(BarrelHoops), "Divers", "Cercles de Tonneau", 10, 30.0, typeof(IronIngot), 1044036, 5, 1044037);
-
+			index = AddCraft(typeof(LargeFishingPole), "Divers", "Canne à pêche", 10.0, 30.0, typeof(PalmierBoard), 1044041, 5, 1044351); //This is in the categor of Other during AoS
+			AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
+			index = AddCraft(typeof(PipeCourte), "Divers", "Pipe Courte ", 20.0, 40.0, typeof(PalmierBoard), "Planches", 2, "Vous n'avez pas assez de planche.");
+			index = AddCraft(typeof(PipeLongue), "Divers", "Pipe Longue", 25.0, 45.0, typeof(PalmierBoard), "Planches", 2, "Vous n'avez pas assez de planche.");
+			index = AddCraft(typeof(PipeCourbee), "Divers", "Pipe Courbée", 30.0, 50.0, typeof(PalmierBoard), "Planches", 2, "Vous n'avez pas assez de planche.");
 			index = AddCraft(typeof(Keg), "Divers", "Tonnelet", 40, 60, typeof(BarrelStaves), "Douve de Tonneau", 3, 1044253);
 			AddRes(index, typeof(BarrelHoops), "Cercles de Tonneau", 1, 1044253);
 			AddRes(index, typeof(BarrelLid), "Couvercle de Tonneau", 1, 1044253);
 			ForceNonExceptional(index);
-
-			index = AddCraft(typeof(LiquorBarrel), "Divers", "Tonneau d'alcool", 55.0, 75.0, typeof(BarrelStaves), "Douve de Tonneau", 4, 1044253);
-			AddRes(index, typeof(BarrelHoops), "Cercles de Tonneau", 2, 1044253);
-			AddRes(index, typeof(BarrelLid), "Couvercle de Tonneau", 1, 1044253);
-			ForceNonExceptional(index);
-
-			index = AddCraft(typeof(Watertub), "Divers", "Tonneau d'eau", 55.0, 75.0, typeof(BarrelStaves), "Douve de Tonneau", 4, 1044253);
-			AddRes(index, typeof(BarrelHoops), "Cercles de Tonneau", 2, 1044253);
-			AddRes(index, typeof(BarrelLid), "Couvercle de Tonneau", 1, 1044253);
-			ForceNonExceptional(index);
 			index = AddCraft(typeof(ShortMusicStandLeft), "Divers", "Petit lutrin", 45.0, 65.0, typeof(PalmierBoard), 1044041, 15, 1044351);
-			index = AddCraft(typeof(TallMusicStandLeft), "Divers", "Grand lutrin", 60.0, 80.0, typeof(PalmierBoard), 1044041, 20, 1044351);
-			index = AddCraft(typeof(ElvenPodium), "Divers", "Lutrin simple", 80.0, 100.0, typeof(PalmierBoard), 1044041, 20, 1044351);
-			index = AddCraft(typeof(EasleSouth), "Divers", "Chevalet", 65.0, 85.0, typeof(PalmierBoard), 1044041, 20, 1044351);
-			index = AddCraft(typeof(PlayerBBEast), "Divers", "Tableau d'affichage (E)", 60.0, 80.0, typeof(PalmierBoard), 1044041, 50, 1044351);
-			AddRes(index, typeof(BlankScroll), "Parchemin Vierge", 30, "Vous n'avez pas suffisament de parchemin vierge");
-			index = AddCraft(typeof(PlayerBBSouth), "Divers", "Tableau d'affichage (S)", 60.0, 80.0, typeof(PalmierBoard), 1044041, 50, 1044351);
-			AddRes(index, typeof(BlankScroll), "Parchemin Vierge", 30, "Vous n'avez pas suffisament de parchemin vierge");
 
 			index = AddCraft(typeof(TrainingDummyEastDeed), "Divers", "Mannequin d'entrainement (E)", 50.0, 70.0, typeof(PalmierBoard), 1044041, 55, 1044351);
 			AddRes(index, typeof(Cloth), 1044286, 60, 1044287);
@@ -182,12 +189,26 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Cloth), 1044286, 60, 1044287);
 			index = AddCraft(typeof(PickpocketDipSouthDeed), "Divers", "Mannequin de vol à la tir (S)", 50.0, 70.0, typeof(PalmierBoard), 1044041, 65, 1044351);
 			AddRes(index, typeof(Cloth), 1044286, 60, 1044287);
-			index = AddCraft(typeof(LargeFishingPole), "Divers", "Canne à pêche", 10.0, 30.0, typeof(PalmierBoard), 1044041, 5, 1044351); //This is in the categor of Other during AoS
-			AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
-			index = AddCraft(typeof(PipeCourbee), "Divers", "Pipe Courbée", 30.0, 50.0, typeof(PalmierBoard), "Planches", 2, "Vous n'avez pas assez de planche.");
-			index = AddCraft(typeof(PipeCourte), "Divers", "Pipe Courte ", 20.0, 40.0, typeof(PalmierBoard), "Planches", 2, "Vous n'avez pas assez de planche.");
-			index = AddCraft(typeof(PipeLongue), "Divers", "Pipe Longue", 25.0, 45.0, typeof(PalmierBoard), "Planches", 2, "Vous n'avez pas assez de planche.");
-			index = AddCraft(typeof(MatchLight), "Divers", "Allumettes", 0.0, 30.0, typeof(Kindling), "Petit Bois", 1, "Vous n'avez pas assez de petit bois.");
+			index = AddCraft(typeof(LiquorBarrel), "Divers", "Tonneau d'alcool", 55.0, 75.0, typeof(BarrelStaves), "Douve de Tonneau", 4, 1044253);
+			AddRes(index, typeof(BarrelHoops), "Cercles de Tonneau", 2, 1044253);
+			AddRes(index, typeof(BarrelLid), "Couvercle de Tonneau", 1, 1044253);
+			ForceNonExceptional(index);
+
+			index = AddCraft(typeof(Watertub), "Divers", "Tonneau d'eau", 55.0, 75.0, typeof(BarrelStaves), "Douve de Tonneau", 4, 1044253);
+			AddRes(index, typeof(BarrelHoops), "Cercles de Tonneau", 2, 1044253);
+			AddRes(index, typeof(BarrelLid), "Couvercle de Tonneau", 1, 1044253);
+			ForceNonExceptional(index);
+			index = AddCraft(typeof(PlayerBBEast), "Divers", "Tableau d'affichage (E)", 60.0, 80.0, typeof(PalmierBoard), 1044041, 50, 1044351);
+			AddRes(index, typeof(BlankScroll), "Parchemin Vierge", 30, "Vous n'avez pas suffisament de parchemin vierge");
+			index = AddCraft(typeof(PlayerBBSouth), "Divers", "Tableau d'affichage (S)", 60.0, 80.0, typeof(PalmierBoard), 1044041, 50, 1044351);
+			AddRes(index, typeof(BlankScroll), "Parchemin Vierge", 30, "Vous n'avez pas suffisament de parchemin vierge");
+			index = AddCraft(typeof(TallMusicStandLeft), "Divers", "Grand lutrin", 60.0, 80.0, typeof(PalmierBoard), 1044041, 20, 1044351);
+			index = AddCraft(typeof(EasleSouth), "Divers", "Chevalet", 65.0, 85.0, typeof(PalmierBoard), 1044041, 20, 1044351);
+			index = AddCraft(typeof(ElvenPodium), "Divers", "Lutrin simple", 80.0, 100.0, typeof(PalmierBoard), 1044041, 20, 1044351);
+
+
+
+
 			#endregion Divers
 
 
@@ -257,10 +278,13 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GildedWoodenChest), "Caisses et coffres", "Grand coffre renforcé", 50.0, 80.0, typeof(PalmierBoard), 1044041, 30, 1044351);
 			index = AddCraft(typeof(WoodenFootLocker), "Caisses et coffres", "Coffre à chaussures", 50.0, 80.0, typeof(PalmierBoard), 1044041, 30, 1044351);
 			index = AddCraft(typeof(CoffreMaritime), "Caisses et coffres", "Coffre Maritime", 60.0, 90.0, typeof(PalmierBoard), 1044041, 40, 1044351);
+			AddRecipe(index, (int)CarpRecipes.CoffreMaritime);
 
 
 
 			index = AddCraft(typeof(FinishedWoodenChest), "Caisses et coffres", "Grand coffre", 70.0, 90.0, typeof(PalmierBoard), 1044041, 30, 1044351);
+			AddRecipe(index, (int)CarpRecipes.FinishedWoodenChest);
+
 
 			index = AddCraft(typeof(OrnateElvenChestSouthDeed), "Caisses et coffres", "Coffre elfique orné (S)", 90.0, 115.0, typeof(PalmierBoard), 1044041, 40, 1044351);
 			ForceNonExceptional(index);
@@ -400,6 +424,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Paravent), "Décorations", "Paravent de bois", 60.0, 80.0, typeof(PalmierBoard), 1044041, 50, 1044351);
 			index = AddCraft(typeof(Incubator), "Décorations", "Présentoir", 60.0, 115.0, typeof(PalmierBoard), 1044041, 100, 1044351);
 			index = AddCraft(typeof(ChickenCoop), "Décorations", "Poulailler", 60.0, 115.0, typeof(PalmierBoard), 1044041, 150, 1044351);
+			AddRecipe(index, (int)CarpRecipes.ChickenCoop);
 
 
 			index = AddCraft(typeof(DartBoardSouthDeed), "Décorations", "Jeu de dards (S)", 20.0, 40.0, typeof(PalmierBoard), 1044041, 5, 1044351);
@@ -410,6 +435,8 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(PoteauChaine), "Décorations", "Poteau avec Chaine", 90.0, 115.0, typeof(PalmierBoard), 1044041, 10, 1044351);
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 3, "Vous n'avez pas suffisament de lingot de fer");
+			AddRecipe(index, (int)CarpRecipes.PoteauChaine);
+
 			#endregion Decoration
 
 			#region Statues et Trophées
@@ -421,6 +448,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(SquirrelStatueEastDeed), "Statues et trophés", "L'Écureuil (E)", 50.0, 70.0, typeof(PalmierBoard), 1044041, 250, 1044351);
 			index = AddCraft(typeof(GiantReplicaAcorn), "Statues et trophés", "Gland géant sculpté", 80.0, 105.0, typeof(PalmierBoard), 1044041, 35, 1044351);
 			index = AddCraft(typeof(MountedDreadHorn), "Statues et trophés", "Tête de licorne sculptée", 90.0, 115.0, typeof(PalmierBoard), 1044041, 50, 1044351);
+			AddRecipe(index, (int)CarpRecipes.MountedDreadHorn);
+
 			#endregion
 			#region Grands Outils
 			index = AddCraft(typeof(SewingMachineDeed), "Grands outils", "Machine à Coudre", 40.0, 60.0, typeof(PalmierBoard), 1044041, 30, 1044351);

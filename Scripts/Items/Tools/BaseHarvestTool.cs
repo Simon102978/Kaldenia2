@@ -145,7 +145,7 @@ namespace Server.Items
 
         public static void AddContextMenuEntries(Mobile from, Item item, List<ContextMenuEntry> list, HarvestSystem system)
         {
-            if (system != Mining.System)
+            if (system != CustomMining.GeneralSystem)
                 return;
 
             if (!item.IsChildOf(from.Backpack) && item.Parent != from)

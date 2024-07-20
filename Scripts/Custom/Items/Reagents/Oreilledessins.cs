@@ -4,7 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
-    public class SsinsEar : BaseReagent
+    public class SsinsEar : BaseReagent, ICommodity
     {
         [Constructable]
         public SsinsEar() : this(1)
@@ -16,6 +16,7 @@ namespace Server.Items
         {
             Hue = 2833;
             Name = "Oreille de Ssins";
+			Stackable = true;
 			
 		}
 
@@ -23,9 +24,12 @@ namespace Server.Items
         {
         }
 
-       
+		public override double DefaultWeight => 1.0;
 
-        public override void Serialize(GenericWriter writer)
+		TextDefinition ICommodity.Description => LabelNumber;
+		bool ICommodity.IsDeedable => true;
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 

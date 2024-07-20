@@ -45,38 +45,50 @@ namespace Server.Engines.Craft
             m_Tool = tool;
             m_Page = page;
 
+               
+
             CraftContext context = craftSystem.GetContext(from);
+
+               
 
             if (list.Count == 0)
             {
+
+
                 if (context != null && context.LastGroupIndex > -1)
                 {                  
                     CraftGroupCol craftGroupCol = m_CraftSystem.CraftGroups;
                     CraftGroup craftGroup = craftGroupCol.GetAt(context.LastGroupIndex);
 
-                    if (craftGroup == null)
-                        return;
-
-                    CraftItemCol craftItemCol = craftGroup.CraftItems;
-
-                    foreach (CraftItem item1 in craftItemCol)
+                    if (craftGroup != null)
                     {
-                        if (item1.CanSee(from, m_CraftSystem))
+                        CraftItemCol craftItemCol = craftGroup.CraftItems;
+
+                        foreach (CraftItem item1 in craftItemCol)
                         {
-                            m_list.Add(item1);
+                            if (item1.CanSee(from, m_CraftSystem))
+                            {
+                                m_list.Add(item1);
+                            }
                         }
+
                     }
-                }   
+
+                           
+                }  
+
             }
             else
             {
                 m_list = list;
             }   
 
-           
+            
+
             from.CloseGump(typeof(CraftGump));
             from.CloseGump(typeof(CraftGumpItem));
 
+          
             AddPage(0);
 
             AddBackground(0, 0, 830, 537, 5120); //5054
@@ -686,24 +698,37 @@ namespace Server.Engines.Craft
                         if (context == null)
                             break;
 
-                        int groupIndex = context.LastGroupIndex;
 
-                        if (groupIndex >= 0 && groupIndex < groups.Count)
+
+                       if (index >= 0 && index < m_list.Count)
+                                m_From.SendGump(new CraftGumpItem(m_From, system, m_list[index], m_Tool));
+
+                //        int groupIndex = context.LastGroupIndex;
+
+
+
+     /*                 if (groupIndex >= 0 && groupIndex < groups.Count)
                         {
                             CraftGroup group = groups.GetAt(groupIndex);
 
                             if (index >= 0 && index < group.CraftItems.Count)
                                 m_From.SendGump(new CraftGumpItem(m_From, system, group.CraftItems.GetAt(index), m_Tool));
-                        }
+                        }*/
 
                         break;
                     }
                 case 3: // Create item (last 10)
                     {
+                        
+
                         if (context == null)
                             break;
 
+                      
+
                         List<CraftItem> lastTen = context.Items;
+
+                     
 
                         if (index >= 0 && index < lastTen.Count)
                             CraftItem(lastTen[index]);
@@ -712,10 +737,13 @@ namespace Server.Engines.Craft
                     }
                 case 4: // Item details (last 10)
                     {
+
                         if (context == null)
                             break;
 
                         List<CraftItem> lastTen = context.Items;
+
+
 
                         if (index >= 0 && index < lastTen.Count)
                             m_From.SendGump(new CraftGumpItem(m_From, system, lastTen[index], m_Tool));

@@ -54,25 +54,25 @@ namespace Server.Items
 
         public void ScaleUses()
         {
-            m_UsesRemaining = (m_UsesRemaining * GetUsesScalar()) / 100;
+            m_UsesRemaining = m_UsesRemaining * GetUsesScalar() ;  
             InvalidateProperties();
         }
 
         public void UnscaleUses()
         {
-            m_UsesRemaining = (m_UsesRemaining * 100) / GetUsesScalar();
+            m_UsesRemaining = (m_UsesRemaining) / GetUsesScalar();
         }
 
 		public int GetUsesScalar()
 		{
 			if (m_Quality == ItemQuality.Exceptional)
-				return 200;
+				return 3;
 			else if (m_Quality == ItemQuality.Epic)
-				return 300;
+				return 6;
 			else if (m_Quality == ItemQuality.Legendary)
-				return 400;
+				return 8;
 
-			return 100;
+			return 1;
 		}
 		#endregion
 
@@ -359,12 +359,25 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public ItemQuality Quality
         {
-            get { return m_Quality; }
-            set
-            {
-                UnscaleDurability();
+			get { return m_Quality; }
+			set
+			{              
+               	UnscaleDurability();
                 UnscaleUses();
-                m_Quality = value;
+
+				m_Quality = value;
+
+				if (Quality == ItemQuality.Legendary)
+					Attributes.WeaponDamage = 60;
+				else if (Quality == ItemQuality.Epic)
+					Attributes.WeaponDamage = 40;
+				else if (Quality == ItemQuality.Exceptional)
+					Attributes.WeaponDamage = 20;
+                else 
+                    Attributes.WeaponDamage = 0;
+
+
+			
                 ScaleDurability();
                 ScaleUses();
                 InvalidateProperties();
@@ -665,11 +678,11 @@ namespace Server.Items
 		public void ScaleWeaponDamage()
 		{
 			if (m_Quality == ItemQuality.Legendary)
-				Attributes.WeaponDamage = 100;
-			else if (m_Quality == ItemQuality.Epic)
 				Attributes.WeaponDamage = 60;
+			else if (m_Quality == ItemQuality.Epic)
+				Attributes.WeaponDamage = 40;
 			else if (m_Quality == ItemQuality.Exceptional)
-				Attributes.WeaponDamage = 30;
+				Attributes.WeaponDamage = 20;
 
 			CraftResourceInfo info = CraftResources.GetInfo(m_Resource);
 
@@ -4340,14 +4353,11 @@ namespace Server.Items
 
             m_AosSkillBonuses = new AosSkillBonuses(this);
 
-            if (this is ITool)
-            {
-                m_UsesRemaining = Utility.RandomMinMax(25, 75);
-            }
-            else
-            {
-                m_UsesRemaining = 150;
-            }
+          
+            m_UsesRemaining = Utility.RandomMinMax(25, 75);
+          
+
+
         }
 
         public BaseWeapon(Serial serial)
@@ -5416,15 +5426,15 @@ namespace Server.Items
 
             if (Quality == ItemQuality.Exceptional)
             {
-                Attributes.WeaponDamage += 15;
+                Attributes.WeaponDamage += 20;
             }
 			if (Quality == ItemQuality.Epic)
 			{
-				Attributes.WeaponDamage += 30;
+				Attributes.WeaponDamage += 40;
 			}
 			if (Quality == ItemQuality.Legendary)
 			{
-				Attributes.WeaponDamage += 50;
+				Attributes.WeaponDamage += 60;
 			}
 
 

@@ -32,6 +32,31 @@ namespace Server.Mobiles
 			get{ return m_MiseMax; }
 			set{ m_MiseMax = value; }
 		}		
+
+    public int m_Gagne;
+
+		[CommandProperty( AccessLevel.GameMaster )]
+		public int Gagne
+		{
+			get{ return m_Gagne; }
+			set{ m_Gagne = value; }
+		}	
+
+    public int m_MiseTotal;
+
+		[CommandProperty( AccessLevel.GameMaster )]
+		public int MiseTotal
+		{
+			get{ return m_MiseTotal; }
+			set{ m_MiseTotal = value; }
+		}	
+
+  	[CommandProperty( AccessLevel.GameMaster )]
+		public int Profit
+		{
+			get{ return m_MiseTotal - m_Gagne; }
+		}	
+ 
  
  		[Constructable]
 		public Joueur() : base("Barde")
@@ -66,25 +91,30 @@ namespace Server.Mobiles
       }
   		else if( m_MiseMax < (Mise * 4))	
   		{
-      Say("Je n'ai pas eu de chance aujourd'hui, je n'ai plus assez de pièces pour ta mise...");
+      Say("Je n'ai pas eu de chance aujourd'hui, je n'ai plus assez de piÃ¨ces pour ta mise...");
       return;
       }	
  			
  			if(tip < 1 || tip > 6)
  			{
- 			Say("Un dé a seulement six faces mon ami... raisonne un peu!");
+ 			Say("Un dÃ© a seulement six faces mon ami... raisonne un peu!");
       return;
       }	
  			
       if ( Mise > 0 )
   		{
-  		Container pack = from.Backpack; 
+        
+
+
+  	  	Container pack = from.Backpack; 
   		
       	if ( pack != null && pack.ConsumeTotal( typeof( Gold ), Mise ) )
     		{
-    		string MiseDonner = "Vous me donnez " + Mise + " pièces";
-        from.SendMessage(MiseDonner);
+        MiseTotal += Mise;
 
+    		string MiseDonner = "Vous me donnez " + Mise + " piÃ¨ces";
+        from.SendMessage(MiseDonner);
+  
         int Profit = 0;		
     		this.Emote( "*S'empare d'un petit sac d'or provenant de sa veste*" ); 
     		int Des1 = Utility.Random( 6 ) + 1;
@@ -100,23 +130,28 @@ namespace Server.Mobiles
                 if(tip == Des1 && tip == Des2)
                 {
                 Profit = Mise * 4;
-                Resultat = "Peste, vous avez gagné un doublé! un simple coup de chance... " + Profit + " pièces d'or!";
+                Resultat = "Peste, vous avez gagnÃ© un doublÃ©! un simple coup de chance... " + Profit + " piÃ¨ces d'or!";
                 }
                 else if(tip == Des1 || tip == Des2)
                 {
                 Profit = Mise * 2;
-                Resultat = "Mmh, vous avez quand même mérité un petit quelque chose... " + Profit + " pièces d'or!";
+                Resultat = "Mmh, vous avez quand mÃªme mÃ©ritÃ© un petit quelque chose... " + Profit + " piÃ¨ces d'or!";
                 }
     			   		else
     			   		{
-                Resultat = "Ah, Ah! Ton or est à moi!";
+                Resultat = "Ah, Ah! Ton or est Ã  moi!";
                 Profit = 0;
                 }
                 Say(Resultat);
                  
                 if(Profit > 0)
                 {
+               
                 from.AddToBackpack( new Gold(Profit) );
+
+                Gagne += Profit;
+
+
                 m_MiseMax =  m_MiseMax - Profit;
                 }
                 else
@@ -128,7 +163,7 @@ namespace Server.Mobiles
     		}	
         else
         {
-           this.Say("Tu ne sembles pas avoir assez de pièces mon ami...");
+           this.Say("Tu ne sembles pas avoir assez de piÃ¨ces mon ami...");
         }	
     	}			
     	else
@@ -148,15 +183,42 @@ namespace Server.Mobiles
 		public override void Serialize( GenericWriter writer )
 		{
 			base.Serialize( writer );
+      writer.Write( (int) 1 ); // version
+
+     	writer.Write( m_MiseTotal );
+     	writer.Write( m_Gagne );
+
 			writer.Write( m_MiseMax );
-			writer.Write( (int) 0 ); // version
+
+	
 		}
 
 		public override void Deserialize( GenericReader reader )
 		{
 			base.Deserialize( reader );
-      m_MiseMax = reader.ReadInt();
-			int version = reader.ReadInt();
+  		int version = reader.ReadInt();
+
+      switch (version)
+      {
+        case 1:
+        {
+          m_MiseTotal = reader.ReadInt();
+          m_Gagne = reader.ReadInt();
+          goto case 0;
+
+        }
+        case 0:
+        {
+          m_MiseMax = reader.ReadInt();
+          break;
+        }
+        default:
+         break;
+      }
+
+     
+
+
 		}
 	}
 }
@@ -190,11 +252,11 @@ namespace Server.Gumps
     this.AddImage(218, 200, 2362);
     this.AddImage(438, 305, 2443);
     this.AddImage(336, 270, 2440);
-    this.AddLabel(338, 250, 0, @"Votre mise en pièces :");
+    this.AddLabel(338, 250, 0, @"Votre mise en piï¿½ces :");
     this.AddLabel(338, 305, 0, @"Votre nombre :");
     this.AddTextEntry(397, 272, 43, 20, 0, 1, @"100");
     this.AddTextEntry(463, 306, 21, 20, 0, 2, @"6");
-    this.AddHtml( 303, 68, 210, 172, @"Gagner jusqu'à 4 fois votre mise!<br>Misez et choisissez un nombre de 1 à 6. Si votre nombre est sur 1 des deux dés, vous gagner 2 fois la mise. S'il est sur les deux dés, vous gagner 4 fois la mise!<br><br>Sinon, votre or est à moi!", (bool)true, (bool)true);
+    this.AddHtml( 303, 68, 210, 172, @"Gagner jusqu'ï¿½ 4 fois votre mise!<br>Misez et choisissez un nombre de 1 ï¿½ 6. Si votre nombre est sur 1 des deux dï¿½s, vous gagner 2 fois la mise. S'il est sur les deux dï¿½s, vous gagner 4 fois la mise!<br><br>Sinon, votre or est ï¿½ moi!", (bool)true, (bool)true);
     }
     
     private int Mise;

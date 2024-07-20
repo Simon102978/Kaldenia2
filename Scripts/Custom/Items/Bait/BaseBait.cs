@@ -187,9 +187,9 @@ namespace Server.Items
 		public override void AddNameProperty(ObjectPropertyList list)
 		{
 			if (Amount > 1)
-				list.Add(1060532, String.Format("{3} {0}{1}{2}", "Appâts [", GetMaterial(), "]", Amount)); // ~1_NUMBER~ ~2_ITEMNAME~
+				list.Add(1050039, "{0}\t{1}", Amount.ToString(), String.Format("Appâts [{0}]", GetMaterial())); // ~1_NUMBER~ ~2_ITEMNAME~
 			else
-				list.Add(String.Format("{0}{1}{2}", "Appât [", GetMaterial(), "]")); // ingots
+				list.Add(String.Format("Appât [{0}]", GetMaterial()));
 		}
 
 		public BaseBait(Serial serial) : base(serial)

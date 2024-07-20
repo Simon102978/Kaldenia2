@@ -53,6 +53,8 @@ namespace Server.Mobiles
 
 		private bool m_Contrebandier = false;
 
+        private List<BaseDoor> m_Doors = new List<BaseDoor>();
+
         private DateTime m_LastRestock;
 
         public override bool CanTeach => false;
@@ -80,11 +82,22 @@ namespace Server.Mobiles
 			}
 
 		}
+
+        [CommandProperty(AccessLevel.GameMaster)]
+		public List<BaseDoor> Doors
+		{
+			get => m_Doors;
+			set
+			{
+				m_Doors = value;
+			}
+
+		}
 		
 
 		public virtual StatutSocialEnum MinBuyClasse => StatutSocialEnum.Possession;
 
-
+		public virtual bool NightExempt => false;
 
 		public virtual NpcGuild NpcGuild => NpcGuild.None;
 
@@ -361,13 +374,27 @@ namespace Server.Mobiles
 
         public override void OnDelete()
         {
+         
+
+            foreach (BaseDoor item in Doors)
+            {
+                item.Vendor = null;
+            }
+
             base.OnDelete();
+
 
             AllVendors.Remove(this);
         }
 
         public override void OnAfterDelete()
         {
+           
+            foreach (BaseDoor item in Doors)
+            {
+                item.Vendor = null;
+            }
+
             base.OnAfterDelete();
 
             AllVendors.Remove(this);
@@ -875,6 +902,7 @@ namespace Server.Mobiles
 
 		public virtual bool IsNight(Mobile from)
 		{
+
 			if (from == null || from.Map == null)
 				return false; // ou true, selon votre logique par défaut
 
@@ -883,22 +911,35 @@ namespace Server.Mobiles
 			return hours >= 24 || hours < 4;
 		}
 
-		public static List<Type> NightExemptTypes = new List<Type>
-{
-	typeof(InnKeeper),
-	typeof(TavernKeeper),
-	typeof(Barkeeper),
-	typeof(AnimalTrainer),
-	typeof(Healer)
-};
 
 		private bool IsExemptFromNightRestriction()
 		{
-			if (this is BaseVendor vendor && vendor.ContreBandier)
+			if (ContreBandier)
 				return true;
 
-			return NightExemptTypes.Any(t => t.IsInstanceOfType(this));
+			return NightExempt;
 		}
+
+        public void AddDoor(BaseDoor door)
+        {
+            if(!Doors.Contains(door))
+                Doors.Add(door);
+        }
+
+        public void RemoveDoor(BaseDoor door)
+        {
+            List<BaseDoor> newDoors = new List<BaseDoor>();
+
+            foreach (BaseDoor item in Doors)
+            {
+                if (item != door)
+                {
+                    newDoors.Add(item);
+                }
+            }
+
+            Doors = newDoors;
+        }
 
 
 		public virtual void VendorBuy(Mobile from)
@@ -2379,7 +2420,14 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write(5); // version
+            writer.Write(6); // version
+
+            writer.Write(m_Doors.Count());
+
+            foreach (Item item in m_Doors)
+            {
+                writer.Write(item);
+            }
 
 			writer.Write(m_Contrebandier);
 
@@ -2457,6 +2505,17 @@ namespace Server.Mobiles
 
             switch (version)
             {
+                case 6:
+                {
+                    int count = reader.ReadInt();
+
+                    for (int i = 0; i < count; i++)
+                    {
+                        m_Doors.Add((BaseDoor)reader.ReadItem());
+                    }
+
+                    goto case 5;
+                }
 				case 5:
 					{
 						m_Contrebandier = reader.ReadBool();
@@ -2586,6 +2645,11 @@ namespace Server.Mobiles
                 if (IsActiveBuyer)
                 {
                     list.Add(new VendorSellEntry(from, this));
+                }
+
+                if (Doors.Count > 0 && !ContreBandier && !NightExempt)
+                {   
+                    list.Add(new OpenDoorEntry(from, this));
                 }
             }
 
@@ -2801,6 +2865,38 @@ namespace Server.ContextMenus
             m_Vendor.VendorSell(Owner.From);
         }
     }
+    public class OpenDoorEntry : ContextMenuEntry
+    {
+        private readonly BaseVendor m_Vendor;
+
+        public OpenDoorEntry(Mobile from, BaseVendor vendor)
+            : base(500024, 3)
+        { // 500024
+            m_Vendor = vendor;
+
+     //       Enabled = true;
+
+           if (vendor.IsNight(from))
+            {
+                Enabled = true;
+            }
+            else 
+            {
+                Enabled = false;
+            }
+            
+        }
+
+        public override void OnClick()
+        {
+           foreach (BaseDoor item in m_Vendor.Doors)
+           {
+             item.OpenByPass();
+           }
+
+        }
+    }
+    //
 
     public class UpgradeMageArmor : ContextMenuEntry
     {

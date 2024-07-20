@@ -46,7 +46,7 @@ namespace Server.Mobiles
 
 		[Constructable]
 		public Jhorn()
-			: base(AIType.AI_Archer, FightMode.Closest, 10, 1, 0.2, 0.4)
+			: base(AIType.AI_Archer, FightMode.Closest, 10, 5, 0.2, 0.4)
 		{
 			Name = "Jhorn";
 			Title = "Briseur De Vent";
@@ -303,10 +303,10 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
         {
-			AddLoot(LootPack.Rich, 5);
+			AddLoot(LootPack.Rich, 3);
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.PeculiarSeed1);
-			AddLoot(LootPack.LootItem<Items.Gold>(250, 400));
+			AddLoot(LootPack.LootItem<Items.Gold>(50, 100));
 
 		}
 

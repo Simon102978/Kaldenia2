@@ -14,6 +14,7 @@ namespace Server.Items
             : base(0x0FBF)
         {
             Weight = 1.0;
+			Name = "Plume du Cartographe";
         }
 
         [Constructable]
@@ -21,9 +22,11 @@ namespace Server.Items
             : base(uses, 0x0FBF)
         {
             Weight = 1.0;
-        }
+			Name = "Plume du Cartographe";
 
-        public MapmakersPen(Serial serial)
+		}
+
+		public MapmakersPen(Serial serial)
             : base(serial)
         {
         }

@@ -7,7 +7,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public OphidianMatriarch()
-            : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Mage, FightMode.Closest, 10, 3, 0.2, 0.4)
         {
             Name = "une matriarche ophidien";
             Body = 87;
@@ -38,6 +38,8 @@ namespace Server.Mobiles
 
             Fame = 16000;
             Karma = -16000;
+
+            AddItem(new BardicheOphidian());
         }
 
         public OphidianMatriarch(Serial serial)

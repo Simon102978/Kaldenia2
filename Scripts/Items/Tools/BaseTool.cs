@@ -50,8 +50,8 @@ namespace Server.Items
             {
                 UnscaleUses();
                 m_Quality = value;
-                InvalidateProperties();
                 ScaleUses();
+                InvalidateProperties();
             }
         }
 
@@ -81,26 +81,26 @@ namespace Server.Items
 
         public void ScaleUses()
         {
-            m_UsesRemaining = (m_UsesRemaining * GetUsesScalar()) / 100;
+            m_UsesRemaining = m_UsesRemaining * GetUsesScalar() ;  
             InvalidateProperties();
         }
 
         public void UnscaleUses()
         {
-            m_UsesRemaining = (m_UsesRemaining * 100) / GetUsesScalar();
+            m_UsesRemaining = (m_UsesRemaining) / GetUsesScalar();
         }
 
-        public int GetUsesScalar()
-        {
+		public int GetUsesScalar()
+		{
 			if (m_Quality == ItemQuality.Exceptional)
-				return 150;
+				return 3;
 			else if (m_Quality == ItemQuality.Epic)
-				return 300;
+				return 6;
 			else if (m_Quality == ItemQuality.Legendary)
-				return 500;
+				return 8;
 
-			return 100;
-        }
+			return 1;
+		}
 
         public bool ShowUsesRemaining
         {
@@ -137,9 +137,9 @@ namespace Server.Items
 			if (m_Quality == ItemQuality.Exceptional)
 				list.Add("Exceptionnelle");
 			else if (m_Quality == ItemQuality.Epic)
-				list.Add("Épique");
+				list.Add("ï¿½pique");
 			else if (m_Quality == ItemQuality.Legendary)
-				list.Add("Légendaire");
+				list.Add("Lï¿½gendaire");
 		}
 		public override void AddNameProperties(ObjectPropertyList list)
 		{
@@ -304,7 +304,7 @@ namespace Server.Items
 
 			if (item != null)
 			{
-				from.SendMessage("Vous devez avoir les mains libres pour équipper un outil !");
+				from.SendMessage("Vous devez avoir les mains libres pour ï¿½quipper un outil !");
 				return false;
 			}
 
@@ -312,7 +312,7 @@ namespace Server.Items
 
 			if (item != null)
 			{
-				from.SendMessage("Vous devez avoir les mains libres pour équipper un outil !");
+				from.SendMessage("Vous devez avoir les mains libres pour ï¿½quipper un outil !");
 				return false;
 			}
 

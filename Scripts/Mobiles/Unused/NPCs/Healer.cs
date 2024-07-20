@@ -26,6 +26,8 @@ namespace Server.Mobiles
         public override bool CanTeach => true;
         public override bool IsActiveVendor => true;
         public override bool IsInvulnerable => true;
+        public override bool NightExempt => true;
+
         public override bool CheckTeach(SkillName skill, Mobile from)
         {
             if (!base.CheckTeach(skill, from))

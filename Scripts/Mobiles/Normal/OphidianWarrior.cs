@@ -12,7 +12,7 @@ namespace Server.Mobiles
         };
         [Constructable]
         public OphidianWarrior()
-            : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Closest, 10, 3, 0.2, 0.4)
         {
             Name = "Un Ophidien";
             Body = 86;
@@ -35,12 +35,16 @@ namespace Server.Mobiles
             SetResistance(ResistanceType.Poison, 30, 40);
             SetResistance(ResistanceType.Energy, 25, 35);
 
-            SetSkill(SkillName.MagicResist, 70.1, 85.0);
-            SetSkill(SkillName.Swords, 60.1, 85.0);
-            SetSkill(SkillName.Tactics, 75.1, 90.0);
+			SetSkill(SkillName.EvalInt, 85.1, 100.0);
+			SetSkill(SkillName.Swords, 85.1, 100.0);
+			SetSkill(SkillName.MagicResist, 75.0, 97.5);
+			SetSkill(SkillName.Tactics, 65.0, 87.5);
+			SetSkill(SkillName.Wrestling, 85.1, 100.0);
 
-            Fame = 4500;
+			Fame = 4500;
             Karma = -4500;
+
+            AddItem(new BardicheOphidian());
         }
 
         public OphidianWarrior(Serial serial)

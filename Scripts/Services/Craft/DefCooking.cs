@@ -22,7 +22,29 @@ namespace Server.Engines.Craft
 
 		GrilledSerpentSteak = 608,
 		BBQDinoRibs = 609,
-		WakuChicken = 610
+		WakuChicken = 610,
+
+
+		////K2
+
+		[Description("Constitution")]
+		HitsMaxBuffFood = 40001,
+
+		[Description("Constitution Majeure")]
+		GreaterHitsMaxBuffFood = 40002,
+
+		[Description("Endurance")]
+		StamMaxBuffFood = 40003,
+
+		[Description("Endurance majeure")]
+		GreaterStamMaxBuffFood = 40004,
+
+		[Description("Sagesse")]
+		ManaMaxBuffFood = 40005,
+
+		[Description("Sagesse majeure")]
+		GreaterManaMaxBuffFood = 40006,
+
 	}
 	#endregion
 
@@ -111,26 +133,35 @@ namespace Server.Engines.Craft
 		{
 			int index = -1;
 
-
 			#region Plats réconfortants
 			index = AddCraft(typeof(LesserHitsMaxBuffFood), "Plats réconfortants", "Constitution mineure", 50.0, 65.0, typeof(RawRibs), "Côtes levées crues", 10, "Vous avez besoin de plus de côtes levées crues.");
 			SetNeedOven(index, true);
 			index = AddCraft(typeof(HitsMaxBuffFood), "Plats réconfortants", "Constitution", 65.0, 80.0, typeof(RawRibs), "Côtes levées crues", 20, "Vous avez besoin de plus de côtes levées crues.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.HitsMaxBuffFood);
 			index = AddCraft(typeof(GreaterHitsMaxBuffFood), "Plats réconfortants", "Constitution majeure", 80.0, 20.0, typeof(RawRibs), "Côtes levées crues", 30, "Vous avez besoin de plus de côtes levées crues.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.GreaterHitsMaxBuffFood);
+
 			index = AddCraft(typeof(LesserStamMaxBuffFood), "Plats réconfortants", "Endurance mineure", 50.0, 65.0, typeof(RawBird), "Volaille cru", 10, "Vous avez besoin de plus de côtes vollaille crue.");
 			SetNeedOven(index, true);
 			index = AddCraft(typeof(StamMaxBuffFood), "Plats réconfortants", "Endurance", 65.0, 80.0, typeof(RawBird), "Volaille cru", 20, "Vous avez besoin de plus de vollaille crue.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.StamMaxBuffFood);
 			index = AddCraft(typeof(GreaterStamMaxBuffFood), "Plats réconfortants", "Endurance majeure", 80.0, 20.0, typeof(RawBird), "Volaille cru", 30, "Vous avez besoin de plus de côtes vollaille crue.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.GreaterStamMaxBuffFood);
+
 			index = AddCraft(typeof(LesserManaMaxBuffFood), "Plats réconfortants", "Sagesse mineure", 50.0, 65.0, typeof(RawFishSteak), "Filets de poisson cru", 10, "Vous avez besoin de plus de filets de poisson crues.");
 			SetNeedOven(index, true);
+
 			index = AddCraft(typeof(ManaMaxBuffFood), "Plats réconfortants", "Sagesse", 65.0, 80.0, typeof(RawFishSteak), "Filets de poisson cru", 20, "Vous avez besoin de plus de filets de poisson crues.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.ManaMaxBuffFood);
 			index = AddCraft(typeof(GreaterManaMaxBuffFood), "Plats réconfortants", "Sagesse majeure", 80.0, 20.0, typeof(RawFishSteak), "Filets de poisson cru", 30, "Vous avez besoin de plus de filets de poisson crues.");
 			SetNeedOven(index, true);
+			AddRecipe(index, (int)CookRecipes.GreaterManaMaxBuffFood);
+
 			#endregion
 
 			#region Ingrédients secs
@@ -139,11 +170,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(BagOfSugar), "Ingrédients secs", "Sac de sucre", 0.0, 20.0, typeof(Sugarcane), "Canne à  sucre", 10, "Vous n'avez pas suffisament de canne à sucre");
 			SetNeedMill(index, true);
 			index = AddCraft(typeof(WheatWort), "Ingrédients secs", "Mout de Blé", 0.0, 20.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
-			AddRes(index, typeof(Pitcher), "Eau", 5, "Vous n'avez pas suffisament d'eau");
+AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
 			index = AddCraft(typeof(Yeast), "Ingrédients secs", "Levure", 0.0, 20.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
-			AddRes(index, typeof(Pitcher), "Eau", 5, "Vous n'avez pas suffisament d'eau");
+AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
 			index = AddCraft(typeof(BrewersYeast), "Ingrédients secs", "Levure à fermentation", 0.0, 20.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
-			AddRes(index, typeof(Pitcher), "Eau", 5, "Vous n'avez pas suffisament d'eau");
+AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
 			index = AddCraft(typeof(DriedOnions), "Ingrédients secs", "Onions Déshydratés", 20.0, 40.0, typeof(Onion), "Onions", 5, 1044253);
 			index = AddCraft(typeof(DriedHerbs), "Ingrédients secs", "Herbes sèches", 20.0, 40.0, typeof(Garlic), "Garlic", 2, 1044253);
 			AddRes(index, typeof(Ginseng), "Ginseng", 2, 1044253);
@@ -155,21 +186,19 @@ namespace Server.Engines.Craft
 			#region Ingrédients humides
 			index = AddCraft(typeof(CocoaButter), "Ingrédients humides", "Beurre de cacao", 0.0, 50.0, typeof(BagOfCocoa), 1080530, 1, 1044253);
 			SetItemHue(index, 0x457);
-			SetNeedOven(index, true);
 			//index = AddCraft(typeof(CocoaLiquor), "Ingrédients humides", "Liqueur de cacao", 0.0, 50.0, typeof(BagOfCocoa), 1080530, 1, 1044253);
 			//AddRes(index, typeof(EmptyPewterBowl), 1025629, 1, 1044253);
 			//SetItemHue(index, 0x46A);
 			//SetNeedOven(index, true);
 			index = AddCraft(typeof(Batter), "Ingrédients humides", "Mélange à crêpes", 20.0, 60.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
 			AddRes(index, typeof(Eggs), "Oeufs", 1, 1044253);
-			AddRes(index, typeof(Pitcher), "Eau", 2, "Vous n'avez pas suffisament d'eau dans votre pichet");
+			AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253); 
 			index = AddCraft(typeof(Butter), "Ingrédients humides", "Beurre", 20.0, 60.0, typeof(Cream), "Cream", 1, 1044253);
 			////AddRecipe(index, (int)CookRecipesExp.Butter);
 			SetNeedHeat(index, true);
-			index = AddCraft(typeof(Cream), "Ingrédients humides", "Crème", 20.0, 60.0, typeof(Vanilla), "Lait", 1, 1044253);
-			AddRes(index, typeof(Pitcher), 1022544, 1, 1044253);
-			SetBeverageType(index, BeverageType.Milk);
+			index = AddCraft(typeof(Cream), "Ingrédients humides", "Crème", 20.0, 60.0, typeof(BaseBeverage), "Milk", 1, "Vous n'avez pas suffisament de lait");
 			SetNeedHeat(index, true);
+
 			index = AddCraft(typeof(CookingOil), "Ingrédients humides", "Huile d'arachide", 25.0, 60.0, typeof(Peanut), "Peanut", 10, 1044253);
 			////AddRecipe(index, (int)CookRecipesExp.CookingOil);
 			SetNeedHeat(index, true);
@@ -381,14 +410,16 @@ namespace Server.Engines.Craft
 			#region Viande générique
 			index = AddCraft(typeof(Ribs), "Viandes", "Côtes levées", 0.0, 70.0, typeof(RawRibs), "Côtes levées crues", 1, 1044253);
 			//////AddRecipe(index, (int)CookRecipesExp.Ribs);
+			ForceNonExceptional(index);
+
 			SetNeedHeat(index, true);
-			SetUseAllRes(index, true);
+		//	SetUseAllRes(index, true);
 			//index = AddCraft(typeof(CookedSteak), "Viandes", "Steak", 25.0, 70.0, typeof(RawSteakExp), "Steak cru", 1, "You need more Raw Steak");
 			//////AddRecipe(index, (int)CookRecipesExp.CookedSteak);
 			//SetNeedHeat(index, true);
 			index = AddCraft(typeof(FishSteak), "Viandes", "Poisson cuit", 0.0, 70.0, typeof(RawFishSteak), 1044476, 1, 1044253);
 			SetNeedHeat(index, true);
-			SetUseAllRes(index, true);
+			//SetUseAllRes(index, true);
 			ForceNonExceptional(index);
 			#endregion
 
@@ -633,7 +664,7 @@ namespace Server.Engines.Craft
 			SetNeedCauldron(index, true);
 			index = AddCraft(typeof(BowlMashedPotatos), "Aliments bouillis", "Bol de patates pilées", 30.0, 65.0, typeof(Potato), "Potato", 5, 1044253);
 			AddRes(index, typeof(Butter), "Butter", 1, 1044253);
-			AddRes(index, typeof(Pitcher), "Milk", 1, 1044253);
+			AddRes(index,typeof(BaseBeverage), "Milk", 1, "Vous n'avez pas suffisament de lait");
 			//AddRecipe(index, (int)CookRecipesExp.BowlMashedPotatos);
 			SetNeedCauldron(index, true);
 			index = AddCraft(typeof(BowlCookedVeggies), "Aliments bouillis", "Bol de légume cuits", 30.0, 65.0, typeof(MixedVegetables), "Mixed Vegetables", 1, 1044253);
@@ -1163,7 +1194,10 @@ namespace Server.Engines.Craft
 			SetRequireResTarget(index);
 			index = AddCraft(typeof(WoodPulp), "Teinture", "Pulpe de bois", 50.0, 70.0, typeof(BarkFragment), "Morceau d’écorce", 1, 1044253);
 			AddRes(index, typeof(Pitcher), 1046458, 1, 1044253);
-			index = AddCraft(typeof(Charcoal), "Teinture", "Charbon", 0.0, 50.0, typeof(PalmierBoard), "Planche", 1, 1044351);
+			index = AddCraft(typeof(Charcoal), "Teinture", "Charbon de palmier", 0.0, 50.0, typeof(PalmierBoard), "Planche", 1, 1044351);
+			SetUseAllRes(index, true);
+			SetNeedHeat(index, true);
+			index = AddCraft(typeof(Charcoal), "Teinture", "Charbon d'érable", 0.0, 50.0, typeof(ErableBoard), "Planche", 1, 1044351);
 			SetUseAllRes(index, true);
 			SetNeedHeat(index, true);
 			#endregion

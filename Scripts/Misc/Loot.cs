@@ -1,6 +1,8 @@
 #region References
 using Server.Items;
 using System;
+using static CustomRecipeScrolls;
+
 #endregion
 
 namespace Server
@@ -242,6 +244,84 @@ namespace Server
             typeof(StatueEast2), typeof(StatueSouthEast), typeof(BustSouth), typeof(BustEast)
         };
 
+
+		public static Type[] CustomRecipeScrollTypes1 => m_CustomRecipeScroll1;
+		private static readonly Type[] m_CustomRecipeScroll1 = new[]
+		{
+	typeof(EnclumeRecipeScroll),
+	typeof(MasonryBookRecipeScroll),
+	typeof(ChickenCoopRecipeScroll),
+	typeof(LumitraitRecipeScroll),
+	typeof(CacheOeil3RecipeScroll),
+	typeof(SuperiorHealPotionRecipeScroll),
+	typeof(PetBondingPotionRecipeScroll),
+	typeof(RobeBleudecolteRecipeScroll),
+	typeof(PoteauChaineRecipeScroll),
+	typeof(MenotteDoreeRecipeScroll),
+	typeof(FinishedWoodenChestRecipeScroll),
+	typeof(SandMiningBookRecipeScroll),
+	typeof(GreaterHitsMaxBuffFoodRecipeScroll),
+	typeof(CompositeRecipeScroll),
+	typeof(TiareRecipeScroll),
+	typeof(PieuseRecipeScroll),
+	typeof(GlassblowingBookRecipeScroll),
+	typeof(EpauletteDoreeRecipeScroll),
+	typeof(Pantalon3RecipeScroll),
+	typeof(GreaterManaMaxBuffFoodRecipeScroll)
+};
+
+		public static Type[] CustomRecipeScrollTypes2 => m_CustomRecipeScroll2;
+		private static readonly Type[] m_CustomRecipeScroll2 = new[]
+		{
+	typeof(Pantalon1RecipeScroll),
+	typeof(RobeNimRecipeScroll),
+	typeof(SuperiorAgilityPotionRecipeScroll),
+	typeof(ArbaviveRecipeScroll),
+	typeof(FoliereRecipeScroll),
+	typeof(InvisibilityPotionRecipeScroll),
+	typeof(ForgeRecipeScroll),
+	typeof(FourreauDoreeRecipeScroll),
+	typeof(HitsMaxBuffFoodRecipeScroll),
+	typeof(CoffreFortRecipeScroll),
+	typeof(CoffreMetalRouilleRecipeScroll),
+	typeof(PeauOursPolaireRecipeScroll),
+	typeof(MountedDreadHornRecipeScroll),
+	typeof(Jupe10RecipeScroll),
+	typeof(StoneMiningBookRecipeScroll),
+	typeof(CoffreMaritimeRecipeScroll),
+	typeof(ManteauVoyageurRecipeScroll),
+	typeof(CoffreMetalVisqueuxRecipeScroll),
+	typeof(StamMaxBuffFoodRecipeScroll),
+	typeof(SuperiorCurePotionRecipeScroll)
+};
+
+		public static Type[] CustomRecipeScrollTypes3 => m_CustomRecipeScroll3;
+		private static readonly Type[] m_CustomRecipeScroll3 = new[]
+		{
+	typeof(GemMiningBookRecipeScroll),
+	typeof(TerMurStyleCandelabraRecipeScroll),
+	typeof(AutoResPotionRecipeScroll),
+	typeof(CoffreMetalDoreRecipeScroll),
+	typeof(FourreauDoreeRecipeScroll),
+	typeof(Jupe8RecipeScroll),
+	typeof(CapePaonRecipeScroll),
+	typeof(PeauOursRecipeScroll),
+	typeof(DiademeFeuilleOrRecipeScroll),
+	typeof(CoffreMetalVisqueuxRecipeScroll),
+	typeof(SuperiorRefreshPotionRecipeScroll),
+	typeof(GreaterStamMaxBuffFoodRecipeScroll),
+	typeof(FoliereRecipeScroll),
+	typeof(ManteauDoreRecipeScroll),
+	typeof(SuperiorStrengthPotionRecipeScroll),
+	typeof(ChickenCoopRecipeScroll),
+	typeof(GreaterHitsMaxBuffFoodRecipeScroll),
+	typeof(CoffreFortRecipeScroll),
+	typeof(SuperiorHealPotionRecipeScroll),
+	typeof(EnclumeRecipeScroll)
+};
+
+
+
 		public static Type[] StealableArtifactTypes => m_StealableArtifact;
 		private static readonly Type[] m_StealableArtifact = new[]
 		{
@@ -412,6 +492,21 @@ namespace Server
 		public static Item RandomStealableArtifact()
 		{
 			return Construct(m_StealableArtifact) as Item;
+		}
+
+		public static Item RandomRecipes1()
+		{
+			return Construct(m_CustomRecipeScroll1) as Item;
+		}
+
+		public static Item RandomRecipes2()
+		{
+			return Construct(m_CustomRecipeScroll2) as Item;
+		}
+
+		public static Item RandomRecipes3()
+		{
+			return Construct(m_CustomRecipeScroll3) as Item;
 		}
 
 		public static BaseClothing RandomClothing(bool inTokuno = false, bool isMondain = false, bool isStygian = false)

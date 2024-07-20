@@ -29,6 +29,833 @@
         }
     }
 
+	[Flipable(0x1949, 0x194A)]
+	public class StatueDon : Item
+	{
+		[Constructable]
+		public StatueDon() : base(0x1949)
+		{
+			Weight = 1.0;
+			Name = "Statue Don";
+		}
+
+		public StatueDon(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class StatueMeduse : Item
+	{
+		[Constructable]
+		public StatueMeduse() : base(0x40BC)
+		{
+			Weight = 1.0;
+			Name = "Statue Meduse";
+		}
+
+		public StatueMeduse(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class StatueCheval : Item
+	{
+		[Constructable]
+		public StatueCheval() : base(0x40BD)
+		{
+			Weight = 1.0;
+			Name = "Statue Cheval";
+		}
+
+		public StatueCheval(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class StatueGuerrier : Item
+	{
+		[Constructable]
+		public StatueGuerrier() : base(0x42C2)
+		{
+			Weight = 1.0;
+			Name = "Statue Guerrier";
+		}
+
+		public StatueGuerrier(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0x9F0F, 0x9F10)]
+	public class StatueSwan : Item
+	{
+		[Constructable]
+		public StatueSwan() : base(0x9F0F)
+		{
+			Weight = 1.0;
+			Name = "Statue Swan";
+		}
+
+		public StatueSwan(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0x9F11, 0x9F12)]
+	public class StatueSwanNoir : Item
+	{
+		[Constructable]
+		public StatueSwanNoir() : base(0x9F11)
+		{
+			Weight = 1.0;
+			Name = "Statue Swan Noir";
+		}
+
+		public StatueSwanNoir(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0xA55B, 0xA55C)]
+	public class StatueEgypte : Item
+	{
+		[Constructable]
+		public StatueEgypte() : base(0xA55B)
+		{
+			Weight = 1.0;
+			Name = "Statue Egypte";
+		}
+
+		public StatueEgypte(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0xA605, 0xA606)]
+	public class StatueDieu : Item
+	{
+		[Constructable]
+		public StatueDieu() : base(0xA605)
+		{
+			Weight = 1.0;
+			Name = "Statue Dieu";
+		}
+
+		public StatueDieu(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0xA55D, 0xA55E)]
+	public class StatueJackal : Item
+	{
+		[Constructable]
+		public StatueJackal() : base(0xA55D)
+		{
+			Weight = 1.0;
+			Name = "Statue Jackal";
+		}
+
+		public StatueJackal(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0xA559, 0xA55A)]
+	public class FauconDore : Item
+	{
+		[Constructable]
+		public FauconDore() : base(0xA559)
+		{
+			Weight = 1.0;
+			Name = "Faucon Dore";
+		}
+
+		public FauconDore(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0xA56E, 0xA56F)]
+	public class StatueAnge : Item
+	{
+		[Constructable]
+		public StatueAnge() : base(0xA56E)
+		{
+			Weight = 1.0;
+			Name = "Statue Ange";
+		}
+
+		public StatueAnge(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class ColonneMarbre : Item
+	{
+		[Constructable]
+		public ColonneMarbre() : base(0xA584)
+		{
+			Weight = 1.0;
+			Name = "Colonne Marbre";
+		}
+
+		public ColonneMarbre(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0xA5CE, 0xA5CF)]
+	public class StatueLion : Item
+	{
+		[Constructable]
+		public StatueLion() : base(0xA5CE)
+		{
+			Weight = 1.0;
+			Name = "Statue Lion";
+		}
+
+		public StatueLion(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0xA5FD, 0xA5FE, 0xA5FF, 0xA600)]
+	public class LutrinMarbre : Item
+	{
+		[Constructable]
+		public LutrinMarbre() : base(0xA5FD)
+		{
+			Weight = 1.0;
+			Name = "Lutrin Marbre";
+		}
+
+		public LutrinMarbre(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0xA572, 0xA573)]
+	public class AltarBlanc : Item
+	{
+		[Constructable]
+		public AltarBlanc() : base(0xA572)
+		{
+			Weight = 1.0;
+			Name = "Altar Blanc";
+		}
+
+		public AltarBlanc(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+	public class VaseTresor : Item
+	{
+		[Constructable]
+		public VaseTresor() : base(0xA5BD)
+		{
+			Weight = 1.0;
+			Name = "Vase Tresor";
+		}
+
+		public VaseTresor(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class GrandeUrne : Item
+	{
+		[Constructable]
+		public GrandeUrne() : base(0xA555)
+		{
+			Weight = 1.0;
+			Name = "Grande Urne";
+		}
+
+		public GrandeUrne(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class UrneBleue : Item
+	{
+		[Constructable]
+		public UrneBleue() : base(0xA5D6)
+		{
+			Weight = 1.0;
+			Name = "Urne Bleue";
+		}
+
+		public UrneBleue(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class UrneEvasee : Item
+	{
+		[Constructable]
+		public UrneEvasee() : base(0xA5D7)
+		{
+			Weight = 1.0;
+			Name = "Urne Evasee";
+		}
+
+		public UrneEvasee(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class Urne3 : Item
+	{
+		[Constructable]
+		public Urne3() : base(0xA5BE)
+		{
+			Weight = 1.0;
+			Name = "Urne 3";
+		}
+
+		public Urne3(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+	public class LargeVase : Item
+	{
+		[Constructable]
+		public LargeVase() : base(0x0B45)
+		{
+			Weight = 1.0;
+			Name = "Large Vase";
+		}
+
+		public LargeVase(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class LargeVase2 : Item
+	{
+		[Constructable]
+		public LargeVase2() : base(0x0B47)
+		{
+			Weight = 1.0;
+			Name = "Large Vase 2";
+		}
+
+		public LargeVase2(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class VaseDore : Item
+	{
+		[Constructable]
+		public VaseDore() : base(0x3D7C)
+		{
+			Weight = 1.0;
+			Name = "Vase Dore";
+		}
+
+		public VaseDore(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class VaseAnthracite : Item
+	{
+		[Constructable]
+		public VaseAnthracite() : base(0x3D7D)
+		{
+			Weight = 1.0;
+			Name = "Vase Anthracite";
+		}
+
+		public VaseAnthracite(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class PetitVaseLigne : Item
+	{
+		[Constructable]
+		public PetitVaseLigne() : base(0x3D7E)
+		{
+			Weight = 1.0;
+			Name = "Petit Vase Ligne";
+		}
+
+		public PetitVaseLigne(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class GrandVaseLigne : Item
+	{
+		[Constructable]
+		public GrandVaseLigne() : base(0x3D7F)
+		{
+			Weight = 1.0;
+			Name = "Grand Vase Ligne";
+		}
+
+		public GrandVaseLigne(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	[Flipable(0x4042, 0x4043)]
+	public class VaseTravaille : Item
+	{
+		[Constructable]
+		public VaseTravaille() : base(0x4042)
+		{
+			Weight = 1.0;
+			Name = "Vase Travaille";
+		}
+
+		public VaseTravaille(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class VaseRunique : Item
+	{
+		[Constructable]
+		public VaseRunique() : base(0x42B2)
+		{
+			Weight = 1.0;
+			Name = "Vase Runique";
+		}
+
+		public VaseRunique(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class VaseRunique2 : Item
+	{
+		[Constructable]
+		public VaseRunique2() : base(0x42B3)
+		{
+			Weight = 1.0;
+			Name = "Vase Runique 2";
+		}
+
+		public VaseRunique2(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class VaseEgyptien : Item
+	{
+		[Constructable]
+		public VaseEgyptien() : base(0x9BC7)
+		{
+			Weight = 1.0;
+			Name = "Vase Egyptien";
+		}
+
+		public VaseEgyptien(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class VaseEgyptien2 : Item
+	{
+		[Constructable]
+		public VaseEgyptien2() : base(0x9BCA)
+		{
+			Weight = 1.0;
+			Name = "Vase Egyptien 2";
+		}
+
+		public VaseEgyptien2(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class VaseGobelet : Item
+	{
+		[Constructable]
+		public VaseGobelet() : base(0xA55F)
+		{
+			Weight = 1.0;
+			Name = "Vase Gobelet";
+		}
+
+		public VaseGobelet(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class VaseDecoratif : Item
+	{
+		[Constructable]
+		public VaseDecoratif() : base(0xA560)
+		{
+			Weight = 1.0;
+			Name = "Vase Decoratif";
+		}
+
+		public VaseDecoratif(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
+	public class VaseEndommage : Item
+	{
+		[Constructable]
+		public VaseEndommage() : base(0xA561)
+		{
+			Weight = 1.0;
+			Name = "Vase Endommage";
+		}
+
+		public VaseEndommage(Serial serial) : base(serial) { }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write(0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
 	public class Vase1 : Item
 	{
 		[Constructable]
@@ -174,35 +1001,7 @@
 		}
 	}
 
-	public class VaseTresor : Item
-	{
-		[Constructable]
-		public VaseTresor()
-			: base(0x99FE)
-		{
-			Weight = 1.0;
-			Name = "Vase Trésor";
-		}
 
-		public VaseTresor(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
 
 	public class Urne : Item
 	{
@@ -266,34 +1065,7 @@
 	}
 
 
-	public class LargeVase : Item
-    {
-        [Constructable]
-        public LargeVase()
-            : base(0xB45)
-        {
-            Weight = 1.0;
-        }
-
-        public LargeVase(Serial serial)
-            : base(serial)
-        {
-        }
-
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-
-            writer.Write(0);
-        }
-
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-
-            int version = reader.ReadInt();
-        }
-    }
+	
 
     public class SmallUrn : Item
     {
@@ -441,65 +1213,7 @@
 		}
 	}
 
-	public class PlantePiquante : Item
-	{
-		[Constructable]
-		public PlantePiquante()
-			: base(0x99A3)
-		{
-			Weight = 1.0;
-			Name = "Plante Piquante";
-		}
-
-		public PlantePiquante(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-	[Flipable(0x99D4, 0x99D5)]
-	public class Monstera : Item
-	{
-		[Constructable]
-		public Monstera()
-			: base(0x99D4)
-		{
-			Weight = 1.0;
-			Name = "Monstera";
-		}
-
-		public Monstera(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
+	
 	public class BacFleurVide1 : Item
 	{
 		[Constructable]
@@ -1236,331 +1950,7 @@
 			int version = reader.ReadInt();
 		}
 	}
-	public class PlanteVase1 : Item
-	{
-		[Constructable]
-		public PlanteVase1()
-			: base(0x99F3)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 1";
-		}
-
-		public PlanteVase1(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-	public class PlanteVase2 : Item
-	{
-		[Constructable]
-		public PlanteVase2()
-			: base(0x99F4)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 2";
-		}
-
-		public PlanteVase2(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-	public class PlanteVase3 : Item
-	{
-		[Constructable]
-		public PlanteVase3()
-			: base(0x99F5)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 3";
-		}
-
-		public PlanteVase3(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-	public class PlanteVase4 : Item
-	{
-		[Constructable]
-		public PlanteVase4()
-			: base(0x99F6)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 4";
-		}
-
-		public PlanteVase4(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-	public class PlanteVase5 : Item
-	{
-		[Constructable]
-		public PlanteVase5()
-			: base(0x99F7)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 5";
-		}
-
-		public PlanteVase5(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-
-	public class PlanteVase6 : Item
-	{
-		[Constructable]
-		public PlanteVase6()
-			: base(0x99F8)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 6";
-		}
-
-		public PlanteVase6(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-
-	public class PlanteVase7 : Item
-	{
-		[Constructable]
-		public PlanteVase7()
-			: base(0x99F9)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 7";
-		}
-
-		public PlanteVase7(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-
-	public class PlanteVase8 : Item
-	{
-		[Constructable]
-		public PlanteVase8()
-			: base(0x99FA)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 8";
-		}
-
-		public PlanteVase8(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-
-	public class PlanteVase9 : Item
-	{
-		[Constructable]
-		public PlanteVase9()
-			: base(0x99FB)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 9";
-		}
-
-		public PlanteVase9(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-
-	public class PlanteVase10 : Item
-	{
-		[Constructable]
-		public PlanteVase10()
-			: base(0x99FC)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 10";
-		}
-
-		public PlanteVase10(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
-
-	public class PlanteVase11 : Item
-	{
-		[Constructable]
-		public PlanteVase11()
-			: base(0x99FD)
-		{
-			Weight = 1.0;
-			Name = "Plante Vase 11";
-		}
-
-		public PlanteVase11(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
+	
 
 	[Flipable(0x99A4, 0x99A5)]
 	public class DecoSoleil : Item
@@ -1837,36 +2227,7 @@
 		}
 	}
 
-	[Flipable(0x99B3, 0x99B4)]
-	public class AltarBlanc : Item
-	{
-		[Constructable]
-		public AltarBlanc()
-			: base(0x99B3)
-		{
-			Weight = 2.0; 
-			Name = "Altar Blanc";
-		}
-
-		public AltarBlanc(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
+	
 
 	[Flipable(0x9A01, 0x9A02)]
 	public class RackPelle : Item
@@ -1898,36 +2259,7 @@
 			int version = reader.ReadInt();
 		}
 	}
-	[Flipable(0x9A03, 0x9A04)]
-	public class FauconDore : Item
-	{
-		[Constructable]
-		public FauconDore()
-			: base(0x9A03)
-		{
-			Weight = 2.0;
-			Name = "Faucon Doré";
-		}
-
-		public FauconDore(Serial serial)
-			: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0);
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
+	
 	[Flipable(0x9A07, 0x9A08)]
 	public class JackalDore : Item
 	{

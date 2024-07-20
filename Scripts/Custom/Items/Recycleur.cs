@@ -96,17 +96,38 @@ namespace Server.Items
                 switch (resource)
 				{
                     case CraftResource.Iron:             m_CraftSystem = DefBlacksmithy.CraftSystem; break;
-                    case CraftResource.DullCopper:                 m_CraftSystem = DefBlacksmithy.CraftSystem; break;
-                    case CraftResource.ShadowIron:		        m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+                    case CraftResource.Bronze:                 m_CraftSystem = DefBlacksmithy.CraftSystem; break;
                     case CraftResource.Copper:		        m_CraftSystem = DefBlacksmithy.CraftSystem; break;
-					case CraftResource.Bronze:			        m_CraftSystem = DefBlacksmithy.CraftSystem; break;
-					case CraftResource.Gold:			    m_CraftSystem = DefBlacksmithy.CraftSystem; break;
-					case CraftResource.Agapite:			    m_CraftSystem = DefBlacksmithy.CraftSystem; break;
-					case CraftResource.Verite:			    m_CraftSystem = DefBlacksmithy.CraftSystem; break;
-					case CraftResource.Valorite:		    m_CraftSystem = DefBlacksmithy.CraftSystem; break;
-					case CraftResource.Mytheril:		    m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+                    case CraftResource.Sonne:		        m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Argent:			        m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Boreale:			    m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Chrysteliar:			    m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Glacias:			    m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Lithiar:		    m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Acier:		    m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Durian:			m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Equilibrum:		m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Gold:			m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Jolinar:			m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Justicium:		 m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Abyssium:		m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Bloodirium:		m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Herbrosite:		m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Khandarium:			m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Mytheril:			m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Sombralir:		m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Draconyr:		m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Heptazion:		 m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Oceanis:			m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Brazium:			m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Lunerium:		m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Marinar:			m_CraftSystem = DefBlacksmithy.CraftSystem; break;
+					case CraftResource.Nostalgium:		m_CraftSystem = DefBlacksmithy.CraftSystem; break;
 
-                    case CraftResource.LupusLeather:     m_CraftSystem = DefTailoring.CraftSystem; break;
+
+
+
+					case CraftResource.LupusLeather:     m_CraftSystem = DefTailoring.CraftSystem; break;
 					case CraftResource.ReptilienLeather:	        m_CraftSystem = DefTailoring.CraftSystem; break;
 					case CraftResource.GeantLeather:	    m_CraftSystem = DefTailoring.CraftSystem; break;
 					case CraftResource.OphidienLeather:	    m_CraftSystem = DefTailoring.CraftSystem; break;
@@ -126,19 +147,24 @@ namespace Server.Items
                     case CraftResource.DemoniaqueBone:           m_CraftSystem = DefBoneTailoring.CraftSystem; break;
                     case CraftResource.AncienBone:          m_CraftSystem = DefBoneTailoring.CraftSystem; break;
 
-                    case CraftResource.PalmierWood:          m_CraftSystem = DefBowFletching.CraftSystem; break;
-					case CraftResource.OakWood:	        m_CraftSystem = DefBowFletching.CraftSystem; break;
-					case CraftResource.AshWood:	    m_CraftSystem = DefBowFletching.CraftSystem; break;
-                    case CraftResource.YewWood:           m_CraftSystem = DefBowFletching.CraftSystem; break;
-                    case CraftResource.Heartwood:        m_CraftSystem = DefBowFletching.CraftSystem; break;
-                    case CraftResource.Bloodwood:           m_CraftSystem = DefBowFletching.CraftSystem; break;
-                    case CraftResource.Frostwood:          m_CraftSystem = DefBowFletching.CraftSystem; break;
-              
+                    case CraftResource.PalmierWood:          m_CraftSystem = DefCarpentry.CraftSystem; break;
+					case CraftResource.ErableWood:	        m_CraftSystem = DefCarpentry.CraftSystem; break;
+					case CraftResource.CheneWood:	    m_CraftSystem = DefCarpentry.CraftSystem; break;
+                    case CraftResource.CedreWood:           m_CraftSystem = DefCarpentry.CraftSystem; break;
+                    case CraftResource.CypresWood:        m_CraftSystem = DefCarpentry.CraftSystem; break;
+                    case CraftResource.SauleWood:           m_CraftSystem = DefCarpentry.CraftSystem; break;
+                    case CraftResource.AcajouWood:          m_CraftSystem = DefCarpentry.CraftSystem; break;
+					case CraftResource.EbeneWood: m_CraftSystem = DefCarpentry.CraftSystem; break;
+					case CraftResource.AmaranteWood: m_CraftSystem = DefCarpentry.CraftSystem; break;
+					case CraftResource.PinWood: m_CraftSystem = DefCarpentry.CraftSystem; break;
+					case CraftResource.AncienWood: m_CraftSystem = DefCarpentry.CraftSystem; break;
 
-              
+
+
+
 				}
 
-                if (m_CraftSystem == null)
+				if (m_CraftSystem == null)
                 {
                     from.SendMessage( "Vous ne pouvez pas recycler ceci. (Code: 0)");
                     return;
@@ -159,35 +185,60 @@ namespace Server.Items
                     switch (resource)
 				    {
 						case CraftResource.Iron: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.DullCopper: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.ShadowIron: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.Copper: m_CraftSystem = DefTinkering.CraftSystem; break;
 						case CraftResource.Bronze: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Copper: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Sonne: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Argent: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Boreale: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Chrysteliar: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Glacias: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Lithiar: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Acier: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Durian: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Equilibrum: m_CraftSystem = DefTinkering.CraftSystem; break;
 						case CraftResource.Gold: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.Agapite: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.Verite: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.Valorite: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Jolinar: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Justicium: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Abyssium: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Bloodirium: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Herbrosite: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Khandarium: m_CraftSystem = DefTinkering.CraftSystem; break;
 						case CraftResource.Mytheril: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Sombralir: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Draconyr: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Heptazion: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Oceanis: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Brazium: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Lunerium: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Marinar: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.Nostalgium: m_CraftSystem = DefTinkering.CraftSystem; break;
 
-						case CraftResource.LupusLeather: m_CraftSystem = DefTailoring.CraftSystem; break;
-						case CraftResource.ReptilienLeather: m_CraftSystem = DefTailoring.CraftSystem; break;
-						case CraftResource.GeantLeather: m_CraftSystem = DefTailoring.CraftSystem; break;
-						case CraftResource.OphidienLeather: m_CraftSystem = DefTailoring.CraftSystem; break;
-						case CraftResource.ArachnideLeather: m_CraftSystem = DefTailoring.CraftSystem; break;
-						case CraftResource.DragoniqueLeather: m_CraftSystem = DefTailoring.CraftSystem; break;
-						case CraftResource.DemoniaqueLeather: m_CraftSystem = DefTailoring.CraftSystem; break;
-						case CraftResource.AncienLeather: m_CraftSystem = DefTailoring.CraftSystem; break;
-						case CraftResource.RegularLeather: m_CraftSystem = DefTailoring.CraftSystem; break;
+
+
+
+						case CraftResource.LupusLeather: m_CraftSystem = DefLeatherArmor.CraftSystem; break;
+						case CraftResource.ReptilienLeather: m_CraftSystem = DefLeatherArmor.CraftSystem; break;
+						case CraftResource.GeantLeather: m_CraftSystem = DefLeatherArmor.CraftSystem; break;
+						case CraftResource.OphidienLeather: m_CraftSystem = DefLeatherArmor.CraftSystem; break;
+						case CraftResource.ArachnideLeather: m_CraftSystem = DefLeatherArmor.CraftSystem; break;
+						case CraftResource.DragoniqueLeather: m_CraftSystem = DefLeatherArmor.CraftSystem; break;
+						case CraftResource.DemoniaqueLeather: m_CraftSystem = DefLeatherArmor.CraftSystem; break;
+						case CraftResource.AncienLeather: m_CraftSystem = DefLeatherArmor.CraftSystem; break;
+						case CraftResource.RegularLeather: m_CraftSystem = DefLeatherArmor.CraftSystem; break;
 
 
 
 						case CraftResource.PalmierWood: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.OakWood: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.AshWood: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.YewWood: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.Heartwood: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.Bloodwood: m_CraftSystem = DefTinkering.CraftSystem; break;
-						case CraftResource.Frostwood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.ErableWood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.CheneWood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.CedreWood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.CypresWood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.SauleWood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.AcajouWood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.EbeneWood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.AmaranteWood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.PinWood: m_CraftSystem = DefTinkering.CraftSystem; break;
+						case CraftResource.AncienWood: m_CraftSystem = DefTinkering.CraftSystem; break;
 					}
 
                     craftItem = m_CraftSystem.CraftItems.SearchFor(targeted.GetType());
@@ -214,31 +265,55 @@ namespace Server.Items
                 {
                     switch (resource)
                     {
-                        case CraftResource.Iron:         resItem = new IronIngot(); break;
-                        case CraftResource.Copper:      resItem = new CopperIngot(); break;
-                        case CraftResource.DullCopper:       resItem = new DullCopperIngot(); break;
-                        case CraftResource.ShadowIron:      resItem = new ShadowIronIngot(); break;
-						case CraftResource.Bronze:		resItem = new BronzeIngot(); break;
-						case CraftResource.Gold:          resItem = new GoldIngot(); break;
-                        case CraftResource.Agapite:     resItem = new AgapiteIngot(); break;
-                        case CraftResource.Verite:      resItem = new VeriteIngot(); break;
-                        case CraftResource.Valorite:    resItem = new ValoriteIngot(); break;
-                        case CraftResource.Mytheril:    resItem = new MytherilIngot(); break;
+
+						case CraftResource.Iron: resItem = new IronIngot(); break;
+						case CraftResource.Bronze: resItem = new BronzeIngot(); break;
+						case CraftResource.Copper: resItem = new CopperIngot(); break;
+						case CraftResource.Sonne: resItem = new SonneIngot(); break;
+						case CraftResource.Argent: resItem = new ArgentIngot(); break;
+						case CraftResource.Boreale: resItem = new BorealeIngot(); break;
+						case CraftResource.Chrysteliar: resItem = new ChrysteliarIngot(); break;
+						case CraftResource.Glacias: resItem = new GlaciasIngot(); break;
+						case CraftResource.Lithiar: resItem = new LithiarIngot(); break;
+						case CraftResource.Acier: resItem = new AcierIngot(); break;
+						case CraftResource.Durian: resItem = new DurianIngot(); break;
+						case CraftResource.Equilibrum: resItem = new EquilibrumIngot(); break;
+						case CraftResource.Gold: resItem = new GoldIngot(); break;
+						case CraftResource.Jolinar: resItem = new JolinarIngot(); break;
+						case CraftResource.Justicium: resItem = new JusticiumIngot(); break;
+						case CraftResource.Abyssium: resItem = new AbyssiumIngot(); break;
+						case CraftResource.Bloodirium: resItem = new BloodiriumIngot(); break;
+						case CraftResource.Herbrosite: resItem = new HerbrositeIngot(); break;
+						case CraftResource.Khandarium: resItem = new KhandariumIngot(); break;
+						case CraftResource.Mytheril: resItem = new MytherilIngot(); break;
+						case CraftResource.Sombralir: resItem = new SombralirIngot(); break;
+						case CraftResource.Draconyr: resItem = new DraconyrIngot(); break;
+						case CraftResource.Heptazion: resItem = new HeptazionIngot(); break;
+						case CraftResource.Oceanis: resItem = new OceanisIngot(); break;
+						case CraftResource.Brazium: resItem = new BraziumIngot(); break;
+						case CraftResource.Lunerium: resItem = new LuneriumIngot(); break;
+						case CraftResource.Marinar: resItem = new MarinarIngot(); break;
+						case CraftResource.Nostalgium: resItem = new NostalgiumIngot(); break;
+						
                     }
                 }
                 else if (resItem is BaseLog)
                 {
                     switch (resource)
                     {
-                        case CraftResource.PalmierWood:      resItem = new PalmierBoard(); break;
-                        case CraftResource.OakWood:       resItem = new OakBoard(); break;
-                        case CraftResource.AshWood:    resItem = new AshBoard(); break;
-                        case CraftResource.YewWood:       resItem = new YewBoard(); break;
-                        case CraftResource.Heartwood:    resItem = new HeartwoodBoard(); break;
-                        case CraftResource.Bloodwood:       resItem = new BloodwoodBoard(); break;
-                        case CraftResource.Frostwood:      resItem = new FrostwoodBoard(); break;
-                      
-                    }
+                       
+						case CraftResource.PalmierWood:  resItem = new PalmierBoard(); break;
+						case CraftResource.ErableWood:  resItem = new ErableBoard(); break;
+						case CraftResource.CheneWood:  resItem = new CheneBoard(); break;
+						case CraftResource.CedreWood:  resItem = new CedreBoard(); break;
+						case CraftResource.CypresWood:  resItem = new CypresBoard(); break;
+						case CraftResource.SauleWood:  resItem = new SauleBoard(); break;
+						case CraftResource.AcajouWood:  resItem = new AcajouBoard(); break;
+						case CraftResource.EbeneWood:  resItem = new EbeneBoard(); break;
+						case CraftResource.AmaranteWood:  resItem = new AmaranteBoard(); break;
+						case CraftResource.PinWood:  resItem = new PinBoard(); break;
+						case CraftResource.AncienWood:  resItem = new AncienBoard(); break;
+					}
                 }
                 else if (resItem is BaseBone)
                 {

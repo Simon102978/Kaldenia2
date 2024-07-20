@@ -14,7 +14,17 @@ namespace Server.Items
         public BaseAxe(int itemID)
             : base(itemID)
         {
-             UsesRemaining = 50;
+       //      UsesRemaining = 50;
+
+       /*     if (Quality == ItemQuality.Exceptional )
+            {
+               UsesRemaining += 100;
+            }
+            else if (Quality == ItemQuality.Legendary )
+            {
+               UsesRemaining += 300;
+            }*/
+
              ShowUsesRemaining = true;
         }
 

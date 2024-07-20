@@ -15,6 +15,7 @@ namespace Server.Mobiles
         {
             public InternalBuyInfo()
             {
+
                 Add(new GenericBuyInfo(typeof(BronzeShield), 66, 20, 0x1B72, 0));
                 Add(new GenericBuyInfo(typeof(Buckler), 50, 20, 0x1B73, 0));
                 Add(new GenericBuyInfo(typeof(MetalKiteShield), 123, 20, 0x1B74, 0));
@@ -28,12 +29,13 @@ namespace Server.Mobiles
         {
             public InternalSellInfo()
             {
-                Add(typeof(Buckler), 25);
-                Add(typeof(BronzeShield), 33);
-                Add(typeof(MetalShield), 60);
-                Add(typeof(MetalKiteShield), 62);
-                Add(typeof(HeaterShield), 115);
-                Add(typeof(WoodenKiteShield), 35);
+                Add(typeof(Buckler), 5);
+				Add(typeof(BronzeShield), 3);
+                Add(typeof(MetalShield), 6);
+                Add(typeof(MetalKiteShield), 2);
+                Add(typeof(HeaterShield), 5);
+                Add(typeof(WoodenKiteShield), 5);
+                Add(typeof(WoodenShield), 5);
             }
         }
     }

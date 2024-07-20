@@ -23,6 +23,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Custom.Jerbal.Jako;
+using static CustomRecipeScrolls;
+
 #endregion
 
 namespace Server.Mobiles
@@ -5743,34 +5745,39 @@ namespace Server.Mobiles
 
             GenerateLoot();
 
-            if (m_Paragon)
-            {
-				GenerateLootParagon();
+					if (Utility.RandomDouble() < 0.01) // 1% de chance
+					{
+						PackItem(new SkillCard());
+					}
 
+			if (Utility.RandomDouble() < 0.01) //  1% de chance
+			{
+				Type[] recipeScrolls = CustomRecipeScrollTypes2;
 
-				/*
-                if (Fame < 1250)
-                {
-                    AddLoot(LootPack.Meager);
-                }
-                else if (Fame < 2500)
-                {
-                    AddLoot(LootPack.Average);
-                }
-                else if (Fame < 5000)
-                {
-                    AddLoot(LootPack.Rich);
-                }
-                else if (Fame < 10000)
-                {
-                    AddLoot(LootPack.FilthyRich);
-                }
-                else
-                {
-                    AddLoot(LootPack.UltraRich);
-                }*/
-			}
+				// Sélectionner un scroll de recette aléatoire
+				Type scrollType = recipeScrolls[Utility.Random(recipeScrolls.Length)];
+				PackItem((Item)Activator.CreateInstance(scrollType));
 
+				if (m_Paragon)
+                {
+				    GenerateLootParagon();
+
+						if (Utility.RandomDouble() < 0.10) // 10% de chance
+					{
+						PackItem(new SkillCard());
+					}
+
+					if (Utility.RandomDouble() < 0.10) // 10% de chance
+					{
+					//	Type[] recipeScrolls = CustomRecipeScrollTypes2;
+
+						// Sélectionner un scroll de recette aléatoire
+						Type scrollType2 = recipeScrolls[Utility.Random(recipeScrolls.Length)];
+						PackItem((Item)Activator.CreateInstance(scrollType2));
+	
+					}
+                }
+            }
             KillersLuck = 0;
         }
 
@@ -6177,6 +6184,43 @@ namespace Server.Mobiles
 			
 		}
 
+		private void AddRecipeScrollToLoot()
+		{
+			if (Utility.RandomDouble() < 0.03) // 3% de chance, ajustez selon vos besoins
+			{
+				Type[] recipeScrolls = CustomRecipeScrollTypes2;
+
+				// Sélectionner un scroll de recette aléatoire
+				Type scrollType = recipeScrolls[Utility.Random(recipeScrolls.Length)];
+				PackItem((Item)Activator.CreateInstance(scrollType));
+			}
+		}
+
+		public static Type[] CustomRecipeScrollTypes2 => m_CustomRecipeScroll2;
+		private static readonly Type[] m_CustomRecipeScroll2 = new[]
+		{
+	typeof(Pantalon1RecipeScroll),
+	typeof(RobeNimRecipeScroll),
+	typeof(SuperiorAgilityPotionRecipeScroll),
+	typeof(ArbaviveRecipeScroll),
+	typeof(FoliereRecipeScroll),
+	typeof(InvisibilityPotionRecipeScroll),
+	typeof(ForgeRecipeScroll),
+	typeof(FourreauDoreeRecipeScroll),
+	typeof(HitsMaxBuffFoodRecipeScroll),
+	typeof(CoffreFortRecipeScroll),
+	typeof(CoffreMetalRouilleRecipeScroll),
+	typeof(PeauOursPolaireRecipeScroll),
+	typeof(MountedDreadHornRecipeScroll),
+	typeof(Jupe10RecipeScroll),
+	typeof(StoneMiningBookRecipeScroll),
+	typeof(CoffreMaritimeRecipeScroll),
+	typeof(ManteauVoyageurRecipeScroll),
+	typeof(CoffreMetalVisqueuxRecipeScroll),
+	typeof(StamMaxBuffFoodRecipeScroll),
+	typeof(SuperiorCurePotionRecipeScroll)
+};
+
 		public virtual double TreasureMapChance => TreasureMap.LootChance;
         public virtual int TreasureMapLevel => -1;
 
@@ -6203,7 +6247,13 @@ namespace Server.Mobiles
                             map = Map.Felucca;
 
                         PackItem(new TreasureMap(treasureLevel, map, SpellHelper.IsEodon(map, Location)));
-                    }
+						// Ajouter une chance de drop pour un scroll de recette
+						if (treasureLevel >= 3)
+						{
+							AddRecipeScrollToLoot();
+						}
+					
+				}
                 }
 
                 if (m_Paragon && Paragon.ChocolateIngredientChance > Utility.RandomDouble())

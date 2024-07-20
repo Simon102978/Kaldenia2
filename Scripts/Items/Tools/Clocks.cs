@@ -175,6 +175,8 @@ namespace Server.Items
             exactTime = string.Format("{0}:{1:D2}", hours, minutes);
         }
 
+        
+
         public override void OnDoubleClick(Mobile from)
         {
             int genericNumber;
@@ -346,7 +348,7 @@ namespace Server.Items
         public LargeGrandfatherClock()
             : base(0x44DD)
         {
-			Name = "Horloge Grand Père";
+			Name = "Horloge Grand Pï¿½re";
 			Weight = 20;
 
 		}
@@ -378,7 +380,7 @@ namespace Server.Items
         public SmallGrandfatherClock()
             : base(0x44D5)
         {
-			Name = "Petite horloge grand père";
+			Name = "Petite horloge grand pï¿½re";
 			Weight = 10;
 
 		}
@@ -410,7 +412,7 @@ namespace Server.Items
         public WhiteGrandfatherClock()
             : base(0x48D4)
         {
-			Name = "Horloge Grand Père Blanche";
+			Name = "Horloge Grand Pï¿½re Blanche";
 			Weight = 20;
 
 		}

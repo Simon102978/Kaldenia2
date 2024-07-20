@@ -83,10 +83,12 @@ namespace Server.Engines.Craft
 
         public override void InitCraftList()
         {
-            AddCraft(typeof(LocalMap), 1044448, 1015230, 10.0, 70.0, typeof(BlankMap), 1044449, 1, 1044450);
-            AddCraft(typeof(CityMap), 1044448, 1015231, 25.0, 85.0, typeof(BlankMap), 1044449, 1, 1044450);
-            AddCraft(typeof(SeaChart), 1044448, 1015232, 35.0, 95.0, typeof(BlankMap), 1044449, 1, 1044450);
-            AddCraft(typeof(WorldMap), 1044448, 1015233, 39.5, 99.5, typeof(BlankMap), 1044449, 1, 1044450);
+			AddCraft(typeof(BlankMap), "Carte", "carte vierge", 10.0, 70.0, typeof(BlankScroll), "Parchemin Vierge", 1, "Vous n'avez pas suffisament de parchemins vierges");
+
+			AddCraft(typeof(LocalMap), "Carte", "Carte Locale", 00.0, 50.0, typeof(BlankMap), "Carte Vierge", 1, "Vous n'avez pas suffisament de carte vierge");
+            AddCraft(typeof(CityMap), "Carte", "Carte de la ville", 25.0, 85.0, typeof(BlankMap), "Carte Vierge", 1, "Vous n'avez pas suffisament de carte vierge");
+            AddCraft(typeof(SeaChart), "Carte", "Carte des eaux", 35.0, 95.0, typeof(BlankMap), "Carte Vierge", 1, "Vous n'avez pas suffisament de carte vierge");
+            AddCraft(typeof(WorldMap), "Carte", "Carte du Monde", 50, 99.5, typeof(BlankMap), "Carte Vierge", 1, "Vous n'avez pas suffisament de carte vierge");
 
   /*          int index = AddCraft(typeof(TatteredWallMapSouth), 1044448, 1072891, 90.0, 150.0, typeof(TreasureMap), 1073494, 10, 1073495);
             AddRes(index, typeof(TreasureMap), 1073498, 5, 1073499);

@@ -12,7 +12,7 @@ namespace Server.Mobiles
         };
         [Constructable]
         public OphidianArchmage()
-            : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Mage, FightMode.Closest, 10, 3, 0.2, 0.4)
         {
             Name = m_Names[Utility.Random(m_Names.Length)];
             Body = 85;
@@ -39,7 +39,9 @@ namespace Server.Mobiles
             SetSkill(SkillName.Magery, 95.1, 100.0);
             SetSkill(SkillName.MagicResist, 75.0, 97.5);
             SetSkill(SkillName.Tactics, 65.0, 87.5);
-            SetSkill(SkillName.Wrestling, 20.2, 60.0);
+            SetSkill(SkillName.Wrestling, 85.1, 100.0);
+
+           AddItem(new BardicheOphidian());
 
             Fame = 11500;
             Karma = -11500;

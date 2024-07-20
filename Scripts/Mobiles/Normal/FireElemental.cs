@@ -58,7 +58,8 @@ namespace Server.Mobiles
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Meager);
             AddLoot(LootPack.LootItem<SulfurousAsh>(3, true));
-        }
+			PackItem(new GolemAsh(GolemAsh.AshType.Feu, Utility.RandomMinMax(0, 5)));
+		}
 
 		public override void GenerateLootParagon()
 		{

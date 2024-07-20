@@ -1158,31 +1158,67 @@ namespace Server.Engines.Craft
 
             int index = 0;
 
-            // Consume ALL
-            if (consumeType == ConsumeType.All)
-            {
-                m_ResHue = 0;
-                m_ResAmount = 0;
-                m_System = craftSystem;
-                CaddelliteCraft = true;
+			// Consume ALL
+			if (consumeType == ConsumeType.All)
+			{
+				m_ResHue = 0;
+				m_ResAmount = 0;
+				m_System = craftSystem;
+				CaddelliteCraft = true;
 
-                if (IsQuantityType(types))
-                {
-                    index = ConsumeQuantity(ourPack, types, amounts);
-                }
-                else if (IsPlantHueType(types))
-                {
-                    index = ConsumeQuantityByPlantHue(from, craftSystem, ourPack, types, amounts);
-                }
-                else
-                {
-                    index = ourPack.ConsumeTotalGrouped(types, amounts, true, ResourceValidator, OnResourceConsumed, CheckHueGrouping);
-                }
+				// Adjust resource amounts on failure
+				if (isFailure)
+				{
+					PlayerMobile pm = from as PlayerMobile;
 
-                resHue = m_ResHue;
-            }
-            // Consume Half ( for use all resource craft type )
-            else if (consumeType == ConsumeType.Half)
+					if (pm != null)
+					{
+						double diminution = 1 - ((pm.Dex + pm.Int) * 0.005);
+
+						if (diminution < 0.05)
+						{
+							diminution = 0.05; // Ensure reduction doesn't drop below 5%
+						}
+
+						for (int i = 0; i < amounts.Length; ++i)
+						{
+							int max = amounts[i];
+
+							// Reduce the amount of consumed materials
+							amounts[i] = (int)(amounts[i] * diminution);
+							amounts[i] += Utility.RandomMinMax(1, 3); // Add a random factor
+
+							// Ensure the amount doesn't exceed the maximum and doesn't fall below 1
+							if (amounts[i] > max)
+							{
+								amounts[i] = max;
+							}
+							if (amounts[i] < 1)
+							{
+								amounts[i] = 1;
+							}
+						}
+					}
+				}
+
+				// Consume resources based on type and amount
+				if (IsQuantityType(types))
+				{
+					index = ConsumeQuantity(ourPack, types, amounts);
+				}
+				else if (IsPlantHueType(types))
+				{
+					index = ConsumeQuantityByPlantHue(from, craftSystem, ourPack, types, amounts);
+				}
+				else
+				{
+					index = ourPack.ConsumeTotalGrouped(types, amounts, true, ResourceValidator, OnResourceConsumed, CheckHueGrouping);
+				}
+
+				resHue = m_ResHue;
+			}
+			// Consume Half ( for use all resource craft type )
+			else if (consumeType == ConsumeType.Half)
             {
                 for (int i = 0; i < amounts.Length; i++)
                 {
@@ -1365,29 +1401,22 @@ namespace Server.Engines.Craft
         }
 
 		public double GetLegendaryChance(CraftSystem system, double successChance, Mobile from)
-        {
+		{
 			if (ForceNonExceptional || successChance <= 0)
-                return 0.0;
-
-            if (ForceExceptional)
-            {
-                bool allRequiredSkills = false;
-                GetSuccessChance(from, null, system, false, ref allRequiredSkills);
-
-                if (allRequiredSkills)
-                    return 100.0;
-            }
+				return 0.0;
 
 			var chanceLegendary = 0.0;
-
 			if (from is CustomPlayerMobile pm)
-            {
-			//	chanceLegendary += pm.Skills[SkillName.ArmsLore].Value / 50;
-				chanceLegendary += pm.Dex / 60;
+			{
+				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
+				double dexFactor = pm.Dex / 100.0;
 
+				// Base chance at 100 skill, 0 dex: 0.001%
+				// Max chance at 100 skill, 100 dex: 0.002%
+				chanceLegendary = 0.00001 * skillFactor * (1 + 0.1 * dexFactor);
 			}
 
-			return chanceLegendary;
+			return Math.Min(chanceLegendary, 0.00002); // Max 0.002%
 		}
 
 		public double GetEpicChance(CraftSystem system, double successChance, Mobile from)
@@ -1395,104 +1424,107 @@ namespace Server.Engines.Craft
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
 
-			if (ForceExceptional)
-			{
-				bool allRequiredSkills = false;
-				GetSuccessChance(from, null, system, false, ref allRequiredSkills);
-
-				if (allRequiredSkills)
-					return 100.0;
-			}
-
 			var chanceEpic = 0.0;
-
 			if (from is CustomPlayerMobile pm)
 			{
-				// chanceEpic += pm.Skills[SkillName.ArmsLore].Value / 20;
-				chanceEpic += pm.Dex / 30;
+				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
+				double dexFactor = pm.Dex / 100.0;
+
+				// Base chance at 100 skill, 0 dex: 0.2%
+				// Max chance at 100 skill, 100 dex: 0.4%
+				chanceEpic = 0.002 * skillFactor * (1 + 0.1 * dexFactor);
 			}
 
-			return chanceEpic;
-					}
-					
+			return Math.Min(chanceEpic, 0.004); // Max 0.4%
+		}
+
 		public double GetExceptionalChance(CraftSystem system, double successChance, Mobile from)
 		{
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
 
-			if (ForceExceptional)
-                        {
-				bool allRequiredSkills = false;
-				GetSuccessChance(from, null, system, false, ref allRequiredSkills);
+			var exceptionalChance = 0.0;
+			if (from is CustomPlayerMobile pm)
+			{
+				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
+				double dexFactor = pm.Dex / 100.0;
 
-				if (allRequiredSkills)
-					return 100.0;
+				// Base chance at 100 skill, 0 dex: 5%
+				// Max chance at 100 skill, 100 dex: 10%
+				// At 0 skill, 100 dex: 5%
+				exceptionalChance = 0.05 * (skillFactor + 0.5 * dexFactor);
 			}
 
-			var exceptionalChance = 0.0;
-
-			if (from is CustomPlayerMobile pm)
-            {
-				// exceptionalChance += pm.Skills[SkillName.ArmsLore].Value / 5;
-				exceptionalChance += pm.Dex / 10;
-            }
-
-			return exceptionalChance;
-        }
+			return Math.Min(exceptionalChance, 0.10); // Max 10%
+		}
 
 		public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills, int maxAmount)
-        {
-            return CheckSkills(from, typeRes, craftSystem, ref quality, ref allRequiredSkills, true, maxAmount);
-        }
+		{
+			return CheckSkills(from, typeRes, craftSystem, ref quality, ref allRequiredSkills, true, maxAmount);
+		}
 
 		public ItemQuality GetQuality(CraftSystem system, double successChance, Mobile from, int expertise)
 		{
-			double chanceLegendary = GetLegendaryChance(system, successChance, from); // Max 2%
-			double chanceEpic = GetEpicChance(system, successChance, from); // Max 5%
-			double chanceExceptional = GetExceptionalChance(system, successChance, from); // Max 20%
+			double chanceLegendary = GetLegendaryChance(system, successChance, from);
+			double chanceEpic = GetEpicChance(system, successChance, from);
+			double chanceExceptional = GetExceptionalChance(system, successChance, from);
 
-			double roll = Utility.RandomDouble() * 100; // Convertir en pourcentage
+			// Apply expertise bonus
+			double expertiseBonus = expertise * 0.0001; // 0.0001% per expertise level
+			chanceLegendary += expertiseBonus;
+			chanceEpic += expertiseBonus * 2;
+			chanceExceptional += expertiseBonus * 3;
 
-			if (roll <= chanceLegendary)
+			double roll = Utility.RandomDouble();
+
+			if (roll < chanceLegendary)
 				return ItemQuality.Legendary;
-			else if (roll <= chanceLegendary + chanceEpic)
+			else if (roll < chanceLegendary + chanceEpic)
 				return ItemQuality.Epic;
-			else if (roll <= chanceLegendary + chanceEpic + chanceExceptional)
+			else if (roll < chanceLegendary + chanceEpic + chanceExceptional)
 				return ItemQuality.Exceptional;
 
 			return ItemQuality.Normal;
 		}
 
-        public bool CheckSkills(
-            Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills, bool gainSkills, int maxAmount)
-        {
-            double chance = GetSuccessChance(from, typeRes, craftSystem, gainSkills, ref allRequiredSkills, maxAmount);
+		public bool CheckSkills(
+			Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills, bool gainSkills, int maxAmount)
+		{
+			double chance = GetSuccessChance(from, typeRes, craftSystem, gainSkills, ref allRequiredSkills, maxAmount);
 
-			double exceptionalChance = GetExceptionalChance(craftSystem, chance, from);
-			double epicChance = GetEpicChance(craftSystem, chance, from);
 			double legendaryChance = GetLegendaryChance(craftSystem, chance, from);
+			double epicChance = GetEpicChance(craftSystem, chance, from);
+			double exceptionalChance = GetExceptionalChance(craftSystem, chance, from);
 
-			double roll = Utility.RandomDouble() * 100; // Convertir en pourcentage
+			// Apply expertise bonus
+			int expertise = 0; // You need to implement a way to get the expertise level
+			double expertiseBonus = expertise * 0.0001; // 0.0001% per expertise level
+			legendaryChance += expertiseBonus;
+			epicChance += expertiseBonus * 2;
+			exceptionalChance += expertiseBonus * 3;
 
-			if (roll <= legendaryChance)
+
+			double roll = Utility.RandomDouble();
+
+			if (roll < legendaryChance)
 			{
 				quality = 4;
 			}
-			else if (roll <= legendaryChance + epicChance)
+			else if (roll < legendaryChance + epicChance)
 			{
 				quality = 3;
 			}
-			else if (roll <= legendaryChance + epicChance + exceptionalChance)
-            {
-                quality = 2;
-            }
+			else if (roll < legendaryChance + epicChance + exceptionalChance)
+			{
+				quality = 2;
+			}
 			else
 			{
 				quality = 1;
 			}
 
-            return (chance > Utility.RandomDouble());
-        }
+			return (chance > Utility.RandomDouble());
+		}
 
 
 
@@ -1831,7 +1863,7 @@ namespace Server.Engines.Craft
 
         public bool CanSee(Mobile from, CraftSystem craftsystem)
         {
-            for (int i = 0; i < Skills.Count; i++)
+       /*     for (int i = 0; i < Skills.Count; i++)
             {
                 CraftSkill craftSkill = Skills.GetAt(i);
 
@@ -1842,7 +1874,7 @@ namespace Server.Engines.Craft
                 {
                     return false;
                 }
-            }
+            }*/
 
             if ((Recipe != null && from is PlayerMobile && !((PlayerMobile)from).HasRecipe(Recipe)))
             {

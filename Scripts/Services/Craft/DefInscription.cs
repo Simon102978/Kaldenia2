@@ -5,8 +5,17 @@ namespace Server.Engines.Craft
 {
     public enum InscriptionRecipes
     {
-        
-    }
+		[Description("Connaissance du verre")]
+		GlassblowingBook = 30001,
+		[Description("Connaissance récolte du sable")]
+		SandMiningBook = 30002,
+		[Description("Connaissance Récolte de pierre")]
+		StoneMiningBook = 30003,
+		[Description("Connaissance de la pierre")]
+		MasonryBook = 30004,
+		[Description("Connaissance géologie")]
+		GemMiningBook = 30005,
+	}
 
     public class DefInscription : CraftSystem
     {
@@ -906,23 +915,23 @@ namespace Server.Engines.Craft
 
 
 			index = AddCraft(typeof(LivreClasse0Oubli), "Livre de Classe", "livre de l'oubli de classe 0", 50.0, 60, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(Tourmaline), "Tourmaline", 10, "Vous n'avez pas assez de Tourmaline.");
 
 			index = AddCraft(typeof(LivreClasse1Oubli), "Livre de Classe", "livre de l'oubli de classe 1", 70.0, 90, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(Rubis), "Rubis", 10, "Vous n'avez pas assez de Rubis.");
 
 			index = AddCraft(typeof(LivreClasse2Oubli), "Livre de Classe", "livre de l'oubli de classe 2", 90.0, 100, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(DragonBlood), "Sang de Dragon", 5, "Vous n'avez pas assez de Sand de Dragon.");
 
 
 			index = AddCraft(typeof(LivreMetier0Oubli), "Livre de Classe", "livre de l'oubli de métier 0", 50.0, 60, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(Citrine), "Citrine", 10, "Vous n'avez pas assez de Citrine.");
 
 			index = AddCraft(typeof(LivreMetier1Oubli), "Livre de Classe", "livre de l'oubli de métier 1", 70.0, 90, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(Ambre), "Ambre", 10, "Vous n'avez pas assez d'Ambre.");
 
 			index = AddCraft(typeof(LivreMetier2Oubli), "Livre de Classe", "livre de l'oubli de métier 2", 90.0, 100, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "DragonBlood", 10, "Vous n'avez pas assez de DragonBlood.");
+			AddRes(index, typeof(DragonBlood), "Sang de Dragon", 5, "Vous n'avez pas assez de Sang de Dragon.");
 
 
 			#region Skills
@@ -933,16 +942,19 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LivreSkillsArchery), "Livre d'étude (skills)", "Archery", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsArmsLore), "Livre d'étude (skills)", "ArmsLore", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			//index = AddCraft(typeof(LivreSkillsBegging), "Livre d'étude (skills)", "Begging", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsBotanique), "Livre d'étude (skills)", "Botanique", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsBlacksmith), "Livre d'étude (skills)", "Blacksmith", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
-			//index = AddCraft(typeof(LivreSkillsCamping), "Livre d'étude (skills)", "Camping", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
-			//index = AddCraft(typeof(LivreSkillsCarpentry), "Livre d'étude (skills)", "Carpentry", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
-			//index = AddCraft(typeof(LivreSkillsCartography), "Livre d'étude (skills)", "Cartography", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsCamping), "Livre d'étude (skills)", "Camping", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsCarpentry), "Livre d'étude (skills)", "Carpentry", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsCartography), "Livre d'étude (skills)", "Cartography", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsConcentration), "Livre d'étude (skills)", "Concentration", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsCooking), "Livre d'étude (skills)", "Cooking", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			//index = AddCraft(typeof(LivreSkillsDetectHidden), "Livre d'étude (skills)", "DetectHidden", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
-			//index = AddCraft(typeof(LivreSkillsDiscordance), "Livre d'étude (skills)", "Discordance", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsDiscordance), "Livre d'étude (skills)", "Discordance", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsEvalInt), "Livre d'étude (skills)", "EvalInt", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsEquitation), "Livre d'étude (skills)", "Equitation", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsFencing), "Livre d'étude (skills)", "Fencing", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
-			//index = AddCraft(typeof(LivreSkillsFishing), "Livre d'étude (skills)", "Fishing", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsFishing), "Livre d'étude (skills)", "Fishing", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			//index = AddCraft(typeof(LivreSkillsFletching), "Livre d'étude (skills)", "Fletching", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			//index = AddCraft(typeof(LivreSkillsForensics), "Livre d'étude (skills)", "Forensics", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsHealing), "Livre d'étude (skills)", "Healing", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
@@ -950,7 +962,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LivreSkillsHiding), "Livre d'étude (skills)", "Hiding", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsInscribe), "Livre d'étude (skills)", "Inscribe", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			//index = AddCraft(typeof(LivreSkillsItemID), "Livre d'étude (skills)", "ItemID", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
-			//index = AddCraft(typeof(LivreSkillsLockpicking), "Livre d'étude (skills)", "Lockpicking", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsLockpicking), "Livre d'étude (skills)", "Lockpicking", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsLumberjacking), "Livre d'étude (skills)", "Lumberjacking", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsMacing), "Livre d'étude (skills)", "Macing", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsMagery), "Livre d'étude (skills)", "Magery", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
@@ -960,13 +972,13 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LivreSkillsMusicianship), "Livre d'étude (skills)", "Musicianship", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsNecromancy), "Livre d'étude (skills)", "Necromancy", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsParry), "Livre d'étude (skills)", "Parry", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
-			//index = AddCraft(typeof(LivreSkillsPeacemaking), "Livre d'étude (skills)", "Peacemaking", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsPeacemaking), "Livre d'étude (skills)", "Peacemaking", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsPoisoning), "Livre d'étude (skills)", "Poisoning", 25.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
-			//index = AddCraft(typeof(LivreSkillsProvocation), "Livre d'étude (skills)", "Provocation", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
-			//index = AddCraft(typeof(LivreSkillsRemoveTrap), "Livre d'étude (skills)", "Remove Trap", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsProvocation), "Livre d'étude (skills)", "Provocation", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsRemoveTrap), "Livre d'étude (skills)", "Remove Trap", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsSpiritSpeak), "Livre d'étude (skills)", "SpiritSpeak", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsSnooping), "Livre d'étude (skills)", "Snooping", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
-			//index = AddCraft(typeof(LivreSkillsStealing), "Livre d'étude (skills)", "Stealing", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
+			index = AddCraft(typeof(LivreSkillsStealing), "Livre d'étude (skills)", "Stealing", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			//index = AddCraft(typeof(LivreSkillsStealth), "Livre d'étude (skills)", "Stealth", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsSwords), "Livre d'étude (skills)", "Swords", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
 			index = AddCraft(typeof(LivreSkillsTactics), "Livre d'étude (skills)", "Tactics", 30.0, 50.0, typeof(LivreVierge), "Livre vierge", 1, "Vous n'avez pas de livre vierge.");
@@ -1074,36 +1086,46 @@ namespace Server.Engines.Craft
 
 			#region Autres
 
-			index = AddCraft(typeof(NewSpellbook), "Autres", "Livre de sort", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
+			index = AddCraft(typeof(Calendrier), "Autres", "Calendrier", 0.0, 25.0, typeof(BlankScroll), 1044377, 5, 1044378);
 
-			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre de Barde", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
-			index = AddCraft(typeof(BlankScroll), "Autres", "Parchemin Vierge", 10.0, 20.0, typeof(Kindling), "Kindling", 5, "Vous n'avez pas assez de Petit Bois.");
+			index = AddCraft(typeof(BlankScroll), "Autres", "Parchemin Vierge", 10.0, 50.0, typeof(Kindling), "Kindling", 10, "Vous n'avez pas assez de Petit Bois.");
+			AddRes(index, typeof(Cloth), "Tissus", 5, "Vous n'avez pas assez de Tissus.");
+			AddRes(index, typeof(Leather), "Cuir", 1, "Vous n'avez pas assez de cuir.");
+
+
 			index = AddCraft(typeof(Missive), "Autres", "Missive", 15.0, 50.0, typeof(BlankScroll), 1044377, 1, 1044378);
 
 			index = AddCraft(typeof(CarnetAdresse), "Autres", "Carnet Adresse", 25.0, 50.0, typeof(BlankScroll), 1044377, 10, 1044378);
-			index = AddCraft(typeof(Calendrier), "Autres", "Calendrier", 0.0, 25.0, typeof(BlankScroll), 1044377, 5, 1044378);
 
-			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre  Barde", 15.0, 50.0, typeof(BlankScroll), 1044377, 20, 1044378);
+
+			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre de Barde", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
+			index = AddCraft(typeof(NewSpellbook), "Autres", "Livre de sort", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
+
 
 			index = AddCraft(typeof(GargoyleBook100), "Autres", "Livre 100 pages", 60.0, 100.0, typeof(BlankScroll), 1044377, 40, 1044378);
 			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
 
-			index = AddCraft(typeof(CarnetAdresse), "Autres", "Carn Adresse", 25.0, 50.0, typeof(BlankScroll), 1044377, 40, 1044378);
-			AddRes(index, typeof(Beeswax), 1025154, 4, 1053098);
-
-			index = AddCraft(typeof(Calendrier), "Autres", "Calendrier", 0.0, 25.0, typeof(BlankScroll), 1044377, 20, 1044378);
-
 			index = AddCraft(typeof(GlassblowingBook), "Autres", "Conn Verre", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
+			AddRecipe(index, (int)InscriptionRecipes.GlassblowingBook);
+
 
 			index = AddCraft(typeof(SandMiningBook), "Autres", "Conn Sable", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
+			AddRecipe(index, (int)InscriptionRecipes.SandMiningBook);
+
 
 			index = AddCraft(typeof(StoneMiningBook), "Autres", "Conn Granite", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
+			AddRecipe(index, (int)InscriptionRecipes.StoneMiningBook);
+
 
 			index = AddCraft(typeof(MasonryBook), "Autres", "Conn Pierre", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
+			AddRecipe(index, (int)InscriptionRecipes.MasonryBook);
+
 
 			index = AddCraft(typeof(GemMiningBook), "Autres", "Conn Gems", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
+			AddRecipe(index, (int)InscriptionRecipes.GemMiningBook);
 
-#endregion
+
+			#endregion
 
 
 			MarkOption = true;

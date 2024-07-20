@@ -4,6 +4,9 @@ using Server.Gumps;
 
 namespace Server.Items
 {
+
+	[Flipable(0xEFA, 0x2253, 0x2252, 0x2254, 0x238C, 0x23A0, 0x225A, 0x2D50, 0x2D9D)]
+
 	public class NewSpellbook : Spellbook
 	{
 		public override SpellbookType SpellbookType { get { return SpellbookType.Regular; } }
@@ -11,6 +14,8 @@ namespace Server.Items
 		public override int BookCount { get { return 200; } }
 
 		public ArrayList Contents = new ArrayList();
+
+
 
 		[Constructable]
 		public NewSpellbook()

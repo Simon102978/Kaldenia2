@@ -9,7 +9,15 @@ namespace Server.Engines.Harvest
 	public class CustomMining : HarvestSystem
 	{
 		private static CustomMining m_GeneralSystem { get; set; }
-
+		public static CustomMining GeneralSystem
+		{
+			get
+			{
+				if (m_GeneralSystem == null)
+					m_GeneralSystem = new CustomMining();
+				return m_GeneralSystem;
+			}
+		}
 		public static HarvestSystem GetSystem(Item item)
 		{
 			Map map;
@@ -96,32 +104,37 @@ namespace Server.Engines.Harvest
 
 			res = new HarvestResource[]
 			{
-				new HarvestResource(00.0,  -100.0, 100.0, "Fer",        typeof(IronOre)),
-				new HarvestResource(00.0,  00.0, 100.0, "Bronze",       typeof(BronzeOre)),
-				new HarvestResource(00.0,  00.0, 100.0, "Cuivre",       typeof(CopperOre)),
-				new HarvestResource(30.0,  30.0, 100.0, "Sonne",        typeof(SonneOre)),
-				new HarvestResource(30.0,  30.0, 100.0, "Argent",       typeof(ArgentOre)),
-				new HarvestResource(30.0,  30.0, 100.0, "Boréale",      typeof(BorealeOre)),
-				new HarvestResource(30.0,  30.0, 100.0, "Chrysteliar",  typeof(ChrysteliarOre)),
-				new HarvestResource(30.0,  30.0, 100.0, "Glacias",      typeof(GlaciasOre)),
-				new HarvestResource(30.0,  30.0, 100.0, "Lithiar",      typeof(LithiarOre)),
-				new HarvestResource(50.0,  50.0, 100.0, "Acier",        typeof(AcierOre)),
-				new HarvestResource(50.0,  50.0, 100.0, "Durian",       typeof(DurianOre)),
-				new HarvestResource(50.0,  50.0, 100.0, "Équilibrum",   typeof(EquilibrumOre)),
-				new HarvestResource(50.0,  50.0, 100.0, "Or",           typeof(GoldOre)),
-				new HarvestResource(50.0,  50.0, 100.0, "Jolinar",      typeof(JolinarOre)),
-				new HarvestResource(50.0,  50.0, 100.0, "Justicium",    typeof(JusticiumOre)),
-				new HarvestResource(70.0,  70.0, 100.0, "Abyssium",     typeof(AbyssiumOre)),
-				new HarvestResource(70.0,  70.0, 100.0, "Bloodirium",   typeof(BloodiriumOre)),
-				new HarvestResource(70.0,  70.0, 100.0, "Herbrosite",   typeof(HerbrositeOre)),
-				new HarvestResource(70.0,  70.0, 100.0, "Khandarium",   typeof(KhandariumOre)),
-				new HarvestResource(70.0,  70.0, 100.0, "Mytheril",     typeof(MytherilOre)),
-				new HarvestResource(70.0,  70.0, 100.0, "Sombralir",    typeof(SombralirOre)),
+				new HarvestResource(00.0,  -100.0, 100.0, "Fer",        typeof(IronOre),		    typeof(Granite)), 
+				new HarvestResource(00.0,  00.0, 100.0, "Bronze",       typeof(BronzeOre),			typeof(BronzeGranite)), 
+				new HarvestResource(00.0,  00.0, 100.0, "Cuivre",       typeof(CopperOre),			typeof(CopperGranite)),
+				new HarvestResource(30.0,  30.0, 100.0, "Sonne",        typeof(SonneOre),			typeof(SonneGranite),      typeof(EarthElemental)),
+				new HarvestResource(30.0,  30.0, 100.0, "Argent",       typeof(ArgentOre),			typeof(ArgentGranite),     typeof(EarthElemental)),
+				new HarvestResource(30.0,  30.0, 100.0, "Boréale",      typeof(BorealeOre),         typeof(BorealeGranite),    typeof(EarthElemental)),
+				new HarvestResource(30.0,  30.0, 100.0, "Chrysteliar",  typeof(ChrysteliarOre),		typeof(ChrysteliarGranite),typeof(EarthElemental)),
+				new HarvestResource(30.0,  30.0, 100.0, "Glacias",      typeof(GlaciasOre),         typeof(GlaciasGranite),    typeof(EarthElemental)),
+				new HarvestResource(30.0,  30.0, 100.0, "Lithiar",      typeof(LithiarOre),         typeof(LithiarGranite),    typeof(EarthElemental)),
+				new HarvestResource(50.0,  50.0, 100.0, "Acier",        typeof(AcierOre),           typeof(AcierGranite),		typeof(FireElemental)),
+				new HarvestResource(50.0,  50.0, 100.0, "Durian",       typeof(DurianOre),          typeof(DurianGranite),		typeof(FireElemental)),
+				new HarvestResource(50.0,  50.0, 100.0, "Équilibrum",   typeof(EquilibrumOre),      typeof(EquilibrumGranite),	typeof(WaterElemental)),
+				new HarvestResource(50.0,  50.0, 100.0, "Or",           typeof(GoldOre),            typeof(GoldGranite),        typeof(WaterElemental)),
+				new HarvestResource(50.0,  50.0, 100.0, "Jolinar",      typeof(JolinarOre),         typeof(JolinarGranite),     typeof(Treefellow)),
+				new HarvestResource(50.0,  50.0, 100.0, "Justicium",    typeof(JusticiumOre),       typeof(JusticiumGranite),   typeof(Treefellow)),
+				new HarvestResource(70.0,  70.0, 100.0, "Abyssium",     typeof(AbyssiumOre),        typeof(AbyssiumGranite),    typeof(BloodElemental)),
+				new HarvestResource(70.0,  70.0, 100.0, "Bloodirium",   typeof(BloodiriumOre),      typeof(BloodiriumGranite),  typeof(BloodElemental)),
+				new HarvestResource(70.0,  70.0, 100.0, "Herbrosite",   typeof(HerbrositeOre),      typeof(HerbrositeGranite),  typeof(PoisonElemental)),
+				new HarvestResource(70.0,  70.0, 100.0, "Khandarium",   typeof(KhandariumOre),      typeof(KhandariumGranite),  typeof(PoisonElemental)),
+				new HarvestResource(70.0,  70.0, 100.0, "Mytheril",     typeof(MytherilOre),        typeof(MytherilGranite),    typeof(EnergyVortex)),
+				new HarvestResource(70.0,  70.0, 100.0, "Sombralir",    typeof(SombralirOre),       typeof(SombralirGranite),   typeof(EnergyVortex))
 			};
 
 			veins = new HarvestVein[]
 			{
 				new HarvestVein(100.0, 0.0, res[0],  null),   // Fer
+				
+																
+
+
+
             };
 
 			oreAndStone.Resources = res;
@@ -194,7 +207,7 @@ namespace Server.Engines.Harvest
 
 			res = new HarvestResource[]
 			{
-				new HarvestResource(100.0, 70.0, 100.0, 1044631, typeof(Sand))
+				new HarvestResource(50.0, 30.0, 100.0, 1044631, typeof(Sand))
 			};
 
 			veins = new HarvestVein[]
@@ -215,14 +228,11 @@ namespace Server.Engines.Harvest
 			{
 				#region Void Pool Items
 				var hmap = HarvestMap.CheckMapOnHarvest(from, loc, def);
-
 				if (hmap != null && hmap.Resource >= CraftResource.Iron && hmap.Resource <= CraftResource.Valorite)
 				{
 					hmap.UsesRemaining--;
 					hmap.InvalidateProperties();
-
 					var info = CraftResources.GetInfo(hmap.Resource);
-
 					if (info != null)
 						return info.ResourceTypes[1];
 				}
@@ -240,9 +250,71 @@ namespace Server.Engines.Harvest
 					return Loot.GemTypes[Utility.Random(Loot.GemTypes.Length)];
 
 				var chance = tool is RockHammer ? 0.50 : 0.15;
-
-				if (pm != null && pm.StoneMining && (pm.ToggleMiningStone || pm.ToggleStoneOnly) && from.Skills[SkillName.Mining].Base >= 100.0 && chance > Utility.RandomDouble())
+				if (pm != null && pm.StoneMining && (pm.ToggleMiningStone || pm.ToggleStoneOnly) && from.Skills[SkillName.Mining].Base >= 50.0 && chance > Utility.RandomDouble())
+				{
+					// Ajout de la logique pour les types de granit personnalisés
+					if (resource.Types.Length > 1 && resource.Types[1] != null)
+					{
+						Type stoneType = resource.Types[1];
+						if (stoneType == typeof(Granite))
+							return typeof(Granite);
+						else if (stoneType == typeof(BronzeGranite))
+							return typeof(BronzeGranite);
+						else if (stoneType == typeof(CopperGranite))
+							return typeof(CopperGranite);
+						else if (stoneType == typeof(SonneGranite))
+							return typeof(SonneGranite);
+						else if (stoneType == typeof(ArgentGranite))
+							return typeof(ArgentGranite);
+						else if (stoneType == typeof(BorealeGranite))
+							return typeof(BorealeGranite);
+						else if (stoneType == typeof(ChrysteliarGranite))
+							return typeof(ChrysteliarGranite);
+						else if (stoneType == typeof(GlaciasGranite))
+							return typeof(GlaciasGranite);
+						else if (stoneType == typeof(LithiarGranite))
+							return typeof(LithiarGranite);
+						else if (stoneType == typeof(AcierGranite))
+							return typeof(AcierGranite);
+						else if (stoneType == typeof(DurianGranite))
+							return typeof(DurianGranite);
+						else if (stoneType == typeof(EquilibrumGranite))
+							return typeof(EquilibrumGranite);
+						else if (stoneType == typeof(GoldGranite))
+							return typeof(GoldGranite);
+						else if (stoneType == typeof(JolinarGranite))
+							return typeof(JolinarGranite);
+						else if (stoneType == typeof(JusticiumGranite))
+							return typeof(JusticiumGranite);
+						else if (stoneType == typeof(AbyssiumGranite))
+							return typeof(AbyssiumGranite);
+						else if (stoneType == typeof(BloodiriumGranite))
+							return typeof(BloodiriumGranite);
+						else if (stoneType == typeof(HerbrositeGranite))
+							return typeof(HerbrositeGranite);
+						else if (stoneType == typeof(KhandariumGranite))
+							return typeof(KhandariumGranite);
+						else if (stoneType == typeof(MytherilGranite))
+							return typeof(MytherilGranite);
+						else if (stoneType == typeof(SombralirGranite))
+							return typeof(SombralirGranite);
+						else if (stoneType == typeof(DraconyrGranite))
+							return typeof(DraconyrGranite);
+						else if (stoneType == typeof(HeptazionGranite))
+							return typeof(HeptazionGranite);
+						else if (stoneType == typeof(OceanisGranite))
+							return typeof(OceanisGranite);
+						else if (stoneType == typeof(BraziumGranite))
+							return typeof(BraziumGranite);
+						else if (stoneType == typeof(LuneriumGranite))
+							return typeof(LuneriumGranite);
+						else if (stoneType == typeof(MarinarGranite))
+							return typeof(MarinarGranite);
+						else if (stoneType == typeof(NostalgiumGranite))
+							return typeof(NostalgiumGranite);
+					}
 					return resource.Types[1];
+				}
 
 				if (pm != null && pm.ToggleStoneOnly)
 					return null;
@@ -300,7 +372,7 @@ namespace Server.Engines.Harvest
 			if (!base.CheckHarvest(from, tool, def, toHarvest))
 				return false;
 
-			if (def == Sand && !(from is PlayerMobile && from.Skills[SkillName.Mining].Base >= 100.0 && ((PlayerMobile)from).SandMining))
+			if (def == Sand && !(from is PlayerMobile && from.Skills[SkillName.Mining].Base >= 50.0 && ((PlayerMobile)from).SandMining))
 			{
 				OnBadHarvestTarget(from, tool, toHarvest);
 				return false;
