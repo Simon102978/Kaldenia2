@@ -344,7 +344,7 @@ namespace Server.Items
 		public virtual bool IsNight(Mobile from)
 		{
 			if (from == null || from.Map == null)
-				return false; // ou true, selon votre logique par défaut
+				return false; // ou true, selon votre logique par dï¿½faut
 
 			int hours, minutes;
 			Server.Items.Clock.GetTime(from.Map, from.X, from.Y, out hours, out minutes);
@@ -363,7 +363,7 @@ namespace Server.Items
 
 				  if (!IsInside(from))
 				  {
-					  from.SendMessage("Ce batiment est fermé pour la nuit. Revenez au lever du soleil.");
+					  from.SendMessage("Ce batiment est fermï¿½ pour la nuit. Revenez au lever du soleil.");
 					  return;
 				  }
 			  }
@@ -391,9 +391,22 @@ namespace Server.Items
                 else
                 {
                     if (Hue == 0x44E && Map == Map.Malas) // doom door into healer room in doom
-                        SendLocalizedMessageTo(from, 1060014); // Only the dead may pass.
+                    {
+                          SendLocalizedMessageTo(from, 1060014); // Only the dead may pass.
+                    }   
                     else
-                        from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 502503); // That is locked.
+                    {
+                         if (this is CustomDoor cd )
+                        {
+                           from.SendMessage("Cette porte est barrÃ©e. Vous devriez peut-Ãªtre essayer de la crocheter."); 
+                        }
+                        else
+                        {
+                             from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 502503); // That is locked.
+                        }
+
+                    }                  
+                       
 
                     return;
                 }
