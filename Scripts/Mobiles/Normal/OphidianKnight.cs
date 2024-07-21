@@ -72,7 +72,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
         {
-            AddLoot(LootPack.Rich, 2);
+            AddLoot(LootPack.Rich, 4);
             AddLoot(LootPack.LootItem<LesserPoisonPotion>());
 			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 4));
 

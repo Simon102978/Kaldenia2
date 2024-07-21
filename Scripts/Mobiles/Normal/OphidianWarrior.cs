@@ -72,7 +72,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.Meager);
+            AddLoot(LootPack.Rich, 2);
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Gems);
 			AddLoot(LootPack.LootItem<Apple>(3, 5));
