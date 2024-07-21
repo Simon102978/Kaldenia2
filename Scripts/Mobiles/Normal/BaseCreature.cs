@@ -5750,7 +5750,7 @@ namespace Server.Mobiles
 						PackItem(new SkillCard());
 					}
 
-			if (Utility.RandomDouble() < 0.01) //  1% de chance
+			if (Utility.RandomDouble() < 0.01 && TreasureMapLevel >= 3) //  1% de chance
 			{
 				Type[] recipeScrolls = CustomRecipeScrollTypes2;
 
