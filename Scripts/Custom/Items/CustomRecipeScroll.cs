@@ -428,20 +428,47 @@ public class CustomRecipeScrolls
 		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
 	}
 
-	public class ForgeRecipeScroll : RecipeScroll
+	public class PetiteForgeRecipeScroll : RecipeScroll
 	{
 		[Constructable]
-		public ForgeRecipeScroll() : base(80011) { }
-		public ForgeRecipeScroll(Serial serial) : base(serial) { }
+		public PetiteForgeRecipeScroll() : base(80011) { }
+		public PetiteForgeRecipeScroll(Serial serial) : base(serial) { }
 		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
 		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
 	}
 
-	public class EnclumeRecipeScroll : RecipeScroll
+	public class EnclumeEastRecipeScroll : RecipeScroll
 	{
 		[Constructable]
-		public EnclumeRecipeScroll() : base(80010) { }
-		public EnclumeRecipeScroll(Serial serial) : base(serial) { }
+		public EnclumeEastRecipeScroll() : base(80010) { }
+		public EnclumeEastRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class EnclumeSouthRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public EnclumeSouthRecipeScroll() : base(80012) { }
+		public EnclumeSouthRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class LargeForgeEastRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public LargeForgeEastRecipeScroll() : base(80013) { }
+		public LargeForgeEastRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class LargeForgeSouthRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public LargeForgeSouthRecipeScroll() : base(80014) { }
+		public LargeForgeSouthRecipeScroll(Serial serial) : base(serial) { }
 		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
 		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
 	}

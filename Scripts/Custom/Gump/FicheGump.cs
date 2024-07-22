@@ -111,8 +111,8 @@ namespace Server.Gumps
 	
 
 			AddSection(x - 10, y + 473, 250, 190, "Statistique");
+			AddButton(x - 5, y + 490, 5601, 5605, 399, GumpButtonType.Reply, 0); // tooltip
 
-	
 
 
 			AddHtmlTexte(x + 10, y + 510, 150, "Force :");
@@ -185,6 +185,17 @@ namespace Server.Gumps
 
 		}
 
+		public static void ShowStatsDetailGump(Mobile from)
+		{
+			string detail = "Force: \n  -Détermine les points de vie\n  -Détermine la quantité que peux porter un personnage\n  -Détermine les dégats au corps à corps\n  -Détermine si vous pouvez porter une armure \n\nDextérité:\n  -Aide au chance de parrer un coup\n  -Détermine les chances d'avoir un objet de meilleurs qualités\n  -Détermine le temps entre chaque bandage\n\nIntelligence:\n  -Détermine la mana\n  -Influence la regénération de mana\n";
+
+			Gump detailGump = new Gump(100, 100);
+			detailGump.AddBackground(0, 0, 400, 300, 9200);
+			detailGump.AddHtml(20, 20, 360, 260, detail, false, true);
+
+			from.SendGump(detailGump);
+		}
+
 		public override void OnResponse(NetState sender, RelayInfo info)
         {
 			if (info.ButtonID == 1)
@@ -232,7 +243,12 @@ namespace Server.Gumps
 				m_From.IncreaseStat(StatType.Int);
 				m_From.SendGump(new FicheGump(m_From, m_GM));
 			}
-			
-		}
+			else if (info.ButtonID == 399)
+			{
+				ShowStatsDetailGump(m_From);
+
+
+			}
     }
+}
 }

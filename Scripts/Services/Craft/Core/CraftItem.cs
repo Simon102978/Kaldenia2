@@ -1402,62 +1402,78 @@ namespace Server.Engines.Craft
             return false;
         }
 
+		public double GetCraftBonus(Mobile from)
+		{
+			if (from is PlayerMobile player)
+			{
+				int hungerLevel = player.Hunger;
+				int thirstLevel = player.Thirst;
+
+				// Calculer le bonus basé sur la faim et la soif
+				double craftBonus = (hungerLevel + thirstLevel) / 40.0; // 1.0 à 20/20
+
+				// Multiplier par 5 pour obtenir un bonus maximal de 5x
+				return 1 + (2 * craftBonus); // 1 à 5x
+			}
+			return 1.0; // Pas de bonus pour les non-joueurs
+		}
+
 		public double GetLegendaryChance(CraftSystem system, double successChance, Mobile from)
 		{
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
-
 			var chanceLegendary = 0.0;
 			if (from is CustomPlayerMobile pm)
 			{
 				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
 				double dexFactor = pm.Dex / 100.0;
-
 				// Base chance at 100 skill, 0 dex: 0.001%
 				// Max chance at 100 skill, 100 dex: 0.002%
 				chanceLegendary = 0.00001 * skillFactor * (1 + 0.1 * dexFactor);
-			}
 
-			return Math.Min(chanceLegendary, 0.00002); // Max 0.002%
+				// Appliquer le bonus de craft
+				chanceLegendary *= GetCraftBonus(from);
+			}
+			return Math.Min(chanceLegendary, 0.0001); // Max 0.01%
 		}
 
 		public double GetEpicChance(CraftSystem system, double successChance, Mobile from)
 		{
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
-
 			var chanceEpic = 0.0;
 			if (from is CustomPlayerMobile pm)
 			{
 				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
 				double dexFactor = pm.Dex / 100.0;
-
 				// Base chance at 100 skill, 0 dex: 0.2%
 				// Max chance at 100 skill, 100 dex: 0.4%
 				chanceEpic = 0.002 * skillFactor * (1 + 0.1 * dexFactor);
-			}
 
-			return Math.Min(chanceEpic, 0.004); // Max 0.4%
+				// Appliquer le bonus de craft
+				chanceEpic *= GetCraftBonus(from);
+			}
+			return Math.Min(chanceEpic, 0.02); // Max 2%
 		}
 
 		public double GetExceptionalChance(CraftSystem system, double successChance, Mobile from)
 		{
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
-
 			var exceptionalChance = 0.0;
 			if (from is CustomPlayerMobile pm)
 			{
 				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
 				double dexFactor = pm.Dex / 100.0;
-
 				// Base chance at 100 skill, 0 dex: 5%
 				// Max chance at 100 skill, 100 dex: 10%
 				// At 0 skill, 100 dex: 5%
 				exceptionalChance = 0.05 * (skillFactor + 0.5 * dexFactor);
-			}
 
-			return Math.Min(exceptionalChance, 0.10); // Max 10%
+				// Appliquer le bonus de craft
+				exceptionalChance *= GetCraftBonus(from);
+			}
+			return Math.Min(exceptionalChance, 0.50); // Max 50%
 		}
 
 		public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills, int maxAmount)

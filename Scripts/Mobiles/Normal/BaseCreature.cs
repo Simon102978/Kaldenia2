@@ -1279,8 +1279,8 @@ namespace Server.Mobiles
 		/// <param name="tellOwner">SendMessage to Owner about the changes.</param>
 		public virtual void GainExp(Mobile killed, uint exp, bool tellOwner)
 		{
-		//	if (this.Summoned || this is HenchmanArcher || this is HenchmanFighter || this is HenchmanMonster || this is HenchmanWizard || this is Squire || !this.JakoIsEnabled || (killed is BaseCreature && (((BaseCreature)killed).Controlled && ((BaseCreature)killed).ControlMaster != null) || !((BaseCreature)killed).JakoIsEnabled) || Level == MaxLevel)
-			//	return;
+			if (this.Summoned || !this.JakoIsEnabled || (killed is BaseCreature && (((BaseCreature)killed).Controlled && ((BaseCreature)killed).ControlMaster != null) || !((BaseCreature)killed).JakoIsEnabled) || Level == MaxLevel)
+				return;
 
 			if (tellOwner && ControlMaster != null)
 				ControlMaster.SendMessage("Your pet {0} has gained {1} experience!", Name, exp);
@@ -6205,7 +6205,9 @@ namespace Server.Mobiles
 	typeof(ArbaviveRecipeScroll),
 	typeof(FoliereRecipeScroll),
 	typeof(InvisibilityPotionRecipeScroll),
-	//typeof(ForgeRecipeScroll),
+	typeof(PetiteForgeRecipeScroll),
+	typeof(EnclumeEastRecipeScroll),
+	typeof(EnclumeSouthRecipeScroll),
 	typeof(FourreauDoreeRecipeScroll),
 	typeof(HitsMaxBuffFoodRecipeScroll),
 	typeof(CoffreFortRecipeScroll),

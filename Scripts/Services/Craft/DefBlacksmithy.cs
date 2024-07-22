@@ -60,10 +60,16 @@ namespace Server.Engines.Craft
 		GlovesOfFeudalGrip = 356,
 
 		//K2
-		[Description("Forge")]
-		ForgeCust = 80011,
-		[Description("Enclume")]
-		EnclumeCust = 80010,
+		[Description("PetiteForge")]
+		PetiteForgeCust = 80011,
+		[Description("EnclumeEst")]
+		EnclumeEastCust = 80010,
+		[Description("EnclumeSouth")]
+		EnclumeSouthCust = 80012,
+		[Description("EnclumeEst")]
+		LargeForgeEastCust = 80013,
+		[Description("EnclumeEst")]
+		LargeForgeSouthCust = 80014,
 
 		[Description("Coffre Fort")]
 		CoffreFort = 80003,
@@ -613,15 +619,15 @@ namespace Server.Engines.Craft
 
 
 			index = AddCraft(typeof(AnvilEastDeed), "Divers", "Enclume (Est)", 52.0, 100.0, typeof(IronIngot), "Fer", 100, "Vous n'avez pas suffisament de lingot de Fer");
-		//	AddRecipe(index, (int)SmithRecipes.EnclumeCust);
+			AddRecipe(index, (int)SmithRecipes.EnclumeEastCust);
 
 
 			index = AddCraft(typeof(AnvilSouthDeed), "Divers", "Enclume (Sud)", 52.0, 100.0, typeof(IronIngot), "Fer", 100, "Vous n'avez pas suffisament de lingot de Fer");
-	//		AddRecipe(index, (int)SmithRecipes.EnclumeCust);
+			AddRecipe(index, (int)SmithRecipes.EnclumeSouthCust);
 
 
 			index = AddCraft(typeof(SmallForgeDeed), "Divers", "Petite Forge", 52.0, 100.0, typeof(IronIngot), "Fer", 150, "Vous n'avez pas suffisament de lingot de Fer");
-		//	AddRecipe(index, (int)SmithRecipes.ForgeCust);
+			AddRecipe(index, (int)SmithRecipes.PetiteForgeCust);
 
 
 			index = AddCraft(typeof(CoffreMetalVisqueux), "Divers", "Coffre Métal Visqueux", 55.0, 85.0, typeof(IronIngot), "Fer", 30, "Vous n'avez pas suffisament de lingot de Fer");
@@ -636,12 +642,12 @@ namespace Server.Engines.Craft
 			AddRecipe(index, (int)SmithRecipes.CoffreMetalDore);
 
 
-			index = AddCraft(typeof(LargeForgeEastDeed), "Divers", "Grande Forge (Est)", 72.0, 120.0, typeof(IronIngot), "Fer", 200, "Vous n'avez pas suffisament de lingot de Fer");
-	//		AddRecipe(index, (int)SmithRecipes.ForgeCust);
+			index = AddCraft(typeof(LargeForgeEastDeed), "Divers", "Grande Forge (Est)", 75.0, 120.0, typeof(IronIngot), "Fer", 200, "Vous n'avez pas suffisament de lingot de Fer");
+			AddRecipe(index, (int)SmithRecipes.LargeForgeEastCust);
 
 
-			index = AddCraft(typeof(LargeForgeSouthDeed), "Divers", "Grande Forge (Sud)", 72.0, 120.0, typeof(IronIngot), "Fer", 200, "Vous n'avez pas suffisament de lingot de Fer");
-		//	AddRecipe(index, (int)SmithRecipes.ForgeCust);
+			index = AddCraft(typeof(LargeForgeSouthDeed), "Divers", "Grande Forge (Sud)", 75.0, 120.0, typeof(IronIngot), "Fer", 200, "Vous n'avez pas suffisament de lingot de Fer");
+			AddRecipe(index, (int)SmithRecipes.LargeForgeSouthCust);
 
 			#endregion
 

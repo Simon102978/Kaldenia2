@@ -248,7 +248,7 @@ namespace Server
 		public static Type[] CustomRecipeScrollTypes1 => m_CustomRecipeScroll1;
 		private static readonly Type[] m_CustomRecipeScroll1 = new[]
 		{
-	typeof(EnclumeRecipeScroll),
+	typeof(EnclumeEastRecipeScroll),
 	typeof(MasonryBookRecipeScroll),
 	typeof(ChickenCoopRecipeScroll),
 	typeof(LumitraitRecipeScroll),
@@ -279,7 +279,7 @@ namespace Server
 	typeof(ArbaviveRecipeScroll),
 	typeof(FoliereRecipeScroll),
 	typeof(InvisibilityPotionRecipeScroll),
-	typeof(ForgeRecipeScroll),
+	typeof(PetiteForgeRecipeScroll),
 	typeof(FourreauDoreeRecipeScroll),
 	typeof(HitsMaxBuffFoodRecipeScroll),
 	typeof(CoffreFortRecipeScroll),
@@ -317,7 +317,8 @@ namespace Server
 	typeof(GreaterHitsMaxBuffFoodRecipeScroll),
 	typeof(CoffreFortRecipeScroll),
 	typeof(SuperiorHealPotionRecipeScroll),
-	typeof(EnclumeRecipeScroll)
+	typeof(LargeForgeEastRecipeScroll),
+	typeof(LargeForgeSouthRecipeScroll),
 };
 
 

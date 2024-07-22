@@ -1,3 +1,4 @@
+using System;
 using Server.Engines.Craft;
 
 namespace Server.Items
@@ -5,73 +6,81 @@ namespace Server.Items
 
 	public abstract class BasePipes : BaseClothing
 	{
-		public BasePipes(int itemID)
-			: this(itemID, 0)
+		private static readonly int[] SmokeEffects = new int[] { 0x9DAC, 0x9DAD, 0x9DAE, 0x9DAF, 0x9DB0 };
+		private Timer m_SmokeTimer;
+
+		public BasePipes(int itemID) : this(itemID, 0)
 		{
 		}
 
-		public BasePipes(int itemID, int hue)
-			: base(itemID, Layer.OneHanded, hue)
+		public BasePipes(int itemID, int hue) : base(itemID, Layer.Neck, hue)
 		{
 		}
 
-		public BasePipes(Serial serial)
-			: base(serial)
+		public BasePipes(Serial serial) : base(serial)
 		{
+		}
+
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (!IsChildOf(from.Backpack) && !IsEquipped(from))
+			{
+				from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
+				return;
+			}
+
+			if (m_SmokeTimer != null)
+			{
+				from.SendLocalizedMessage(1010597); // You must wait before using this again.
+				return;
+			}
+
+			from.PlaySound(0x226); // Sound effect for smoking
+			from.SendLocalizedMessage(1010598); // You puff on the pipe.
+
+			m_SmokeTimer = Timer.DelayCall(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1), 5, new TimerStateCallback(ProduceSmokeEffect), new object[] { from, 0 });
+		}
+
+		private void ProduceSmokeEffect(object state)
+		{
+			object[] states = (object[])state;
+			Mobile from = (Mobile)states[0];
+			int index = (int)states[1];
+
+			if (index < SmokeEffects.Length)
+			{
+				Effects.SendLocationEffect(new Point3D(from.X, from.Y, from.Z + 20), from.Map, SmokeEffects[index], 30, 10, 0, 0);
+				states[1] = index + 1;
+			}
+			else
+			{
+				if (m_SmokeTimer != null)
+				{
+					m_SmokeTimer.Stop();
+					m_SmokeTimer = null;
+				}
+			}
 		}
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-
 			writer.Write((int)0); // version
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
-
 			int version = reader.ReadInt();
+		}
+
+		private bool IsEquipped(Mobile m)
+		{
+			return m.FindItemOnLayer(Layer.Neck) == this;
 		}
 	}
 
-	public class PipeCourbee :  BasePipes
-    {
-    
-		[Constructable]
-		public PipeCourbee()
-			: this(0)
-		{
-		}
 
-		[Constructable]
-		public PipeCourbee(int hue)
-		: base(41663, hue)
-		{
-			Weight = 2.0;
-			Name ="Pipe Courbée";
-			Layer = Layer.Neck;
-		}
-
-		public PipeCourbee(Serial serial)
-		: base(serial)
-		{
-		}
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0); // version
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
 
 	public class PipeCourte  :  BasePipes
 	{
@@ -147,6 +156,46 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
     }
+
+	public class PipeCourbee : BasePipes
+	{
+
+		[Constructable]
+		public PipeCourbee()
+			: this(0)
+		{
+		}
+
+		[Constructable]
+		public PipeCourbee(int hue)
+		: base(41663, hue)
+		{
+			Weight = 2.0;
+			Name = "Pipe Courbée";
+			Layer = Layer.Neck;
+		}
+
+		public PipeCourbee(Serial serial)
+		: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+
+
 	public class Carquois :  BaseQuiver
 	{
 			[Constructable]

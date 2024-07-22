@@ -722,7 +722,7 @@ namespace Server
 
 		public static readonly LootPackItem[] CustomRecipesScroll1 = new LootPackItem[]
 {
-	new LootPackItem(typeof(EnclumeRecipeScroll), 1),
+	new LootPackItem(typeof(EnclumeSouthRecipeScroll), 1),
 	new LootPackItem(typeof(MasonryBookRecipeScroll), 1),
 	new LootPackItem(typeof(ChickenCoopRecipeScroll), 1),
 	new LootPackItem(typeof(LumitraitRecipeScroll), 1),
@@ -752,7 +752,7 @@ namespace Server
 	new LootPackItem(typeof(ArbaviveRecipeScroll), 1),
 	new LootPackItem(typeof(FoliereRecipeScroll), 1),
 	new LootPackItem(typeof(InvisibilityPotionRecipeScroll), 1),
-	new LootPackItem(typeof(ForgeRecipeScroll), 1),
+	new LootPackItem(typeof(PetiteForgeRecipeScroll), 1),
 	new LootPackItem(typeof(FourreauDoreeRecipeScroll), 1),
 	new LootPackItem(typeof(HitsMaxBuffFoodRecipeScroll), 1),
 	new LootPackItem(typeof(CoffreFortRecipeScroll), 1),
@@ -789,7 +789,7 @@ namespace Server
 	new LootPackItem(typeof(GreaterHitsMaxBuffFoodRecipeScroll), 1),
 	new LootPackItem(typeof(CoffreFortRecipeScroll), 1),
 	new LootPackItem(typeof(SuperiorHealPotionRecipeScroll), 1),
-	new LootPackItem(typeof(EnclumeRecipeScroll), 1)
+	new LootPackItem(typeof(EnclumeEastRecipeScroll), 1)
 };
 
 
