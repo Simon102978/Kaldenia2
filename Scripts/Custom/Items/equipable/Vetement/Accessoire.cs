@@ -25,18 +25,22 @@ namespace Server.Items
 		{
 			if (!IsChildOf(from.Backpack) && !IsEquipped(from))
 			{
-				from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
-				return;
-			}
-
-			if (m_SmokeTimer != null)
-			{
-				from.SendLocalizedMessage(1010597); // You must wait before using this again.
+				from.SendMessage("La pipe doit être dans votre sac pour être utilisée");
 				return;
 			}
 
 			from.PlaySound(0x226); // Sound effect for smoking
-			from.SendLocalizedMessage(1010598); // You puff on the pipe.
+			from.SendMessage("Vous prenez une bouffée de pipe");
+
+			StartSmokeAnimation(from);
+		}
+
+		private void StartSmokeAnimation(Mobile from)
+		{
+			if (m_SmokeTimer != null)
+			{
+				m_SmokeTimer.Stop();
+			}
 
 			m_SmokeTimer = Timer.DelayCall(TimeSpan.FromSeconds(1), TimeSpan.FromSeconds(1), 5, new TimerStateCallback(ProduceSmokeEffect), new object[] { from, 0 });
 		}
