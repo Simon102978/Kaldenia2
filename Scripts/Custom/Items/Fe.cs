@@ -17,9 +17,27 @@ namespace Server.Items
 			LootType = LootType.Blessed;
 			Name = "Fiole d'expérience";
 			Hue = 2372;
+			Stackable = false;
 
 
 		}
+
+		protected override void OnAmountChange(int oldValue)
+		{ 
+			
+			Amount = 1;
+
+
+
+		}
+
+		public override void Consume(int amount)
+		{
+			
+				Delete();
+			
+		}
+
 
 		public Fe( Serial serial ) : base( serial )
 		{
