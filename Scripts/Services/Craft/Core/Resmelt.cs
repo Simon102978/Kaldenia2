@@ -75,7 +75,17 @@ namespace Server.Engines.Craft
                         result = Resmelt(from, (BaseWeapon)targeted, ((BaseWeapon)targeted).Resource);
                         isStoreBought = !((BaseWeapon)targeted).PlayerConstructed;
                     }
-                    else if (targeted is DragonBardingDeed)
+					else if (targeted is BaseThrown)
+					{
+						result = Resmelt(from, (BaseThrown)targeted, ((BaseThrown)targeted).Resource);
+						isStoreBought = !((BaseThrown)targeted).PlayerConstructed;
+					}
+					else if (targeted is BaseRanged)
+					{
+						result = Resmelt(from, (BaseRanged)targeted, ((BaseRanged)targeted).Resource);
+						isStoreBought = !((BaseRanged)targeted).PlayerConstructed;
+					}
+					else if (targeted is DragonBardingDeed)
                     {
                         result = Resmelt(from, (DragonBardingDeed)targeted, ((DragonBardingDeed)targeted).Resource);
                         isStoreBought = false;

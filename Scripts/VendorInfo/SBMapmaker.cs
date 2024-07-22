@@ -31,9 +31,11 @@ namespace Server.Mobiles
                 Add(typeof(BlankScroll), 2);
                 Add(typeof(MapmakersPen), 2);
                 Add(typeof(BlankMap), 2);
-                Add(typeof(CityMap), 3);
+                Add(typeof(CityMap), 5);
                 Add(typeof(LocalMap), 3);
-                Add(typeof(WorldMap), 3);
+				Add(typeof(SeaChart), 7);
+
+				Add(typeof(WorldMap), 10);
                 Add(typeof(PresetMapEntry), 3);
                 //TODO: Buy back maps that the mapmaker sells!!!
             }

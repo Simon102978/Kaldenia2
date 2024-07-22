@@ -56,8 +56,9 @@ namespace Server.Engines.Craft
         public CraftSkillCol Skills { get; private set; }
 
         public BeverageType RequiredBeverage { get; set; }
+		public int RequiredBeverageQuantity { get; set; }
 
-        public int ForceSuccessChance { get; set; } = -1;
+		public int ForceSuccessChance { get; set; } = -1;
 
         public double MinSkillOffset { get; set; }
         public bool ForceNonExceptional { get; set; }
@@ -1386,6 +1387,7 @@ namespace Server.Engines.Craft
 
             return true;
         }
+
 
         public bool IsAnvilOfArtifactValid(Mobile from, CraftSystem system)
         {

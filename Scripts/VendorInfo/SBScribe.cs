@@ -25,6 +25,8 @@ namespace Server.Mobiles
             {
 				Add(new GenericBuyInfo(typeof(Missive), 5, 999, 0x14EE, 0));
 				Add(new GenericBuyInfo(typeof(ScribesPen), 10, 20, 0xFBF, 0));
+				Add(new GenericBuyInfo(typeof(MapmakersPen), 8, 10, 0xFBF, 0));
+
 				Add(new GenericBuyInfo(typeof(CarnetAdresse), 15, 20, 0xFF2, 1633));
 
 		//		Add(new GenericBuyInfo(typeof(SpellsPen), 15, 20, 0x1F19, 2079));
@@ -45,7 +47,9 @@ namespace Server.Mobiles
     {
         public InternalSellInfo()
         {
-            Add(typeof(ScribesPen), 1);
+			Add(typeof(LivreVierge), 250);
+			Add(typeof(MapmakersPen), 1);
+			Add(typeof(ScribesPen), 1);
             Add(typeof(BrownBook), 2);
             Add(typeof(TanBook), 2);
 			Add(typeof(BlueBook), 2);

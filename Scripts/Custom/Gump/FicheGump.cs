@@ -107,11 +107,28 @@ namespace Server.Gumps
 			AddHtmlTexte(x + 10, y + 435, 150, "Heures jouées:");
 			AddHtmlTexte(x + 125, y + 435, 100, Math.Round(m_From.Account.TotalGameTime.TotalHours, 2).ToString());
 
+	
 
 			AddSection(x - 10, y + 473, 250, 190, "Statistique");
 
+			string strDetail = "Force: \n" +
+	"  -Détermine les points de vie\n" +
+	"  -Détermine la quantité que peut porter un personnage\n" +
+	"  -Détermine les dégâts au corps à corps\n" +
+	"  -Détermine si vous pouvez porter une armure";
+
+			string dexDetail = "Dextérité:\n" +
+				"  -Aide aux chances de parer un coup\n" +
+				"  -Détermine les chances d'avoir un objet de meilleure qualité\n" +
+				"  -Détermine le temps entre chaque bandage";
+
+			string intDetail = "Intelligence:\n" +
+				"  -Détermine la mana\n" +
+				"  -Influence la régénération de mana";
+
 
 			AddHtmlTexte(x + 10, y + 510, 150, "Force :");
+			AddTooltip(strDetail);
 
 			if (m_From.CanDecreaseStat(StatType.Str))
 			{
@@ -126,6 +143,7 @@ namespace Server.Gumps
 			AddLabel(x + 130, y + 510, 150, m_From.Str.ToString());
 
 			AddHtmlTexte(x + 10, y + 530, 150, "Dextérité :");
+			AddTooltip(dexDetail);
 
 			if (m_From.CanDecreaseStat(StatType.Dex))
 			{
@@ -139,7 +157,8 @@ namespace Server.Gumps
 			AddLabel(x + 130, y + 530, 150, m_From.Dex.ToString());
 
 			AddHtmlTexte(x + 10, y + 550, 150, "Intelligence :");
-		
+			AddTooltip(intDetail);
+
 			if (m_From.CanDecreaseStat(StatType.Int))
 			{
 			AddButton(x + 100, y + 552, 5603, 5607, 304, GumpButtonType.Reply, 0);

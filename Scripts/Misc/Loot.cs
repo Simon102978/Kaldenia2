@@ -28,7 +28,7 @@ namespace Server
 		
         private static readonly Type[] m_SAWeaponTypes = new[]
         {
-            typeof(DiscMace), typeof(Shortblade), typeof(DualPointedSpear), typeof(GlassStaff),
+            typeof(DiscMace), typeof(Shortblade), typeof(ShortSpear), typeof(GlassStaff),
             typeof(StoneWarSword), typeof(DualShortAxes), typeof(GlassSword), typeof(Dagger)
         };
         public static Type[] SAWeaponTypes => m_SAWeaponTypes;

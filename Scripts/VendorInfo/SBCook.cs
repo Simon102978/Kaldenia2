@@ -15,16 +15,16 @@ namespace Server.Mobiles
         {
             public InternalBuyInfo()
             {
-                Add(new GenericBuyInfo(typeof(BreadLoaf), 5, 20, 0x103B, 0, true));
-                Add(new GenericBuyInfo(typeof(BreadLoaf), 5, 20, 0x103C, 0, true));
-                Add(new GenericBuyInfo(typeof(ApplePie), 7, 20, 0x1041, 0, true)); //OSI just has Pie, not Apple/Fruit/Meat
-                Add(new GenericBuyInfo(typeof(Cake), 13, 20, 0x9E9, 0, true));
-                Add(new GenericBuyInfo(typeof(Muffins), 3, 20, 0x9EA, 0, true));
+                Add(new GenericBuyInfo(typeof(BreadLoaf), 15, 20, 0x103B, 0, true));
+                Add(new GenericBuyInfo(typeof(BreadLoaf), 15, 20, 0x103C, 0, true));
+                Add(new GenericBuyInfo(typeof(ApplePie), 75, 20, 0x1041, 0, true)); //OSI just has Pie, not Apple/Fruit/Meat
+                Add(new GenericBuyInfo(typeof(Cake), 200, 20, 0x9E9, 0, true));
+                Add(new GenericBuyInfo(typeof(Muffins), 15, 20, 0x9EA, 0, true));
 
                 Add(new GenericBuyInfo(typeof(CheeseWheel), 21, 10, 0x97E, 0, true));
-                Add(new GenericBuyInfo(typeof(CookedBird), 17, 20, 0x9B7, 0, true));
-                Add(new GenericBuyInfo(typeof(LambLeg), 8, 20, 0x160A, 0, true));
-                Add(new GenericBuyInfo(typeof(ChickenLeg), 5, 20, 0x1608, 0, true));
+                Add(new GenericBuyInfo(typeof(CookedBird), 25, 20, 0x9B7, 0, true));
+                Add(new GenericBuyInfo(typeof(LambLeg), 25, 20, 0x160A, 0, true));
+                Add(new GenericBuyInfo(typeof(ChickenLeg), 25, 20, 0x1608, 0, true));
 
                 Add(new GenericBuyInfo(typeof(WoodenBowlOfCarrots), 3, 20, 0x15F9, 0));
                 Add(new GenericBuyInfo(typeof(WoodenBowlOfCorn), 3, 20, 0x15FA, 0));
@@ -38,8 +38,8 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(WoodenBowlOfStew), 3, 20, 0x1604, 0));
                 Add(new GenericBuyInfo(typeof(WoodenBowlOfTomatoSoup), 3, 20, 0x1606, 0));
 
-                Add(new GenericBuyInfo(typeof(RoastPig), 106, 20, 0x9BB, 0, true));
-                Add(new GenericBuyInfo(typeof(SackFlour), 20, 20, 0x1039, 0, true));
+                Add(new GenericBuyInfo(typeof(RoastPig), 250, 20, 0x9BB, 0, true));
+                Add(new GenericBuyInfo(typeof(SackFlour), 10, 20, 0x1039, 0, true));
                 Add(new GenericBuyInfo(typeof(JarHoney), 40, 20, 0x9EC, 0, true));
                 Add(new GenericBuyInfo(typeof(RollingPin), 2, 20, 0x1043, 0));
                 Add(new GenericBuyInfo(typeof(FlourSifter), 2, 20, 0x103E, 0));

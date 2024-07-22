@@ -10,6 +10,8 @@ using Server.Custom;
 using Server.Movement;
 using Server.Gumps;
 using Server.Multis;
+using Server.Misc;
+
 
 
 #endregion
@@ -1512,13 +1514,22 @@ namespace Server.Mobiles
 
 			if (CheckSkill(SkillName.Equitation, 100 - chanceToFall))
 			{
-				
+			
+				SkillCheck.Gain(this, Skills[SkillName.Equitation], 10); // Tente un gain supplémentaire
 				return true;
-			}		
+			}
+			else
+			{
+				// Même en cas d'échec, donnez une petite chance de gain
+				if (Utility.RandomDouble() < 0.1) 
+				{
+					SkillCheck.Gain(this, Skills[SkillName.Equitation], 5); 
+				}
+			}
 
 
-	//		if (chanceToFall <= Utility.RandomMinMax(0, 100))
-	//			return true;
+			//		if (chanceToFall <= Utility.RandomMinMax(0, 100))
+			//			return true;
 
 			if (type == EquitationType.Running)
 			{

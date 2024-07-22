@@ -44,9 +44,9 @@ namespace Server.Items
             {
                 pm.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
             }
-          else if (pm.Skills[SkillName.Alchemy].Base < 50.0)
+          else if (pm.Skills[SkillName.Alchemy].Base < 30.0)
             {
-               pm.SendMessage("Vous devez avoir 50.0 dans votre skill d'Alchemy"); // Only a Grandmaster Alchemist can learn from this book.
+               pm.SendMessage("Vous devez avoir 30.0 dans votre skill d'Alchemy"); // Only a Grandmaster Alchemist can learn from this book.
            }
             else if (pm.Glassblowing)
             {

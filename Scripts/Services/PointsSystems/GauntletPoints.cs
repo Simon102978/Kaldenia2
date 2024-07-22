@@ -117,7 +117,7 @@ namespace Server.Engines.Points
             new Type[] { typeof(ShadowDancerLeggings) },    new Type[] {typeof(RingOfTheElements) },    new Type[] { typeof(GauntletsOfNobility) },
             new Type[] { typeof(LeggingsOfBane) },          new Type[] { typeof(MidnightBracers) },     new Type[] { typeof(Glenda) },
             new Type[] { typeof(BowOfTheInfiniteSwarm) },   new Type[] { typeof(TheDeceiver) },         new Type[] { typeof(TheScholarsHalo) },
-            new Type[] { typeof(DoomRecipeScroll) },
+          //  new Type[] { typeof(DoomRecipeScroll) },
             new Type[]
             {
                 typeof(LegacyOfTheDreadLord),       typeof(TheTaskmaster),

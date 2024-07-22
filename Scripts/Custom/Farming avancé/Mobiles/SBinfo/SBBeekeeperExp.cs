@@ -27,10 +27,10 @@ namespace Server.Mobiles
 		{
 			public InternalBuyInfo()
 			{
-                Add(new GenericBuyInfo(typeof(apiBeeHiveDeed), 2000, 10, 2330, 0));
+                Add(new GenericBuyInfo(typeof(apiBeeHiveDeed), 500, 10, 2330, 0));
                 Add(new GenericBuyInfo(typeof(HiveTool), 100, 20, 2549, 0));
                 Add(new GenericBuyInfo(typeof(apiWaxProcessingPot), 400, 20, 2532, 0));
-				Add(new GenericBuyInfo(typeof(JarHoney), 3, 20, 0x9EC, 0));
+				Add(new GenericBuyInfo(typeof(JarHoney), 40, 20, 0x9EC, 0));
 				Add(new GenericBuyInfo(typeof(Beeswax), 2, 20, 0x1422, 0));
 
 			}
@@ -43,8 +43,8 @@ namespace Server.Mobiles
                 Add(typeof(apiBeeHiveDeed), 100);
                 Add(typeof(HiveTool), 50);
                 Add(typeof(apiWaxProcessingPot), 12);
-				Add(typeof(JarHoney), 1);
-				Add(typeof(Beeswax), 1);
+				Add(typeof(JarHoney), 10);
+				Add(typeof(Beeswax), 10);
 
 			}
 		}

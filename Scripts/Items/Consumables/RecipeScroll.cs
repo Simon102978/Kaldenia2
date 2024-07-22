@@ -124,109 +124,110 @@ namespace Server.Items
         }
     }
 
-    public class DoomRecipeScroll : RecipeScroll
-    {
-        [Constructable]
-        public DoomRecipeScroll()
-            : base(Utility.RandomList(355, 356, 456, 585))
-        {
-        }
+	/*   public class DoomRecipeScroll : RecipeScroll
+	   {
+		   [Constructable]
+		   public DoomRecipeScroll()
+			   : base(Utility.RandomList(355, 356, 456, 585))
+		   {
+		   }
 
-        public DoomRecipeScroll(Serial serial)
-            : base(serial)
-        {
-        }
+		   public DoomRecipeScroll(Serial serial)
+			   : base(serial)
+		   {
+		   }
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
+		   public override void Serialize(GenericWriter writer)
+		   {
+			   base.Serialize(writer);
 
-            writer.Write(0); // version
-        }
+			   writer.Write(0); // version
+		   }
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
+		   public override void Deserialize(GenericReader reader)
+		   {
+			   base.Deserialize(reader);
 
-            int version = reader.ReadInt();
-        }
+			   int version = reader.ReadInt();
+		   }
+	   }
+
+	   public class SmallElegantAquariumRecipeScroll : RecipeScroll
+	   {
+		   [Constructable]
+		   public SmallElegantAquariumRecipeScroll()
+			   : base(153)
+		   {
+		   }
+
+		   public SmallElegantAquariumRecipeScroll(Serial serial)
+			   : base(serial)
+		   {
+		   }
+
+		   public override void Serialize(GenericWriter writer)
+		   {
+			   base.Serialize(writer);
+			   writer.Write(0); // version
+		   }
+
+		   public override void Deserialize(GenericReader reader)
+		   {
+			   base.Deserialize(reader);
+			   reader.ReadInt();
+		   }
+	   }
+
+	   public class WallMountedAquariumRecipeScroll : RecipeScroll
+	   {
+		   [Constructable]
+		   public WallMountedAquariumRecipeScroll()
+			   : base(154)
+		   {
+		   }
+
+		   public WallMountedAquariumRecipeScroll(Serial serial)
+			   : base(serial)
+		   {
+		   }
+
+		   public override void Serialize(GenericWriter writer)
+		   {
+			   base.Serialize(writer);
+			   writer.Write(0); // version
+		   }
+
+		   public override void Deserialize(GenericReader reader)
+		   {
+			   base.Deserialize(reader);
+			   reader.ReadInt();
+		   }
+	   }
+
+	   public class LargeElegantAquariumRecipeScroll : RecipeScroll
+	   {
+		   [Constructable]
+		   public LargeElegantAquariumRecipeScroll()
+			   : base(155)
+		   {
+		   }
+
+		   public LargeElegantAquariumRecipeScroll(Serial serial)
+			   : base(serial)
+		   {
+		   }
+
+		   public override void Serialize(GenericWriter writer)
+		   {
+			   base.Serialize(writer);
+			   writer.Write(0); // version
+		   }
+
+		   public override void Deserialize(GenericReader reader)
+		   {
+			   base.Deserialize(reader);
+			   reader.ReadInt();
+		   }*/
+
     }
 
-    public class SmallElegantAquariumRecipeScroll : RecipeScroll
-    {
-        [Constructable]
-        public SmallElegantAquariumRecipeScroll()
-            : base(153)
-        {
-        }
-
-        public SmallElegantAquariumRecipeScroll(Serial serial)
-            : base(serial)
-        {
-        }
-
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(0); // version
-        }
-
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            reader.ReadInt();
-        }
-    }
-
-    public class WallMountedAquariumRecipeScroll : RecipeScroll
-    {
-        [Constructable]
-        public WallMountedAquariumRecipeScroll()
-            : base(154)
-        {
-        }
-
-        public WallMountedAquariumRecipeScroll(Serial serial)
-            : base(serial)
-        {
-        }
-
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(0); // version
-        }
-
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            reader.ReadInt();
-        }
-    }
-
-    public class LargeElegantAquariumRecipeScroll : RecipeScroll
-    {
-        [Constructable]
-        public LargeElegantAquariumRecipeScroll()
-            : base(155)
-        {
-        }
-
-        public LargeElegantAquariumRecipeScroll(Serial serial)
-            : base(serial)
-        {
-        }
-
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(0); // version
-        }
-
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            reader.ReadInt();
-        }
-    }
-}

@@ -1088,7 +1088,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(Calendrier), "Autres", "Calendrier", 0.0, 25.0, typeof(BlankScroll), 1044377, 5, 1044378);
 
-			index = AddCraft(typeof(BlankScroll), "Autres", "Parchemin Vierge", 10.0, 50.0, typeof(Kindling), "Kindling", 10, "Vous n'avez pas assez de Petit Bois.");
+			index = AddCraft(typeof(BlankScroll), "Autres", "Parchemin Vierge", 0.0, 50.0, typeof(Kindling), "Kindling", 10, "Vous n'avez pas assez de Petit Bois.");
 			AddRes(index, typeof(Cloth), "Tissus", 5, "Vous n'avez pas assez de Tissus.");
 			AddRes(index, typeof(Leather), "Cuir", 1, "Vous n'avez pas assez de cuir.");
 
@@ -1105,23 +1105,23 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GargoyleBook100), "Autres", "Livre 100 pages", 60.0, 100.0, typeof(BlankScroll), 1044377, 40, 1044378);
 			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
 
-			index = AddCraft(typeof(GlassblowingBook), "Autres", "Conn Verre", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
+			index = AddCraft(typeof(GlassblowingBook), "Autres", "Conn Verre", 30, 100, typeof(BlankScroll), 1044377, 20, 1044378);
 			AddRecipe(index, (int)InscriptionRecipes.GlassblowingBook);
 
 
-			index = AddCraft(typeof(SandMiningBook), "Autres", "Conn Sable", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
+			index = AddCraft(typeof(SandMiningBook), "Autres", "Conn Sable", 30, 100, typeof(BlankScroll), 1044377, 20, 1044378);
 			AddRecipe(index, (int)InscriptionRecipes.SandMiningBook);
 
 
-			index = AddCraft(typeof(StoneMiningBook), "Autres", "Conn Granite", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
+			index = AddCraft(typeof(StoneMiningBook), "Autres", "Conn Granite", 30, 100, typeof(BlankScroll), 1044377, 20, 1044378);
 			AddRecipe(index, (int)InscriptionRecipes.StoneMiningBook);
 
 
-			index = AddCraft(typeof(MasonryBook), "Autres", "Conn Pierre", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
+			index = AddCraft(typeof(MasonryBook), "Autres", "Conn Pierre", 30, 100, typeof(BlankScroll), 1044377, 20, 1044378);
 			AddRecipe(index, (int)InscriptionRecipes.MasonryBook);
 
 
-			index = AddCraft(typeof(GemMiningBook), "Autres", "Conn Gems", 65, 100, typeof(BlankScroll), 1044377, 20, 1044378);
+			index = AddCraft(typeof(GemMiningBook), "Autres", "Conn Gems", 75, 100, typeof(BlankScroll), 1044377, 20, 1044378);
 			AddRecipe(index, (int)InscriptionRecipes.GemMiningBook);
 
 

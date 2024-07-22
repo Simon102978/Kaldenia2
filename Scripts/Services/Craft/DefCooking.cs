@@ -1,5 +1,6 @@
 ﻿using Server.Items;
 using System;
+using System.Linq;
 
 namespace Server.Engines.Craft
 {
@@ -100,6 +101,32 @@ namespace Server.Engines.Craft
 			return 0;
 		}
 
+		private void AddBeverageRes(int index, BeverageType beverageType, int quantity, string message)
+		{
+			AddRes(index, typeof(Pitcher), $"Pichet de {GetBeverageName(beverageType)}", 1, message);
+
+			CraftItem craftItem = CraftItems.GetAt(index);
+			craftItem.RequiredBeverage = beverageType;
+
+			// Ajouter une propriété pour la quantité requise si elle n'existe pas déjà
+			if (!craftItem.GetType().GetProperties().Any(p => p.Name == "RequiredBeverageQuantity"))
+			{
+				throw new InvalidOperationException("La classe CraftItem doit avoir une propriété RequiredBeverageQuantity.");
+			}
+			craftItem.GetType().GetProperty("RequiredBeverageQuantity").SetValue(craftItem, quantity);
+		}
+
+		private string GetBeverageName(BeverageType type)
+		{
+			switch (type)
+			{
+				case BeverageType.Milk: return "lait";
+				case BeverageType.Water: return "eau";
+				// Ajoutez d'autres types de boissons ici
+				default: return type.ToString().ToLower();
+			}
+		}
+
 		public override void PlayCraftEffect(Mobile from)
 		{
 		}
@@ -170,11 +197,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(BagOfSugar), "Ingrédients secs", "Sac de sucre", 0.0, 20.0, typeof(Sugarcane), "Canne à  sucre", 10, "Vous n'avez pas suffisament de canne à sucre");
 			SetNeedMill(index, true);
 			index = AddCraft(typeof(WheatWort), "Ingrédients secs", "Mout de Blé", 0.0, 20.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
-AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
+AddBeverageRes(index, BeverageType.Water, 1, "Vous avez besoin d'un pichet d'eau avec 1 charge");
 			index = AddCraft(typeof(Yeast), "Ingrédients secs", "Levure", 0.0, 20.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
-AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
+AddBeverageRes(index, BeverageType.Water, 1, "Vous avez besoin d'un pichet d'eau avec 1 charge");
 			index = AddCraft(typeof(BrewersYeast), "Ingrédients secs", "Levure à fermentation", 0.0, 20.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
-AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
+AddBeverageRes(index, BeverageType.Water, 1, "Vous avez besoin d'un pichet d'eau avec 1 charge");
 			index = AddCraft(typeof(DriedOnions), "Ingrédients secs", "Onions Déshydratés", 20.0, 40.0, typeof(Onion), "Onions", 5, 1044253);
 			index = AddCraft(typeof(DriedHerbs), "Ingrédients secs", "Herbes sèches", 20.0, 40.0, typeof(Garlic), "Garlic", 2, 1044253);
 			AddRes(index, typeof(Ginseng), "Ginseng", 2, 1044253);
@@ -192,12 +219,12 @@ AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
 			//SetNeedOven(index, true);
 			index = AddCraft(typeof(Batter), "Ingrédients humides", "Mélange à crêpes", 20.0, 60.0, typeof(SackFlour), "Sac de Farine", 1, "Vous n'avez pas suffisament de sac de farine");
 			AddRes(index, typeof(Eggs), "Oeufs", 1, 1044253);
-			AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253); 
+			AddBeverageRes(index, BeverageType.Water, 1, "Vous avez besoin d'un pichet d'eau avec 1 charge"); 
 			index = AddCraft(typeof(Butter), "Ingrédients humides", "Beurre", 20.0, 60.0, typeof(Cream), "Cream", 1, 1044253);
 			////AddRecipe(index, (int)CookRecipesExp.Butter);
 			SetNeedHeat(index, true);
-			index = AddCraft(typeof(Cream), "Ingrédients humides", "Crème", 20.0, 60.0, typeof(BaseBeverage), "Milk", 1, "Vous n'avez pas suffisament de lait");
-			SetNeedHeat(index, true);
+			index = AddCraft(typeof(Cream), "Ingrédients humides", "Crème", 20.0, 60.0, typeof(Vanilla), "Vanille", 1, "Vous n'avez pas suffisament de vanille");
+			AddBeverageRes(index, BeverageType.Milk, 2, "Vous avez besoin d'un pichet de lait avec 2 charges");
 
 			index = AddCraft(typeof(CookingOil), "Ingrédients humides", "Huile d'arachide", 25.0, 60.0, typeof(Peanut), "Peanut", 10, 1044253);
 			////AddRecipe(index, (int)CookRecipesExp.CookingOil);
@@ -664,7 +691,7 @@ AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
 			SetNeedCauldron(index, true);
 			index = AddCraft(typeof(BowlMashedPotatos), "Aliments bouillis", "Bol de patates pilées", 30.0, 65.0, typeof(Potato), "Potato", 5, 1044253);
 			AddRes(index, typeof(Butter), "Butter", 1, 1044253);
-			AddRes(index,typeof(BaseBeverage), "Milk", 1, "Vous n'avez pas suffisament de lait");
+AddBeverageRes(index, BeverageType.Milk, 2, "Vous avez besoin d'un pichet de lait avec 2 charges");
 			//AddRecipe(index, (int)CookRecipesExp.BowlMashedPotatos);
 			SetNeedCauldron(index, true);
 			index = AddCraft(typeof(BowlCookedVeggies), "Aliments bouillis", "Bol de légume cuits", 30.0, 65.0, typeof(MixedVegetables), "Mixed Vegetables", 1, 1044253);
@@ -722,13 +749,13 @@ AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
 			#endregion
 
 			#region Plâts préparés
-			index = AddCraft(typeof(Quiche), "Plâts préparés", "Quiche", 60.0, 90.0, typeof(UnbakedQuiche), 1044518, 1, 1044253);
+			index = AddCraft(typeof(Quiche), "Plâts préparés", "Quiche", 20.0, 50.0, typeof(UnbakedQuiche), 1044518, 1, 1044253);
 			SetNeedOven(index, true);
-			index = AddCraft(typeof(MeatPie), "Plâts préparés", "Pâté à la viande", 60.0, 90.0, typeof(UnbakedMeatPie), 1044519, 1, 1044253);
+			index = AddCraft(typeof(MeatPie), "Plâts préparés", "Pâté à la viande", 20.0, 50.0, typeof(UnbakedMeatPie), 1044519, 1, 1044253);
 			SetNeedOven(index, true);
-			index = AddCraft(typeof(SausagePizza), "Plâts préparés", "Pizza saucisse", 50.0, 80.0, typeof(UncookedSausagePizza), 1044520, 1, 1044253);
+			index = AddCraft(typeof(SausagePizza), "Plâts préparés", "Pizza saucisse", 40.0, 80.0, typeof(UncookedSausagePizza), 1044520, 1, 1044253);
 			SetNeedOven(index, true);
-			index = AddCraft(typeof(CheesePizza), "Plâts préparés", "Pizza fromage", 50.0, 80.0, typeof(UncookedCheesePizza), 1044521, 1, 1044253);
+			index = AddCraft(typeof(CheesePizza), "Plâts préparés", "Pizza fromage", 40.0, 80.0, typeof(UncookedCheesePizza), 1044521, 1, 1044253);
 			SetNeedOven(index, true);
 
 			index = AddCraft(typeof(HamPineapplePizza), "Plâts préparés", "Pizza jambon ananas", 70.0, 20.0, typeof(UncookedPizza), "Uncooked Pizza", 1, 1044253);
@@ -1144,13 +1171,12 @@ AddRes(index, typeof(BaseBeverage), 1046458, 1, 1044253);
 			AddRes(index, typeof(CocoaButter), "Beurre de cacao", 1, 1044253);
 			//AddRes(index, typeof(CocoaLiquor), "Liqueur de cacao", 1, 1044253);
 			AddRes(index, typeof(Pitcher), 1022544, 1, 1044253);
-			SetBeverageType(index, BeverageType.Milk);
+			AddBeverageRes(index, BeverageType.Milk, 2, "Vous avez besoin d'un pichet de lait avec 2 charges"); 
 			SetItemHue(index, 0x461);
 			index = AddCraft(typeof(WhiteChocolate), "Pâtisserie/Boulangerie", "Chocolat blanc", 80.0, 99.0, typeof(SackOfSugar), "Sac de sucre", 1, 1044253);
 			AddRes(index, typeof(CocoaButter), "Beurre de cacao", 1, 1044253);
 			AddRes(index, typeof(Vanilla), "Vanille", 1, 1044253);
-			AddRes(index, typeof(Pitcher), 1022544, 1, 1044253);
-			SetBeverageType(index, BeverageType.Milk);
+			AddBeverageRes(index, BeverageType.Milk, 2, "Vous avez besoin d'un pichet de lait avec 2 charges"); 
 			SetItemHue(index, 0x47E);
 			#endregion
 

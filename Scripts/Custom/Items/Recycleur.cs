@@ -82,7 +82,7 @@ namespace Server.Items
                     BaseShoes shoes = (BaseShoes)targeted;
                     resource = shoes.Resource;
                 }
-                else
+				else
                 {
                     from.SendMessage( "Cet article ne peut pas être recyclé.");
                 }

@@ -83,12 +83,12 @@ namespace Server.Engines.Craft
 
         public override void InitCraftList()
         {
-			AddCraft(typeof(BlankMap), "Carte", "carte vierge", 10.0, 70.0, typeof(BlankScroll), "Parchemin Vierge", 1, "Vous n'avez pas suffisament de parchemins vierges");
+			AddCraft(typeof(BlankMap), "Carte", "carte vierge", 00.0, 50.0, typeof(BlankScroll), "Parchemin Vierge", 1, "Vous n'avez pas suffisament de parchemins vierges");
 
-			AddCraft(typeof(LocalMap), "Carte", "Carte Locale", 00.0, 50.0, typeof(BlankMap), "Carte Vierge", 1, "Vous n'avez pas suffisament de carte vierge");
-            AddCraft(typeof(CityMap), "Carte", "Carte de la ville", 25.0, 85.0, typeof(BlankMap), "Carte Vierge", 1, "Vous n'avez pas suffisament de carte vierge");
-            AddCraft(typeof(SeaChart), "Carte", "Carte des eaux", 35.0, 95.0, typeof(BlankMap), "Carte Vierge", 1, "Vous n'avez pas suffisament de carte vierge");
-            AddCraft(typeof(WorldMap), "Carte", "Carte du Monde", 50, 99.5, typeof(BlankMap), "Carte Vierge", 1, "Vous n'avez pas suffisament de carte vierge");
+			AddCraft(typeof(LocalMap), "Carte", "Carte Locale", 15.0, 65.0, typeof(BlankMap), "Carte Vierge", 1, "Vous n'avez pas suffisament de carte vierge");
+            AddCraft(typeof(CityMap), "Carte", "Carte de la ville", 25.0, 85.0, typeof(BlankMap), "Carte Vierge", 3, "Vous n'avez pas suffisament de carte vierge");
+            AddCraft(typeof(SeaChart), "Carte", "Carte des eaux", 35.0, 95.0, typeof(BlankMap), "Carte Vierge", 5, "Vous n'avez pas suffisament de carte vierge");
+            AddCraft(typeof(WorldMap), "Carte", "Carte du Monde", 50, 99.5, typeof(BlankMap), "Carte Vierge", 7, "Vous n'avez pas suffisament de carte vierge");
 
   /*          int index = AddCraft(typeof(TatteredWallMapSouth), 1044448, 1072891, 90.0, 150.0, typeof(TreasureMap), 1073494, 10, 1073495);
             AddRes(index, typeof(TreasureMap), 1073498, 5, 1073499);

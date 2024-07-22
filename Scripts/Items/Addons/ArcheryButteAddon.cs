@@ -16,7 +16,7 @@ namespace Server.Items
         private DateTime m_LastUse;
         private Hashtable m_Entries;
 
-        public ArcheryButte()
+		public ArcheryButte()
             : this(0x100A)
         {
         }
@@ -25,8 +25,8 @@ namespace Server.Items
             : base(itemID)
         {
             m_MinSkill = -25.0;
-            m_MaxSkill = +25.0;
-        }
+            m_MaxSkill = +50.0;
+		}
 
         public ArcheryButte(Serial serial)
             : base(serial)
@@ -121,23 +121,35 @@ namespace Server.Items
                 Fire(from);
         }
 
-        public void Gather(Mobile from)
-        {
-            from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 500592); // You gather the arrows and bolts.
+		public void Gather(Mobile from)
+		{
+			from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 500592); // You gather the arrows and bolts.
 
-            if (m_Arrows > 0)
-                from.AddToBackpack(new Arrow(m_Arrows));
+			if (m_Arrows > 0)
+			{
+				int arrowsToReturn = (int)(m_Arrows * 0.5); // 50% des flèches
+				if (arrowsToReturn > 0)
+				{
+					from.AddToBackpack(new Arrow(arrowsToReturn));
+				}
+			}
 
-            if (m_Bolts > 0)
-                from.AddToBackpack(new Bolt(m_Bolts));
+			if (m_Bolts > 0)
+			{
+				int boltsToReturn = (int)(m_Bolts * 0.5); // 50% des carreaux
+				if (boltsToReturn > 0)
+				{
+					from.AddToBackpack(new Bolt(boltsToReturn));
+				}
+			}
 
-            m_Arrows = 0;
-            m_Bolts = 0;
+			m_Arrows = 0;
+			m_Bolts = 0;
 
-            m_Entries = null;
-        }
+			m_Entries = null;
+		}
 
-        public void Fire(Mobile from)
+		public void Fire(Mobile from)
         {
             BaseRanged ranged = from.Weapon as BaseRanged;
 
@@ -320,7 +332,7 @@ namespace Server.Items
                         if (m_MinSkill == 0.0 && m_MaxSkill == 30.0)
                         {
                             m_MinSkill = -25.0;
-                            m_MaxSkill = +25.0;
+                            m_MaxSkill = +50.0;
                         }
 
                         break;

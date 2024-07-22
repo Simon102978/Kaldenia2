@@ -18,9 +18,10 @@ namespace Server.Mobiles
             {
                 Add(new GenericBuyInfo(typeof(NewSpellbook), 250, 10, 0xEFA, 0));
 
-                
 
-                Add(new GenericBuyInfo(typeof(ScribesPen), 8, 10, 0xFBF, 0));
+				Add(new GenericBuyInfo(typeof(MapmakersPen), 8, 10, 0xFBF, 0));
+
+				Add(new GenericBuyInfo(typeof(ScribesPen), 8, 10, 0xFBF, 0));
 
                 Add(new GenericBuyInfo(typeof(BlankScroll), 5, 20, 0x0E34, 0));
 
