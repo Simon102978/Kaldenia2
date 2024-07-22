@@ -6205,7 +6205,7 @@ namespace Server.Mobiles
 	typeof(ArbaviveRecipeScroll),
 	typeof(FoliereRecipeScroll),
 	typeof(InvisibilityPotionRecipeScroll),
-	typeof(ForgeRecipeScroll),
+	//typeof(ForgeRecipeScroll),
 	typeof(FourreauDoreeRecipeScroll),
 	typeof(HitsMaxBuffFoodRecipeScroll),
 	typeof(CoffreFortRecipeScroll),
