@@ -56,8 +56,8 @@ namespace Server.Spells.Spellweaving
                 {
                     double skill = Caster.Skills[SkillName.EvalInt].Value;
 
-                    int hitsPerRound = 5 + (int)(skill / 24) + FocusLevel;
-                    TimeSpan duration = TimeSpan.FromSeconds(30 + (FocusLevel * 10));
+                    int hitsPerRound = 5 + (int)(skill / 50) + FocusLevel;
+                    TimeSpan duration = TimeSpan.FromSeconds(15 + (FocusLevel * 10));
 
                     GiftOfRenewalInfo info = new GiftOfRenewalInfo(Caster, m, hitsPerRound);
 

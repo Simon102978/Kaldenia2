@@ -98,7 +98,7 @@ namespace Server.Items
 					handTwo = null;
 
 				double snooping = pm.Skills.Snooping.Value;
-				double stealing = pm.Skills.Stealing.Value;
+				double stealing = pm.Skills.Snooping.Value;
 
 				int chance_de_voler = (int)((snooping + stealing) / 20) * 2;
 				int chance = (int)((snooping + stealing) / 15) * 2;

@@ -257,7 +257,7 @@ namespace Server.Engines.Craft
 				else if (excepChance > 100.0) excepChance = 100.0;
 
 				AddLabel(170, 100, LabelHue, "Exceptional Chance:");
-				AddLabel(300, 100, LabelHue, string.Format("{0:F3}%", excepChance));
+				AddLabel(300, 100, LabelHue, string.Format("{0:F3}%", excepChance * 100));
 
 				double epicChance = m_CraftItem.GetEpicChance(m_CraftSystem, chance, m_From);
 
@@ -265,7 +265,7 @@ namespace Server.Engines.Craft
 				else if (epicChance > 100.0) epicChance = 100.0;
 
 				AddLabel(350, 80, LabelHue, "Epic Chance:");
-				AddLabel(465, 80, LabelHue, string.Format("{0:F3}%", epicChance));
+				AddLabel(465, 80, LabelHue, string.Format("{0:F3}%", epicChance * 100));
 
 				double legendaryChance = m_CraftItem.GetLegendaryChance(m_CraftSystem, chance, m_From);
 
@@ -273,7 +273,7 @@ namespace Server.Engines.Craft
 				else if (legendaryChance > 100.0) legendaryChance = 100.0;
 
 				AddLabel(350, 100, LabelHue, "Legendary Chance:");
-				AddLabel(465, 100, LabelHue, string.Format("{0:F3}%", legendaryChance));
+				AddLabel(465, 100, LabelHue, string.Format("{0:F3}%", legendaryChance * 100));
             }
 		}
 

@@ -27,7 +27,7 @@ namespace Server.Spells.Chivalry
                 return 0;
             }
 
-            int v = (int)Math.Sqrt(from.Karma + 20000 + (from.Skills.Chivalry.Fixed * 10));
+            int v = (int)Math.Sqrt(from.Int + 10000 + (from.Skills.Magery.Fixed * 10));
 
             return v / div;
         }

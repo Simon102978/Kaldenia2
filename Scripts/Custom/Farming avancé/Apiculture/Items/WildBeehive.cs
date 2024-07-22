@@ -25,36 +25,56 @@ namespace Server.Items
 		[Constructable]
 		public WildBeehive() : base( 0x91A )
 		{
-			Name = "Ruche Sauvage";
+			Name = "Ruche";
 			Movable = false;
 		}
-		public override void OnDoubleClick( Mobile from )
+		public override void OnDoubleClick(Mobile from)
 		{
-			if( from.InRange( this.GetWorldLocation(), 1 ) )
+			if (from.InRange(this.GetWorldLocation(), 1))
 			{
-				
-				if ( m_UsesRemaining == 1 )
+				if (m_UsesRemaining == 1)
 				{
-					from.AddToBackpack( new HoneyComb() );
+					GiveRandomItem(from);
 					InvalidateProperties();
-					from.SendMessage( "Vous retirez le dernier rayon de Miel, la ruche s'effondre." );
+					from.SendMessage("Vous retirez le dernier produit, la ruche s'effondre.");
 					this.Delete();
 				}
 				else
 				{
-					from.AddToBackpack( new HoneyComb() );
+					GiveRandomItem(from);
 					m_UsesRemaining -= 1;
 					InvalidateProperties();
-					from.SendMessage("Vous sortez un rayon de miel de la ruche.");
-					
+					from.SendMessage("Vous récoltez un produit de la ruche.");
 				}
 			}
-			else 
-  			{ 
-			from.SendMessage("Vous êtes trop loin de la ruche."); 
-			return; 
-  			} 
+			else
+			{
+				from.SendMessage("Vous êtes trop loin de la ruche.");
+			}
 		}
+
+		private void GiveRandomItem(Mobile from)
+		{
+			int randomChoice = Utility.Random(3);
+			int amount = Utility.RandomMinMax(1, 2);
+
+			switch (randomChoice)
+			{
+				case 0:
+					from.AddToBackpack(new HoneyComb(amount));
+					from.SendMessage($"Vous obtenez {amount} rayon(s) de miel.");
+					break;
+				case 1:
+					from.AddToBackpack(new Beeswax(amount));
+					from.SendMessage($"Vous obtenez {amount} morceau(x) de cire d'abeille.");
+					break;
+				case 2:
+					from.AddToBackpack(new JarHoney(amount));
+					from.SendMessage($"Vous obtenez {amount} pot(s) de miel.");
+					break;
+			}
+		}
+
 		public override bool HandlesOnMovement
 		{
 			get { return true; }
