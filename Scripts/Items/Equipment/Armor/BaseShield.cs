@@ -1,5 +1,7 @@
+using Server.Mobiles;
 using Server.Network;
 using System;
+using System.Collections.Generic;
 
 namespace Server.Items
 {
@@ -31,36 +33,83 @@ namespace Server.Items
             }
         }
 
-        public int LastParryChance { get; set; }
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (!IsEquippedBy(from))
+			{
+				from.SendLocalizedMessage(500214); // You must equip this item to use it.
+				return;
+			}
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
+			if (from.Stam < 10)
+			{
+				from.SendMessage("Vous n'avez pas assez de stamina pour utiliser cette capacité.");
+				return;
+			}
 
-            writer.Write(1);//version
-        }
+			from.Stam -= 10;
+			from.PublicOverheadMessage(MessageType.Emote, 0x3B2, false, "* Provoque les adversaires *");
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
+			List<Mobile> targets = new List<Mobile>();
+			foreach (Mobile m in from.GetMobilesInRange(10))
+			{
+				if (m != from && m is BaseCreature && ((BaseCreature)m).Combatant != from)
+				{
+					targets.Add(m);
+				}
+			}
 
-            int version = reader.ReadInt();
+			foreach (Mobile target in targets)
+			{
+				if (target is BaseCreature)
+				{
+					BaseCreature bc = (BaseCreature)target;
+					bc.Combatant = from;
+					bc.ControlTarget = from;
+					bc.ControlOrder = OrderType.Attack;
+				}
+			}
 
-            if (version < 1)
-            {
-                if (this is Aegis)
-                    return;
+			from.SendMessage("Vous provoquez les adversaires autour de vous!");
+		}
 
-                // The 15 bonus points to resistances are not applied to shields on OSI.
-                PhysicalBonus = 0;
-                FireBonus = 0;
-                ColdBonus = 0;
-                PoisonBonus = 0;
-                EnergyBonus = 0;
-            }
-        }
+		// Ajoutez cette méthode d'assistance à votre classe BaseShield
+		private bool IsEquippedBy(Mobile m)
+		{
+			return m.FindItemOnLayer(Layer.TwoHanded) == this || m.FindItemOnLayer(Layer.FirstValid) == this;
+		}
 
-        public override void AddNameProperties(ObjectPropertyList list)
+
+		public int LastParryChance { get; set; }
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write(1);//version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+			if (version < 1)
+			{
+				if (this is Aegis)
+					return;
+
+				// The 15 bonus points to resistances are not applied to shields on OSI.
+				PhysicalBonus = 0;
+				FireBonus = 0;
+				ColdBonus = 0;
+				PoisonBonus = 0;
+				EnergyBonus = 0;
+			}
+		}
+
+		public override void AddNameProperties(ObjectPropertyList list)
         {
             base.AddNameProperties(list);
 

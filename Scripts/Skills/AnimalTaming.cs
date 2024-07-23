@@ -432,7 +432,8 @@ namespace Server.SkillHandlers
                     }
                 }
 
-                private bool CanPath()
+		
+				private bool CanPath()
                 {
                     IPoint3D p = m_Tamer;
 

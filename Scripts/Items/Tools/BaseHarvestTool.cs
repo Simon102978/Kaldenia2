@@ -143,43 +143,41 @@ namespace Server.Items
             AddContextMenuEntries(from, this, list, HarvestSystem);
         }
 
-        public static void AddContextMenuEntries(Mobile from, Item item, List<ContextMenuEntry> list, HarvestSystem system)
-        {
-            if (system != CustomMining.GeneralSystem)
-                return;
+		public static void AddContextMenuEntries(Mobile from, Item item, List<ContextMenuEntry> list, HarvestSystem system)
+		{
+			if (system != Mining.System)
+				return;
 
-            if (!item.IsChildOf(from.Backpack) && item.Parent != from)
-                return;
+			if (!item.IsChildOf(from.Backpack) && item.Parent != from)
+				return;
 
-            PlayerMobile pm = from as PlayerMobile;
+			PlayerMobile pm = from as PlayerMobile;
 
-            if (pm == null)
-                return;
+			if (pm == null)
+				return;
 
-            int typeentry = 0;
+			int typeentry = 0;
 
-            if (pm.ToggleMiningStone)
-                typeentry = 6179;
-            if (pm.ToggleMiningGem)
-                typeentry = 1112239;
-            if (pm.ToggleStoneOnly)
-                typeentry = 1156865;
-            if (!pm.ToggleMiningStone && !pm.ToggleMiningGem && !pm.ToggleStoneOnly)
-                typeentry = 6178;
+			if (pm.ToggleMiningStone)
+				typeentry = 6179;
+			if (pm.ToggleMiningGem)
+				typeentry = 1112239;
+			if (pm.ToggleStoneOnly)
+				typeentry = 1156865;
+			if (!pm.ToggleMiningStone && !pm.ToggleMiningGem && !pm.ToggleStoneOnly)
+				typeentry = 6178;
 
-            ContextMenuEntry miningEntry = new ContextMenuEntry(typeentry)
-            {
-                Color = 0x421F
-            };
-            list.Add(miningEntry);
+			ContextMenuEntry miningEntry = new ContextMenuEntry(typeentry);
+			miningEntry.Color = 0x421F;
+			list.Add(miningEntry);
 
-            list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreOnly, 6176));         // Set To Ore
-            list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreAndStone, 6177));     // Set To Ore and Stone
-            list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreAndGems, 1112237));   // Set To Ore and Gems
-            list.Add(new ToggleMiningStoneEntry(pm, MiningType.StoneOnly, 1156864));    // Set To Stone
-        }
+			list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreOnly, 6176));         // Set To Ore
+			list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreAndStone, 6177));     // Set To Ore and Stone
+			list.Add(new ToggleMiningStoneEntry(pm, MiningType.OreAndGems, 1112237));   // Set To Ore and Gems
+			list.Add(new ToggleMiningStoneEntry(pm, MiningType.StoneOnly, 1156864));    // Set To Stone
+		}
 
-        public class ToggleMiningStoneEntry : ContextMenuEntry
+		public class ToggleMiningStoneEntry : ContextMenuEntry
         {
             private readonly PlayerMobile m_Mobile;
             private readonly MiningType MiningType;

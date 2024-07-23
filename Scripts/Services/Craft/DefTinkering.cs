@@ -349,6 +349,12 @@ namespace Server.Engines.Craft
 
 			AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet", 10.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
 
+		index =	AddCraft(typeof(BraceletMontre), "Bracelets", "Montre Solaire", 25.0, 70.0, typeof(IronIngot), "Lingot de fer", 10, "Vous n'avez pas assez de lingots pour fabriquer cette montre.");
+			AddRes(index, typeof(ClockParts), "Pièces d'horloge", 1, "Vous n'avez pas assez de Pièces d'horloge pour fabriquer cette montre.");
+			AddRes(index, typeof(Gears), "Engrenages", 3, "Vous n'avez pas assez de d'engrenages pour fabriquer cette montre.");
+
+
+
 			index = AddCraft(typeof(Bracelet1), "Bracelets", "Bracelet serti d'ambre", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ce bracelet.");
 			AddRes(index, typeof(Ambre), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer ce bracelet.");
 
@@ -744,6 +750,8 @@ namespace Server.Engines.Craft
 
 			#endregion
 			#region Divers
+			index = AddCraft(typeof(FishSteakResourceCrate), "Divers", "Caisse de Poissons frais", 0.0, 60.0, typeof(RawFishSteak), "Steak de poisson", 150, "Vous n'avez pas suffisament de steak de poisson");
+
 			AddCraft(typeof(IronIngotResourceCrate), "Divers", "Caisse de ressource", 10.0, 60.0, typeof(IronIngot), "Lingot de fer", 150, " vous n'avez pas suffisament de Lingot de fer");
 
 			index = AddCraft(typeof(KeyRing), "Divers", "Trousseau de clés", 10.0, 60.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");

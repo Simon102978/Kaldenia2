@@ -97,4 +97,59 @@ namespace Server.Items
             int version = reader.ReadInt();
         }
     }
+	public class BraceletMontre : BaseBracelet, IRepairable
+	{
+		public CraftSystem RepairSystem => DefTinkering.CraftSystem;
+
+		[Constructable]
+		public BraceletMontre()
+			: base(0x1F06)
+		{
+			Name = "Montre solaire";
+		}
+
+		public BraceletMontre(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (!IsEquippedBy(from))
+			{
+				from.SendMessage("Vous devez porter la montre solaire pour l'utiliser.");
+				return;
+			}
+
+			int hours, minutes;
+			Clock.GetTime(from.Map, from.X, from.Y, out hours, out minutes);
+
+			if (hours >= 22 || hours < 6)
+			{
+				from.SendMessage("Il fait trop sombre pour lire l'heure sur votre montre solaire.");
+				return;
+			}
+
+			string timeString = $"{hours:D2}:{minutes:D2}";
+			from.SendMessage($"Votre montre solaire indique qu'il est {timeString}.");
+		}
+
+		private bool IsEquippedBy(Mobile m)
+		{
+			return m.FindItemOnLayer(Layer.Bracelet) == this;
+		}
+
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
 }

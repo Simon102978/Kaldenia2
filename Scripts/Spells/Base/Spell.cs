@@ -370,7 +370,7 @@ namespace Server.Spells
             return true;
         }
 
-        public virtual bool OnCasterUsingObject(object o)
+		public virtual bool OnCasterUsingObject(object o)
         {
             if (m_State == SpellState.Sequencing)
             {
@@ -699,11 +699,25 @@ namespace Server.Spells
 
             if (m_Info.Mantra != null && m_Info.Mantra.Length > 0 && (m_Caster.Player || (m_Caster is BaseCreature && ((BaseCreature)m_Caster).ShowSpellMantra)))
             {
-                m_Caster.PublicOverheadMessage(MessageType.Spell, m_Caster.SpeechHue, true, m_Info.Mantra, false);
+				if (ShouldDisplayWords())
+				{
+					m_Caster.PublicOverheadMessage(MessageType.Spell, m_Caster.SpeechHue, true, m_Info.Mantra, false);
             }
         }
+	}
 
-        public virtual bool BlockedByHorrificBeast
+		private bool ShouldDisplayWords()
+		{
+			if (m_Caster is Mobile mobile)
+			{
+				Item hat = mobile.FindItemOnLayer(Layer.Helm);
+				return !(hat is ChapeauArchimage);
+			}
+			return true;
+		}
+
+
+		public virtual bool BlockedByHorrificBeast
         {
             get
             {
@@ -1294,19 +1308,28 @@ namespace Server.Spells
                     return;
                 }
 
-                if (!m_Spell.Caster.Mounted && m_Spell.m_Info.Action >= 0)
-                {
-                    m_Spell.Caster.Animate(AnimationType.Spell, 0);
-                }
+				if (!m_Spell.Caster.Mounted && m_Spell.m_Info.Action >= 0)
+				{
+					if (ShouldPlayCastAnimation(m_Spell.Caster))
+					{
+						m_Spell.Caster.Animate(AnimationType.Spell, 0);
+					}
+				}
 
-                if (!Running)
+				if (!Running)
                 {
                     m_Spell.m_AnimTimer = null;
                 }
             }
-        }
+			private bool ShouldPlayCastAnimation(Mobile caster)
+			{
+				Item gloves = caster.FindItemOnLayer(Layer.Gloves);
+				return !(gloves is GantsArchimage);
+			}
 
-        private class CastTimer : Timer
+		}
+
+		private class CastTimer : Timer
         {
             private static CastTimer _Instance;
 
@@ -1341,7 +1364,8 @@ namespace Server.Spells
                 }
             }
 
-            protected override void OnTick()
+		
+			protected override void OnTick()
             {
                 var registry = Instance.Registry;
 

@@ -581,6 +581,8 @@ namespace Server.Engines.Harvest
 					fish.Stackable = false;
 
 					fish.Weight = Math.Max(1, 200 - (int)Math.Sqrt(Utility.RandomMinMax(0, 40000)));
+
+
 				}
 			}
 			#endregion
