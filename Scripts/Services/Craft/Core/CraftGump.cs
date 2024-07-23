@@ -681,7 +681,12 @@ namespace Server.Engines.Craft
                         if (context == null)
                             break;
 
-                        int groupIndex = context.LastGroupIndex;
+
+
+                       if (index >= 0 && index < m_list.Count)
+                                CraftItem(m_list[index]);
+
+                 /*       int groupIndex = context.LastGroupIndex;
 
                         if (groupIndex >= 0 && groupIndex < groups.Count)
                         {
@@ -689,7 +694,7 @@ namespace Server.Engines.Craft
 
                             if (index >= 0 && index < group.CraftItems.Count)
                                 CraftItem(group.CraftItems.GetAt(index));
-                        }
+                        }*/
 
                         break;
                     }
