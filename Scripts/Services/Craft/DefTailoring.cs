@@ -105,15 +105,7 @@ namespace Server.Engines.Craft
 		CacheOeil3 = 20010,
 
 
-		[Description("Peau Ours")]
-		PeauOurs = 20011,
 
-		[Description("Peau Ours Polaire")]
-		PeauOursPolaire = 20012,
-
-
-		[Description("Fourreau doré")]
-		FourreauDore = 20013,
 
 	
 

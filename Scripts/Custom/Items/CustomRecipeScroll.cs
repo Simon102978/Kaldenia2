@@ -148,6 +148,23 @@ public class CustomRecipeScrolls
 		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
 	}
 
+	public class PeauOursPolaireEstRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public PeauOursPolaireEstRecipeScroll() : base(20015) { }
+		public PeauOursPolaireEstRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+		public class PeauOursEstRecipeScroll : RecipeScroll
+	{
+		[Constructable]
+		public PeauOursEstRecipeScroll() : base(20014) { }
+		public PeauOursEstRecipeScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
 	public class PeauOursPolaireRecipeScroll : RecipeScroll
 	{
 		[Constructable]

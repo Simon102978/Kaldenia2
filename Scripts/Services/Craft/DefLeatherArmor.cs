@@ -4,9 +4,28 @@ using System.Collections.Generic;
 
 namespace Server.Engines.Craft
 {
+	public enum TailorLeatherRecipe
+	{
+		[Description("Peau Ours Sud")]
+		PeauOurs = 20011,
+
+		[Description("Peau Ours Polaire Sud")]
+		PeauOursPolaire = 20012,
+
+
+		[Description("Fourreau doré")]
+		FourreauDore = 20013,
+
+		[Description("Peau Ours Est")]
+		PeauOursEst = 20014,
+
+		[Description("Peau Ours Polaire Est")]
+		PeauOursPolaireEst = 20015,
+	}
  
     public class DefLeatherArmor : CraftSystem
     {
+	
         #region Statics
 
   
@@ -290,20 +309,20 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(fourreau2), "Divers", "Fourreau croisé", 30.0, 80.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(fourreau3), "Divers", "Fourreau bandouillère", 40.0, 90.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(FourreauDore), "Divers", "Fourreau Doré", 40.0, 90.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			AddRecipe(index, (int)TailorRecipe.FourreauDore);
+			AddRecipe(index, (int)TailorLeatherRecipe.FourreauDore);
 
 
-			AddCraft(typeof(BrownBearRugSouthDeed), "Decorations", "Peau Ours Sud", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
-			AddRecipe(index, (int)TailorRecipe.PeauOurs);
+			index = AddCraft(typeof(BrownBearRugSouthDeed), "Decorations", "Peau Ours Sud", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
+			AddRecipe(index, (int)TailorLeatherRecipe.PeauOurs);
 
-			AddCraft(typeof(BrownBearRugEastDeed), "Decorations", "Peau Ours Est", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
-			AddRecipe(index, (int)TailorRecipe.PeauOurs);
+			index = AddCraft(typeof(BrownBearRugEastDeed), "Decorations", "Peau Ours Est", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
+			AddRecipe(index, (int)TailorLeatherRecipe.PeauOursEst);
 
-			AddCraft(typeof(PolarBearRugSouthDeed), "Decorations", "Peau Ours Polaire Sud", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
-			AddRecipe(index, (int)TailorRecipe.PeauOursPolaire);
+			index = AddCraft(typeof(PolarBearRugSouthDeed), "Decorations", "Peau Ours Polaire Sud", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
+			AddRecipe(index, (int)TailorLeatherRecipe.PeauOursPolaire);
 
-			AddCraft(typeof(PolarBearRugEastDeed), "Decorations", "Peau Ours Polaire Est", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
-			AddRecipe(index, (int)TailorRecipe.PeauOursPolaire);
+			index = AddCraft(typeof(PolarBearRugEastDeed), "Decorations", "Peau Ours Polaire Est", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
+			AddRecipe(index, (int)TailorLeatherRecipe.PeauOursPolaireEst);
 
 
 			index = AddCraft(typeof(Corde), "Divers", "Corde", 60.0, 75.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
