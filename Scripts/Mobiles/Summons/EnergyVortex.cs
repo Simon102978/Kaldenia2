@@ -4,6 +4,8 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
+
+
     [CorpseName("Le corps d'un elementaire")]
     public class EnergyVortex : BaseCreature
     {
@@ -12,7 +14,10 @@ namespace Server.Mobiles
         {
         }
 
-        [Constructable]
+		private DateTime m_lastTargetSearch = DateTime.MinValue;
+
+
+		[Constructable]
         public EnergyVortex(bool summoned)
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
