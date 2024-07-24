@@ -9,7 +9,7 @@ namespace Server.Mobiles
         public Mimic()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a mimic";
+            Name = "Mimic";
             Body = 729;
 
             SetStr(281);

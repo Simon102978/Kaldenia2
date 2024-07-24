@@ -97,7 +97,20 @@ namespace Server.Items
 		public virtual void TransformMimic(Mobile Combatant)
 		{
 
-			Mimic helper = new Mimic();
+
+			BaseCreature helper;
+
+			if (Utility.RandomBool())
+			{
+				helper = new MimicMage();
+			}
+			else
+			{
+				helper = new MimicWarrior();
+			}
+
+
+
 
 
 			helper.Home = this.Location;
