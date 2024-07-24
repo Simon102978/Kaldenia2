@@ -184,7 +184,7 @@ namespace Server.Items.Crops
 				m_sower = sower;
 				cnt = 0;
 				rnd = Utility.RandomDouble();
-				cookValue = sower.Skills[SkillName.Cooking].Value / 50;
+				cookValue = sower.Skills[SkillName.Botanique].Value / 50;
 			}
 
 			protected override void OnTick()
