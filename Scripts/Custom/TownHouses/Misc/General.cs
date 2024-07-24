@@ -13,7 +13,7 @@ namespace Knives.TownHouses
 
 		// This setting determines the suggested gold value for a single square of a home
 		//  which then derives price, lockdowns and secures.
-		public static int SuggestionFactor { get { return 250; } }
+		public static int SuggestionFactor { get { return 225; } }
 
 		// This setting determines if players need License in order to rent out their property
 		public static bool RequireRenterLicense { get { return false; } }

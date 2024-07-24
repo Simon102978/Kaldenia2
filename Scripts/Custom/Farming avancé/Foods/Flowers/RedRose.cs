@@ -10,7 +10,11 @@ namespace Server.Items
 		{
 			Name = "Rose Rouge";
 			Hue = 2118;
+			Stackable = true;
+			Amount = amount;
 		}
+
+		
 
 		public RedRose( Serial serial ) : base( serial ) { }
 
