@@ -30,7 +30,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Wrestling, 95.1, 100.0);
             SetSkill(SkillName.Tactics, 50.0);
 
-            ControlSlots = 1;
+            ControlSlots = 2;
         }
 
         public VampireBatFamiliar(Serial serial)

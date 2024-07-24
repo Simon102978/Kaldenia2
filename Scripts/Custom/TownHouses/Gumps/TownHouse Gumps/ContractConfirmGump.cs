@@ -95,7 +95,7 @@ namespace Knives.TownHouses
 				}
 			}
 
-			AddBackgroundZero(0, 0, width, y + 23, 0x24A4);
+			AddBackgroundZero(0, 0, width, y + 23, 9274);
 		}
 
 		protected override void OnClose()

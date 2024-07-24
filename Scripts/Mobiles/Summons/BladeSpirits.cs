@@ -3,9 +3,14 @@ using System.Collections;
 
 namespace Server.Mobiles
 {
+
+
+
 	[CorpseName("a blade spirit corpse")]
 	public class BladeSpirits : BaseCreature
 	{
+		private DateTime m_lastTargetSearch = DateTime.MinValue;
+
 		[Constructable]
 		public BladeSpirits()
 			: this(false)
@@ -104,10 +109,6 @@ namespace Server.Mobiles
 				return Poison.Lethal;
 			}
 		}
-		public override double GetFightModeRanking(Mobile m, FightMode acqType, bool bPlayerOnly)
-		{
-			return (m.Str + m.Skills[SkillName.Tactics].Value) / Math.Max(this.GetDistanceToSqrt(m), 1.0);
-		}
 
 		public override int GetAngerSound()
 		{
@@ -126,44 +127,53 @@ namespace Server.Mobiles
 
 		public override void OnThink()
 		{
-			if (Core.SE && this.Summoned)
+			base.OnThink();
+
+			if (Combatant == null || !Combatant.Alive || Combatant.Deleted)
 			{
-				ArrayList spirtsOrVortexes = new ArrayList();
-				IPooledEnumerable eable = GetMobilesInRange(5);
-
-				foreach (Mobile m in eable)
+				if (DateTime.UtcNow - m_lastTargetSearch > TimeSpan.FromSeconds(2))
 				{
-					if (m is EnergyVortex || m is BladeSpirits)
-					{
-						if (((BaseCreature)m).Summoned)
-							spirtsOrVortexes.Add(m);
-					}
-				}
-
-				eable.Free();
-
-				while (spirtsOrVortexes.Count > 6)
-				{
-					int index = Utility.Random(spirtsOrVortexes.Count);
-					this.Dispel(((Mobile)spirtsOrVortexes[index]));
-					spirtsOrVortexes.RemoveAt(index);
+					FindNewTarget();
+					m_lastTargetSearch = DateTime.UtcNow;
 				}
 			}
+		}
 
-			base.OnThink();
+		private void FindNewTarget()
+		{
+			Mobile closestMobile = null;
+			double closestDistance = double.MaxValue;
+
+			IPooledEnumerable eable = GetMobilesInRange(10);
+			foreach (Mobile m in eable)
+			{
+				if (m != this && m.Alive && !m.IsDeadBondedPet && CanBeHarmful(m))
+				{
+					double distance = GetDistanceToSqrt(m);
+					if (distance < closestDistance)
+					{
+						closestMobile = m;
+						closestDistance = distance;
+					}
+				}
+			}
+			eable.Free();
+
+			if (closestMobile != null)
+			{
+				Combatant = closestMobile;
+			}
 		}
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-
 			writer.Write((int)0); // version
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
-
 			int version = reader.ReadInt();
 		}
 	}

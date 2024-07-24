@@ -1,3 +1,4 @@
+
 #region References
 using System;
 using System.Collections.Generic;
@@ -79,6 +80,8 @@ namespace Knives.TownHouses
 		public VersionHouse(Serial serial)
 			: base(serial)
 		{ }
+
+
 
 		// ReSharper disable RedundantOverridenMember
 		public override void Serialize(GenericWriter writer)

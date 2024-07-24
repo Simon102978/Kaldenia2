@@ -24,7 +24,7 @@ namespace Knives.TownHouses
 
 		protected override void BuildGump()
 		{
-			AddBackground(0, 0, c_Width, c_Height, 0x13BE);
+			AddBackground(0, 0, c_Width, c_Height, 9274);
 
 			AddHtml(20, 20, c_Width - 40, c_Height - 40, HTML.White + c_Text, false, c_Scroll);
 		}

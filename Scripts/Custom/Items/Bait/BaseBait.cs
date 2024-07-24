@@ -36,12 +36,13 @@ namespace Server.Items
 		public BaseBait(Bait bait, int charge) : base(0x4B46)
 		{
 			Name = "Appât";
-			Weight = 0.1;
 
 			m_Bait = bait;
 			m_Charge = charge;
 			Stackable = true;
 		}
+		public override double DefaultWeight => 0.1;
+
 
 		public static string[] m_Material = new string[]
 		{
@@ -83,6 +84,7 @@ namespace Server.Items
 			"WinterDragonfish",
 			"ZombieFish"
 		};
+
 		public bool ApplyTo(LargeFishingPole pole)
 		{
 			if (pole == null)

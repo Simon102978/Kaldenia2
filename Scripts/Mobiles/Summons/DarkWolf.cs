@@ -36,7 +36,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Wrestling, 85.1, 90.0);
             SetSkill(SkillName.Tactics, 50.0);
 
-            ControlSlots = 1;
+            ControlSlots = 2;
         }
 
         public DarkWolfFamiliar(Serial serial)

@@ -41,7 +41,7 @@ namespace Knives.TownHouses
 				AddHtml(width / 2 - 23, y + 3, 51, "<CENTER>Clear");
 			}
 
-			AddBackgroundZero(0, 0, width, y + 40, 0x1400);
+			AddBackgroundZero(0, 0, width, y + 40, 9274);
 		}
 
 		private void Help()
