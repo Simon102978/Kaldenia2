@@ -824,6 +824,36 @@ namespace Server.Engines.Craft
 
 			// Add every material you want the player to be able to choose from
 			// This will override the overridable material
+			AddSubRes(typeof(IronIngot), "Fer", 0.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(BronzeIngot), "Bronze", 0.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(CopperIngot), "Copper", 0.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(SonneIngot), "Sonne", 20.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(ArgentIngot), "Argent", 20.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(BorealeIngot), "Boréale", 20.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(ChrysteliarIngot), "Chrysteliar", 20.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(GlaciasIngot), "Glacias", 20.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(LithiarIngot), "Lithiar", 20.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(AcierIngot), "Acier", 40.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(DurianIngot), "Durian", 40.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(EquilibrumIngot), "Équilibrum", 40.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(GoldIngot), "Or", 40.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(JolinarIngot), "Jolinar", 40.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(JusticiumIngot), "Justicium", 40.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(AbyssiumIngot), "Abyssium", 60.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(BloodiriumIngot), "Bloodirium", 60.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(HerbrositeIngot), "Herbrosite", 60.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(KhandariumIngot), "Khandarium", 60.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(MytherilIngot), "Mytheril", 60.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(SombralirIngot), "Sombralir", 60.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(DraconyrIngot), "Draconyr", 80.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(HeptazionIngot), "Heptazion", 80.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(OceanisIngot), "Océanis", 80.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(BraziumIngot), "Brazium", 80.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(LuneriumIngot), "Lunerium", 80.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(MarinarIngot), "Marinar", 80.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(NostalgiumIngot), "Nostalgium", 100.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+
+
 			// Set the overridable material for wood
 			SetSubRes2(typeof(PalmierBoard), "Palmier");
 
@@ -839,6 +869,8 @@ namespace Server.Engines.Craft
 			AddSubRes2(typeof(AmaranteBoard), "Amarante", 80.0, "Vous ne savez pas travailler le bois Amarante");
 			AddSubRes2(typeof(PinBoard), "Pin", 80.0, "Vous ne savez pas travailler le bois Pin");
 			AddSubRes2(typeof(AncienBoard), "Ancien", 100.0, "Vous ne savez pas travailler le bois ancien");
+
+
 			MarkOption = true;
 			Repair = true;
 			CanEnhance = true;
