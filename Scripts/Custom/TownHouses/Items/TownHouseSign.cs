@@ -1648,7 +1648,7 @@ namespace Knives.TownHouses
 			}
 		}
 
-        public TownHouseSign(Serial serial)
+		public TownHouseSign(Serial serial)
 			: base(serial)
 		{ }
 
@@ -1742,7 +1742,7 @@ namespace Knives.TownHouses
 			if (version >= 14)
 				Currency = ScriptCompiler.FindTypeByFullName(reader.ReadString());
 
-			if(Currency == null)
+			if (Currency == null)
 				Currency = typeof(Gold);
 
 			if (version >= 13)
@@ -1867,7 +1867,7 @@ namespace Knives.TownHouses
 
 			if (whiteSpaceAlias == null || whiteSpaceAlias.Length == 0)
 			{
-				whiteSpaceAlias = new[] {'_'};
+				whiteSpaceAlias = new[] { '_' };
 			}
 
 			str = whiteSpaceAlias.Aggregate(str, (s, c) => s.Replace(c, ' '));
@@ -1876,5 +1876,5 @@ namespace Knives.TownHouses
 
 			return str;
 		}
-    }
+	}
 }

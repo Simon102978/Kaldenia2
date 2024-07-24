@@ -4,6 +4,8 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
+
+
     [CorpseName("Le corps d'un elementaire")]
     public class EnergyVortex : BaseCreature
     {
@@ -12,7 +14,10 @@ namespace Server.Mobiles
         {
         }
 
-        [Constructable]
+		private DateTime m_lastTargetSearch = DateTime.MinValue;
+
+
+		[Constructable]
         public EnergyVortex(bool summoned)
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
@@ -26,7 +31,7 @@ namespace Server.Mobiles
             }
             else
             {
-                Body = -1;
+                Body = 162;
             }
 
             bool weak = summoned && Siege.SiegeShard;
@@ -77,11 +82,7 @@ namespace Server.Mobiles
 
         public override Poison PoisonImmune => Poison.Lethal;
 
-        public override double GetFightModeRanking(Mobile m, FightMode acqType, bool bPlayerOnly)
-        {
-            return (m.Int + m.Skills[SkillName.Magery].Value) / Math.Max(GetDistanceToSqrt(m), 1.0);
-        }
-
+      
         public override int GetAngerSound()
         {
             return 0x15;
@@ -99,45 +100,56 @@ namespace Server.Mobiles
 			PackItem(new GolemAsh(GolemAsh.AshType.Vent, Utility.RandomMinMax(0, 5)));
 		}
 		public override void OnThink()
-        {
-            if (Summoned)
-            {
-                ArrayList spirtsOrVortexes = new ArrayList();
-                IPooledEnumerable eable = GetMobilesInRange(5);
+		{
+			base.OnThink();
 
-                foreach (Mobile m in eable)
-                {
-                    if (m is EnergyVortex || m is BladeSpirits)
-                    {
-                        if (((BaseCreature)m).Summoned)
-                            spirtsOrVortexes.Add(m);
-                    }
-                }
+			if (Combatant == null || !Combatant.Alive || Combatant.Deleted)
+			{
+				if (DateTime.UtcNow - m_lastTargetSearch > TimeSpan.FromSeconds(2))
+				{
+					FindNewTarget();
+					m_lastTargetSearch = DateTime.UtcNow;
+				}
+			}
+		}
 
-                eable.Free();
+		private void FindNewTarget()
+		{
+			Mobile closestMobile = null;
+			double closestDistance = double.MaxValue;
 
-                while (spirtsOrVortexes.Count > 6)
-                {
-                    int index = Utility.Random(spirtsOrVortexes.Count);
-                    //TODO: Confim if it's the dispel with all the pretty effects or just a Deletion of it.
-                    Dispel(((Mobile)spirtsOrVortexes[index]));
-                    spirtsOrVortexes.RemoveAt(index);
-                }
-            }
+			IPooledEnumerable eable = GetMobilesInRange(10);
+			foreach (Mobile m in eable)
+			{
+				if (m != this && m.Alive && !m.IsDeadBondedPet && CanBeHarmful(m))
+				{
+					double distance = GetDistanceToSqrt(m);
+					if (distance < closestDistance)
+					{
+						closestMobile = m;
+						closestDistance = distance;
+					}
+				}
+			}
+			eable.Free();
 
-            base.OnThink();
-        }
+			if (closestMobile != null)
+			{
+				Combatant = closestMobile;
+			}
+		}
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(0); // version
-        }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            reader.ReadInt();
-        }
-    }
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
 }
+
