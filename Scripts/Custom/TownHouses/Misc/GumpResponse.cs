@@ -1,3 +1,5 @@
+
+
 using System.Collections;
 using Server;
 using Server.Network;
@@ -15,6 +17,8 @@ namespace Knives.TownHouses
             m_Successor = PacketHandlers.GetHandler(0xB1);
 
             PacketHandlers.Register(0xB1, 0, true, DisplayGumpResponse);
+
+
         }
 
         public static void DisplayGumpResponse(NetState state, PacketReader pvSrc)
@@ -82,7 +86,7 @@ namespace Knives.TownHouses
             if (th == null || th.ForSaleSign == null)
                 return true;
 
-            if (gump is HouseGump)
+
             {
                 int val = id - 1;
 

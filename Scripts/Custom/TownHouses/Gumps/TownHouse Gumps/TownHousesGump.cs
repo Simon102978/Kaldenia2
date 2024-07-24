@@ -1,7 +1,3 @@
-#if ServUO58
-#define ServUOX
-#endif
-
 #region References
 using System.Collections;
 
@@ -123,7 +119,7 @@ namespace Knives.TownHouses
 				AddButton(width / 2 + 70, y + 3, 0x2716, "New", New);
 			}
 
-			AddBackgroundZero(0, 0, width, y + 40, 9274);
+			AddBackgroundZero(0, 0, width, y + 40, 0x13BE);
 		}
 
 		private void TownHouseMenu(object obj)
@@ -167,7 +163,6 @@ namespace Knives.TownHouses
 			NewGump();
 
 			Owner.SendGump(new HouseGump(0, Owner, (BaseHouse)obj));
-
 		}
 
 		private void New()

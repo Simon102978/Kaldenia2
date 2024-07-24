@@ -208,7 +208,7 @@ namespace Knives.TownHouses
 
 			var house = BaseHouse.FindHouseAt(m);
 
-			if (m.AccessLevel == AccessLevel.Player && (house == null || house.Owner != m))
+			if (m.AccessLevel < AccessLevel.Counselor && (house == null || house.Owner != m))
 			{
 				m.SendMessage("You have to be inside your house to use this.");
 				return;
