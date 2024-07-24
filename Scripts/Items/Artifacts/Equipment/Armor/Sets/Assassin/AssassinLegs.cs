@@ -8,7 +8,7 @@ namespace Server.Items
             : base()
         {
 
-			Name = "Jambières du roi Ssins";
+			Name = "JambiÃ¨res du roi Ssins";
 
 			Hue = 2833;
 			SetHue = 2833;
@@ -37,7 +37,7 @@ namespace Server.Items
       //  public override int LabelNumber => 1074304;// Assassin Armor
         public override SetItem SetID => SetItem.Assassin;
         public override int Pieces => 5;
-        public override int BasePhysicalResistance => 9;
+        public override int BasePhysicalResistance => 3;
         public override int BaseFireResistance => 6;
         public override int BaseColdResistance => 3;
         public override int BasePoisonResistance => 8;
