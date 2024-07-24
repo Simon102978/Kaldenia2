@@ -13,11 +13,13 @@ namespace Server.Items
 		public override ArmorMaterialType MaterialType => ArmorMaterialType.Cloth;
 		public override ArmorMeditationAllowance DefMedAllowance => ArmorMeditationAllowance.All;
 
+
 		[Constructable]
 		public GantsArchimage() : base(0x13C6)
 		{
 			Name = "Gant De L'Archimage";
 			Weight = 1.0;
+			Hue = 0; // Couleur magique, ajustez selon vos préférences
 		}
 
 		public GantsArchimage(Serial serial) : base(serial)

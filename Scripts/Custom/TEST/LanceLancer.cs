@@ -1,4 +1,4 @@
-ï»¿using System;
+using System;
 using Server;
 using Server.Items;
 using Server.Targeting;
@@ -22,7 +22,7 @@ namespace Server.Items
 			Attributes.WeaponSpeed = 25;
 			Attributes.WeaponDamage = 15;
 
-			JavelotCount = 50; // Valeur par dÃ©faut
+			JavelotCount = 50; // Valeur par défaut
 		}
 
 		public Javelot(Serial serial) : base(serial)
@@ -62,9 +62,9 @@ namespace Server.Items
 					if (JavelotCount > 0)
 					{
 						JavelotCount--;
-					
-					attacker.SendMessage("Il vous reste {0} javelots.", JavelotCount);
-					InvalidateProperties();
+
+						attacker.SendMessage("Il vous reste {0} javelots.", JavelotCount);
+						InvalidateProperties();
 					}
 					else
 					{
@@ -84,7 +84,7 @@ namespace Server.Items
 		{
 			if (IsChildOf(from.Backpack) || Parent == from)
 			{
-				from.SendMessage("SÃ©lectionnez les javelots Ã  ajouter.");
+				from.SendMessage("Sélectionnez les javelots à ajouter.");
 				from.Target = new InternalTarget(this);
 			}
 			else
@@ -116,7 +116,7 @@ namespace Server.Items
 						if (targetJavelot.JavelotCount <= 0)
 							targetJavelot.Delete();
 
-						from.SendMessage("Vous avez ajoutÃ© {0} javelots. Total: {1}", toAdd, m_Javelot.JavelotCount);
+						from.SendMessage("Vous avez ajouté {0} javelots. Total: {1}", toAdd, m_Javelot.JavelotCount);
 						m_Javelot.InvalidateProperties();
 						if (!targetJavelot.Deleted)
 							targetJavelot.InvalidateProperties();

@@ -3,13 +3,11 @@ using System.Collections;
 
 namespace Server.Mobiles
 {
-
-
-
 	[CorpseName("a blade spirit corpse")]
 	public class BladeSpirits : BaseCreature
 	{
 		private DateTime m_lastTargetSearch = DateTime.MinValue;
+
 
 		[Constructable]
 		public BladeSpirits()
@@ -108,6 +106,10 @@ namespace Server.Mobiles
 			{
 				return Poison.Lethal;
 			}
+		}
+		public override double GetFightModeRanking(Mobile m, FightMode acqType, bool bPlayerOnly)
+		{
+			return (m.Str + m.Skills[SkillName.Tactics].Value) / Math.Max(this.GetDistanceToSqrt(m), 1.0);
 		}
 
 		public override int GetAngerSound()

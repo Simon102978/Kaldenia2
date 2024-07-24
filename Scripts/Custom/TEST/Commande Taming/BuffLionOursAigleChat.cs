@@ -214,8 +214,8 @@ namespace Server.Items
 		{
 			Attributes.WeaponDamage = m_ActiveBuffs.Contains(AnimalBuffType.Lion) ? 15 : 0;
 			Attributes.DefendChance = m_ActiveBuffs.Contains(AnimalBuffType.Ours) ? 10 : 0;
-			Attributes.AttackChance = m_ActiveBuffs.Contains(AnimalBuffType.Aigle) ? 10 :0;
-			Attributes.WeaponSpeed  = m_ActiveBuffs.Contains(AnimalBuffType.Chat) ? 10 : 0;
+			Attributes.AttackChance = m_ActiveBuffs.Contains(AnimalBuffType.Aigle) ? 10 : 0;
+			Attributes.WeaponSpeed = m_ActiveBuffs.Contains(AnimalBuffType.Chat) ? 10 : 0;
 		}
 	}
 }

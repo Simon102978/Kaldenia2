@@ -35,7 +35,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Wrestling, 40.0);
             SetSkill(SkillName.Tactics, 40.0);
 
-            ControlSlots = 2;
+            ControlSlots = 1;
         }
 
         public ShadowWispFamiliar(Serial serial)

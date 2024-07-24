@@ -84,7 +84,6 @@ namespace Server.Items
 			"WinterDragonfish",
 			"ZombieFish"
 		};
-
 		public bool ApplyTo(LargeFishingPole pole)
 		{
 			if (pole == null)

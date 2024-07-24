@@ -7,11 +7,7 @@ namespace Server.Mobiles
     [CorpseName("Le corps d'un elementaire")]
     public class EnergyVortex : BaseCreature
     {
-
-		private DateTime m_lastTargetSearch = DateTime.MinValue;
-
-
-		[Constructable]
+        [Constructable]
         public EnergyVortex() : this(false)
         {
         }
@@ -30,7 +26,7 @@ namespace Server.Mobiles
             }
             else
             {
-                Body = -1;
+                Body = 162;
             }
 
             bool weak = summoned && Siege.SiegeShard;
@@ -81,8 +77,7 @@ namespace Server.Mobiles
 
         public override Poison PoisonImmune => Poison.Lethal;
 
-        
-
+      
         public override int GetAngerSound()
         {
             return 0x15;
