@@ -23,9 +23,9 @@ namespace Server.Items
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			if (!IsChildOf(from.Backpack) && !IsEquipped(from))
+			if (Parent != from)
 			{
-				from.SendMessage("La pipe doit être dans votre sac pour être utilisée");
+				from.SendMessage("La pipe doit être équipée pour être utilisée.");
 				return;
 			}
 
@@ -34,6 +34,7 @@ namespace Server.Items
 
 			StartSmokeAnimation(from);
 		}
+
 
 		private void StartSmokeAnimation(Mobile from)
 		{

@@ -329,7 +329,7 @@ namespace Server.Items
                         m_Arrows = reader.ReadInt();
                         m_Bolts = reader.ReadInt();
 
-                        if (m_MinSkill == 0.0 && m_MaxSkill == 30.0)
+                        if (m_MinSkill == 0.0 && m_MaxSkill == 50.0)
                         {
                             m_MinSkill = -25.0;
                             m_MaxSkill = +50.0;
