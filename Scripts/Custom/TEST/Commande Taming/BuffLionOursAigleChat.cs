@@ -72,10 +72,10 @@ namespace Server.Items
 			CommandSystem.Register("chat", AccessLevel.Player, new CommandEventHandler(OnCatCommand));
 		}
 
-		private static void OnLionCommand(CommandEventArgs e) { UseAnimalSkill(e.Mobile, AnimalBuffType.Lion, 35); }
-		private static void OnBearCommand(CommandEventArgs e) { UseAnimalSkill(e.Mobile, AnimalBuffType.Ours, 45); }
-		private static void OnHawkCommand(CommandEventArgs e) { UseAnimalSkill(e.Mobile, AnimalBuffType.Aigle, 65); }
-		private static void OnCatCommand(CommandEventArgs e) { UseAnimalSkill(e.Mobile, AnimalBuffType.Chat, 80); }
+		private static void OnLionCommand(CommandEventArgs e) { UseAnimalSkill(e.Mobile, AnimalBuffType.Lion, 15); }
+		private static void OnBearCommand(CommandEventArgs e) { UseAnimalSkill(e.Mobile, AnimalBuffType.Ours, 30); }
+		private static void OnHawkCommand(CommandEventArgs e) { UseAnimalSkill(e.Mobile, AnimalBuffType.Aigle, 45); }
+		private static void OnCatCommand(CommandEventArgs e) { UseAnimalSkill(e.Mobile, AnimalBuffType.Chat, 60); }
 
 		private static void UseAnimalSkill(Mobile from, AnimalBuffType buffType, double requiredSkill)
 		{
@@ -213,9 +213,8 @@ namespace Server.Items
 		private void UpdateTalismanProperties()
 		{
 			Attributes.WeaponDamage = m_ActiveBuffs.Contains(AnimalBuffType.Lion) ? 15 : 0;
-			Attributes.DefendChance = m_ActiveBuffs.Contains(AnimalBuffType.Ours) ? 10 : 0;
-			Attributes.AttackChance = m_ActiveBuffs.Contains(AnimalBuffType.Aigle) ? 10 :0;
-			Attributes.WeaponSpeed  = m_ActiveBuffs.Contains(AnimalBuffType.Chat) ? 10 : 0;
+			Attributes.DefendChance = (m_ActiveBuffs.Contains(AnimalBuffType.Ours) ? 10 : 0) + (m_ActiveBuffs.Contains(AnimalBuffType.Chat) ? 5 : 0);
+			Attributes.AttackChance = m_ActiveBuffs.Contains(AnimalBuffType.Aigle) ? 5 : 0;
 		}
 	}
 }

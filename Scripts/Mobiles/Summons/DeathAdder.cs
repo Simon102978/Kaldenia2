@@ -29,7 +29,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.MagicResist, 100.0);
             SetSkill(SkillName.Poisoning, 150.0);
 
-            ControlSlots = 2;
+            ControlSlots = 1;
         }
 
         public DeathAdder(Serial serial)

@@ -736,7 +736,7 @@ namespace Knives.TownHouses
 				if (currency)
 				{
 					if (m.AccessLevel == AccessLevel.Player && !m.BankBox.ConsumeTotal(Currency, price) &&
-					!m.Backpack.ConsumeTotal(Currency, price))
+						!m.Backpack.ConsumeTotal(Currency, price))
 					{
 						m.SendMessage("You cannot afford this house.");
 						return;
@@ -756,7 +756,6 @@ namespace Knives.TownHouses
 						SpaceWords(Currency.Name));
 
 					Server.Custom.CustomPersistence.Location += price;
-
 				}
 				else if (m.AccessLevel == AccessLevel.Player)
 				{
@@ -766,6 +765,8 @@ namespace Knives.TownHouses
 
 					Server.Custom.CustomPersistence.Location += price;
 				}
+
+
 
 				Visible = false;
 
@@ -1401,6 +1402,7 @@ namespace Knives.TownHouses
 			{
 				House.Owner.SendMessage("You pay your rent with {0} {1}.", c_Price, SpaceWords(Currency.Name));
 			}
+
 			Server.Custom.CustomPersistence.Location += c_Price;
 
 			OnRentPaid();

@@ -49,7 +49,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Wrestling, 70.1, 75.0);
             SetSkill(SkillName.Tactics, 50.0);
 
-            ControlSlots = 2;
+            ControlSlots = 1;
 
             Container pack = Backpack;
 

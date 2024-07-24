@@ -3,14 +3,9 @@ using System.Collections;
 
 namespace Server.Mobiles
 {
-
-
-
 	[CorpseName("a blade spirit corpse")]
 	public class BladeSpirits : BaseCreature
 	{
-		private DateTime m_lastTargetSearch = DateTime.MinValue;
-
 		[Constructable]
 		public BladeSpirits()
 			: this(false)
@@ -109,6 +104,10 @@ namespace Server.Mobiles
 				return Poison.Lethal;
 			}
 		}
+		public override double GetFightModeRanking(Mobile m, FightMode acqType, bool bPlayerOnly)
+		{
+			return (m.Str + m.Skills[SkillName.Tactics].Value) / Math.Max(this.GetDistanceToSqrt(m), 1.0);
+		}
 
 		public override int GetAngerSound()
 		{
@@ -127,53 +126,44 @@ namespace Server.Mobiles
 
 		public override void OnThink()
 		{
-			base.OnThink();
-
-			if (Combatant == null || !Combatant.Alive || Combatant.Deleted)
+			if (Core.SE && this.Summoned)
 			{
-				if (DateTime.UtcNow - m_lastTargetSearch > TimeSpan.FromSeconds(2))
-				{
-					FindNewTarget();
-					m_lastTargetSearch = DateTime.UtcNow;
-				}
-			}
-		}
+				ArrayList spirtsOrVortexes = new ArrayList();
+				IPooledEnumerable eable = GetMobilesInRange(5);
 
-		private void FindNewTarget()
-		{
-			Mobile closestMobile = null;
-			double closestDistance = double.MaxValue;
-
-			IPooledEnumerable eable = GetMobilesInRange(10);
-			foreach (Mobile m in eable)
-			{
-				if (m != this && m.Alive && !m.IsDeadBondedPet && CanBeHarmful(m))
+				foreach (Mobile m in eable)
 				{
-					double distance = GetDistanceToSqrt(m);
-					if (distance < closestDistance)
+					if (m is EnergyVortex || m is BladeSpirits)
 					{
-						closestMobile = m;
-						closestDistance = distance;
+						if (((BaseCreature)m).Summoned)
+							spirtsOrVortexes.Add(m);
 					}
 				}
-			}
-			eable.Free();
 
-			if (closestMobile != null)
-			{
-				Combatant = closestMobile;
+				eable.Free();
+
+				while (spirtsOrVortexes.Count > 6)
+				{
+					int index = Utility.Random(spirtsOrVortexes.Count);
+					this.Dispel(((Mobile)spirtsOrVortexes[index]));
+					spirtsOrVortexes.RemoveAt(index);
+				}
 			}
+
+			base.OnThink();
 		}
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
+
 			writer.Write((int)0); // version
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
+
 			int version = reader.ReadInt();
 		}
 	}

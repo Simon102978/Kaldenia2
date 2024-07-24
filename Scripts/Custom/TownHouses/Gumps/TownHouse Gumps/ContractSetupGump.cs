@@ -67,7 +67,7 @@ namespace Knives.TownHouses
 					break;
 			}
 
-			AddBackgroundZero(0, 0, width, y + 40, 9274);
+			AddBackgroundZero(0, 0, width, y + 40, 0x13BE);
 		}
 
 		private void BlocksPage(int width, ref int y)
