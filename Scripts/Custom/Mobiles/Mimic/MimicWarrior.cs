@@ -13,8 +13,7 @@ namespace Server.Mobiles
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "Un Mimic";
-            Body = 86;
-            BaseSoundID = 634;
+            Body = 729;
 
             SetStr(150, 320);
             SetDex(94, 190);
