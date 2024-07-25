@@ -21,6 +21,8 @@ namespace Server.Mobiles
 		public DateTime m_GlobalTimer;
 		public DateTime m_NextSpawn;
 
+		public DateTime LastFreeze;
+
 		public DateTime DelayCharge;
 		public DateTime DelayMortalStrike;
 
@@ -98,8 +100,9 @@ namespace Server.Mobiles
 			if (m_GlobalTimer < DateTime.UtcNow && Warmode)
 			{
 
+				GlobaleMortalStrike();
 				
-					switch (Utility.Random(3))
+				/*	switch (Utility.Random(3))
 					{
 						case 0:
 							Charge();
@@ -112,7 +115,7 @@ namespace Server.Mobiles
 							break;
 						default:
 							break;
-					}				
+					}			*/	
 							
 				m_GlobalTimer = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(2, 5));
 			}
@@ -179,7 +182,7 @@ namespace Server.Mobiles
 		}
 
 
-		public void Charge()
+	/*	public void Charge()
 		{
 			if (DelayCharge < DateTime.UtcNow)
 			{
@@ -199,7 +202,7 @@ namespace Server.Mobiles
 
 				DelayCharge = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(30, 50));
 			}
-		}
+		}*/
 
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
@@ -212,14 +215,15 @@ namespace Server.Mobiles
         {
             int dam = base.Damage(amount, from, informMount, checkDisrupt);
 
-            /*if (!BlockReflect && from != null && dam > 0)
-            {
-                BlockReflect = true;
-                AOS.Damage(from, this, dam, 0, 0, 0, 0, 0, 0, 50);
-                BlockReflect = false;
+			   double chance = 0.25;
 
-                from.PlaySound(0x1F1);
-            }*/
+  			if ((Utility.RandomDouble() < chance ) && LastFreeze < DateTime.UtcNow )
+            {
+                from.Freeze(TimeSpan.FromSeconds(5));
+                from.Emote("*Falixus te maudit.*");
+
+                 LastFreeze = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(6, 9));
+            }
 
             return dam;
         }
