@@ -418,7 +418,11 @@ namespace Server.Items
 
         private void DoDecay()
         {
-            if (!GetFlag(CorpseFlag.NoBones))
+            if (Owner is CustomPlayerMobile)
+            {
+                return;
+            }
+            else if (!GetFlag(CorpseFlag.NoBones))
             {
                 TurnToBones();
             }
