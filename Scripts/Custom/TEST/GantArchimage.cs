@@ -13,6 +13,7 @@ namespace Server.Items
 
 
 
+
 		[Constructable]
 		public GantsArchimage() : base(0x13C6)
 		{

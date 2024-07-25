@@ -349,6 +349,7 @@ namespace Server.Items
         public TreasureMap(int level, Map map)
             : this(level, map, false)
         {
+			Name = "Carte au trésor";
         }
 
         [Constructable]
@@ -816,7 +817,7 @@ namespace Server.Items
 
             foreach (BaseHarvestTool tool in items)
             {
-                if (tool.HarvestSystem == Mining.System)
+                if (tool.HarvestSystem == CustomMining.GeneralSystem)
                 {
                     return true;
                 }
@@ -1140,14 +1141,14 @@ namespace Server.Items
             switch (m_Level)
             {
                 case 0:
-                    return 27;
+                    return 25;
                 case 1:
-                    return 70;
+                    return 45;
                 case 2:
-                    return 90;
+                    return 75;
                 case 3:
                 case 4:
-                    return 100.0;
+                    return 90.0;
 
                 default:
                     return 0.0;
@@ -1188,11 +1189,11 @@ namespace Server.Items
             from.SendLocalizedMessage( 503016 ); // Only the person who decoded this map may actually dig up the treasure.
             }
             */
-                else if (m_Map.m_Decoder != from && !m_Map.HasRequiredSkill(from))
+              /*  else if (m_Map.m_Decoder != from && !m_Map.HasRequiredSkill(from))
                 {
                     from.SendLocalizedMessage(503031); // You did not decode this map and have no clue where to look for the treasure.
                     return;
-                }
+                }*/
                 else if (!from.CanBeginAction(typeof(TreasureMap)))
                 {
                     from.SendLocalizedMessage(503020); // You are already digging treasure.

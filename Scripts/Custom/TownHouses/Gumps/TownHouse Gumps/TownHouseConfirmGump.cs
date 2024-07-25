@@ -26,26 +26,26 @@ namespace Knives.TownHouses
 				0,
 				y += 10,
 				width,
-				String.Format("<CENTER>{0} this House?", c_Sign.RentByTime == TimeSpan.Zero ? "Purchase" : "Rent"));
+				String.Format("<CENTER>{0} Cette maison?", c_Sign.RentByTime == TimeSpan.Zero ? "Acheter" : "Louer"));
 			AddImage(width / 2 - 100, y + 2, 0x39);
 			AddImage(width / 2 + 70, y + 2, 0x3B);
 
 			if (c_Sign.RentByTime == TimeSpan.Zero)
 			{
-				AddHtml(0, y += 25, width, String.Format("<CENTER>{0}: {1}", "Price", c_Sign.Free ? "Free" : "" + c_Sign.Price));
+				AddHtml(0, y += 25, width, String.Format("<CENTER>{0}: {1}", "Prix", c_Sign.Free ? "Gratuit" : "" + c_Sign.Price));
 			}
 			else if (c_Sign.RecurRent)
 			{
-				AddHtml(0, y += 25, width, String.Format("<CENTER>{0}: {1}", "Recurring " + c_Sign.PriceType, c_Sign.Price));
+				AddHtml(0, y += 25, width, String.Format("<CENTER>{0}: {1}", "Recurent " + c_Sign.PriceType, c_Sign.Price));
 			}
 			else
 			{
-				AddHtml(0, y += 25, width, String.Format("<CENTER>{0}: {1}", "One " + c_Sign.PriceTypeShort, c_Sign.Price));
+				AddHtml(0, y += 25, width, String.Format("<CENTER>{0}: {1}", "Un " + c_Sign.PriceTypeShort, c_Sign.Price));
 			}
 
 			if (c_Sign.KeepItems)
 			{
-				AddHtml(0, y += 20, width, "<CENTER>Cost of Items: " + c_Sign.ItemsPrice);
+				AddHtml(0, y += 20, width, "<CENTER>Prix des Items: " + c_Sign.ItemsPrice);
 				AddButton(20, y, c_Items ? 0xD3 : 0xD2, "Items", Items);
 			}
 
@@ -53,9 +53,9 @@ namespace Knives.TownHouses
 			AddHtml(0, y += 20, width, "<CENTER>Secures: " + c_Sign.Secures);
 
 			AddButton(10, y += 25, 0xFB1, 0xFB3, "Cancel", Cancel);
-			AddButton(width - 40, y, 0xFB7, 0xFB9, "Confirm", Confirm);
+			AddButton(width - 40, y, 0xFB7, 0xFB9, "Confirme", Confirm);
 
-			AddBackgroundZero(0, 0, width, y + 40, 0x13BE);
+			AddBackgroundZero(0, 0, width + 50, y + 50, 0x24F4);
 		}
 
 		private void Items()
