@@ -93,7 +93,7 @@ namespace Server.Gumps
 
 			string couleur = "#FFFFFF";
 
-			if (day * 5 <= m_From.FENormalTotal)
+			if (day * 3 <= m_From.FENormalTotal)
 			{
 				couleur = "#336699";
 			}
