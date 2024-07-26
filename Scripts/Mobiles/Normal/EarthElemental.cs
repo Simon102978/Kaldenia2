@@ -56,7 +56,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.LootItemCallback(SpawnOre, 100.0, 5, false, true));
             AddLoot(LootPack.LootItem<FertileDirt>(1, 4, true));
             AddLoot(LootPack.LootItem<MandrakeRoot>(true));
-			PackItem(new GolemAsh(GolemAsh.AshType.Terre, Utility.RandomMinMax(0, 5)));
+			AddLoot(LootPack.LootItem<GolemCendreTerre>(Utility.RandomMinMax(1, 5)));
 
 		}
 

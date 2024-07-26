@@ -52,12 +52,14 @@ namespace Server.Items
         [Constructable]
         public SewingMachineDeed() : this(0)
         {
+			Name = "Machine à coudre";
         }
 
         [Constructable]
         public SewingMachineDeed(int uses) : base(uses)
         {
-        }
+			Name = "Machine à coudre";
+		}
 
         public override void OnDoubleClick(Mobile from)
         {

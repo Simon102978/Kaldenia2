@@ -909,81 +909,81 @@ namespace Server.Items
 
 
 			// Os
-			CraftAttributeInfo ErableWood = ErableWood = new CraftAttributeInfo();
+			CraftAttributeInfo erableWood = ErableWood = new CraftAttributeInfo();
 
-			ErableWood.ArmorPhysicalResist = 1;
+			erableWood.ArmorPhysicalResist = 1;
 
-			CraftAttributeInfo CheneWood = CheneWood = new CraftAttributeInfo();
+			CraftAttributeInfo cheneWood = CheneWood = new CraftAttributeInfo();
 
-			CheneWood.ArmorPhysicalResist = 2;
-			CheneWood.ArmorPoisonResist = 2;
-			CheneWood.ArmorColdResist = 2;
+			cheneWood.ArmorPhysicalResist = 2;
+			cheneWood.ArmorPoisonResist = 2;
+			cheneWood.ArmorColdResist = 2;
 
-			CheneWood.WeaponPoisonDamage = 20;
-			CheneWood.WeaponColdDamage = 20;
+			cheneWood.WeaponPoisonDamage = 20;
+			cheneWood.WeaponColdDamage = 20;
 
-			CraftAttributeInfo CedreWood = CedreWood = new CraftAttributeInfo();
+			CraftAttributeInfo cedreWood = CedreWood = new CraftAttributeInfo();
 
-			CedreWood.ArmorPhysicalResist = 2;
-			CedreWood.ArmorColdResist = 2;
-			CedreWood.ArmorEnergyResist = 2;
+			cedreWood.ArmorPhysicalResist = 2;
+			cedreWood.ArmorColdResist = 2;
+			cedreWood.ArmorEnergyResist = 2;
 
-			CedreWood.WeaponPoisonDamage = 20;
-			CedreWood.WeaponEnergyDamage = 20;
+			cedreWood.WeaponPoisonDamage = 20;
+			cedreWood.WeaponEnergyDamage = 20;
 
-			CraftAttributeInfo CypresWood = CypresWood = new CraftAttributeInfo();
+			CraftAttributeInfo cypresWood = CypresWood = new CraftAttributeInfo();
 
-			CypresWood.ArmorPhysicalResist = 3;
-			CypresWood.ArmorFireResist = 3;
-			CypresWood.ArmorPoisonResist = 3;
+			cypresWood.ArmorPhysicalResist = 3;
+			cypresWood.ArmorFireResist = 3;
+			cypresWood.ArmorPoisonResist = 3;
 
-			CypresWood.WeaponFireDamage = 30;
-			CypresWood.WeaponPoisonDamage = 30;
+			cypresWood.WeaponFireDamage = 30;
+			cypresWood.WeaponPoisonDamage = 30;
 
-			CraftAttributeInfo SauleWood = SauleWood = new CraftAttributeInfo();
+			CraftAttributeInfo sauleWood = SauleWood = new CraftAttributeInfo();
 
-			SauleWood.ArmorPhysicalResist = 3;
-			SauleWood.ArmorFireResist = 3;
-			SauleWood.ArmorEnergyResist = 3;
+			sauleWood.ArmorPhysicalResist = 3;
+			sauleWood.ArmorFireResist = 3;
+			sauleWood.ArmorEnergyResist = 3;
 
-			SauleWood.WeaponFireDamage = 30;
-			SauleWood.WeaponEnergyDamage = 30;
+			sauleWood.WeaponFireDamage = 30;
+			sauleWood.WeaponEnergyDamage = 30;
 
-			CraftAttributeInfo PinWood = PinWood = new CraftAttributeInfo();
+			CraftAttributeInfo pinWood = PinWood = new CraftAttributeInfo();
 
-			PinWood.ArmorPhysicalResist = 4;
-			PinWood.ArmorPoisonResist = 4;
-			PinWood.ArmorColdResist = 4;
+			pinWood.ArmorPhysicalResist = 4;
+			pinWood.ArmorPoisonResist = 4;
+			pinWood.ArmorColdResist = 4;
 
-			PinWood.WeaponPoisonDamage = 40;
-			PinWood.WeaponColdDamage = 40;
+			pinWood.WeaponPoisonDamage = 40;
+			pinWood.WeaponColdDamage = 40;
 
-			CraftAttributeInfo AmaranteWood = AmaranteWood = new CraftAttributeInfo();
+			CraftAttributeInfo amaranteWood = AmaranteWood = new CraftAttributeInfo();
 
-			AmaranteWood.ArmorPhysicalResist = 4;
-			AmaranteWood.ArmorFireResist = 4;
-			AmaranteWood.ArmorEnergyResist = 4;
+			amaranteWood.ArmorPhysicalResist = 4;
+			amaranteWood.ArmorFireResist = 4;
+			amaranteWood.ArmorEnergyResist = 4;
 
-			AmaranteWood.WeaponFireDamage = 40;
-			AmaranteWood.WeaponEnergyDamage = 40;
+			amaranteWood.WeaponFireDamage = 40;
+			amaranteWood.WeaponEnergyDamage = 40;
 
-			CraftAttributeInfo AcajouWood = AcajouWood = new CraftAttributeInfo();
+			CraftAttributeInfo acajouWood = AcajouWood = new CraftAttributeInfo();
 
-			AcajouWood.ArmorPhysicalResist = 5;
-			AcajouWood.ArmorColdResist = 5;
-			AcajouWood.ArmorPoisonResist = 5;
+			acajouWood.ArmorPhysicalResist = 5;
+			acajouWood.ArmorColdResist = 5;
+			acajouWood.ArmorPoisonResist = 5;
 
-			AcajouWood.WeaponColdDamage = 50;
-			AcajouWood.WeaponPoisonDamage = 50;
+			acajouWood.WeaponColdDamage = 50;
+			acajouWood.WeaponPoisonDamage = 50;
 
-			CraftAttributeInfo EbeneWood = EbeneWood = new CraftAttributeInfo();
+			CraftAttributeInfo ebeneWood = EbeneWood = new CraftAttributeInfo();
 
-			EbeneWood.ArmorPhysicalResist = 5;
-			EbeneWood.ArmorFireResist = 5;
-			EbeneWood.ArmorEnergyResist = 5;
+			ebeneWood.ArmorPhysicalResist = 5;
+			ebeneWood.ArmorFireResist = 5;
+			ebeneWood.ArmorEnergyResist = 5;
 
-			EbeneWood.WeaponFireDamage = 50;
-			EbeneWood.WeaponEnergyDamage = 50;
+			ebeneWood.WeaponFireDamage = 50;
+			ebeneWood.WeaponEnergyDamage = 50;
 
 			CraftAttributeInfo ancienWood = AncienWood = new CraftAttributeInfo();
 
@@ -1294,7 +1294,7 @@ namespace Server.Items
 		private static readonly CraftResourceInfo[] m_WoodInfo = new[]
 		{
 			new CraftResourceInfo(0000, 0, "Palmier",      0,    CraftAttributeInfo.Blank,               CraftResource.PalmierWood,      typeof( PalmierBoard ),			   typeof(PalmierLog)),
-			new CraftResourceInfo(1355, 0, "Érable",    0,    CraftAttributeInfo.Blank,               CraftResource.ErableWood,     typeof( ErableBoard ),    typeof(ErableLog)),
+			new CraftResourceInfo(1355, 0, "Érable",    0,    CraftAttributeInfo.ErableWood,               CraftResource.ErableWood,     typeof( ErableBoard ),    typeof(ErableLog)),
 			new CraftResourceInfo(1411, 0, "Chêne",   1,    CraftAttributeInfo.CheneWood,       CraftResource.CheneWood,    typeof( CheneBoard ),   typeof(CheneLog)),
 			new CraftResourceInfo(1191, 0, "Cèdre",   1,    CraftAttributeInfo.CedreWood,       CraftResource.CedreWood,    typeof( CedreBoard ),   typeof(CedreLog)),
 			new CraftResourceInfo(1126, 0, "Cyprès",  2,    CraftAttributeInfo.CypresWood,      CraftResource.CypresWood,   typeof( CypresBoard ),  typeof(CypresLog)),

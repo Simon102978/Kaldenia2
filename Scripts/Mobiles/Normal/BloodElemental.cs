@@ -1,3 +1,5 @@
+using Server.Items;
+
 namespace Server.Mobiles
 {
     [CorpseName("le corps d'un elementaire de sang")]
@@ -51,7 +53,8 @@ namespace Server.Mobiles
             AddLoot(LootPack.FilthyRich);
             AddLoot(LootPack.Rich);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 7));
-			PackItem(new GolemAsh(GolemAsh.AshType.Sang, Utility.RandomMinMax(0, 5)));
+			AddLoot(LootPack.LootItem<GolemCendreSang>(Utility.RandomMinMax(1, 5)));
+
 
 		}
 

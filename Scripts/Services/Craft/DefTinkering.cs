@@ -142,21 +142,20 @@ namespace Server.Engines.Craft
 			if (type == typeof(CrystalDust))
 				return false;
 
-			return true;
 
-			//bool contains = false;
-			//type = item.ItemType;
+			bool contains = false;
+			type = item.ItemType;
 
-			//for (int i = 0; !contains && i < m_TinkerColorables.Length; ++i)
-			//	contains = (m_TinkerColorables[i] == type);
+			for (int i = 0; !contains && i < m_TinkerColorables.Length; ++i)
+				contains = (m_TinkerColorables[i] == type);
 
-			//if (!contains && !type.IsSubclassOf(typeof(BaseIngot)))
-			//	return false;
+			if (!contains && !type.IsSubclassOf(typeof(BaseIngot)))
+				return false;
 
-			//if (type.IsSubclassOf(typeof(BaseBoard)))
-			//	return true;
+			if (type.IsSubclassOf(typeof(BaseBoard)))
+				return true;
 
-			//return contains;
+			return contains;
 		}
 
 		public override void PlayCraftEffect(Mobile from)
@@ -167,29 +166,55 @@ namespace Server.Engines.Craft
 		{
 		}
 
-		public override int PlayEndingEffect(Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality, bool makersMark, CraftItem item)
+		public override int PlayEndingEffect(
+	Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality, bool makersMark, CraftItem item)
 		{
 			if (toolBroken)
-				from.SendMessage("Vous avez brisé votre outil."); ; // You have worn out your tool
+			{
+				from.SendLocalizedMessage(1044038); // You have worn out your tool
+			}
 
 			if (failed)
 			{
 				if (lostMaterial)
+				{
 					return 1044043; // You failed to create the item, and some of your materials are lost.
-				else
-					return 1044157; // You failed to create the item, but no materials were lost.
+				}
+
+				return 1044157; // You failed to create the item, but no materials were lost.
 			}
-			else
+
+			if (quality == 0)
 			{
-				if (quality == 0)
-					return 502785; // You were barely able to make this item.  It's quality is below average.
-				else if (makersMark && quality == 2)
-					return 1044156; // You create an exceptional quality item and affix your maker's mark.
-				else if (quality == 2)
-					return 1044155; // You create an exceptional quality item.
-				else
-					return 1044154; // You create the item.
+				return 502785; // You were barely able to make this item.  It's quality is below average.
 			}
+
+			if (makersMark && quality == 2)
+			{
+				return 1044156; // You create an exceptional quality item and affix your maker's mark.
+			}
+
+			if (quality == 2)
+			{
+				return 1044155; // You create an exceptional quality item.
+			}
+			if (makersMark && quality == 3)
+			{
+				from.SendMessage("Vous créez un item de qualité Épique et apposer votre marque."); ; // You create an epic quality item.			
+			}
+			if (quality == 3)
+			{
+				from.SendMessage("Vous créez un item de qualité Épique."); ; // You create an epic quality item.
+			}
+			if (makersMark && quality == 4)
+			{
+				from.SendMessage("Vous créez un item de qualité Légendaire et apposer votre marque."); ; // You create a legendary quality item.
+			}
+			if (quality == 4)
+			{
+				from.SendMessage("Vous créez un item de qualité Légendaire."); ; // You create a legendary quality item.
+			}
+			return 1044154; // You create the item.
 		}
 
 		public override void InitCraftList()
@@ -206,10 +231,12 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(OutilsJardin), "Outils", "Outils de Jardinage", 10.0, 30.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(GolemSpiritWand), "Outils", "Baguette des Esprits", 10.0, 30.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(OutilDeTanneur), "Outils", "Outil de Tanner", 30.0, 60.0, typeof(PalmierBoard), "Planches de Palmier", 5, "Vous n'avez pas suffisament de planche de palmier");
+			SetUseSubRes2(index, true);
 
 
 
 			index = AddCraft(typeof(ToileVierge), "Outils", "Toile Vierge (Peinture)", 10.0, 50.0, typeof(PalmierBoard), "Planche de Palmier", 5, "Vous n'avez pas suffisament de planche de palmier");
+			SetUseSubRes2(index, true);
 
 
 			index = AddCraft(typeof(MalletAndChisel), "Outils", "Maillet et Ciseau (Pierre)", 10.0, 30.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
@@ -222,6 +249,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(SmithyHammer), "Outils", "Marteau de forgeron", 15.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(Saw), "Outils", "Scie", 15.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(RollingPin), "Outils", "Rouleau à pâte", 15.0, 35.0, typeof(PalmierBoard), 1044041, 5, 1044351);
+			SetUseSubRes2(index, true);
 			index = AddCraft(typeof(Skillet), "Outils", "Poêlon", 15.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(FlourSifter), "Outils", "Tamis à farine", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 3, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(MortarPestle), "Outils", "Mortier et pilon", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 3, " vous n'avez pas suffisament de Lingot de fer");
@@ -483,6 +511,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(BarrelHoops), "Pièces d'assemblages", "Cercles de tonneau", -15.0, 35.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(Hinge), "Pièces d'assemblages", "Charnière", 5.0, 55.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(Axle), "Pièces d'assemblages", "Essieu", -25.0, 25.0, typeof(PalmierBoard), 1044041, 2, 1044351);
+			SetUseSubRes2(index, true);
 			#endregion
 
 			#region Assemblages
@@ -541,11 +570,13 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Goblet), "Ustensiles", "Gobelet", 10.0, 60.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(PewterMug), "Ustensiles", "Chope en étain", 10.0, 60.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(Tray), "Ustensiles", "Plateau", 25.0, 75.0, typeof(PalmierBoard), 1044041, 2, 1044351);
+			SetUseSubRes2(index, true);
 			index = AddCraft(typeof(Silverware), "Ustensiles", "Argenterie", 25.0, 75.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			#endregion
 
 			#region Luminaires et décorations
 			index = AddCraft(typeof(Torch), "Luminaires et décorations", "Torche", 0.0, 50.0, typeof(PalmierBoard), 1044041, 2, 1044253);
+			SetUseSubRes2(index, true);
 			index = AddCraft(typeof(CandleLarge), "Luminaires et décorations", "Chandelier Simple", 45.0, 105.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(Candelabra), "Luminaires et décorations", "Chandelier", 55.0, 105.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(CandelabraStand), "Luminaires et décorations", "Grand Chandelier", 65.0, 105.0, typeof(IronIngot), "Lingot de fer", 8, " vous n'avez pas suffisament de Lingot de fer");
@@ -757,12 +788,14 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(KeyRing), "Divers", "Trousseau de clés", 10.0, 60.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(Key), "Divers", "Clé en fer", 20.0, 70.0, typeof(IronIngot), "Lingot de fer", 3, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(DyeTub), "Divers", "Bac de Teinture", 35.0, 65.0, typeof(PalmierBoard), 1044041, 5, 1044351);
+			SetUseSubRes2(index, true);
 			index = AddCraft(typeof(Scales), "Divers", "Balance", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(Globe), "Divers", "Globe terrestre", 55.0, 105.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(MagicCrystalBall), "Divers", "Boule de Cristal", 35.0, 105.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(DecoDeckOfTarot), "Divers", "Jeu de Tarot", 55.0, 105.0, typeof(BlankScroll), "Parchemins Vierge", 5, "Vous n'avez pas suffisament de parchemins vierge");
 			index = AddCraft(typeof(LargeFishingPole), "Divers", "Canne à pêche", 10.0, 30.0, typeof(PalmierBoard), 1044041, 5, 1044351); //This is in the categor of Other during AoS
 			AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
+			SetUseSubRes2(index, true);
 			index = AddCraft(typeof(Spyglass), "Divers", "Longue vue", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(Fouet4), "Divers", "Fouet 4 mètres", 50.0, 70.0, typeof(Leather), 1044462, 3, 1044463);
 			index = AddCraft(typeof(Fouet6), "Divers", "Fouet 6 mètres", 65.0, 85.0, typeof(Leather), 1044462, 4, 1044463);

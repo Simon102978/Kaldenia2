@@ -761,21 +761,37 @@ namespace Server.Items
             to.Send(new SpellbookContent(this, ItemID, BookOffset + 1, m_Content));
         }
 
-        public override void AddNameProperties(ObjectPropertyList list)
-        {
+		public override void AddCraftedProperties(ObjectPropertyList list)
+		{
+			if (OwnerName != null)
+				list.Add(1153213, OwnerName);
+
+			if (m_Crafter != null)
+				list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+
+			if (m_Quality == BookQuality.Exceptional)
+				list.Add("Exceptionnelle");
+			else if (m_Quality == BookQuality.Epic)
+				list.Add("Épique");
+			else if (m_Quality == BookQuality.Legendary)
+				list.Add("Légendaire");
+
+
+		}
+
+		public override void AddNameProperties(ObjectPropertyList list)
+		{
 			var name = Name ?? String.Empty;
 
 			if (String.IsNullOrWhiteSpace(name))
 				name = System.Text.RegularExpressions.Regex.Replace(GetType().Name, "[A-Z]", " $0");
 
-			/*if (IsSetItem)
-				list.Add($"<BASEFONT COLOR=#00FF00>{name}</BASEFONT>");
-			else */
-			if (m_Quality == BookQuality.Legendary)
+			
+			 if (Quality == BookQuality.Legendary)
 				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
-			else if (m_Quality == BookQuality.Epic)
+			else if (Quality == BookQuality.Epic)
 				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
-			else if (m_Quality == BookQuality.Exceptional)
+			else if (Quality == BookQuality.Exceptional)
 				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
 			else
 				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
@@ -785,12 +801,9 @@ namespace Server.Items
 			if (!String.IsNullOrWhiteSpace(desc))
 				list.Add(desc);
 
-			if (m_Quality == BookQuality.Exceptional)
-				list.Add("Exceptionnelle");
-			else if (m_Quality == BookQuality.Epic)
-				list.Add("Épique");
-			else if (m_Quality == BookQuality.Legendary)
-				list.Add("Légendaire");
+
+			AddCraftedProperties(list);
+
 
 			if (m_EngravedText != null)
             {
@@ -1133,24 +1146,18 @@ namespace Server.Items
             }
         }
 
-        public virtual int OnCraft(
-					 int quality,
-			bool makersMark,
-			Mobile from,
-			CraftSystem craftSystem,
-			Type typeRes,
-			ITool tool,
-			CraftItem craftItem,
-			int resHue)
+		public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
 		{
-			Quality = (BookQuality)(quality);
+			if (quality >= 2)
+				Quality = BookQuality.Legendary;
+			else if (quality == 1)
+				Quality = BookQuality.Epic;
+			else if (quality == 0)
+				Quality = BookQuality.Exceptional;
+			else
+				Quality = BookQuality.Regular;
 
-			if (Quality == BookQuality.Legendary)
-				Attributes.SpellDamage = 30;
-			else if (Quality == BookQuality.Epic)
-				Attributes.SpellDamage = 20;
-			else if (Quality == BookQuality.Exceptional)
-				Attributes.SpellDamage = 10;
+			
 
 			if (typeRes == null)
 				typeRes = craftItem.Resources.GetAt(0).ItemType;
@@ -1196,7 +1203,9 @@ namespace Server.Items
 
                 int propertyCount = propertyCounts[Utility.Random(propertyCounts.Length)];
 
-                GuaranteedSpellbookImprovementTalisman talisman = from.FindItemOnLayer(Layer.Talisman) as GuaranteedSpellbookImprovementTalisman;
+				
+
+				GuaranteedSpellbookImprovementTalisman talisman = from.FindItemOnLayer(Layer.Talisman) as GuaranteedSpellbookImprovementTalisman;
 
                 if (talisman != null && talisman.Charges > 0)
                 {
@@ -1220,10 +1229,10 @@ namespace Server.Items
                 Crafter = from;
             }
 
-            m_Quality = (BookQuality)(quality - 1);
 
-            return quality;
-        }
+			InvalidateProperties();
+			return quality;
+		}
 
         [Usage("AllSpells")]
         [Description("Completely fills a targeted spellbook with scrolls.")]

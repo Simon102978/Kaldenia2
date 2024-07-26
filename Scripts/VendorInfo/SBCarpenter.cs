@@ -79,6 +79,9 @@ namespace Server.Mobiles
                 Add(typeof(LapHarp), 3);
                 Add(typeof(Tambourine), 3);
                 Add(typeof(Drums), 3);
+				Add(typeof(PipeCourte), 2);
+				Add(typeof(PipeLongue), 2);
+				Add(typeof(PipeCourbee), 3);
 
 				//Add(typeof(PalmierLog), 1);
 				Add(typeof(PalmierWoodResourceCrate), 100);

@@ -5,6 +5,8 @@ namespace Server.Mobiles
     [CorpseName("le corps d'un scorpion")]
     public class Scorpion : BaseCreature
     {
+
+
         [Constructable]
         public Scorpion()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
@@ -40,16 +42,16 @@ namespace Server.Mobiles
             Karma = -2000;
 
             Tamable = true;
-            ControlSlots = 1;
-            MinTameSkill = 47.1;
+            ControlSlots = 2;
+			MinTameSkill = 47.1;
         }
 
         public Scorpion(Serial serial)
             : base(serial)
         {
         }
-
-        public override int Meat => Utility.RandomMinMax(2, 3);
+		
+		public override int Meat => Utility.RandomMinMax(2, 3);
 
 		public override int Hides => Utility.RandomMinMax(2, 3);
 		public override HideType HideType => HideType.Arachnide;
@@ -62,7 +64,7 @@ namespace Server.Mobiles
 		public override FoodType FavoriteFood => FoodType.Meat;
         public override PackInstinct PackInstinct => PackInstinct.Arachnid;
         public override Poison PoisonImmune => Poison.Greater;
-        public override Poison HitPoison => (0.8 >= Utility.RandomDouble() ? Poison.Greater : Poison.Deadly);
+        public override Poison HitPoison => (0.8 >= Utility.RandomDouble() ? Poison.Lesser : Poison.Regular);
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Meager);

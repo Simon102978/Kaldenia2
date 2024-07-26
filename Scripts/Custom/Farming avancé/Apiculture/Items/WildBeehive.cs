@@ -30,9 +30,13 @@ namespace Server.Items
 		}
 		public override void OnDoubleClick(Mobile from)
 		{
+			Container pack = from.Backpack;
+
 			if (from.InRange(this.GetWorldLocation(), 1))
 			{
-				if (m_UsesRemaining == 1)
+				if (pack != null)
+				{
+					if (m_UsesRemaining == 1)
 				{
 					GiveRandomItem(from);
 					InvalidateProperties();
@@ -52,12 +56,12 @@ namespace Server.Items
 				from.SendMessage("Vous êtes trop loin de la ruche.");
 			}
 		}
+		}
 
 		private void GiveRandomItem(Mobile from)
 		{
-			int randomChoice = Utility.Random(3);
+			int randomChoice = Utility.Random(4); 
 			int amount = Utility.RandomMinMax(1, 2);
-
 			switch (randomChoice)
 			{
 				case 0:
@@ -65,17 +69,22 @@ namespace Server.Items
 					from.SendMessage($"Vous obtenez {amount} rayon(s) de miel.");
 					break;
 				case 1:
-					from.AddToBackpack(new Beeswax(amount));
+					from.AddToBackpack(new RawBeeswax(amount));
 					from.SendMessage($"Vous obtenez {amount} morceau(x) de cire d'abeille.");
 					break;
 				case 2:
-					from.AddToBackpack(new JarHoney(amount));
-					from.SendMessage($"Vous obtenez {amount} pot(s) de miel.");
+					from.AddToBackpack(new JarHoney());
+					from.SendMessage($"Vous obtenez 1 pot de miel.");
+					break;
+				case 3:
+					from.SendMessage("Vous n'obtenez rien cette fois-ci.");
 					break;
 			}
 		}
+		
+	
 
-		public override bool HandlesOnMovement
+public override bool HandlesOnMovement
 		{
 			get { return true; }
 		}

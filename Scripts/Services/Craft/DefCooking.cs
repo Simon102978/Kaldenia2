@@ -131,30 +131,58 @@ namespace Server.Engines.Craft
 		{
 		}
 
-		public override int PlayEndingEffect(Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality, bool makersMark, CraftItem item)
+		
+				public override int PlayEndingEffect(
+		Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality, bool makersMark, CraftItem item)
 		{
 			if (toolBroken)
+			{
 				from.SendLocalizedMessage(1044038); // You have worn out your tool
+			}
 
 			if (failed)
 			{
 				if (lostMaterial)
+				{
 					return 1044043; // You failed to create the item, and some of your materials are lost.
-				else
-					return 1044157; // You failed to create the item, but no materials were lost.
+				}
+
+				return 1044157; // You failed to create the item, but no materials were lost.
 			}
-			else
+
+			if (quality == 0)
 			{
-				if (quality == 0)
-					return 502785; // You were barely able to make this item.  It's quality is below average.
-				else if (makersMark && quality == 2)
-					return 1044156; // You create an exceptional quality item and affix your maker's mark.
-				else if (quality == 2)
-					return 1044155; // You create an exceptional quality item.
-				else
-					return 1044154; // You create the item.
+				return 502785; // You were barely able to make this item.  It's quality is below average.
 			}
+
+			if (makersMark && quality == 2)
+			{
+				return 1044156; // You create an exceptional quality item and affix your maker's mark.
+			}
+
+			if (quality == 2)
+			{
+				return 1044155; // You create an exceptional quality item.
+			}
+			if (makersMark && quality == 3)
+			{
+				from.SendMessage("Vous créez un item de qualité Épique et apposer votre marque."); ; // You create an epic quality item.			
+			}
+			if (quality == 3)
+			{
+				from.SendMessage("Vous créez un item de qualité Épique."); ; // You create an epic quality item.
+			}
+			if (makersMark && quality == 4)
+			{
+				from.SendMessage("Vous créez un item de qualité Légendaire et apposer votre marque."); ; // You create a legendary quality item.
+			}
+			if (quality == 4)
+			{
+				from.SendMessage("Vous créez un item de qualité Légendaire."); ; // You create a legendary quality item.
+			}
+			return 1044154; // You create the item.
 		}
+
 
 		public override void InitCraftList()
 		{
@@ -212,6 +240,8 @@ AddBeverageRes(index, BeverageType.Water, 1, "Vous avez besoin d'un pichet d'eau
 
 			#region Ingrédients humides
 			index = AddCraft(typeof(CocoaButter), "Ingrédients humides", "Beurre de cacao", 0.0, 50.0, typeof(BagOfCocoa), 1080530, 1, 1044253);
+			SetItemHue(index, 0x457);
+			index = AddCraft(typeof(JarHoney), "Ingrédients humides", "Miel", 10.0, 50.0, typeof(HoneyComb), "Rayon de Miel", 5, "Vous n'avez pas suffisament de rayon de miel");
 			SetItemHue(index, 0x457);
 			//index = AddCraft(typeof(CocoaLiquor), "Ingrédients humides", "Liqueur de cacao", 0.0, 50.0, typeof(BagOfCocoa), 1080530, 1, 1044253);
 			//AddRes(index, typeof(EmptyPewterBowl), 1025629, 1, 1044253);

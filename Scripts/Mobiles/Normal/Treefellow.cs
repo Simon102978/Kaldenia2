@@ -68,7 +68,7 @@ namespace Server.Mobiles
 			AddLoot(LootPack.LootItem<PalmierLog>(5, 12));
 			AddLoot(LootPack.LootItem<EcorceArbreGeant>(3, 7));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(2, 4));
-			PackItem(new GolemAsh(GolemAsh.AshType.Sylvestre, Utility.RandomMinMax(0, 5)));
+			AddLoot(LootPack.LootItem<GolemCendreSylvestre>(Utility.RandomMinMax(1, 5)));
 
 		}
 

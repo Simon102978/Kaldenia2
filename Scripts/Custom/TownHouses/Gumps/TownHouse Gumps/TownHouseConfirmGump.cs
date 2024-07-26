@@ -55,7 +55,7 @@ namespace Knives.TownHouses
 			AddButton(10, y += 25, 0xFB1, 0xFB3, "Cancel", Cancel);
 			AddButton(width - 40, y, 0xFB7, 0xFB9, "Confirme", Confirm);
 
-			AddBackgroundZero(0, 0, width + 50, y + 50, 0x24F4);
+			AddBackgroundZero(-25, -25, width + 80, y + 80, 0x24F4);
 		}
 
 		private void Items()

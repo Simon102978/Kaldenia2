@@ -39,7 +39,7 @@ namespace Server.Mobiles
             Fame = 3500;
             Karma = -3500;
 
-            ControlSlots = 1;
+            ControlSlots = 2;
         }
 
         public ClockworkScorpion(Serial serial)

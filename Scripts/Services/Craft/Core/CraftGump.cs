@@ -388,16 +388,21 @@ namespace Server.Engines.Craft
                 if (index == 0)
                 {
                     if (i > 0)
-                        AddButton(485, 455, 4005, 4007, 0, GumpButtonType.Page, (i / 10) + 1);
 
-                    AddPage((i / 10) + 1);
+					AddButton(370, 360, 4005, 4007, 0, GumpButtonType.Page, (i / 10) + 1);
+					AddHtml(405, 363, 200, 20, "<h3><basefont color=#FFFFFF>Page Suivante<basefont></h3>", false, false);
+
+
+					AddPage((i / 10) + 1);
 
                     if (i > 0)
-                        AddButton(455, 360, 4014, 4015, 0, GumpButtonType.Page, i / 10);
 
-                    CraftContext context = m_CraftSystem.GetContext(m_From);
+					AddButton(220, 360, 4014, 4015, 0, GumpButtonType.Page, i / 10);
+					AddHtml(255, 363, 200, 20, "<h3><basefont color=#FFFFFF>Page Précédente<basefont></h3>", false, false);
+					CraftContext context = m_CraftSystem.GetContext(m_From);
 
-                    AddButton(220, 260, 4005, 4007, GetButtonID(6, 4), GumpButtonType.Reply, 0);
+
+					AddButton(220, 260, 4005, 4007, GetButtonID(6, 4), GumpButtonType.Reply, 0);
                     AddHtmlLocalized(255, 260, 200, 18, (context == null || !context.DoNotColor) ? 1061591 : 1061590, LabelColor, false, false);
                 }
 
@@ -462,7 +467,7 @@ namespace Server.Engines.Craft
                         if (i > 0)
                         {
                             AddButton(220, 360, 4014, 4015, 0, GumpButtonType.Page, i / 10);
-                            AddHtml(255, 363, 200, 20, "<h3><basefont color=#FFFFFF>Page Précédante<basefont></h3>", false, false);
+                            AddHtml(255, 363, 200, 20, "<h3><basefont color=#FFFFFF>Page Précédente<basefont></h3>", false, false);
                          
                          //   AddHtmlLocalized(255, 363, 100, 18, 1044044, LabelColor, false, false); // PREV PAGE
                         }
@@ -530,7 +535,7 @@ namespace Server.Engines.Craft
                     if (i > 0)
                     {
                         AddButton(220, 360, 4014, 4015, 0, GumpButtonType.Page, i / maxItemPerPage);
-                        AddHtml(255, 363, 200, 20, "<h3><basefont color=#FFFFFF>Page Précédante<basefont></h3>", false, false);
+                        AddHtml(255, 363, 200, 20, "<h3><basefont color=#FFFFFF>Page Précédente<basefont></h3>", false, false);
                        
                        // AddHtmlLocalized(255, 263, 100, 18, 1044044, LabelColor, false, false); // PREV PAGE
                     }
