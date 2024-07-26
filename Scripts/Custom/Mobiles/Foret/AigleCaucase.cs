@@ -1,69 +1,59 @@
-using Server.Items;
-using System.Collections.Generic;
-using System.Collections;
 using System;
+using System.Collections.Generic;
+using Server.Items;
 
 namespace Server.Mobiles
 {
-
-
-    [CorpseName("Corps de Saliva")]
-    public class Saliva : Harpy
+    [CorpseName("le corps d'un aigle")]
+    public class AigleCaucase : BaseCreature
     {
-		public DateTime DelayHurlement;
+        public DateTime DelayHurlement;
 		public DateTime DelayCoupVent;
 		public DateTime DelayAttraction;
 		public DateTime TuerSummoneur;
 		private DateTime m_GlobalTimer;
 
-
-		[Constructable]
-        public Saliva()
-            : base()
+        [Constructable]
+        public AigleCaucase()
+           : base(AIType.AI_Melee, FightMode.Closest, 10, 1, .2, .4)
         {
-            Name = "Saliva";
-            Hue = 0x11E;
+            Name = "Aigle du Caucase";
+            Body = 5;
+            BaseSoundID = 0x2EE;
+            Hue = 2065;
 
-            SetStr(136, 206);
-            SetDex(123, 222);
-            SetInt(118, 127);
 
-            SetHits(409, 842);
+            SetStr(73, 115);
+            SetDex(76, 95);
+            SetInt(16, 30);
 
-			SetDamage(19, 28);
+            SetHits(100, 150);
+            SetMana(0);
 
-			SetDamageType(ResistanceType.Physical, 100);
+            SetDamage(7, 13);
 
-            SetResistance(ResistanceType.Physical, 46, 47);
-            SetResistance(ResistanceType.Fire, 32, 40);
-            SetResistance(ResistanceType.Cold, 34, 49);
-            SetResistance(ResistanceType.Poison, 40, 48);
-            SetResistance(ResistanceType.Energy, 35, 39);
+            SetDamageType(ResistanceType.Physical, 60);
+            SetDamageType(ResistanceType.Energy, 40);
 
-            SetSkill(SkillName.Wrestling, 106.4, 128.8);
-            SetSkill(SkillName.Tactics, 129.9, 141.0);
-            SetSkill(SkillName.MagicResist, 84.3, 90.1);
+
+
+            SetResistance(ResistanceType.Physical, 20, 25);
+            SetResistance(ResistanceType.Fire, 10, 15);
+            SetResistance(ResistanceType.Cold, 20, 25);
+            SetResistance(ResistanceType.Poison, 5, 10);
+            SetResistance(ResistanceType.Energy, 40, 50);
+
+
+            SetSkill(SkillName.MagicResist, 30.1, 35.0);
+            SetSkill(SkillName.Tactics, 60.3, 75.0);
+            SetSkill(SkillName.Wrestling, 70.3, 80.0);
+
+            Fame = 2000;
+            Karma = -2000;
+
         }
 
-        public Saliva(Serial serial)
-            : base(serial)
-        {
-        }
-
-        public override void GenerateLoot()
-        {
-            AddLoot(LootPack.UltraRich, 2);
-
-            AddLoot(LootPack.Parrot);
-			AddLoot(LootPack.LootItem<Items.Gold>(100, 175));
-			AddLoot(LootPack.RandomLootItem(new System.Type[] { typeof(SilverRing), typeof(Necklace), typeof(SilverNecklace), typeof(Collier), typeof(Collier2),  typeof(Collier3), typeof(Couronne3),  typeof(Collier4), typeof(Tiare), }, 10.0, 1, false, true));
-			AddLoot(LootPack.LootItem<Items.Gemme>(), (double) 5);
-			AddLoot(LootPack.LootItem<PlumesSaliva>(1, 5));
-
-
-		}
-
-		public override void OnThink()
+        public override void OnThink()
 		{
 
 
@@ -75,7 +65,7 @@ namespace Server.Mobiles
 				if (m_GlobalTimer < DateTime.UtcNow)
 				{
 
-					if (!this.InRange(Combatant.Location,3) && InLOS(Combatant))
+					if (InLOS(Combatant.Location))
 					{
 						switch (Utility.Random(3))
 						{
@@ -104,9 +94,7 @@ namespace Server.Mobiles
 			}
 		}
 
-		
-
-		public void Hurlement()
+        		public void Hurlement()
 		{
 
 
@@ -346,10 +334,34 @@ namespace Server.Mobiles
 
 
 
+        public AigleCaucase(Serial serial)
+            : base(serial)
+        {
+        }
+
+		public override bool CanBeParagon => false;
+
+		public override int Meat => Utility.RandomMinMax(1, 3);
+        public override MeatType MeatType => MeatType.Bird;
+        public override int Feathers => Utility.RandomMinMax(10, 35);
+        public override FoodType FavoriteFood => FoodType.Meat | FoodType.Fish;
+        public override bool CanFly => true;
+
+        public override void GenerateLoot()
+        {
+            AddLoot(LootPack.LootItem<PlumesAigle>(3, 7));
+            AddLoot(LootPack.Average);     
+			AddLoot(LootPack.Others, Utility.RandomMinMax(0, 2));
+
+		}
+
+	
+
+
 		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(0); // version
+            writer.Write(0);
         }
 
         public override void Deserialize(GenericReader reader)
