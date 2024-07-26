@@ -70,6 +70,17 @@ namespace Server.Items
 		public GolemCendreFeu(int amount) : base(amount) { }
 
 		public GolemCendreFeu(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
 	}
 
 	public class GolemCendreEau : BaseGolemAsh
@@ -84,6 +95,17 @@ namespace Server.Items
 		public GolemCendreEau(int amount) : base(amount) { }
 
 		public GolemCendreEau(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
 	}
 
 	public class GolemCendreGlace : BaseGolemAsh
@@ -98,6 +120,17 @@ namespace Server.Items
 		public GolemCendreGlace(int amount) : base(amount) { }
 
 		public GolemCendreGlace(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
 	}
 
 	public class GolemCendrePoison : BaseGolemAsh
@@ -112,6 +145,17 @@ namespace Server.Items
 		public GolemCendrePoison(int amount) : base(amount) { }
 
 		public GolemCendrePoison(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
 	}
 
 	public class GolemCendreSang : BaseGolemAsh
@@ -126,6 +170,17 @@ namespace Server.Items
 		public GolemCendreSang(int amount) : base(amount) { }
 
 		public GolemCendreSang(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
 	}
 
 	public class GolemCendreSylvestre : BaseGolemAsh
@@ -140,6 +195,17 @@ namespace Server.Items
 		public GolemCendreSylvestre(int amount) : base(amount) { }
 
 		public GolemCendreSylvestre(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
 	}
 
 	public class GolemCendreTerre : BaseGolemAsh
@@ -154,6 +220,17 @@ namespace Server.Items
 		public GolemCendreTerre(int amount) : base(amount) { }
 
 		public GolemCendreTerre(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
 	}
 
 	public class GolemCendreVent : BaseGolemAsh
@@ -168,5 +245,16 @@ namespace Server.Items
 		public GolemCendreVent(int amount) : base(amount) { }
 
 		public GolemCendreVent(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
 	}
 }
