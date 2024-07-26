@@ -135,58 +135,72 @@ namespace Server.Items
 
 		private void ApplyBuff(AnimalBuffType buffType)
 		{
-			foreach (Mobile m in m_Owner.GetMobilesInRange(18))
+			if (m_Owner == null)
 			{
-				if (m is BaseCreature pet && pet.Controlled && pet.ControlMaster == m_Owner && pet.Alive)
+				Console.WriteLine("Error: m_Owner is null in ApplyBuff");
+				return;
+			}
+
+			try
+			{
+				foreach (Mobile m in m_Owner.GetMobilesInRange(18))
 				{
-					switch (buffType)
+					if (m is BaseCreature pet && pet != null && pet.Controlled && pet.ControlMaster == m_Owner && pet.Alive)
 					{
-						case AnimalBuffType.Lion:
-							pet.PhysicalDamage += 15;
-							break;
-						case AnimalBuffType.Ours:
-							pet.Skills[SkillName.Wrestling].Base += 10;
-							pet.Str += 10;
-							break;
-						case AnimalBuffType.Aigle:
-							pet.Skills[SkillName.Tactics].Base += 10;
-							pet.Int += 10;
-							break;
-						case AnimalBuffType.Chat:
-							pet.Skills[SkillName.MagicResist].Base += 10;
-							pet.Dex += 10;
-							break;
-					}
-					if (!m_BuffedPets.Contains(pet))
-					{
-						m_BuffedPets.Add(pet);
+						switch (buffType)
+						{
+							case AnimalBuffType.Lion:
+								pet.PhysicalDamage = Math.Min(100, pet.PhysicalDamage + 15);
+								break;
+							case AnimalBuffType.Ours:
+								pet.Skills[SkillName.Wrestling].Base = Math.Min(100, pet.Skills[SkillName.Wrestling].Base + 10);
+								pet.Str = Math.Min(short.MaxValue, (short)(pet.Str + 10));
+								break;
+							case AnimalBuffType.Aigle:
+								pet.Skills[SkillName.Tactics].Base = Math.Min(100, pet.Skills[SkillName.Tactics].Base + 10);
+								pet.Int = Math.Min(short.MaxValue, (short)(pet.Int + 10));
+								break;
+							case AnimalBuffType.Chat:
+								pet.Skills[SkillName.MagicResist].Base = Math.Min(100, pet.Skills[SkillName.MagicResist].Base + 10);
+								pet.Dex = Math.Min(short.MaxValue, (short)(pet.Dex + 10));
+								break;
+						}
+						if (!m_BuffedPets.Contains(pet))
+						{
+							m_BuffedPets.Add(pet);
+						}
 					}
 				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error in ApplyBuff: {ex.Message}");
+				Console.WriteLine(ex.StackTrace);
 			}
 		}
 
 		private void RemoveBuff(AnimalBuffType buffType)
 		{
-			foreach (BaseCreature pet in m_BuffedPets)
+			foreach (BaseCreature pet in m_BuffedPets.ToArray())
 			{
-				if (pet.Alive)
+				if (pet != null && !pet.Deleted && pet.Alive)
 				{
 					switch (buffType)
 					{
 						case AnimalBuffType.Lion:
-							pet.PhysicalDamage -= 15;
+							pet.PhysicalDamage = Math.Max(0, pet.PhysicalDamage - 15);
 							break;
 						case AnimalBuffType.Ours:
-							pet.Skills[SkillName.Wrestling].Base -= 10;
-							pet.Str -= 10;
+							pet.Skills[SkillName.Wrestling].Base = Math.Max(0, pet.Skills[SkillName.Wrestling].Base - 10);
+							pet.Str = Math.Max((short)0, (short)(pet.Str - 10));
 							break;
 						case AnimalBuffType.Aigle:
-							pet.Skills[SkillName.Tactics].Base -= 10;
-							pet.Int -= 10;
+							pet.Skills[SkillName.Tactics].Base = Math.Max(0, pet.Skills[SkillName.Tactics].Base - 10);
+							pet.Int = Math.Max((short)0, (short)(pet.Int - 10));
 							break;
 						case AnimalBuffType.Chat:
-							pet.Skills[SkillName.MagicResist].Base -= 10;
-							pet.Dex -= 10;
+							pet.Skills[SkillName.MagicResist].Base = Math.Max(0, pet.Skills[SkillName.MagicResist].Base - 10);
+							pet.Dex = Math.Max((short)0, (short)(pet.Dex - 10));
 							break;
 					}
 				}
@@ -195,18 +209,29 @@ namespace Server.Items
 
 		private void EndBuff(AnimalBuffType buffType)
 		{
-			if (m_ActiveBuffs.Contains(buffType))
+			try
 			{
-				m_ActiveBuffs.Remove(buffType);
-				RemoveBuff(buffType);
-				m_Owner.SendMessage($"L'effet de la compétence {buffType} s'estompe.");
-				UpdateTalismanProperties();
-			}
+				if (m_ActiveBuffs.Contains(buffType))
+				{
+					m_ActiveBuffs.Remove(buffType);
+					RemoveBuff(buffType);
+					if (m_Owner != null && !m_Owner.Deleted)
+					{
+						m_Owner.SendMessage($"L'effet de la compétence {buffType} s'estompe.");
+					}
+					UpdateTalismanProperties();
+				}
 
-			if (m_ActiveBuffs.Count == 0)
+				if (m_ActiveBuffs.Count == 0 && m_Owner != null && !m_Owner.Deleted)
+				{
+					m_Owner.RemoveItem(this);
+					Delete();
+				}
+			}
+			catch (Exception ex)
 			{
-				m_Owner.RemoveItem(this);
-				Delete();
+				Console.WriteLine($"Error in EndBuff: {ex.Message}");
+				Console.WriteLine(ex.StackTrace);
 			}
 		}
 
@@ -214,8 +239,8 @@ namespace Server.Items
 		{
 			Attributes.WeaponDamage = m_ActiveBuffs.Contains(AnimalBuffType.Lion) ? 15 : 0;
 			Attributes.DefendChance = m_ActiveBuffs.Contains(AnimalBuffType.Ours) ? 10 : 0;
-			Attributes.AttackChance = m_ActiveBuffs.Contains(AnimalBuffType.Aigle) ? 10 :0;
-			Attributes.WeaponSpeed  = m_ActiveBuffs.Contains(AnimalBuffType.Chat) ? 10 : 0;
+			Attributes.AttackChance = m_ActiveBuffs.Contains(AnimalBuffType.Aigle) ? 10 : 0;
+			Attributes.WeaponSpeed = m_ActiveBuffs.Contains(AnimalBuffType.Chat) ? 10 : 0;
 		}
 	}
 }

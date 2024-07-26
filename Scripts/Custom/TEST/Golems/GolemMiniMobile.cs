@@ -66,6 +66,25 @@ namespace Server.Custom
 		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
+		public Mobile SummonMaster
+		{
+			get { return m_SummonMaster; }
+			set
+			{
+				m_SummonMaster = value;
+				if (m_SummonMaster != null)
+				{
+					ControlMaster = m_SummonMaster;
+					Controlled = true;
+					ControlTarget = m_SummonMaster;
+					ControlOrder = OrderType.Follow;
+				}
+			}
+		}
+
+		private Mobile m_SummonMaster;
+
+		[CommandProperty(AccessLevel.GameMaster)]
 		public MiniGolem MiniGolem { get { return m_MiniGolem; } set { m_MiniGolem = value; } }
 
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -166,15 +185,16 @@ namespace Server.Custom
 		{
 			base.OnDeath(c);
 
-			if (ControlMaster != null && Map != null && Map != Map.Internal)
+			if (SummonMaster != null && Map != null && Map != Map.Internal)
 			{
-				ControlMaster.SendLocalizedMessage(1006265, Name);
+				SummonMaster.SendLocalizedMessage(1006265, Name); // ~1_NAME~ has been killed.
 			}
 
+			// Ne pas dissiper le golem à la mort
 			Delete();
 		}
 
-		public override bool CanBeControlledBy(Mobile m) => m == ControlMaster;
+		public override bool CanBeControlledBy(Mobile m) => m == SummonMaster;
 
 		public override int GetIdleSound() => 268;
 		public override int GetAngerSound() => 267;
@@ -444,7 +464,7 @@ namespace Server.Custom
 		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
 		{
 			base.GetContextMenuEntries(from, list);
-			if (m_Golem != null && from == m_Golem.ControlMaster)
+			if (m_Golem != null && from == m_Golem.SummonMaster)
 			{
 				list.Add(new OpenAttributesGumpEntry(from, m_Golem));
 			}
@@ -482,8 +502,9 @@ namespace Server.Custom
 					// Dématérialiser le golem
 					m_Golem.ControlMaster = null;
 					m_Golem.Controlled = false;
+					m_Golem.SetControlMaster(from);
 					m_Golem.Map = Map.Internal;
-					m_Golem.Location = Point3D.Zero;
+					m_Golem.Location = new Point3D(0, 0, 0);
 
 					from.SendMessage("Vous avez dématérialisé le golem.");
 				}

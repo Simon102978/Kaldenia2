@@ -1148,14 +1148,15 @@ namespace Server.Items
 
 		public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
 		{
-			if (quality >= 2)
+			if (quality >= 4)
 				Quality = BookQuality.Legendary;
-			else if (quality == 1)
+			else if (quality == 3)
 				Quality = BookQuality.Epic;
-			else if (quality == 0)
+			else if (quality == 2)
 				Quality = BookQuality.Exceptional;
 			else
 				Quality = BookQuality.Regular;
+		
 
 			
 
