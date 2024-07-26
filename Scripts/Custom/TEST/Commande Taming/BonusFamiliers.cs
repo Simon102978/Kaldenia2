@@ -6,7 +6,7 @@ namespace Server.Custom
 {
 	public static class TamingFollowersBonus
 	{
-		private const int BaseFollowersMax = 5; // Valeur de base pour FollowersMax
+		private const int BaseFollowersMax = 3; // Valeur de base pour FollowersMax
 
 		public static void Initialize()
 		{
@@ -34,8 +34,10 @@ namespace Server.Custom
 		{
 			int tamingSkill = (int)m.Skills[SkillName.AnimalTaming].Base;
 			if (tamingSkill >= 100)
-				return 2;
+				return 3;
 			else if (tamingSkill >= 50)
+				return 2;
+			else if (tamingSkill >= 25)
 				return 1;
 			else
 				return 0;

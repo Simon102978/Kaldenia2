@@ -67,7 +67,7 @@ namespace Server.Mobiles
             Fame = 0;
             Karma = 0;
 
-            ControlSlots = 4;
+            ControlSlots = 2;
         }
 
         public override int GetAngerSound()

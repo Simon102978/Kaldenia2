@@ -61,7 +61,7 @@ namespace Server.Spells.Fifth
 
 		public override void OnCast()
 		{
-			if ((Caster.Followers + 2) > Caster.FollowersMax)
+			if ((Caster.Followers + 1) > Caster.FollowersMax)
 			{
 				Caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
 
@@ -72,7 +72,7 @@ namespace Server.Spells.Fifth
 				{
 					BaseCreature creature = (BaseCreature)Activator.CreateInstance(m_Creature);
 
-					creature.ControlSlots = 2;
+					creature.ControlSlots = 1;
 
 					TimeSpan duration = TimeSpan.FromSeconds(4.0 * Caster.Skills[SkillName.Magery].Value);
 
@@ -176,7 +176,7 @@ namespace Server.Spells.Fifth
 			{
 				if (info.ButtonID > 0)
 				{
-					int controlSlots = 2;
+					int controlSlots = 1;
 
 					/*if (info.ButtonID < 7)
 						controlSlots = 1;*/

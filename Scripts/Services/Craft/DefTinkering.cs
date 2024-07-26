@@ -275,6 +275,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Boline), "Outils", "Serpe", 15.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 
 			index = AddCraft(typeof(DisguiseKit), "Outils",  "Trousse à déguisement", 50.0, 60.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(RuneChisel), "Outils", "Ciseau runique", 60.0, 90.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
+
 			#endregion
 
 			#region Anneaux

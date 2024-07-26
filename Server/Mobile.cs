@@ -6055,7 +6055,7 @@ namespace Server
 						if (version < 15)
 						{
 							m_Followers = 0;
-							m_FollowersMax = 5;
+							m_FollowersMax = 3;
 						}
 
 						m_Location = reader.ReadPoint3D();
@@ -10984,7 +10984,7 @@ namespace Server
 			m_StrMaxCap = Config.Get("PlayerCaps.StrMaxCap", 150);
 			m_DexMaxCap = Config.Get("PlayerCaps.DexMaxCap", 150);
 			m_IntMaxCap = Config.Get("PlayerCaps.IntMaxCap", 150);
-			m_FollowersMax = 5;
+			m_FollowersMax = 3;
 			m_Skills = new Skills(this);
 			m_Items = new List<Item>();
 			m_StatMods = new List<StatMod>();

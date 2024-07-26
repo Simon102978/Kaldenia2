@@ -30,6 +30,7 @@ namespace Server.Items
 		{
 			Name = "Luth fin";
 			Weight = 5.0;
+			Layer = Layer.OneHanded;
             Notes = new int[_MAX_SIZE];
             for (int i = 0; i < _MAX_SIZE; ++i)
                 Notes[i] = 0;

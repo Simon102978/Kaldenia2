@@ -279,7 +279,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(BambooFlute), "Instruments", "Flûte de bambou", 30.0, 60.0, typeof(PalmierBoard), 1044041, 15, 1044351);
 			index = AddCraft(typeof(AudChar), "Instruments", "Aude-Char", 30.0, 60.0, typeof(PalmierBoard), 1044041, 35, 1044351);
 			AddRes(index, typeof(Cloth), 1044286, 15, 1044287);
-			index = AddCraft(typeof(Guitare), "Instruments", "Guitare", 30.0, 60.0, typeof(PalmierBoard), 1044041, 35, 1044351);
+			index = AddCraft(typeof(GuitareSolo), "Instruments", "Guitare", 30.0, 60.0, typeof(PalmierBoard), 1044041, 35, 1044351);
 			AddRes(index, typeof(Cloth), 1044286, 15, 1044287);
 			index = AddCraft(typeof(HarpeLongue), "Instruments", "Harpe Longue", 30.0, 60.0, typeof(PalmierBoard), 1044041, 35, 1044351);
 			AddRes(index, typeof(Cloth), 1044286, 15, 1044287);

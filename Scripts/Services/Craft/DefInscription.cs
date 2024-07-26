@@ -1,4 +1,5 @@
-﻿using Server.Items;
+﻿using Server.Custom;
+using Server.Items;
 using System;
 
 namespace Server.Engines.Craft
@@ -1121,6 +1122,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(CarnetAdresse), "Autres", "Carnet Adresse", 25.0, 50.0, typeof(BlankScroll), 1044377, 10, 1044378);
 
+			index = AddCraft(typeof(CustomRecipeBook), "Autres", "Livre de recettes personnalisées", 25.0, 50.0, typeof(BlankScroll), 1044377, 10, 1044378);
 
 			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre de Barde", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
 			index = AddCraft(typeof(NewSpellbook), "Autres", "Livre de sort", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
