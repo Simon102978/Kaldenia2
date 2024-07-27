@@ -40,6 +40,13 @@ namespace Server.Mobiles
             SetWeaponAbility(WeaponAbility.BleedAttack);
             SetSpecialAbility(SpecialAbility.GraspingClaw);
 
+            AdjustSpeeds();
+
+
+        }
+
+        public override void AdjustSpeeds()
+        {
             double activeSpeed = 0.0;
 			double passiveSpeed = 0.0;
 
@@ -48,9 +55,14 @@ namespace Server.Mobiles
 			ActiveSpeed = activeSpeed;
 			PassiveSpeed = passiveSpeed;
 			CurrentSpeed = passiveSpeed;
-
-
         }
+
+         public override void OnActionCombat()
+        { 
+            AdjustSpeeds();
+        }
+
+     
 
         public override void GenerateLoot()
         {
