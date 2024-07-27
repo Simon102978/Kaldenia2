@@ -5,11 +5,23 @@ using static Server.HueData;
 
 namespace Server.Items
 {
-	public class GantsArchimage : BaseClothing
+	public class GantsArchimage : BaseArmor
 	{
+
+		public override int BasePhysicalResistance => 1;
+		public override int BaseFireResistance => 4;
+		public override int BaseColdResistance => 3;
+		public override int BasePoisonResistance => 3;
+		public override int BaseEnergyResistance => 3;
 
 		public override int InitMinHits => 30;
 		public override int InitMaxHits => 40;
+
+		
+
+		public override ArmorMaterialType MaterialType => ArmorMaterialType.Cloth;
+
+		public override ArmorMeditationAllowance DefMedAllowance => ArmorMeditationAllowance.All;
 
 
 
