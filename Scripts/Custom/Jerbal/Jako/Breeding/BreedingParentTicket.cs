@@ -108,7 +108,7 @@ namespace Custom.Jerbal.Jako.Breeding
             else
             {
                 list.Add("WARNING: This is the only way to retreive your pet.<br>If this ticket is deleted, so is your pet!<br>Owner: {0}<br>Pet: {1} (Level {2} {3})<br>Pickup Date: {4}",
-                                    (m_doneReal == DateTime.MinValue ? String.Format("{0} or {1}", m_owner.Name, m_oParent.Name) : m_owner.Name), m_creature.Name, ((BaseCreature)m_creature).Level, ((BaseCreature)m_creature).SexString, m_doneDisp.ToShortDateString());                
+                                    (m_doneReal == DateTime.MinValue ? String.Format("{0} or {1}", m_owner.Name, m_oParent.Name) : m_owner.Name), m_creature.Name, ((BaseCreature)m_creature).Level,/* ((BaseCreature)m_creature).SexString,*/ m_doneDisp.ToShortDateString());                
             }
         }
 

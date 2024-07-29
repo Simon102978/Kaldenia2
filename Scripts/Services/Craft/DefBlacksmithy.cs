@@ -296,9 +296,17 @@ namespace Server.Engines.Craft
 			{
 				return 1044155; // You create an exceptional quality item.
 			}
-			if (quality == 3)
+			if (makersMark && quality == 3)
+			{
+				from.SendMessage("Vous créez un item de qualité Épique et apposer votre marque."); ; // You create an epic quality item.			
+			}
+				if (quality == 3)
 			{
 				from.SendMessage("Vous créez un item de qualité Épique."); ; // You create an epic quality item.
+			}
+			if (makersMark && quality == 4)
+			{
+				from.SendMessage("Vous créez un item de qualité Légendaire et apposer votre marque."); ; // You create a legendary quality item.
 			}
 			if (quality == 4)
 			{
@@ -551,10 +559,10 @@ namespace Server.Engines.Craft
 			#endregion
 
 			#region "Lancer"
-			AddCraft(typeof(Shuriken), "Lancer", "Shuriken", 40.0, 80.0, typeof(IronIngot), 1044036, 5, 1044037);
-			AddCraft(typeof(Boomerang), "Lancer", "Boomerang", 40.0, 80.0, typeof(IronIngot), 1044036, 5, 1044037);
-			AddCraft(typeof(Cyclone), "Lancer", "Cyclone", 40.0, 80.0, typeof(IronIngot), 1044036, 9, 1044037);
-			AddCraft(typeof(SoulGlaive), "Lancer", "Étoile", 40.0, 80.0, typeof(IronIngot), 1044036, 9, 1044037);
+			AddCraft(typeof(Shuriken), "Lancer", "Shuriken", 40.0, 80.0, typeof(IronIngot), 1044036, 3, 1044037);
+			AddCraft(typeof(Boomerang), "Lancer", "Boomerang", 40.0, 80.0, typeof(IronIngot), 1044036, 25, 1044037);
+			AddCraft(typeof(Cyclone), "Lancer", "Cyclone", 40.0, 80.0, typeof(IronIngot), 1044036, 25, 1044037);
+			AddCraft(typeof(SoulGlaive), "Lancer", "Étoile", 40.0, 80.0, typeof(IronIngot), 1044036, 25, 1044037);
 
 			#endregion
 

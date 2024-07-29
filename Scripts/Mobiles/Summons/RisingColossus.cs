@@ -47,7 +47,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Mysticism, m.Skills[SkillName.Mysticism].Value);
             SetSkill(SkillName.Focus, m.Skills[SkillName.Focus].Value);
 
-            ControlSlots = 5;
+            ControlSlots = 3;
 
             m_DispelDifficulty = 91 + (int)((baseskill * 83) / 5.2);
 

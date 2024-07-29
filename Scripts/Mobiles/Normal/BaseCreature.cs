@@ -309,9 +309,17 @@ namespace Server.Mobiles
 
         private bool m_bSummoned;
         private DateTime m_SummonEnd;
-        private int m_iControlSlots = 1;
+		private int m_iControlSlots = 0;
 
-        private bool m_bBardProvoked;
+		[CommandProperty(AccessLevel.Administrator)]
+		public virtual int ControlSlots
+		{
+			get { return m_iControlSlots; }
+			set { m_iControlSlots = value; }
+		}
+
+
+		private bool m_bBardProvoked;
         private bool m_bBardPacified;
         private Mobile m_bBardMaster;
         private Mobile m_bBardTarget;
@@ -386,7 +394,7 @@ namespace Server.Mobiles
             }
         }
 
-        [CommandProperty(AccessLevel.GameMaster, AccessLevel.Administrator)]
+		[CommandProperty(AccessLevel.GameMaster, AccessLevel.Administrator)]
         public Mobile StabledBy { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -1125,7 +1133,7 @@ namespace Server.Mobiles
 		private uint m_level = 1;
 		private uint m_realLevel = 1;
 		private uint m_experience = 0;
-		private uint m_maxLevel = (uint)Utility.RandomMinMax(8, 17);
+		private uint m_maxLevel = (uint)Utility.RandomMinMax(8, 25);
 		private uint m_traits = 0;
 		private DateTime m_nextMate = DateTime.Now;
 		protected virtual TimeSpan NextMateDelay(uint atLevel)
@@ -1144,10 +1152,10 @@ namespace Server.Mobiles
 		{
 			double baseexp = 1;
 
-			if (this.Fame < 80)
+			if (this.Str < 80)
 				baseexp = 1;
 			else
-				baseexp = (double)this.Fame / 80;
+				baseexp = (double)this.Str / 50;
 
 			uint baseexpuint = Convert.ToUInt32(baseexp);
 
@@ -1155,7 +1163,7 @@ namespace Server.Mobiles
 		}
 
 		public virtual uint TraitsGiven(uint atLevel) { return (atLevel == 10) ? (uint)3 : (uint)1; }
-		public string SexString { get { return (Female ? "" : ""); } }
+	//	public string SexString { get { return (Female ? "" : ""); } }
 		public JakoAttributes m_jakoAttributes = new JakoAttributes();
 
 
@@ -4238,7 +4246,7 @@ namespace Server.Mobiles
             }
         }
 
-        [CommandProperty(AccessLevel.Administrator)]
+      /*  [CommandProperty(AccessLevel.Administrator)]
         public int ControlSlots
         {
             get { return m_iControlSlots; }
@@ -4264,7 +4272,7 @@ namespace Server.Mobiles
                     m_iControlSlots = value;
                 }
             }
-        }
+        } */
 
         [CommandProperty(AccessLevel.Administrator)]
         public int ControlSlotsMax { get; set; }
@@ -6122,10 +6130,10 @@ namespace Server.Mobiles
         {
             base.AddNameProperties(list);
 
-            if (Controlled && !string.IsNullOrEmpty(EngravedText))
-            {
-                list.Add(1157315, EngravedText); // <BASEFONT COLOR=#668cff>Branded: ~1_VAL~<BASEFONT COLOR=#FFFFFF>
-            }
+         //   if (Controlled && !string.IsNullOrEmpty(EngravedText))
+         //   {
+         //       list.Add(1157315, EngravedText); // <BASEFONT COLOR=#668cff>Branded: ~1_VAL~<BASEFONT COLOR=#FFFFFF>
+         //   }
 
             if (DisplayWeight)
             {

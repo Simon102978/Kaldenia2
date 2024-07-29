@@ -1,6 +1,8 @@
 using Server.Mobiles;
 using Server.Network;
+using Server.Prompts;
 using Server.Targeting;
+using System;
 using System.Collections.Generic;
 
 namespace Server.Commands
@@ -9,9 +11,9 @@ namespace Server.Commands
     {
         public static void Initialize()
         {
-            CommandSystem.Register("Vis", AccessLevel.Counselor, Vis_OnCommand);
-            CommandSystem.Register("VisList", AccessLevel.Counselor, VisList_OnCommand);
-            CommandSystem.Register("VisClear", AccessLevel.Counselor, VisClear_OnCommand);
+            CommandSystem.Register("Vis", AccessLevel.Player, Vis_OnCommand);
+            CommandSystem.Register("VisList", AccessLevel.Player, VisList_OnCommand);
+            CommandSystem.Register("VisClear", AccessLevel.Player, VisClear_OnCommand);
         }
 
         [Usage("Vis")]
@@ -77,60 +79,103 @@ namespace Server.Commands
             {
             }
 
-            protected override void OnTarget(Mobile from, object targeted)
-            {
-                if (from is PlayerMobile && targeted is Mobile)
-                {
-                    PlayerMobile pm = (PlayerMobile)from;
-                    Mobile targ = (Mobile)targeted;
+			protected override void OnTarget(Mobile from, object targeted)
+			{
+				if (from is PlayerMobile && targeted is Mobile)
+				{
+					PlayerMobile pm = (PlayerMobile)from;
+					Mobile targ = (Mobile)targeted;
 
-                    if (targ.AccessLevel <= from.AccessLevel)
-                    {
-                        List<Mobile> list = pm.VisibilityList;
+					Console.WriteLine($"Debug: OnTarget called. From: {from.Name}, Target: {targ.Name}");
 
-                        if (list.Contains(targ))
-                        {
-                            list.Remove(targ);
-                            from.SendMessage("{0} has been removed from your visibility list.", targ.Name);
-                        }
-                        else
-                        {
-                            list.Add(targ);
-                            from.SendMessage("{0} has been added to your visibility list.", targ.Name);
-                        }
+					if (targ.AccessLevel <= from.AccessLevel)
+					{
+						List<Mobile> list = pm.VisibilityList;
 
-                        if (Utility.InUpdateRange(targ, from))
-                        {
-                            NetState ns = targ.NetState;
+						if (list.Contains(targ))
+						{
+							// Au lieu de retirer automatiquement, demandez confirmation
+							from.SendMessage("This player is already in your visibility list. Do you want to remove them? (Y/N)");
+							from.SendMessage("Type Y to remove, or N to keep them in the list.");
+							from.Prompt = new RemoveConfirmPrompt(targ);
+						}
+						else
+						{
+							list.Add(targ);
+							from.SendMessage("{0} has been added to your visibility list.", targ.Name);
+							Console.WriteLine($"Debug: {targ.Name} added to {from.Name}'s visibility list.");
 
-                            if (ns != null)
-                            {
-                                if (targ.CanSee(from))
-                                {
-                                    ns.Send(new MobileIncoming(targ, from));
+							// Mise à jour de la visibilité
+							UpdateVisibility(from, targ);
+						}
+					}
+					else
+					{
+						from.SendMessage("They can already see you!");
+						Console.WriteLine($"Debug: {targ.Name} already has higher access level than {from.Name}.");
+					}
+				}
+				else
+				{
+					from.SendMessage("Add only mobiles to your visibility list.");
+					Console.WriteLine("Debug: Invalid target type.");
+				}
+			}
 
-                                    ns.Send(from.OPLPacket);
+			private class RemoveConfirmPrompt : Prompt
+			{
+				private Mobile _target;
 
-                                    foreach (Item item in from.Items)
-                                        ns.Send(item.OPLPacket);
-                                }
-                                else
-                                {
-                                    ns.Send(from.RemovePacket);
-                                }
-                            }
-                        }
-                    }
-                    else
-                    {
-                        from.SendMessage("They can already see you!");
-                    }
-                }
-                else
-                {
-                    from.SendMessage("Add only mobiles to your visibility list.");
-                }
-            }
-        }
-    }
+				public RemoveConfirmPrompt(Mobile target)
+				{
+					_target = target;
+				}
+
+				public override void OnResponse(Mobile from, string text)
+				{
+					if (from is PlayerMobile pm)
+					{
+						text = text.Trim().ToLower();
+						if (text == "y" || text == "yes")
+						{
+							pm.VisibilityList.Remove(_target);
+							from.SendMessage("{0} has been removed from your visibility list.", _target.Name);
+							Console.WriteLine($"Debug: {_target.Name} removed from {from.Name}'s visibility list.");
+
+							// Mise à jour de la visibilité
+							UpdateVisibility(from, _target);
+						}
+						else
+						{
+							from.SendMessage("{0} remains in your visibility list.", _target.Name);
+						}
+					}
+				}
+			}
+
+			private static void UpdateVisibility(Mobile from, Mobile targ)
+			{
+				if (Utility.InUpdateRange(targ, from))
+				{
+					NetState ns = targ.NetState;
+
+					if (ns != null)
+					{
+						if (targ.CanSee(from))
+						{
+							ns.Send(new MobileIncoming(targ, from));
+							ns.Send(from.OPLPacket);
+
+							foreach (Item item in from.Items)
+								ns.Send(item.OPLPacket);
+						}
+						else
+						{
+							ns.Send(from.RemovePacket);
+						}
+					}
+				}
+			}
+		}
+	}
 }

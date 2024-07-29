@@ -10,7 +10,7 @@ namespace Server.Items
 			Name = "Plastron du roi Ssins";
 			Hue = 2833;
 			SetHue = 2833;
-
+			Layer = Layer.MiddleTorso;
 			Attributes.BonusStam = 2;
             Attributes.WeaponSpeed = 5;
 

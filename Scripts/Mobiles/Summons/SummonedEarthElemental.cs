@@ -31,7 +31,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Tactics, 100.0);
             SetSkill(SkillName.Wrestling, 90.0);
 
-            ControlSlots = 4;
+            ControlSlots = 2;
         }
 
         public SummonedEarthElemental(Serial serial)

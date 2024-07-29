@@ -29,7 +29,7 @@ namespace Custom.Jerbal.Jako.Gumps
             AddImageTiled(90, 107, 260, 226, 2082);
             AddImage(72, 72, 2080);
             AddImage(91, 331, 2083);
-            AddHtml(102, 106, 238, 179, String.Format("{0} wishes to breed your pet {1} (Level {2} {3}) with {4} pet {5} (Level {6} {7}). This would cause your pet to be inaccessible for up to {8} days and cost {9} gold. Please note that the owner of the female receives the deed to redeem the child if the mating is successful.", targeter.Name, ownbc.Name, ownbc.Level, ownbc.SexString, (ownbc.ControlMaster == othbc.ControlMaster ? "your" : String.Format("{0}'s", othbc.ControlMaster.Name)), othbc.Name, othbc.Level, othbc.SexString, ownbc.NextMateIn.TotalDays.ToString(), JakoBreeder.GoldPrice(owners, others)), (bool)false, (bool)false);
+            AddHtml(102, 106, 238, 179, String.Format("{0} wishes to breed your pet {1} (Level {2} {3}) with {4} pet {5} (Level {6} {7}). This would cause your pet to be inaccessible for up to {8} days and cost {9} gold. Please note that the owner of the female receives the deed to redeem the child if the mating is successful.", targeter.Name, ownbc.Name, ownbc.Level, /*ownbc.SexString,*/ (ownbc.ControlMaster == othbc.ControlMaster ? "your" : String.Format("{0}'s", othbc.ControlMaster.Name)), othbc.Name, othbc.Level, /*othbc.SexString,*/ ownbc.NextMateIn.TotalDays.ToString(), JakoBreeder.GoldPrice(owners, others)), (bool)false, (bool)false);
             AddButton(314, 78, 1151, 1152, (int)Buttons.Close, GumpButtonType.Reply, 0);
             AddButton(104, 289, 92, 92, (int)Buttons.Accept, GumpButtonType.Reply, 0);
             AddImage(155, 289, 93);
@@ -112,7 +112,7 @@ namespace Custom.Jerbal.Jako.Gumps
                 AddLabel(65, 189, 0, @"Owner:");
                 AddLabel(115, 189, 0, m_Pet1.ControlMaster.Name);
                 AddLabel(65, 211, 0, @"Level:");
-                AddLabel(115, 211, 0, String.Format("{0} {1}", m_Pet1.RealLevel.ToString(), m_Pet1.SexString));
+          //      AddLabel(115, 211, 0, String.Format("{0} {1}", m_Pet1.RealLevel.ToString(), m_Pet1.SexString));
             }
 
 
@@ -122,7 +122,7 @@ namespace Custom.Jerbal.Jako.Gumps
                 AddLabel(65, 267, 0, @"Owner:");
                 AddLabel(115, 267, 0, m_Pet2.ControlMaster.Name);
                 AddLabel(65, 289, 0, @"Level:");
-                AddLabel(115, 289, 0, String.Format("{0} {1}", m_Pet2.RealLevel.ToString(), m_Pet2.SexString));
+             //   AddLabel(115, 289, 0, String.Format("{0} {1}", m_Pet2.RealLevel.ToString(), m_Pet2.SexString));
             }
  
 

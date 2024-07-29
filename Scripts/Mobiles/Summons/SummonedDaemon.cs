@@ -34,7 +34,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Tactics, 100.0);
             SetSkill(SkillName.Wrestling, 98.1, 99.0);
 
-            ControlSlots = 4;
+            ControlSlots = 3;
         }
 
         public SummonedDaemon(Serial serial)

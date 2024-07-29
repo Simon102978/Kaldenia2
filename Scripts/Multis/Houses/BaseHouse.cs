@@ -2903,32 +2903,30 @@ namespace Server.Multis
             }
         }
 
-        public void AddCoOwner(Nom targ)
-        {
-            CoOwners.Add(targ);
+		public void AddCoOwner(Nom targ)
+		{
+			if (!CoOwners.Contains(targ))
+			{
+				CoOwners.Add(targ);
+			}
 
-            List<Nom> remove = new List<Nom>();
+			// Vous pouvez garder cette partie si vous voulez vous assurer que le nouveau co-propriétaire n'est pas dans la liste des amis
+			List<Nom> remove = new List<Nom>();
+			foreach (Nom m in Friends)
+			{
+				if (m == targ)
+					remove.Add(m);
+			}
 
-            foreach (Nom m in CoOwners)
-            {
-                if (m != targ)
-                    remove.Add(m);
-            }
+			foreach (Nom m in remove)
+				Friends.Remove(m);
 
-            foreach (Nom m in remove)
-                CoOwners.Remove(m);
+			remove.Clear();
+			remove.TrimExcess();
+		}
 
-            remove.Clear();
 
-         
-            foreach (Nom m in remove)
-                Friends.Remove(m);
-
-            remove.Clear();
-            remove.TrimExcess();
-        }
-
-        public void RemoveCoOwner(Mobile from, Mobile targ)
+		public void RemoveCoOwner(Mobile from, Mobile targ)
         {
             RemoveCoOwner(from, targ, true);
         }

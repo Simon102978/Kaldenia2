@@ -3272,7 +3272,7 @@ namespace Server.Items
             double tacticsBonus = GetBonus(attacker.Skills[SkillName.Tactics].Value, 0.625, 100.0, 6.25);
 
 
-			if (attacker is CustomPlayerMobile)
+/*			if (attacker is CustomPlayerMobile)
 			{
 				// Solution non elegante pour booster les dégats des joueurs du double.
 
@@ -3280,7 +3280,7 @@ namespace Server.Items
 				anatomyBonus *= 1.5;
 				tacticsBonus *= 1.5;
 			}
-
+*/
 
 
 	//		double anatomyBonus = GetBonus(attacker.Skills[SkillName.Anatomy].Value, 0.500, 100.0, 5.00);
@@ -3312,13 +3312,13 @@ namespace Server.Items
 
 
 
-			if (attacker is BaseCreature)
+	/*		if (attacker is BaseCreature)
 			{
 				//	totalBonus = totalBonus * 70 / 100;
 
 				totalBonus = totalBonus * 80 / 100;
 			}
-
+*/
 
 
 

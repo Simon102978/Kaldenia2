@@ -3,18 +3,49 @@ using Server;
 using Server.Mobiles;
 using Server.Items;
 using Server.Gumps;
-using Server.Custom;
 using Server.Multis;
-using static Server.Custom.GolemSpiritWand;
 using System.Collections.Generic;
 using Server.ContextMenus;
-using Server.Engines.Quests;
 
 namespace Server.Custom
 {
+	public static class GolemAsh
+	{
+		public enum AshType
+		{
+			Feu,
+			Eau,
+			Glace,
+			Poison,
+			Sang,
+			Sylvestre,
+			Terre,
+			Vent
+		}
+
+		public static AshType GetAshTypeFromAsh(BaseGolemAsh ash)
+		{
+			if (ash is GolemCendreFeu) return AshType.Feu;
+			if (ash is GolemCendreEau) return AshType.Eau;
+			if (ash is GolemCendreGlace) return AshType.Glace;
+			if (ash is GolemCendrePoison) return AshType.Poison;
+			if (ash is GolemCendreSang) return AshType.Sang;
+			if (ash is GolemCendreSylvestre) return AshType.Sylvestre;
+			if (ash is GolemCendreTerre) return AshType.Terre;
+			if (ash is GolemCendreVent) return AshType.Vent;
+
+			throw new ArgumentException("Type de cendre inconnu");
+		}
+	}
+
 	public class GolemZyX : BaseCreature
 	{
 		private int m_Penalty;
+		private MiniGolem m_MiniGolem;
+		private GolemAsh.AshType m_AshType;
+		private int m_MaxHitPoints;
+		private CreatureSpirit m_Spirit;
+
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int Penalty
 		{
@@ -22,42 +53,17 @@ namespace Server.Custom
 			set { m_Penalty = value; }
 		}
 
-		private Mobile m_Owner;
-		private MiniGolem m_MiniGolem;
-		private GolemAsh.AshType m_AshType;
-		private int m_MaxHitPoints;
-		private CreatureSpirit m_Spirit;
-
-		private int m_CurrentHits;
-
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int CurrentHits
 		{
-			get { return m_CurrentHits; }
+			get { return Hits; }
 			set
 			{
-				m_CurrentHits = Math.Max(0, Math.Min(value, m_MaxHitPoints));
+				Hits = Math.Max(0, Math.Min(value, m_MaxHitPoints));
 				Delta(MobileDelta.Hits);
 				InvalidateProperties();
 			}
 		}
-
-		/*	[CommandProperty(AccessLevel.GameMaster)]
-			public Mobile Owner
-			{
-				get { return m_Owner; }
-				set
-				{
-					m_Owner = value;
-					if (m_Owner != null)
-					{
-						ControlMaster = m_Owner;
-						Controlled = true;
-						ControlTarget = m_Owner;
-						ControlOrder = OrderType.Follow;
-					}
-				}
-			}*/
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public Mobile SummonMaster
@@ -93,37 +99,23 @@ namespace Server.Custom
 			m_AshType = ashType;
 			m_Spirit = spirit;
 			Name = $"Golem de {ashType}";
-			Body = 14; // Adjust as needed
-			BaseSoundID = 268; // Adjust as needed
-
-
-
+			Body = 14;
+			BaseSoundID = 268;
 			SetStr(spirit.GetStrength());
 			SetDex(spirit.GetDexterity());
 			SetInt(spirit.GetIntelligence());
-
-			m_MaxHitPoints = ashQuantity * 5; 
-			CurrentHits = m_MaxHitPoints;
+			m_MaxHitPoints = ashQuantity * 5;
 			SetHits(m_MaxHitPoints);
 			SetMana(0);
-
 			Summoned = true;
-			SummonMaster = owner;
 			ControlOrder = OrderType.Follow;
 			ControlSlots = 3;
 			Controlled = true;
 
-		
-
-
-
 			SetDamage(10, 23);
-
 			SetDamageType(GetDamageType(ashType), 100);
-
 			VirtualArmor = spirit.GetAR();
 
-			// Set skills based on the spirit
 			foreach (SkillName skillName in Enum.GetValues(typeof(SkillName)))
 			{
 				double skillValue = spirit.GetSkillValue(skillName);
@@ -135,11 +127,14 @@ namespace Server.Custom
 
 			Fame = 3500;
 			Karma = -3500;
-
 			Hue = GetHueForAshType(ashType);
 
 			m_MiniGolem = new MiniGolem(this, ashType);
-			if (owner != null && !owner.Backpack.TryDropItem(owner, m_MiniGolem, false))
+			if (owner?.Backpack != null)
+			{
+				owner.Backpack.DropItem(m_MiniGolem);
+			}
+			else
 			{
 				m_MiniGolem.Delete();
 			}
@@ -152,36 +147,31 @@ namespace Server.Custom
 			switch (ashType)
 			{
 				case GolemAsh.AshType.Feu: return ResistanceType.Fire;
-				case GolemAsh.AshType.Eau: return ResistanceType.Cold;
+				case GolemAsh.AshType.Eau:
 				case GolemAsh.AshType.Glace: return ResistanceType.Cold;
 				case GolemAsh.AshType.Poison: return ResistanceType.Poison;
 				default: return ResistanceType.Physical;
 			}
 		}
 
-		public override bool IsScaredOfScaryThings { get { return false; } }
-		public override bool IsScaryToPets { get { return true; } }
-		public override bool AutoDispel { get { return false; } }
-		public override bool BleedImmune { get { return true; } }
-		public override Poison PoisonImmune { get { return Poison.Lethal; } }
-
-		public override bool NoHouseRestrictions { get { return true; } }
-		public override bool IsInvulnerable { get { return false; } }
-		public override bool IsBondable { get { return false; } }
-		public override bool Unprovokable { get { return true; } }
-		public override bool CanRummageCorpses { get { return false; } }
-		public override bool BardImmune { get { return true; } }
-
+		public override bool IsScaredOfScaryThings => false;
+		public override bool IsScaryToPets => true;
+		public override bool AutoDispel => false;
+		public override bool BleedImmune => true;
+		public override Poison PoisonImmune => Poison.Lethal;
+		public override bool NoHouseRestrictions => true;
+		public override bool IsInvulnerable => false;
+		public override bool IsBondable => false;
+		public override bool Unprovokable => true;
+		public override bool CanRummageCorpses => false;
+		public override bool BardImmune => true;
 		public override bool DeleteCorpseOnDeath => true;
 		public override bool CanBeRenamedBy(Mobile from) => true;
-		public override bool IsDispellable => false; // Empêche le golem d'être 
-
-
-
+		public override bool IsDispellable => false;
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			if (from == SummonMaster)
+			if (from == ControlMaster)
 			{
 				from.SendGump(new GolemZyXAttributesGump(this));
 			}
@@ -204,21 +194,12 @@ namespace Server.Custom
 			Delete();
 		}
 
-		public override bool OnBeforeDeath()
-		{
-			return base.OnBeforeDeath();
-		}
+		public override bool CanBeControlledBy(Mobile m) => m == SummonMaster;
 
-		public override bool CanBeControlledBy(Mobile m)
-		{
-			return m == SummonMaster;
-		}
-
-
-		public override int GetIdleSound() { return 268; }
-		public override int GetAngerSound() { return 267; }
-		public override int GetHurtSound() { return 269; }
-		public override int GetDeathSound() { return 270; }
+		public override int GetIdleSound() => 268;
+		public override int GetAngerSound() => 267;
+		public override int GetHurtSound() => 269;
+		public override int GetDeathSound() => 270;
 
 		private int GetHueForAshType(GolemAsh.AshType ashType)
 		{
@@ -239,115 +220,86 @@ namespace Server.Custom
 		public override void OnHeal(ref int amount, Mobile from)
 		{
 			amount = 0;
-			if (from != null && from.Player)
+			if (from?.Player == true)
 			{
-				
 				from.SendMessage("Ce golem ne peut pas être soigné.");
 			}
 		}
 
-		public virtual bool  CanRegenHits() { return false; }
-
-		
-
+		public virtual bool CanRegenHits() { return false; }
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
 			if (Deleted || !Alive)
 				return;
 
-			CurrentHits -= amount;
+			Hits -= amount;
 
-			if (CurrentHits <= 0)
+			if (Hits <= 0)
 			{
 				Kill();
 			}
 
-			if (m_MiniGolem != null)
-			{
-				m_MiniGolem.InvalidateProperties();
-			}
-			{
-				if (AshType == GolemAsh.AshType.Glace)
+			m_MiniGolem?.InvalidateProperties();
+
+			if (AshType == GolemAsh.AshType.Glace)
 				AttemptParalyze(from);
-			}
-			{
-				if (AshType == GolemAsh.AshType.Poison)
+
+			if (AshType == GolemAsh.AshType.Poison)
 				AttemptPoison(from);
-				{
-				}
-			}
 		}
 
-		public override bool CanBeDamaged()
-		{
-			return true;
-		}
+		public override bool CanBeDamaged() => true;
 
-		public override int HitsMax
-		{
-			get { return m_MaxHitPoints; }
-		}
+		public override int HitsMax => m_MaxHitPoints;
 
 		public void AttemptParalyze(Mobile target)
 		{
-			if (AshType != GolemAsh.AshType.Glace)
+			if (AshType != GolemAsh.AshType.Glace || target == null || !target.Alive || target.Paralyzed)
 				return;
 
-			if (target != null && target.Alive && !target.Paralyzed)
+			double skill = Skills[SkillName.Wrestling].Value;
+			if (skill / 150.0 > Utility.RandomDouble())
 			{
-				double skill = Skills[SkillName.Wrestling].Value;
-				if (skill / 150.0 > Utility.RandomDouble())
-				{
-					target.Paralyze(TimeSpan.FromSeconds(3 + skill / 50));
-					target.PlaySound(0x204);
-					target.FixedEffect(0x376A, 6, 1);
-				}
+				target.Paralyze(TimeSpan.FromSeconds(3 + skill / 50));
+				target.PlaySound(0x204);
+				target.FixedEffect(0x376A, 6, 1);
 			}
 		}
 
 		public void RangedAttack(Mobile target)
 		{
-			if (AshType != GolemAsh.AshType.Sylvestre)
+			if (AshType != GolemAsh.AshType.Sylvestre || target == null || !target.Alive || !InRange(target, 5))
 				return;
 
-			if (target != null && target.Alive && InRange(target, 5))
-			{
-				Direction = GetDirectionTo(target);
-				MovingEffect(target, 0xF42, 7, 1, false, false);
-				DoHarmful(target);
-				AOS.Damage(target, this, Utility.RandomMinMax(DamageMin, DamageMax), 100, 0, 0, 0, 0);
-			}
+			Direction = GetDirectionTo(target);
+			MovingEffect(target, 0xF42, 7, 1, false, false);
+			DoHarmful(target);
+			AOS.Damage(target, this, Utility.RandomMinMax(DamageMin, DamageMax), 100, 0, 0, 0, 0);
 		}
+
 		public void AttemptPoison(Mobile target)
 		{
-			if (AshType != GolemAsh.AshType.Poison)
+			if (AshType != GolemAsh.AshType.Poison || target == null || !target.Alive || target.Poisoned)
 				return;
 
-			if (target != null && target.Alive && !target.Poisoned)
+			double skill = Skills[SkillName.Poisoning].Value;
+			if (skill / 100.0 > Utility.RandomDouble())
 			{
-				double skill = Skills[SkillName.Poisoning].Value;
-				if (skill / 100.0 > Utility.RandomDouble())
-				{
-					int level = (int)(skill / 30.0);
-					target.ApplyPoison(this, Poison.GetPoison(Math.Min(level, 3)));
-					target.PlaySound(0x205);
-					target.FixedEffect(0x3779, 1, 10);
-				}
+				int level = (int)(skill / 30.0);
+				target.ApplyPoison(this, Poison.GetPoison(Math.Min(level, 3)));
+				target.PlaySound(0x205);
+				target.FixedEffect(0x3779, 1, 10);
 			}
 		}
-
-
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-			writer.Write((int)1); // version
+			writer.Write(1); // version
 
 			writer.Write(m_MiniGolem);
 			writer.Write((int)m_AshType);
 			writer.Write(m_MaxHitPoints);
-			writer.Write(m_CurrentHits);
-			writer.Write(m_SummonMaster);
 			writer.Write(m_Penalty);
 		}
 
@@ -362,41 +314,21 @@ namespace Server.Custom
 					m_MiniGolem = reader.ReadItem() as MiniGolem;
 					m_AshType = (GolemAsh.AshType)reader.ReadInt();
 					m_MaxHitPoints = reader.ReadInt();
-					m_CurrentHits = reader.ReadInt();
-					m_SummonMaster = reader.ReadMobile();
 					m_Penalty = reader.ReadInt();
 					break;
 				case 0:
 					m_MiniGolem = reader.ReadItem() as MiniGolem;
 					m_AshType = (GolemAsh.AshType)reader.ReadInt();
 					m_MaxHitPoints = reader.ReadInt();
-					m_CurrentHits = m_MaxHitPoints;
+					m_Penalty = 0;
 					break;
-			}
-
-			if (version < 1)
-			{
-				m_SummonMaster = null;
-				m_Penalty = 0;
 			}
 
 			Summoned = true;
 			ControlSlots = 3;
 			Controlled = true;
-
-			if (m_SummonMaster != null)
-			{
-				ControlMaster = m_SummonMaster;
-				ControlTarget = m_SummonMaster;
-				ControlOrder = OrderType.Follow;
-			}
 		}
 	}
-
-
-
-
-
 
 	public class GolemZyXAttributesGump : Gump
 	{
@@ -412,7 +344,7 @@ namespace Server.Custom
 			AddImage(118, 277, 2081);
 			AddImage(118, 347, 2083);
 
-			AddHtml(147, 108, 210, 18, String.Format("<center><i>{0}</i></center>", golem.Name), false, false);
+			AddHtml(147, 108, 210, 18, $"<center><i>{golem.Name}</i></center>", false, false);
 
 			AddButton(240, 77, 2093, 2093, 2, GumpButtonType.Reply, 0);
 
@@ -451,7 +383,6 @@ namespace Server.Custom
 
 			AddHtml(153, 294, 160, 18, "<BASEFONT COLOR=#CCCCCC>Pénalité:</BASEFONT>", false, false);
 			AddHtml(320, 294, 35, 18, golem.Penalty.ToString(), false, false);
-
 			AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, page + 1);
 			AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, pages);
 
@@ -489,7 +420,7 @@ namespace Server.Custom
 
 		private string FormatAttributes(int current, int max)
 		{
-			return String.Format("{0}/{1}", current, max);
+			return $"{current}/{max}";
 		}
 
 		private string FormatStat(int value)
@@ -499,7 +430,7 @@ namespace Server.Custom
 
 		private string FormatDamage(int min, int max)
 		{
-			return String.Format("{0}-{1}", min, max);
+			return $"{min}-{max}";
 		}
 
 		private string FormatSkill(GolemZyX golem, SkillName skillName)
@@ -507,7 +438,6 @@ namespace Server.Custom
 			return golem.Skills[skillName].Base.ToString("F1");
 		}
 	}
-
 
 	public class MiniGolem : Item
 	{
@@ -534,7 +464,7 @@ namespace Server.Custom
 		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
 		{
 			base.GetContextMenuEntries(from, list);
-			if (m_Golem != null && from == m_Golem.ControlMaster)
+			if (m_Golem != null && from == m_Golem.SummonMaster)
 			{
 				list.Add(new OpenAttributesGumpEntry(from, m_Golem));
 			}
@@ -628,7 +558,7 @@ namespace Server.Custom
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-			writer.Write((int)0); // version
+			writer.Write(0); // version
 			writer.Write(m_Golem);
 			writer.Write((int)m_AshType);
 		}
@@ -638,13 +568,8 @@ namespace Server.Custom
 			base.Deserialize(reader);
 			int version = reader.ReadInt();
 
-			switch (version)
-			{
-				case 0:
-					m_Golem = reader.ReadMobile() as GolemZyX;
-					m_AshType = (GolemAsh.AshType)reader.ReadInt();
-					break;
-			}
+			m_Golem = reader.ReadMobile() as GolemZyX;
+			m_AshType = (GolemAsh.AshType)reader.ReadInt();
 
 			if (m_Golem == null || m_Golem.Deleted)
 			{

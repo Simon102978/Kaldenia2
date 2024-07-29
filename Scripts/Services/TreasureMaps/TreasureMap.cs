@@ -343,13 +343,14 @@ namespace Server.Items
 
         public TreasureMap()
         {
-        }
+			
+		}
 
         [Constructable]
         public TreasureMap(int level, Map map)
             : this(level, map, false)
         {
-			Name = "Carte au trésor";
+			
         }
 
         [Constructable]
@@ -806,27 +807,36 @@ namespace Server.Items
             return array;
         }
 
-        public static bool HasDiggingTool(Mobile m)
-        {
-            if (m.Backpack == null)
-            {
-                return false;
-            }
+		public static bool HasDiggingTool(Mobile m)
+		{
+			if (m.Backpack == null)
+			{
+				return false;
+			}
 
-            List<BaseHarvestTool> items = m.Backpack.FindItemsByType<BaseHarvestTool>();
+			// Vérifier d'abord si le joueur a une pelle
+			Item shovel = m.Backpack.FindItemByType(typeof(Shovel));
+			if (shovel != null)
+			{
+				return true;
+			}
 
-            foreach (BaseHarvestTool tool in items)
-            {
-                if (tool.HarvestSystem == CustomMining.GeneralSystem)
-                {
-                    return true;
-                }
-            }
+			// Si aucune pelle n'est trouvée, vérifier les autres outils de minage
+			List<BaseHarvestTool> items = m.Backpack.FindItemsByType<BaseHarvestTool>();
 
-            return false;
-        }
+			foreach (BaseHarvestTool tool in items)
+			{
+				if (tool.HarvestSystem == CustomMining.GeneralSystem)
+				{
+					return true;
+				}
+			}
 
-        public virtual void OnBeginDig(Mobile from)
+			return false;
+		}
+
+
+		public virtual void OnBeginDig(Mobile from)
         {
             if (m_Completed)
             {
@@ -990,14 +1000,15 @@ namespace Server.Items
 
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            if (TreasureMapInfo.NewSystem)
+			
+			if (TreasureMapInfo.NewSystem)
             {
                 list.Add(m_Decoder != null ? 1158980 + (int)TreasureLevel : 1158975 + (int)TreasureLevel, "#" + TreasureMapInfo.PackageLocalization(Package).ToString());
             }
             else
             {
-                base.AddNameProperty(list);
-            }
+				list.Add("Carte au trésor");
+			}
         }
 
         public override void GetProperties(ObjectPropertyList list)

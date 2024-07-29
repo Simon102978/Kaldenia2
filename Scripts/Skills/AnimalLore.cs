@@ -367,8 +367,8 @@ namespace Server.SkillHandlers
 					AddHtml(153, 204, 160, 18, "<basefont color=#4A3929>Mating Level</basefont>", false, false);
 					AddHtml(280, 204, 75, 18, FormatStat((int)c.MatingLevel), false, false);
 
-					AddHtml(153, 222, 160, 18, "<basefont color=#4A3929>Sex</basefont>", false, false);
-					AddHtml(320, 222, 35, 18, FormatString(c.SexString), false, false);
+				//	AddHtml(153, 222, 160, 18, "<basefont color=#4A3929>Sex</basefont>", false, false);
+				//	AddHtml(320, 222, 35, 18, FormatString(c.SexString), false, false);
 
 					AddHtml(153, 240, 160, 18, "<basefont color=#4A3929>Experience Earned</basefont>", false, false);
 					AddHtml(320, 240, 35, 18, FormatStat((int)c.Experience), false, false);

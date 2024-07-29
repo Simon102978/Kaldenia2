@@ -6414,30 +6414,57 @@ namespace Server.Mobiles
 
                     continue;
                 }
+				if ((Followers + pet.ControlSlots) <= FollowersMax)
+				{
+					pet.SetControlMaster(this);
 
-                if ((Followers + pet.ControlSlots) <= FollowersMax)
-                {
-                    pet.SetControlMaster(this);
+					if (pet.Summoned)
+					{
+						pet.SummonMaster = this;
+					}
 
-                    if (pet.Summoned)
-                    {
-                        pet.SummonMaster = this;
-                    }
+					pet.ControlTarget = this;
+					pet.ControlOrder = OrderType.Follow;
 
-                    pet.ControlTarget = this;
-                    pet.ControlOrder = OrderType.Follow;
+					// pet.MoveToWorld(Location, Map);
 
-                    pet.MoveToWorld(Location, Map);
+					// À la place, l'animal est dans le monde, mais à sa dernière position connue
+					if (pet.Map == null || pet.Map == Map.Internal)
+					{
+						pet.MoveToWorld(pet.LogoutLocation, pet.LogoutMap);
+					}
 
-                    pet.IsStabled = false;
-                    pet.StabledBy = null;
+					pet.IsStabled = false;
+					pet.StabledBy = null;
 
-                    if (Stabled.Contains(pet))
-                    {
-                        Stabled.Remove(pet);
-                    }
-                }
-                else
+					if (Stabled.Contains(pet))
+					{
+						Stabled.Remove(pet);
+					}
+				}
+				/*  if ((Followers + pet.ControlSlots) <= FollowersMax)
+				  {
+					  pet.SetControlMaster(this);
+
+					  if (pet.Summoned)
+					  {
+						  pet.SummonMaster = this;
+					  }
+
+					  pet.ControlTarget = this;
+					  pet.ControlOrder = OrderType.Follow;
+
+					  pet.MoveToWorld(Location, Map);
+
+					  pet.IsStabled = false;
+					  pet.StabledBy = null;
+
+					  if (Stabled.Contains(pet))
+					  {
+						  Stabled.Remove(pet);
+					  }
+				  }*/
+				else
                 {
                     SendLocalizedMessage(1049612, pet.Name); // ~1_NAME~ remained in the stables because you have too many followers.
                 }

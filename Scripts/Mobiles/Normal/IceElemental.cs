@@ -63,7 +63,7 @@ namespace Server.Mobiles
       //      AddLoot(LootPack.Gems, 2);
             AddLoot(LootPack.MageryRegs, 3);
             AddLoot(LootPack.LootItem<BlackPearl>());
-			PackItem(new GolemAsh(GolemAsh.AshType.Glace, Utility.RandomMinMax(0, 5)));
+			AddLoot(LootPack.LootItem<GolemCendreGlace>(Utility.RandomMinMax(1, 5)));
 
 		}
 

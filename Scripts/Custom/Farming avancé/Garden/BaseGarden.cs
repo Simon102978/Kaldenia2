@@ -24,8 +24,10 @@ namespace Server.Items
         private bool m_Public = false;
 
         public abstract BaseGardenDeed Deed();
-      
-        public List<Mobile> GetMobiles()
+
+
+
+		public List<Mobile> GetMobiles()
         {
             if (Map == null || Map == Map.Internal)
                 return new List<Mobile>();

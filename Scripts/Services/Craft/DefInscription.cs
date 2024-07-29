@@ -1,4 +1,5 @@
-﻿using Server.Items;
+﻿using Server.Custom;
+using Server.Items;
 using System;
 
 namespace Server.Engines.Craft
@@ -87,6 +88,8 @@ namespace Server.Engines.Craft
             return 0;
         }
 
+
+
         private readonly System.Collections.Generic.Dictionary<Type, int> _Buffer = new System.Collections.Generic.Dictionary<Type, int>();
 
         public override void PlayCraftEffect(Mobile from)
@@ -110,18 +113,40 @@ namespace Server.Engines.Craft
                     else
                         return 1044157; // You failed to create the item, but no materials were lost.
                 }
-                else
-                {
-                    if (quality == 0)
-                        return 502785; // You were barely able to make this item.  It's quality is below average.
-                    else if (makersMark && quality == 2)
-                        return 1044156; // You create an exceptional quality item and affix your maker's mark.
-                    else if (quality == 2)
-                        return 1044155; // You create an exceptional quality item.
-                    else
-                        return 1044154; // You create the item.
-                }
-            }
+				if (quality == 0)
+				{
+					return 502785; // You were barely able to make this item.  It's quality is below average.
+				}
+
+				if (makersMark && quality == 2)
+				{
+					return 1044156; // You create an exceptional quality item and affix your maker's mark.
+				}
+
+				if (quality == 2)
+				{
+					return 1044155; // You create an exceptional quality item.
+				}
+				if (makersMark && quality == 3)
+				{
+					from.SendMessage("Vous créez un item de qualité Épique et apposer votre marque."); ; // You create an epic quality item.			
+				}
+				if (quality == 3)
+				{
+					from.SendMessage("Vous créez un item de qualité Épique."); ; // You create an epic quality item.
+				}
+				if (makersMark && quality == 4)
+				{
+					from.SendMessage("Vous créez un item de qualité Légendaire et apposer votre marque."); ; // You create a legendary quality item.
+				}
+				if (quality == 4)
+				{
+					from.SendMessage("Vous créez un item de qualité Légendaire."); ; // You create a legendary quality item.
+				}
+				return 1044154; // You create the item.
+
+			}
+		
             else
             {
                 if (failed)
@@ -1097,6 +1122,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(CarnetAdresse), "Autres", "Carnet Adresse", 25.0, 50.0, typeof(BlankScroll), 1044377, 10, 1044378);
 
+			index = AddCraft(typeof(CustomRecipeBook), "Autres", "Livre de recettes personnalisées", 25.0, 50.0, typeof(BlankScroll), 1044377, 10, 1044378);
 
 			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre de Barde", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
 			index = AddCraft(typeof(NewSpellbook), "Autres", "Livre de sort", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);

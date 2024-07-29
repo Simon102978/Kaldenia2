@@ -120,7 +120,7 @@ namespace Server.Spells.SkillMasteries
             SetSkill(SkillName.Tactics, Math.Max(100, 75 * scale));
             SetSkill(SkillName.Wrestling, Math.Max(100, 75 * scale));
 
-            ControlSlots = 5;
+            ControlSlots = 3;
 
             Timer.DelayCall(TimeSpan.FromSeconds(1), () =>
                 {

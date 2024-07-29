@@ -1503,6 +1503,8 @@ namespace Server.Engines.Craft
 				return ItemQuality.Exceptional;
 
 			return ItemQuality.Normal;
+
+		
 		}
 
 		public bool CheckSkills(

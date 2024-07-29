@@ -136,7 +136,13 @@ namespace Server.Items
                 from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
         }
 
-        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+		private static bool IsPickaxeOrShovel(Item item)
+		{
+		
+			return item is Pickaxe || item is Shovel;
+		}
+
+		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
             base.GetContextMenuEntries(from, list);
 
@@ -145,16 +151,22 @@ namespace Server.Items
 
 		public static void AddContextMenuEntries(Mobile from, Item item, List<ContextMenuEntry> list, HarvestSystem system)
 		{
-			if (system != Mining.System)
-				return;
+			bool isPickaxeOrShovel = IsPickaxeOrShovel(item);
 
-			if (!item.IsChildOf(from.Backpack) && item.Parent != from)
-				return;
+			if (!isPickaxeOrShovel)
+			{
+				if (system != CustomMining.GeneralSystem)
+					return;
+
+				if (!item.IsChildOf(from.Backpack) && item.Parent != from)
+					return;
+			}
 
 			PlayerMobile pm = from as PlayerMobile;
 
 			if (pm == null)
 				return;
+
 
 			int typeentry = 0;
 
