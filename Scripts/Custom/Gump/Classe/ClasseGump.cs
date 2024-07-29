@@ -94,10 +94,29 @@ namespace Server.Gumps
 
 			AddBackground(x - 10, y + 550, 605, 55, 9270);
 
-			if (m_From.CanEvolveTo(m_Classe) && m_Classe != m_From.Classe)
+			if (m_Classe == m_From.Classe)
 			{
-				AddButtonHtlml(x + 150, y + 568, 3,$"Je veux devenir un {m_Classe.Name}.","#FFFFFF");
+				AddHtmlTexteColored(x + 10, y + 568, 605,$"<center>Il s'agit de votre classe.</center>","#FFFFFF");
 			}
+			else if (m_From.CanEvolveTo(m_Classe) )
+			{
+				AddButtonHtlml(x + 150, y + 568, 3,$"<center>Je veux devenir un {m_Classe.Name}.</center>","#FFFFFF");
+			}
+			else if (!m_From.Classe.Evolution.Contains(m_Classe.ClasseID))
+			{
+				AddHtmlTexteColored(x + 10, y + 568, 605,$"<center>Classe Incompatible avec votre classe actuel.</center>","#FFFFFF");
+			}
+			else if((DateTime.Now - m_From.LastEvolutionClasse).TotalDays < m_From.NombreJourEvolution(m_Classe.ClasseLvl) )
+			{
+				AddHtmlTexteColored(x + 10, y + 568, 605,$"<center>Vous devez attendre {Math.Round(m_From.NombreJourEvolution(m_Classe.ClasseLvl) - (DateTime.Now - m_From.LastEvolutionClasse).TotalDays,2)} jours avant de pouvoir changer de classe.</center>","#FFFFFF");
+
+			}		
+			else if (m_Classe.ClasseLvl - m_From.Classe.ClasseLvl > m_From.CalculePtsEvolution())
+			{
+				AddHtmlTexteColored(x + 150, y + 568, 300,$"<center>Vous n'avez pas assez de points d'évolution.</center>","#FFFFFF");
+			}
+			
+			
 
 	        AddSection(x - 10, y + 610, 605, 50, m_Classe.Name);
 

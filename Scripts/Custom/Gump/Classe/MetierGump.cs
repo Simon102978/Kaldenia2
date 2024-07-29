@@ -94,10 +94,28 @@ namespace Server.Gumps
 
 			AddBackground(x - 10, y + 550, 605, 55, 9270);
 
-			if (m_From.CanEvolveMetierTo(m_Metier) && m_Metier != m_From.Metier)
+			if (m_Metier == m_From.Metier)
+			{
+				AddHtmlTexteColored(x + 10, y + 568, 605,$"<center>Il s'agit de votre métier.</center>","#FFFFFF");
+			}
+			else if (m_From.CanEvolveMetierTo(m_Metier))
 			{
 				AddButtonHtlml(x + 150, y + 568, 3,$"Je veux devenir un {m_Metier.Name}.","#FFFFFF");
 			}
+			else if (!m_From.Metier.Evolution.Contains(m_Metier.MetierID))
+			{
+				AddHtmlTexteColored(x + 10, y + 568, 605,$"<center>Métier Incompatible avec votre métier actuel.</center>","#FFFFFF");
+			}
+			else if((DateTime.Now - m_From.LastEvolutionMetier).TotalDays < m_From.NombreJourEvolution(m_Metier.MetierLvl) )
+			{
+				AddHtmlTexteColored(x + 10, y + 568, 605,$"<center>Vous devez attendre {Math.Round(m_From.NombreJourEvolution(m_Metier.MetierLvl) - (DateTime.Now - m_From.LastEvolutionMetier).TotalDays,2)} jours avant de pouvoir changer de métier.</center>","#FFFFFF");
+
+			}	
+			else if (m_Metier.MetierLvl - m_From.Metier.MetierLvl > m_From.CalculePtsEvolution())
+			{
+				AddHtmlTexteColored(x + 150, y + 568, 300,$"<center>Vous n'avez pas assez de points d'évolution.</center>","#FFFFFF");
+			}	
+
 
 	        AddSection(x - 10, y + 610, 605, 50, m_Metier.Name);
 
