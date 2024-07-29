@@ -1788,11 +1788,6 @@ namespace Server.Mobiles
 
                 return false;
             }
-			else if(evolution.ClasseIncompatible.Contains(Classe.ClasseID))
-            { 
-
-                return false;
-            }
             else
             {
                 return true;
