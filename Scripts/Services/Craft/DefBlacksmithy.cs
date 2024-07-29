@@ -542,7 +542,7 @@ namespace Server.Engines.Craft
 			#endregion
 
 			#region Hallebarde
-			index = AddCraft(typeof(Pitchfork), "Hallebardes", "Fourche", 10.0, 35.0, typeof(IronIngot), "Iron ingot", 5, "You do not have enough iron ingots to make that.");
+			index = AddCraft(typeof(Pitchfork), "Hallebardes", "Fourche", 10.0, 35.0, typeof(IronIngot), "Iron ingot", 10, "You do not have enough iron ingots to make that.");
 			AddCraft(typeof(Bardiche), "Hallebardes", "Bardiche", 40.0, 60.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(Hellebarde), "Hallebardes", "Hallebarde simple", 50.0, 70.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
 			AddCraft(typeof(BladedStaff), "Hallebardes", "Bardiche Simple", 55.0, 75.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
