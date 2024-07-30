@@ -11,6 +11,7 @@
             SetStr(450, 476);
             SetDex(157, 179);
             SetInt(251, 275);
+            Hue = 2097;
 
             SetHits(400, 425);
 
