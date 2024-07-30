@@ -52,7 +52,7 @@ namespace Server.Mobiles
 
 		[Constructable]
 		public ZanYanXan ()
-			: base(AIType.ArcherMageAI, FightMode.Closest, 10, 1, 0.2, 0.4)
+			: base(AIType.ArcherMageAI, FightMode.Closest, 10, 10, 0.2, 0.4)
 		{
 			Name = "Zan'Yan'Xan";
 			Title = "L'Éternelle Réanimée";
