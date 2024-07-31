@@ -122,7 +122,7 @@ namespace Server.Mobiles
 
             if (m_Stone != null)
             {
-                m_Stone.Active = true;
+                m_Stone.MobActif = true;
             }
 
 
@@ -405,7 +405,7 @@ namespace Server.Mobiles
 		{
             if (m_Stone != null)
             {
-                m_Stone.Active = false;
+                m_Stone.MobActif = false;
             }
 
 			base.OnDeath(c);

@@ -11,6 +11,7 @@ namespace Server.Items
 {
   public class WallControlerStone : Item
   {
+    private static readonly string m_TimerID = "CloseWallControler";
 
     private bool m_Active;
 
@@ -20,6 +21,25 @@ namespace Server.Items
     private int m_WallItemId;
 
     public List<Point3D> Wall = new List<Point3D>();
+
+    public bool m_MobActif = false;
+
+    [CommandProperty(AccessLevel.GameMaster)]
+    	public bool MobActif
+        {
+            get
+            {
+                return m_MobActif;
+            }
+            set
+            {
+                m_MobActif = value;
+
+                Active = m_MobActif;
+                
+
+            }
+        }
 
 
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -43,6 +63,29 @@ namespace Server.Items
                 }
             }
         }
+
+
+   private void InternalClose()
+   {
+         Active = MobActif;
+   }
+
+    public void ActiveSwitch()
+    {
+      if (MobActif)
+      {
+        if (Active)
+        {
+         
+          TimerRegistry.Register(m_TimerID, this, TimeSpan.FromSeconds(20), TimeSpan.FromSeconds(10), true, TimerPriority.OneSecond, door => door.InternalClose());
+        }
+        else
+        {
+           TimerRegistry.RemoveFromRegistry(m_TimerID, this);
+        }   
+          Active = !Active;         
+      }
+    }
 
 		private void DestroyWall()
 		{
@@ -203,7 +246,8 @@ namespace Server.Items
     {
       base.Serialize(writer);
 
-      writer.Write((int)0); // version
+      writer.Write((int)1); // version
+      writer.Write(m_MobActif);
       writer.Write(m_WallName);
       writer.Write(m_Active);
       writer.Write(m_WallItemId);
@@ -223,6 +267,11 @@ namespace Server.Items
 
       switch (version)
       {
+        case 1:
+        {
+          m_MobActif = reader.ReadBool();
+          goto case 0;
+        }
         case 0:
         {
           m_WallName = reader.ReadString();

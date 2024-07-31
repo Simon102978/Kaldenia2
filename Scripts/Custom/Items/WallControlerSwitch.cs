@@ -37,16 +37,6 @@ namespace Server.Items
 		{
 		}
 
-		/*	public override void GetProperties( ObjectPropertyList list )
-			{
-
-				base.GetProperties( list );
-				int count = m_doors.Count;
-				list.Add("Doors controlled: {0}", count);
-
-			}
-
-		   */
 
 		public override void OnDoubleClick(Mobile m)
 		{
@@ -102,14 +92,8 @@ namespace Server.Items
                 {
                     oc = i as WallControlerStone;
 
-                    if (oc.Active)
-                    {
-                        oc.Active = false;
-                    }
-                    else
-                    {
-                        oc.Active = true;
-                    }
+                    oc.ActiveSwitch();
+
                 }
         }
 
@@ -128,14 +112,7 @@ namespace Server.Items
                 {
                     oc = i as WallControlerStone;
 
-                    if (oc.Active)
-                    {
-                        oc.Active = false;
-                    }
-                    else
-                    {
-                        oc.Active = true;
-                    }
+                    oc.ActiveSwitch();
                 }
             }
 
