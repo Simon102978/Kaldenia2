@@ -3298,11 +3298,13 @@ namespace Server.Mobiles
 
 			if (Siege.SiegeShard && isCriminal)
 			{
-				Criminal = true;
+				// Au lieu de rendre le joueur criminel, nous pouvons simplement envoyer un avertissement
+				SendMessage("Attention : Vous effectuez une action bénéfique sur une cible criminelle.");
 				return;
 			}
 
-			base.OnBeneficialAction(target, isCriminal);
+			// Nous ne appelons pas base.OnBeneficialAction pour éviter de devenir criminel
+			// Cependant, vous pouvez ajouter ici d'autres logiques si nécessaire
 		}
 
 		public override bool IsBeneficialCriminal(Mobile target)
@@ -3310,8 +3312,11 @@ namespace Server.Mobiles
 			if (!target.Criminal && target is BaseCreature bc && bc.GetMaster() == this)
 				return false;
 
-			return base.IsBeneficialCriminal(target);
+			// Toujours retourner false pour éviter de considérer l'action comme criminelle
+			return false;
 		}
+
+
 
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
@@ -6339,70 +6344,103 @@ namespace Server.Mobiles
 		[CommandProperty(AccessLevel.GameMaster)]
 		public ExploringTheDeepQuestChain ExploringTheDeepQuest { get; set; }
 
-		public void AutoStablePets()
-		{
-			if (AllFollowers.Count > 0)
+			public void AutoStablePets()
 			{
-				for (int i = m_AllFollowers.Count - 1; i >= 0; --i)
+				if (AllFollowers.Count > 0)
 				{
-					BaseCreature pet = AllFollowers[i] as BaseCreature;
-
-					if (pet == null)
+					for (int i = m_AllFollowers.Count - 1; i >= 0; --i)
 					{
-						continue;
+						BaseCreature pet = AllFollowers[i] as BaseCreature;
+
+						if (pet == null)
+						{
+							continue;
+						}
+
+						if (pet.Summoned && pet.Map != Map)
+						{
+							pet.PlaySound(pet.GetAngerSound());
+
+							Timer.DelayCall(pet.Delete);
+
+							continue;
+						}
+
+						if (!pet.CanAutoStable || Stabled.Count >= AnimalTrainer.GetMaxStabled(this))
+						{
+							continue;
+						}
+
+
+						if (pet is IMount && ((IMount)pet).Rider != null)
+							continue;
+
+						if ((pet is PackHorse || pet is PackLlama) && (pet.Backpack != null && pet.Backpack.Items.Count > 0))
+							continue;
+
+						pet.ControlTarget = null;
+						pet.ControlOrder = OrderType.Stay;
+						pet.Internalize();
+
+						pet.SetControlMaster(null);
+						pet.SummonMaster = null;
+
+						pet.IsStabled = true;
+						pet.StabledBy = this;
+
+						Stabled.Add(pet);
+						m_AutoStabled.Add(pet);
 					}
-
-					if (pet.Summoned && pet.Map != Map)
-					{
-						pet.PlaySound(pet.GetAngerSound());
-
-						Timer.DelayCall(pet.Delete);
-
-						continue;
-					}
-
-					if (!pet.CanAutoStable || Stabled.Count >= AnimalTrainer.GetMaxStabled(this))
-					{
-						continue;
-					}
-
-					pet.ControlTarget = null;
-					pet.ControlOrder = OrderType.Stay;
-					pet.Internalize();
-
-					pet.SetControlMaster(null);
-					pet.SummonMaster = null;
-
-					pet.IsStabled = true;
-					pet.StabledBy = this;
-
-					Stabled.Add(pet);
-					m_AutoStabled.Add(pet);
 				}
 			}
-		}
 
-		public void ClaimAutoStabledPets()
-		{
-			if (!Region.AllowAutoClaim(this) || m_AutoStabled.Count <= 0)
+			public void ClaimAutoStabledPets()
 			{
-				return;
-			}
-
-			if (!Alive)
-			{
-				SendGump(new ReLoginClaimGump());
-				return;
-			}
-
-			for (int i = m_AutoStabled.Count - 1; i >= 0; --i)
-			{
-				BaseCreature pet = m_AutoStabled[i] as BaseCreature;
-
-				if (pet == null || pet.Deleted)
+				if (!Region.AllowAutoClaim(this) || m_AutoStabled.Count <= 0)
 				{
-					if (pet != null)
+					return;
+				}
+
+				if (!Alive)
+				{
+					SendGump(new ReLoginClaimGump());
+					return;
+				}
+
+				for (int i = m_AutoStabled.Count - 1; i >= 0; --i)
+				{
+					BaseCreature pet = m_AutoStabled[i] as BaseCreature;
+
+					if (pet == null || pet.Deleted)
 					{
+						if (pet != null)
+						{
+							pet.IsStabled = false;
+							pet.StabledBy = null;
+
+							if (Stabled.Contains(pet))
+							{
+								Stabled.Remove(pet);
+							}
+						}
+
+						continue;
+					}
+
+					if ((Followers + pet.ControlSlots) <= FollowersMax)
+					{
+						pet.SetControlMaster(this);
+
+						if (pet.Summoned)
+						{
+							pet.SummonMaster = this;
+						}
+
+						pet.ControlTarget = this;
+						pet.ControlOrder = OrderType.Follow;
+
+						pet.MoveToWorld(Location, Map);
+
 						pet.IsStabled = false;
 						pet.StabledBy = null;
 
@@ -6411,39 +6449,13 @@ namespace Server.Mobiles
 							Stabled.Remove(pet);
 						}
 					}
-
-					continue;
-				}
-
-				if ((Followers + pet.ControlSlots) <= FollowersMax)
-				{
-					pet.SetControlMaster(this);
-
-					if (pet.Summoned)
+					else
 					{
-						pet.SummonMaster = this;
-					}
-
-					pet.ControlTarget = this;
-					pet.ControlOrder = OrderType.Follow;
-
-					pet.MoveToWorld(Location, Map);
-
-					pet.IsStabled = false;
-					pet.StabledBy = null;
-
-					if (Stabled.Contains(pet))
-					{
-						Stabled.Remove(pet);
+						SendLocalizedMessage(1049612, pet.Name); // ~1_NAME~ remained in the stables because you have too many followers.
 					}
 				}
-				else
-				{
-					SendLocalizedMessage(1049612, pet.Name); // ~1_NAME~ remained in the stables because you have too many followers.
-				}
+
+				m_AutoStabled.Clear(); 
 			}
-
-			m_AutoStabled.Clear();
-		}
 	}
 }

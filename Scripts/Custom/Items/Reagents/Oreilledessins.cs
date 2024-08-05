@@ -14,7 +14,7 @@ namespace Server.Items
         [Constructable]
         public SsinsEar(int amount) : base(0xF78, amount)
         {
-            Hue = 2833;
+            Hue = 2835;
             Name = "Oreille de Ssins";
 			Stackable = true;
 			

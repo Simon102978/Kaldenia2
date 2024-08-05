@@ -89,59 +89,73 @@ namespace Server.Engines.Craft
                 return (GetWeakenChance(mob, skill, curHits, maxHits) > Utility.Random(100));
             }
 
-            private int GetRepairDifficulty(int curHits, int maxHits)
-            {
-                return (((maxHits - curHits) * 1250) / Math.Max(maxHits, 1)) - 250;
-            }
+			private int GetRepairDifficulty(int curHits, int maxHits)
+			{
+				// Réduire la difficulté globale
+				return (((maxHits - curHits) * 1000) / Math.Max(maxHits, 1)) - 200;
+			}
 
-            private bool CheckRepairDifficulty(Mobile mob, SkillName skill, int curHits, int maxHits)
-            {
-                double difficulty = GetRepairDifficulty(curHits, maxHits) * 0.1;
+			private bool CheckRepairDifficulty(Mobile mob, SkillName skill, int curHits, int maxHits)
+			{
+				double baseDifficulty = GetRepairDifficulty(curHits, maxHits) * 0.08; // Réduit de 0.1 à 0.08
+				double skillValue = mob.Skills[skill].Value;
 
-                if (m_Deed != null)
-                {
-                    double value = m_Deed.SkillLevel;
-                    double minSkill = difficulty - 25.0;
-                    double maxSkill = difficulty + 25;
+				// Bonus basé sur la compétence
+				double skillBonus = Math.Max(0, (skillValue - 70) / 3);
 
-                    if (value < minSkill)
-                        return false; // Too difficult
-                    else if (value >= maxSkill)
-                        return true; // No challenge
+				// Bonus basé sur l'état de l'objet
+				double conditionBonus = (double)curHits / maxHits * 15;
 
-                    double chance = (value - minSkill) / (maxSkill - minSkill);
+				double adjustedDifficulty = Math.Max(0, baseDifficulty - skillBonus - conditionBonus);
 
-                    return (chance >= Utility.RandomDouble());
-                }
-                else if (m_Addon != null)
-                {
-                    double value = m_Addon.Tools.Find(x => x.System == m_CraftSystem).SkillValue;
-                    double minSkill = difficulty - 25.0;
-                    double maxSkill = difficulty + 25;
+				if (m_Deed != null)
+				{
+					double value = m_Deed.SkillLevel;
+					double minSkill = adjustedDifficulty - 30.0; // Augmenté de 25 à 30
+					double maxSkill = adjustedDifficulty + 20; // Réduit de 25 à 20
 
-                    if (value < minSkill)
-                        return false; // Too difficult
-                    else if (value >= maxSkill)
-                        return true; // No challenge
+					if (value < minSkill)
+						return false; // Too difficult
+					else if (value >= maxSkill)
+						return true; // No challenge
 
-                    double chance = (value - minSkill) / (maxSkill - minSkill);
+					double chance = (value - minSkill) / (maxSkill - minSkill);
+					return (chance >= Utility.RandomDouble() * 0.9); // 10% de chance supplémentaire
+				}
+				else if (m_Addon != null)
+				{
+					double value = m_Addon.Tools.Find(x => x.System == m_CraftSystem).SkillValue;
+					double minSkill = adjustedDifficulty - 30.0; // Augmenté de 25 à 30
+					double maxSkill = adjustedDifficulty + 20; // Réduit de 25 à 20
 
-                    return (chance >= Utility.RandomDouble());
-                }
+					if (value < minSkill)
+						return false; // Too difficult
+					else if (value >= maxSkill)
+						return true; // No challenge
+
+					double chance = (value - minSkill) / (maxSkill - minSkill);
+					return (chance >= Utility.RandomDouble() * 0.9); // 10% de chance supplémentaire
+				}
 				else
 				{
 					SkillLock sl = mob.Skills[skill].Lock;
 					mob.Skills[skill].SetLockNoRelay(SkillLock.Locked);
 
-					bool check = mob.CheckSkill(skill, difficulty - 25.0, difficulty + 25.0);
+					// Élargir la plage de compétence et ajouter une chance minimale
+					double minSkill = Math.Max(0, adjustedDifficulty - 40.0);
+					double maxSkill = adjustedDifficulty + 10.0;
+					double chance = Math.Max(0.1, (skillValue - minSkill) / (maxSkill - minSkill));
+
+					bool check = chance >= Utility.RandomDouble();
 
 					mob.Skills[skill].SetLockNoRelay(sl);
 
 					return check;
 				}
-            }
+			}
 
-            private bool CheckDeed(Mobile from)
+
+			private bool CheckDeed(Mobile from)
             {
                 if (m_Deed != null)
                 {

@@ -373,7 +373,10 @@ namespace Server.Mobiles
 
         private bool m_SeeksHome;
 
-        [CommandProperty(AccessLevel.GameMaster)]
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool HasBeenTransformed { get; set; }
+
+		[CommandProperty(AccessLevel.GameMaster)]
         public bool SeeksHome { get { return m_SeeksHome; } set { m_SeeksHome = value; } }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -2846,9 +2849,8 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
 
-            writer.Write(34);
-			
-			
+			writer.Write(35);
+
 				writer.Write(m_level);
 				writer.Write(m_realLevel);
 				writer.Write(m_experience);
@@ -2882,9 +2884,10 @@ namespace Server.Mobiles
             writer.Write(m_pHome.X);
             writer.Write(m_pHome.Y);
             writer.Write(m_pHome.Z);
+			writer.Write(HasBeenTransformed);
 
-            // Version 1
-            writer.Write(m_iRangeHome);
+			// Version 1
+			writer.Write(m_iRangeHome);
 
             int i = 0;
 
@@ -3030,19 +3033,24 @@ namespace Server.Mobiles
             // Version 25 Current Tame Skill
             writer.Write(m_CurrentTameSkill);
         }
-
         private static readonly double[] m_StandardActiveSpeeds = new[] { 0.175, 0.1, 0.15, 0.2, 0.25, 0.3, 0.4, 0.5, 0.6, 0.8 };
 
         private static readonly double[] m_StandardPassiveSpeeds = new[] { 0.350, 0.2, 0.4, 0.5, 0.6, 0.8, 1.0, 1.2, 1.6, 2.0 };
 
-        public override void Deserialize(GenericReader reader)
+	
+
+	public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
 
-            int version = reader.ReadInt();
+			int version = reader.ReadInt();
 
-            switch (version)
-            {
+			switch (version)
+			{
+				case 35:
+					HasBeenTransformed = reader.ReadBool();
+					goto case 34;
+
 				case 34:
 					{
 							

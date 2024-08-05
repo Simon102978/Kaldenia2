@@ -418,7 +418,7 @@ namespace Server.Engines.Harvest
 
 		public override void OnHarvestFinished(Mobile from, Item tool, HarvestDefinition def, HarvestVein vein, HarvestBank bank, HarvestResource resource, object harvested)
 		{
-			if (tool is Pickaxe && def == OreAndStone && 0.05 > Utility.RandomDouble())
+			if (tool is Pickaxe && def == OreAndStone && 0.03 > Utility.RandomDouble())
 			{
 				var res = vein.PrimaryResource;
 

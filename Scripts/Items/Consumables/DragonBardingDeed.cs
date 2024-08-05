@@ -68,7 +68,7 @@ namespace Server.Items
             base.GetProperties(list);
 
             if (m_Exceptional && m_Crafter != null)
-                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+                list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
         }
 
         public override void OnDoubleClick(Mobile from)

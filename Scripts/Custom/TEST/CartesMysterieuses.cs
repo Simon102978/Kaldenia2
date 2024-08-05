@@ -11,7 +11,7 @@ public class SkillCard : Item
 	private SkillName m_Skill;
 	private bool m_Decrypted;
 
-	private static Dictionary<SkillName, List<Mobile>> s_ActiveCards = new Dictionary<SkillName, List<Mobile>>();
+	private static Dictionary<Mobile, Dictionary<SkillName, SkillCardEffect>> s_ActiveEffects = new Dictionary<Mobile, Dictionary<SkillName, SkillCardEffect>>();
 
 	[Constructable]
 	public SkillCard() : base(0x9C14)
@@ -31,7 +31,6 @@ public class SkillCard : Item
 		double maxBonus = level * 2;
 		return Math.Round(Utility.RandomMinMax((int)(minBonus * 10), (int)(maxBonus * 10)) / 10.0, 1);
 	}
-
 
 	public SkillCard(Serial serial) : base(serial)
 	{
@@ -74,10 +73,10 @@ public class SkillCard : Item
 	private void AssignSkill()
 	{
 		SkillName[] skills = {
-			SkillName.Alchemy, SkillName.Anatomy, SkillName.AnimalLore, 
-		SkillName.Parry, SkillName.Blacksmith, SkillName.Peacemaking,
+			SkillName.Alchemy, SkillName.Anatomy, SkillName.AnimalLore,
+			SkillName.Parry, SkillName.Blacksmith, SkillName.Peacemaking,
 			SkillName.Camping, SkillName.Carpentry, SkillName.Cartography, SkillName.Cooking,
-			 SkillName.Discordance, SkillName.EvalInt, SkillName.Healing,
+			SkillName.Discordance, SkillName.EvalInt, SkillName.Healing,
 			SkillName.Fishing,  SkillName.Hiding, SkillName.Provocation,
 			SkillName.Inscribe, SkillName.Lockpicking, SkillName.Magery, SkillName.MagicResist,
 			SkillName.Tactics, SkillName.Snooping, SkillName.Musicianship, SkillName.Poisoning,
@@ -85,7 +84,7 @@ public class SkillCard : Item
 			SkillName.AnimalTaming,  SkillName.Tinkering, SkillName.Tracking,
 			SkillName.Veterinary, SkillName.Swords, SkillName.Macing, SkillName.Fencing,
 			SkillName.Wrestling, SkillName.Lumberjacking, SkillName.Mining, SkillName.Meditation,
-			  SkillName.Concentration, SkillName.Equitation,
+			SkillName.Concentration, SkillName.Equitation,
 			SkillName.Botanique
 		};
 
@@ -237,50 +236,81 @@ public class SkillCard : Item
 			return;
 		}
 
-		TimedSkillMod skillMod = new TimedSkillMod(m_Skill, true, m_Bonus, TimeSpan.FromHours(1));
-		from.AddSkillMod(skillMod);
-		from.SendMessage($"Votre compétence {m_Skill} a été augmentée de {m_Bonus:F1}% pour 1 heure.");
-		AddActiveCard(from, m_Skill);
+		double baseValue = from.Skills[m_Skill].Base;
+		double cap = from.Skills[m_Skill].Cap;
+		double effectiveBonus = Math.Min(m_Bonus, cap - baseValue);
 
-		Timer.DelayCall(TimeSpan.FromHours(1), () =>
+		SkillMod mod = new DefaultSkillMod(m_Skill, true, effectiveBonus);
+		from.AddSkillMod(mod);
+
+		SkillCardEffect effect = new SkillCardEffect
 		{
-			RemoveActiveCard(from, m_Skill);
-			from.RemoveSkillMod(skillMod);
-			from.SendMessage($"Le bonus de compétence {m_Skill} s'est dissipé.");
-		});
+			Owner = from,
+			Skill = m_Skill,
+			Bonus = m_Bonus,
+			ExpireTime = DateTime.UtcNow + TimeSpan.FromHours(1),
+			SkillMod = mod
+		};
+
+		if (!s_ActiveEffects.ContainsKey(from))
+		{
+			s_ActiveEffects[from] = new Dictionary<SkillName, SkillCardEffect>();
+		}
+		s_ActiveEffects[from][m_Skill] = effect;
+
+		from.SendMessage($"Votre compétence {m_Skill} a été augmentée de {effectiveBonus:F1}% pour 1 heure.");
+
+		Timer.DelayCall(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(30), () => CheckAndAdjustBonus(effect));
+		Timer.DelayCall(TimeSpan.FromHours(1), () => RemoveEffect(effect));
 
 		from.SendMessage("La carte se désintègre après avoir libéré son pouvoir.");
 		this.Delete();
 	}
 
-	private static bool IsSkillCardActive(Mobile from, SkillName skill)
+	private static void CheckAndAdjustBonus(SkillCardEffect effect)
 	{
-		if (s_ActiveCards.TryGetValue(skill, out List<Mobile> activeUsers))
+		if (effect.Owner.Deleted || DateTime.UtcNow >= effect.ExpireTime)
 		{
-			return activeUsers.Contains(from);
+			RemoveEffect(effect);
+			return;
 		}
-		return false;
+
+		double baseValue = effect.Owner.Skills[effect.Skill].Base;
+		double cap = effect.Owner.Skills[effect.Skill].Cap;
+		double currentBonus = effect.SkillMod.Value;
+		double newBonus = Math.Min(effect.Bonus, cap - baseValue);
+
+		if (Math.Abs(newBonus - currentBonus) > 0.1)
+		{
+			effect.Owner.RemoveSkillMod(effect.SkillMod);
+			SkillMod newMod = new DefaultSkillMod(effect.Skill, true, newBonus);
+			effect.Owner.AddSkillMod(newMod);
+			effect.SkillMod = newMod;
+			effect.Owner.SendMessage($"Votre bonus de compétence {effect.Skill} a été ajusté à {newBonus:F1}%.");
+		}
 	}
 
-	private static void AddActiveCard(Mobile from, SkillName skill)
+	private static void RemoveEffect(SkillCardEffect effect)
 	{
-		if (!s_ActiveCards.ContainsKey(skill))
+		if (effect.Owner != null && !effect.Owner.Deleted)
 		{
-			s_ActiveCards[skill] = new List<Mobile>();
+			effect.Owner.RemoveSkillMod(effect.SkillMod);
+			effect.Owner.SendMessage($"Le bonus de compétence {effect.Skill} s'est dissipé.");
 		}
-		s_ActiveCards[skill].Add(from);
-	}
 
-	private static void RemoveActiveCard(Mobile from, SkillName skill)
-	{
-		if (s_ActiveCards.TryGetValue(skill, out List<Mobile> activeUsers))
+		if (s_ActiveEffects.ContainsKey(effect.Owner))
 		{
-			activeUsers.Remove(from);
-			if (activeUsers.Count == 0)
+			s_ActiveEffects[effect.Owner].Remove(effect.Skill);
+			if (s_ActiveEffects[effect.Owner].Count == 0)
 			{
-				s_ActiveCards.Remove(skill);
+				s_ActiveEffects.Remove(effect.Owner);
 			}
 		}
+	}
+
+	private static bool IsSkillCardActive(Mobile from, SkillName skill)
+	{
+		return s_ActiveEffects.ContainsKey(from) && s_ActiveEffects[from].ContainsKey(skill);
 	}
 
 	public override void OnDoubleClick(Mobile from)
@@ -357,6 +387,15 @@ public class SkillCard : Item
 		{
 			m_Card.Use(m_From);
 		}
+	}
+
+	private class SkillCardEffect
+	{
+		public Mobile Owner { get; set; }
+		public SkillName Skill { get; set; }
+		public double Bonus { get; set; }
+		public DateTime ExpireTime { get; set; }
+		public SkillMod SkillMod { get; set; }
 	}
 }
 

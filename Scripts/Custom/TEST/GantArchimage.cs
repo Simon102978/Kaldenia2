@@ -5,7 +5,7 @@ using static Server.HueData;
 
 namespace Server.Items
 {
-	public class GantsArchimage : BaseArmor
+	public class GantsArchimage : LeatherGloves
 	{
 
 		public override int BasePhysicalResistance => 1;
@@ -17,10 +17,10 @@ namespace Server.Items
 		public override int InitMinHits => 30;
 		public override int InitMaxHits => 40;
 
-		
 
-		public override ArmorMaterialType MaterialType => ArmorMaterialType.Cloth;
 
+		public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
+		public override CraftResource DefaultResource => CraftResource.RegularLeather;
 		public override ArmorMeditationAllowance DefMedAllowance => ArmorMeditationAllowance.All;
 
 

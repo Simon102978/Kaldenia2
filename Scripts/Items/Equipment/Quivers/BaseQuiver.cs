@@ -598,7 +598,7 @@ namespace Server.Items
 
             if (m_Crafter != null)
             {
-                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+                list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
             }
 
             if (m_Quality == ItemQuality.Exceptional)
