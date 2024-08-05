@@ -1360,6 +1360,10 @@ namespace Server.Spells
                 iDamage +=  (int)(damage *cp.Skills.Concentration.Fixed / 3000); 
             }
 
+            
+
+             target.CheckSkill(SkillName.MagicResist, 0.0, 120.0);
+
 
 
             if (delay == TimeSpan.Zero)
