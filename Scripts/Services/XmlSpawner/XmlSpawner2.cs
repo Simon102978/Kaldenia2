@@ -3084,6 +3084,8 @@ namespace Server.Mobiles
             CommandSystem.Register("XmlSpawnerSaveAll", DiskAccessLevel, SaveAll_OnCommand);
             CommandSystem.Register("XmlSpawnerRespawn", AccessLevel.Seer, Respawn_OnCommand);
             CommandSystem.Register("XmlSpawnerRespawnAll", AccessLevel.Seer, RespawnAll_OnCommand);
+            CommandSystem.Register("XmlSpawnerRespawnAllExceptMirage", AccessLevel.Administrator, RespawnAutreMirage_OnCommand);
+            
 
             CommandSystem.Register("XmlShow", AccessLevel.Administrator, ShowSpawnPoints_OnCommand);
             CommandSystem.Register("XmlHide", AccessLevel.Administrator, HideSpawnPoints_OnCommand);
@@ -6973,6 +6975,7 @@ namespace Server.Mobiles
         {
             RespawnSpawners(e, true);
         }
+        
 
         private static void RespawnSpawners(CommandEventArgs e, bool RespawnAll)
         {
@@ -7030,6 +7033,81 @@ namespace Server.Mobiles
             else
                 e.Mobile.SendMessage("You do not have rights to perform this command.");
         }
+
+        [Usage("XmlSpawnerRespawnAll [SpawnerPrefixFilter]")]
+        [Description("Respawns all XmlSpawner objects from the entire world except Mirage.")]
+        public static void RespawnAutreMirage_OnCommand(CommandEventArgs e)
+        {
+            RespawnSpawnersAutreMirage(e);
+        }
+
+
+        private static void RespawnSpawnersAutreMirage(CommandEventArgs e)
+        {
+            if (e == null || e.Mobile == null) return;
+
+            if (e.Mobile.AccessLevel >= AccessLevel.Administrator)
+            {
+                // Spawner Respawn criteria (if any)
+                string SpawnerPrefix = string.Empty;
+
+                // Check if there is an argument provided (respawn criteria)
+                if (e.Arguments != null && e.Arguments.Length > 0)
+                    SpawnerPrefix = e.Arguments[0];
+
+                 e.Mobile.SendMessage("Respawning ALL XmlSpawner objects from {0}{1}.", e.Mobile.Map, !string.IsNullOrEmpty(SpawnerPrefix) ? " beginning with " + SpawnerPrefix : string.Empty);
+
+                // Respawn Xml spawner's in the world based on the mobiles current map
+                int Count = 0;
+                List<Item> ToRespawn = new List<Item>();
+                foreach (Item i in World.Items.Values)
+                {
+                    try
+                    {
+
+                        if ((i is XmlSpawner) && (i.Map == e.Mobile.Map) && (i.Deleted == false) && i.GetRegion().Name != "Mirage")
+                        {
+                            // Check if there is a respawn condition
+                            if ((SpawnerPrefix == null) || (SpawnerPrefix.Length == 0) || (i.Name != null && i.Name.StartsWith(SpawnerPrefix)))
+                            {
+                                ToRespawn.Add(i);
+                                Count++;
+                            }
+                        }
+                    }
+                    catch (Exception ex) { Console.WriteLine("Error attempting to add {0}, {1}", i, ex.Message); }
+                }
+                // Respawn the items in the array list
+                foreach (Item i in ToRespawn)
+                {
+
+                    // Send a message to the client that the spawner is being respawned
+                    e.Mobile.SendMessage(33, "Respawning '{0}' in {1} at {2}", i.Name, i.Map.Name, i.Location.ToString());
+                    XmlSpawner CheckXmlSpawner = (XmlSpawner)i;
+                    CheckXmlSpawner.Respawn();
+                }
+
+                e.Mobile.SendMessage("Respawned {0} XmlSpawner objects from {1}.", Count, e.Mobile.Map);
+            }
+            else
+                e.Mobile.SendMessage("You do not have rights to perform this command.");
+        }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 #if (TRACE)
         public static void XmlMake_OnCommand(CommandEventArgs e)
