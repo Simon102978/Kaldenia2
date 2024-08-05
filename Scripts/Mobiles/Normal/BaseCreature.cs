@@ -5753,39 +5753,41 @@ namespace Server.Mobiles
 
             GenerateLoot();
 
-					if (Utility.RandomDouble() < 0.01) // 1% de chance
-					{
-						PackItem(new SkillCard());
-					}
-
-			if (Utility.RandomDouble() < 0.01 && TreasureMapLevel >= 3) //  1% de chance
+			if (Utility.RandomDouble() < 0.01) // 1% de chance
 			{
-				Type[] recipeScrolls = CustomRecipeScrollTypes2;
+				PackItem(new SkillCard());
+			}
+
+			if (TreasureMapLevel >= 3) 
+			{
+
 
 				// Sélectionner un scroll de recette aléatoire
-				Type scrollType = recipeScrolls[Utility.Random(recipeScrolls.Length)];
-				PackItem((Item)Activator.CreateInstance(scrollType));
 
-				if (m_Paragon)
-                {
-				    GenerateLootParagon();
+				if (Utility.RandomDouble() < 0.10) // 10% de chance
+				{
+                	Type[] recipeScrolls = CustomRecipeScrollTypes2;
 
-						if (Utility.RandomDouble() < 0.10) // 10% de chance
+				// Sélectionner un scroll de recette aléatoire
+					Type scrollType2 = recipeScrolls[Utility.Random(recipeScrolls.Length)];
+					PackItem((Item)Activator.CreateInstance(scrollType2));
+	
+				}
+                
+            }
+
+            if (m_Paragon)
+            {			   
+                    GenerateLoot();
+                    GenerateLoot();
+                    GenerateLootParagon();
+
+                    if (Utility.RandomDouble() < 0.10) // 10% de chance
 					{
 						PackItem(new SkillCard());
 					}
 
-					if (Utility.RandomDouble() < 0.10) // 10% de chance
-					{
-					//	Type[] recipeScrolls = CustomRecipeScrollTypes2;
-
-						// Sélectionner un scroll de recette aléatoire
-						Type scrollType2 = recipeScrolls[Utility.Random(recipeScrolls.Length)];
-						PackItem((Item)Activator.CreateInstance(scrollType2));
-	
-					}
-                }
-            }
+            }       
             KillersLuck = 0;
         }
 
@@ -6290,13 +6292,6 @@ namespace Server.Mobiles
             {
                 m_HasGeneratedLoot = true;
                 GenerateLoot(LootStage.Death);
-
-				if (IsParagon)
-				{
-					GenerateLoot(LootStage.Death);
-					GenerateLoot(LootStage.Death);
-				}
-
             }
 
             if (!NoKillAwards && Region.IsPartOf("Doom"))

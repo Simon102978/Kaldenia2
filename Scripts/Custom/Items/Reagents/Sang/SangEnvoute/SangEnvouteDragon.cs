@@ -10,11 +10,12 @@
 
         [Constructable]
         public SangEnvouteDragon(int amount)
-            : base(0x0F91)
+            : base(0x4077)
         {
             Stackable = true;
             Amount = amount;
 			Name = "Sang Envouté Dragon";
+            Hue = 1363;
         }
 
         public SangEnvouteDragon(Serial serial)

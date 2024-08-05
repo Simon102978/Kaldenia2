@@ -11,11 +11,12 @@ namespace Server.Items
 
         [Constructable]
         public SangEnvouteDrake(int amount)
-            : base(0x0F91)
+            : base(0x4077)
         {
             Stackable = true;
             Amount = amount;
 			Name = "Sang Envouté Drake";
+            Hue = 1459;
         }
 
         public SangEnvouteDrake(Serial serial)
