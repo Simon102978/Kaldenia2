@@ -32,6 +32,7 @@ namespace Server.Spells.Second
             }
             else if (item.TrapType != TrapType.None && item.TrapType != TrapType.MagicTrap)
             {
+                Caster.SendMessage("Vous pouvez seulement retirer les pièges magiques.");
                 base.DoFizzle();
             }
             else if (CheckSequence())
