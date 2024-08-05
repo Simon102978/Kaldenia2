@@ -202,7 +202,11 @@ namespace Server.Mobiles
 
 				Emote($"*Attire une bourasque provenant de {Combatant.Name}*");
 
+				Mobile target = Combatant as Mobile;
+
 				KnockBack(this.Location, Combatant as Mobile, -5);
+
+				Combatant = target;
 
 				DelayCoupVent = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(10, 60));
 			}
@@ -247,6 +251,7 @@ namespace Server.Mobiles
 
 					int dmg = 15;
 
+					Mobile target = Combatant as Mobile;
 
 
 					for (int i = 0; i < targets.Count; ++i)
@@ -267,6 +272,8 @@ namespace Server.Mobiles
 
 						KnockBack(this.Location, m, Distance * -1); // Si sur le centre de la tornade...
 					}
+
+					Combatant = target;
 				}
 
 

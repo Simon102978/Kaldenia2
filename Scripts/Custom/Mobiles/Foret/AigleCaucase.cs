@@ -184,13 +184,19 @@ namespace Server.Mobiles
 			{
 				int dmg = 35;
 
+				Mobile target = Combatant as Mobile;
+
 				Combatant.FixedParticles(0x374A, 10, 30, 5013, 1153, 2, EffectLayer.Waist);
 
 				AOS.Damage(Combatant, this, dmg, 100, 0, 0, 0, 0); // C'est un coup de vent, donc rien d'electrique...
 
 				Emote($"*Attire une bourasque provenant de {Combatant.Name}*");
 
-				KnockBack(this.Location, Combatant as Mobile, -5);
+				KnockBack(this.Location, target, -5);
+
+				Combatant = target;
+
+
 
 				DelayCoupVent = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(10, 60));
 			}
@@ -211,7 +217,7 @@ namespace Server.Mobiles
 
 				foreach (Mobile m in eable)
 				{
-					if (this != m && !(m is Harpy) && !(m is StoneHarpy) && !m.IsStaff())
+					if (this != m && !m.IsStaff())
 					{
 
 
@@ -235,6 +241,7 @@ namespace Server.Mobiles
 
 					int dmg = 15;
 
+					Mobile target = Combatant as Mobile;
 
 
 					for (int i = 0; i < targets.Count; ++i)
@@ -247,6 +254,7 @@ namespace Server.Mobiles
 
 						int Distance = 3;
 
+
 						if (m.GetDistanceToSqrt(this.Location) < Distance)
 						{
 							Distance = (int)m.GetDistanceToSqrt(this.Location);
@@ -255,6 +263,8 @@ namespace Server.Mobiles
 
 						KnockBack(this.Location, m, Distance * -1); // Si sur le centre de la tornade...
 					}
+
+					Combatant = target;
 				}
 
 
