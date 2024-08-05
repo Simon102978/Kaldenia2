@@ -277,7 +277,7 @@ namespace Server.Items
                 list.Add(1063341); // exceptional
 
             if (m_Crafter != null)
-                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+                list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
 
             if (!string.IsNullOrEmpty(m_Description))
                 list.Add(m_Description);

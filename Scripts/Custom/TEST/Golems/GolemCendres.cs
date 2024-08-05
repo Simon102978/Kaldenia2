@@ -211,7 +211,7 @@ namespace Server.Items
 	public class GolemCendreTerre : BaseGolemAsh
 	{
 		public override string AshName => "Cendres Élémentaires de Terre";
-		public override int AshHue => 1175;
+		public override int AshHue => 0;
 
 		[Constructable]
 		public GolemCendreTerre() : base() { }
@@ -236,7 +236,7 @@ namespace Server.Items
 	public class GolemCendreVent : BaseGolemAsh
 	{
 		public override string AshName => "Cendres Élémentaires de Vent";
-		public override int AshHue => -1;
+		public override int AshHue => 2834;
 
 		[Constructable]
 		public GolemCendreVent() : base() { }

@@ -132,7 +132,7 @@ namespace Server.Items
         public override void AddCraftedProperties(ObjectPropertyList list)
         {
             if (m_Crafter != null)
-                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+                list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
 
 			if (m_Quality == ItemQuality.Exceptional)
 				list.Add("Exceptionnelle");

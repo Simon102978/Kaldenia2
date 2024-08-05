@@ -455,6 +455,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Couronne3), "Bijoux Divers", "Diadème", 30.0, 80.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			index = AddCraft(typeof(Couronne4), "Bijoux Divers", "Grande couronne", 35.0, 85.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			index = AddCraft(typeof(Lunettes), "Bijoux Divers", "Lunette dorée", 35.0, 85.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
+			index = AddCraft(typeof(Chapelet), "Bijoux Divers", "Chapelet", 35.0, 85.0, typeof(PalmierBoard), "Planches", 5, "Vous n'avez pas assez de Planches.");
 			index = AddCraft(typeof(Tiare), "Bijoux Divers", "Tiare", 35.0, 85.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			AddRecipe(index, (int)TinkerRecipes.Tiare);
 
@@ -752,31 +753,31 @@ namespace Server.Engines.Craft
 
 			#endregion
 			#region Cristaux de Golem
-			index = AddCraft(typeof(GolemCrystalCitrine), "Cristaux de Golem", "Cristal de Citrine", 50.0, 70.0, typeof(Citrine), 1044231, 25, 1044253);
+			index = AddCraft(typeof(GolemCrystalCitrine), "Cristaux de Golem", "Cristal de Citrine", 50.0, 70.0, typeof(Citrine), "Citrine", 25, "Vous n'avez pas suffisament de Citrine");
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 5, "Vous n'avez pas suffisamment de Lingot de fer");
 
-			index = AddCraft(typeof(GolemCrystalRubis), "Cristaux de Golem", "Cristal de Rubis", 50.0, 70.0, typeof(Rubis), 1044231, 25, 1044253);
+			index = AddCraft(typeof(GolemCrystalRubis), "Cristaux de Golem", "Cristal de Rubis", 50.0, 70.0, typeof(Rubis), "Rubis", 25, "Vous n'avez pas suffisament de Rubis");
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 5, "Vous n'avez pas suffisamment de Lingot de fer");
 
-			index = AddCraft(typeof(GolemCrystalAmbre), "Cristaux de Golem", "Cristal d'Ambre", 50.0, 70.0, typeof(Ambre), 1044231, 25, 1044253);
+			index = AddCraft(typeof(GolemCrystalAmbre), "Cristaux de Golem", "Cristal d'Ambre", 50.0, 70.0, typeof(Ambre), "Ambre", 25, "Vous n'avez pas suffisament de Ambre");
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 5, "Vous n'avez pas suffisamment de Lingot de fer");
 
-			index = AddCraft(typeof(GolemCrystalTourmaline), "Cristaux de Golem", "Cristal de Tourmaline", 50.0, 70.0, typeof(Tourmaline), 1044231, 25, 1044253);
+			index = AddCraft(typeof(GolemCrystalTourmaline), "Cristaux de Golem", "Cristal de Tourmaline", 50.0, 70.0, typeof(Tourmaline), "Tourmaline", 25, "Vous n'avez pas suffisament de Tourmaline");
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 5, "Vous n'avez pas suffisamment de Lingot de fer");
 
-			index = AddCraft(typeof(GolemCrystalSaphire), "Cristaux de Golem", "Cristal de Saphir", 60.0, 80.0, typeof(Sapphire), 1044231, 25, 1044253);
+			index = AddCraft(typeof(GolemCrystalSaphire), "Cristaux de Golem", "Cristal de Saphir", 60.0, 80.0, typeof(Sapphire), "Saphire", 25, "Vous n'avez pas suffisament de Saphire");
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 5, "Vous n'avez pas suffisamment de Lingot de fer");
 
-			index = AddCraft(typeof(GolemCrystalEmeraude), "Cristaux de Golem", "Cristal d'Émeraude", 60.0, 80.0, typeof(Emeraude), 1044231, 25, 1044253);
+			index = AddCraft(typeof(GolemCrystalEmeraude), "Cristaux de Golem", "Cristal d'Émeraude", 60.0, 80.0, typeof(Emeraude), "Emeraude", 25, "Vous n'avez pas suffisament de Emeraude");
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 5, "Vous n'avez pas suffisamment de Lingot de fer");
 
-			index = AddCraft(typeof(GolemCrystalAmethyste), "Cristaux de Golem", "Cristal d'Améthyste", 60.0, 80.0, typeof(Amethyste), 1044231, 25, 1044253);
+			index = AddCraft(typeof(GolemCrystalAmethyste), "Cristaux de Golem", "Cristal d'Améthyste", 60.0, 80.0, typeof(Amethyste), "Améthyste", 25, "Vous n'avez pas suffisament de Amethyste");
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 5, "Vous n'avez pas suffisamment de Lingot de fer");
 
-			index = AddCraft(typeof(GolemCrystalSaphireEtoile), "Cristaux de Golem", "Cristal de Saphir d'Étoile", 80.0, 100.0, typeof(SaphirEtoile), 1044231, 25, 1044253);
+			index = AddCraft(typeof(GolemCrystalSaphireEtoile), "Cristaux de Golem", "Cristal de Saphir d'Étoile", 80.0, 100.0, typeof(SaphirEtoile), "Saphir Étoilé", 25, "Vous n'avez pas suffisament de Saphire Étoilé");
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 5, "Vous n'avez pas suffisamment de Lingot de fer");
 
-			index = AddCraft(typeof(GolemCrystalDiamant), "Cristaux de Golem", "Cristal de Diamant", 90.0, 110.0, typeof(Diamant), 1044231, 25, 1044253);
+			index = AddCraft(typeof(GolemCrystalDiamant), "Cristaux de Golem", "Cristal de Diamant", 90.0, 110.0, typeof(Diamant), "Diamant", 25, "Vous n'avez pas suffisament de Diamant");
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 5, "Vous n'avez pas suffisamment de Lingot de fer");
 
 

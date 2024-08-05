@@ -667,248 +667,215 @@ namespace Server.Items
 			nostalgium.WeaponDamage = 20;
 
 			// Cuir
-			CraftAttributeInfo lupusLeather = LupusLeather = new CraftAttributeInfo();
 
-			lupusLeather.ArmorPhysicalResist = 0;
+			CraftAttributeInfo lupusLeather = LupusLeather = new CraftAttributeInfo();
+			lupusLeather.ArmorPhysicalResist = 1;
 			lupusLeather.ArmorDurability = 50;
 			lupusLeather.ArmorLowerRequirements = 20;
 			lupusLeather.WeaponDurability = 100;
 			lupusLeather.WeaponLowerRequirements = 50;
 			lupusLeather.RunicMinAttributes = 1;
 			lupusLeather.RunicMaxAttributes = 2;
-
 			lupusLeather.RunicMinIntensity = 40;
-			lupusLeather.RunicMaxIntensity = 100;
+			lupusLeather.RunicMaxIntensity = 80;
 
 			CraftAttributeInfo reptilienLeather = ReptilienLeather = new CraftAttributeInfo();
-
-			reptilienLeather.ArmorPhysicalResist = 0;
-			reptilienLeather.ArmorFireResist = 2;
-			reptilienLeather.ArmorEnergyResist = 7;
-			reptilienLeather.ArmorDurability = 100;
-
-			reptilienLeather.WeaponColdDamage = 20;
-			reptilienLeather.WeaponDurability = 50;
-
+			reptilienLeather.ArmorPhysicalResist = 2;
+			reptilienLeather.ArmorFireResist = 3;
+			reptilienLeather.ArmorEnergyResist = 8;
+			reptilienLeather.ArmorDurability = 110;
+			reptilienLeather.WeaponColdDamage = 25;
+			reptilienLeather.WeaponDurability = 60;
 			reptilienLeather.RunicMinAttributes = 2;
 			reptilienLeather.RunicMaxAttributes = 2;
-
 			reptilienLeather.RunicMinIntensity = 45;
-			reptilienLeather.RunicMaxIntensity = 100;
+			reptilienLeather.RunicMaxIntensity = 85;
 
 			CraftAttributeInfo geantLeather = GeantLeather = new CraftAttributeInfo();
-
-			geantLeather.ArmorPhysicalResist = 0;
-			geantLeather.ArmorFireResist = 2;
-			geantLeather.ArmorPoisonResist = 7;
-			geantLeather.ArmorEnergyResist = 2;
-			geantLeather.WeaponPoisonDamage = 10;
-			geantLeather.WeaponEnergyDamage = 20;
+			geantLeather.ArmorPhysicalResist = 3;
+			geantLeather.ArmorFireResist = 3;
+			geantLeather.ArmorPoisonResist = 8;
+			geantLeather.ArmorEnergyResist = 3;
+			geantLeather.WeaponPoisonDamage = 15;
+			geantLeather.WeaponEnergyDamage = 25;
 			geantLeather.RunicMinAttributes = 2;
 			geantLeather.RunicMaxAttributes = 3;
-
 			geantLeather.RunicMinIntensity = 50;
-			geantLeather.RunicMaxIntensity = 100;
+			geantLeather.RunicMaxIntensity = 90;
 
 			CraftAttributeInfo ophidienLeather = OphidienLeather = new CraftAttributeInfo();
-
-			ophidienLeather.ArmorPhysicalResist = 0;
-			ophidienLeather.ArmorColdResist = 7;
-			ophidienLeather.ArmorPoisonResist = 2;
-			ophidienLeather.ArmorEnergyResist = 2;
-			ophidienLeather.WeaponFireDamage = 40;
+			ophidienLeather.ArmorPhysicalResist = 3;
+			ophidienLeather.ArmorColdResist = 8;
+			ophidienLeather.ArmorPoisonResist = 3;
+			ophidienLeather.ArmorEnergyResist = 3;
+			ophidienLeather.WeaponFireDamage = 45;
 			ophidienLeather.RunicMinAttributes = 3;
 			ophidienLeather.RunicMaxAttributes = 3;
-
 			ophidienLeather.RunicMinIntensity = 55;
-			ophidienLeather.RunicMaxIntensity = 100;
+			ophidienLeather.RunicMaxIntensity = 90;
 
 			CraftAttributeInfo arachnideLeather = ArachnideLeather = new CraftAttributeInfo();
-
-			arachnideLeather.ArmorPhysicalResist = 0;
-			arachnideLeather.ArmorFireResist = 2;
-			arachnideLeather.ArmorColdResist = 2;
-			arachnideLeather.ArmorEnergyResist = 3;
-			arachnideLeather.ArmorLuck = 40;
-			arachnideLeather.ArmorLowerRequirements = 30;
-			arachnideLeather.WeaponLuck = 40;
-			arachnideLeather.WeaponLowerRequirements = 50;
+			arachnideLeather.ArmorPhysicalResist = 3;
+			arachnideLeather.ArmorFireResist = 3;
+			arachnideLeather.ArmorColdResist = 3;
+			arachnideLeather.ArmorEnergyResist = 4;
+			arachnideLeather.ArmorLuck = 45;
+			arachnideLeather.ArmorLowerRequirements = 35;
+			arachnideLeather.WeaponLuck = 45;
+			arachnideLeather.WeaponLowerRequirements = 55;
 			arachnideLeather.RunicMinAttributes = 3;
 			arachnideLeather.RunicMaxAttributes = 4;
-
 			arachnideLeather.RunicMinIntensity = 60;
-			arachnideLeather.RunicMaxIntensity = 100;
+			arachnideLeather.RunicMaxIntensity = 95;
 
 			CraftAttributeInfo dragoniqueLeather = DragoniqueLeather = new CraftAttributeInfo();
-
-			dragoniqueLeather.ArmorPhysicalResist = 1;
-			dragoniqueLeather.ArmorFireResist = 7;
-			dragoniqueLeather.ArmorColdResist = 2;
-			dragoniqueLeather.ArmorPoisonResist = 2;
-			dragoniqueLeather.ArmorEnergyResist = 2;
-			dragoniqueLeather.WeaponColdDamage = 30;
-			dragoniqueLeather.WeaponEnergyDamage = 20;
+			dragoniqueLeather.ArmorPhysicalResist = 4;
+			dragoniqueLeather.ArmorFireResist = 8;
+			dragoniqueLeather.ArmorColdResist = 3;
+			dragoniqueLeather.ArmorPoisonResist = 3;
+			dragoniqueLeather.ArmorEnergyResist = 3;
+			dragoniqueLeather.WeaponColdDamage = 35;
+			dragoniqueLeather.WeaponEnergyDamage = 25;
 			dragoniqueLeather.RunicMinAttributes = 4;
 			dragoniqueLeather.RunicMaxAttributes = 4;
-
 			dragoniqueLeather.RunicMinIntensity = 65;
-			dragoniqueLeather.RunicMaxIntensity = 100;
+			dragoniqueLeather.RunicMaxIntensity = 95;
 
 			CraftAttributeInfo demoniaqueLeather = DemoniaqueLeather = new CraftAttributeInfo();
-
-			demoniaqueLeather.ArmorPhysicalResist = 1;
-			demoniaqueLeather.ArmorFireResist = 4;
-			demoniaqueLeather.ArmorColdResist = 3;
-			demoniaqueLeather.ArmorPoisonResist = 4;
-			demoniaqueLeather.ArmorEnergyResist = 1;
-			demoniaqueLeather.WeaponPoisonDamage = 40;
-			demoniaqueLeather.WeaponEnergyDamage = 20;
+			demoniaqueLeather.ArmorPhysicalResist = 4;
+			demoniaqueLeather.ArmorFireResist = 5;
+			demoniaqueLeather.ArmorColdResist = 4;
+			demoniaqueLeather.ArmorPoisonResist = 5;
+			demoniaqueLeather.ArmorEnergyResist = 2;
+			demoniaqueLeather.WeaponPoisonDamage = 45;
+			demoniaqueLeather.WeaponEnergyDamage = 25;
 			demoniaqueLeather.RunicMinAttributes = 4;
 			demoniaqueLeather.RunicMaxAttributes = 5;
-
 			demoniaqueLeather.RunicMinIntensity = 70;
 			demoniaqueLeather.RunicMaxIntensity = 100;
 
 			CraftAttributeInfo ancienLeather = AncienLeather = new CraftAttributeInfo();
-
-			ancienLeather.ArmorPhysicalResist = 1;
-			ancienLeather.ArmorColdResist = 4;
-			ancienLeather.ArmorPoisonResist = 4;
-			ancienLeather.ArmorEnergyResist = 4;
-			ancienLeather.ArmorDurability = 50;
-			ancienLeather.WeaponFireDamage = 10;
-			ancienLeather.WeaponColdDamage = 20;
-			ancienLeather.WeaponPoisonDamage = 10;
-			ancienLeather.WeaponEnergyDamage = 20;
+			ancienLeather.ArmorPhysicalResist = 5;
+			ancienLeather.ArmorFireResist = 5;
+			ancienLeather.ArmorColdResist = 5;
+			ancienLeather.ArmorPoisonResist = 5;
+			ancienLeather.ArmorEnergyResist = 5;
+			ancienLeather.ArmorDurability = 70;
+			ancienLeather.WeaponFireDamage = 20;
+			ancienLeather.WeaponColdDamage = 30;
+			ancienLeather.WeaponPoisonDamage = 20;
+			ancienLeather.WeaponEnergyDamage = 30;
 			ancienLeather.RunicMinAttributes = 5;
 			ancienLeather.RunicMaxAttributes = 5;
-
 			ancienLeather.RunicMinIntensity = 85;
 			ancienLeather.RunicMaxIntensity = 100;
 
 			// Os
 
 			CraftAttributeInfo lupusBone = LupusBone = new CraftAttributeInfo();
-
-			lupusBone.ArmorPhysicalResist = 1;
-			lupusBone.ArmorDurability = 50;
-			lupusBone.ArmorLowerRequirements = 20;
-			lupusBone.WeaponDurability = 100;
-			lupusBone.WeaponLowerRequirements = 50;
+			lupusBone.ArmorPhysicalResist = 2;
+			lupusBone.ArmorDurability = 60;
+			lupusBone.ArmorLowerRequirements = 25;
+			lupusBone.WeaponDurability = 110;
+			lupusBone.WeaponLowerRequirements = 55;
 			lupusBone.RunicMinAttributes = 1;
 			lupusBone.RunicMaxAttributes = 2;
-
-			lupusBone.RunicMinIntensity = 40;
-			lupusBone.RunicMaxIntensity = 100;
+			lupusBone.RunicMinIntensity = 45;
+			lupusBone.RunicMaxIntensity = 85;
 
 			CraftAttributeInfo reptilienBone = ReptilienBone = new CraftAttributeInfo();
-
-			reptilienBone.ArmorPhysicalResist = 3;
-			reptilienBone.ArmorFireResist = 2;
-			reptilienBone.ArmorEnergyResist = 7;
-			reptilienBone.ArmorDurability = 100;
-
-			reptilienBone.WeaponColdDamage = 20;
-			reptilienBone.WeaponDurability = 50;
-
+			reptilienBone.ArmorPhysicalResist = 4;
+			reptilienBone.ArmorFireResist = 3;
+			reptilienBone.ArmorEnergyResist = 8;
+			reptilienBone.ArmorDurability = 110;
+			reptilienBone.WeaponColdDamage = 25;
+			reptilienBone.WeaponDurability = 60;
 			reptilienBone.RunicMinAttributes = 2;
 			reptilienBone.RunicMaxAttributes = 2;
-
-			reptilienBone.RunicMinIntensity = 45;
-			reptilienBone.RunicMaxIntensity = 100;
+			reptilienBone.RunicMinIntensity = 50;
+			reptilienBone.RunicMaxIntensity = 90;
 
 			CraftAttributeInfo geantBone = GeantBone = new CraftAttributeInfo();
-
-			geantBone.ArmorPhysicalResist = 2;
-			geantBone.ArmorFireResist = 2;
-			geantBone.ArmorPoisonResist = 7;
-			geantBone.ArmorEnergyResist = 2;
-			geantBone.WeaponPoisonDamage = 10;
-			geantBone.WeaponEnergyDamage = 20;
+			geantBone.ArmorPhysicalResist = 4;
+			geantBone.ArmorFireResist = 3;
+			geantBone.ArmorPoisonResist = 8;
+			geantBone.ArmorEnergyResist = 3;
+			geantBone.WeaponPoisonDamage = 15;
+			geantBone.WeaponEnergyDamage = 25;
 			geantBone.RunicMinAttributes = 2;
 			geantBone.RunicMaxAttributes = 3;
-
-			geantBone.RunicMinIntensity = 50;
-			geantBone.RunicMaxIntensity = 100;
+			geantBone.RunicMinIntensity = 55;
+			geantBone.RunicMaxIntensity = 90;
 
 			CraftAttributeInfo ophidienBone = OphidienBone = new CraftAttributeInfo();
-
-			ophidienBone.ArmorPhysicalResist = 3;
-			ophidienBone.ArmorColdResist = 7;
-			ophidienBone.ArmorPoisonResist = 2;
-			ophidienBone.ArmorEnergyResist = 2;
-			ophidienBone.WeaponFireDamage = 40;
+			ophidienBone.ArmorPhysicalResist = 5;
+			ophidienBone.ArmorColdResist = 8;
+			ophidienBone.ArmorPoisonResist = 3;
+			ophidienBone.ArmorEnergyResist = 3;
+			ophidienBone.WeaponFireDamage = 45;
 			ophidienBone.RunicMinAttributes = 3;
 			ophidienBone.RunicMaxAttributes = 3;
-
-			ophidienBone.RunicMinIntensity = 55;
-			ophidienBone.RunicMaxIntensity = 100;
+			ophidienBone.RunicMinIntensity = 60;
+			ophidienBone.RunicMaxIntensity = 95;
 
 			CraftAttributeInfo arachnideBone = ArachnideBone = new CraftAttributeInfo();
-
-			arachnideBone.ArmorPhysicalResist = 2;
-			arachnideBone.ArmorFireResist = 2;
-			arachnideBone.ArmorColdResist = 2;
-			arachnideBone.ArmorEnergyResist = 3;
-			arachnideBone.ArmorLuck = 40;
-			arachnideBone.ArmorLowerRequirements = 30;
-			arachnideBone.WeaponLuck = 40;
-			arachnideBone.WeaponLowerRequirements = 50;
+			arachnideBone.ArmorPhysicalResist = 4;
+			arachnideBone.ArmorFireResist = 3;
+			arachnideBone.ArmorColdResist = 3;
+			arachnideBone.ArmorEnergyResist = 4;
+			arachnideBone.ArmorLuck = 45;
+			arachnideBone.ArmorLowerRequirements = 35;
+			arachnideBone.WeaponLuck = 45;
+			arachnideBone.WeaponLowerRequirements = 55;
 			arachnideBone.RunicMinAttributes = 3;
 			arachnideBone.RunicMaxAttributes = 4;
-
-			arachnideBone.RunicMinIntensity = 60;
-			arachnideBone.RunicMaxIntensity = 100;
+			arachnideBone.RunicMinIntensity = 65;
+			arachnideBone.RunicMaxIntensity = 95;
 
 			CraftAttributeInfo dragoniqueBone = DragoniqueBone = new CraftAttributeInfo();
-
-			dragoniqueBone.ArmorPhysicalResist = 2;
-			dragoniqueBone.ArmorFireResist = 7;
-			dragoniqueBone.ArmorColdResist = 2;
-			dragoniqueBone.ArmorPoisonResist = 2;
-			dragoniqueBone.ArmorEnergyResist = 2;
-			dragoniqueBone.WeaponColdDamage = 30;
-			dragoniqueBone.WeaponEnergyDamage = 20;
+			dragoniqueBone.ArmorPhysicalResist = 5;
+			dragoniqueBone.ArmorFireResist = 8;
+			dragoniqueBone.ArmorColdResist = 3;
+			dragoniqueBone.ArmorPoisonResist = 3;
+			dragoniqueBone.ArmorEnergyResist = 3;
+			dragoniqueBone.WeaponColdDamage = 35;
+			dragoniqueBone.WeaponEnergyDamage = 25;
 			dragoniqueBone.RunicMinAttributes = 4;
 			dragoniqueBone.RunicMaxAttributes = 4;
-
-			dragoniqueBone.RunicMinIntensity = 65;
+			dragoniqueBone.RunicMinIntensity = 70;
 			dragoniqueBone.RunicMaxIntensity = 100;
 
 			CraftAttributeInfo demoniaqueBone = DemoniaqueBone = new CraftAttributeInfo();
-
-			demoniaqueBone.ArmorPhysicalResist = 4;
-			demoniaqueBone.ArmorFireResist = 4;
-			demoniaqueBone.ArmorColdResist = 3;
-			demoniaqueBone.ArmorPoisonResist = 4;
-			demoniaqueBone.ArmorEnergyResist = 1;
-			demoniaqueBone.WeaponPoisonDamage = 40;
-			demoniaqueBone.WeaponEnergyDamage = 20;
+			demoniaqueBone.ArmorPhysicalResist = 6;
+			demoniaqueBone.ArmorFireResist = 5;
+			demoniaqueBone.ArmorColdResist = 4;
+			demoniaqueBone.ArmorPoisonResist = 5;
+			demoniaqueBone.ArmorEnergyResist = 2;
+			demoniaqueBone.WeaponPoisonDamage = 45;
+			demoniaqueBone.WeaponEnergyDamage = 25;
 			demoniaqueBone.RunicMinAttributes = 4;
 			demoniaqueBone.RunicMaxAttributes = 5;
-
-			demoniaqueBone.RunicMinIntensity = 70;
+			demoniaqueBone.RunicMinIntensity = 75;
 			demoniaqueBone.RunicMaxIntensity = 100;
 
 			CraftAttributeInfo ancienBone = AncienBone = new CraftAttributeInfo();
-
-			ancienBone.ArmorPhysicalResist = 5;
-			ancienBone.ArmorColdResist = 4;
-			ancienBone.ArmorPoisonResist = 4;
-			ancienBone.ArmorEnergyResist = 4;
-			ancienBone.ArmorDurability = 50;
-			ancienBone.WeaponFireDamage = 10;
-			ancienBone.WeaponColdDamage = 20;
-			ancienBone.WeaponPoisonDamage = 10;
-			ancienBone.WeaponEnergyDamage = 20;
+			ancienBone.ArmorPhysicalResist = 7;
+			ancienBone.ArmorFireResist = 6;
+			ancienBone.ArmorColdResist = 6;
+			ancienBone.ArmorPoisonResist = 6;
+			ancienBone.ArmorEnergyResist = 6;
+			ancienBone.ArmorDurability = 80;
+			ancienBone.WeaponFireDamage = 25;
+			ancienBone.WeaponColdDamage = 35;
+			ancienBone.WeaponPoisonDamage = 25;
+			ancienBone.WeaponEnergyDamage = 35;
 			ancienBone.RunicMinAttributes = 5;
 			ancienBone.RunicMaxAttributes = 5;
-
-			ancienBone.RunicMinIntensity = 85;
+			ancienBone.RunicMinIntensity = 90;
 			ancienBone.RunicMaxIntensity = 100;
 
 
-			// Os
+			// Bois
 			CraftAttributeInfo erableWood = ErableWood = new CraftAttributeInfo();
 
 			erableWood.ArmorPhysicalResist = 1;

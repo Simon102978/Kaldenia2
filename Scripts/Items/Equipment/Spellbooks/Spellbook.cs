@@ -767,7 +767,7 @@ namespace Server.Items
 				list.Add(1153213, OwnerName);
 
 			if (m_Crafter != null)
-				list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+				list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
 
 			if (m_Quality == BookQuality.Exceptional)
 				list.Add("Exceptionnelle");
@@ -812,7 +812,7 @@ namespace Server.Items
 
             if (m_Crafter != null)
             {
-                list.Add(1050043, m_Crafter.TitleName); // crafted by ~1_NAME~
+                list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
             }
 
             if (IsVvVItem)
