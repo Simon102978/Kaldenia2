@@ -10,7 +10,7 @@ namespace Server.Items
 			Name = "Plastron du roi Ssins";
 			Hue = 2833;
 			SetHue = 2833;
-			Layer = Layer.MiddleTorso;
+
 			Attributes.BonusStam = 2;
             Attributes.WeaponSpeed = 5;
 
@@ -44,7 +44,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(0); // version
+            writer.Write(1); // version
         }
 
         public override void Deserialize(GenericReader reader)
@@ -52,6 +52,28 @@ namespace Server.Items
             base.Deserialize(reader);
 
             int version = reader.ReadInt();
+
+            switch (version)
+            {   
+                case 1:
+                {
+                    break;
+                } 
+                case 0:
+                {
+                    
+                    if (Parent is Mobile m)
+                    {
+                        m.PlaceInBackpack(this);
+                    }
+
+                    Layer = Layer.InnerTorso;
+
+                    break;
+                }
+               
+               
+            }
         }
     }
 }
