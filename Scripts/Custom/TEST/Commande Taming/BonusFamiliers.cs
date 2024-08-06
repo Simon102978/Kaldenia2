@@ -33,9 +33,8 @@ namespace Server.Custom
 		public static int CalculateBonus(Mobile m)
 		{
 			int tamingSkill = (int)m.Skills[SkillName.AnimalTaming].Base;
+
 			if (tamingSkill >= 100)
-				return 3;
-			else if (tamingSkill >= 50)
 				return 2;
 			else if (tamingSkill >= 25)
 				return 1;
@@ -51,7 +50,7 @@ namespace Server.Custom
 			if (player.FollowersMax != newFollowersMax)
 			{
 				player.FollowersMax = newFollowersMax;
-				player.SendMessage($"Votre bonus de familiers est maintenant de +{newBonus} basé sur votre compétence Taming.");
+				player.SendMessage($"Votre bonus de familiers est maintenant de +{newBonus} basï¿½ sur votre compï¿½tence Taming.");
 			}
 		}
 
