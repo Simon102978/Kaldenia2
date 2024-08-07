@@ -47,7 +47,7 @@ namespace Server.Gumps
 			AddTextEntryBg(150, 185, 200, 25, 0, 1, m_Stone.WallItemId.ToString());
 
 		  	AddHtmlTexteColored(84, 220, 75, "Hue: ", "#ffffff");
-			AddTextEntryBg(150, 215, 200, 25, 0, 2, m_Stone.HuedItemID.ToString());
+			AddTextEntryBg(150, 215, 200, 25, 0, 2, m_Stone.WallHue.ToString());
 
 			AddButtonHtlml(84,240,5, "Appliquer","#FFFFFF");
 

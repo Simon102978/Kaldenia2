@@ -326,8 +326,16 @@ namespace Server.Items
 			}
 			public override bool OnMoveOver(Mobile m)
 			{
-				m.SendMessage("Vous ne passerez pas !");
-				return false;
+
+        if (m.Alive && m.IsPlayer())
+        {
+          m.SendMessage("Vous ne passerez pas !");
+				  return false;
+        }
+
+        return true;
+
+
 			}
 
 			public override void Serialize(GenericWriter writer)
