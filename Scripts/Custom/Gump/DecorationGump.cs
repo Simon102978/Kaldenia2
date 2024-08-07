@@ -143,77 +143,96 @@ namespace Server.Gumps
             }
         }
     }
-    public class NudgeUpTarget : Target
-    {
-        public NudgeUpTarget()
-            : base(-1, false, TargetFlags.None)
-        {
+	public class NudgeUpTarget : Target
+	{
+		public NudgeUpTarget()
+			: base(-1, false, TargetFlags.None)
+		{
+		}
 
-        }
+		protected override void OnTarget(Mobile from, object target)
+		{
+			if (target == null)
+			{
+				// Si le joueur annule la cible (missclick), retourner au gump
+				from.SendGump(new DecorationGump(from));
+				return;
+			}
 
-        protected override void OnTarget(Mobile from, object target)
-        {
-            if (target != null)
-            {
-                if ((target is Item) && (!(target is BaseDoor)))
-                {
-                    Item item = (Item)target;
+			if ((target is Item) && (!(target is BaseDoor)))
+			{
+				Item item = (Item)target;
 
-                    if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
-                    {
- ///                       if (item.CanBeAltered)
-                        {
-                            Point3D point = item.Location;
-                            point.Z += 1;
+				if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
+				{
+					Point3D point = item.Location;
+					point.Z += 1;
 
-                            item.Location = point;
-                        }
-                    }
-                    else
-                        from.SendMessage("Ceci est hors de votre portée.");
-                }
-                else
-                    from.SendMessage("Vous pouvez seulement deplacer un objet !");
-            }
-            from.SendGump(new DecorationGump(from));
-        }
-    }
-    public class NudgeDownTarget : Target
-    {
-        public NudgeDownTarget()
-            : base(-1, false, TargetFlags.None)
-        {
+					item.Location = point;
 
-        }
+					// Réactiver la cible pour une utilisation continue
+					from.Target = new NudgeUpTarget();
+				}
+				else
+				{
+					from.SendMessage("Ceci est hors de votre portée.");
+					from.SendGump(new DecorationGump(from));
+				}
+			}
+			else
+			{
+				from.SendMessage("Vous pouvez seulement deplacer un objet !");
+				from.SendGump(new DecorationGump(from));
+			}
+		}
+	}
 
-        protected override void OnTarget(Mobile from, object target)
-        {
-            if (target != null)
-            {
-                if ((target is Item) && (!(target is BaseDoor)))
-                {
-                    Item item = (Item)target;
+	public class NudgeDownTarget : Target
+	{
+		public NudgeDownTarget()
+			: base(-1, false, TargetFlags.None)
+		{
+		}
 
-                    if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
-                    {
- ///                       if (item.CanBeAltered)
-                        {
-                            Point3D point = item.Location;
-                            point.Z -= 1;
+		protected override void OnTarget(Mobile from, object target)
+		{
+			if (target == null)
+			{
+				// Si le joueur annule la cible (missclick), retourner au gump
+				from.SendGump(new DecorationGump(from));
+				return;
+			}
 
-                            item.Location = point;
-                        }
-                    }
-                    else
-                        from.SendMessage("Ceci est hors de votre portée.");
-                }
-                else
-                    from.SendMessage("Vous pouvez seulement deplacer un objet !");
-            }
-            from.SendGump(new DecorationGump(from));
-        }
-    }
-    public class DecoLockTarget : Target
+			if ((target is Item) && (!(target is BaseDoor)))
+			{
+				Item item = (Item)target;
+
+				if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
+				{
+					Point3D point = item.Location;
+					point.Z -= 1;
+
+					item.Location = point;
+
+					// Réactiver la cible pour une utilisation continue
+					from.Target = new NudgeDownTarget();
+				}
+				else
+				{
+					from.SendMessage("Ceci est hors de votre portée.");
+					from.SendGump(new DecorationGump(from));
+				}
+			}
+			else
+			{
+				from.SendMessage("Vous pouvez seulement deplacer un objet !");
+				from.SendGump(new DecorationGump(from));
+			}
+		}
+	}
+
+
+	public class DecoLockTarget : Target
     {
         public DecoLockTarget()
             : base(-1, false, TargetFlags.None)

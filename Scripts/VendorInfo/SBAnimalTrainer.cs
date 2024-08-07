@@ -38,7 +38,7 @@ namespace Server.Mobiles
 
 				//Add(new GenericBuyInfo("2001111", typeof(HitchingPostSouthDeed), 10000, 10, 0x14F0, 0));
 				Add(new GenericBuyInfo(typeof(Saddlebag), 500, 20, 0x14F8, 0));
-				Add(new GenericBuyInfo(typeof(TamerTransformBrush), 500, 20, 0x1372, 0));
+				//Add(new GenericBuyInfo(typeof(TamerTransformBrush), 500, 20, 0x1372, 0));
 
 				Add(new GenericBuyInfo(typeof(TamerColorBucket), 500, 20, 0x2004, 0));
 
