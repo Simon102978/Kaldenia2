@@ -170,6 +170,8 @@ namespace Server.Engines.Harvest
 				new BonusHarvestResource(5.0, 1.0, "Perle noire", typeof(BlackPearl)),
 				new BonusHarvestResource(50.0, 0.5, "Perle Blanche", typeof(WhitePearl)),
 				new BonusHarvestResource(50.0, 2.0, "Un poisson des bas fonds", typeof(BaseHighseasFish)),
+				new BonusHarvestResource(70.0, 1.0, "Carte Mystérieuse", typeof(SkillCard)),
+
 
 
 

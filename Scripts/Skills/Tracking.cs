@@ -28,7 +28,18 @@ namespace Server.SkillHandlers
             return TimeSpan.FromSeconds(10.0); // 10 second delay before beign able to re-use a skill
         }
 
-        public static void AddInfo(Mobile tracker, Mobile target)
+		public static double GetTrackingDamageBonus(Mobile attacker, Mobile defender)
+		{
+			TrackingInfo info;
+			if (m_Table.TryGetValue(attacker, out info) && info.m_Target == defender)
+			{
+				double skillValue = attacker.Skills[SkillName.Tracking].Value;
+				return skillValue * 0.002; // 0% à 0 de compétence, 20% à 100 de compétence
+			}
+			return 0.0;
+		}
+
+		public static void AddInfo(Mobile tracker, Mobile target)
         {
             TrackingInfo info = new TrackingInfo(tracker, target);
             m_Table[tracker] = info;

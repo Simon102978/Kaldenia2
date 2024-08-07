@@ -8,8 +8,9 @@ namespace Server.Items
         [Constructable]
         public LeatherDyeTub()
         {
-            LootType = LootType.Blessed;
-        }
+			Name = "Bac de Teinture (Cuir)";
+			Charges = 1;
+		}
 
         public LeatherDyeTub(Serial serial)
             : base(serial)

@@ -27,6 +27,7 @@ namespace Server.Mobiles
 			{
 				//this.Add( new GenericBuyInfo( typeof( MilkBucket ), 300, 10, 0x0FFA, 0 ) );
 				//this.Add( new GenericBuyInfo( typeof( CheeseForm ), 300, 10, 0x0E78, 0 ) );
+				this.Add(new GenericBuyInfo("Graine Douteuse", typeof(DrugSeed), 30, 50, 0xF27, 0));
 
 				this.Add(new GenericBuyInfo("Outil de Jardinage", typeof(OutilsJardin), 20, 20, 0x15FD, 0));
 
@@ -34,11 +35,15 @@ namespace Server.Mobiles
 					this.Add( new GenericBuyInfo( "Terre Fertile", typeof( FertileDirt ), 3, 999, 0xF81, 0 ) );
 					this.Add( new GenericBuyInfo( "Random Plant Seed", typeof( Engines.Plants.Seed ), 20, 100, 0xDCF, 0 ) );
 
+
 				//	//	this.Add( new GenericBuyInfo( typeof( GreaterCurePotion ), 45, 20, 0xF07, 0 ) );
 				////	this.Add( new GenericBuyInfo( typeof( GreaterPoisonPotion ), 45, 20, 0xF0A, 0 ) );
 				////	this.Add( new GenericBuyInfo( typeof( GreaterStrengthPotion ), 45, 20, 0xF09, 0 ) );
 				////	this.Add( new GenericBuyInfo( typeof( GreaterHealPotion ), 45, 20, 0xF0C, 0 ) );
 				///
+
+
+
 				this.Add(new GenericBuyInfo("Baie Tribale", typeof(TribalBerry), 3, 25, 0x9D0, 0));
 				this.Add(new GenericBuyInfo("Gingembre frais", typeof(FreshGinger), 3, 20, 0x2BE3, 0));
 				this.Add(new GenericBuyInfo("Asparagus Seed", typeof(AsparagusSeed), 3, 20, 0xF27, 0));
@@ -104,7 +109,7 @@ namespace Server.Mobiles
 				this.Add(new GenericBuyInfo("Field Corn Seed", typeof(FieldCornSeed), 3, 20, 0xF27, 0));
 				this.Add(new GenericBuyInfo("Sun Flower Seed", typeof(SunFlowerSeed), 3, 20, 0xF27, 0));
 				this.Add(new GenericBuyInfo("Tea Seed", typeof(TeaSeed), 3, 20, 0xF27, 0));
-				this.Add(new GenericBuyInfo("VanillaSeed", typeof(VanillaSeed), 3, 20, 0xF27, 0));
+				this.Add(new GenericBuyInfo("Vanilla Seed", typeof(VanillaSeed), 3, 20, 0xF27, 0));
 
 
 			//	this.Add(new GenericBuyInfo("Pommier", typeof(AppleSapling), 3, 20, 0xF27, 0));

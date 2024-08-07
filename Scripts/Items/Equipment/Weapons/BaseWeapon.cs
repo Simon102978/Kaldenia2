@@ -17,6 +17,8 @@ using Server.Custom;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.SkillHandlers;
+
 #endregion
 
 namespace Server.Items
@@ -2022,7 +2024,10 @@ namespace Server.Items
 
             percentageBonus += (int)(damageBonus * 100) - 100;
 
-            CheckSlayerResult cs1 = CheckSlayers(attacker, defender, Slayer);
+			double trackingBonus = Tracking.GetTrackingDamageBonus(attacker, defender);
+			percentageBonus += (int)(trackingBonus * 100);
+
+			CheckSlayerResult cs1 = CheckSlayers(attacker, defender, Slayer);
             CheckSlayerResult cs2 = CheckSlayers(attacker, defender, Slayer2);
             CheckSlayerResult suit = CheckSlayers(attacker, defender, SetHelper.GetSetSlayer(attacker));
             CheckSlayerResult tal = CheckTalismanSlayer(attacker, defender);

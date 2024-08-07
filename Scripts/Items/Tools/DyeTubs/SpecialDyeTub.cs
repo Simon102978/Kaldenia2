@@ -7,15 +7,22 @@ namespace Server.Items
         public SpecialDyeTub()
         {
 			Name = "Bac de Teinture (Spéciale)";
-			Charges = 5;
+			Charges = 1;
         }
 
         public SpecialDyeTub(Serial serial)
             : base(serial)
         {
         }
+		public override bool AllowRunebooks => true;
+		public override bool AllowFurniture => true;
+		public override bool AllowStatuettes => true;
+		public override bool AllowLeather => true;
+		public override bool AllowDyables => true;
+		public override bool AllowMetal => true;
+		public override bool AllowWeapons => true;
 
-        public override CustomHuePicker CustomHuePicker => CustomHuePicker.SpecialDyeTub;
+		public override CustomHuePicker CustomHuePicker => CustomHuePicker.SpecialDyeTub;
         public override int LabelNumber => 1041285;// Special Dye Tub
         [CommandProperty(AccessLevel.GameMaster)]
         public bool IsRewardItem

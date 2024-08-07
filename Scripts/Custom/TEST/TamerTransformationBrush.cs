@@ -48,11 +48,7 @@ namespace Server.Items
 				{
 					if (creature.Controlled && creature.ControlMaster == from)
 					{
-						if (creature.HasBeenTransformed)
-						{
-							from.SendMessage("Cette créature a déjà été transformée et ne peut plus l'être.");
-							return;
-						}
+						
 
 						List<int> availableBodyValues = GetAvailableBodyValues(creature.BodyValue);
 						from.SendGump(new TransformGump(from, creature, availableBodyValues, m_Brush));
@@ -155,7 +151,6 @@ namespace Server.Items
 					if (from.Skills[SkillName.AnimalTaming].Base >= requiredSkill)
 					{
 						m_Creature.BodyValue = m_BodyValues[index];
-						m_Creature.HasBeenTransformed = true;
 						from.SendMessage($"Vous avez transformé votre créature en Body ID {m_BodyValues[index]}.");
 						m_Brush.Delete();
 					}

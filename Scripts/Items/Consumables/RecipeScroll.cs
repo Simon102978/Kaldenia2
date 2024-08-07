@@ -4,43 +4,70 @@ using Server.Network;
 
 namespace Server.Items
 {
-    public class RecipeScroll : Item
-    {
-        private int m_RecipeID;
-        public RecipeScroll(Recipe r)
-            : this(r.ID)
-        {
-        }
+	public class RecipeScroll : Item
+	{
+		private int m_RecipeID;
 
-        [Constructable]
-        public RecipeScroll(int recipeID)
-            : base(0x2831)
-        {
+		public RecipeScroll(Recipe r)
+			: this(r.ID)
+		{
+		}
+
+		[Constructable]
+		public RecipeScroll(int recipeID)
+			: base(0x2831)
+		{
 			Name = "Recette Secrète";
-			Hue = 1173;
 			m_RecipeID = recipeID;
-        }
+			SetHueBasedOnRecipeID();
+		}
 
-        public RecipeScroll(Serial serial)
-            : base(serial)
-        {
-        }
+		public RecipeScroll(Serial serial)
+			: base(serial)
+		{
+		}
 
-        public override int LabelNumber => 1074560;// recipe scroll
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int RecipeID
-        {
-            get
-            {
-                return m_RecipeID;
-            }
-            set
-            {
-                m_RecipeID = value;
-                InvalidateProperties();
-            }
-        }
-        public Recipe Recipe
+		private void SetHueBasedOnRecipeID()
+		{
+			if (m_RecipeID >= 10000 && m_RecipeID < 20000)
+				Hue = 1173; // Couleur pour 10000-19999
+			else if (m_RecipeID >= 20000 && m_RecipeID < 30000)
+				Hue = 1174; // Couleur pour 20000-29999
+			else if (m_RecipeID >= 30000 && m_RecipeID < 40000)
+				Hue = 1175; // Couleur pour 30000-39999
+			else if (m_RecipeID >= 40000 && m_RecipeID < 50000)
+				Hue = 1176; // Couleur pour 40000-49999
+			else if (m_RecipeID >= 50000 && m_RecipeID < 60000)
+				Hue = 1177; // Couleur pour 50000-59999
+			else if (m_RecipeID >= 60000 && m_RecipeID < 70000)
+				Hue = 1178; // Couleur pour 60000-69999
+			else if (m_RecipeID >= 70000 && m_RecipeID < 80000)
+				Hue = 1179; // Couleur pour 70000-79999
+			else if (m_RecipeID >= 80000 && m_RecipeID < 90000)
+				Hue = 1180; // Couleur pour 80000-89999
+			else if (m_RecipeID >= 90000 && m_RecipeID < 100000)
+				Hue = 1181; // Couleur pour 90000-99999
+			else
+				Hue = 1182; // Couleur par défaut pour les autres ID
+		}
+
+		public override int LabelNumber => 1074560;// recipe scroll
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int RecipeID
+		{
+			get
+			{
+				return m_RecipeID;
+			}
+			set
+			{
+				m_RecipeID = value;
+				SetHueBasedOnRecipeID();
+				InvalidateProperties();
+			}
+		}
+		public Recipe Recipe
         {
             get
             {
