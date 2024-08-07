@@ -39,8 +39,6 @@ namespace Server.Mobiles
 
         public override bool BleedImmune => true;
 		
-
-
 		public bool BlockReflect { get; set; }
 
 		public override bool CanBeParagon => false;
@@ -74,7 +72,7 @@ namespace Server.Mobiles
             SetResistance(ResistanceType.Poison, 40, 50);
             SetResistance(ResistanceType.Energy, 50, 60);
 
-              SetSkill(SkillName.Wrestling, 85.1, 95.0);
+            SetSkill(SkillName.Wrestling, 85.1, 95.0);
             SetSkill(SkillName.Tactics, 75.5, 90.8);
             SetSkill(SkillName.MagicResist, 102.8, 117.9);
             SetSkill(SkillName.Anatomy, 75.5, 90.2);

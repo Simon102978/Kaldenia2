@@ -31,7 +31,7 @@ namespace Server.Items
             {
                 from.SendLocalizedMessage(1114322); // You destroy the bone pile.
 
-                Gold gold = new Gold(25, 100);
+                Bone gold = new Bone(Utility.Random(5));
 
                 gold.MoveToWorld(GetWorldLocation(), Map);
 
@@ -81,7 +81,7 @@ namespace Server.Items
 
                 Mobile spawn;
 
-                switch (Utility.Random(12))
+                switch (Utility.Random(10)) // Retrait des Liches.
                 {
                     default:
                     case 0:
