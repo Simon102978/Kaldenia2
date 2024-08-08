@@ -979,7 +979,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PortraitSud11(int hue) : base(0x0EC8, hue )
+		public PortraitSud11(int hue) : base(0x0EE7, hue )
 		{
 			Weight = 1.0;
 			
@@ -1177,7 +1177,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PortraitEst10(int hue) : base( 15603, hue )
+		public PortraitEst10(int hue) : base(0x2D71, hue )
 		{
 			Weight = 1.0;
 			
@@ -1408,7 +1408,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud(int hue) : base( 15594, hue )
+		public PeintureSud(int hue) : base(0x2D70, hue )
 		{
 			Weight = 1.0;
 			
@@ -3176,7 +3176,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud29(int hue) : base( 15650, hue )
+		public PeintureSud29(int hue) : base(0x9D5D, hue )
 		{
 			Weight = 1.0;
 			
@@ -3210,7 +3210,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud30(int hue) : base( 15652, hue )
+		public PeintureSud30(int hue) : base(0x99A8, hue )
 		{
 			Weight = 1.0;
 			
@@ -3243,7 +3243,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud31(int hue) : base( 15654 , hue)
+		public PeintureSud31(int hue) : base(0x99AA, hue)
 		{
 			Weight = 1.0;
 			
@@ -3276,7 +3276,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud32(int hue) : base( 15656 , hue)
+		public PeintureSud32(int hue) : base(0x99AC, hue)
 		{
 			Weight = 1.0;
 			
@@ -3309,7 +3309,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud33(int hue) : base( 15658 , hue)
+		public PeintureSud33(int hue) : base(0x99AE, hue)
 		{
 			Weight = 1.0;
 			
@@ -3343,7 +3343,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud34(int hue) : base( 15660 , hue)
+		public PeintureSud34(int hue) : base(0x99B0, hue)
 		{
 			Weight = 1.0;
 			
@@ -3377,7 +3377,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud35(int hue) : base( 15662, hue )
+		public PeintureSud35(int hue) : base(0x99B2, hue )
 		{
 			Weight = 1.0;
 			
@@ -3410,7 +3410,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud36(int hue) : base( 15664 , hue)
+		public PeintureSud36(int hue) : base(0x99B4, hue)
 		{
 			Weight = 1.0;
 			
@@ -3444,7 +3444,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud37(int hue) : base( 15666 , hue)
+		public PeintureSud37(int hue) : base(0x99B6, hue)
 		{
 			Weight = 1.0;
 			
@@ -3478,7 +3478,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureSud38(int hue) : base( 15668 , hue)
+		public PeintureSud38(int hue) : base(0x99B8, hue)
 		{
 			Weight = 1.0;
 			
@@ -3501,6 +3501,248 @@ namespace Server.Items
 			base.Deserialize( reader );
 
             int version = reader.ReadInt();
+
+		}
+	}
+
+	public class PeintureSud39 : Peintures
+	{
+		[Constructable]
+		public PeintureSud39() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureSud39(int hue) : base(0x99BA, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureSud39(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+
+	public class PeintureSud40 : Peintures
+	{
+		[Constructable]
+		public PeintureSud40() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureSud40(int hue) : base(0x99BC, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureSud40(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+
+	public class PeintureSud41 : Peintures
+	{
+		[Constructable]
+		public PeintureSud41() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureSud41(int hue) : base(0x99BE, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureSud41(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+
+	public class PeintureSud42 : Peintures
+	{
+		[Constructable]
+		public PeintureSud42() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureSud42(int hue) : base(0x99C0, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureSud42(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+	public class PeintureSud43 : Peintures
+	{
+		[Constructable]
+		public PeintureSud43() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureSud43(int hue) : base(0x99C2, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureSud43(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+	public class PeintureSud44 : Peintures
+	{
+		[Constructable]
+		public PeintureSud44() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureSud44(int hue) : base(0x99C4, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureSud44(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+	public class PeintureSud45 : Peintures
+	{
+		[Constructable]
+		public PeintureSud45() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureSud45(int hue) : base(0x99C6, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureSud45(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
 
 		}
 	}
@@ -3614,7 +3856,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst30(int hue) : base( 15651, hue )
+		public PeintureEst30(int hue) : base(0x99A7, hue )
 		{
 			Weight = 1.0;
 			
@@ -3648,7 +3890,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst31(int hue) : base( 15653, hue )
+		public PeintureEst31(int hue) : base(0x99A9, hue )
 		{
 			Weight = 1.0;
 			
@@ -3682,7 +3924,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst32(int hue) : base( 15655, hue )
+		public PeintureEst32(int hue) : base(0x99AB, hue )
 		{
 			Weight = 1.0;
 			
@@ -3716,7 +3958,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst33(int hue) : base( 15657, hue )
+		public PeintureEst33(int hue) : base(0x99AD, hue )
 		{
 			Weight = 1.0;
 			
@@ -3751,7 +3993,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst34(int hue) : base( 15659 , hue)
+		public PeintureEst34(int hue) : base(0x99AF, hue)
 		{
 			Weight = 1.0;
 			
@@ -3785,7 +4027,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst35(int hue) : base( 15661 , hue)
+		public PeintureEst35(int hue) : base(0x99B1, hue)
 		{
 			Weight = 1.0;
 			
@@ -3819,7 +4061,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst36(int hue) : base( 15663 , hue)
+		public PeintureEst36(int hue) : base(0x99B3, hue)
 		{
 			Weight = 1.0;
 			
@@ -3853,7 +4095,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst37(int hue) : base( 15665, hue )
+		public PeintureEst37(int hue) : base(0x99B5, hue )
 		{
 			Weight = 1.0;
 			
@@ -3887,7 +4129,7 @@ namespace Server.Items
 		}
 
 		[Constructable]
-		public PeintureEst38(int hue) : base( 15667, hue )
+		public PeintureEst38(int hue) : base(0x99B7, hue )
 		{
 			Weight = 1.0;
 			
@@ -3913,6 +4155,218 @@ namespace Server.Items
 
 		}
 	}
+
+	public class PeintureEst39 : Peintures
+	{
+		[Constructable]
+		public PeintureEst39() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureEst39(int hue) : base(0x99BB, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureEst39(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+
+	public class PeintureEst40 : Peintures
+	{
+		[Constructable]
+		public PeintureEst40() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureEst40(int hue) : base(0x99BD, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureEst40(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+
+	public class PeintureEst41 : Peintures
+	{
+		[Constructable]
+		public PeintureEst41() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureEst41(int hue) : base(0x99BF, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureEst41(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+
+	public class PeintureEst42 : Peintures
+	{
+		[Constructable]
+		public PeintureEst42() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureEst42(int hue) : base(0x99C1, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureEst42(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+
+	public class PeintureEst43 : Peintures
+	{
+		[Constructable]
+		public PeintureEst43() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureEst43(int hue) : base(0x99C3, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureEst43(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+
+	public class PeintureEst44 : Peintures
+	{
+		[Constructable]
+		public PeintureEst44() : this(0)
+		{
+		}
+
+		[Constructable]
+		public PeintureEst44(int hue) : base(0x99C5, hue)
+		{
+			Weight = 1.0;
+
+			Name = "Peinture";
+		}
+
+		public PeintureEst44(Serial serial) : base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0);
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+
+		}
+	}
+
+	
 	[Flipable(0xA565, 0xA566)]
 	public class ToileKershe : Peintures
 	{

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace Server.Items.Crops
 {
@@ -80,6 +81,20 @@ namespace Server.Items.Crops
 
 	public class DrugCrop : BaseCrop
 	{
+		private static Dictionary<DrugPlantType, int> PlantTypeToItemID = new Dictionary<DrugPlantType, int>
+	{
+		{ DrugPlantType.Shimyshisha, 0x0C51 },
+		{ DrugPlantType.Shenyr, 0x0C52 },
+		{ DrugPlantType.Amaesha, 0x0C53 },
+		{ DrugPlantType.Astishys, 0x0C54 },
+		{ DrugPlantType.Gwelalith, 0x0C55 },
+		{ DrugPlantType.Frilar, 0x0C56 },
+		{ DrugPlantType.Thomahar, 0x0C57 },
+		{ DrugPlantType.Thiseth, 0x0C58 },
+		{ DrugPlantType.Etherawin, 0x0C59 },
+		{ DrugPlantType.Eralirid, 0x0C5A }
+	};
+
 		private DrugPlantType m_PlantType;
 		private DrugType m_DrugType;
 
@@ -90,30 +105,36 @@ namespace Server.Items.Crops
 		public DrugCrop() : this(null) { }
 
 		[Constructable]
-		public DrugCrop(Mobile sower) : base(0xC7C)
+		public DrugCrop(Mobile sower) : base(0xC61)
 		{
 			Movable = false;
 			Name = "Plante douteuse";
 			Hue = 0x000;
 			Sower = sower;
 
-			// Générer aléatoirement le type de plante et le type de drogue
 			m_PlantType = (DrugPlantType)Utility.Random(Enum.GetValues(typeof(DrugPlantType)).Length);
 			m_DrugType = (DrugType)Utility.Random(Enum.GetValues(typeof(DrugType)).Length);
 
-			Init(this, 1, 0xC62, 0xCC7, false);
+			Init(this, 4, 0xC61, PlantTypeToItemID[m_PlantType], false);
 		}
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			int amount = Utility.RandomMinMax(1, 5);
-			for (int i = 0; i < amount; i++)
+			if (ItemID == PlantTypeToItemID[m_PlantType])  // Vérifie si la plante est mature
 			{
-				DrugBase drug = new DrugBase(m_PlantType, m_DrugType);
-				from.AddToBackpack(drug);
+				int amount = 1;
+				for (int i = 0; i < amount; i++)
+				{
+					DrugBase drug = new DrugBase(m_PlantType, m_DrugType);
+					from.AddToBackpack(drug);
+				}
+				from.SendMessage($"Vous récoltez {amount} pousse{(amount > 1 ? "s" : "")}.");
+				this.Delete();
 			}
-			from.SendMessage($"Vous récoltez {amount} pousse{(amount > 1 ? "s" : "")}.");
-			this.Delete();
+			else
+			{
+				from.SendMessage("Cette plante n'est pas encore mature.");
+			}
 		}
 
 		public DrugCrop(Serial serial) : base(serial) { }
@@ -132,7 +153,7 @@ namespace Server.Items.Crops
 			int version = reader.ReadInt();
 			m_PlantType = (DrugPlantType)reader.ReadInt();
 			m_DrugType = (DrugType)reader.ReadInt();
-			Init(this, 1, 0xC61, 0xC7C, true);
+			Init(this, 4, 0xC61, PlantTypeToItemID[m_PlantType], true);
 		}
 	}
 }

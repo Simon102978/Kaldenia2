@@ -23,6 +23,8 @@ namespace Server.Items
 		private int m_MaxHitPoints;
 		private int m_HitPoints;
 
+		
+
 
 		[CommandProperty(AccessLevel.GameMaster)]
         public bool IsVvVItem
@@ -295,6 +297,7 @@ namespace Server.Items
             : base(itemID)
         {
             Weight = 2.0;
+			Name = "Carquois";
             Capacity = 500;
             Layer = Layer.Cloak;
 
@@ -303,7 +306,8 @@ namespace Server.Items
             m_Resistances = new AosElementAttributes(this);
             m_SetAttributes = new AosAttributes(this);
             m_SetSkillBonuses = new AosSkillBonuses(this);
-            DamageIncrease = 10;
+
+			DamageIncrease = 10;
             IsArrowAmmo = true;
 
 			HitPoints = 75;
@@ -589,27 +593,53 @@ namespace Server.Items
                 list.Add(1154937); // VvV Item
         }
 
-        public override void AddCraftedProperties(ObjectPropertyList list)
+		public override void AddCraftedProperties(ObjectPropertyList list)
+		{
+			if (OwnerName != null)
+				list.Add(1153213, OwnerName);
+
+			if (m_Crafter != null)
+				list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
+
+			if (m_Quality == ItemQuality.Exceptional)
+				list.Add("Exceptionnelle");
+			else if (m_Quality == ItemQuality.Epic)
+				list.Add("Épique");
+			else if (m_Quality == ItemQuality.Legendary)
+				list.Add("Légendaire");
+
+			
+
+
+
+
+		}
+
+		public override void AddNameProperties(ObjectPropertyList list)
         {
-            if (OwnerName != null)
-            {
-                list.Add(1153213, OwnerName);
-            }
+			//base.AddNameProperties(list);
+			var name = Name ?? String.Empty;
 
-            if (m_Crafter != null)
-            {
-                list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
-            }
 
-            if (m_Quality == ItemQuality.Exceptional)
-                list.Add(1063341); // exceptional
-        }
+			if (Quality == ItemQuality.Legendary)
+				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Epic)
+				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Exceptional)
+				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
+			else
+				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
 
-        public override void AddNameProperties(ObjectPropertyList list)
-        {
-            base.AddNameProperties(list);
+			AddCraftedProperties(list);
 
-            m_AosSkillBonuses.GetProperties(list);
+
+			var desc = Description ?? String.Empty;
+
+			if (!String.IsNullOrWhiteSpace(desc))
+				list.Add(desc);
+
+
+			m_AosSkillBonuses.GetProperties(list);
 
             Item ammo = Ammo;
 

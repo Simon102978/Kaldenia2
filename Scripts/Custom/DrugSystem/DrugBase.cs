@@ -124,7 +124,7 @@ namespace Server.Items
 
 			ApplyDrugEffect(pm);
 
-			int duration = 5 + (int)m_DrugPlant + (int)m_Type * 2;
+			int duration = 1 + (int)m_DrugPlant + (int)m_Type * 2;
 			Timer.DelayCall(TimeSpan.FromMinutes(duration), () =>
 			{
 				pm.Hallucinating = false;
@@ -296,7 +296,7 @@ namespace Server.Items
 		private void ApplyFrilarEffect(CustomPlayerMobile pm)
 		{
 			pm.SendMessage("Vous ressentez une intense paranoïa.");
-			CreateGhostNPC(pm);
+			ChangePlayerGender(pm); 
 			ChangeEnvironment(pm);
 		}
 
@@ -332,23 +332,31 @@ namespace Server.Items
 		private static void ChangePlayerZPosition(CustomPlayerMobile pm)
 		{
 			int originalZ = pm.Z;
-			int newZ = originalZ + Utility.RandomMinMax(-30, 30);
+			int newZ = originalZ + Utility.RandomMinMax(-10, 10);
 
-			pm.Z = newZ;
-			pm.SendMessage("Vous vous sentez " + (newZ > originalZ ? "flotter" : "couler") + "...");
-
-			Timer.DelayCall(TimeSpan.FromSeconds(10), () =>
+			// Vérifiez que le nouveau Z est valide
+			if (newZ >= pm.Map.GetAverageZ(pm.X, pm.Y))
 			{
-				pm.Z = originalZ;
-				pm.SendMessage("Vous revenez à votre position normale.");
-			});
+				pm.Z = newZ;
+				pm.SendMessage("Vous vous sentez " + (newZ > originalZ ? "flotter" : "couler") + "...");
+
+				Timer.DelayCall(TimeSpan.FromSeconds(5), () =>
+				{
+					pm.Z = originalZ;
+					pm.SendMessage("Vous revenez à votre position normale.");
+				});
+			}
+			else
+			{
+				pm.SendMessage("Vous ressentez une étrange sensation de flottement.");
+			}
 		}
 
 		private static void ApplyDeathScreen(CustomPlayerMobile pm)
 		{
 			pm.Send(new ToggleSpecialAbility(0x3EA, true));
 
-			Timer.DelayCall(TimeSpan.FromSeconds(10), () =>
+			Timer.DelayCall(TimeSpan.FromSeconds(5), () =>
 			{
 				pm.Send(new ToggleSpecialAbility(0x3EA, false));
 			});
@@ -388,16 +396,26 @@ namespace Server.Items
 			pm.Move(pm.Direction);
 		}
 
-		private static void CreateGhostNPC(CustomPlayerMobile pm)
+		private static void ChangePlayerGender(CustomPlayerMobile pm)
 		{
-			GhostNPC ghost = new GhostNPC();
-			ghost.MoveToWorld(pm.Location, pm.Map);
+			int originalBodyValue = pm.BodyValue;
+			bool originalGender = pm.Female;
 
+			// Changer le sexe et le corps
+			pm.Female = !pm.Female;
+			pm.BodyValue = pm.Female ? 401 : 400;
+
+			pm.SendMessage("Vous vous sentez étrangement différent...");
+
+			// Planifier le retour à l'état original
 			Timer.DelayCall(TimeSpan.FromSeconds(30), () =>
 			{
-				ghost.Delete();
+				pm.Female = originalGender;
+				pm.BodyValue = originalBodyValue;
+				pm.SendMessage("Vous vous sentez redevenir vous-même.");
 			});
 		}
+
 
 		private static void ChangePlayerAppearance(CustomPlayerMobile pm)
 		{

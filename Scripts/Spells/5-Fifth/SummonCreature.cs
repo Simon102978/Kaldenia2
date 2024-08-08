@@ -2,6 +2,7 @@
 using System;
 using Server.Network;
 using Server.Gumps;
+using System.Linq;
 
 
 
@@ -31,12 +32,13 @@ namespace Server.Spells.Fifth
 		public Type m_Creature;
 		public int m_ControlSlots;
 
-		public SummonCreatureSpell(Mobile caster, Item scroll, Type type, int controlSlot)
-			: base(caster, scroll, m_Info)
+		public SummonCreatureSpell(Mobile caster, Item scroll, Type type, int controlSlots)
+	: base(caster, scroll, m_Info)
 		{
 			m_Creature = type;
-			m_ControlSlots = controlSlot;
+			m_ControlSlots = controlSlots;
 		}
+
 
 
 		public override bool CheckCast()
@@ -44,27 +46,37 @@ namespace Server.Spells.Fifth
 			if (!base.CheckCast())
 				return false;
 
-			if ((Caster.Followers + 2) > Caster.FollowersMax)
-			{
-				Caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
-				return false;
-			}
-			else if (m_Creature == null)
+			if (m_Creature == null)
 			{
 				Caster.SendGump(new SummonCreatureGump(Caster, Scroll));
 				return false;
 			}
 
+			// La vérification du nombre de followers se fera dans OnCast()
 			return true;
 		}
 
 
 		public override void OnCast()
 		{
-			if ((Caster.Followers + 1) > Caster.FollowersMax)
+			if (m_Creature == null)
+			{
+				Caster.SendGump(new SummonCreatureGump(Caster, Scroll));
+				return;
+			}
+
+			SummonCreatureEntry entry = m_Table.FirstOrDefault(e => e.Type == m_Creature);
+			if (entry == null)
+			{
+				Caster.SendMessage("Erreur: Créature non trouvée.");
+				return;
+			}
+
+			int requiredFollowers = entry.RequiredFollowers;
+
+			if ((Caster.Followers + requiredFollowers) > Caster.FollowersMax)
 			{
 				Caster.SendLocalizedMessage(1049645); // You have too many followers to summon that creature.
-
 			}
 			else if (CheckSequence())
 			{
@@ -72,7 +84,7 @@ namespace Server.Spells.Fifth
 				{
 					BaseCreature creature = (BaseCreature)Activator.CreateInstance(m_Creature);
 
-					creature.ControlSlots = 1;
+					creature.ControlSlots = requiredFollowers;
 
 					TimeSpan duration = TimeSpan.FromSeconds(4.0 * Caster.Skills[SkillName.Magery].Value);
 
@@ -90,21 +102,22 @@ namespace Server.Spells.Fifth
 
 
 
+
 		private class SummonCreatureEntry
 		{
 			private int m_ItemID;
 			private double m_RequiredSkill;
 			private Type m_Type;
-
+			public int RequiredFollowers { get; }
 			private int m_OffsetX;
 			private int m_OffsetY;
 
-			public SummonCreatureEntry(int itemID, double requiredSkill, Type type, int offsetX, int offsetY)
+			public SummonCreatureEntry(int itemID, double requiredSkill, Type type, int offsetX, int offsetY, int requiredFollowers)
 			{
 				m_ItemID = itemID;
 				m_RequiredSkill = requiredSkill;
 				m_Type = type;
-
+				RequiredFollowers = requiredFollowers;
 				m_OffsetX = offsetX;
 				m_OffsetY = offsetY;
 			}
@@ -119,20 +132,20 @@ namespace Server.Spells.Fifth
 
 		private static SummonCreatureEntry[] m_Table = new SummonCreatureEntry[]
 		{
-			new SummonCreatureEntry( ShrinkTable.Lookup(205), 0.0, typeof(Rabbit), 0, 8 ),
-			new SummonCreatureEntry( ShrinkTable.Lookup(0xC9), 12.0, typeof(Cat), 0, 8 ),
-			new SummonCreatureEntry( ShrinkTable.Lookup(0xD9), 14.0, typeof(Dog), 0, 8 ),
-			new SummonCreatureEntry( ShrinkTable.Lookup(0xCB), 17.0, typeof(Pig), 0, -3 ),
-			new SummonCreatureEntry( ShrinkTable.Lookup(0xED), 20.0, typeof(Hind), 4, 5 ),
-			new SummonCreatureEntry( ShrinkTable.Lookup(0xD8), 30.0, typeof(Cow), 0, 0 ),
-			new SummonCreatureEntry( ShrinkTable.Lookup(0x1D), 30.0, typeof(Gorilla), 7, 0 ),
-			new SummonCreatureEntry( ShrinkTable.Lookup(0xE2), 45.0, typeof(Horse), 0, -15 ),
-			new SummonCreatureEntry( ShrinkTable.Lookup(167), 50.0, typeof(BrownBear), 7, -6 ),
-			new SummonCreatureEntry(ShrinkTable.Lookup(64), 60.0, typeof(SnowLeopard), 7, -6 ),
-			new SummonCreatureEntry(ShrinkTable.Lookup(213), 75.0, typeof(PolarBear), 7, -6 ),
-			new SummonCreatureEntry(ShrinkTable.Lookup(212), 80.0, typeof(GrizzlyBear), 7, -6 ),
-			new SummonCreatureEntry(ShrinkTable.Lookup(48), 85.0, typeof(Scorpion), 7, -6 ),
-			new SummonCreatureEntry(ShrinkTable.Lookup(0x15), 95.0, typeof(GiantSerpent), 7, -6 ),
+			new SummonCreatureEntry( ShrinkTable.Lookup(205), 0.0, typeof(Rabbit), 0, 8, 1 ),
+			new SummonCreatureEntry( ShrinkTable.Lookup(0xC9), 12.0, typeof(Cat), 0, 8, 1 ),
+			new SummonCreatureEntry( ShrinkTable.Lookup(0xD9), 14.0, typeof(Dog), 0, 8, 1 ),
+			new SummonCreatureEntry( ShrinkTable.Lookup(0xCB), 17.0, typeof(Pig), 0, -3, 1 ),
+			new SummonCreatureEntry( ShrinkTable.Lookup(0xED), 20.0, typeof(Hind), 4, 5, 1 ),
+			new SummonCreatureEntry( ShrinkTable.Lookup(0xD8), 30.0, typeof(Cow), 0, 0, 1 ),
+			new SummonCreatureEntry( ShrinkTable.Lookup(0x1D), 30.0, typeof(Gorilla), 7, 2, 1),
+			new SummonCreatureEntry( ShrinkTable.Lookup(0xE2), 45.0, typeof(Horse), 0, -15, 1),
+			new SummonCreatureEntry( ShrinkTable.Lookup(167), 50.0, typeof(BrownBear), 7, -6, 1 ),
+			new SummonCreatureEntry(ShrinkTable.Lookup(64), 60.0, typeof(SnowLeopard), 7, -6, 2 ),
+			new SummonCreatureEntry(ShrinkTable.Lookup(213), 75.0, typeof(PolarBear), 7, -6, 2 ),
+			new SummonCreatureEntry(ShrinkTable.Lookup(212), 80.0, typeof(GrizzlyBear), 7, -6, 2 ),
+			new SummonCreatureEntry(ShrinkTable.Lookup(48), 85.0, typeof(Scorpion), 7, -6 , 3),
+			new SummonCreatureEntry(ShrinkTable.Lookup(0x15), 95.0, typeof(GiantSerpent), 7, -6, 3 ),
 		};
 
 		public class SummonCreatureGump : Gump
@@ -172,20 +185,19 @@ namespace Server.Spells.Fifth
 				}
 			}
 
-			public override void OnResponse(NetState state, RelayInfo info)
+		public override void OnResponse(NetState state, RelayInfo info)
 			{
 				if (info.ButtonID > 0)
 				{
-					int controlSlots = 1;
-
-					/*if (info.ButtonID < 7)
-						controlSlots = 1;*/
-
-					Spell spell = new SummonCreatureSpell(m_Caster, m_Scroll, m_Table[info.ButtonID - 1].Type, controlSlots);
+					SummonCreatureEntry entry = m_Table[info.ButtonID - 1];
+					Spell spell = new SummonCreatureSpell(m_Caster, m_Scroll, entry.Type, entry.RequiredFollowers);
 					spell.Cast();
 				}
 			}
 		}
+
+
+
 
 		public override TimeSpan GetCastDelay()
 		{

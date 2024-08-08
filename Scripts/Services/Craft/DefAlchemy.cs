@@ -139,7 +139,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GreaterRefreshPotion), "Rafraichissement", "Potion de rafrai. majeure", 50.0, 75.0, typeof(BlackPearl), "Perle noire", 5, "Vous n'avez pas suffisament de perle noire");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			index = AddCraft(typeof(SuperiorRefreshPotion), "Rafraichissement", "Potion de rafrai. supérieure", 75.0, 100.0, typeof(BlackPearl), "Perle noire", 7, "Vous n'avez pas suffisament de perle noire");
+			index = AddCraft(typeof(SuperiorRefreshPotion), "Rafraichissement", "Pot rafrai. supérieure", 75.0, 100.0, typeof(BlackPearl), "Perle noire", 7, "Vous n'avez pas suffisament de perle noire");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRecipe(index, (int)AlchemyRecipes.SuperiorRefreshPotion);
 
@@ -152,7 +152,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GreaterHealPotion), "Soin", "Potion de soin majeure", 50.0, 75.0, typeof(Ginseng), "Ginseng", 5, "Vous n'avez pas suffisament de Ginseng");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			index = AddCraft(typeof(SuperiorHealPotion), "Soin", "Potion de soin supérieure", 75.0, 100.0, typeof(Ginseng), "Ginseng", 7, "Vous n'avez pas suffisament de Ginseng");
+			index = AddCraft(typeof(SuperiorHealPotion), "Soin", "Pot. soin supérieure", 75.0, 100.0, typeof(Ginseng), "Ginseng", 7, "Vous n'avez pas suffisament de Ginseng");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRecipe(index, (int)AlchemyRecipes.SuperiorHealPotion);
 
@@ -165,7 +165,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GreaterCurePotion), "Antidote", "Potion d'antidote majeure", 50.0, 75.0, typeof(Garlic), "Ail", 5, "Vous n'avez pas suffisament d'Ail");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			index = AddCraft(typeof(SuperiorCurePotion), "Antidote", "Potion d'antidote supérieure", 75.0, 100.0, typeof(Garlic), "Ail", 7, "Vous n'avez pas suffisament d'Ail");
+			index = AddCraft(typeof(SuperiorCurePotion), "Antidote", "Pot. antidote supérieure", 75.0, 100.0, typeof(Garlic), "Ail", 7, "Vous n'avez pas suffisament d'Ail");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRecipe(index, (int)AlchemyRecipes.SuperiorCurePotion);
 
@@ -178,7 +178,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GreaterAgilityPotion), "Dextérité", "Potion de dextérité majeure", 50.0, 75.0, typeof(Bloodmoss), "Mousse de Sang", 5, "Vous n'avez pas suffisament de Mousse de sang");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			index = AddCraft(typeof(SuperiorAgilityPotion), "Dextérité", "Potion de dextérité supérieure", 75.0, 100.0, typeof(Bloodmoss), "Mousse de Sang", 7, "Vous n'avez pas suffisament de Mousse de sang");
+			index = AddCraft(typeof(SuperiorAgilityPotion), "Dextérité", "Pot. dex supérieure", 75.0, 100.0, typeof(Bloodmoss), "Mousse de Sang", 7, "Vous n'avez pas suffisament de Mousse de sang");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRecipe(index, (int)AlchemyRecipes.SuperiorAgilityPotion);
 
@@ -191,7 +191,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GreaterStrengthPotion), "Force", "Potion de force majeure", 50.0, 75.0, typeof(MandrakeRoot), "Racine de Mandragore", 5, "Vous n'avez pas suffisament de Racine de Mandragore");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			index = AddCraft(typeof(SuperiorStrengthPotion), "Force", "Potion de force supérieure", 75.0, 100.0, typeof(MandrakeRoot), "Racine de Mandragore", 7, "Vous n'avez pas suffisament de Racine de Mandragore");
+			index = AddCraft(typeof(SuperiorStrengthPotion), "Force", "Pot. force supérieure", 75.0, 100.0, typeof(MandrakeRoot), "Racine de Mandragore", 7, "Vous n'avez pas suffisament de Racine de Mandragore");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRecipe(index, (int)AlchemyRecipes.SuperiorStrengthPotion);
 

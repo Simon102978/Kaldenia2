@@ -246,6 +246,56 @@ namespace Server.Engines.Craft
 							else
 								number = 1044280; // You fail to repair the item.
 						}
+						else if (targeted is BaseQuiver)
+						{
+							BaseQuiver quiver = (BaseQuiver)targeted;
+							SkillName skill = m_CraftSystem.MainSkill;
+							int toWeaken = 1;
+
+							// Vérifications similaires aux autres types d'objets
+							if (m_CraftSystem.CraftItems.SearchForSubclass(quiver.GetType()) == null && !CheckSpecial(quiver))
+							{
+								number = (usingDeed) ? 1061136 : 1044277;
+							}
+							else if (!quiver.IsChildOf(from.Backpack) && quiver.Parent != from)
+							{
+								number = 1044275;
+							}
+							else if (quiver.MaxHitPoints <= 0 || quiver.HitPoints == quiver.MaxHitPoints)
+							{
+								number = 1044281;
+							}
+							else if (quiver.MaxHitPoints <= toWeaken)
+							{
+								number = 1044278;
+							}
+							else
+							{
+								// Logique de réparation similaire aux autres types d'objets
+								if (CheckWeaken(from, skill, quiver.HitPoints, quiver.MaxHitPoints))
+								{
+									quiver.MaxHitPoints -= toWeaken;
+									quiver.HitPoints = Math.Max(0, quiver.HitPoints - toWeaken);
+								}
+
+								if (CheckRepairDifficulty(from, skill, quiver.HitPoints, quiver.MaxHitPoints))
+								{
+									number = 1044279;
+									m_CraftSystem.PlayCraftEffect(from);
+									quiver.HitPoints = quiver.MaxHitPoints;
+
+									m_CraftSystem.OnRepair(from, m_Tool, m_Deed, m_Addon, quiver);
+								}
+								else
+								{
+									number = (usingDeed) ? 1061137 : 1044280;
+									m_CraftSystem.PlayCraftEffect(from);
+								}
+
+								toDelete = true;
+							}
+						}
+
 						else if (targeted is BaseWeapon)
 						{
 							BaseWeapon weapon = (BaseWeapon)targeted;
@@ -699,12 +749,14 @@ namespace Server.Engines.Craft
             if (targeted is BrokenAutomatonHead || targeted is IRepairableMobile)
                 return true;
 
-            return (targeted is BlankScroll ||
-                    (targeted is BaseArmor && ((BaseArmor)targeted).CanRepair) ||
-                    (targeted is BaseWeapon && ((BaseWeapon)targeted).CanRepair) ||
-                    (targeted is BaseClothing && ((BaseClothing)targeted).CanRepair) ||
-                    (targeted is BaseJewel && ((BaseJewel)targeted).CanRepair)) ||
-                    (targeted is BaseTalisman && ((BaseTalisman)targeted).CanRepair);
-        }
+			return (targeted is BlankScroll ||
+					(targeted is BaseArmor && ((BaseArmor)targeted).CanRepair) ||
+					(targeted is BaseWeapon && ((BaseWeapon)targeted).CanRepair) ||
+					(targeted is BaseClothing && ((BaseClothing)targeted).CanRepair) ||
+					(targeted is BaseJewel && ((BaseJewel)targeted).CanRepair)) ||
+					   (targeted is BaseTalisman && ((BaseTalisman)targeted).CanRepair) ||
+					(targeted is BaseQuiver); // Ajout de BaseQuiver
+
+		}
     }
 }

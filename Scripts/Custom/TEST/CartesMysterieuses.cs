@@ -286,27 +286,44 @@ public class SkillCard : Item
 			SkillMod newMod = new DefaultSkillMod(effect.Skill, true, newBonus);
 			effect.Owner.AddSkillMod(newMod);
 			effect.SkillMod = newMod;
-			effect.Owner.SendMessage($"Votre bonus de compétence {effect.Skill} a été ajusté à {newBonus:F1}%.");
-		}
-	}
 
-	private static void RemoveEffect(SkillCardEffect effect)
-	{
-		if (effect.Owner != null && !effect.Owner.Deleted)
-		{
-			effect.Owner.RemoveSkillMod(effect.SkillMod);
-			effect.Owner.SendMessage($"Le bonus de compétence {effect.Skill} s'est dissipé.");
-		}
-
-		if (s_ActiveEffects.ContainsKey(effect.Owner))
-		{
-			s_ActiveEffects[effect.Owner].Remove(effect.Skill);
-			if (s_ActiveEffects[effect.Owner].Count == 0)
+			if (newBonus > 0)
 			{
-				s_ActiveEffects.Remove(effect.Owner);
+				effect.Owner.SendMessage($"Votre bonus de compétence {effect.Skill} a été ajusté à {newBonus:F1}%.");
+			}
+			else
+			{
+				RemoveEffect(effect);
 			}
 		}
 	}
+
+
+	private static void RemoveEffect(SkillCardEffect effect)
+	{
+		if (effect == null || effect.Owner == null || effect.Owner.Deleted)
+			return;
+
+		if (s_ActiveEffects.TryGetValue(effect.Owner, out var effectsForMobile))
+		{
+			if (effectsForMobile.TryGetValue(effect.Skill, out var activeEffect) && activeEffect == effect)
+			{
+				effect.Owner.RemoveSkillMod(effect.SkillMod);
+				effectsForMobile.Remove(effect.Skill);
+
+				if (effect.Owner.Skills[effect.Skill].Base > 0)
+				{
+					effect.Owner.SendMessage($"Le bonus de compétence {effect.Skill} s'est dissipé.");
+				}
+
+				if (effectsForMobile.Count == 0)
+				{
+					s_ActiveEffects.Remove(effect.Owner);
+				}
+			}
+		}
+	}
+
 
 	private static bool IsSkillCardActive(Mobile from, SkillName skill)
 	{
