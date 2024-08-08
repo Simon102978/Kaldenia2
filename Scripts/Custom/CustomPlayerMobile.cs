@@ -1512,7 +1512,7 @@ namespace Server.Mobiles
 				chanceToFall = 0;
 
 
-			if (CheckSkill(SkillName.Equitation, 100 - chanceToFall))
+			if (Utility.Random(100) > chanceToFall)
 			{
 			
 				SkillCheck.Gain(this, Skills[SkillName.Equitation], 10); // Tente un gain supplémentaire
