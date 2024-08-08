@@ -84,17 +84,15 @@ namespace Server.Mobiles
 			if (Combatant != null)
 			{
 
+                    if (Combatant is BaseCreature bc)
+                    {
+                        AntiSummon();
+                    }
+
 					if (!this.InRange(Combatant.Location, 3) && this.InRange(Combatant.Location, 10))
 					{
 						Charge();
 					}
-					else
-					{
-						AntiSummon();
-					}
-
-				
-
 			}
 		}
 
@@ -107,7 +105,7 @@ namespace Server.Mobiles
 
 						Emote($"*Effectue une charge vers {cp.Name}*");
 
-						cp.Damage(35);
+						cp.Damage(15);
 
 						cp.Freeze(TimeSpan.FromSeconds(3));
 
@@ -125,15 +123,14 @@ namespace Server.Mobiles
 			{
 				if (Combatant is BaseCreature bc)
 				{
-					if (bc.Summoned)
-					{
+
 						if (bc.ControlMaster is CustomPlayerMobile cp)
 						{
 							Combatant = cp;
 
 							Emote($"*Effectue une charge vers {cp.Name}*");
 
-							cp.Damage(35);
+							cp.Damage(15);
 
 							cp.Freeze(TimeSpan.FromSeconds(3));
 
@@ -141,7 +138,7 @@ namespace Server.Mobiles
 
 						}
 					}
-				}
+				
 				TuerSummoneur = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(30, 50));
 			}
 		}
