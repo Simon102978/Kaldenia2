@@ -72,8 +72,14 @@ namespace Server.Mobiles
 
 			if (Combatant != null)
 			{
+				
 				if (m_GlobalTimer < DateTime.UtcNow)
 				{
+
+                    if (Combatant is BaseCreature bc)
+                    {
+                        AntiSummon();
+                    }
 
 					if (!this.InRange(Combatant.Location,3) && InLOS(Combatant))
 					{
@@ -92,10 +98,7 @@ namespace Server.Mobiles
 								break;
 						}
 					}
-					else
-					{
-						AntiSummon();
-					}
+						
 
 					m_GlobalTimer = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(2, 5));
 				}
@@ -168,8 +171,7 @@ namespace Server.Mobiles
 			{
 				if (Combatant is BaseCreature bc)
 				{
-					if (bc.Summoned)
-					{
+					
 						if (bc.ControlMaster is CustomPlayerMobile cp)
 						{
 							Combatant = cp;
@@ -183,7 +185,7 @@ namespace Server.Mobiles
 							this.Location = cp.Location;
 
 						}
-					}
+					
 				}
 				TuerSummoneur = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(10, 50));
 			}
