@@ -104,7 +104,7 @@ namespace Server
 
 		public void PriceCalculation()
 		{
-			int Cost = 7500;
+			int Cost = 1000;
 
 			Cost += RaceCost();
 
@@ -288,7 +288,7 @@ namespace Server
 					GrandeurCost += 1000;
 					break;
 				case GrandeurEnum.Colossale:
-					GrandeurCost += 5000;
+					GrandeurCost += 2000;
 					break;
 				default:
 					break;
