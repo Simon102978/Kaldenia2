@@ -104,7 +104,7 @@ namespace Server
 
 		public void PriceCalculation()
 		{
-			int Cost = 3000;
+			int Cost = 7500;
 
 			Cost += RaceCost();
 
