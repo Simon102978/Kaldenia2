@@ -91,7 +91,7 @@ namespace Server.Gumps
 
                 if (m != null && (m == owner || !m.Hidden || owner.AccessLevel >= m.AccessLevel || (m is PlayerMobile && ((PlayerMobile)m).VisibilityList.Contains(owner))))
                 {
-                    if (filter != null && (m.Name == null || m.Name.ToLower().IndexOf(filter) < 0))
+                    if (filter != null && (m.GetBaseName() == null || m.GetBaseName().ToLower().IndexOf(filter) < 0))
                         continue;
 
                     list.Add(m);
@@ -167,7 +167,7 @@ namespace Server.Gumps
                 Mobile m = m_Mobiles[index];
 
                 AddImageTiled(x, y, EntryWidth, EntryHeight, EntryGumpID);
-                AddLabelCropped(x + TextOffsetX, y, EntryWidth - TextOffsetX, EntryHeight, GetHueFor(m), m.Deleted ? "(deleted)" : m.Name);
+                AddLabelCropped(x + TextOffsetX, y, EntryWidth - TextOffsetX, EntryHeight, GetHueFor(m), m.Deleted ? "(deleted)" : m.GetBaseName());
 
                 x += EntryWidth + OffsetSize;
 
@@ -288,7 +288,7 @@ namespace Server.Gumps
                 else if (x.AccessLevel < y.AccessLevel)
                     return 1;
                 else
-                    return Insensitive.Compare(x.Name, y.Name);
+                    return Insensitive.Compare(x.GetBaseName(), y.GetBaseName());
             }
         }
     }
