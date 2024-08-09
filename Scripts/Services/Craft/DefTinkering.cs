@@ -269,6 +269,9 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(BreweryLabelMaker), "Outils", "Marqueur de bière", 30.0, 55.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(GrapevinePlacementTool), "Outils", "Outil placement de vignes", 30.0, 55.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(GrinderExp), "Outils", "Broyeur à café", 05.0, 55.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(WaxCraftingPot), "Outils", "Travail de la cire", 30.0, 55.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(apiWaxProcessingPot), "Outils", "Outil de transformation pour la cire", 30.0, 55.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
+
 			index = AddCraft(typeof(JuicersTools), "Outils", "Fabrication de Jus", 30.0, 55.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(VinyardLabelMaker), "Outils", "Marqueur de vin", 30.0, 55.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(WinecraftersTools), "Outils", "Outil fabrication de vin", 30.0, 55.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");

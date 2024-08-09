@@ -1127,8 +1127,25 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre de Barde", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
 			index = AddCraft(typeof(NewSpellbook), "Autres", "Livre de sort", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
 
+			index = AddCraft(typeof(BlueBook), "Autres", "Livre Bleu", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, 1044361);
+			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);
+			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
+
+			index = AddCraft(typeof(BrownBook), "Autres", "Livre Brun", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, 1044361);
+			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);
+			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
+
+			index = AddCraft(typeof(RedBook), "Autres", "Livre Rouge", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, 1044361);
+			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);
+			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
+
+			index = AddCraft(typeof(TanBook), "Autres", "Livre Beige", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, 1044361);
+			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);
+			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
+
 
 			index = AddCraft(typeof(GargoyleBook100), "Autres", "Livre 100 pages", 60.0, 100.0, typeof(BlankScroll), 1044377, 40, 1044378);
+			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);
 			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
 
 			index = AddCraft(typeof(GlassblowingBook), "Autres", "Conn Verre", 30, 100, typeof(BlankScroll), 1044377, 20, 1044378);

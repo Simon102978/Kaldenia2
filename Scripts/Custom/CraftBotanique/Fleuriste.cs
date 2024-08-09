@@ -1482,6 +1482,7 @@ public class Bouquet1 : Item
 	{
 		Weight = 1.0;
 		Name = "Bouquet 1";
+		Layer = Layer.OneHanded;
 	}
 
 	public Bouquet1(Serial serial) : base(serial) { }
@@ -1506,9 +1507,11 @@ public class Bouquet2 : Item
 	{
 		Weight = 1.0;
 		Name = "Bouquet 2";
-	}
+		Layer = Layer.OneHanded;
 
-	public Bouquet2(Serial serial) : base(serial) { }
+		}
+
+		public Bouquet2(Serial serial) : base(serial) { }
 
 	public override void Serialize(GenericWriter writer)
 	{
@@ -1530,9 +1533,11 @@ public class Bouquet3 : Item
 	{
 		Weight = 1.0;
 		Name = "Bouquet 3";
-	}
+		Layer = Layer.OneHanded;
 
-	public Bouquet3(Serial serial) : base(serial) { }
+		}
+
+		public Bouquet3(Serial serial) : base(serial) { }
 
 	public override void Serialize(GenericWriter writer)
 	{

@@ -121,129 +121,131 @@ namespace Server.Items
         }
     }
 
-    [Flipable(0xA537, 0xA538)]
-    public class ShoulderParrot : BaseOuterTorso
-    {
-        private DateTime _NextFly;
-        private DateTime _FlyEnd;
-        private Timer _Timer;
-        private Mobile _LastShoulder;
+	[Flipable(0xA537, 0xA538)]
+	public class ShoulderParrot : BaseOuterTorso
+	{
+		private DateTime _NextFly;
+		private DateTime _FlyEnd;
+		private Timer _Timer;
+		private Mobile _LastShoulder;
+		private string _MasterName;
+		private int[] _animationFrames = new int[] { 0xA539, 0xA53A, 0xA541, 0xA542, 0xA543, 0xA544, 0xA545, 0xA546, 0xA547, 0xA548, 0xA549, 0xA54A };
+		private int _currentFrame = 0;
 
-        private string _MasterName;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public string MasterName { get { return _MasterName; } set { _MasterName = value; InvalidateProperties(); } }
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public string MasterName { get { return _MasterName; } set { _MasterName = value; InvalidateProperties(); } }
-
-        [Constructable]
-        public ShoulderParrot()
-            : base(0xA537)
-        {
+		[Constructable]
+		public ShoulderParrot() : base(0xA537)
+		{
 			Name = "Perroquet";
 			Weight = 2.0;
-        }
+		}
 
-        public override void AddNameProperty(ObjectPropertyList list)
-        {
-            if (_MasterName != null)
-            {
-                list.Add(1158958, string.Format("{0}{1}", _MasterName, _MasterName.ToLower().EndsWith("s") || _MasterName.ToLower().EndsWith("z") ? "'" : "'s"));
-            }
-            else
-            {
-                list.Add("Un Perroquet"); // Shoulder Parrot
-            }
-        }
+		public override void AddNameProperty(ObjectPropertyList list)
+		{
+			if (_MasterName != null)
+			{
+				list.Add(1158958, string.Format("{0}{1}", _MasterName, _MasterName.ToLower().EndsWith("s") || _MasterName.ToLower().EndsWith("z") ? "'" : "'s"));
+			}
+			else
+			{
+				list.Add("Un Perroquet");
+			}
+		}
 
-        public override void OnDoubleClick(Mobile m)
-        {
-            if (m.FindItemOnLayer(Layer.OuterTorso) == this)
-            {
-                if (_NextFly > DateTime.UtcNow)
-                {
-                    m.SendMessage("Votre Perroquet est trop épuisé pour voler maintenant."); // Your parrot is too tired to fly right now.
-                }
-                else
-                {
-                    _Timer = Timer.DelayCall(TimeSpan.FromMilliseconds(500), TimeSpan.FromMilliseconds(500), FlyOnTick);
-                    _Timer.Start();
+		public override void OnDoubleClick(Mobile m)
+		{
+			if (m.FindItemOnLayer(Layer.OuterTorso) == this)
+			{
+				if (_NextFly > DateTime.UtcNow)
+				{
+					m.SendMessage("Votre Perroquet est trop épuisé pour voler maintenant.");
+				}
+				else
+				{
+					_Timer = Timer.DelayCall(TimeSpan.FromMilliseconds(100), TimeSpan.FromMilliseconds(100), AnimateParrot);
+					_Timer.Start();
+					Movable = false;
+					_LastShoulder = m;
+					MoveToWorld(new Point3D(m.X, m.Y, m.Z + 15), m.Map);
+					_FlyEnd = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(3, 5));
+				}
+			}
+			else
+			{
+				m.SendMessage("Votre perroquet ne peut pas voler ici");
+			}
+		}
 
-                    Movable = false;
-                    _LastShoulder = m;
-                    MoveToWorld(new Point3D(m.X, m.Y, m.Z + 15), m.Map);
-                    ItemID = 0x3B4E;
+		private void AnimateParrot()
+		{
+			if (_FlyEnd < DateTime.UtcNow && _LastShoulder != null)
+			{
+				EndFlight();
+			}
+			else
+			{
+				ItemID = _animationFrames[_currentFrame];
+				_currentFrame = (_currentFrame + 1) % _animationFrames.Length;
+			}
+		}
 
-                    _FlyEnd = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(3, 5));
-                }
-            }
-            else
-            {
-                m.SendMessage("Votre perroquet ne peut pas voler ici"); // Your parrot can't fly here.
-            }
-        }
+		private void EndFlight()
+		{
+			Movable = true;
+			ItemID = 0xA537; // Retour à l'état initial
+			if (_LastShoulder.FindItemOnLayer(Layer.OuterTorso) != null)
+			{
+				_LastShoulder.Backpack.DropItem(this);
+			}
+			else
+			{
+				_LastShoulder.AddItem(this);
+			}
+			_LastShoulder = null;
+			_Timer.Stop();
+			_NextFly = DateTime.UtcNow + TimeSpan.FromMinutes(2);
+			_currentFrame = 0;
+		}
 
-        private void FlyOnTick()
-        {
-            if (_FlyEnd < DateTime.UtcNow && _LastShoulder != null)
-            {
-                Movable = true;
-                ItemID = 0x3B4C;
+		public ShoulderParrot(Serial serial) : base(serial)
+		{
+		}
 
-                if (_LastShoulder.FindItemOnLayer(Layer.OuterTorso) != null)
-                {
-                    _LastShoulder.Backpack.DropItem(this);
-                }
-                else
-                {
-                    _LastShoulder.AddItem(this);
-                }
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+			writer.Write(_MasterName);
+			writer.Write(_LastShoulder);
+		}
 
-                _LastShoulder = null;
-                _Timer.Stop();
-                _NextFly = DateTime.UtcNow + TimeSpan.FromMinutes(2);
-            }
-        }
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			reader.ReadInt();
+			_MasterName = reader.ReadString();
+			Mobile m = reader.ReadMobile();
+			if (m != null)
+			{
+				ItemID = 0xA537;
+				Timer.DelayCall(() =>
+				{
+					if (m.FindItemOnLayer(Layer.OuterTorso) != null)
+					{
+						m.Backpack.DropItem(this);
+					}
+					else
+					{
+						m.AddItem(this);
+					}
+				});
+			}
+		}
+	}
 
-        public ShoulderParrot(Serial serial) : base(serial)
-        {
-        }
-
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(0);
-
-            writer.Write(_MasterName);
-            writer.Write(_LastShoulder);
-        }
-
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            reader.ReadInt();
-
-            _MasterName = reader.ReadString();
-            Mobile m = reader.ReadMobile();
-
-            if (m != null)
-            {
-                ItemID = 0x3B4C;
-
-                Timer.DelayCall(() =>
-                {
-                    if (m.FindItemOnLayer(Layer.OuterTorso) != null)
-                    {
-                        m.Backpack.DropItem(this);
-                    }
-                    else
-                    {
-                        m.AddItem(this);
-                    }
-                });
-            }
-        }
-    }
-
-    [Flipable(0xA2C8, 0xA2C9)]
+	[Flipable(0xA2C8, 0xA2C9)]
     public class PirateWallMap : Item
     {
         public override int LabelNumber => 1158938;  // Pirate Wall Map

@@ -141,11 +141,11 @@ namespace Server.Spells.Fifth
 			new SummonCreatureEntry( ShrinkTable.Lookup(0x1D), 30.0, typeof(Gorilla), 7, 2, 1),
 			new SummonCreatureEntry( ShrinkTable.Lookup(0xE2), 45.0, typeof(Horse), 0, -15, 1),
 			new SummonCreatureEntry( ShrinkTable.Lookup(167), 50.0, typeof(BrownBear), 7, -6, 1 ),
-			new SummonCreatureEntry(ShrinkTable.Lookup(64), 60.0, typeof(SnowLeopard), 7, -6, 2 ),
-			new SummonCreatureEntry(ShrinkTable.Lookup(213), 75.0, typeof(PolarBear), 7, -6, 2 ),
-			new SummonCreatureEntry(ShrinkTable.Lookup(212), 80.0, typeof(GrizzlyBear), 7, -6, 2 ),
-			new SummonCreatureEntry(ShrinkTable.Lookup(48), 85.0, typeof(Scorpion), 7, -6 , 3),
-			new SummonCreatureEntry(ShrinkTable.Lookup(0x15), 95.0, typeof(GiantSerpent), 7, -6, 3 ),
+			new SummonCreatureEntry(ShrinkTable.Lookup(64), 60.0, typeof(SnowLeopard), 7, -6, 1 ),
+			new SummonCreatureEntry(ShrinkTable.Lookup(213), 75.0, typeof(PolarBear), 7, -6, 1 ),
+			new SummonCreatureEntry(ShrinkTable.Lookup(212), 80.0, typeof(GrizzlyBear), 7, -6, 1 ),
+			new SummonCreatureEntry(ShrinkTable.Lookup(48), 85.0, typeof(Scorpion), 7, -6 , 2),
+			new SummonCreatureEntry(ShrinkTable.Lookup(0x15), 95.0, typeof(GiantSerpent), 7, -6, 2 ),
 		};
 
 		public class SummonCreatureGump : Gump

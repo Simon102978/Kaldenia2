@@ -2,6 +2,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text.RegularExpressions;
 
@@ -244,6 +245,23 @@ namespace Knives.TownHouses
 				InvalidateProperties();
 			}
 		}
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public DateTime NextRentDue
+		{
+			get
+			{
+				if (c_RentTime.Kind == DateTimeKind.Utc)
+				{
+					return c_RentTime;
+				}
+				else
+				{
+					return c_RentTime.ToUniversalTime();
+				}
+			}
+		}
+
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool RecurRent
@@ -1316,6 +1334,22 @@ namespace Knives.TownHouses
 		}
 		#endregion
 
+		public static void CollectAllRents()
+		{
+			int totalCollected = 0;
+			foreach (TownHouseSign sign in s_TownHouseSigns)
+			{
+				if (sign.Owned && sign.c_RentByTime != TimeSpan.Zero)
+				{
+					sign.RentDue();
+					sign.BeginRentTimer(sign.c_RentByTime);
+					totalCollected += sign.c_Price;
+				}
+			}
+			Server.Custom.CustomPersistence.Location += totalCollected;
+			Console.WriteLine($"Total rent collected: {totalCollected}");
+		}
+
 		#region Rent
 		public void ClearRentTimer()
 		{
@@ -1485,6 +1519,69 @@ namespace Knives.TownHouses
 			}
 		}
 		#endregion
+
+		public void NotifyUpcomingRent()
+		{
+			if (Owned && c_RentByTime != TimeSpan.Zero)
+			{
+				TimeSpan timeUntilDue = c_RentTime - DateTime.UtcNow;
+				if (timeUntilDue <= TimeSpan.FromDays(1))
+				{
+					House.Owner.SendMessage("Votre loyer est du dans moins d'une journée!");
+				}
+			}
+		}
+
+		public static void CheckAllRentPayments()
+		{
+			foreach (var sign in s_TownHouseSigns)
+			{
+				sign.CheckAndCollectRent();
+			}
+		}
+
+		public void CheckAndCollectRent()
+		{
+			if (Owned && c_RentByTime != TimeSpan.Zero && DateTime.UtcNow >= c_RentTime)
+			{
+				RentDue();
+			}
+		}
+
+		public void CatchUpMissedPayments()
+		{
+			while (c_RentTime < DateTime.UtcNow)
+			{
+				RentDue();
+			}
+		}
+
+		public void LogRentTransaction(bool success, int amount)
+		{
+			string logFolder = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Logs");
+			string logFile = Path.Combine(logFolder, "RentTransactions.txt");
+
+			// Créer le dossier Logs s'il n'existe pas
+			if (!Directory.Exists(logFolder))
+			{
+				Directory.CreateDirectory(logFolder);
+			}
+
+			string log = $"{DateTime.UtcNow:yyyy-MM-dd HH:mm:ss} UTC: Rent {(success ? "collected" : "failed")} - Amount: {amount} - House: {this.House?.Name ?? "Unknown"} - Owner: {this.House?.Owner?.Name ?? "Unknown"}";
+
+			try
+			{
+				// Ajouter le log au fichier
+				using (StreamWriter sw = File.AppendText(logFile))
+				{
+					sw.WriteLine(log);
+				}
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Error writing to log file: {ex.Message}");
+			}
+		}
 
 		public bool CanBuyHouse(Mobile m)
 		{
