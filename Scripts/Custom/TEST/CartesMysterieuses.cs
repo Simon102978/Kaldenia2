@@ -238,7 +238,7 @@ public class SkillCard : Item
 
 		double baseValue = from.Skills[m_Skill].Base;
 		double cap = from.Skills[m_Skill].Cap;
-		double effectiveBonus = Math.Min(m_Bonus, cap - baseValue);
+		double effectiveBonus = m_Bonus; // Utilisez le bonus complet, sans le limiter au cap
 
 		SkillMod mod = new DefaultSkillMod(m_Skill, true, effectiveBonus);
 		from.AddSkillMod(mod);

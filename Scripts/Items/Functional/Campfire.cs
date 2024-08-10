@@ -4,6 +4,7 @@ using System;
 using System.Collections;
 using Server.Items;
 using Server.Gumps;
+using Server.Custom;
 
 namespace Server.Items
 {
@@ -24,8 +25,7 @@ namespace Server.Items
 
 		public bool IsUpgraded = false;
 
-		public Campfire()
-			: base(0xDE3)
+		public Campfire() : base(0xDE3)
 		{
 			Movable = false;
 			Light = LightType.Circle300;
@@ -36,13 +36,13 @@ namespace Server.Items
 			m_Timer = Timer.DelayCall(TimeSpan.FromSeconds(1.0), TimeSpan.FromSeconds(1.0), OnTick);
 		}
 
-		public Campfire(Serial serial)
-			: base(serial)
+		public Campfire(Serial serial) : base(serial)
 		{
 		}
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public DateTime Created => m_Created;
+
 		[CommandProperty(AccessLevel.GameMaster)]
 		public CampfireStatus Status
 		{
@@ -52,10 +52,8 @@ namespace Server.Items
 				{
 					case 0xDE3:
 						return CampfireStatus.Burning;
-
 					case 0xDE9:
 						return CampfireStatus.Extinguishing;
-
 					default:
 						return CampfireStatus.Off;
 				}
@@ -83,6 +81,7 @@ namespace Server.Items
 				}
 			}
 		}
+
 		public static CampfireEntry GetEntry(Mobile player)
 		{
 			return (CampfireEntry)m_Table[player];
@@ -105,16 +104,13 @@ namespace Server.Items
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-
 			writer.Write(0); // version
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
-
 			int version = reader.ReadInt();
-
 			Delete();
 		}
 
@@ -123,11 +119,11 @@ namespace Server.Items
 			DateTime now = DateTime.UtcNow;
 			TimeSpan age = now - Created;
 
-			if (age >= TimeSpan.FromSeconds(220.0)) // 100
+			if (age >= TimeSpan.FromSeconds(220.0))
 				Delete();
-			else if (age >= TimeSpan.FromSeconds(210.0)) // 90
+			else if (age >= TimeSpan.FromSeconds(210.0))
 				Status = CampfireStatus.Off;
-			else if (age >= TimeSpan.FromSeconds(180.0)) // 60
+			else if (age >= TimeSpan.FromSeconds(180.0))
 				Status = CampfireStatus.Extinguishing;
 
 			if (Status == CampfireStatus.Off || Deleted)
@@ -135,27 +131,22 @@ namespace Server.Items
 
 			foreach (CampfireEntry entry in new ArrayList(m_Entries))
 			{
-
 				if (!entry.Valid || entry.Player.NetState == null)
 				{
 					RemoveEntry(entry);
 				}
-				else if (!entry.Safe && now - entry.Start >= TimeSpan.FromSeconds(60 - 45 * (entry.Player.Skills[SkillName.Camping].Value / 100))) //originally was: TimeSpan.FromSeconds(30.0)
+				else if (!entry.Safe && now - entry.Start >= TimeSpan.FromSeconds(60 - 45 * (entry.Player.Skills[SkillName.Camping].Value / 100)))
 				{
 					entry.Safe = true;
 					entry.Player.SendLocalizedMessage(500621); // The camp is now secure.
-
-
 				}
 
-				if (entry.Safe = true)
+				if (entry.Safe)
 				{
-
-					if (entry.Player.Hits < entry.Player.HitsMax && entry.Player.CanHeal())
+					if (entry.Player.Hits < entry.Player.HitsMax && entry.Player.CanHeal() && !IsInCombat(entry.Player))
+					{
 						entry.Player.Hits += 1;
-					//  if(entry.Player.Mana < entry.Player.ManaMax)
-					//	entry.Player.Mana +=1;
-
+					}
 
 					Effects.SendLocationParticles(this, 0x3779, 1, 30, 1160, 3, 9502, 0);
 
@@ -165,7 +156,6 @@ namespace Server.Items
 						entry.IsBuffed = true;
 					}
 				}
-
 			}
 
 			IPooledEnumerable eable = GetMobilesInRange(SecureRange);
@@ -177,20 +167,23 @@ namespace Server.Items
 					if (pm != null && GetEntry(pm) == null)
 					{
 						CampfireEntry entry = new CampfireEntry(pm, this);
-
 						m_Table[pm] = entry;
 						m_Entries.Add(entry);
-
 						pm.SendLocalizedMessage(500620); // You feel it would take a few moments to secure your camp.
 					}
 				}
-				else
+				else if (!(state is GolemZyX) && !IsInCombat(state))
 				{
 					state.Hits += 10;
-				}			
+				}
 			}
 
 			eable.Free();
+		}
+
+		private bool IsInCombat(Mobile m)
+		{
+			return (m is PlayerMobile || m is BaseCreature) && m.Combatant != null;
 		}
 
 		public bool DoBuff(Mobile from)
@@ -203,24 +196,18 @@ namespace Server.Items
 				return false;
 			}
 
-
 			if (Spells.SpellHelper.AddStatOffset(from, StatType.Str, scale, Duration)
-		&& Spells.SpellHelper.AddStatOffset(from, StatType.Dex, scale, Duration)
-		 && Spells.SpellHelper.AddStatOffset(from, StatType.Int, scale, Duration))
+				&& Spells.SpellHelper.AddStatOffset(from, StatType.Dex, scale, Duration)
+				&& Spells.SpellHelper.AddStatOffset(from, StatType.Int, scale, Duration))
 			{
 				from.FixedEffect(0x375A, 10, 15);
 				from.PlaySound(0x1E7);
-				//	from.SendMessage("You feel comforted by the warmth of the campfire.");
-
 				return true;
 			}
-
 
 			from.SendLocalizedMessage(502173); // You are already under a similar effect.
 			return false;
 		}
-
-
 
 		private void ClearEntries()
 		{
@@ -240,6 +227,7 @@ namespace Server.Items
 		private readonly Campfire m_Fire;
 		private readonly DateTime m_Start;
 		private bool m_Safe;
+
 		public CampfireEntry(PlayerMobile player, Campfire fire)
 		{
 			m_Player = player;
@@ -253,16 +241,11 @@ namespace Server.Items
 		public DateTime Start => m_Start;
 		public bool Valid => !Fire.Deleted && Fire.Status != CampfireStatus.Off && Player.Map == Fire.Map && Player.InRange(Fire, Campfire.SecureRange);
 		public bool IsBuffed;
+
 		public bool Safe
 		{
-			get
-			{
-				return Valid && m_Safe;
-			}
-			set
-			{
-				m_Safe = value;
-			}
+			get { return Valid && m_Safe; }
+			set { m_Safe = value; }
 		}
 	}
 }

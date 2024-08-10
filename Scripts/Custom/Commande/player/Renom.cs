@@ -55,6 +55,15 @@ namespace Server.Scripts.Commands
 					else
 						from.SendMessage("L'item doit être dans votre sac.");
 				}
+				else if (targeted is BaseLight)
+				{
+					BaseLight item = (BaseLight)targeted;
+
+					if (item.IsChildOf(from.Backpack))
+						item.Name = m_Name;
+					else
+						from.SendMessage("L'item doit être dans votre sac.");
+				}
 				else if (targeted is BaseWeapon)
 				{
 					BaseWeapon item = (BaseWeapon)targeted;

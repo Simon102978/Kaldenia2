@@ -38,8 +38,10 @@ namespace Server.Mobiles
 
             Fame = 4000;
             Karma = -4000;
+			CanSwim = true;
 
-            SetAreaEffect(AreaEffect.AuraDamage);
+
+			SetAreaEffect(AreaEffect.AuraDamage);
         }
 
         public IceElemental(Serial serial)

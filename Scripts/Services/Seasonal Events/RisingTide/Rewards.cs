@@ -140,6 +140,8 @@ namespace Server.Items
 		{
 			Name = "Perroquet";
 			Weight = 2.0;
+			Layer = Layer.Neck;
+
 		}
 
 		public override void AddNameProperty(ObjectPropertyList list)
@@ -156,7 +158,7 @@ namespace Server.Items
 
 		public override void OnDoubleClick(Mobile m)
 		{
-			if (m.FindItemOnLayer(Layer.OuterTorso) == this)
+			if (Parent is Mobile owner && owner == m)
 			{
 				if (_NextFly > DateTime.UtcNow)
 				{
@@ -174,9 +176,10 @@ namespace Server.Items
 			}
 			else
 			{
-				m.SendMessage("Votre perroquet ne peut pas voler ici");
+				m.SendMessage("Le perroquet doit être sur votre épaule pour voler.");
 			}
 		}
+
 
 		private void AnimateParrot()
 		{
@@ -195,19 +198,25 @@ namespace Server.Items
 		{
 			Movable = true;
 			ItemID = 0xA537; // Retour à l'état initial
-			if (_LastShoulder.FindItemOnLayer(Layer.OuterTorso) != null)
+
+			if (_LastShoulder != null)
 			{
-				_LastShoulder.Backpack.DropItem(this);
+				if (_LastShoulder.FindItemOnLayer(Layer.Neck) == null)
+				{
+					_LastShoulder.AddItem(this);
+				}
+				else
+				{
+					_LastShoulder.Backpack.DropItem(this);
+				}
 			}
-			else
-			{
-				_LastShoulder.AddItem(this);
-			}
+
 			_LastShoulder = null;
 			_Timer.Stop();
 			_NextFly = DateTime.UtcNow + TimeSpan.FromMinutes(2);
 			_currentFrame = 0;
 		}
+
 
 		public ShoulderParrot(Serial serial) : base(serial)
 		{

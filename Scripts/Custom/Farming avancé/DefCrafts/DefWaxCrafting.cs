@@ -117,89 +117,100 @@ namespace Server.Engines.Craft
 
 
 			/* Begin Ressources */
-			index = AddCraft( typeof( CandleWick ), "Resources", "Candle Wick", 50.0, 80.0, typeof( Beeswax ), "Wax", 1, "You dont have enough wax" );
-			AddRes( index, typeof( Cloth ), "Cloth", 1, "You dont have enough cloth" );
+			index = AddCraft( typeof( CandleWick ), "Ressources", "Mèche de bougie", 50.0, 80.0, typeof( Beeswax ), "Cire d'abeille", 1, "Vous n'avez pas suffisament de cire d'abeille" );
+			AddRes( index, typeof( Cloth ), "Tissus", 1, "Vous n'avez pas assez de Tissus" );
 			SetNeedHeat( index, true );
 
-			index = AddCraft( typeof( BlankCandle ), "Resources", "Blank Candle", 50.0, 80.0, typeof( Beeswax ), "Wax", 2, "You dont have enough wax" );
+			index = AddCraft( typeof( BlankCandle ), "Ressources", "Chandelle Vierge", 50.0, 80.0, typeof( Beeswax ), "Cire d'abeille", 2, "Vous n'avez pas suffisament de cire d'abeille" );
 			SetNeedHeat( index, true );
 
-			index = AddCraft(typeof(CandleFitSkull), "Resources", "Chandelle en forme de Crâne", 50.0, 80.0, typeof(Beeswax), "Wax", 4, "You dont have enough wax");
+			index = AddCraft(typeof(CandleFitSkull), "Ressources", "Crâne de cire Vierge", 50.0, 80.0, typeof(Beeswax), "Cire d'abeille", 4, "Vous n'avez pas suffisament de cire d'abeille");
 			SetNeedHeat(index, true);
 			/* End Ressources */
 
 			/* Begin Candles */
-			index = AddCraft( typeof( CandleShort ), "Candles", "small candle", 80.0, 105.0, typeof( BlankCandle ), "Blank Candle", 1, "You need a blank candle" );
-			AddRes( index, typeof( CandleWick ), "Candle Wick", 1, "You need a candle wick" );
+
+
+			index = AddCraft(typeof(Candle), "Chandelles", " Petite Bougie", 25.0, 60.0, typeof(BlankCandle), "Chandelle Vierge", 1, "Vous avez besoin d'une Chandelle Vierge");
+			AddRes(index, typeof(CandleWick), "Mèche de bougie", 1, "Vous avez besoin d'une Mèche de bougie");
+			SetNeedHeat(index, true);
+
+			index = AddCraft(typeof(CandleLarge), "Chandelles", " Chandelle portative", 25.0, 60.0, typeof(BlankCandle), "Chandelle Vierge", 1, "Vous avez besoin d'une Chandelle Vierge");
+			AddRes(index, typeof(CandleWick), "Mèche de bougie", 1, "Vous avez besoin d'une Mèche de bougie");
+			SetNeedHeat(index, true);
+
+
+			index = AddCraft( typeof( CandleShort ), "Chandelles", "Petite Chandelle", 80.0, 105.0, typeof( BlankCandle ), "Chandelle Vierge", 1, "Vous avez besoin d'une Chandelle Vierge" );
+			AddRes( index, typeof( CandleWick ), "Mèche de bougie", 1, "Vous avez besoin d'une Mèche de bougie" );
 			SetNeedHeat( index, true );
 
-			index = AddCraft( typeof( CandleShortColor ), "Candles", "small colored candle", 80.0, 105.0, typeof( BlankCandle ), "Blank Candle", 1, "You need a blank candle" );
-			AddRes( index, typeof( Dyes ), "Dyes", 1, "You need dyes" );
-			AddRes( index, typeof( CandleWick ), "Candle Wick", 1, "You need a candle wick" );
+			index = AddCraft( typeof( CandleShortColor ), "Chandelles", "Petite chandelle colorée", 80.0, 105.0, typeof( BlankCandle ), "Chandelle Vierge", 1, "Vous avez besoin d'une Chandelle Vierge" );
+			AddRes( index, typeof( Dyes ), "Dyes", 1, "Vous avez besoin d'un Dyes (Colorant)" );
+			AddRes( index, typeof( CandleWick ), "Mèche de bougie", 1, "Vous avez besoin d'une Mèche de bougie" );
 			SetNeedHeat( index, true );
 
-			index = AddCraft( typeof( CandleLong ), "Candles", "large candle", 80.0, 110.0, typeof( BlankCandle ), "Blank Candle", 1, "You need a blank candle" );
-			AddRes( index, typeof( CandleWick ), "Candle Wick", 1, "You need a candle wick" );
+			index = AddCraft( typeof( CandleLong ), "Chandelles", "Large chandelle", 80.0, 110.0, typeof( BlankCandle ), "Chandelle Vierge", 1, "Vous avez besoin d'une Chandelle Vierge" );
+			AddRes( index, typeof( CandleWick ), "Mèche de bougie", 1, "Vous avez besoin d'une Mèche de bougie" );
 			SetNeedHeat( index, true );
 
-			index = AddCraft( typeof( CandleLongColor ), "Candles", "large colored candle", 80.0, 110.0, typeof( BlankCandle ), "Blank Candle", 1, "You need a blank candle" );
-			AddRes( index, typeof( Dyes ), "Dyes", 1, "You need dyes" );
-			AddRes( index, typeof( CandleWick ), "Candle Wick", 1, "You need a candle wick" );
+			index = AddCraft( typeof( CandleLongColor ), "Chandelles", "Large chandelle colorée", 80.0, 110.0, typeof( BlankCandle ), "Chandelle Vierge", 1, "Vous avez besoin d'une Chandelle Vierge" );
+			AddRes(index, typeof(Dyes), "Dyes", 1, "Vous avez besoin d'un Dyes (Colorant)");
+			AddRes( index, typeof( CandleWick ), "Mèche de bougie", 1, "Vous avez besoin d'une Mèche de bougie" );
 			SetNeedHeat( index, true );
 
-			index = AddCraft( typeof( CandleSkull ), "Candles", "skull candle", 100.0, 100.0, typeof( BlankCandle ), "Blank Candle", 1, "You need a blank candle" );
-			AddRes( index, typeof( CandleWick ), "Candle Wick", 1, "You need a candle wick" );
-			AddRes( index, typeof( CandleFitSkull ), "A candle fit skull", 1, "You need a candle fit skull" );
+			index = AddCraft( typeof( CandleSkull ), "Chandelles", "Chandelle en forme de crâne", 80.0, 100.0, typeof( BlankCandle ), "Chandelle Vierge", 1, "Vous avez besoin d'une Chandelle Vierge" );
+			AddRes( index, typeof( CandleWick ), "Mèche de bougie", 1, "Vous avez besoin d'une Mèche de bougie" );
+			AddRes( index, typeof( CandleFitSkull ), "Crâne de cire Vierge", 1, "Vous avez besoin d'un Crâne de cire Vierge");
 			SetNeedHeat( index, true );
 
-			index = AddCraft( typeof( CandleOfLove ), "Candles", "candle of love", 100.0, 100.0, typeof( BlankCandle ), "Blank Candle", 1, "You need a blank candle" );
-			AddRes( index, typeof( CandleWick ), "Candle Wick", 1, "You need a candle wick" );
+			index = AddCraft( typeof( CandleOfLove ), "Chandelles", "Chandelle de l'amour", 80.0, 100.0, typeof( BlankCandle ), "Chandelle Vierge", 1, "Vous avez besoin d'une Chandelle Vierge" );
+			AddRes( index, typeof( CandleWick ), "Mèche de bougie", 1, "Vous avez besoin d'une Mèche de bougie" );
 			
 			SetNeedHeat( index, true );
 			/* End Candles */
 
 			/* Begin Decorative */
-			index = AddCraft( typeof( DippingStick ), "Decorative", "Dipping Stick", 75.0, 115.0, typeof( BlankCandle ), "Blank Candle", 3, "you need more blank candles" );
+			index = AddCraft( typeof( DippingStick ), "Decoration", "Bâtonnets de cire", 75.0, 115.0, typeof( BlankCandle ), "Chandelle Vierge", 3, "Vous avez besoin de chandelles vierges" );
 			SetNeedHeat( index, true );
 
-			index = AddCraft( typeof( PileOfBlankCandles ), "Decorative", "Pile of Blank Candles", 75.0, 115.0, typeof( BlankCandle ), "Blank Candle", 5, "You need more blank candles" );
+
+
+			index = AddCraft( typeof( PileOfBlankCandles ), "Decoration", "Pile de chandelles vierges", 75.0, 115.0, typeof( BlankCandle ), "Chandelle Vierge", 5, "Vous avez besoin de chandelles vierges" );
 			SetNeedHeat( index, true );
 
-			index = AddCraft( typeof( SomeBlankCandles ), "Decorative", "Some Blank Candles", 75.0, 115.0, typeof( BlankCandle ), "Blank Candle", 3, "You need more blank candles" );
+			index = AddCraft( typeof( SomeBlankCandles ), "Decoration", "Quelques chandelles vierges", 75.0, 115.0, typeof( BlankCandle ), "Chandelle Vierge", 3, "Vous avez besoin de chandelles vierges" );
 			SetNeedHeat( index, true );
 
-			index = AddCraft( typeof( RawWaxBust ), "Decorative", "Raw Wax Bust", 50.0, 80.0, typeof( Beeswax ), "Wax", 4, "You dont have enough wax" );
+			index = AddCraft(typeof(OfficialSealingWax), "Decoration", "Sceau officiel", 50.0, 80.0, typeof(Beeswax), "Cire d'abeille", 4, "Vous n'avez pas suffisament de cire d'abeille");
+			SetNeedHeat(index, true);
+
+			index = AddCraft( typeof( RawWaxBust ), "Decoration", "Buste de Cire", 50.0, 80.0, typeof( Beeswax ), "Cire d'abeille", 4, "Vous n'avez pas suffisament de cire d'abeille" );
 			SetNeedHeat( index, true );
 
-			index = AddCraft(typeof(OrigamiButterfly), "Decorative", "Un Papillon de Cire", 75.0, 115.0, typeof(Beeswax), "Wax", 15, "You dont have enough wax");
+			index = AddCraft(typeof(OrigamiButterfly), "Decoration", "Un Papillon de Cire", 75.0, 115.0, typeof(Beeswax), "Cire d'abeille", 15, "Vous n'avez pas suffisament de cire d'abeille");
             SetNeedHeat(index, true);
 
-            index = AddCraft(typeof(OrigamiSwan), "Decorative", "Un Cygne de Cire", 75.0, 115.0, typeof(Beeswax), "Wax", 15, "You dont have enough wax");
+            index = AddCraft(typeof(OrigamiSwan), "Decoration", "Un Cygne de Cire", 75.0, 115.0, typeof(Beeswax), "Cire d'abeille", 15, "Vous n'avez pas suffisament de cire d'abeille");
             SetNeedHeat(index, true);
 
-            index = AddCraft(typeof(OrigamiFrog), "Decorative", "Une Grenouille de Cire", 75.0, 115.0, typeof(Beeswax), "Wax", 15, "You dont have enough wax");
+            index = AddCraft(typeof(OrigamiFrog), "Decoration", "Une Grenouille de Cire", 75.0, 115.0, typeof(Beeswax), "Cire d'abeille", 15, "Vous n'avez pas suffisament de cire d'abeille");
             SetNeedHeat(index, true);
 
-            index = AddCraft(typeof(OrigamiShape), "Decorative", "Une forme de Cire", 75.0, 115.0, typeof(Beeswax), "Wax", 15, "You dont have enough wax");
+            index = AddCraft(typeof(OrigamiShape), "Decoration", "Une forme de Cire", 75.0, 115.0, typeof(Beeswax), "Cire d'abeille", 15, "Vous n'avez pas suffisament de cire d'abeille");
             SetNeedHeat(index, true);
 
-            index = AddCraft(typeof(OrigamiSongbird), "Decorative", "Un Oiseau de Cire", 75.0, 115.0, typeof(Beeswax), "Wax", 15, "You dont have enough wax");
+            index = AddCraft(typeof(OrigamiSongbird), "Decoration", "Un Oiseau de Cire", 75.0, 115.0, typeof(Beeswax), "Cire d'abeille", 15, "Vous n'avez pas suffisament de cire d'abeille");
             SetNeedHeat(index, true);
 
-            index = AddCraft(typeof(OrigamiFish), "Decorative", "Un Poisson de Cire", 75.0, 115.0, typeof(Beeswax), "Wax", 15, "You dont have enough wax");
+            index = AddCraft(typeof(OrigamiFish), "Decoration", "Un Poisson de Cire", 75.0, 115.0, typeof(Beeswax), "Cire d'abeille", 15, "Vous n'avez pas suffisament de cire d'abeille");
             SetNeedHeat(index, true);
 
-            index = AddCraft(typeof(OrigamiDragon), "Decorative", "Un Dragon de Cire", 75.0, 115.0, typeof(Beeswax), "Wax", 15, "You dont have enough wax");
+            index = AddCraft(typeof(OrigamiDragon), "Decoration", "Un Dragon de Cire", 75.0, 115.0, typeof(Beeswax), "Cire d'abeille", 15, "Vous n'avez pas suffisament de cire d'abeille");
             SetNeedHeat(index, true);
 
-            index = AddCraft(typeof(OrigamiBunny), "Decorative", "Un Lapin de Cire", 75.0, 115.0, typeof(Beeswax), "Wax", 15, "You dont have enough wax");
+            index = AddCraft(typeof(OrigamiBunny), "Decoration", "Un Lapin de Cire", 75.0, 115.0, typeof(Beeswax), "Cire d'abeille", 15, "Vous n'avez pas suffisament de cire d'abeille");
             SetNeedHeat(index, true); 
 
-			index = AddCraft(typeof(WaxUOVase), "Decorative", "UO Vase", 75.0, 115.0, typeof(Beeswax), "Wax", 20, "You dont have enough wax");
-            SetNeedHeat(index, true);
-
-            index = AddCraft(typeof(PotOfMoltenGold), "Decorative", "Pot Of Molten Gold", 75.0, 115.0, typeof(Beeswax), "Wax", 30, "You dont have enough wax");
-            SetNeedHeat(index, true);
 			/* End Decorative */
 
 		}

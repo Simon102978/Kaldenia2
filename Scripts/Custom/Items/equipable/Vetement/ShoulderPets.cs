@@ -17,6 +17,7 @@ namespace Server.Items
 		{
 			Weight = 3.0;
 			Name = "Un Singe";
+			Layer = Layer.Neck;
 			
 		}
 
@@ -57,6 +58,8 @@ namespace Server.Items
 		{
 			Weight = 3.0;
 			Name = "Un Aigle";
+			Layer = Layer.Neck;
+
 
 		}
 
@@ -95,10 +98,12 @@ namespace Server.Items
 	{
 		Weight = 3.0;
 		Name = "Une Araignée";
+		Layer = Layer.Neck;
 
-	}
 
-	public ShoulderAraignee(Serial serial)
+		}
+
+		public ShoulderAraignee(Serial serial)
 		: base(serial)
 	{
 	}
@@ -134,10 +139,12 @@ namespace Server.Items
 	{
 		Weight = 3.0;
 		Name = "Une Chouette";
+		Layer = Layer.Neck;
 
-	}
 
-	public ShoulderChouette(Serial serial)
+		}
+
+		public ShoulderChouette(Serial serial)
 		: base(serial)
 	{
 	}
@@ -173,10 +180,12 @@ namespace Server.Items
 	{
 		Weight = 3.0;
 		Name = "Un Corbeau";
+		Layer = Layer.Neck;
 
-	}
 
-	public ShoulderCorneille(Serial serial)
+		}
+
+		public ShoulderCorneille(Serial serial)
 		: base(serial)
 	{
 	}
@@ -212,10 +221,12 @@ namespace Server.Items
 	{
 		Weight = 3.0;
 		Name = "Un Lézard";
+		Layer = Layer.Neck;
 
-	}
 
-	public ShoulderLezard(Serial serial)
+		}
+
+		public ShoulderLezard(Serial serial)
 		: base(serial)
 	{
 	}
@@ -251,10 +262,12 @@ namespace Server.Items
 	{
 		Weight = 3.0;
 		Name = "Un Serpent";
+		Layer = Layer.Neck;
 
-	}
 
-	public ShoulderSerpent(Serial serial)
+		}
+
+		public ShoulderSerpent(Serial serial)
 		: base(serial)
 	{
 	}

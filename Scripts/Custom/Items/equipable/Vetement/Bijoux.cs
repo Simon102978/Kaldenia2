@@ -512,7 +512,7 @@ public override void Deserialize(GenericReader reader)
 	int version = reader.ReadInt();
 }
     }
-	public class Chapelet : BaseCouronne
+	public class Chapelet : BaseJewel
 	{
 
 

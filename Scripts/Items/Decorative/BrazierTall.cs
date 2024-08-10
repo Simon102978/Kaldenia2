@@ -8,6 +8,7 @@ namespace Server.Items
         public BrazierTall()
             : base(0x19AA)
         {
+			Name = "Brasero Long";
             Movable = true;
             Duration = TimeSpan.Zero; // Never burnt out
             Burning = true;

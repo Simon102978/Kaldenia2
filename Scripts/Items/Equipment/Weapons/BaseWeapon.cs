@@ -1219,11 +1219,16 @@ namespace Server.Items
 
             bonus = 0;
 
-            double chance = ourValue / (theirValue * 2.0);
+            double chance = ourValue / (theirValue * 1.8); // passe de 2 à 1.8 
 
             chance *= 1.0 + ((double)bonus / 100);
 
-            if (atkWeapon is BaseThrown)
+			//if (attacker is PlayerMobile)
+			//{
+			//	chance += 0.15; // Ajoute 15% de chance de toucher pour les joueurs
+			//}
+
+			if (atkWeapon is BaseThrown)
             {
                 //Distance malas
                 if (attacker.InRange(defender, 1))  //Close Quarters

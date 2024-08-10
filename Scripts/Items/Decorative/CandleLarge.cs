@@ -16,6 +16,7 @@ namespace Server.Items
             Burning = false;
             Light = LightType.Circle150;
             Weight = 2.0;
+			Layer = Layer.OneHanded;
         }
 
         public CandleLarge(Serial serial)

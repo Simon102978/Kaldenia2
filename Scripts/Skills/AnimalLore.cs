@@ -41,7 +41,7 @@ namespace Server.SkillHandlers
 
 					if (!c.IsDeadPet)
 					{
-						if (c.Body.IsAnimal || c.Body.IsMonster || c.Body.IsSea || c.BaseHire)
+						if (c.Body.IsAnimal || c.Body.IsMonster || c.Body.IsSea /*|| c.BaseHire*/)
 						{
 							if ((!c.Controlled || !c.Tamable) && from.Skills[SkillName.AnimalLore].Base < 100.0)
 							{
