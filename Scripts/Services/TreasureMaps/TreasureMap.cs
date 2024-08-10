@@ -21,10 +21,13 @@ namespace Server.Items
         public static double LootChance = Config.Get("TreasureMaps.LootChance", .01);
         private static TimeSpan ResetTime = TimeSpan.FromDays(Config.Get("TreasureMaps.ResetTime", 30.0));
 
+
         #region Forgotten Treasures
         private TreasurePackage _Package;
 
-        [CommandProperty(AccessLevel.GameMaster)]
+		
+
+		[CommandProperty(AccessLevel.GameMaster)]
         public TreasureLevel TreasureLevel
         {
             get { return (TreasureLevel)m_Level; }
@@ -37,7 +40,9 @@ namespace Server.Items
             }
         }
 
-        [CommandProperty(AccessLevel.GameMaster)]
+	
+
+		[CommandProperty(AccessLevel.GameMaster)]
         public TreasurePackage Package
         {
             get { return _Package; }
@@ -343,7 +348,7 @@ namespace Server.Items
 
         public TreasureMap()
         {
-			
+			Name = "Carte au trésor";
 		}
 
         [Constructable]
@@ -356,7 +361,8 @@ namespace Server.Items
         [Constructable]
         public TreasureMap(int level, Map map1, bool eodon)
         {
-            Level = level;
+			Name = "Carte au trésor";
+			Level = level;
             bool newSystem = TreasureMapInfo.NewSystem;
 
             if (newSystem)
@@ -406,7 +412,8 @@ namespace Server.Items
             NextReset = DateTime.UtcNow + ResetTime;
         }
 
-        public Map GetRandomMap()
+	
+		public Map GetRandomMap()
         {
             switch (Utility.Random(8))
             {
@@ -998,7 +1005,9 @@ namespace Server.Items
             }
         }
 
-        public override void AddNameProperty(ObjectPropertyList list)
+
+	
+		public override void AddNameProperty(ObjectPropertyList list)
         {
 			
 			if (TreasureMapInfo.NewSystem)
@@ -1011,11 +1020,36 @@ namespace Server.Items
 			}
         }
 
-        public override void GetProperties(ObjectPropertyList list)
+		private int GetRequiredSkill()
+		{
+			switch (TreasureLevel)
+			{
+				case TreasureLevel.Stash:  
+					return 5;
+				case TreasureLevel.Supply: 
+					return 20;
+				case TreasureLevel.Cache:  
+					return 50;
+				case TreasureLevel.Hoard:  
+					return 70;
+				case TreasureLevel.Trove:  
+					return 90;
+				default:
+					return 100;  
+			}
+		}
+
+		public override void GetProperties(ObjectPropertyList list)
         {
             base.GetProperties(list);
 
-            TreasureFacet facet = TreasureMapInfo.GetFacet(ChestLocation, Facet);
+			list.Add("Carte Niveau :", Level.ToString()); // Level ~1_val~
+			list.Add(1061645, GetRequiredSkill().ToString()); // Lockpicking Required: ~1_val~
+
+		
+
+		
+		TreasureFacet facet = TreasureMapInfo.GetFacet(ChestLocation, Facet);
 
             switch (facet)
             {

@@ -26,7 +26,7 @@ namespace Server.Scripts.Commands
 			}
 
 			string className = e.GetString(0);
-			string directoryPath = Path.Combine(Core.BaseDirectory, "Scripts", "Custom", "ItemGen");
+			string directoryPath = Path.Combine(Core.BaseDirectory, "Scripts","Custom", "ItemGen");
 			string filePath = Path.Combine(directoryPath, $"{className}.cs");
 
 			if (File.Exists(filePath))
@@ -168,7 +168,7 @@ namespace Server.Scripts.Commands
 			{
 				writer.WriteLine($"            Layer = Layer.{armor.Layer};");
 				if (armor.Quality != ItemQuality.Normal)
-					writer.WriteLine($"            Quality = ArmorQuality.{armor.Quality};");
+					writer.WriteLine($"            Quality = ItemQuality.{armor.Quality};");
 				
 
 				if (armor.PhysicalResistance != 0) writer.WriteLine($"            PhysicalResistance = {armor.PhysicalResistance};");
@@ -186,7 +186,7 @@ namespace Server.Scripts.Commands
 			{
 				writer.WriteLine($"            Layer = Layer.{weapon.Layer};");
 				if (weapon.Quality != ItemQuality.Normal)
-					writer.WriteLine($"            Quality = WeaponQuality.{weapon.Quality};");
+					writer.WriteLine($"            Quality = ItemQuality.{weapon.Quality};");
 				
 
 				writer.WriteLine($"            MinDamage = {weapon.MinDamage};");

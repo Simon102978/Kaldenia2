@@ -18,7 +18,7 @@ namespace Server.Scripts.Commands
 		}
 
 		[Usage("MobGen <ClassName>")]
-		[Description("Permet de créer un script de créature qui sera sauvegardé sur le serveur dans : TheBox/MobGen.")]
+		[Description("Permet de créer un script de créature qui sera sauvegardé sur le serveur dans : Scripts/Custom/MobGen.")]
 		public static void MobGen_OnCommand(CommandEventArgs e)
 		{
 			if (!e.Mobile.IsStaff())
@@ -35,7 +35,7 @@ namespace Server.Scripts.Commands
 
 			string className = e.GetString(0);
 			string serverPath = Server.Config.Get("ServUOPath", Core.BaseDirectory);
-			string directoryPath = Path.Combine(serverPath, "TheBox", "MobGen");
+			string directoryPath = Path.Combine(serverPath, "Scripts","Custom","MobGen");
 			string filePath = Path.Combine(directoryPath, $"{className}.cs");
 
 			if (File.Exists(filePath))
@@ -70,7 +70,7 @@ namespace Server.Scripts.Commands
 
 				try
 				{
-					string directoryPath = Path.Combine(ServerPath, "Scripts", "MobGen");
+					string directoryPath = Path.Combine(Core.BaseDirectory, "Scripts", "Custom", "MobGen");
 					Directory.CreateDirectory(directoryPath);
 					string filePath = Path.Combine(directoryPath, $"{ClassName}.cs");
 
@@ -148,15 +148,16 @@ namespace Server.Scripts.Commands
 									sb.AppendLine($"\t\t\t\tHue = {item.Hue},");
 								if (item.LootType != LootType.Regular)
 									sb.AppendLine($"\t\t\t\tLootType = LootType.{item.LootType},");
+								sb.AppendLine($"\t\t\t\tLayer = Layer.{item.Layer},");
 								if (item is BaseWeapon weapon)
 								{
-									sb.AppendLine($"\t\t\t\tQuality = WeaponQuality.{weapon.Quality},");
+									sb.AppendLine($"\t\t\t\tQuality = ItemQuality.{weapon.Quality},");
 									if (weapon.Resource != CraftResource.None)
 										sb.AppendLine($"\t\t\t\tResource = CraftResource.{weapon.Resource},");
 								}
 								else if (item is BaseArmor armor)
 								{
-									sb.AppendLine($"\t\t\t\tQuality = ArmorQuality.{armor.Quality},");
+									sb.AppendLine($"\t\t\t\tQuality = ItemQuality.{armor.Quality},");
 									if (armor.Resource != CraftResource.None)
 										sb.AppendLine($"\t\t\t\tResource = CraftResource.{armor.Resource},");
 								}

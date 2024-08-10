@@ -213,7 +213,7 @@ namespace Server.Items
 
 			_LastShoulder = null;
 			_Timer.Stop();
-			_NextFly = DateTime.UtcNow + TimeSpan.FromMinutes(2);
+			_NextFly = DateTime.UtcNow + TimeSpan.FromSeconds(15);
 			_currentFrame = 0;
 		}
 

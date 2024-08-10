@@ -49,9 +49,6 @@ namespace Server.Commands
 				if (atkWeapon == null || defWeapon == null)
 					return 0;
 
-				Skill atkSkill = attacker.Skills[atkWeapon.Skill];
-				Skill defSkill = defender.Skills[defWeapon.Skill];
-
 				double atkValue = atkWeapon.GetAttackSkillValue(attacker, defender);
 				double defValue = defWeapon.GetDefendSkillValue(attacker, defender);
 
@@ -59,27 +56,74 @@ namespace Server.Commands
 				defValue = Math.Max(defValue, -19.9);
 
 				int bonus = AosAttributes.GetValue(attacker, AosAttribute.AttackChance);
+
+				if (attacker is BaseCreature bc && !bc.Controlled && defender is BaseCreature bc2 && bc2.Controlled)
+				{
+					bonus = Math.Max(bonus, 45);
+				}
+
 				bonus = Math.Min(45, bonus);
 
 				double ourValue = (atkValue + 20.0) * (100 + bonus);
 
 				bonus = AosAttributes.GetValue(defender, AosAttribute.DefendChance);
+
+				ForceArrow.ForceArrowInfo info = ForceArrow.GetInfo(attacker, defender);
+
+				if (info != null && info.Defender == defender)
+					bonus -= info.DefenseChanceMalus;
+
 				int max = 45 + BaseArmor.GetRefinedDefenseChance(defender) + WhiteTigerFormSpell.GetDefenseCap(defender);
-				bonus = Math.Min(bonus, max);
+
+				if (bonus > max)
+					bonus = max;
 
 				double theirValue = (defValue + 20.0) * (100 + bonus);
 
-				double chance = ourValue / (theirValue * 2.0);
+				double chance = ourValue / (theirValue * 1.8); // Changed from 2.0 to 1.8
 
-				// Ajustements pour les armes de lancer
 				if (atkWeapon is BaseThrown)
 				{
-					// Ajoutez ici les ajustements pour les armes de lancer
+					// Distance malus
+					if (attacker.InRange(defender, 1))  // Close Quarters
+					{
+						chance -= (.12 - Math.Min(12, (attacker.Skills[SkillName.Throwing].Value + attacker.RawDex) / 20) / 10);
+					}
+					else if (attacker.GetDistanceToSqrt(defender) < ((BaseThrown)atkWeapon).MinThrowRange)  // Too close
+					{
+						chance -= .12;
+					}
+
+					// Shield penalty
+					BaseShield shield = attacker.FindItemOnLayer(Layer.TwoHanded) as BaseShield;
+
+					if (shield != null)
+					{
+						double malus = Math.Min(90, 1200 / Math.Max(1.0, attacker.Skills[SkillName.Parry].Value));
+						chance = chance - (chance * (malus / 100));
+					}
+				}
+
+				if (defWeapon is BaseThrown)
+				{
+					BaseShield shield = defender.FindItemOnLayer(Layer.TwoHanded) as BaseShield;
+
+					if (shield != null)
+					{
+						double malus = Math.Min(90, 1200 / Math.Max(1.0, defender.Skills[SkillName.Parry].Value));
+						chance = chance + (chance * (malus / 100));
+					}
 				}
 
 				chance = Math.Max(chance, 0.02);
 
-				// Convertir en pourcentage
+				// Ajout du 15% de chance de toucher supplémentaire
+				chance += 0.15;
+
+				// Assurez-vous que la chance ne dépasse pas 100%
+				chance = Math.Min(chance, 1.0);
+
+				// Convert to percentage
 				return chance * 100;
 			}
 		}

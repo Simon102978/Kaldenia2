@@ -1223,10 +1223,10 @@ namespace Server.Items
 
             chance *= 1.0 + ((double)bonus / 100);
 
-			//if (attacker is PlayerMobile)
-			//{
-			//	chance += 0.15; // Ajoute 15% de chance de toucher pour les joueurs
-			//}
+			if (attacker is PlayerMobile)
+			{
+				chance += 0.15; // Ajoute 15% de chance de toucher pour les joueurs
+			}
 
 			if (atkWeapon is BaseThrown)
             {

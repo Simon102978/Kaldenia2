@@ -4,7 +4,6 @@ using System;
 using System.Collections;
 using Server.Items;
 using Server.Gumps;
-using Server.Custom;
 
 namespace Server.Items
 {
@@ -22,21 +21,25 @@ namespace Server.Items
 		private readonly Timer m_Timer;
 		private readonly DateTime m_Created;
 		private readonly ArrayList m_Entries;
+		private readonly ArrayList m_TamedCreatures;
 
 		public bool IsUpgraded = false;
 
-		public Campfire() : base(0xDE3)
+		public Campfire()
+			: base(0xDE3)
 		{
 			Movable = false;
 			Light = LightType.Circle300;
 
 			m_Entries = new ArrayList();
+			m_TamedCreatures = new ArrayList();
 
 			m_Created = DateTime.UtcNow;
 			m_Timer = Timer.DelayCall(TimeSpan.FromSeconds(1.0), TimeSpan.FromSeconds(1.0), OnTick);
 		}
 
-		public Campfire(Serial serial) : base(serial)
+		public Campfire(Serial serial)
+			: base(serial)
 		{
 		}
 
@@ -143,26 +146,28 @@ namespace Server.Items
 
 				if (entry.Safe)
 				{
-					if (entry.Player.Hits < entry.Player.HitsMax && entry.Player.CanHeal() && !IsInCombat(entry.Player))
-					{
-						entry.Player.Hits += 1;
-					}
+					ApplyCampfireEffects(entry.Player);
+				}
+			}
 
-					Effects.SendLocationParticles(this, 0x3779, 1, 30, 1160, 3, 9502, 0);
-
-					if (!entry.IsBuffed)
-					{
-						DoBuff(entry.Player);
-						entry.IsBuffed = true;
-					}
+			// Gérer les créatures apprivoisées séparément
+			foreach (BaseCreature creature in new ArrayList(m_TamedCreatures))
+			{
+				if (creature.Deleted || !creature.Controlled || !creature.InRange(this, SecureRange))
+				{
+					m_TamedCreatures.Remove(creature);
+				}
+				else if (creature.Combatant == null)
+				{
+					ApplyCampfireEffectsToCreature(creature);
 				}
 			}
 
 			IPooledEnumerable eable = GetMobilesInRange(SecureRange);
 
-			foreach (Mobile state in eable)
+			foreach (Mobile mobile in eable)
 			{
-				if (state is PlayerMobile pm)
+				if (mobile is PlayerMobile pm)
 				{
 					if (pm != null && GetEntry(pm) == null)
 					{
@@ -172,19 +177,37 @@ namespace Server.Items
 						pm.SendLocalizedMessage(500620); // You feel it would take a few moments to secure your camp.
 					}
 				}
-				else if (!(state is GolemZyX) && !IsInCombat(state))
+				else if (mobile is BaseCreature creature && creature.Controlled && !m_TamedCreatures.Contains(creature))
 				{
-					state.Hits += 10;
+					m_TamedCreatures.Add(creature);
 				}
 			}
 
 			eable.Free();
 		}
 
-		private bool IsInCombat(Mobile m)
+		private void ApplyCampfireEffects(Mobile player)
 		{
-			return (m is PlayerMobile || m is BaseCreature) && m.Combatant != null;
+			if (player.Hits < player.HitsMax && player.CanHeal())
+				player.Hits += 1;
+
+			Effects.SendLocationParticles(this, 0x3779, 1, 30, 1160, 3, 9502, 0);
+
+			if (!((CampfireEntry)m_Table[player]).IsBuffed)
+			{
+				DoBuff(player);
+				((CampfireEntry)m_Table[player]).IsBuffed = true;
+			}
 		}
+
+		private void ApplyCampfireEffectsToCreature(BaseCreature creature)
+		{
+			if (creature.Hits < creature.HitsMax)
+				creature.Hits += 10;
+
+			Effects.SendLocationParticles(EffectItem.Create(creature.Location, creature.Map, EffectItem.DefaultDuration), 0x3779, 1, 30, 1160, 3, 9502, 0);
+		}
+
 
 		public bool DoBuff(Mobile from)
 		{
@@ -244,8 +267,14 @@ namespace Server.Items
 
 		public bool Safe
 		{
-			get { return Valid && m_Safe; }
-			set { m_Safe = value; }
+			get
+			{
+				return Valid && m_Safe;
+			}
+			set
+			{
+				m_Safe = value;
+			}
 		}
 	}
 }
