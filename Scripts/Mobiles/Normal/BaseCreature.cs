@@ -4327,7 +4327,16 @@ namespace Server.Mobiles
 			Effects.SendLocationParticles(EffectItem.Create(m.Location, m.Map, EffectItem.DefaultDuration), 0x3728, 8, 20, 5042);
 			Effects.PlaySound(m, m.Map, 0x201);
 
-			m.Delete();
+			int delay = Utility.RandomMinMax(3, 7);
+			Timer.DelayCall(TimeSpan.FromSeconds(delay), () =>
+			{
+				if (!m.Deleted)
+				{
+					Effects.SendLocationParticles(EffectItem.Create(m.Location, m.Map, EffectItem.DefaultDuration), 0x3728, 8, 20, 5042);
+					Effects.PlaySound(m, m.Map, 0x201);
+					m.Delete();
+				}
+			});
 		}
 
 		public virtual bool DeleteOnRelease => m_bSummoned || m_Allured;

@@ -6357,7 +6357,12 @@ namespace Server.Mobiles
 							continue;
 						}
 
-						if (pet.Summoned && pet.Map != Map)
+					if (pet is IMount)
+					{
+						continue;
+					}
+
+					if (pet.Summoned && pet.Map != Map)
 						{
 							pet.PlaySound(pet.GetAngerSound());
 

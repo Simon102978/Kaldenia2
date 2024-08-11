@@ -612,7 +612,7 @@ namespace Server.Engines.Craft
 
 			#region Appats
 			// Appât pour Fish
-			index = AddCraft(typeof(BaitFish), "Appâts", "Appât à Poisson (1)", 00.0, 30.0, typeof(IronIngot), "Lingots de fer", 1, "Vous n'avez pas assez de lingots de fer pour faire cet appât.");
+			index = AddCraft(typeof(BaitFish), "Appâts", "Appât à Poisson (1)", -20.0, 30.0, typeof(IronIngot), "Lingots de fer", 1, "Vous n'avez pas assez de lingots de fer pour faire cet appât.");
 			
 
 			// Appât pour AutumnDragonfish

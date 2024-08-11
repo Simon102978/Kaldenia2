@@ -36,483 +36,483 @@ namespace Server.Items
 
 	}
 
-	public class Collier :  BaseNecklace
-    {
-
-	[Constructable]
-	public Collier()
-		: base(41842)
+	public class Collier : BaseNecklace
 	{
-		Weight = 2.0;
-		Name = "Collier massif doré";
+
+		[Constructable]
+		public Collier()
+			: base(41842)
+		{
+			Weight = 2.0;
+			Name = "Collier massif doré";
+		}
+
+		public Collier(Serial serial)
+			: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
 	}
 
-	public Collier(Serial serial)
-		: base(serial)
-	{
-	}
-
-	public override void Serialize(GenericWriter writer)
-	{
-		base.Serialize(writer);
-
-		writer.Write(0); // version
-	}
-
-	public override void Deserialize(GenericReader reader)
-	{
-		base.Deserialize(reader);
-
-		int version = reader.ReadInt();
-	}
-}
-
-public class Collier2 :  BaseNecklace
+	public class Collier2 : BaseNecklace
 
 	{
 
-	[Constructable]
-	public Collier2()
-            : base(41843)
+		[Constructable]
+		public Collier2()
+				: base(41843)
 
 		{
-		Weight = 2.0;
-		Name = "Collier croix Ankh";
-	}
+			Weight = 2.0;
+			Name = "Collier croix Ankh";
+		}
 
-	public Collier2(Serial serial)
-            : base(serial)
+		public Collier2(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Couronne2 :  BaseCouronne
+			int version = reader.ReadInt();
+		}
+	}
+	public class Couronne2 : BaseCouronne
 
 	{
 
 
-	[Constructable]
-	public Couronne2()
-            : base(41845)
+		[Constructable]
+		public Couronne2()
+				: base(41845)
 
 		{
-		Weight = 2.0;
-		Name = "Petite couronne";
-	}
+			Weight = 2.0;
+			Name = "Petite couronne";
+		}
 
-	public Couronne2(Serial serial)
-            : base(serial)
+		public Couronne2(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Collier3 :  BaseNecklace
+			int version = reader.ReadInt();
+		}
+	}
+	public class Collier3 : BaseNecklace
 
 	{
 
-	[Constructable]
-	public Collier3()
-            : base(41846)
+		[Constructable]
+		public Collier3()
+				: base(41846)
 
 		{
-		Weight = 2.0;
-		Name = "Collier bolo doré";
-	}
+			Weight = 2.0;
+			Name = "Collier bolo doré";
+		}
 
-	public Collier3(Serial serial)
-            : base(serial)
+		public Collier3(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Couronne3 :  BaseCouronne
+			int version = reader.ReadInt();
+		}
+	}
+	public class Couronne3 : BaseCouronne
 
 	{
 
 
-	[Constructable]
-	public Couronne3()
-            : base(41847)
+		[Constructable]
+		public Couronne3()
+				: base(41847)
 
 		{
-		Weight = 2.0;
-		Name = "Diadème";
-	}
+			Weight = 2.0;
+			Name = "Diadème";
+		}
 
-	public Couronne3(Serial serial)
-            : base(serial)
+		public Couronne3(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Collier4 :  BaseNecklace
+			int version = reader.ReadInt();
+		}
+	}
+	public class Collier4 : BaseNecklace
 
 	{
 
-	[Constructable]
-	public Collier4()
-            : base(41848)
+		[Constructable]
+		public Collier4()
+				: base(41848)
 
 		{
-		Weight = 2.0;
-		Name = "Grande chaine dorée";
-	}
+			Weight = 2.0;
+			Name = "Grande chaine dorée";
+		}
 
-	public Collier4(Serial serial)
-            : base(serial)
+		public Collier4(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Collier5 :  BaseNecklace
+			int version = reader.ReadInt();
+		}
+	}
+	public class Collier5 : BaseNecklace
 
 	{
 
-	[Constructable]
-	public Collier5()
-            : base(41849)
+		[Constructable]
+		public Collier5()
+				: base(41849)
 
 		{
-		Weight = 2.0;
-		Name = "Collier croix Ankh doré";
-	}
+			Weight = 2.0;
+			Name = "Collier croix Ankh doré";
+		}
 
-	public Collier5(Serial serial)
-            : base(serial)
+		public Collier5(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Collier6 :  BaseNecklace
+			int version = reader.ReadInt();
+		}
+	}
+	public class Collier6 : BaseNecklace
 
 	{
 
-	[Constructable]
-	public Collier6()
-            : base(41850)
+		[Constructable]
+		public Collier6()
+				: base(41850)
 
 		{
-		Weight = 2.0;
-		Name = "Petit collier Usekh";
-	}
+			Weight = 2.0;
+			Name = "Petit collier Usekh";
+		}
 
-	public Collier6(Serial serial)
-            : base(serial)
+		public Collier6(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Collier7 :  BaseNecklace
+			int version = reader.ReadInt();
+		}
+	}
+	public class Collier7 : BaseNecklace
 
 	{
 
-	[Constructable]
-	public Collier7()
-            : base(41851)
+		[Constructable]
+		public Collier7()
+				: base(41851)
 
 		{
-		Weight = 2.0;
-		Name = "Petit collier doré";
-	}
+			Weight = 2.0;
+			Name = "Petit collier doré";
+		}
 
-	public Collier7(Serial serial)
-            : base(serial)
+		public Collier7(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Lunettes :  BaseNecklace
+			int version = reader.ReadInt();
+		}
+	}
+	public class Lunettes : BaseNecklace
 
 	{
 
-	[Constructable]
-	public Lunettes()
-            : base(41852)
+		[Constructable]
+		public Lunettes()
+				: base(41852)
 
 		{
-		Weight = 2.0;
-		Name = "Lunette dorée";
-	}
+			Weight = 2.0;
+			Name = "Lunette dorée";
+		}
 
-	public Lunettes(Serial serial)
-            : base(serial)
+		public Lunettes(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Couronne4 :  BaseCouronne
+			int version = reader.ReadInt();
+		}
+	}
+	public class Couronne4 : BaseCouronne
 
 	{
 
-	[Constructable]
-	public Couronne4()
-            : base(41853)
+		[Constructable]
+		public Couronne4()
+				: base(41853)
 
 		{
-		Weight = 2.0;
-		Name = "Grande couronne";
-	}
+			Weight = 2.0;
+			Name = "Grande couronne";
+		}
 
-	public Couronne4(Serial serial)
-            : base(serial)
+		public Couronne4(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Collier8 :  BaseNecklace
+			int version = reader.ReadInt();
+		}
+	}
+	public class Collier8 : BaseNecklace
 
 	{
 
-	[Constructable]
-	public Collier8()
-            : base(41854)
+		[Constructable]
+		public Collier8()
+				: base(41854)
 
 		{
-		Weight = 2.0;
-		Name = "Collier de feuilles dorées";
-	}
+			Weight = 2.0;
+			Name = "Collier de feuilles dorées";
+		}
 
-	public Collier8(Serial serial)
-            : base(serial)
+		public Collier8(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Ceinture10 :  BaseWaist
+			int version = reader.ReadInt();
+		}
+	}
+	public class Ceinture10 : BaseWaist
 
 	{
 
-	[Constructable]
-	public Ceinture10()
-            : base(41855)
+		[Constructable]
+		public Ceinture10()
+				: base(41855)
 
 		{
-		Weight = 2.0;
-		Name = "Ceinture de feuilles dorées";
+			Weight = 2.0;
+			Name = "Ceinture de feuilles dorées";
 			Layer = Layer.Waist;
-	}
+		}
 
-	public Ceinture10(Serial serial)
-            : base(serial)
+		public Ceinture10(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Tiare :  BaseCouronne
+			int version = reader.ReadInt();
+		}
+	}
+	public class Tiare : BaseCouronne
 	{
 
 
-	[Constructable]
-	public Tiare()
-            : base(41856)
+		[Constructable]
+		public Tiare()
+				: base(41856)
 
 		{
-		Weight = 2.0;
-		Name ="Tiare";
-	}
+			Weight = 2.0;
+			Name = "Tiare";
+		}
 
-	public Tiare(Serial serial)
-            : base(serial)
+		public Tiare(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-	public class Chapelet : BaseJewel
+			int version = reader.ReadInt();
+		}
+	}
+	public class Chapelet : Item
 	{
 
 
@@ -523,6 +523,7 @@ public override void Deserialize(GenericReader reader)
 		{
 			Weight = 2.0;
 			Name = "Chapelet";
+			Layer = Layer.Waist;
 		}
 
 		public Chapelet(Serial serial)
@@ -546,145 +547,145 @@ public override void Deserialize(GenericReader reader)
 			int version = reader.ReadInt();
 		}
 	}
-	public class Collier9 :  BaseNecklace
+	public class Collier9 : BaseNecklace
 
 	{
 
-	[Constructable]
-	public Collier9()
-            : base(41857)
+		[Constructable]
+		public Collier9()
+				: base(41857)
 
 		{
-		Weight = 2.0;
-		Name = "Collier de perle";
-	}
+			Weight = 2.0;
+			Name = "Collier de perle";
+		}
 
-	public Collier9(Serial serial)
-            : base(serial)
+		public Collier9(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
-
-	writer.Write(0); // version
-}
-
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
-
-	int version = reader.ReadInt();
-}
-    }
-public class Collier10 :  BaseNecklace
-
-	{
-
-
-	[Constructable]
-	public Collier10()
-            : base(41858)
-
 		{
-		Weight = 2.0;
-		Name = "Collier simple avec pendentif";
-	}
+			base.Serialize(writer);
 
-	public Collier10(Serial serial)
-            : base(serial)
+			writer.Write(0); // version
+		}
 
+		public override void Deserialize(GenericReader reader)
 		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
 	}
-
-
-		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
-
-	writer.Write(0); // version
-}
-
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
-
-	int version = reader.ReadInt();
-}
-    }
-public class Collier11 :  BaseNecklace
+	public class Collier10 : BaseNecklace
 
 	{
 
 
-	[Constructable]
-	public Collier11()
-            : base(41859)
+		[Constructable]
+		public Collier10()
+				: base(41858)
 
 		{
-		Weight = 2.0;
-		Name = "Collier simple";
-	}
+			Weight = 2.0;
+			Name = "Collier simple avec pendentif";
+		}
 
-	public Collier11(Serial serial)
-            : base(serial)
+		public Collier10(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
-public class Collier12 :  BaseNecklace
+			int version = reader.ReadInt();
+		}
+	}
+	public class Collier11 : BaseNecklace
 
 	{
 
 
-	[Constructable]
-	public Collier12()
-            : base(41860)
+		[Constructable]
+		public Collier11()
+				: base(41859)
 
 		{
-		Weight = 2.0;
-		Name = "Grand collier doré avec pendentif";
-	}
+			Weight = 2.0;
+			Name = "Collier simple";
+		}
 
-	public Collier12(Serial serial)
-            : base(serial)
+		public Collier11(Serial serial)
+				: base(serial)
 
 		{
-	}
+		}
 
 
 		public override void Serialize(GenericWriter writer)
-{
-	base.Serialize(writer);
+		{
+			base.Serialize(writer);
 
-	writer.Write(0); // version
-}
+			writer.Write(0); // version
+		}
 
-public override void Deserialize(GenericReader reader)
-{
-	base.Deserialize(reader);
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
-	int version = reader.ReadInt();
-}
-    }
+			int version = reader.ReadInt();
+		}
+	}
+	public class Collier12 : BaseNecklace
+
+	{
+
+
+		[Constructable]
+		public Collier12()
+				: base(41860)
+
+		{
+			Weight = 2.0;
+			Name = "Grand collier doré avec pendentif";
+		}
+
+		public Collier12(Serial serial)
+				: base(serial)
+
+		{
+		}
+
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
 	public class DiademeFeuilleOr : BaseNecklace
 
 	{

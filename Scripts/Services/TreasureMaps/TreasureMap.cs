@@ -18,7 +18,7 @@ namespace Server.Items
     {
         public static bool NewSystem => false;
 
-        public static double LootChance = Config.Get("TreasureMaps.LootChance", .01);
+        public static double LootChance = Config.Get("TreasureMaps.LootChance", .05);
         private static TimeSpan ResetTime = TimeSpan.FromDays(Config.Get("TreasureMaps.ResetTime", 30.0));
 
 
@@ -936,10 +936,10 @@ namespace Server.Items
 
             from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 503019); // You successfully decode a treasure map!
             Decoder = from;
-
-            LootType = LootType.Blessed;
-
-            DisplayTo(from);
+			m_Decoder = from;
+			//       LootType = LootType.Blessed;
+			InvalidateProperties();
+			DisplayTo(from);
         }
 
         public void ResetLocation()
@@ -1004,21 +1004,16 @@ namespace Server.Items
                 }
             }
         }
+		public void ForceRefresh()
+		{
+			Delta(ItemDelta.Properties);
+		}
 
 
-	
 		public override void AddNameProperty(ObjectPropertyList list)
-        {
-			
-			if (TreasureMapInfo.NewSystem)
-            {
-                list.Add(m_Decoder != null ? 1158980 + (int)TreasureLevel : 1158975 + (int)TreasureLevel, "#" + TreasureMapInfo.PackageLocalization(Package).ToString());
-            }
-            else
-            {
-				list.Add("Carte au trésor");
-			}
-        }
+		{
+			list.Add("Carte au trésor");
+		}
 
 		private int GetRequiredSkill()
 		{
@@ -1041,15 +1036,20 @@ namespace Server.Items
 
 		public override void GetProperties(ObjectPropertyList list)
         {
-            base.GetProperties(list);
 
-			list.Add("Carte Niveau :", Level.ToString()); // Level ~1_val~
-			list.Add(1061645, GetRequiredSkill().ToString()); // Lockpicking Required: ~1_val~
+			if (m_Decoder != null)
+			{
+				list.Add($"Carte Niveau: {Level}");
+				list.Add($"Lockpicking Requis: {GetRequiredSkill()}");
+			}
 
-		
+			
+			list.Add("un trésor caché sur les landes");
 
-		
-		TreasureFacet facet = TreasureMapInfo.GetFacet(ChestLocation, Facet);
+
+
+
+			TreasureFacet facet = TreasureMapInfo.GetFacet(ChestLocation, Facet);
 
             switch (facet)
             {

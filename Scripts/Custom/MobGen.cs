@@ -83,8 +83,10 @@ namespace Server.Scripts.Commands
 					sb.AppendLine();
 					sb.AppendLine("namespace Server.Mobiles");
 					sb.AppendLine("{");
+					sb.AppendLine($"\t[CorpseName(\"le corps d'un {{0}}\")]");
 					sb.AppendLine($"\tpublic class {ClassName} : BaseCreature");
 					sb.AppendLine("\t{");
+					sb.AppendLine("\t\t[Constructable]");
 					sb.AppendLine($"\t\tpublic {ClassName}() : base(AIType.{creature.AI}, FightMode.{creature.FightMode}, 10, 1, 0.2, 0.4)");
 					sb.AppendLine("\t\t{");
 					sb.AppendLine($"\t\t\tName = \"{creature.Name}\";");
@@ -131,6 +133,7 @@ namespace Server.Scripts.Commands
 						sb.AppendLine($"\t\t\tTamable = true;");
 						sb.AppendLine($"\t\t\tControlSlots = {creature.ControlSlots};");
 						sb.AppendLine($"\t\t\tMinTameSkill = {Math.Round(creature.MinTameSkill, 1).ToString(System.Globalization.CultureInfo.InvariantCulture)};");
+						sb.AppendLine("\t\t\tFavoriteFood = FoodType.Fish | FoodType.Meat | FoodType.FruitsAndVegies | FoodType.Eggs;");
 					}
 
 					if (creature.BodyValue == 400 || creature.BodyValue == 401)
@@ -168,6 +171,8 @@ namespace Server.Scripts.Commands
 
 					sb.AppendLine("\t\t}");
 					sb.AppendLine();
+					sb.AppendLine("\t\tpublic override FoodType FavoriteFood => FoodType.Fish | FoodType.Meat | FoodType.FruitsAndVegies | FoodType.Eggs;");
+					sb.AppendLine();
 					sb.AppendLine($"\t\tpublic {ClassName}(Serial serial) : base(serial)");
 					sb.AppendLine("\t\t{");
 					sb.AppendLine("\t\t}");
@@ -195,6 +200,8 @@ namespace Server.Scripts.Commands
 					from.SendMessage($"Erreur lors de la génération du script : {ex.Message}");
 				}
 			}
+
 		}
 	}
 }
+
