@@ -291,6 +291,7 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Cloth), 1044286, 15, 1044287);
 			index = AddCraft(typeof(pianomodern2AddonDeed), "Instruments", "Piano (S)", 30.0, 60.0, typeof(PalmierBoard), 1044041, 35, 1044351);
 			AddRes(index, typeof(Cloth), 1044286, 15, 1044287);
+			index = AddCraft(typeof(FireHorn), "Instruments", "Corne de feu", 80.0, 110.0, typeof(PalmierBoard), 1044041, 15, 1044351);
 			#endregion Instruments
 
 			#region Caisses et Coffres

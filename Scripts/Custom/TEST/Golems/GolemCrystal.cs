@@ -457,7 +457,7 @@ namespace Server.Custom
 				{
 					GolemAsh.AshType ashType = GolemAsh.GetAshTypeFromAsh(m_Crystal.Ash);
 					GolemZyX golem = new GolemZyX(m_Crystal.Spirit, ashType, m_Crystal.AshQuantity, from); 
-					ApplyAshBonuses(golem, m_Crystal.Ash, m_Crystal.AshQuantity, from.Skills[SkillName.AnimalTaming].Value);
+					ApplyAshBonuses(golem, m_Crystal.Ash, m_Crystal.AshQuantity);
 					golem.MoveToWorld(from.Location, from.Map);
 					from.SendMessage("Vous avez créé un Golem avec succès!");
 				}
@@ -473,10 +473,10 @@ namespace Server.Custom
 			}
 
 
-			private void ApplyAshBonuses(GolemZyX golem, BaseGolemAsh ash, int ashQuantity, double animalTamingSkill)
+			private void ApplyAshBonuses(GolemZyX golem, BaseGolemAsh ash, int ashQuantity)
 			{
 				int baseBonus = ashQuantity * 5;
-				int skillBonus = (int)(animalTamingSkill * 0.1);
+				int skillBonus = 0;
 
 				if (ash is GolemCendreFeu)
 				{
@@ -539,11 +539,32 @@ namespace Server.Custom
 					golem.Penalty = 2;
 				}
 
-				golem.SetHits(golem.HitsMax + (baseBonus * 2));
-				golem.SetDamage(golem.DamageMin + (baseBonus / 10), golem.DamageMax + (baseBonus / 5));
+				golem.SetDamage(golem.DamageMin + ((golem.Str + golem.Dex) / 60), golem.DamageMax + ((golem.Str + golem.Dex) / 30));
+				int newHitsMax = golem.HitsMax + (baseBonus * 2);
+				golem.SetHits(newHitsMax);
+				golem.Hits = newHitsMax;
+
+
+				// Conserver les résistances de l'esprit
+				golem.SetResistance(ResistanceType.Physical, golem.PhysicalResistance);
+				golem.SetResistance(ResistanceType.Fire, golem.FireResistance);
+				golem.SetResistance(ResistanceType.Cold, golem.ColdResistance);
+				golem.SetResistance(ResistanceType.Poison, golem.PoisonResistance);
+				golem.SetResistance(ResistanceType.Energy, golem.EnergyResistance);
+
+				// Appliquer un bonus de résistance basé sur le type de cendre
+				ResistanceType bonusResistance = GetBonusResistanceType(ash);
+				golem.SetResistance(bonusResistance, golem.GetResistance(bonusResistance) + 25);
 			}
 
-
+			private ResistanceType GetBonusResistanceType(BaseGolemAsh ash)
+			{
+				if (ash is GolemCendreFeu) return ResistanceType.Fire;
+				if (ash is GolemCendreEau || ash is GolemCendreGlace) return ResistanceType.Cold;
+				if (ash is GolemCendrePoison) return ResistanceType.Poison;
+				if (ash is GolemCendreSylvestre || ash is GolemCendreVent) return ResistanceType.Energy;
+				return ResistanceType.Physical; // Par défaut pour les autres types
+			}
 
 
 

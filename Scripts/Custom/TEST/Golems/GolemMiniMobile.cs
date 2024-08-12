@@ -45,6 +45,8 @@ namespace Server.Custom
 		private GolemAsh.AshType m_AshType;
 		private int m_MaxHitPoints;
 		private CreatureSpirit m_Spirit;
+		private Mobile m_SummonMaster;
+		private bool m_IsMaterialized;
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int Penalty
@@ -77,12 +79,10 @@ namespace Server.Custom
 					ControlMaster = m_SummonMaster;
 					Controlled = true;
 					ControlTarget = m_SummonMaster;
-					ControlOrder = OrderType.Follow;
+					ControlOrder = OrderType.Come;
 				}
 			}
 		}
-
-		private Mobile m_SummonMaster;
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public MiniGolem MiniGolem { get { return m_MiniGolem; } set { m_MiniGolem = value; } }
@@ -90,7 +90,23 @@ namespace Server.Custom
 		[CommandProperty(AccessLevel.GameMaster)]
 		public GolemAsh.AshType AshType { get { return m_AshType; } set { m_AshType = value; } }
 
-		public override double DispelDifficulty => 200.0;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public CreatureSpirit Spirit { get { return m_Spirit; } set { m_Spirit = value; } }
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool IsMaterialized
+		{
+			get { return m_IsMaterialized; }
+			set
+			{
+				m_IsMaterialized = value;
+				if (m_IsMaterialized)
+					Materialize(SummonMaster);
+				else
+					Dematerialize();
+			}
+		}
+
 
 		public GolemZyX(CreatureSpirit spirit, GolemAsh.AshType ashType, int ashQuantity, Mobile owner)
 			: base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
@@ -101,22 +117,32 @@ namespace Server.Custom
 			Name = $"Golem de {ashType}";
 			Body = 14;
 			BaseSoundID = 268;
-			SetStr(spirit.GetStrength());
-			SetDex(spirit.GetDexterity());
-			SetInt(spirit.GetIntelligence());
-			m_MaxHitPoints = ashQuantity * 2;
+
+			SetStr(spirit.GetStrength() /2);
+			SetDex(spirit.GetDexterity() /2);
+			SetInt(spirit.GetIntelligence() /2);
+
+			m_MaxHitPoints = ashQuantity * 3;
 			SetHits(m_MaxHitPoints);
 			SetMana(0);
-			Summoned = false;
-			ControlOrder = OrderType.Follow;
-			ControlSlots = 3;
-			Controlled = true;
-			Blessed = true;
 
-			SetDamage(1, 2);
+			Summoned = false;
+			ControlSlots = 3;
+			SetControlMaster(owner);
+			Controlled = true;
+			ControlTarget = owner;
+			ControlOrder = OrderType.Come;
+
+			SetDamage(2, 8);
 			SetDamageType(GetDamageType(ashType), 100);
 			VirtualArmor = spirit.GetAR();
 
+
+			SetResistance(ResistanceType.Physical, spirit.GetPhysicalResistance());
+			SetResistance(ResistanceType.Fire, spirit.GetFireResistance());
+			SetResistance(ResistanceType.Cold, spirit.GetColdResistance());
+			SetResistance(ResistanceType.Poison, spirit.GetPoisonResistance());
+			SetResistance(ResistanceType.Energy, spirit.GetEnergyResistance());
 			foreach (SkillName skillName in Enum.GetValues(typeof(SkillName)))
 			{
 				double skillValue = spirit.GetSkillValue(skillName);
@@ -139,15 +165,18 @@ namespace Server.Custom
 			{
 				m_MiniGolem.Delete();
 			}
+
+			IsMaterialized = false; // Le golem commence dématérialisé
 		}
 
 		public GolemZyX(Serial serial) : base(serial) { }
+
 		public void Materialize(Mobile master)
 		{
 			if (master == null || master.Deleted)
 				return;
 
-			if (master.Followers + ControlSlots > master.FollowersMax)
+			if (master.Followers + 3 > master.FollowersMax)
 			{
 				master.SendMessage("Vous n'avez pas assez de place pour matérialiser ce golem.");
 				return;
@@ -155,26 +184,38 @@ namespace Server.Custom
 
 			SetControlMaster(master);
 			Controlled = true;
+			ControlTarget = master;
+			ControlOrder = OrderType.Come;
 			Map = master.Map;
 			Location = master.Location;
-			master.Followers += ControlSlots;
+			master.Followers += 3;
+
+			m_IsMaterialized = true;
+			Hidden = false;
+			if (Map == null || Map == Map.Internal)
+			{
+				Map = master.Map;
+			}
 
 			master.SendMessage("Vous avez matérialisé le golem.");
 		}
+
 
 		public void Dematerialize()
 		{
 			if (ControlMaster != null)
 			{
-				ControlMaster.Followers -= ControlSlots;
+				ControlMaster.Followers -= 3;
 				ControlMaster.SendMessage("Vous avez dématérialisé le golem.");
 			}
 
 			ControlMaster = null;
 			Controlled = false;
+			m_IsMaterialized = false;
+			Hidden = true;
 			Map = Map.Internal;
-			Location = Point3D.Zero;
 		}
+
 		private ResistanceType GetDamageType(GolemAsh.AshType ashType)
 		{
 			switch (ashType)
@@ -223,7 +264,6 @@ namespace Server.Custom
 				SummonMaster.SendLocalizedMessage(1006265, Name); // ~1_NAME~ has been killed.
 			}
 
-			// Ne pas dissiper le golem à la mort
 			Delete();
 		}
 
@@ -252,16 +292,24 @@ namespace Server.Custom
 
 		public override void OnHeal(ref int amount, Mobile from)
 		{
-			base.OnHeal(ref amount, from);
+			// La guérison ne devrait être autorisée que par la méthode spécifique que nous définissons
+			amount = 0;
+			from?.SendMessage("Ce golem ne peut pas être soigné par des moyens conventionnels.");
+		}
 
-			if (amount > 0)
+		// Nouvelle méthode pour gérer la guérison par les cendres
+		public void HealByAsh(BaseGolemAsh ash, int amount)
+		{
+			if (GolemAsh.GetAshTypeFromAsh(ash) == this.AshType)
 			{
-				Hits = Math.Max(0, Hits - amount);
-				from?.SendMessage("Ce golem ne peut pas être soigné.");
+				int healedAmount = Math.Min(HitsMax - Hits, amount);
+				Hits += healedAmount;
+				InvalidateProperties();
 			}
 		}
 
 		public virtual bool CanRegenHits() { return false; }
+
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
 			if (Deleted || !Alive)
@@ -330,12 +378,16 @@ namespace Server.Custom
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-			writer.Write(1); // version
+			writer.Write(4); // version
 
 			writer.Write(m_MiniGolem);
 			writer.Write((int)m_AshType);
 			writer.Write(m_MaxHitPoints);
 			writer.Write(m_Penalty);
+			writer.Write(m_SummonMaster);
+			writer.Write(m_Spirit);
+			writer.Write(m_IsMaterialized);
+			writer.Write(ControlSlots); // Ajout de ControlSlots
 		}
 
 		public override void Deserialize(GenericReader reader)
@@ -345,29 +397,58 @@ namespace Server.Custom
 
 			switch (version)
 			{
-				case 1:
+				case 4:
 					m_MiniGolem = reader.ReadItem() as MiniGolem;
 					m_AshType = (GolemAsh.AshType)reader.ReadInt();
 					m_MaxHitPoints = reader.ReadInt();
 					m_Penalty = reader.ReadInt();
+					m_SummonMaster = reader.ReadMobile();
+					m_Spirit = reader.ReadItem() as CreatureSpirit;
+					m_IsMaterialized = reader.ReadBool();
+					ControlSlots = reader.ReadInt(); 
 					break;
-				case 0:
+				case 3:
 					m_MiniGolem = reader.ReadItem() as MiniGolem;
 					m_AshType = (GolemAsh.AshType)reader.ReadInt();
 					m_MaxHitPoints = reader.ReadInt();
-					m_Penalty = 0;
+					m_Penalty = reader.ReadInt();
+					m_SummonMaster = reader.ReadMobile();
+					m_Spirit = reader.ReadItem() as CreatureSpirit;
+					m_IsMaterialized = reader.ReadBool();
+					ControlSlots = 3; 
+					break;
+				case 2:
+				case 1:
+				case 0:
+					// Gérer les anciennes versions si nécessaire
+					ControlSlots = 3; 
 					break;
 			}
 
-			Summoned = true;
-			ControlSlots = 3;
-			Controlled = true;
+			if (m_IsMaterialized)
+			{
+				Hidden = false;
+				if (m_SummonMaster != null)
+				{
+					SetControlMaster(m_SummonMaster);
+					Controlled = true;
+					m_SummonMaster.Followers += ControlSlots; // Ajuster les followers du maître
+				}
+			}
+			else
+			{
+				Hidden = true;
+				Map = Map.Internal;
+			}
 		}
+
 	}
+
 
 	public class GolemZyXAttributesGump : Gump
 	{
 		private static readonly int LabelColor = 0x7FFF;
+		private const int SkillsPerPage = 9;
 
 		public GolemZyXAttributesGump(GolemZyX golem) : base(250, 50)
 		{
@@ -386,12 +467,43 @@ namespace Server.Custom
 			AddImage(140, 138, 2091);
 			AddImage(140, 335, 2091);
 
-			int pages = 3;
-			int page = 0;
+			List<SkillName> activeSkills = new List<SkillName>();
+			foreach (SkillName skillName in Enum.GetValues(typeof(SkillName)))
+			{
+				if (golem.Skills[skillName].Base > 0)
+				{
+					activeSkills.Add(skillName);
+				}
+			}
+
+			int skillPages = (int)Math.Ceiling((double)activeSkills.Count / SkillsPerPage);
+			int totalPages = 2 + skillPages; // Attributes + Skills + Resistances
+
+			int currentPage = 0;
 
 			// Page 1: Attributes
-			AddPage(++page);
+			AddPage(++currentPage);
+			AddAttributesPage(golem);
+			AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, currentPage + 1);
+			AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, totalPages);
 
+			// Skills Pages
+			for (int i = 0; i < skillPages; i++)
+			{
+				AddPage(++currentPage);
+				AddSkillsPage(golem, activeSkills, i);
+				AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, currentPage + 1);
+				AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, currentPage - 1);
+			}
+
+			// Resistances Page
+			AddPage(++currentPage);
+			AddResistancesPage(golem);
+			AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, currentPage - 1);
+		}
+
+		private void AddAttributesPage(GolemZyX golem)
+		{
 			AddImage(128, 152, 2086);
 			AddHtmlLocalized(147, 150, 160, 18, 1049593, 200, false, false); // Attributes
 
@@ -418,61 +530,52 @@ namespace Server.Custom
 
 			AddHtml(153, 294, 160, 18, "<BASEFONT COLOR=#CCCCCC>Pénalité:</BASEFONT>", false, false);
 			AddHtml(320, 294, 35, 18, golem.Penalty.ToString(), false, false);
-			AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, page + 1);
-			AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, pages);
+		}
 
-			// Page 2: Skills
-			AddPage(++page);
-
+		private void AddSkillsPage(GolemZyX golem, List<SkillName> activeSkills, int pageIndex)
+		{
 			AddImage(128, 152, 2086);
 			AddHtmlLocalized(147, 150, 160, 18, 3001030, 200, false, false); // Skills
 
-			int y = 168;
-			foreach (SkillName skillName in Enum.GetValues(typeof(SkillName)))
+			int startIndex = pageIndex * SkillsPerPage;
+			int endIndex = Math.Min(startIndex + SkillsPerPage, activeSkills.Count);
+
+			for (int i = startIndex, y = 168; i < endIndex; i++, y += 18)
 			{
-				Skill skill = golem.Skills[skillName];
-				if (skill.Base > 0)
-				{
-					AddHtmlLocalized(153, y, 160, 18, SkillInfo.Table[(int)skillName].Localization, LabelColor, false, false);
-					AddHtml(320, y, 35, 18, FormatSkill(golem, skillName), false, false);
-					y += 18;
-				}
+				SkillName skillName = activeSkills[i];
+				AddHtmlLocalized(153, y, 160, 18, SkillInfo.Table[(int)skillName].Localization, LabelColor, false, false);
+				AddHtml(320, y, 35, 18, FormatSkill(golem, skillName), false, false);
 			}
-
-			AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, page + 1);
-			AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, page - 1);
-
-			// Page 3: Additional Information (if needed)
-			 AddPage(++page);
-
-    AddImage(128, 152, 2086);
-    AddHtmlLocalized(147, 150, 160, 18, 1061645, 200, false, false); // Resistances
-
-    AddHtmlLocalized(153, 168, 160, 18, 1061646, LabelColor, false, false); // Physical
-    AddHtml(320, 168, 35, 18, FormatElement(golem.PhysicalResistance), false, false);
-
-    AddHtmlLocalized(153, 186, 160, 18, 1061647, LabelColor, false, false); // Fire
-    AddHtml(320, 186, 35, 18, FormatElement(golem.FireResistance), false, false);
-
-    AddHtmlLocalized(153, 204, 160, 18, 1061648, LabelColor, false, false); // Cold
-    AddHtml(320, 204, 35, 18, FormatElement(golem.ColdResistance), false, false);
-
-    AddHtmlLocalized(153, 222, 160, 18, 1061649, LabelColor, false, false); // Poison
-    AddHtml(320, 222, 35, 18, FormatElement(golem.PoisonResistance), false, false);
-
-    AddHtmlLocalized(153, 240, 160, 18, 1061650, LabelColor, false, false); // Energy
-    AddHtml(320, 240, 35, 18, FormatElement(golem.EnergyResistance), false, false);
-
-    AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, page - 1);
 		}
+
+		private void AddResistancesPage(GolemZyX golem)
+		{
+			AddImage(128, 152, 2086);
+			AddHtmlLocalized(147, 150, 160, 18, 1061645, 200, false, false); // Resistances
+
+			AddHtmlLocalized(153, 168, 160, 18, 1061646, LabelColor, false, false); // Physical
+			AddHtml(320, 168, 35, 18, FormatElement(golem.PhysicalResistance), false, false);
+
+			AddHtmlLocalized(153, 186, 160, 18, 1061647, LabelColor, false, false); // Fire
+			AddHtml(320, 186, 35, 18, FormatElement(golem.FireResistance), false, false);
+
+			AddHtmlLocalized(153, 204, 160, 18, 1061648, LabelColor, false, false); // Cold
+			AddHtml(320, 204, 35, 18, FormatElement(golem.ColdResistance), false, false);
+
+			AddHtmlLocalized(153, 222, 160, 18, 1061649, LabelColor, false, false); // Poison
+			AddHtml(320, 222, 35, 18, FormatElement(golem.PoisonResistance), false, false);
+
+			AddHtmlLocalized(153, 240, 160, 18, 1061650, LabelColor, false, false); // Energy
+			AddHtml(320, 240, 35, 18, FormatElement(golem.EnergyResistance), false, false);
+		}
+
 
 		private string FormatElement(int value)
 		{
 			return value.ToString();
 		}
-	
 
-	private string FormatAttributes(int current, int max)
+		private string FormatAttributes(int current, int max)
 		{
 			return $"{current}/{max}";
 		}
@@ -543,7 +646,7 @@ namespace Server.Custom
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			if (m_Golem != null && from == m_Golem.ControlMaster)
+			if (m_Golem != null && from == m_Golem.SummonMaster)
 			{
 				if (m_Golem.Deleted)
 				{
@@ -551,21 +654,13 @@ namespace Server.Custom
 					return;
 				}
 
-				if (m_Golem.Map != Map.Internal) // Le golem est matérialisé
-				{
-					m_Golem.Dematerialize();
-				}
-				else // Le golem est dématérialisé
-				{
-					m_Golem.Materialize(from);
-				}
+				m_Golem.IsMaterialized = !m_Golem.IsMaterialized;
 			}
 			else
 			{
 				base.OnDoubleClick(from);
 			}
 		}
-
 
 		public override void GetProperties(ObjectPropertyList list)
 		{

@@ -90,8 +90,10 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(BacVideTerre), "Bacs et Terre Fertile", "Bac Vide avec Terre", 10.0, 30.0, typeof(PalmierBoard), "Bois", 10, "Vous n'avez pas assez de bois");
 
+
 			index = AddCraft(typeof(BacVideSable), "Bacs et Terre Fertile", "Bac Vide avec Sable", 15.0, 35.0, typeof(PalmierBoard), "Bois", 10, "Vous n'avez pas assez de bois");
 			AddRes(index, typeof(Sand), "Sable", 5, "Vous n'avez pas assez de sable");
+
 
 
 			index = AddCraft(typeof(Presentoir), "Bacs et Terre Fertile", "Presentoir", 25.0, 45.0, typeof(PalmierBoard), "Bois", 10, "Vous n'avez pas assez de bois");
@@ -312,14 +314,31 @@ namespace Server.Engines.Craft
 
 
 
+			// Set the overridable material for wood
+			SetSubRes(typeof(PalmierBoard), "Palmier");
+
+			// Add every wood type you want the player to be able to choose from
+			AddSubRes(typeof(PalmierBoard), "Palmier", 0.0, "Vous ne savez pas travailler le bois Commun");
+			AddSubRes(typeof(ErableBoard), "Érable", 0.0, "Vous ne savez pas travailler le bois Érable");
+			AddSubRes(typeof(CedreBoard), "Cèdre", 20.0, "Vous ne savez pas travailler le bois Cèdre");
+			AddSubRes(typeof(CheneBoard), "Chêne", 20.0, "Vous ne savez pas travailler le bois Chêne");
+			AddSubRes(typeof(SauleBoard), "Saule", 40.0, "Vous ne savez pas travailler le bois Saule");
+			AddSubRes(typeof(CypresBoard), "Cyprès", 40.0, "Vous ne savez pas travailler le bois Cyprès");
+			AddSubRes(typeof(AcajouBoard), "Acajou", 60.0, "Vous ne savez pas travailler le bois Acajou");
+			AddSubRes(typeof(EbeneBoard), "Ébène", 60.0, "Vous ne savez pas travailler le bois Ébène");
+			AddSubRes(typeof(AmaranteBoard), "Amarante", 80.0, "Vous ne savez pas travailler le bois Amarante");
+			AddSubRes(typeof(PinBoard), "Pin", 80.0, "Vous ne savez pas travailler le bois Pin");
+			AddSubRes(typeof(AncienBoard), "Ancien", 100.0, "Vous ne savez pas travailler le bois ancien");
 
 
-
-
-
-
+			MarkOption = true;
+			Repair = true;
+			CanEnhance = true;
+			CanAlter = true;
 		}
 	}
 }
+	
+
 
         

@@ -139,6 +139,9 @@ namespace Server.Scripts.Commands
 					if (creature.BodyValue == 400 || creature.BodyValue == 401)
 					{
 						sb.AppendLine("\n\t\t\t// Équipement");
+						sb.AppendLine("\t\t\tAddItem(new Backpack());");
+
+
 						foreach (Item item in creature.Items)
 						{
 							if (item.Layer != Layer.Backpack)
@@ -166,6 +169,10 @@ namespace Server.Scripts.Commands
 								}
 								sb.AppendLine("\t\t\t});");
 							}
+						}
+						if (creature.Race != null)
+						{
+							sb.AppendLine($"\n\t\t\tRace = Race.Human;");
 						}
 					}
 

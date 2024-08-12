@@ -736,14 +736,14 @@ namespace Server.Items
 
 			//AddWeightProperty(list);
 
-			if (this is BaseBracelet || this is BaseRing)
+			if (this is BaseBracelet || this is BaseRing || this is BaseNecklace)
 				list.Add($"Enchantement: {Enchantement}/1");
 
 			if (GemType != GemType.None)
 			{
 				list.Add("Pierre précieuse : {0}", GemType.ToString());
 
-				if (this is BaseBracelet || this is BaseRing)
+				if (this is BaseBracelet || this is BaseNecklace)
 					list.Add($"Enchantement: {Enchantement}/1");
 
 				if (m_GorgonLenseCharges > 0)

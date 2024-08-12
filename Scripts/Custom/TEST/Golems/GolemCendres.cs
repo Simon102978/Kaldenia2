@@ -1,6 +1,8 @@
 using System;
 using Server;
+using Server.Custom;
 using Server.Items;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -22,6 +24,44 @@ namespace Server.Items
 			Amount = amount;
 			Hue = AshHue;
 			Weight = 0.1;
+		}
+
+		public override void OnDoubleClick(Mobile from)
+		{
+			from.SendMessage("Sélectionnez le golem que vous souhaitez soigner.");
+			from.Target = new InternalTarget(this);
+		}
+
+		private class InternalTarget : Target
+		{
+			private BaseGolemAsh m_Ash;
+
+			public InternalTarget(BaseGolemAsh ash) : base(3, false, TargetFlags.None)
+			{
+				m_Ash = ash;
+			}
+
+			protected override void OnTarget(Mobile from, object targeted)
+			{
+				if (targeted is GolemZyX golem)
+				{
+					if (golem.AshType == GolemAsh.GetAshTypeFromAsh(m_Ash))
+					{
+						int healAmount = 2;
+						golem.HealByAsh(m_Ash, healAmount); // Utiliser la méthode HealByAsh spécifique aux golems
+						from.SendMessage($"Vous avez soigné le golem de {healAmount} points de vie.");
+						m_Ash.Consume(1);
+					}
+					else
+					{
+						from.SendMessage("Ces cendres ne correspondent pas au type de ce golem.");
+					}
+				}
+				else
+				{
+					from.SendMessage("Vous devez cibler un golem.");
+				}
+			}
 		}
 
 		public BaseGolemAsh(Serial serial) : base(serial)

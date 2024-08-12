@@ -52,13 +52,13 @@ public class SkillCard : Item
 
 	public void Decrypt(Mobile from)
 	{
-		if (from.Skills[SkillName.Cartography].Value < m_Level * 20)
+		if (from.Skills[SkillName.Cartography].Value < m_Level * 17)
 		{
 			from.SendMessage("Votre compétence en cartographie est trop faible pour décrypter cette carte.");
 			return;
 		}
 
-		if (!from.CheckSkill(SkillName.Cartography, m_Level * 20, 100))
+		if (!from.CheckSkill(SkillName.Cartography, m_Level * 20, 120))
 		{
 			from.SendMessage("Vous n'avez pas réussi à décrypter la carte. Essayez encore.");
 			return;
@@ -237,8 +237,7 @@ public class SkillCard : Item
 		}
 
 		double baseValue = from.Skills[m_Skill].Base;
-		double cap = from.Skills[m_Skill].Cap;
-		double effectiveBonus = m_Bonus; // Utilisez le bonus complet, sans le limiter au cap
+		double effectiveBonus = m_Bonus;
 
 		SkillMod mod = new DefaultSkillMod(m_Skill, true, effectiveBonus);
 		from.AddSkillMod(mod);
@@ -247,9 +246,10 @@ public class SkillCard : Item
 		{
 			Owner = from,
 			Skill = m_Skill,
-			Bonus = m_Bonus,
+			Bonus = effectiveBonus,
 			ExpireTime = DateTime.UtcNow + TimeSpan.FromHours(1),
-			SkillMod = mod
+			SkillMod = mod,
+			InitialBaseValue = baseValue
 		};
 
 		if (!s_ActiveEffects.ContainsKey(from))
@@ -260,44 +260,11 @@ public class SkillCard : Item
 
 		from.SendMessage($"Votre compétence {m_Skill} a été augmentée de {effectiveBonus:F1}% pour 1 heure.");
 
-		Timer.DelayCall(TimeSpan.FromSeconds(30), TimeSpan.FromSeconds(30), () => CheckAndAdjustBonus(effect));
 		Timer.DelayCall(TimeSpan.FromHours(1), () => RemoveEffect(effect));
 
 		from.SendMessage("La carte se désintègre après avoir libéré son pouvoir.");
 		this.Delete();
 	}
-
-	private static void CheckAndAdjustBonus(SkillCardEffect effect)
-	{
-		if (effect.Owner.Deleted || DateTime.UtcNow >= effect.ExpireTime)
-		{
-			RemoveEffect(effect);
-			return;
-		}
-
-		double baseValue = effect.Owner.Skills[effect.Skill].Base;
-		double cap = effect.Owner.Skills[effect.Skill].Cap;
-		double currentBonus = effect.SkillMod.Value;
-		double newBonus = Math.Min(effect.Bonus, cap - baseValue);
-
-		if (Math.Abs(newBonus - currentBonus) > 0.1)
-		{
-			effect.Owner.RemoveSkillMod(effect.SkillMod);
-			SkillMod newMod = new DefaultSkillMod(effect.Skill, true, newBonus);
-			effect.Owner.AddSkillMod(newMod);
-			effect.SkillMod = newMod;
-
-			if (newBonus > 0)
-			{
-				effect.Owner.SendMessage($"Votre bonus de compétence {effect.Skill} a été ajusté à {newBonus:F1}%.");
-			}
-			else
-			{
-				RemoveEffect(effect);
-			}
-		}
-	}
-
 
 	private static void RemoveEffect(SkillCardEffect effect)
 	{
@@ -309,12 +276,18 @@ public class SkillCard : Item
 			if (effectsForMobile.TryGetValue(effect.Skill, out var activeEffect) && activeEffect == effect)
 			{
 				effect.Owner.RemoveSkillMod(effect.SkillMod);
+
+				double currentBaseValue = effect.Owner.Skills[effect.Skill].Base;
+				double naturalProgression = currentBaseValue - effect.InitialBaseValue;
+
+				if (naturalProgression > 0)
+				{
+					effect.Owner.Skills[effect.Skill].Base = effect.InitialBaseValue + naturalProgression;
+				}
+
 				effectsForMobile.Remove(effect.Skill);
 
-				if (effect.Owner.Skills[effect.Skill].Base > 0)
-				{
-					effect.Owner.SendMessage($"Le bonus de compétence {effect.Skill} s'est dissipé.");
-				}
+				effect.Owner.SendMessage($"Le bonus de compétence {effect.Skill} s'est dissipé. Votre progression naturelle a été conservée.");
 
 				if (effectsForMobile.Count == 0)
 				{
@@ -323,7 +296,6 @@ public class SkillCard : Item
 			}
 		}
 	}
-
 
 	private static bool IsSkillCardActive(Mobile from, SkillName skill)
 	{
@@ -413,6 +385,7 @@ public class SkillCard : Item
 		public double Bonus { get; set; }
 		public DateTime ExpireTime { get; set; }
 		public SkillMod SkillMod { get; set; }
+		public double InitialBaseValue { get; set; }
 	}
 }
 

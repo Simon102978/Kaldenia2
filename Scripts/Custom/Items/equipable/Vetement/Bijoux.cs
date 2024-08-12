@@ -66,7 +66,40 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
+	public class Chapelet : BaseNecklace
+	{
 
+		[Constructable]
+		public Chapelet()
+				: base(0xA4E3)
+
+		{
+			Weight = 2.0;
+			Name = "Chapelet";
+			Layer = Layer.Waist;
+		}
+
+		public Chapelet(Serial serial)
+				: base(serial)
+
+		{
+		}
+
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
 	public class Collier2 : BaseNecklace
 
 	{
@@ -512,41 +545,7 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class Chapelet : Item
-	{
-
-
-		[Constructable]
-		public Chapelet()
-				: base(0xA4E3)
-
-		{
-			Weight = 2.0;
-			Name = "Chapelet";
-			Layer = Layer.Waist;
-		}
-
-		public Chapelet(Serial serial)
-				: base(serial)
-
-		{
-		}
-
-
-		public override void Serialize(GenericWriter writer)
-		{
-			base.Serialize(writer);
-
-			writer.Write(0); // version
-		}
-
-		public override void Deserialize(GenericReader reader)
-		{
-			base.Deserialize(reader);
-
-			int version = reader.ReadInt();
-		}
-	}
+	
 	public class Collier9 : BaseNecklace
 
 	{

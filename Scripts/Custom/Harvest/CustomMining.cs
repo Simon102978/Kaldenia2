@@ -18,7 +18,6 @@ namespace Server.Engines.Harvest
 				return m_GeneralSystem;
 			}
 		}
-
 		public static HarvestSystem GetSystem(Item item)
 		{
 			Map map;
@@ -54,9 +53,6 @@ namespace Server.Engines.Harvest
 		public HarvestDefinition OreAndStone { get; }
 
 		public HarvestDefinition Sand { get; }
-
-		public HarvestDefinition Dirt { get; }
-
 
 		public CustomMining()
 		{
@@ -108,18 +104,18 @@ namespace Server.Engines.Harvest
 
 			res = new HarvestResource[]
 			{
-				new HarvestResource(00.0,  -100.0, 100.0, "Fer",        typeof(IronOre),		    typeof(Granite)), 
-				new HarvestResource(00.0,  00.0, 100.0, "Bronze",       typeof(BronzeOre),			typeof(BronzeGranite)), 
-				new HarvestResource(00.0,  00.0, 100.0, "Cuivre",       typeof(CopperOre),			typeof(CopperGranite)),
-				new HarvestResource(30.0,  30.0, 100.0, "Sonne",        typeof(SonneOre),			typeof(SonneGranite),      typeof(EarthElemental)),
-				new HarvestResource(30.0,  30.0, 100.0, "Argent",       typeof(ArgentOre),			typeof(ArgentGranite),     typeof(EarthElemental)),
+				new HarvestResource(00.0,  -100.0, 100.0, "Fer",        typeof(IronOre),            typeof(Granite)),
+				new HarvestResource(00.0,  00.0, 100.0, "Bronze",       typeof(BronzeOre),          typeof(BronzeGranite)),
+				new HarvestResource(00.0,  00.0, 100.0, "Cuivre",       typeof(CopperOre),          typeof(CopperGranite)),
+				new HarvestResource(30.0,  30.0, 100.0, "Sonne",        typeof(SonneOre),           typeof(SonneGranite),      typeof(EarthElemental)),
+				new HarvestResource(30.0,  30.0, 100.0, "Argent",       typeof(ArgentOre),          typeof(ArgentGranite),     typeof(EarthElemental)),
 				new HarvestResource(30.0,  30.0, 100.0, "Boréale",      typeof(BorealeOre),         typeof(BorealeGranite),    typeof(EarthElemental)),
-				new HarvestResource(30.0,  30.0, 100.0, "Chrysteliar",  typeof(ChrysteliarOre),		typeof(ChrysteliarGranite),typeof(EarthElemental)),
+				new HarvestResource(30.0,  30.0, 100.0, "Chrysteliar",  typeof(ChrysteliarOre),     typeof(ChrysteliarGranite),typeof(EarthElemental)),
 				new HarvestResource(30.0,  30.0, 100.0, "Glacias",      typeof(GlaciasOre),         typeof(GlaciasGranite),    typeof(EarthElemental)),
 				new HarvestResource(30.0,  30.0, 100.0, "Lithiar",      typeof(LithiarOre),         typeof(LithiarGranite),    typeof(EarthElemental)),
-				new HarvestResource(50.0,  50.0, 100.0, "Acier",        typeof(AcierOre),           typeof(AcierGranite),		typeof(FireElemental)),
-				new HarvestResource(50.0,  50.0, 100.0, "Durian",       typeof(DurianOre),          typeof(DurianGranite),		typeof(FireElemental)),
-				new HarvestResource(50.0,  50.0, 100.0, "Équilibrum",   typeof(EquilibrumOre),      typeof(EquilibrumGranite),	typeof(WaterElemental)),
+				new HarvestResource(50.0,  50.0, 100.0, "Acier",        typeof(AcierOre),           typeof(AcierGranite),       typeof(FireElemental)),
+				new HarvestResource(50.0,  50.0, 100.0, "Durian",       typeof(DurianOre),          typeof(DurianGranite),      typeof(FireElemental)),
+				new HarvestResource(50.0,  50.0, 100.0, "Équilibrum",   typeof(EquilibrumOre),      typeof(EquilibrumGranite),  typeof(WaterElemental)),
 				new HarvestResource(50.0,  50.0, 100.0, "Or",           typeof(GoldOre),            typeof(GoldGranite),        typeof(WaterElemental)),
 				new HarvestResource(50.0,  50.0, 100.0, "Jolinar",      typeof(JolinarOre),         typeof(JolinarGranite),     typeof(Treefellow)),
 				new HarvestResource(50.0,  50.0, 100.0, "Justicium",    typeof(JusticiumOre),       typeof(JusticiumGranite),   typeof(Treefellow)),
@@ -166,69 +162,8 @@ namespace Server.Engines.Harvest
 			Definitions.Add(oreAndStone);
 			#endregion
 
-
-			#region Mining for dirt
-			var dirt = Dirt = new HarvestDefinition();
-
-			// Resource banks are every 8x8 tiles
-			dirt.BankWidth = 8;
-			dirt.BankHeight = 8;
-
-			// Every bank holds from 6 to 12 dirt
-			dirt.MinTotal = 6;
-			dirt.MaxTotal = 13;
-
-			// A resource bank will respawn its content every 10 to 20 minutes
-			dirt.MinRespawn = TimeSpan.FromMinutes(10.0);
-			dirt.MaxRespawn = TimeSpan.FromMinutes(20.0);
-
-			// Skill checking is done on the Mining skill
-			dirt.Skill = SkillName.Mining;
-
-			// Set the list of harvestable tiles
-			dirt.Tiles = m_DirtTiles;
-
-			// Players must be within 2 tiles to harvest
-			dirt.MaxRange = 2;
-
-			// One dirt per harvest action
-			dirt.ConsumedPerHarvest = 1;
-			dirt.ConsumedPerFeluccaHarvest = 2;
-
-			dirt.EffectActions = new int[] { 11 };
-			dirt.EffectSounds = new int[] { 0x125, 0x126 };
-			dirt.EffectCounts = new int[] { 1 };
-			dirt.EffectDelay = TimeSpan.FromSeconds(1.6);
-			dirt.EffectSoundDelay = TimeSpan.FromSeconds(0.9);
-
-			dirt.NoResourcesMessage = 1007001; // There is no dirt here to dig.
-			dirt.DoubleHarvestMessage = 1045047; // There is not enough dirt here to harvest.
-			dirt.TimedOutOfRangeMessage = 500976; // You have moved too far away to continue digging.
-			dirt.OutOfRangeMessage = 500446; // That is too far away.
-			dirt.FailMessage = 1010181; // You loosen some dirt but fail to find any useable resources.
-			dirt.PackFullMessage = 1010190; // Your backpack is full, so the dirt you dug is lost.
-			dirt.ToolBrokeMessage = 1044038; // You have worn out your tool!
-
-			res = new HarvestResource[]
-			{
-				new HarvestResource(50.0, 30.0, 100.0, 1044631, typeof(FertileDirt))
-			};
-
-			veins = new HarvestVein[]
-			{
-				new HarvestVein(100.0, 0.0, res[0], null)
-			};
-
-			dirt.Resources = res;
-			dirt.Veins = veins;
-
-			Definitions.Add(dirt);
-			#endregion
-		
-	
-
-	#region Mining for sand
-	var sand = Sand = new HarvestDefinition();
+			#region Mining for sand
+			var sand = Sand = new HarvestDefinition();
 
 			// Resource banks are every 8x8 tiles
 			sand.BankWidth = 8;
@@ -286,7 +221,6 @@ namespace Server.Engines.Harvest
 			Definitions.Add(sand);
 			#endregion
 		}
-    
 
 		public override Type GetResourceType(Mobile from, Item tool, HarvestDefinition def, Map map, Point3D loc, HarvestResource resource)
 		{
@@ -681,20 +615,7 @@ namespace Server.Engines.Harvest
 			0x4549, 0x454A, 0x454B, 0x454C, 0x454D, 0x454E, 0x454F
 		};
 
-private static readonly int[] m_DirtTiles = new int[]
-{
-	0x071, 0x07C,
-	0x165, 0x174,
-	0x1DC, 0x1EF,
-	0x306, 0x31F,
-	0x08D, 0x0A7,
-	0x2E5, 0x305,
-	0x777, 0x791,
-	0x98C, 0x9BF,
-};
-
-
-private static readonly int[] m_SandTiles = new int[]
+		private static readonly int[] m_SandTiles = new int[]
 		{
 			22, 23, 24, 25, 26, 27, 28, 29, 30, 31,
 			32, 33, 34, 35, 36, 37, 38, 39, 40, 41,
@@ -719,4 +640,3 @@ private static readonly int[] m_SandTiles = new int[]
 		#endregion
 	}
 }
-

@@ -32,13 +32,12 @@ namespace Server.Items
         public MapItem()
             : this(Siege.SiegeShard ? Map.Felucca : Map.Trammel)
         {
-			Name = "Carte au trésor";
         }
 
         [Constructable]
         public MapItem(Map map) : base(0x14EC)
         {
-			Name = "Carte au trésor";
+			Name = "Carte";
 			Weight = 1.0;
 
             Width = 200;

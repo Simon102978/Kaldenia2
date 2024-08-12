@@ -12,6 +12,7 @@ namespace Server.Items
         public FireHorn()
             : base(0xFC7)
         {
+			Name = "Corne de feu";
             Hue = 0x466;
             Weight = 1.0;
         }
@@ -21,7 +22,6 @@ namespace Server.Items
         {
         }
 
-        public override int LabelNumber => 1060456;// fire horn
         public override void OnDoubleClick(Mobile from)
         {
             if (CheckUse(from))

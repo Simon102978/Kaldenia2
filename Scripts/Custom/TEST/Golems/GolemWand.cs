@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using Server.ContextMenus;
 using Server.Network;
 using Server.Multis;
+using System.Linq;
 
 namespace Server.Custom
 {
@@ -37,14 +38,15 @@ namespace Server.Custom
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			if (from.Skills[SkillName.AnimalTaming].Base < 50.0)
+			if (from.Skills[SkillName.AnimalTaming].Base >= 50.0 || from.Skills[SkillName.Magery].Base >= 50.0)
 			{
-				from.SendMessage("Vous avez besoin d'au moins 50 en Animal Taming pour utiliser cette baguette.");
-				return;
+				from.SendMessage("Ciblez un cadavre pour en extraire l'esprit.");
+				from.Target = new InternalTarget(this);
 			}
-
-			from.SendMessage("Ciblez un cadavre pour en extraire l'esprit.");
-			from.Target = new InternalTarget(this);
+			else
+			{
+				from.SendMessage("Vous avez besoin d'au moins 50 en Animal Taming ou en Magery pour utiliser cette baguette.");
+			}
 		}
 
 		private class InternalTarget : Target
@@ -138,6 +140,7 @@ namespace Server.Custom
 	public class CreatureSpirit : Item
 	{
 		private int m_Str, m_Dex, m_Int, m_AR;
+		private int m_PhysicalResistance, m_FireResistance, m_ColdResistance, m_PoisonResistance, m_EnergyResistance;
 		private Dictionary<SkillName, double> m_Skills;
 
 		[CommandProperty(AccessLevel.Owner)]
@@ -146,7 +149,14 @@ namespace Server.Custom
 		public int GetStrength() { return m_Str; }
 		public int GetDexterity() { return m_Dex; }
 		public int GetIntelligence() { return m_Int; }
+
+		public int GetPhysicalResistance() { return m_PhysicalResistance; }
+		public int GetFireResistance() { return m_FireResistance; }
+		public int GetColdResistance() { return m_ColdResistance; }
+		public int GetPoisonResistance() { return m_PoisonResistance; }
+		public int GetEnergyResistance() { return m_EnergyResistance; }
 		public int GetAR() { return m_AR; }
+
 
 		public Dictionary<SkillName, double> Skills
 		{
@@ -173,9 +183,15 @@ namespace Server.Custom
 			m_Skills = new Dictionary<SkillName, double>();
 			if (creature != null)
 			{
+
 				m_Str = creature.Str;
 				m_Dex = creature.Dex;
 				m_Int = creature.Int;
+				m_PhysicalResistance = creature.PhysicalResistance;
+				m_FireResistance = creature.FireResistance;
+				m_ColdResistance = creature.ColdResistance;
+				m_PoisonResistance = creature.PoisonResistance;
+				m_EnergyResistance = creature.EnergyResistance;
 				m_AR = creature.VirtualArmor;
 				for (int i = 0; i < creature.Skills.Length; i++)
 				{
@@ -191,6 +207,11 @@ namespace Server.Custom
 				m_Str = 0;
 				m_Dex = 0;
 				m_Int = 0;
+				m_PhysicalResistance = 0;
+				m_FireResistance = 0;
+				m_ColdResistance = 0;
+				m_PoisonResistance = 0;
+				m_EnergyResistance = 0;
 				m_AR = 0;
 				Percentage = 0;
 			}
@@ -281,6 +302,11 @@ namespace Server.Custom
 					m_Spirit.m_Str = (int)(m_Spirit.m_Str * (1 - ratio) + targetSpirit.m_Str * ratio);
 					m_Spirit.m_Dex = (int)(m_Spirit.m_Dex * (1 - ratio) + targetSpirit.m_Dex * ratio);
 					m_Spirit.m_Int = (int)(m_Spirit.m_Int * (1 - ratio) + targetSpirit.m_Int * ratio);
+					m_Spirit.m_PhysicalResistance = (int)(m_Spirit.m_PhysicalResistance * (1 - ratio) + targetSpirit.m_PhysicalResistance * ratio);
+					m_Spirit.m_FireResistance = (int)(m_Spirit.m_FireResistance * (1 - ratio) + targetSpirit.m_FireResistance * ratio);
+					m_Spirit.m_ColdResistance = (int)(m_Spirit.m_ColdResistance * (1 - ratio) + targetSpirit.m_ColdResistance * ratio);
+					m_Spirit.m_PoisonResistance = (int)(m_Spirit.m_PoisonResistance * (1 - ratio) + targetSpirit.m_PoisonResistance * ratio);
+					m_Spirit.m_EnergyResistance = (int)(m_Spirit.m_EnergyResistance * (1 - ratio) + targetSpirit.m_EnergyResistance * ratio);
 					m_Spirit.m_AR = (int)(m_Spirit.m_AR * (1 - ratio) + targetSpirit.m_AR * ratio);
 
 					foreach (var skill in targetSpirit.m_Skills)
@@ -309,6 +335,7 @@ namespace Server.Custom
 		public class SpiritInfoGump : Gump
 		{
 			private static readonly int LabelColor = 0x7FFF;
+			private const int SkillsPerPage = 9;
 
 			public SpiritInfoGump(CreatureSpirit spirit) : base(250, 50)
 			{
@@ -327,11 +354,11 @@ namespace Server.Custom
 				AddImage(140, 138, 2091);
 				AddImage(140, 335, 2091);
 
-				int pages = 2;
-				int page = 0;
+				int totalPages = 2 + (int)Math.Ceiling((double)spirit.Skills.Count / SkillsPerPage);
+				int currentPage = 0;
 
 				// Page 1: Attributes
-				AddPage(++page);
+				AddPage(++currentPage);
 
 				AddImage(128, 152, 2086);
 				AddHtmlLocalized(147, 150, 160, 18, 1049593, 200, false, false); // Attributes
@@ -356,34 +383,74 @@ namespace Server.Custom
 				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#0x7FFF>% Total:</BASEFONT>", false, false);
 				AddHtml(320, y, 35, 18, $"{spirit.Percentage}%", false, false);
 
-				AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, page + 1);
-				AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, pages);
+				AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, currentPage + 1);
+				AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, totalPages);
 
-				// Page 2: Skills
-				AddPage(++page);
+				// Skills Pages
+				int skillIndex = 0;
+				int skillPages = (int)Math.Ceiling((double)spirit.Skills.Count / SkillsPerPage);
 
-				AddImage(128, 152, 2086);
-				AddHtmlLocalized(147, 150, 160, 18, 3001030, 200, false, false); // Skills
-
-				y = 168;
-				foreach (var skill in spirit.m_Skills)
+				for (int i = 0; i < skillPages; i++)
 				{
-					AddHtml(153, y, 160, 18, $"<BASEFONT COLOR=#0x7FFF>{skill.Key}:</BASEFONT>", false, false);
-					AddHtml(320, y, 35, 18, $"{skill.Value:F1}", false, false);
-					y += 18;
+					AddPage(++currentPage);
+
+					AddImage(128, 152, 2086);
+					AddHtmlLocalized(147, 150, 160, 18, 3001030, 200, false, false); // Skills
+
+					y = 168;
+					for (int j = 0; j < SkillsPerPage && skillIndex < spirit.Skills.Count; j++)
+					{
+						var skill = spirit.Skills.ElementAt(skillIndex);
+						AddHtml(153, y, 160, 18, $"<BASEFONT COLOR=#0x7FFF>{skill.Key}:</BASEFONT>", false, false);
+						AddHtml(320, y, 35, 18, $"{skill.Value:F1}", false, false);
+						y += 18;
+						skillIndex++;
+					}
+
+					AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, (currentPage % totalPages) + 1);
+					AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, ((currentPage - 2 + totalPages) % totalPages) + 1);
 				}
 
-				AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, page - 1);
+				// Resistances Page
+				AddPage(++currentPage);
+
+				AddImage(128, 152, 2086);
+				AddHtmlLocalized(147, 150, 160, 18, 1062760, 200, false, false); // Resistances
+
+				y = 168;
+				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#0x7FFF>Physical:</BASEFONT>", false, false);
+				AddHtml(320, y, 35, 18, spirit.GetPhysicalResistance().ToString(), false, false);
+				y += 18;
+
+				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#0x7FFF>Fire:</BASEFONT>", false, false);
+				AddHtml(320, y, 35, 18, spirit.GetFireResistance().ToString(), false, false);
+				y += 18;
+
+				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#0x7FFF>Cold:</BASEFONT>", false, false);
+				AddHtml(320, y, 35, 18, spirit.GetColdResistance().ToString(), false, false);
+				y += 18;
+
+				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#0x7FFF>Poison:</BASEFONT>", false, false);
+				AddHtml(320, y, 35, 18, spirit.GetPoisonResistance().ToString(), false, false);
+				y += 18;
+
+				AddHtml(153, y, 160, 18, "<BASEFONT COLOR=#0x7FFF>Energy:</BASEFONT>", false, false);
+				AddHtml(320, y, 35, 18, spirit.GetEnergyResistance().ToString(), false, false);
+
+				AddButton(340, 358, 5601, 5605, 0, GumpButtonType.Page, 1);
+				AddButton(317, 358, 5603, 5607, 0, GumpButtonType.Page, currentPage - 1);
 			}
 		}
+
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-			writer.Write((int)0); // version
+			writer.Write((int)1);  // version
 			writer.Write(m_Str);
 			writer.Write(m_Dex);
 			writer.Write(m_Int);
+
 			writer.Write(m_AR);
 			writer.Write(Percentage);
 			writer.Write(m_Skills.Count);
@@ -392,6 +459,11 @@ namespace Server.Custom
 				writer.Write((int)skill.Key);
 				writer.Write(skill.Value);
 			}
+			writer.Write(m_PhysicalResistance);
+			writer.Write(m_FireResistance);
+			writer.Write(m_ColdResistance);
+			writer.Write(m_PoisonResistance);
+			writer.Write(m_EnergyResistance);
 		}
 
 		public override void Deserialize(GenericReader reader)
@@ -412,7 +484,16 @@ namespace Server.Custom
 				m_Skills[skillName] = skillValue;
 			}
 			UpdateHue();
+			if (version >= 1)
+			{
+				m_PhysicalResistance = reader.ReadInt();
+				m_FireResistance = reader.ReadInt();
+				m_ColdResistance = reader.ReadInt();
+				m_PoisonResistance = reader.ReadInt();
+				m_EnergyResistance = reader.ReadInt();
+			}
 		}
+
 	}
 }
 

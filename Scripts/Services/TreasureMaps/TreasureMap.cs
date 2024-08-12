@@ -1036,35 +1036,39 @@ namespace Server.Items
 
 		public override void GetProperties(ObjectPropertyList list)
         {
+			list.Add("Carte");
+
 
 			if (m_Decoder != null)
 			{
+				list.Add("Carte au trésor");
+
 				list.Add($"Carte Niveau: {Level}");
 				list.Add($"Lockpicking Requis: {GetRequiredSkill()}");
 			}
 
-			
-			list.Add("un trésor caché sur les landes");
+			list.Add("Un trésor caché sur les landes");
 
 
 
 
-			TreasureFacet facet = TreasureMapInfo.GetFacet(ChestLocation, Facet);
 
-            switch (facet)
+			/*	TreasureFacet facet = TreasureMapInfo.GetFacet(ChestLocation, Facet);
+
+				switch (facet)
+				{
+					case TreasureFacet.Trammel: list.Add(1041503); break;
+					case TreasureFacet.Felucca: list.Add(1041502); break;
+					case TreasureFacet.Ilshenar: list.Add(1060850); break;
+					case TreasureFacet.Malas: list.Add(1060851); break;
+					case TreasureFacet.Tokuno: list.Add(1115645); break;
+					case TreasureFacet.TerMur: list.Add(1115646); break;
+					case TreasureFacet.Eodon: list.Add(1158985); break;
+				}
+			*/
+			if (m_Completed)
             {
-                case TreasureFacet.Trammel: list.Add(1041503); break;
-                case TreasureFacet.Felucca: list.Add(1041502); break;
-                case TreasureFacet.Ilshenar: list.Add(1060850); break;
-                case TreasureFacet.Malas: list.Add(1060851); break;
-                case TreasureFacet.Tokuno: list.Add(1115645); break;
-                case TreasureFacet.TerMur: list.Add(1115646); break;
-                case TreasureFacet.Eodon: list.Add(1158985); break;
-            }
-
-            if (m_Completed)
-            {
-                list.Add(1041507, m_CompletedBy == null ? "someone" : m_CompletedBy.Name); // completed by ~1_val~
+                list.Add("Carte complétée par:", m_CompletedBy == null ? "Quelqu'un" : m_CompletedBy.Name); // completed by ~1_val~
             }
         }
 

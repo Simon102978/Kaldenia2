@@ -48,84 +48,71 @@ namespace Server.Items
 
 		public virtual bool CheckSuccess(Mobile from)
 		{
-
-			if (!from.CheckSkill(SkillName.Inscribe, SkillRequis, SkillRequis + 30))
-			{
-				from.SendMessage("La rune explose en mille morceau.");
-				from.PlaySound(65);
-				from.PlaySound(0x1F8);
-				Delete();
-				return false;
-			}
-			else
-			{
-				return true;
-			}
+			return true;
+			/*		if (!from.CheckSkill(SkillName.Inscribe, SkillRequis, SkillRequis + 30))
+					{
+						from.SendMessage("La rune explose en mille morceau.");
+						from.PlaySound(65);
+						from.PlaySound(0x1F8);
+						Delete();
+						return false;
+					}
+					else
+					{
+						return true;
+					}*/
 		}
 
 
 
 
 
-		public override void OnDoubleClick( Mobile from ) 
+		public override void OnDoubleClick(Mobile from)
 		{
-		
-		 
 			PlayerMobile pm = from as PlayerMobile;
-		
-			if ( !IsChildOf( from.Backpack ) )
-			{
-				from.SendLocalizedMessage( 1042001 ); // That must be in your pack for you to use it.
-			}
 
-			else if ( pm == null || from.Skills[SkillName.Inscribe].Base < SkillRequis)
+			if (!IsChildOf(from.Backpack))
 			{
-				from.SendMessage( "Vous n'etes pas assez doué pour réussir." );
-			}												
-		    else 
-		    {
-			    from.SendMessage("Select the item to enhance.");
+				from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
+			}
+			else
+			{
+				from.SendMessage("Sélectionnez l'objet à enchanter.");
 				from.Target = new InternalTarget(this);
-			} 
-		} 
-		
-		private class InternalTarget : Target 
+			}
+		}
+
+		private class InternalTarget : Target
 		{
 			private BaseRune m_Rune;
 
-			public InternalTarget(BaseRune rune ) : base( 1, false, TargetFlags.None )
+			public InternalTarget(BaseRune rune) : base(1, false, TargetFlags.None)
 			{
 				m_Rune = rune;
 			}
 
-		 	protected override void OnTarget( Mobile from, object targeted ) 
-		 	{ 
-				int DestroyChance = Utility.Random( 5 );
-				int augmentper = Utility.Random( 8 ) + 1;
-
-           	    if ( targeted is Item item )  // protects from crash if targeting a Mobile. 
-			    {
+			protected override void OnTarget(Mobile from, object targeted)
+			{
+				if (targeted is Item item)
+				{
 					if (!m_Rune.CanEnchant(item, from))
 					{
-					
+						from.SendMessage("Cet objet ne peut pas être enchanté avec cette rune.");
 						return;
 					}
 					else if (item.Enchantement >= 3)
 					{
-						from.SendMessage("Cette objet a déjà trois enchantements.");
+						from.SendMessage("Cet objet a déjà trois enchantements.");
 						return;
-					}				
+					}
 					else if (!from.InRange(item.GetWorldLocation(), 1))
 					{
-						from.SendMessage("Vous êtes trop loin de la l'objet."); // That is too far away. 
+						from.SendMessage("Vous êtes trop loin de l'objet.");
 						return;
 					}
-					else if ((((Item)targeted).Parent != null) && (((Item)targeted).Parent is Mobile))
+					else if ((item.Parent != null) && (item.Parent is Mobile))
 					{
-						from.SendMessage("Vous ne pouvez pas enchanter cette objets à cette endroit.");
-					}
-					else if (!m_Rune.CheckSuccess(from))
-					{
+						from.SendMessage("Vous ne pouvez pas enchanter cet objet à cet endroit.");
 						return;
 					}
 					else
@@ -134,13 +121,13 @@ namespace Server.Items
 						from.SendMessage("Vous enchantez l'objet.");
 					}
 				}
-				else 
+				else
 				{
-		       			from.SendMessage( "Vous devez cibler un objet." );
-		    	} 
-		  	}
-		
+					from.SendMessage("Vous devez cibler un objet.");
+				}
+			}
 		}
+
 
 		public override bool DisplayLootType{ get{ return false; } }  // ha ha!
 
