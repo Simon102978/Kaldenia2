@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using Server.Gumps;
 using Server.Items;
+using Server.Misc;
 using Server.Mobiles;
 #endregion
 
@@ -165,27 +166,8 @@ namespace Server
 
 		public override int RandomHair(bool female) //Random hair doesn't include baldness
 		{
-			switch (Utility.Random(9))
-			{
-				case 0:
-					return 0x203B;  //Short
-				case 1:
-					return 0x203C;  //Long
-				case 2:
-					return 0x203D;  //Pony Tail
-				case 3:
-					return 0x2044;  //Mohawk
-				case 4:
-					return 0x2045;  //Pageboy
-				case 5:
-					return 0x2047;  //Afro
-				case 6:
-					return 0x2049;  //Pig tails
-				case 7:
-					return 0x204A;  //Krisna
-				default:
-					return (female ? 0x2046 : 0x2048);  //Buns or Receeding Hair
-			}
+			return Coiffure.RandomHair();
+			
 		}
 
 		public override bool ValidateFacialHair(bool female, int itemID)
@@ -196,11 +178,12 @@ namespace Server
 			if (female)
 				return false;
 
-			if (itemID >= 0x203E && itemID <= 0x2041)
-				return true;
 
-			if (itemID >= 0x204B && itemID <= 0x204D)
+			if (Coiffure.GetCoiffure(itemID).Barbe)
+			{
 				return true;
+			}
+
 
 			return false;
 		}
@@ -209,9 +192,7 @@ namespace Server
 			if (female)
 				return 0;
 
-			int rand = Utility.Random(7);
-
-			return ((rand < 4) ? 0x203E : 0x2047) + rand;
+			return Coiffure.RandomFacialHair();
 		}
 		public override bool ValidateFace(bool female, int itemID)
 		{

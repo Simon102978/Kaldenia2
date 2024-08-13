@@ -44,6 +44,37 @@ namespace Server.Misc
 
 		}
 
+		public static int RandomHair()
+		{
+			for (int i = 0; i < 30; i++)
+			{
+				Coiffure coif = coiffure[Utility.Random(coiffure.Count)];
+
+				if (!coif.Barbe)
+				{
+					return coif.ItemId;
+				}
+			}
+
+			return 0;
+		}
+
+		public static int RandomFacialHair()
+		{
+			for (int i = 0; i < 30; i++)
+			{
+				Coiffure coif = coiffure[Utility.Random(coiffure.Count)];
+
+				if (coif.Barbe)
+				{
+					return coif.ItemId;
+				}
+			}
+
+			return 0;
+
+		}
+
 		public static void Configure()
 		{
 			Coiffure.Register(new Coiffure(41861, 0, false, true, 50));
@@ -134,7 +165,7 @@ namespace Server.Misc
 			Coiffure.Register(new Coiffure(0x204C, 30, true, true, 50));
 			Coiffure.Register(new Coiffure(0x204D, 30, true,true,50));
 
-// Cheveux ajouté K2 
+// Cheveux ajoutï¿½ K2 
 
 			Coiffure.Register(new Coiffure(0xA4BE, 0, false, true, 50));
 			Coiffure.Register(new Coiffure(0xA4BF, 15, false, true, 50));
