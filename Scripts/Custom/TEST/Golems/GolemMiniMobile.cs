@@ -48,6 +48,7 @@ namespace Server.Custom
 		private Mobile m_SummonMaster;
 		private bool m_IsMaterialized;
 
+
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int Penalty
 		{
@@ -118,9 +119,9 @@ namespace Server.Custom
 			Body = 14;
 			BaseSoundID = 268;
 
-			SetStr(spirit.GetStrength() /2);
-			SetDex(spirit.GetDexterity() /2);
-			SetInt(spirit.GetIntelligence() /2);
+			SetStr(spirit.GetStrength());
+			SetDex(spirit.GetDexterity());
+			SetInt(spirit.GetIntelligence());
 
 			m_MaxHitPoints = ashQuantity * 3;
 			SetHits(m_MaxHitPoints);
@@ -133,7 +134,7 @@ namespace Server.Custom
 			ControlTarget = owner;
 			ControlOrder = OrderType.Come;
 
-			SetDamage(2, 8);
+			SetDamage(spirit.GetDamageMin(), spirit.GetDamageMax()); 
 			SetDamageType(GetDamageType(ashType), 100);
 			VirtualArmor = spirit.GetAR();
 

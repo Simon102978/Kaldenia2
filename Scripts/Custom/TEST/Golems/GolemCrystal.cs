@@ -8,6 +8,7 @@ using Server.Mobiles;
 using System.Collections.Generic;
 using Server.Items;
 using static Server.Custom.GolemZyX;
+using Server.Engines.Fellowship;
 
 namespace Server.Custom
 {
@@ -351,10 +352,10 @@ namespace Server.Custom
 
 				if (crystal.AshQuantity > 0 && crystal.Ash != null)
 				{
-					int energy = crystal.AshQuantity * 5;
+					int energy = crystal.AshQuantity * 3;
 
 					Cendredescription = $"Quantité: {crystal.AshQuantity} {crystal.Ash.AshName}\n\n";
-					Cendredescription += $"Énergie: {crystal.AshQuantity} cendre * 5 énergie = {energy}\n\n";
+					Cendredescription += $"Énergie: {crystal.AshQuantity} cendre * 3 énergie = {energy}\n\n";
 					Cendredescription += $"Pouvoir: {crystal.Ash.GetType().Name.Replace("GolemCendre", "")}\n";
 					Cendredescription += GetAshBonusDescription(crystal.Ash);
 				}
@@ -459,6 +460,9 @@ namespace Server.Custom
 					GolemZyX golem = new GolemZyX(m_Crystal.Spirit, ashType, m_Crystal.AshQuantity, from); 
 					ApplyAshBonuses(golem, m_Crystal.Ash, m_Crystal.AshQuantity);
 					golem.MoveToWorld(from.Location, from.Map);
+					golem.IsMaterialized = true;
+					golem.ControlOrder = OrderType.Stay;
+					
 					from.SendMessage("Vous avez créé un Golem avec succès!");
 				}
 				else
@@ -475,57 +479,56 @@ namespace Server.Custom
 
 			private void ApplyAshBonuses(GolemZyX golem, BaseGolemAsh ash, int ashQuantity)
 			{
-				int baseBonus = ashQuantity * 5;
-				int skillBonus = 0;
+				int baseBonus = ashQuantity * 3;
 
 				if (ash is GolemCendreFeu)
 				{
-					golem.SetStr(golem.Str + baseBonus + 20);
-					golem.Skills[SkillName.Tactics].Base += 10 + skillBonus;
+					golem.SetStr(golem.Str + 20);
+					golem.Skills[SkillName.Tactics].Base += 10;
 					golem.SetDamageType(ResistanceType.Fire, 100);
 					golem.SetResistance(ResistanceType.Fire, 50);
 					golem.Penalty = 4;
 				}
 				if (ash is GolemCendreEau)
 				{
-					golem.SetDex(golem.Dex + baseBonus + 20);
-					golem.Skills[SkillName.Wrestling].Base += 10 + skillBonus;
+					golem.SetDex(golem.Dex + 20);
+					golem.Skills[SkillName.Wrestling].Base += 10;
 					golem.SetDamageType(ResistanceType.Cold, 100);
 					golem.SetResistance(ResistanceType.Cold, 50);
 					golem.Penalty = 3;
 				}
 				if (ash is GolemCendreGlace)
 				{
-					golem.Skills[SkillName.Wrestling].Base += 20 + skillBonus;
+					golem.Skills[SkillName.Wrestling].Base += 20;
 					golem.SetDamageType(ResistanceType.Cold, 100);
 					golem.SetResistance(ResistanceType.Cold, 50);
 					golem.Penalty = 2;
 				}
 				if (ash is GolemCendrePoison)
 				{
-					golem.Skills[SkillName.Tactics].Base += 20 + skillBonus;
+					golem.Skills[SkillName.Tactics].Base += 20;
 					golem.SetDamageType(ResistanceType.Poison, 100);
 					golem.SetResistance(ResistanceType.Poison, 50);
 					golem.Penalty = 2;
 				}
 				if (ash is GolemCendreSang)
 				{
-					golem.Skills[SkillName.Wrestling].Base += 20 + skillBonus;
+					golem.Skills[SkillName.Wrestling].Base += 20;
 					golem.VirtualArmor *= 2;
 					golem.SetDamageType(ResistanceType.Physical, 100);
 					golem.Penalty = 2;
 				}
 				if (ash is GolemCendreSylvestre)
 				{
-					golem.Skills[SkillName.MagicResist].Base += 20 + skillBonus;
+					golem.Skills[SkillName.MagicResist].Base += 20;
 					golem.SetDamageType(ResistanceType.Energy, 100);
 					golem.SetResistance(ResistanceType.Energy, 50);
 					golem.Penalty = 3;
 				}
 				if (ash is GolemCendreTerre)
 				{
-					golem.Skills[SkillName.Tactics].Base += 20 + skillBonus;
-					golem.Skills[SkillName.Wrestling].Base += 20 + skillBonus;
+					golem.Skills[SkillName.Tactics].Base += 20;
+					golem.Skills[SkillName.Wrestling].Base += 20;
 					golem.SetDamageType(ResistanceType.Physical, 100);
 					golem.SetResistance(ResistanceType.Physical, 50);
 					golem.Penalty = 3;
@@ -533,13 +536,13 @@ namespace Server.Custom
 				if (ash is GolemCendreVent)
 				{
 					golem.SetDex(golem.Dex * 2);
-					golem.Skills[SkillName.Tactics].Base += 20 + skillBonus;
+					golem.Skills[SkillName.Tactics].Base += 20;
 					golem.SetDamageType(ResistanceType.Energy, 100);
 					golem.SetResistance(ResistanceType.Energy, 50);
 					golem.Penalty = 2;
 				}
 
-				golem.SetDamage(golem.DamageMin + ((golem.Str + golem.Dex) / 60), golem.DamageMax + ((golem.Str + golem.Dex) / 30));
+				golem.SetDamage(golem.DamageMin, golem.DamageMax);
 				int newHitsMax = golem.HitsMax + (baseBonus * 2);
 				golem.SetHits(newHitsMax);
 				golem.Hits = newHitsMax;
@@ -555,8 +558,30 @@ namespace Server.Custom
 				// Appliquer un bonus de résistance basé sur le type de cendre
 				ResistanceType bonusResistance = GetBonusResistanceType(ash);
 				golem.SetResistance(bonusResistance, golem.GetResistance(bonusResistance) + 25);
-			}
 
+				ApplyPenalty(golem);
+			}
+			private void ApplyPenalty(GolemZyX golem)
+			{
+				if (golem.Penalty > 1)
+				{
+					golem.DamageMin /= golem.Penalty;
+					golem.DamageMax /= golem.Penalty;
+					golem.RawStr /= golem.Penalty;
+					golem.RawDex /= golem.Penalty;
+					golem.RawInt /= golem.Penalty;
+					golem.Stam = golem.StamMax;
+					golem.Mana = golem.ManaMax;
+
+					foreach (Skill skill in golem.Skills)
+					{
+						skill.Base /= golem.Penalty;
+					}
+
+					golem.DamageMin /= golem.Penalty;
+					golem.DamageMax /= golem.Penalty;
+				}
+			}
 			private ResistanceType GetBonusResistanceType(BaseGolemAsh ash)
 			{
 				if (ash is GolemCendreFeu) return ResistanceType.Fire;

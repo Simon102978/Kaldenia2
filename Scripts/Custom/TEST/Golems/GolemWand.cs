@@ -139,6 +139,7 @@ namespace Server.Custom
 
 	public class CreatureSpirit : Item
 	{
+		private int m_DamageMin, m_DamageMax;
 		private int m_Str, m_Dex, m_Int, m_AR;
 		private int m_PhysicalResistance, m_FireResistance, m_ColdResistance, m_PoisonResistance, m_EnergyResistance;
 		private Dictionary<SkillName, double> m_Skills;
@@ -146,6 +147,8 @@ namespace Server.Custom
 		[CommandProperty(AccessLevel.Owner)]
 		public int Percentage { get;  set; }
 
+		public int GetDamageMin() { return m_DamageMin; }
+		public int GetDamageMax() { return m_DamageMax; }
 		public int GetStrength() { return m_Str; }
 		public int GetDexterity() { return m_Dex; }
 		public int GetIntelligence() { return m_Int; }
@@ -183,7 +186,8 @@ namespace Server.Custom
 			m_Skills = new Dictionary<SkillName, double>();
 			if (creature != null)
 			{
-
+				m_DamageMin = creature.DamageMin;
+				m_DamageMax = creature.DamageMax;
 				m_Str = creature.Str;
 				m_Dex = creature.Dex;
 				m_Int = creature.Int;
@@ -446,11 +450,11 @@ namespace Server.Custom
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-			writer.Write((int)1);  // version
+			writer.Write((int)2);  // version
+
 			writer.Write(m_Str);
 			writer.Write(m_Dex);
 			writer.Write(m_Int);
-
 			writer.Write(m_AR);
 			writer.Write(Percentage);
 			writer.Write(m_Skills.Count);
@@ -464,17 +468,23 @@ namespace Server.Custom
 			writer.Write(m_ColdResistance);
 			writer.Write(m_PoisonResistance);
 			writer.Write(m_EnergyResistance);
+
+			// Nouvelles propriétés pour la version 2
+			writer.Write(m_DamageMin);
+			writer.Write(m_DamageMax);
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
 			int version = reader.ReadInt();
+
 			m_Str = reader.ReadInt();
 			m_Dex = reader.ReadInt();
 			m_Int = reader.ReadInt();
 			m_AR = reader.ReadInt();
 			Percentage = reader.ReadInt();
+
 			m_Skills = new Dictionary<SkillName, double>();
 			int count = reader.ReadInt();
 			for (int i = 0; i < count; i++)
@@ -483,7 +493,7 @@ namespace Server.Custom
 				double skillValue = reader.ReadDouble();
 				m_Skills[skillName] = skillValue;
 			}
-			UpdateHue();
+
 			if (version >= 1)
 			{
 				m_PhysicalResistance = reader.ReadInt();
@@ -492,7 +502,22 @@ namespace Server.Custom
 				m_PoisonResistance = reader.ReadInt();
 				m_EnergyResistance = reader.ReadInt();
 			}
+
+			if (version >= 2)
+			{
+				m_DamageMin = reader.ReadInt();
+				m_DamageMax = reader.ReadInt();
+			}
+			else
+			{
+				// Valeurs par défaut pour les anciennes versions
+				m_DamageMin = 1;
+				m_DamageMax = 8;
+			}
+
+			UpdateHue();
 		}
+
 
 	}
 }
