@@ -75,6 +75,8 @@ namespace Server.Mobiles
 
 
             Utility.AssignRandomHair(this);
+
+            HideSelf();
   
         }
 

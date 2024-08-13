@@ -40,7 +40,7 @@ namespace Server.Mobiles
             SetDex(81, 95);
             SetInt(151, 165);
 
-            SetDamage(5, 15);
+            SetDamage(5, 10);
 
             SetDamageType(ResistanceType.Physical, 65);
             SetDamageType(ResistanceType.Fire, 15);
@@ -62,7 +62,7 @@ namespace Server.Mobiles
             SetSkill(SkillName.Swords, 95.0, 120.0);
 
             SetSkill(SkillName.Ninjitsu, 95.0, 120.0);
-            SetSkill(SkillName.Hiding, 100.0);
+            SetSkill(SkillName.Hiding, 80.0);
         //    SetSkill(SkillName.Stealth, 120.0);
 
             Fame = 8500;
@@ -75,6 +75,8 @@ namespace Server.Mobiles
 
 
             Utility.AssignRandomHair(this);
+
+            HideSelf();
   
         }
 

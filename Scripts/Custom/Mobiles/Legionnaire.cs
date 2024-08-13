@@ -68,6 +68,8 @@ namespace Server.Mobiles
             Fame = 5000;
             Karma = -5000;
 
+            AddItem(new Backpack());
+
             AddItem(new Cape7
 			{
 				Name = "Cape brodee d'un aigle d'or",
@@ -155,9 +157,6 @@ namespace Server.Mobiles
 				LootType = LootType.Blessed,
 				Layer = Layer.Waist,
 			});
-
-
-
 
             Utility.AssignRandomHair(this);
         }
