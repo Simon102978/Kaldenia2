@@ -2740,7 +2740,10 @@ namespace Server.Multis
                 from.SendLocalizedMessage(501347); // You cannot eject that from the house!
             }
             else
-            {
+            {   
+                from.SendMessage("Option désactivé.");
+
+                /*
                 targ.MoveToWorld(BanLocation, Map);
 
                 from.SendLocalizedMessage(1042840, targ.Name); // ~1_PLAYER NAME~ has been ejected from this house.
@@ -2822,12 +2825,15 @@ namespace Server.Multis
             }
             else
             {
-                Bans.Add(targ);
+
+
+                from.SendMessage("Option désactivé.");
+            /*    Bans.Add(targ);
 
                 from.SendLocalizedMessage(1042839, targ.Name); // ~1_PLAYER_NAME~ has been banned from this house.
                 targ.Mobile.SendLocalizedMessage(501340); // You have been banned from this house.
 
-                targ.Mobile.MoveToWorld(BanLocation, Map);
+                targ.Mobile.MoveToWorld(BanLocation, Map);*/
             }
         }
 
