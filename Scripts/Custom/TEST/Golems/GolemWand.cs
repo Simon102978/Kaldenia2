@@ -65,6 +65,11 @@ namespace Server.Custom
 				{
 					if (corpse.Owner is BaseCreature creature)
 					{
+						if (creature.Summoned || creature.IsBonded)
+						{
+							from.SendMessage("Vous ne pouvez pas capturer l'esprit d'une créature invoquée ou apprivoisée.");
+							return;
+						}
 						if (Utility.RandomBool()) // 50% de chance de capturer l'esprit
 						{
 							CreatureSpirit spirit = new CreatureSpirit(creature);

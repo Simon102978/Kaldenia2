@@ -565,21 +565,20 @@ namespace Server.Custom
 			{
 				if (golem.Penalty > 1)
 				{
-					golem.DamageMin /= golem.Penalty;
-					golem.DamageMax /= golem.Penalty;
+					golem.DamageMin /= 2;
+					golem.DamageMax /= 2;
 					golem.RawStr /= golem.Penalty;
 					golem.RawDex /= golem.Penalty;
 					golem.RawInt /= golem.Penalty;
 					golem.Stam = golem.StamMax;
 					golem.Mana = golem.ManaMax;
 
-					foreach (Skill skill in golem.Skills)
-					{
-						skill.Base /= golem.Penalty;
-					}
+				//	foreach (Skill skill in golem.Skills)
+				//	{
+				//		skill.Base /= golem.Penalty;
+				//	}
 
-					golem.DamageMin /= golem.Penalty;
-					golem.DamageMax /= golem.Penalty;
+					
 				}
 			}
 			private ResistanceType GetBonusResistanceType(BaseGolemAsh ash)

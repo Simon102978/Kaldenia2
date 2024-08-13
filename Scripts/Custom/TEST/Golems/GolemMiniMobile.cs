@@ -74,13 +74,23 @@ namespace Server.Custom
 			get { return m_SummonMaster; }
 			set
 			{
-				m_SummonMaster = value;
-				if (m_SummonMaster != null)
+				if (m_SummonMaster != value)
 				{
-					ControlMaster = m_SummonMaster;
-					Controlled = true;
-					ControlTarget = m_SummonMaster;
-					ControlOrder = OrderType.Come;
+					if (m_SummonMaster != null)
+					{
+						m_SummonMaster.Followers -= ControlSlots;
+					}
+
+					m_SummonMaster = value;
+
+					if (m_SummonMaster != null)
+					{
+						ControlMaster = m_SummonMaster;
+						Controlled = true;
+						ControlTarget = m_SummonMaster;
+						ControlOrder = OrderType.Come;
+						m_SummonMaster.Followers += ControlSlots;
+					}
 				}
 			}
 		}
@@ -100,11 +110,17 @@ namespace Server.Custom
 			get { return m_IsMaterialized; }
 			set
 			{
-				m_IsMaterialized = value;
-				if (m_IsMaterialized)
-					Materialize(SummonMaster);
-				else
-					Dematerialize();
+				if (m_IsMaterialized != value)
+				{
+					if (value)
+					{
+						Materialize(SummonMaster);
+					}
+					else
+					{
+						Dematerialize();
+					}
+				}
 			}
 		}
 
@@ -128,13 +144,13 @@ namespace Server.Custom
 			SetMana(0);
 
 			Summoned = false;
-			ControlSlots = 3;
+			ControlSlots = 0;
 			SetControlMaster(owner);
 			Controlled = true;
 			ControlTarget = owner;
 			ControlOrder = OrderType.Come;
 
-			SetDamage(spirit.GetDamageMin(), spirit.GetDamageMax()); 
+			SetDamage(spirit.GetDamageMin() +1, spirit.GetDamageMax() +2); 
 			SetDamageType(GetDamageType(ashType), 100);
 			VirtualArmor = spirit.GetAR();
 
@@ -183,6 +199,14 @@ namespace Server.Custom
 				return;
 			}
 
+			master.SendMessage("Le golem commence à se matérialiser...");
+
+			Effects.SendLocationParticles(EffectItem.Create(master.Location, master.Map, EffectItem.DefaultDuration), 0x3728, 10, 30, 5052);
+			Effects.PlaySound(master.Location, master.Map, 0x201);
+
+			Timer.DelayCall(TimeSpan.FromSeconds(10), () =>
+			{
+
 			SetControlMaster(master);
 			Controlled = true;
 			ControlTarget = master;
@@ -198,7 +222,11 @@ namespace Server.Custom
 				Map = master.Map;
 			}
 
-			master.SendMessage("Vous avez matérialisé le golem.");
+				Effects.SendLocationParticles(EffectItem.Create(Location, Map, EffectItem.DefaultDuration), 0x3728, 10, 30, 5052);
+				Effects.PlaySound(Location, Map, 0x202);
+
+				master.SendMessage("Vous avez matérialisé le golem.");
+			});
 		}
 
 
@@ -647,15 +675,33 @@ namespace Server.Custom
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			if (m_Golem != null && from == m_Golem.SummonMaster)
+			if (m_Golem != null)
 			{
-				if (m_Golem.Deleted)
+				if (from == m_Golem.SummonMaster)
 				{
-					from.SendMessage("Ce golem n'est plus fonctionnel.");
-					return;
-				}
+					if (m_Golem.Deleted)
+					{
+						from.SendMessage("Ce golem n'est plus fonctionnel.");
+						return;
+					}
 
-				m_Golem.IsMaterialized = !m_Golem.IsMaterialized;
+					m_Golem.IsMaterialized = !m_Golem.IsMaterialized;
+				}
+				else if (from != m_Golem.SummonMaster && from.Alive)
+				{
+					// Transfert de propriété
+					Mobile oldOwner = m_Golem.SummonMaster;
+					m_Golem.SummonMaster = from;
+					m_Golem.SetControlMaster(from);
+
+					from.SendMessage("Vous êtes maintenant le propriétaire de ce MiniGolem.");
+					if (oldOwner != null && oldOwner.NetState != null)
+						oldOwner.SendMessage("Votre MiniGolem a un nouveau propriétaire.");
+
+					// Mettre à jour le MiniGolem
+					this.Golem = m_Golem;
+					this.InvalidateProperties();
+				}
 			}
 			else
 			{
