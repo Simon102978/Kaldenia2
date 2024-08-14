@@ -36,7 +36,7 @@ namespace Server.Gumps
 
 			AddPage(0);
 
-			//Background
+			//Backgound
 			AddImage(100, 100, 5011);
 
 			//Nudge
@@ -52,6 +52,9 @@ namespace Server.Gumps
 			AddButton(187, 245, 4505, 4505, 8, GumpButtonType.Reply, 0);
 			AddButton(182, 215, 4506, 4506, 9, GumpButtonType.Reply, 0);
 			AddButton(187, 185, 4507, 4507, 10, GumpButtonType.Reply, 0);
+
+			//Flip
+			//AddButton(216, 180, 4008, 4008, 13, GumpButtonType.Reply, 0);
 
 			//Lock
 			AddButton(227, 162, 4020, 4022, 11, GumpButtonType.Reply, 0);
@@ -105,47 +108,70 @@ namespace Server.Gumps
 					from.Target = new DecoMoveTarget(DecoDirection.NorthWest);
 					break;
 				case 11:
-					from.Target = new DecoLockTarget();
-					break;
+					{
+
+						BaseHouse House = BaseHouse.FindHouseAt(from);
+
+						if (House != null)
+						{
+							from.Target = new LockdownTarget(false, House);
+						}
+						else
+						{
+							from.Target = new DecoLockTarget();
+						}
+						break;
+
+
+					}
 				case 12:
-					from.Target = new DecoUnLockTarget();
-					break;
+					{
+
+						BaseHouse House = BaseHouse.FindHouseAt(from);
+
+						if (House != null)
+						{
+							from.Target = new LockdownTarget(true, House);
+						}
+						else
+						{
+							from.Target = new DecoUnLockTarget();
+						}
+						break;
+					}
 				default: break;
 			}
 		}
 	}
-
 	public class NudgeUpTarget : Target
 	{
-		public NudgeUpTarget() : base(-1, false, TargetFlags.None) { }
-
-		protected override void OnTarget(Mobile from, object targeted)
+		public NudgeUpTarget()
+			: base(-1, false, TargetFlags.None)
 		{
-			if (targeted is Item item && !(item is BaseDoor))
+		}
+
+		protected override void OnTarget(Mobile from, object target)
+		{
+			if (target == null)
 			{
-				BaseHouse house = BaseHouse.FindHouseAt(item);
+				// Si le joueur annule la cible (missclick), retourner au gump
+				from.SendGump(new DecorationGump(from));
+				return;
+			}
 
-				if (house != null && !(house.IsOwner(from) || house.IsCoOwner(from)))
+			if ((target is Item) && (!(target is BaseDoor)))
+			{
+				Item item = (Item)target;
+
+				if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
 				{
-					from.SendMessage("Vous devez être propriétaire ou co-propriétaire pour modifier cet objet.");
-					from.SendGump(new DecorationGump(from));
-					return;
-				}
+					Point3D point = item.Location;
+					point.Z += 1;
 
-				if (from.GetDistanceToSqrt(item.Location) <= 1 && from.InLOS(item))
-				{
-					Point3D newLocation = new Point3D(item.Location.X, item.Location.Y, item.Location.Z + 1);
+					item.Location = point;
 
-					if (house == null || house.IsInside(newLocation))
-					{
-						item.Location = newLocation;
-						from.Target = new NudgeUpTarget();
-					}
-					else
-					{
-						from.SendMessage("Vous ne pouvez pas déplacer cet objet en dehors de la maison.");
-						from.SendGump(new DecorationGump(from));
-					}
+					// Réactiver la cible pour une utilisation continue
+					from.Target = new NudgeUpTarget();
 				}
 				else
 				{
@@ -155,7 +181,7 @@ namespace Server.Gumps
 			}
 			else
 			{
-				from.SendMessage("Vous pouvez seulement déplacer un objet !");
+				from.SendMessage("Vous pouvez seulement deplacer un objet !");
 				from.SendGump(new DecorationGump(from));
 			}
 		}
@@ -163,35 +189,33 @@ namespace Server.Gumps
 
 	public class NudgeDownTarget : Target
 	{
-		public NudgeDownTarget() : base(-1, false, TargetFlags.None) { }
-
-		protected override void OnTarget(Mobile from, object targeted)
+		public NudgeDownTarget()
+			: base(-1, false, TargetFlags.None)
 		{
-			if (targeted is Item item && !(item is BaseDoor))
+		}
+
+		protected override void OnTarget(Mobile from, object target)
+		{
+			if (target == null)
 			{
-				BaseHouse house = BaseHouse.FindHouseAt(item);
+				// Si le joueur annule la cible (missclick), retourner au gump
+				from.SendGump(new DecorationGump(from));
+				return;
+			}
 
-				if (house != null && !(house.IsOwner(from) || house.IsCoOwner(from)))
+			if ((target is Item) && (!(target is BaseDoor)))
+			{
+				Item item = (Item)target;
+
+				if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
 				{
-					from.SendMessage("Vous devez être propriétaire ou co-propriétaire pour modifier cet objet.");
-					from.SendGump(new DecorationGump(from));
-					return;
-				}
+					Point3D point = item.Location;
+					point.Z -= 1;
 
-				if (from.GetDistanceToSqrt(item.Location) <= 1 && from.InLOS(item))
-				{
-					Point3D newLocation = new Point3D(item.Location.X, item.Location.Y, item.Location.Z - 1);
+					item.Location = point;
 
-					if (house == null || house.IsInside(newLocation))
-					{
-						item.Location = newLocation;
-						from.Target = new NudgeDownTarget();
-					}
-					else
-					{
-						from.SendMessage("Vous ne pouvez pas déplacer cet objet en dehors de la maison.");
-						from.SendGump(new DecorationGump(from));
-					}
+					// Réactiver la cible pour une utilisation continue
+					from.Target = new NudgeDownTarget();
 				}
 				else
 				{
@@ -201,194 +225,167 @@ namespace Server.Gumps
 			}
 			else
 			{
-				from.SendMessage("Vous pouvez seulement déplacer un objet !");
+				from.SendMessage("Vous pouvez seulement deplacer un objet !");
 				from.SendGump(new DecorationGump(from));
 			}
 		}
 	}
 
+
 	public class DecoLockTarget : Target
 	{
-		public DecoLockTarget() : base(-1, false, TargetFlags.None) { }
-
-		protected override void OnTarget(Mobile from, object targeted)
+		public DecoLockTarget()
+			: base(-1, false, TargetFlags.None)
 		{
-			if (targeted is Item item && !(item is BaseDoor))
-			{
-				BaseHouse house = BaseHouse.FindHouseAt(item);
 
-				if (house != null)
+		}
+
+		protected override void OnTarget(Mobile from, object target)
+		{
+			if (target != null)
+			{
+				if ((target is Item) && (!(target is BaseDoor)))
 				{
-					if (house.IsOwner(from) || house.IsCoOwner(from))
+					Item item = (Item)target;
+
+					if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
 					{
-						if (from.GetDistanceToSqrt(item.Location) <= 1 && from.InLOS(item))
+						if (item.CanBeLock && item.Movable)
 						{
-							if (!house.IsSecure(item))
-							{
-								house.AddSecure(from, item);
-								from.SendMessage("L'objet a été verrouillé.");
-							}
-							else
-							{
-								from.SendMessage("Cet objet est déjà verrouillé.");
-							}
+							item.Movable = false;
+							item.LockByPlayer = true;
 						}
 						else
 						{
-							from.SendMessage("Ceci est hors de votre portée.");
+							from.SendMessage("Vous ne pouvez pas barrer/debarrer cet objet.");
 						}
 					}
 					else
-					{
-						from.SendMessage("Vous devez être propriétaire ou co-propriétaire pour verrouiller cet objet.");
-					}
+						from.SendMessage("Ceci est hors de votre portée.");
 				}
 				else
-				{
-					from.SendMessage("Cet objet n'est pas dans une maison.");
-				}
-			}
-			else
-			{
-				from.SendMessage("Vous pouvez seulement verrouiller un objet !");
+					from.SendMessage("Vous pouvez seulement barrer/debarrer un objet !");
 			}
 			from.SendGump(new DecorationGump(from));
 		}
 	}
-
 	public class DecoUnLockTarget : Target
 	{
-		public DecoUnLockTarget() : base(-1, false, TargetFlags.None) { }
-
-		protected override void OnTarget(Mobile from, object targeted)
+		public DecoUnLockTarget()
+			: base(-1, false, TargetFlags.None)
 		{
-			if (targeted is Item item && !(item is BaseDoor))
-			{
-				BaseHouse house = BaseHouse.FindHouseAt(item);
 
-				if (house != null)
+		}
+
+		protected override void OnTarget(Mobile from, object target)
+		{
+			if (target != null)
+			{
+				if ((target is Item) && (!(target is BaseDoor)))
 				{
-					if (house.IsOwner(from) || house.IsCoOwner(from))
+					Item item = (Item)target;
+
+					if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
 					{
-						if (from.GetDistanceToSqrt(item.Location) <= 1 && from.InLOS(item))
+						if (item.CanBeLock)
 						{
-							if (house.IsSecure(item))
+
+							if (item.LockByPlayer || item.Createur != null)
 							{
-								house.ReleaseSecure(from, item);
-								from.SendMessage("L'objet a été déverrouillé.");
+								item.SetLastMoved();
+								item.Movable = true;
+								item.LockByPlayer = false;
 							}
 							else
 							{
-								from.SendMessage("Cet objet n'est pas verrouillé.");
+								from.SendMessage("Vous ne pouvez débarrer que les objets verouillé ou créer par un joueur.");
 							}
+
+
+
+
 						}
 						else
 						{
-							from.SendMessage("Ceci est hors de votre portée.");
+							from.SendMessage("Vous ne pouvez pas barrer/debarrer cet objet.");
 						}
 					}
 					else
-					{
-						from.SendMessage("Vous devez être propriétaire ou co-propriétaire pour déverrouiller cet objet.");
-					}
+						from.SendMessage("Ceci est hors de votre portée.");
 				}
 				else
-				{
-					from.SendMessage("Cet objet n'est pas dans une maison.");
-				}
-			}
-			else
-			{
-				from.SendMessage("Vous pouvez seulement déverrouiller un objet !");
+					from.SendMessage("Vous pouvez seulement barrer/debarrer un objet !");
 			}
 			from.SendGump(new DecorationGump(from));
 		}
 	}
-
 	public class DecoMoveTarget : Target
 	{
 		DecoDirection dir;
 
-		public DecoMoveTarget(DecoDirection direction) : base(-1, false, TargetFlags.None)
+		public DecoMoveTarget(DecoDirection direction)
+			: base(-1, false, TargetFlags.None)
 		{
 			dir = direction;
 		}
 
-		protected override void OnTarget(Mobile from, object targeted)
+		protected override void OnTarget(Mobile from, object target)
 		{
-			if (targeted is Item item && !(item is BaseDoor))
+			if (target != null)
 			{
-				BaseHouse house = BaseHouse.FindHouseAt(item);
-
-				if (house != null && !(house.IsOwner(from) || house.IsCoOwner(from)))
+				if ((target is Item) && (!(target is BaseDoor)))
 				{
-					from.SendMessage("Vous devez être propriétaire ou co-propriétaire pour déplacer cet objet.");
-					from.SendGump(new DecorationGump(from));
-					return;
-				}
+					Item item = (Item)target;
 
-				if (from.GetDistanceToSqrt(item.Location) <= 1 && from.InLOS(item))
-				{
-					Point3D newLocation = CalculateNewLocation(item.Location, dir);
-
-					if (house == null || house.IsInside(newLocation))
+					if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
 					{
-						item.Location = newLocation;
+						///                       if (item.CanBeAltered)
+						{
+							Point3D point = item.Location;
+
+							switch (dir)
+							{
+								case DecoDirection.North:
+									point.X -= 1;
+									point.Y -= 1;
+									break;
+								case DecoDirection.South:
+									point.X += 1;
+									point.Y += 1;
+									break;
+								case DecoDirection.East:
+									point.X += 1;
+									point.Y -= 1;
+									break;
+								case DecoDirection.West:
+									point.X -= 1;
+									point.Y += 1;
+									break;
+								case DecoDirection.NorthEast:
+									point.Y -= 1;
+									break;
+								case DecoDirection.NorthWest:
+									point.X -= 1;
+									break;
+								case DecoDirection.SouthEast:
+									point.X += 1;
+									break;
+								case DecoDirection.SouthWest:
+									point.Y += 1;
+									break;
+							}
+							//        point.Z -= 1;
+
+							item.Location = point;
+						}
 					}
 					else
-					{
-						from.SendMessage("Vous ne pouvez pas déplacer cet objet en dehors de la maison.");
-					}
+						from.SendMessage("Ceci est hors de votre portée.");
 				}
 				else
-				{
-					from.SendMessage("Ceci est hors de votre portée.");
-				}
-			}
-			else
-			{
-				from.SendMessage("Vous pouvez seulement déplacer un objet !");
+					from.SendMessage("Vous pouvez seulement deplacer un objet !");
 			}
 			from.SendGump(new DecorationGump(from));
-		}
-
-		private Point3D CalculateNewLocation(Point3D currentLocation, DecoDirection direction)
-		{
-			Point3D newLocation = currentLocation;
-
-			switch (direction)
-			{
-				case DecoDirection.North:
-					newLocation.Y--;
-					break;
-				case DecoDirection.South:
-					newLocation.Y++;
-					break;
-				case DecoDirection.East:
-					newLocation.X++;
-					break;
-				case DecoDirection.West:
-					newLocation.X--;
-					break;
-				case DecoDirection.NorthEast:
-					newLocation.X++;
-					newLocation.Y--;
-					break;
-				case DecoDirection.NorthWest:
-					newLocation.X--;
-					newLocation.Y--;
-					break;
-				case DecoDirection.SouthEast:
-					newLocation.X++;
-					newLocation.Y++;
-					break;
-				case DecoDirection.SouthWest:
-					newLocation.X--;
-					newLocation.Y++;
-					break;
-			}
-
-			return newLocation;
 		}
 	}
 }

@@ -89,8 +89,8 @@ namespace Server.Items
 		}
 		private PotionEffect m_PotionEffect;
 
-		public static TimeSpan DefaultDuration = TimeSpan.FromMinutes(30);
-
+		public static TimeSpan DefaultDuration = TimeSpan.FromMinutes(5.0);
+		public virtual TimeSpan MinimumDuration => TimeSpan.Zero;
 		public virtual TimeSpan Duration
 		{
 			get
@@ -100,11 +100,18 @@ namespace Server.Items
 					return m_CustomDuration;
 				}
 
-				// Calculer la durée en fonction du niveau d'alchimie
 				double minutes = 5 + (55 * m_AlchemyLevel / 100.0);
-				return TimeSpan.FromMinutes(minutes);
+				TimeSpan calculatedDuration = TimeSpan.FromMinutes(minutes);
+
+				if (calculatedDuration < DefaultDuration)
+				{
+					calculatedDuration = DefaultDuration;
+				}
+
+				return TimeSpan.FromTicks(Math.Max(calculatedDuration.Ticks, MinimumDuration.Ticks));
 			}
 		}
+
 		public PotionEffect PotionEffect
         {
             get
@@ -233,8 +240,7 @@ namespace Server.Items
 
 		public abstract void Drink(Mobile from);
 
-		
-		public static void PlayDrinkEffect(Mobile m, BasePotion potion)
+		public static void PlayDrinkEffect(Mobile m)
 		{
 			m.RevealingAction();
 			m.PlaySound(0x2D6);
@@ -244,10 +250,6 @@ namespace Server.Items
 			{
 				m.Animate(AnimationType.Eat, 0);
 			}
-
-			TimeSpan duration = potion.Duration;
-			int minutes = (int)Math.Ceiling(duration.TotalMinutes);
-			m.SendMessage(String.Format("L'effet de la potion durera environ {0} minute{1}.", minutes, minutes > 1 ? "s" : ""));
 		}
 
 		public static int EnhancePotions(Mobile m)

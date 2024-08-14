@@ -15,7 +15,7 @@ namespace Server.Items
         }
 
         public abstract int StrOffset { get; }
-        public abstract TimeSpan Duration { get; }
+                public virtual TimeSpan MinimumDuration => TimeSpan.FromMinutes(5.0);
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

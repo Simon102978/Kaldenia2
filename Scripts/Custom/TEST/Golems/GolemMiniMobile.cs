@@ -150,7 +150,7 @@ namespace Server.Custom
 			ControlTarget = owner;
 			ControlOrder = OrderType.Come;
 
-			SetDamage(spirit.GetDamageMin() +1, spirit.GetDamageMax() +2); 
+			SetDamage(spirit.GetDamageMin() +2, spirit.GetDamageMax() +3); 
 			SetDamageType(GetDamageType(ashType), 100);
 			VirtualArmor = spirit.GetAR();
 
@@ -199,14 +199,6 @@ namespace Server.Custom
 				return;
 			}
 
-			master.SendMessage("Le golem commence à se matérialiser...");
-
-			Effects.SendLocationParticles(EffectItem.Create(master.Location, master.Map, EffectItem.DefaultDuration), 0x3728, 10, 30, 5052);
-			Effects.PlaySound(master.Location, master.Map, 0x201);
-
-			Timer.DelayCall(TimeSpan.FromSeconds(10), () =>
-			{
-
 			SetControlMaster(master);
 			Controlled = true;
 			ControlTarget = master;
@@ -222,14 +214,9 @@ namespace Server.Custom
 				Map = master.Map;
 			}
 
-				Effects.SendLocationParticles(EffectItem.Create(Location, Map, EffectItem.DefaultDuration), 0x3728, 10, 30, 5052);
-				Effects.PlaySound(Location, Map, 0x202);
+			master.SendMessage("Vous avez matérialisé le golem.");
 
-				master.SendMessage("Vous avez matérialisé le golem.");
-			});
 		}
-
-
 		public void Dematerialize()
 		{
 			if (ControlMaster != null)

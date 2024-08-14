@@ -1198,7 +1198,7 @@ namespace Server.Multis
             }
 
             // staff or not locked down
-            if (from.AccessLevel >= AccessLevel.GameMaster || IsOwner(from) || !IsLockedDown(item))
+            if (from.AccessLevel >= AccessLevel.GameMaster || IsOwner(from) || IsCoOwner(from) || !IsLockedDown(item))
                 return true;
 
             bool lockedDown = LockDowns.ContainsKey(item);
@@ -2365,8 +2365,8 @@ namespace Server.Multis
             if (item == null)
                 return false;
 
-            if (IsOwner(m))
-                return true;
+			if (IsOwner(m) || IsCoOwner(m))
+				return true;
 
             if (item is BaseContainer || item.Parent is BaseContainer)
             {
@@ -2443,7 +2443,7 @@ namespace Server.Multis
 
         public void AddSecure(Mobile m, Item item)
         {
-            if (Secures == null || !IsCoOwner(m) || !IsActive)
+            if (Secures == null || /*!IsCoOwner(m) || */!IsActive)
                 return;
 
             if (!IsInside(item))
@@ -4225,6 +4225,8 @@ namespace Server.Multis
 
             return false;
         }
+
+
         public bool IsCoOwner(Mobile m)
         {
             return IsCoOwner(new Nom(m));
@@ -4330,7 +4332,7 @@ namespace Server.Multis
             if (m == null)
                 return false;
 
-            if (m.Mobile.IsStaff() || IsFriend(m) || (Access != null && Access.Contains(m)))
+            if (m.Mobile.IsStaff() || IsFriend(m) || IsCoOwner(m) || (Access != null && Access.Contains(m)))
                 return true;
 
             foreach (Nom item in Access)
@@ -4854,44 +4856,45 @@ namespace Server.Multis
             m_Securable = securable;
         }
 
-        public static ISecurable GetSecurable(Mobile from, Item item)
-        {
-            BaseHouse house = BaseHouse.FindHouseAt(item);
+		public static ISecurable GetSecurable(Mobile from, Item item)
+		{
+			BaseHouse house = BaseHouse.FindHouseAt(item);
 
-            if (house == null)
-                return null;
+			if (house == null)
+				return null;
 
-            bool owner = house.IsOwner(from) || (house.IsLockedDown(item) && house.CheckLockdownOwnership(from, item));
-            ISecurable sec = null;
+			bool owner = house.IsOwner(from) || house.IsCoOwner(from) || (house.IsLockedDown(item) && house.CheckLockdownOwnership(from, item));
+			ISecurable sec = null;
 
-            if (item is ISecurable)
-            {
-                if (!owner)
-                    return null;
+			if (item is ISecurable)
+			{
+				if (!owner)
+					return null;
 
-                bool isOwned = house.Doors.Contains(item);
+				bool isOwned = house.Doors.Contains(item);
 
-                if (!isOwned)
-                    isOwned = (house is HouseFoundation && ((HouseFoundation)house).IsFixture(item));
+				if (!isOwned)
+					isOwned = (house is HouseFoundation && ((HouseFoundation)house).IsFixture(item));
 
-                if (!isOwned)
-                    isOwned = house.IsLockedDown(item);
+				if (!isOwned)
+					isOwned = house.IsLockedDown(item);
 
-                if (!isOwned)
-                    isOwned = item is BaseAddon || item is JewelryBox || item is Engines.Plants.SeedBox;
+				if (!isOwned)
+					isOwned = item is BaseAddon || item is JewelryBox || item is Engines.Plants.SeedBox;
 
-                if (isOwned)
-                    sec = (ISecurable)item;
-            }
-            else
-            {
-                sec = house.GetSecureInfoFor(from, item);
-            }
+				if (isOwned)
+					sec = (ISecurable)item;
+			}
+			else
+			{
+				sec = house.GetSecureInfoFor(from, item);
+			}
 
-            return sec;
-        }
+			return sec;
+		}
 
-        public static void AddTo(Mobile from, Item item, List<ContextMenuEntry> list)
+
+		public static void AddTo(Mobile from, Item item, List<ContextMenuEntry> list)
         {
             ISecurable sec = GetSecurable(from, item);
 
@@ -4939,20 +4942,21 @@ namespace Server.Multis
             Enabled = Mobile.Alive;
         }
 
-        public override void OnClick()
-        {
-            if (Mobile.Alive && BaseHouse.FindHouseAt(Mobile) == House && House.IsOwner(Mobile))
-            {
-                Mobile.Target = new InternalTarget(Item, House);
-                Mobile.SendLocalizedMessage(1159160); // Target the location that you wish to relocate this container. Once selected the container will no longer be secured.
-            }
-            else
-            {
-                Mobile.SendLocalizedMessage(1153882); // You do not own that.
-            }
-        }
+		public override void OnClick()
+		{
+			if (Mobile.Alive && BaseHouse.FindHouseAt(Mobile) == House && (House.IsOwner(Mobile) || House.IsCoOwner(Mobile)))
+			{
+				Mobile.Target = new InternalTarget(Item, House);
+				Mobile.SendLocalizedMessage(1159160); // Target the location that you wish to relocate this container. Once selected the container will no longer be secured.
+			}
+			else
+			{
+				Mobile.SendLocalizedMessage(1153882); // You do not own that.
+			}
+		}
 
-        public static AddonFitResult CouldFit(Point3D p, Map map, Mobile from, ref BaseHouse house)
+
+		public static AddonFitResult CouldFit(Point3D p, Map map, Mobile from, ref BaseHouse house)
         {
             if (!map.CanFit(p.X, p.Y, p.Z, 20, true, true, true))
                 return AddonFitResult.Blocked;
