@@ -51,6 +51,8 @@ namespace Server.Mobiles
 
             SetDamage(8, 15);
 
+			SetHits(300);
+
             SetDamageType(ResistanceType.Physical, 100);
 
             SetResistance(ResistanceType.Physical, 35, 45);
@@ -293,7 +295,7 @@ namespace Server.Mobiles
 
 				int Nombre = 0;
 
-				while(Nombre < 5)
+				while(Nombre < 3)
 				{
 					int monstre = Utility.Random(5);
 
