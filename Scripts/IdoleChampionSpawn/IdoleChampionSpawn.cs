@@ -264,8 +264,10 @@ namespace Server.Engines.Idole
 
             if (m_Level > 1 && LastChange.AddMinutes(30) < DateTime.Now)
             {
-                m_Level = 0;
+                        
                 ClearSpawn();
+                Despawn();
+                m_Level = 0;  
 
             }
 
