@@ -6,6 +6,61 @@ using Server.Mobiles;
 
 public class SkillCard : Item
 {
+	[CommandProperty(AccessLevel.GameMaster)]
+	public int Level
+	{
+		get { return m_Level; }
+		set
+		{
+			m_Level = value;
+			if (m_Decrypted)
+				UpdateAppearance();
+			InvalidateProperties();
+		}
+	}
+
+	[CommandProperty(AccessLevel.GameMaster)]
+	public double Bonus
+	{
+		get { return m_Bonus; }
+		set
+		{
+			m_Bonus = value;
+			InvalidateProperties();
+		}
+	}
+
+	[CommandProperty(AccessLevel.GameMaster)]
+	public SkillName Skill
+	{
+		get { return m_Skill; }
+		set
+		{
+			m_Skill = value;
+			if (m_Decrypted)
+				UpdateAppearance();
+			InvalidateProperties();
+		}
+	}
+
+	[CommandProperty(AccessLevel.GameMaster)]
+	public bool Decrypted
+	{
+		get { return m_Decrypted; }
+		set
+		{
+			m_Decrypted = value;
+			if (m_Decrypted)
+				UpdateAppearance();
+			else
+			{
+				ItemID = 0x9C14;
+				Name = "Carte mystérieuse";
+				Hue = 0;
+			}
+			InvalidateProperties();
+		}
+	}
 	private int m_Level;
 	private double m_Bonus;
 	private SkillName m_Skill;
@@ -91,7 +146,13 @@ public class SkillCard : Item
 		m_Skill = skills[Utility.Random(skills.Length)];
 	}
 
-	private void UpdateAppearance()
+	public void RegenerateBonus()
+	{
+		m_Bonus = GenerateBonus(m_Level);
+		InvalidateProperties();
+	}
+
+	public void UpdateAppearance()
 	{
 		ItemID = 0x9C15;
 		Name = GetCardName();
@@ -219,6 +280,11 @@ public class SkillCard : Item
 		{
 			list.Add($"Compétence: {m_Skill}");
 			list.Add($"Bonus: +{m_Bonus:F1}%");
+			list.Add($"Niveau: {m_Level}");
+		}
+		else
+		{
+			list.Add("Non décryptée");
 		}
 	}
 
