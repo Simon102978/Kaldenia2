@@ -17,7 +17,7 @@ namespace Server.Mobiles
             Name = NameList.RandomName("female");
             AddItem(new Skirt(Utility.RandomNeutralHue()));
             
-            SetStr(86, 100);
+            SetStr(150, 200);
             SetDex(81, 95);
             SetInt(61, 75);
 
@@ -96,7 +96,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.Average,3);
+            AddLoot(LootPack.Average);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 4));
 		}
 

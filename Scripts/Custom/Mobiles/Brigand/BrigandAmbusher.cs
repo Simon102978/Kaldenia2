@@ -25,7 +25,7 @@ namespace Server.Mobiles
                 Name = NameList.RandomName("male");
                 AddItem(new ShortPants(Utility.RandomNeutralHue()));
             }
-            SetStr(96, 120);
+            SetStr(120, 150);
             SetDex(86, 105);
             SetInt(36, 60);
 

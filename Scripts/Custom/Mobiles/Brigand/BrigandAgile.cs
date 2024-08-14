@@ -27,11 +27,11 @@ namespace Server.Mobiles
                 AddItem(new ShortPants(Utility.RandomNeutralHue()));
             }
 
-            SetStr(100, 150);
+            SetStr(200, 300);
             SetDex(81, 95);
             SetInt(61, 75);
 
-            SetDamage(5, 15);
+            SetDamage(10, 15);
 
             SetSkill(SkillName.Fencing, 66.0, 97.5);
             SetSkill(SkillName.Macing, 65.0, 87.5);
@@ -142,7 +142,7 @@ namespace Server.Mobiles
 			base.AlterMeleeDamageTo(to, ref damage);
 		}
 
-        public override Poison HitPoison => Poison.Lesser;
+        public override Poison HitPoison => Poison.Deadly;
 
 
         public override void GenerateLoot()
