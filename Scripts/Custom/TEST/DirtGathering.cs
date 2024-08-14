@@ -152,9 +152,16 @@ namespace Server.Engines.Harvest
 				// Utiliser un nombre aléatoire au lieu de CheckSkill pour déterminer le succès
 				if (from.Skills[SkillName.Botanique].Value >= Utility.Random(100))
 				{
-					Item fertileDirt = new FertileDirt();
-					from.AddToBackpack(fertileDirt);
-					from.SendMessage("Vous avez récolté de la terre fertile.");
+					// Déterminer la quantité de FertileDirt à récolter (entre 1 et 5)
+					int amount = Utility.RandomMinMax(1, 5);
+
+					for (int i = 0; i < amount; i++)
+					{
+						Item fertileDirt = new FertileDirt();
+						from.AddToBackpack(fertileDirt);
+					}
+
+					from.SendMessage($"Vous avez récolté {amount} terre{(amount > 1 ? "s" : "")} fertile{(amount > 1 ? "s" : "")}.");
 					from.PlaySound(0x125);
 					from.Animate(32, 5, 1, true, false, 0);
 
@@ -174,6 +181,7 @@ namespace Server.Engines.Harvest
 				// Démarrer le timer
 				_harvestTimer = Timer.DelayCall(TimeSpan.FromSeconds(10), () => _harvestTimer = null);
 			}
+
 
 			private Shovel GetEquippedShovel(Mobile from)
 			{

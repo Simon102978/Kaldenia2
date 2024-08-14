@@ -410,7 +410,7 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Myrrh), "gomme d'épinette", 1, "Il Vous manque :  gomme d'épinette");
 
 			index = AddCraft(typeof(PerfumJaunePotion), "Parfums ",                     "Agrume en folie ",             70.0, 85.0, typeof(Bottle),"Bouteille vide ", 1, "Il Vous manque :  Une Bouteille Vide");
-			AddRes(index, typeof(Camomille), "Tulipe", 1, "Il Vous manque :  Tulipe");
+			AddRes(index, typeof(Tulipe), "Tulipe", 1, "Il Vous manque :  Tulipe");
 			AddRes(index, typeof(Saffron), "Safran", 1, "Il Vous manque :  Safran l'épice.");
 
 

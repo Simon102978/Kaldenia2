@@ -11,7 +11,7 @@ namespace Server.Spells.SkillMasteries
 
         public virtual double SlayerBonus => 1.5;
 
-        public override double RequiredSkill => 90;
+        public override double RequiredSkill => 50;
         public override double UpKeep => 0;
         public override int RequiredMana => 0;
         public override bool PartyEffects => false;
