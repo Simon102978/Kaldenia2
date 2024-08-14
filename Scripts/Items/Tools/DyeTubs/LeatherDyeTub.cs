@@ -9,7 +9,7 @@ namespace Server.Items
         public LeatherDyeTub()
         {
 			Name = "Bac de Teinture (Cuir)";
-			Charges = 1;
+			Charges = 3;
 		}
 
         public LeatherDyeTub(Serial serial)

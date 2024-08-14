@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using Server.Items;
 using static Server.Custom.GolemZyX;
 using Server.Engines.Fellowship;
+using System.Linq;
 
 namespace Server.Custom
 {
@@ -454,6 +455,9 @@ namespace Server.Custom
 					return;
 				}
 
+				ash.Consume(m_Crystal.AshQuantity);
+				m_Crystal.Spirit.Delete();
+
 				if (Utility.RandomDouble() * 100 < m_Crystal.SuccessChance)
 				{
 					GolemAsh.AshType ashType = GolemAsh.GetAshTypeFromAsh(m_Crystal.Ash);
@@ -469,10 +473,7 @@ namespace Server.Custom
 				{
 					from.SendMessage("La création du Golem a échoué.");
 				}
-
-				// Consommer les ressources
-				m_Crystal.Ash.Consume(m_Crystal.AshQuantity);
-				m_Crystal.Spirit.Delete();
+				
 				m_Crystal.Delete();
 			}
 
@@ -604,19 +605,42 @@ namespace Server.Custom
 
 				protected override void OnTarget(Mobile from, object targeted)
 				{
-					if (targeted is BaseGolemAsh ash)
+					if (targeted is BaseGolemAsh selectedAsh)
 					{
-						m_Crystal.Ash = ash;
-						m_Crystal.AshQuantity = ash.Amount;
-						from.SendMessage($"Vous avez sélectionné {ash.Amount} {ash.AshName}.");
+						// Trouver toutes les cendres du même type dans le sac
+						List<BaseGolemAsh> allAshes = from.Backpack.FindItemsByType<BaseGolemAsh>()
+							.Where(a => a.GetType() == selectedAsh.GetType())
+							.ToList();
+
+						int totalAmount = allAshes.Sum(a => a.Amount);
+
+						if (totalAmount > 0)
+						{
+							m_Crystal.Ash = selectedAsh; // Utiliser le type de cendre sélectionné comme référence
+							m_Crystal.AshQuantity = totalAmount;
+
+							// Consommer toutes les cendres du même type
+							foreach (var ash in allAshes)
+							{
+								ash.Delete();
+							}
+
+							from.SendMessage($"Vous avez sélectionné {totalAmount} {selectedAsh.AshName}.");
+						}
+						else
+						{
+							from.SendMessage("Vous n'avez pas de cendres de ce type.");
+						}
 					}
 					else
 					{
 						from.SendMessage("Cela n'est pas des cendres valides.");
 					}
+
 					from.SendGump(new GolemCreationGump(from, m_Crystal));
 				}
 			}
+
 
 			private class InternalSpiritTarget : Target
 			{

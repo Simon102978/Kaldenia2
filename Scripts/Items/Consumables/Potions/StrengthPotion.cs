@@ -17,8 +17,9 @@ namespace Server.Items
         }
 
         public override int StrOffset => 15;
-        public override TimeSpan Duration => TimeSpan.FromMinutes(5.0);
-        public override void Serialize(GenericWriter writer)
+		public override TimeSpan MinimumDuration => TimeSpan.FromMinutes(5.0);
+		// public override TimeSpan Duration => TimeSpan.FromMinutes(5.0);
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 

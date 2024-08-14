@@ -98,21 +98,21 @@ namespace Knives.TownHouses
 
                 if (th.ForSaleSign.ForcePublic && type == 3 && index == 12 && th.Public)
                 {
-                    m.SendMessage("This house cannot be private.");
+                  //  m.SendMessage("This house cannot be private.");
                     m.SendGump(gump);
-                    return false;
+					return false;
                 }
 
                 if (th.ForSaleSign.ForcePrivate && type == 3 && index == 13 && !th.Public)
                 {
-                    m.SendMessage("This house cannot be public.");
+                 //   m.SendMessage("This house cannot be public.");
                     m.SendGump(gump);
                     return false;
                 }
 
                 if (th.ForSaleSign.NoTrade && type == 6 && index == 1)
                 {
-                    m.SendMessage("This house cannot be traded.");
+                 //   m.SendMessage("This house cannot be traded.");
                     m.SendGump(gump);
                     return false;
                 }

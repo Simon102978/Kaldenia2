@@ -68,9 +68,51 @@ namespace Server.Items
 
     public abstract class BasePotion : Item, ICraftable, ICommodity
     {
-        private PotionEffect m_PotionEffect;
 
-        public PotionEffect PotionEffect
+		private int m_AlchemyLevel;
+		private TimeSpan m_CustomDuration;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public TimeSpan CustomDuration
+		{
+			get { return m_CustomDuration; }
+			set
+			{
+				m_CustomDuration = value;
+				InvalidateProperties();
+			}
+		}
+		public int AlchemyLevel
+		{
+			get { return m_AlchemyLevel; }
+			set { m_AlchemyLevel = value; }
+		}
+		private PotionEffect m_PotionEffect;
+
+		public static TimeSpan DefaultDuration = TimeSpan.FromMinutes(5.0);
+		public virtual TimeSpan MinimumDuration => TimeSpan.Zero;
+		public virtual TimeSpan Duration
+		{
+			get
+			{
+				if (m_CustomDuration > TimeSpan.Zero)
+				{
+					return m_CustomDuration;
+				}
+
+				double minutes = 5 + (55 * m_AlchemyLevel / 100.0);
+				TimeSpan calculatedDuration = TimeSpan.FromMinutes(minutes);
+
+				if (calculatedDuration < DefaultDuration)
+				{
+					calculatedDuration = DefaultDuration;
+				}
+
+				return TimeSpan.FromTicks(Math.Max(calculatedDuration.Ticks, MinimumDuration.Ticks));
+			}
+		}
+
+		public PotionEffect PotionEffect
         {
             get
             {
@@ -167,37 +209,50 @@ namespace Server.Items
             }
         }
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(1); // version
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(3); // version
 
-            writer.Write((int)m_PotionEffect);
-        }
+			writer.Write(m_CustomDuration);
+			writer.Write(m_AlchemyLevel);
+			writer.Write((int)m_PotionEffect);
+		}
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            int version = reader.ReadInt();
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
 
-            m_PotionEffect = (PotionEffect)reader.ReadInt();
-        }
+			if (version >= 3)
+			{
+				m_CustomDuration = reader.ReadTimeSpan();
+			}
 
-        public abstract void Drink(Mobile from);
+			if (version >= 2)
+			{
+				m_AlchemyLevel = reader.ReadInt();
+			}
 
-        public static void PlayDrinkEffect(Mobile m)
-        {
-            m.RevealingAction();
-            m.PlaySound(0x2D6);
-            m.AddToBackpack(new Bottle());
+			m_PotionEffect = (PotionEffect)reader.ReadInt();
+		}
 
-            if (m.Body.IsHuman && !m.Mounted)
-            {
-                m.Animate(AnimationType.Eat, 0);
-            }
-        }
 
-        public static int EnhancePotions(Mobile m)
+		public abstract void Drink(Mobile from);
+
+		public static void PlayDrinkEffect(Mobile m)
+		{
+			m.RevealingAction();
+			m.PlaySound(0x2D6);
+			m.AddToBackpack(new Bottle());
+
+			if (m.Body.IsHuman && !m.Mounted)
+			{
+				m.Animate(AnimationType.Eat, 0);
+			}
+		}
+
+		public static int EnhancePotions(Mobile m)
         {
             int EP = AosAttributes.GetValue(m, AosAttribute.EnhancePotions);
             int skillBonus = m.Skills.Alchemy.Fixed / 330 * 10;
@@ -232,43 +287,47 @@ namespace Server.Items
             return dropped is BasePotion && ((BasePotion)dropped).m_PotionEffect == m_PotionEffect && base.WillStack(from, dropped);
         }
 
-        public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
-        {
-            if (craftSystem is DefAlchemy)
-            {
-                Container pack = from.Backpack;
+		public int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
+		{
+			if (craftSystem is DefAlchemy)
+			{
+				// Définir le niveau d'alchimie du créateur
+				m_AlchemyLevel = (int)from.Skills[SkillName.Alchemy].Value;
 
-                if (pack != null)
-                {
-                    if ((int)PotionEffect >= (int)PotionEffect.Invisibility)
-                        return 1;
+				Container pack = from.Backpack;
 
-                    List<PotionKeg> kegs = pack.FindItemsByType<PotionKeg>();
+				if (pack != null)
+				{
+					if ((int)PotionEffect >= (int)PotionEffect.Invisibility)
+						return 1;
 
-                    for (int i = 0; i < kegs.Count; ++i)
-                    {
-                        PotionKeg keg = kegs[i];
+					List<PotionKeg> kegs = pack.FindItemsByType<PotionKeg>();
 
-                        if (keg == null)
-                            continue;
+					for (int i = 0; i < kegs.Count; ++i)
+					{
+						PotionKeg keg = kegs[i];
 
-                        if (keg.Held <= 0 || keg.Held >= 100)
-                            continue;
+						if (keg == null)
+							continue;
 
-                        if (keg.Type != PotionEffect)
-                            continue;
+						if (keg.Held <= 0 || keg.Held >= 100)
+							continue;
 
-                        ++keg.Held;
+						if (keg.Type != PotionEffect)
+							continue;
 
-                        Consume();
-                        from.AddToBackpack(new Bottle());
+						++keg.Held;
 
-                        return -1; // signal placed in keg
-                    }
-                }
-            }
+						Consume();
+						from.AddToBackpack(new Bottle());
 
-            return 1;
-        }
-    }
+						return -1; // signal placed in keg
+					}
+				}
+			}
+
+			return 1;
+		}
+	}
 }
+

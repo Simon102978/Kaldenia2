@@ -19,57 +19,34 @@ namespace Server.Mobiles
     {
     }
 
-    public class VendorItem
-    {
-        private string m_Description;
+	public class VendorItem
+	{
+		public VendorItem(Item item, int price, string description, DateTime created)
+		{
+			Item = item;
+			Price = price;
+			Description = description ?? "";
+			Created = created;
+			Valid = true;
+		}
 
-        public VendorItem(Item item, int price, string description, DateTime created)
-        {
-            Item = item;
-            Price = price;
+		public Item Item { get; }
+		public int Price { get; }
+		public string FormattedPrice => Price.ToString("N0", CultureInfo.GetCultureInfo("en-US"));
+		public string Description { get; set; }
+		public DateTime Created { get; }
+		public bool IsForSale => Price >= 0;
+		public bool IsForFree => Price == 0;
+		public bool Valid { get; private set; }
 
-            if (description != null)
-                m_Description = description;
-            else
-                m_Description = "";
+		public void Invalidate()
+		{
+			Valid = false;
+		}
+	}
 
-            Created = created;
 
-            Valid = true;
-        }
-
-        public Item Item { get; }
-        public int Price { get; }
-        public string FormattedPrice => Price.ToString("N0", CultureInfo.GetCultureInfo("en-US"));
-        public string Description
-        {
-            get
-            {
-                return m_Description;
-            }
-            set
-            {
-                if (value != null)
-                    m_Description = value;
-                else
-                    m_Description = "";
-
-                if (Valid)
-                    Item.InvalidateProperties();
-            }
-        }
-        public DateTime Created { get; }
-        public bool IsForSale => Price >= 0;
-        public bool IsForFree => Price == 0;
-        public bool Valid { get; private set; }
-
-        public void Invalidate()
-        {
-            Valid = false;
-        }
-    }
-
-    public class VendorBackpack : Backpack
+	public class VendorBackpack : Backpack
     {
         public VendorBackpack()
         {
@@ -117,7 +94,9 @@ namespace Server.Mobiles
             return true;
         }
 
-        public override bool CheckItemUse(Mobile from, Item item)
+		
+
+		public override bool CheckItemUse(Mobile from, Item item)
         {
             if (!base.CheckItemUse(from, item))
                 return false;
@@ -155,29 +134,31 @@ namespace Server.Mobiles
                 list.Add(new BuyEntry(item));
         }
 
-        public override void GetChildNameProperties(ObjectPropertyList list, Item item)
-        {
-            base.GetChildNameProperties(list, item);
+		public override void GetChildNameProperties(ObjectPropertyList list, Item item)
+		{
+			base.GetChildNameProperties(list, item);
 
-            PlayerVendor pv = RootParent as PlayerVendor;
+			PlayerVendor pv = RootParent as PlayerVendor;
 
-            if (pv == null)
-                return;
+			if (pv == null)
+				return;
 
-            VendorItem vi = pv.GetVendorItem(item);
+			VendorItem vi = pv.GetVendorItem(item);
 
-            if (vi == null)
-                return;
+			if (vi == null)
+				return;
 
-            if (!vi.IsForSale)
-                list.Add(1043307); // Price: Not for sale.
-            else if (vi.IsForFree)
-                list.Add(1043306); // Price: FREE!
-            else
-                list.Add(1043304, vi.FormattedPrice); // Price: ~1_COST~
-        }
+			if (!vi.IsForSale)
+				list.Add(1043307); // Price: Not for sale.
+			else if (vi.IsForFree)
+				list.Add(1043306); // Price: FREE!
+			else
+				list.Add(1043304, vi.FormattedPrice); // Price: ~1_COST~
+		}
 
-        public override void GetChildProperties(ObjectPropertyList list, Item item)
+
+
+		public override void GetChildProperties(ObjectPropertyList list, Item item)
         {
             base.GetChildProperties(list, item);
 
@@ -526,22 +507,22 @@ namespace Server.Mobiles
             AddItem(pack);
         }
 
-        public virtual bool IsOwner(Mobile m)
-        {
-            if (m.AccessLevel >= AccessLevel.GameMaster)
-                return true;
+		public virtual bool IsOwner(Mobile m)
+		{
+			if (m.AccessLevel >= AccessLevel.GameMaster)
+				return true;
 
-            if (House != null)
-            {
-                return House.IsOwner(m);
-            }
-            else
-            {
-                return m == Owner;
-            }
-        }
+			if (House != null)
+			{
+				return House.IsOwner(m) || House.IsCoOwner(m);
+			}
+			else
+			{
+				return m == Owner;
+			}
+		}
 
-        public virtual void Destroy(bool toBackpack)
+		public virtual void Destroy(bool toBackpack)
         {
             Return();
 
@@ -668,18 +649,18 @@ namespace Server.Mobiles
             return (VendorItem)m_SellItems[item];
         }
 
-        public override void OnSubItemAdded(Item item)
-        {
-            base.OnSubItemAdded(item);
+		public override void OnSubItemAdded(Item item)
+		{
+			base.OnSubItemAdded(item);
 
-            if (GetVendorItem(item) == null && CanBeVendorItem(item))
-            {
-                // TODO: default price should be dependent to the type of object
-                SetVendorItem(item, 999, "");
-            }
-        }
+			if (GetVendorItem(item) == null && CanBeVendorItem(item))
+			{
+				// Utilisez un prix par défaut ou demandez-le à l'utilisateur
+				SetVendorItem(item, 999, "");
+			}
+		}
 
-        public override void OnSubItemRemoved(Item item)
+		public override void OnSubItemRemoved(Item item)
         {
             base.OnSubItemRemoved(item);
 
@@ -694,8 +675,8 @@ namespace Server.Mobiles
             if (!CanBeVendorItem(item))
                 RemoveVendorItem(item);
         }
-
-        public override void OnItemRemoved(Item item)
+		
+		public override void OnItemRemoved(Item item)
         {
             base.OnItemRemoved(item);
 
@@ -1208,19 +1189,35 @@ namespace Server.Mobiles
             return SetVendorItem(item, price, description, DateTime.UtcNow);
         }
 
-        private VendorItem SetVendorItem(Item item, int price, string description, DateTime created)
-        {
-            RemoveVendorItem(item);
+		private VendorItem SetVendorItem(Item item, int price, string description, DateTime created)
+		{
+			RemoveVendorItem(item);
 
-            VendorItem vi = new VendorItem(item, price, description, created);
-            m_SellItems[item] = vi;
+			VendorItem vi = new VendorItem(item, price, description, created);
+			m_SellItems[item] = vi;
 
-            item.InvalidateProperties();
+			item.InvalidateProperties();
 
-            return vi;
-        }
+			return vi;
+		}
 
-        private void RemoveVendorItem(Item item)
+		public void UpdateVendorItem(Item item, int price, string description)
+		{
+			VendorItem vi = GetVendorItem(item);
+			if (vi != null)
+			{
+				// Créez un nouveau VendorItem avec les nouvelles valeurs
+				VendorItem newVi = new VendorItem(item, price, description, vi.Created);
+				m_SellItems[item] = newVi;
+				item.InvalidateProperties();
+			}
+			else
+			{
+				SetVendorItem(item, price, description);
+			}
+		}
+
+		private void RemoveVendorItem(Item item)
         {
             VendorItem vi = GetVendorItem(item);
 
