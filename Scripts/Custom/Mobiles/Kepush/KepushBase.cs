@@ -136,7 +136,7 @@ namespace Server.Mobiles
 
 		public override bool IsEnemy(Mobile m)
 		{
-			if (m is CustomPlayerMobile cp && cp.Race.RaceID == 7)
+			if (m is CustomPlayerMobile cp && cp.Race.RaceID == 7 && cp.TribeRelation.Kepush > 40)
 			{
 				return false;
 			}

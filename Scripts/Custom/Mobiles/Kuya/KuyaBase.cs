@@ -56,7 +56,7 @@ namespace Server.Mobiles
 
 		public override bool IsEnemy(Mobile m)
 		{
-			if (m is CustomPlayerMobile cp && cp.Race.RaceID == 5)
+			if (m is CustomPlayerMobile cp && cp.Race.RaceID == 5 && cp.TribeRelation.Kuya > 40)
 			{
 				return false;
 			}

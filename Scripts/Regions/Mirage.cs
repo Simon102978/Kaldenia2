@@ -33,6 +33,11 @@ namespace Server.Regions
             base.OnExit(from);
 
             from.SendMessage("Vous sortez de Mirage.");
+
+             if (from is BaseCreature bc )
+            {
+                bc.OnExitCity();
+            }
         }
 
 

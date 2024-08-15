@@ -171,7 +171,8 @@ namespace Server.Mobiles
 		Pirate,
 		Titusien,
 		Geant,
-		Kepush
+		Kepush,
+		Legion
 	}
 
 	public enum LootStage
@@ -739,7 +740,7 @@ namespace Server.Mobiles
 
 
 
-		public void OnEnterCity()
+		public virtual void OnEnterCity()
 		{
 			if (ControlMaster != null)
 			{
@@ -759,6 +760,13 @@ namespace Server.Mobiles
 
 				Delete();
 			}
+		}
+
+		public virtual void OnExitCity()
+		{
+
+
+
 		}
 
 		#endregion
@@ -1692,10 +1700,18 @@ namespace Server.Mobiles
 				case TribeType.Kepush:
 					{
 						lTribe.Add(TribeType.Kuya);
+						lTribe.Add(TribeType.Legion);
+
+						break;
+					}
+				case TribeType.Legion:
+					{
+						lTribe.Add(TribeType.Kepush);
 
 
 						break;
 					}
+
 				default:
 					break;
 			}
@@ -3824,7 +3840,9 @@ namespace Server.Mobiles
 				case AIType.ArcherMageAI:
 					m_AI = new ArcherMageAI(this);
 					break;
-
+				case AIType.LegionnaireAi:
+					m_AI = new LegionnaireAI(this);
+					break;
 			}
 		}
 
@@ -3930,7 +3948,10 @@ namespace Server.Mobiles
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool Controlled
 		{
-			get { return m_bControlled; }
+			get 
+			{ 
+				return GetControlled(); 
+			}
 			set
 			{
 				if (m_bControlled == value)
@@ -3943,6 +3964,11 @@ namespace Server.Mobiles
 
 				InvalidateProperties();
 			}
+		}
+
+		public virtual bool GetControlled()
+		{
+			return m_bControlled; 
 		}
 
 		#region Snake Charming

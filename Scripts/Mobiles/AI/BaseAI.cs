@@ -39,7 +39,8 @@ namespace Server.Mobiles
         AI_Necro,
 		MaritimeMeleeAI,
 		MaritimeMageAI,
-        ArcherMageAI
+        ArcherMageAI,
+        LegionnaireAi
 
 	}
 

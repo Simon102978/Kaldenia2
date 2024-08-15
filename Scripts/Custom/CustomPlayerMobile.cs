@@ -2383,6 +2383,7 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+				case 38:
 				case 37:
 				{
 					TeleportStone = (TeleportStone)reader.ReadItem();
@@ -2630,6 +2631,11 @@ namespace Server.Mobiles
                     }
             }
 
+			if (version <= 37)
+			{
+				ChangeTribeValue(TribeType.Legion, 25);
+			}
+
 
 		}
 
@@ -2637,7 +2643,7 @@ namespace Server.Mobiles
         {        
             base.Serialize(writer);
 
-            writer.Write(37); // version
+            writer.Write(38); // version
 
 			writer.Write(TeleportStone);
 			writer.Write(m_LastEvolutionClasse);

@@ -125,6 +125,7 @@ namespace Server.Gumps
 				from.EquipItem(new Backpack());
 				from.Thirst = 20;
 				from.Hunger = 20;
+				from.ChangeTribeValue(TribeType.Legion, 25);
 
 
 

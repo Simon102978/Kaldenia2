@@ -19,6 +19,8 @@ namespace Server.Mobiles
 
         public DateTime m_ParalyseZone;
 
+		public override bool IsScaryToPets => true;
+
         [Constructable]
         public Mephitis()
                   : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)

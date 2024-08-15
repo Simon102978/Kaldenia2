@@ -134,6 +134,21 @@ namespace Server
 			get { return GetValue(TribeType.Brigand); }
 			set { SetValue(TribeType.Brigand, value); }
 		}
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Kepush
+		{
+			get { return GetValue(TribeType.Kepush); }
+			set { SetValue(TribeType.Kepush, value); }
+		}
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Legion
+		{
+			get { return GetValue(TribeType.Legion); }
+			set { SetValue(TribeType.Legion, value); }
+		}
+
+
 		#endregion
 
 

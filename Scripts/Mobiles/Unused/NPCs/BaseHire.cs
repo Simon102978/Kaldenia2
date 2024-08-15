@@ -338,7 +338,7 @@ namespace Server.Mobiles
 		}
 
 
-		public bool IsOwner(Mobile from)
+		public virtual bool IsOwner(Mobile from)
 		{
 			return from == GetOwner();
 
