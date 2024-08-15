@@ -1128,6 +1128,9 @@ namespace Server.Mobiles
 				if (this is IMount && ((IMount)this).Rider != null)
 					return false;
 
+				if (this is PackHorse || this is PackLlama )
+					return false;
+
 				return true;
 			}
 		}

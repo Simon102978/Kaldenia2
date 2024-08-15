@@ -1113,9 +1113,9 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(Calendrier), "Autres", "Calendrier", 0.0, 25.0, typeof(BlankScroll), 1044377, 5, 1044378);
 
-			index = AddCraft(typeof(BlankScroll), "Autres", "Parchemin Vierge", 0.0, 50.0, typeof(Kindling), "Kindling", 10, "Vous n'avez pas assez de Petit Bois.");
-			AddRes(index, typeof(Cloth), "Tissus", 5, "Vous n'avez pas assez de Tissus.");
-			AddRes(index, typeof(Leather), "Cuir", 1, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(BlankScroll), "Autres", "Parchemin Vierge", 0.0, 50.0, typeof(Kindling), "Kindling", 7, "Vous n'avez pas assez de Petit Bois.");
+			//AddRes(index, typeof(Cloth), "Tissus", 5, "Vous n'avez pas assez de Tissus.");
+			//AddRes(index, typeof(Leather), "Cuir", 1, "Vous n'avez pas assez de cuir.");
 
 
 			index = AddCraft(typeof(Missive), "Autres", "Missive", 15.0, 50.0, typeof(BlankScroll), 1044377, 1, 1044378);

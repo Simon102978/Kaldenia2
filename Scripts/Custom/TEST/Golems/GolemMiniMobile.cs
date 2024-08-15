@@ -47,6 +47,8 @@ namespace Server.Custom
 		private CreatureSpirit m_Spirit;
 		private Mobile m_SummonMaster;
 		private bool m_IsMaterialized;
+		public bool MaterializationInProgress { get; private set; }
+
 
 
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -78,7 +80,7 @@ namespace Server.Custom
 				{
 					if (m_SummonMaster != null)
 					{
-						m_SummonMaster.Followers -= ControlSlots;
+					//	m_SummonMaster.Followers -= ControlSlots;
 					}
 
 					m_SummonMaster = value;
@@ -89,7 +91,7 @@ namespace Server.Custom
 						Controlled = true;
 						ControlTarget = m_SummonMaster;
 						ControlOrder = OrderType.Come;
-						m_SummonMaster.Followers += ControlSlots;
+					//	m_SummonMaster.Followers += ControlSlots;
 					}
 				}
 			}
@@ -104,6 +106,15 @@ namespace Server.Custom
 		[CommandProperty(AccessLevel.GameMaster)]
 		public CreatureSpirit Spirit { get { return m_Spirit; } set { m_Spirit = value; } }
 
+		private int m_StoredHits;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int StoredHits
+		{
+			get { return m_StoredHits; }
+			set { m_StoredHits = value; }
+		}
+
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool IsMaterialized
 		{
@@ -114,7 +125,11 @@ namespace Server.Custom
 				{
 					if (value)
 					{
-						Materialize(SummonMaster);
+						if (!MaterializationInProgress)
+						{
+							MaterializationInProgress = true;
+							Materialize(SummonMaster);
+						}
 					}
 					else
 					{
@@ -134,7 +149,7 @@ namespace Server.Custom
 			Name = $"Golem de {ashType}";
 			Body = 14;
 			BaseSoundID = 268;
-
+			MaterializationInProgress = false;
 			SetStr(spirit.GetStrength());
 			SetDex(spirit.GetDexterity());
 			SetInt(spirit.GetIntelligence());
@@ -144,7 +159,7 @@ namespace Server.Custom
 			SetMana(0);
 
 			Summoned = false;
-			ControlSlots = 0;
+			ControlSlots = 3;
 			SetControlMaster(owner);
 			Controlled = true;
 			ControlTarget = owner;
@@ -152,7 +167,7 @@ namespace Server.Custom
 
 			SetDamage(spirit.GetDamageMin() +2, spirit.GetDamageMax() +3); 
 			SetDamageType(GetDamageType(ashType), 100);
-			VirtualArmor = spirit.GetAR();
+			VirtualArmor = spirit.GetAR() +5;
 
 
 			SetResistance(ResistanceType.Physical, spirit.GetPhysicalResistance());
@@ -189,39 +204,61 @@ namespace Server.Custom
 		public GolemZyX(Serial serial) : base(serial) { }
 
 		public void Materialize(Mobile master)
-		{
-			if (master == null || master.Deleted)
-				return;
+{
+    if (m_IsMaterialized)
+    {
+        master.SendMessage("Le golem est déjà matérialisé.");
+        return;
+    }
 
-			if (master.Followers + 3 > master.FollowersMax)
-			{
-				master.SendMessage("Vous n'avez pas assez de place pour matérialiser ce golem.");
-				return;
-			}
+    if (master == null || master.Deleted)
+        return;
 
-			SetControlMaster(master);
-			Controlled = true;
-			ControlTarget = master;
-			ControlOrder = OrderType.Come;
-			Map = master.Map;
-			Location = master.Location;
-			master.Followers += 3;
+    if (master.Followers + ControlSlots > master.FollowersMax)
+    {
+        master.SendMessage("Vous n'avez pas assez de place pour matérialiser ce golem.");
+        return;
+    }
 
-			m_IsMaterialized = true;
-			Hidden = false;
-			if (Map == null || Map == Map.Internal)
-			{
-				Map = master.Map;
-			}
+    master.SendMessage("Le golem commence à se matérialiser...");
+    MaterializationInProgress = true;
 
-			master.SendMessage("Vous avez matérialisé le golem.");
+    Timer.DelayCall(TimeSpan.FromSeconds(10), () =>
+    {
+        if (Deleted || master.Deleted)
+        {
+            MaterializationInProgress = false;
+            return;
+        }
 
-		}
+        SetControlMaster(master);
+        ControlTarget = master;
+        ControlOrder = OrderType.Come;
+        Map = master.Map;
+        Location = master.Location;
+       // master.Followers += ControlSlots;
+
+        m_IsMaterialized = true;
+        MaterializationInProgress = false;
+        Hidden = false;
+        if (Map == null || Map == Map.Internal)
+        {
+            Map = master.Map;
+        }
+
+        Effects.SendLocationParticles(EffectItem.Create(Location, Map, EffectItem.DefaultDuration), 0x3728, 10, 30, 5052);
+        PlaySound(0x201);
+
+        master.SendMessage("Le golem s'est matérialisé.");
+    });
+}
+
+
 		public void Dematerialize()
 		{
 			if (ControlMaster != null)
 			{
-				ControlMaster.Followers -= 3;
+			//	ControlMaster.Followers -= ControlSlots; 
 				ControlMaster.SendMessage("Vous avez dématérialisé le golem.");
 			}
 
@@ -278,6 +315,7 @@ namespace Server.Custom
 			if (SummonMaster != null && Map != null && Map != Map.Internal)
 			{
 				SummonMaster.SendLocalizedMessage(1006265, Name); // ~1_NAME~ has been killed.
+			//	SummonMaster.Followers -= ControlSlots;
 			}
 
 			Delete();
@@ -320,18 +358,20 @@ namespace Server.Custom
 			{
 				int healedAmount = Math.Min(HitsMax - Hits, amount);
 				Hits += healedAmount;
+				StoredHits = Hits; // Mettre à jour StoredHits
 				InvalidateProperties();
 			}
 		}
+		
 
-		public virtual bool CanRegenHits() { return false; }
-
+		public override bool CanRegenHits => false;
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
 			if (Deleted || !Alive)
 				return;
 
 			Hits -= amount;
+			StoredHits = Hits; // Mettre à jour StoredHits
 
 			if (Hits <= 0)
 			{
@@ -346,7 +386,6 @@ namespace Server.Custom
 			if (AshType == GolemAsh.AshType.Poison)
 				AttemptPoison(from);
 		}
-
 		public override bool CanBeDamaged() => true;
 
 		public override int HitsMax => m_MaxHitPoints;
@@ -394,7 +433,7 @@ namespace Server.Custom
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-			writer.Write(4); // version
+			writer.Write(0); // version
 
 			writer.Write(m_MiniGolem);
 			writer.Write((int)m_AshType);
@@ -403,7 +442,7 @@ namespace Server.Custom
 			writer.Write(m_SummonMaster);
 			writer.Write(m_Spirit);
 			writer.Write(m_IsMaterialized);
-			writer.Write(ControlSlots); // Ajout de ControlSlots
+			writer.Write(Hits); 
 		}
 
 		public override void Deserialize(GenericReader reader)
@@ -411,34 +450,25 @@ namespace Server.Custom
 			base.Deserialize(reader);
 			int version = reader.ReadInt();
 
-			switch (version)
+			m_MiniGolem = reader.ReadItem() as MiniGolem;
+			m_AshType = (GolemAsh.AshType)reader.ReadInt();
+			m_MaxHitPoints = reader.ReadInt();
+			m_Penalty = reader.ReadInt();
+			m_SummonMaster = reader.ReadMobile();
+			m_Spirit = reader.ReadItem() as CreatureSpirit;
+			m_IsMaterialized = reader.ReadBool();
+			int storedHits = reader.ReadInt();
+
+			
+
+			// Restaurer les points de vie
+			if (storedHits > 0 && storedHits <= HitsMax)
 			{
-				case 4:
-					m_MiniGolem = reader.ReadItem() as MiniGolem;
-					m_AshType = (GolemAsh.AshType)reader.ReadInt();
-					m_MaxHitPoints = reader.ReadInt();
-					m_Penalty = reader.ReadInt();
-					m_SummonMaster = reader.ReadMobile();
-					m_Spirit = reader.ReadItem() as CreatureSpirit;
-					m_IsMaterialized = reader.ReadBool();
-					ControlSlots = reader.ReadInt(); 
-					break;
-				case 3:
-					m_MiniGolem = reader.ReadItem() as MiniGolem;
-					m_AshType = (GolemAsh.AshType)reader.ReadInt();
-					m_MaxHitPoints = reader.ReadInt();
-					m_Penalty = reader.ReadInt();
-					m_SummonMaster = reader.ReadMobile();
-					m_Spirit = reader.ReadItem() as CreatureSpirit;
-					m_IsMaterialized = reader.ReadBool();
-					ControlSlots = 3; 
-					break;
-				case 2:
-				case 1:
-				case 0:
-					// Gérer les anciennes versions si nécessaire
-					ControlSlots = 3; 
-					break;
+				Hits = storedHits;
+			}
+			else
+			{
+				Hits = HitsMax;
 			}
 
 			if (m_IsMaterialized)
@@ -448,7 +478,6 @@ namespace Server.Custom
 				{
 					SetControlMaster(m_SummonMaster);
 					Controlled = true;
-					m_SummonMaster.Followers += ControlSlots; // Ajuster les followers du maître
 				}
 			}
 			else
@@ -456,9 +485,15 @@ namespace Server.Custom
 				Hidden = true;
 				Map = Map.Internal;
 			}
-		}
 
+			// Assurez-vous que le MiniGolem est correctement lié
+			if (m_MiniGolem != null)
+			{
+				m_MiniGolem.Golem = this;
+			}
+		}
 	}
+
 
 
 	public class GolemZyXAttributesGump : Gump
@@ -672,14 +707,40 @@ namespace Server.Custom
 						return;
 					}
 
-					m_Golem.IsMaterialized = !m_Golem.IsMaterialized;
+					if (m_Golem.IsMaterialized)
+					{
+						m_Golem.Dematerialize();
+						from.SendMessage("Le golem a été dématérialisé.");
+					}
+					else
+					{
+						if (m_Golem.MaterializationInProgress)
+						{
+							from.SendMessage("Le golem est déjà en cours de matérialisation.");
+						}
+						else
+						{
+							m_Golem.Materialize(from);
+						}
+					}
 				}
 				else if (from != m_Golem.SummonMaster && from.Alive)
 				{
 					// Transfert de propriété
 					Mobile oldOwner = m_Golem.SummonMaster;
+
+					if (oldOwner != null)
+					{
+					//	oldOwner.Followers -= m_Golem.ControlSlots;
+					}
+
 					m_Golem.SummonMaster = from;
 					m_Golem.SetControlMaster(from);
+
+					if (m_Golem.IsMaterialized)
+					{
+						//from.Followers += m_Golem.ControlSlots;
+					}
 
 					from.SendMessage("Vous êtes maintenant le propriétaire de ce MiniGolem.");
 					if (oldOwner != null && oldOwner.NetState != null)
@@ -695,6 +756,7 @@ namespace Server.Custom
 				base.OnDoubleClick(from);
 			}
 		}
+
 
 		public override void GetProperties(ObjectPropertyList list)
 		{
