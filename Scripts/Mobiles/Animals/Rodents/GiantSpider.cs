@@ -44,12 +44,12 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-		public override int Hides => 3;
+	/*	public override int Hides => 3;
 		public override HideType HideType => HideType.Arachnide;
 
 
 		public override int Bones => 3;
-		public override BoneType BoneType => BoneType.Arachnide;
+		public override BoneType BoneType => BoneType.Arachnide;*/
 
 		public override FoodType FavoriteFood => FoodType.Meat;
         public override PackInstinct PackInstinct => PackInstinct.Arachnid;
