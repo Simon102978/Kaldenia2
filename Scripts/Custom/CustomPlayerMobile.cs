@@ -2039,7 +2039,7 @@ namespace Server.Mobiles
 						MoveToWorld(new Point3D(5340,2861,0), Map.Felucca);
 						return;
 					}*/
-
+					Deaths++;
 
 
 
