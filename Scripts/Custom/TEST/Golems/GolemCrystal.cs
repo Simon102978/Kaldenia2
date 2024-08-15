@@ -433,49 +433,77 @@ namespace Server.Custom
 
 			private void TryCreateGolem(Mobile from)
 			{
-				if (m_Crystal.Spirit == null || m_Crystal.AshQuantity == 0 || m_Crystal.Ash == null)
+				try
 				{
-					from.SendMessage("Vous devez sélectionner un esprit et des cendres.");
-					from.SendGump(new GolemCreationGump(from, m_Crystal));
-					return;
-				}
+					if (m_Crystal == null || m_Crystal.Deleted)
+					{
+						from.SendMessage("Le cristal de golem n'est plus valide.");
+						return;
+					}
 
-				if (m_Crystal.Spirit.Percentage < 100)
-				{
-					from.SendMessage("L'esprit doit être complet (100 sur 100) pour être utilisé.");
-					from.SendGump(new GolemCreationGump(from, m_Crystal));
-					return;
-				}
+					if (m_Crystal.Spirit == null || m_Crystal.AshQuantity == 0 || m_Crystal.Ash == null)
+					{
+						from.SendMessage("Vous devez sélectionner un esprit et des cendres.");
+						from.SendGump(new GolemCreationGump(from, m_Crystal));
+						return;
+					}
 
-				BaseGolemAsh ash = from.Backpack.FindItemByType<BaseGolemAsh>();
-				if (ash == null || ash.Amount < m_Crystal.AshQuantity)
-				{
-					from.SendMessage("Vous n'avez pas assez de cendres.");
-					from.SendGump(new GolemCreationGump(from, m_Crystal));
-					return;
-				}
+					if (m_Crystal.Spirit.Percentage < 100)
+					{
+						from.SendMessage("L'esprit doit être complet (100 sur 100) pour être utilisé.");
+						from.SendGump(new GolemCreationGump(from, m_Crystal));
+						return;
+					}
 
-				ash.Consume(m_Crystal.AshQuantity);
-				m_Crystal.Spirit.Delete();
+					int initialFollowers = from.Followers;
 
-				if (Utility.RandomDouble() * 100 < m_Crystal.SuccessChance)
-				{
-					GolemAsh.AshType ashType = GolemAsh.GetAshTypeFromAsh(m_Crystal.Ash);
-					GolemZyX golem = new GolemZyX(m_Crystal.Spirit, ashType, m_Crystal.AshQuantity, from); 
-					ApplyAshBonuses(golem, m_Crystal.Ash, m_Crystal.AshQuantity);
-					golem.MoveToWorld(from.Location, from.Map);
-					golem.IsMaterialized = true;
-					golem.ControlOrder = OrderType.Stay;
-					
-					from.SendMessage("Vous avez créé un Golem avec succès!");
+					// Stockez les informations nécessaires avant de supprimer le cristal
+					CreatureSpirit spirit = m_Crystal.Spirit;
+					BaseGolemAsh ash = m_Crystal.Ash;
+					int ashQuantity = m_Crystal.AshQuantity;
+					double successChance = m_Crystal.SuccessChance;
+
+					// Supprimez le cristal et son contenu
+					m_Crystal.Delete();
+
+					if (Utility.RandomDouble() * 100 < successChance)
+					{
+						GolemAsh.AshType ashType = GolemAsh.GetAshTypeFromAsh(ash);
+						GolemZyX golem = new GolemZyX(spirit, ashType, ashQuantity, from);
+
+						if (golem == null)
+						{
+							from.SendMessage("Échec de la création du golem.");
+							return;
+						}
+
+						ApplyAshBonuses(golem, ash, ashQuantity);
+
+						if (from.Followers != initialFollowers)
+						{
+							from.Followers = initialFollowers;
+						}
+
+						golem.MoveToWorld(from.Location, from.Map);
+						golem.IsMaterialized = true;
+						golem.ControlOrder = OrderType.Stay;
+
+						from.SendMessage("Vous avez créé un Golem avec succès!");
+					}
+					else
+					{
+						from.SendMessage("La création du Golem a échoué.");
+					}
 				}
-				else
+				catch (Exception ex)
 				{
-					from.SendMessage("La création du Golem a échoué.");
+					Console.WriteLine($"Erreur dans TryCreateGolem: {ex.Message}");
+					Console.WriteLine(ex.StackTrace);
+					from.SendMessage("Une erreur s'est produite lors de la création du golem.");
 				}
-				
-				m_Crystal.Delete();
 			}
+
+
 
 
 			private void ApplyAshBonuses(GolemZyX golem, BaseGolemAsh ash, int ashQuantity)
@@ -661,8 +689,16 @@ namespace Server.Custom
 						}
 						else
 						{
+							if (m_Crystal.Spirit != null)
+							{
+								from.AddToBackpack(m_Crystal.Spirit);
+							}
+
 							m_Crystal.Spirit = spirit;
+							spirit.Movable = false;
 							from.SendMessage("Vous avez sélectionné un esprit de créature.");
+
+							spirit.Delete();
 						}
 					}
 					else
@@ -673,6 +709,7 @@ namespace Server.Custom
 					from.SendGump(new GolemCreationGump(from, m_Crystal));
 				}
 			}
+
 		}
 	}
 }

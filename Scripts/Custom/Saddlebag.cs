@@ -116,7 +116,7 @@ namespace Server.Items
 									from.SendMessage("Votre saccoche est maintenant trop usée.");
 								}
 							}
-							else if (targ is Llama)
+							else if (targ is RidableLlama)
 							{
 								PackLlama pl = new PackLlama();
 								ConvertAnimal(bc, pl);

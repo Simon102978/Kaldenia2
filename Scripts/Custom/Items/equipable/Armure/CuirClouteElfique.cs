@@ -90,6 +90,8 @@ namespace Server.Items
 		{
 			Weight = 6.0;
 			Name = "Pantalons Clouté Elfique";
+			Layer = Layer.Pants;
+
 		}
 
 		public PantalonsClouteElfique(Serial serial)

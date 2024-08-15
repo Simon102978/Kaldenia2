@@ -1015,22 +1015,21 @@ namespace Server.Items
 			list.Add("Carte au trésor");
 		}
 
-		private int GetRequiredSkill()
+		public int GetRequiredLockpickingSkill()
 		{
-			switch (TreasureLevel)
+			switch ((int)Level)
 			{
-				case TreasureLevel.Stash:  
+				case 0:
 					return 5;
-				case TreasureLevel.Supply: 
-					return 20;
-				case TreasureLevel.Cache:  
-					return 50;
-				case TreasureLevel.Hoard:  
-					return 70;
-				case TreasureLevel.Trove:  
-					return 90;
+				case 1:
+					return 45;
+				case 2:
+					return 75;
+				case 3:
+				case 4:
+					return 80;
 				default:
-					return 100;  
+					return 100; // Une valeur par défaut élevée pour les niveaux non définis
 			}
 		}
 
@@ -1043,11 +1042,9 @@ namespace Server.Items
 			{
 				list.Add("Carte au trésor");
 
-				list.Add($"Carte Niveau: {Level}");
-				list.Add($"Lockpicking Requis: {GetRequiredSkill()}");
-			}
-
-			list.Add("Un trésor caché sur les landes");
+				list.Add($"Niveau de la carte: {Level}");
+				list.Add($"Lockpicking requis: +- {GetRequiredLockpickingSkill()}");
+				list.Add("Un trésor caché sur les landes");
 
 
 
@@ -1070,9 +1067,12 @@ namespace Server.Items
             {
                 list.Add("Carte complétée par:", m_CompletedBy == null ? "Quelqu'un" : m_CompletedBy.Name); // completed by ~1_val~
             }
-        }
+		}
+	}
 
-        public override void Serialize(GenericWriter writer)
+
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
