@@ -63,16 +63,16 @@ namespace Server.Mobiles
             SetHits(1000);
             SetMana(5000);
 
-            SetDamage(15, 20);
+            SetDamage(10, 15);
 
             SetDamageType(ResistanceType.Physical, 50);
             SetDamageType(ResistanceType.Cold, 50);
 
-            SetResistance(ResistanceType.Physical, 75);
-            SetResistance(ResistanceType.Fire, 60);
-            SetResistance(ResistanceType.Cold, 90);
-            SetResistance(ResistanceType.Poison, 100);
-            SetResistance(ResistanceType.Energy, 60);
+            SetResistance(ResistanceType.Physical, 50);
+            SetResistance(ResistanceType.Fire, 30);
+            SetResistance(ResistanceType.Cold, 45);
+            SetResistance(ResistanceType.Poison, 50);
+            SetResistance(ResistanceType.Energy, 30);
 
             SetSkill(SkillName.Wrestling, 120.0);
             SetSkill(SkillName.Tactics, 100.0);
@@ -287,7 +287,7 @@ namespace Server.Mobiles
 					mob.FixedParticles(0x36BD, 20, 10, 5044, EffectLayer.Head);
 					mob.PlaySound(0x307);
 
-					int damage = Utility.RandomMinMax(50, 125);
+					int damage = Utility.RandomMinMax(40, 60);
 					AOS.Damage(mob, this, damage, 0, 100, 0, 0, 0);
 				}
 
