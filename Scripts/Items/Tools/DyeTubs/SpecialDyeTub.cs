@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    public class SpecialDyeTub : DyeTub, Engines.VeteranRewards.IRewardItem
+    public class SpecialDyeTub : DyeTub, Engines.VeteranRewards.IRewardItem, IDyable
     {
         private bool m_IsRewardItem;
         [Constructable]
@@ -36,7 +36,18 @@ namespace Server.Items
                 m_IsRewardItem = value;
             }
         }
-        public override void OnDoubleClick(Mobile from)
+
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (sender != this && sender is DyeTub)
+			{
+				DyedHue = sender.DyedHue;
+				from.SendMessage("Vous avez appliqué la couleur du bac de teinture normal à votre bac de teinture spécial.");
+				return true;
+			}
+			return false;
+		}
+		public override void OnDoubleClick(Mobile from)
         {
             if (m_IsRewardItem && !Engines.VeteranRewards.RewardSystem.CheckIsUsableBy(from, this, null))
                 return;

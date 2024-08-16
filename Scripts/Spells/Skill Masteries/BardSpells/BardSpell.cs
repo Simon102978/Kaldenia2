@@ -18,39 +18,37 @@ namespace Server.Spells.SkillMasteries
         public override bool DamageCanDisrupt => true;
         public override bool CheckManaBeforeCast => !HasSpell(Caster, GetType());
 
-        public override double BaseSkillBonus => Math.Floor(2 + (((Caster.Skills[CastSkill].Base - 90) / 10) + ((Caster.Skills[DamageSkill].Base - 90) / 10)));
+		public override double BaseSkillBonus => Math.Floor(2 + (((Caster.Skills[CastSkill].Base - 60) / 10) + ((Caster.Skills[DamageSkill].Base - 60) / 10)));
 
-        public override double CollectiveBonus
-        {
-            get
-            {
-                double bonus = 0;
-                double prov = Caster.Skills[SkillName.Provocation].Base;
-                double peac = Caster.Skills[SkillName.Peacemaking].Base;
-                double disc = Caster.Skills[SkillName.Discordance].Base;
+		public override double CollectiveBonus
+		{
+			get
+			{
+				double bonus = 0;
+				double prov = Caster.Skills[SkillName.Provocation].Base;
+				double peac = Caster.Skills[SkillName.Peacemaking].Base;
+				double disc = Caster.Skills[SkillName.Discordance].Base;
+				switch (CastSkill)
+				{
+					case SkillName.Provocation:
+						if (peac >= 80) bonus += 1 + ((peac - 80) / 10);
+						if (disc >= 80) bonus += 1 + ((disc - 80) / 10);
+						break;
+					case SkillName.Peacemaking:
+						if (prov >= 80) bonus += 1 + ((prov - 80) / 10);
+						if (disc >= 80) bonus += 1 + ((disc - 80) / 10);
+						break;
+					case SkillName.Discordance:
+						if (prov >= 80) bonus += 1 + ((prov - 80) / 10);
+						if (peac >= 80) bonus += 1 + ((peac - 80) / 10);
+						break;
+				}
+				return bonus;
+			}
+		}
 
-                switch (CastSkill)
-                {
-                    default: return 0.0;
-                    case SkillName.Provocation:
-                        if (peac >= 100) bonus += 1 + ((peac - 100) / 10);
-                        if (disc >= 100) bonus += 1 + ((disc - 100) / 10);
-                        break;
-                    case SkillName.Peacemaking:
-                        if (prov >= 100) bonus += 1 + ((peac - 100) / 10);
-                        if (disc >= 100) bonus += 1 + ((disc - 100) / 10);
-                        break;
-                    case SkillName.Discordance:
-                        if (prov >= 100) bonus += 1 + ((peac - 100) / 10);
-                        if (peac >= 100) bonus += 1 + ((disc - 100) / 10);
-                        break;
-                }
 
-                return bonus;
-            }
-        }
-
-        public override SkillName DamageSkill => SkillName.Musicianship;
+		public override SkillName DamageSkill => SkillName.Musicianship;
 
         public override int UpkeepCancelMessage => 1115665;  // You do not have enough mana to continue infusing your song with magic.
         public override int OutOfRangeMessage => 1115771;  // Your target is no longer in range of your spellsong.
@@ -155,17 +153,17 @@ namespace Server.Spells.SkillMasteries
         {
             var upkeep = base.GetUpkeep();
 
-            if (CastSkill != SkillName.Provocation && Caster.Skills[SkillName.Provocation].Base > 100.0)
+            if (CastSkill != SkillName.Provocation && Caster.Skills[SkillName.Provocation].Base > 60.0)
             {
                 upkeep--;
             }
 
-            if (CastSkill != SkillName.Peacemaking && Caster.Skills[SkillName.Peacemaking].Base > 100.0)
+            if (CastSkill != SkillName.Peacemaking && Caster.Skills[SkillName.Peacemaking].Base > 60.0)
             {
                 upkeep--;
             }
 
-            if (CastSkill != SkillName.Discordance && Caster.Skills[SkillName.Discordance].Base > 100.0)
+            if (CastSkill != SkillName.Discordance && Caster.Skills[SkillName.Discordance].Base > 60.0)
             {
                 upkeep--;
             }

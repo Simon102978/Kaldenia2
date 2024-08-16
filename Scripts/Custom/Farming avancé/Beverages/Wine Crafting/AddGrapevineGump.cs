@@ -23,8 +23,8 @@ namespace Server.Gumps
 		private GumpPage m_Page;
 		private int m_VarietyIndex;
 
-		private const int LabelHue = 0x480;
-		private const int LabelColor = 0x7FFF;
+		private const int LabelHue = 0xFFFFFF;
+		private const int LabelColor = 0xFFFFFF;
 		private const int FontColor = 0xFFFFFF;
 
 		private enum GumpPage

@@ -80,7 +80,7 @@ namespace Server.Custom
 				{
 					if (m_SummonMaster != null)
 					{
-					//	m_SummonMaster.Followers -= ControlSlots;
+						m_SummonMaster.Followers -= ControlSlots;
 					}
 
 					m_SummonMaster = value;
@@ -91,7 +91,7 @@ namespace Server.Custom
 						Controlled = true;
 						ControlTarget = m_SummonMaster;
 						ControlOrder = OrderType.Come;
-					//	m_SummonMaster.Followers += ControlSlots;
+						m_SummonMaster.Followers += ControlSlots;
 					}
 				}
 			}
