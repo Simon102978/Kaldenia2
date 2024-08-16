@@ -1,8 +1,5 @@
-using Server.ContextMenus;
 using Server.Items;
-using Server.Regions;
 using System;
-using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -11,17 +8,12 @@ namespace Server.Mobiles
 		public DateTime DelayCharge;
 		public DateTime TuerSummoneur;
 
-		public override bool CanDetectHidden => true;
-     	public override bool BardImmune => true;
-
-
 		[Constructable]
         public Legionnaire()
-                   : base(AIType.LegionnaireAi)
-    //        : base()
+           //         : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base()
         {
             SpeechHue = Utility.RandomDyedHue();
-				IsBonded = false;
            
 
             if (Utility.RandomBool())
@@ -243,8 +235,8 @@ namespace Server.Mobiles
 				TuerSummoneur = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(30, 50));
 			}
 		}
-	
-		
+
+
 
 		public override int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
         {
@@ -261,122 +253,6 @@ namespace Server.Mobiles
 
             return dam;
         }
-
-		
-		public override TribeType Tribe => TribeType.Legion;
-		
-		public override bool GetControlled()
-		{
-			return true; 
-		}
-
-		public override bool IsPetFriend(Mobile m)
-		{
-			if (m is CustomPlayerMobile cp && cp.GetTribeValue(TribeType.Legion) > 90)
-			{
-				return true;
-			}
-
-
-			return base.IsFriend(m);
-		}
-
-
-		public override bool CanBeControlledBy(Mobile m)
-		{
-			if (m is CustomPlayerMobile cp && cp.GetTribeValue(TribeType.Legion) > 90)
-			{
-				return true;
-			}
-
-
-			return base.CanBeControlledBy(m);
-		}
-
-
-		public override bool AllowEquipFrom(Mobile from)
-		{
-			if (from.IsStaff())
-			{
-				return true;
-			}
-			else
-			{
-				return false;
-			}
-	
-		}
-
-
-		public override void AggressiveAction(Mobile aggressor, bool criminal)
-		{
-			 if (aggressor is BaseCreature)
-			{
-				var pm = ((BaseCreature)aggressor).GetMaster() as PlayerMobile;
-
-				if (pm != null)
-				{
-					AggressiveAction(pm, criminal);
-				}
-			}
-
-			base.AggressiveAction(aggressor, criminal);
-
-			OrderType ct = ControlOrder;
-
-			if (AIObject != null)
-			{
-		
-					AIObject.OnAggressiveAction(aggressor);
-				
-				
-			}
-
-			//StopFlee();
-			ForceReacquire();
-
-			if (aggressor.ChangingCombatant &&
-				(ct == OrderType.Come || ct == OrderType.Stay || ct == OrderType.Stop || ct == OrderType.None ||
-				 ct == OrderType.Follow))
-			{
-				ControlTarget = aggressor;
-				ControlOrder = OrderType.Attack;
-			}
-			else if (Combatant == null)
-			{
-				Warmode = true;
-				Combatant = aggressor;
-			}
-		}
-
-
-	
-			
-		public override void OnExitCity()
-		{
-			if (Spawner != null )
-			{
-				
-				World.Broadcast(37, false, AccessLevel.Counselor, $"Un légionnaire essait de sortir de Mirage à {X},{Y},{Z}");
-
-				this.Delete();
-
-			}
-
-
-		}
-
-
-		public override bool CheckControlChance(Mobile m)
-		{
-			
-			if (m is CustomPlayerMobile cp && cp.GetTribeValue(TribeType.Legion) > 90)
-			{
-				return true;
-			}
-
-			return base.CheckControlChance(m);
-		}
 
         public override void GenerateLoot()
         {
