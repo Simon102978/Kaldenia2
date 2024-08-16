@@ -236,7 +236,7 @@ namespace Server.Custom
         ControlOrder = OrderType.Come;
         Map = master.Map;
         Location = master.Location;
-       // master.Followers += ControlSlots;
+      //  master.Followers += ControlSlots;
 
         m_IsMaterialized = true;
         MaterializationInProgress = false;
@@ -258,7 +258,7 @@ namespace Server.Custom
 		{
 			if (ControlMaster != null)
 			{
-			//	ControlMaster.Followers -= ControlSlots; 
+				//ControlMaster.Followers -= ControlSlots; 
 				ControlMaster.SendMessage("Vous avez dématérialisé le golem.");
 			}
 
