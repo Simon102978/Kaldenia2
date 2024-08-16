@@ -49,7 +49,7 @@ namespace Server.Mobiles
 
         [Constructable]
         public Omar()
-            : base(AIType.AI_NecroMage, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "Omar";
             Title = "Ex-Empereur Kershe";
@@ -82,11 +82,6 @@ namespace Server.Mobiles
             SetSkill(SkillName.Tactics, 100.0);
             SetSkill(SkillName.MagicResist, 150.0);
             SetSkill(SkillName.Tracking, 150.0);
-            SetSkill(SkillName.Magery, 100.0);
-            SetSkill(SkillName.EvalInt, 100.0);
-            SetSkill(SkillName.Meditation, 120.0);
-            SetSkill(SkillName.Necromancy, 120.0);
-            SetSkill(SkillName.SpiritSpeak, 120.0);
 
             Fame = 8000;
             Karma = -8000;
