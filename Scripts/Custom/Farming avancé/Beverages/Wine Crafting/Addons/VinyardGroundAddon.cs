@@ -221,7 +221,7 @@ namespace Server.Items
             AddBackground(0, 0, 450, 260, 9270);
 
             AddAlphaRegion(12, 12, 426, 22);
-            AddTextEntry(13, 13, 379, 20, 32, 0, @"Warning!");
+            AddTextEntry(13, 13, 379, 20, 32, 0, @"Attention!");
 
             AddAlphaRegion(12, 39, 426, 209);
 

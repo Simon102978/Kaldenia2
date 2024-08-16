@@ -10,11 +10,11 @@ namespace Server.Items
         public override bool BardMasteryBonus => true;
         #endregion
 
-        public override int BasePhysicalResistance => 3;
-        public override int BaseFireResistance => 4;
-        public override int BaseColdResistance => 4;
-        public override int BasePoisonResistance => 4;
-        public override int BaseEnergyResistance => 17;
+    //    public override int BasePhysicalResistance => 3;
+    //    public override int BaseFireResistance => 4;
+    //    public override int BaseColdResistance => 4;
+    //    public override int BasePoisonResistance => 4;
+    //    public override int BaseEnergyResistance => 17;
         public override int InitMinHits => 125;
         public override int InitMaxHits => 125;
 

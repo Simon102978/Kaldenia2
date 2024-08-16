@@ -16,6 +16,7 @@ namespace Server.Misc
 		public static bool AllowPlayerYards = true;
 		public static bool AllowAllHouseTiles = true;
 		public static bool AllowAllYardTiles = true;
+		public static bool CanGrowGarden = true;
 
 		public const int m_VinePrice = 50;
 
@@ -25,7 +26,8 @@ namespace Server.Misc
 			0x00C, 0x00E,
 			0x013, 0x015,
 			0x150, 0x155,
-			0x15A, 0x15C
+			0x15A, 0x15C,
+			0x31F5
 		};
 
 		public static int[] HouseTiles = new int[]

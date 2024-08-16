@@ -5,11 +5,11 @@ namespace Server.Items
         public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
         public override ArmorMeditationAllowance DefMedAllowance => ArmorMeditationAllowance.All;
 
-        public override int BasePhysicalResistance => 1;
-        public override int BaseFireResistance => 2;
-        public override int BaseColdResistance => 2;
-        public override int BasePoisonResistance => 2;
-        public override int BaseEnergyResistance => 3;
+        public override int BasePhysicalResistance => 0;
+        public override int BaseFireResistance => 0;
+        public override int BaseColdResistance => 0;
+        public override int BasePoisonResistance => 0;
+        public override int BaseEnergyResistance => 0;
 
         public override int InitMinHits => 30;
         public override int InitMaxHits => 40;
@@ -21,16 +21,16 @@ namespace Server.Items
             Layer = Layer.Earrings;
         }
 
-        public override int GetDurabilityBonus()
-        {
-            int bonus = Quality == ItemQuality.Exceptional ? 20 : 0;
+     //   public override int GetDurabilityBonus()
+     //   {
+     //       int bonus = Quality == ItemQuality.Exceptional ? 20 : 0;
 
-            return bonus + ArmorAttributes.DurabilityBonus;
-        }
+       //     return bonus + ArmorAttributes.DurabilityBonus;
+      //  }
 
-        protected override void ApplyResourceResistances(CraftResource oldResource)
-        {
-        }
+   //     protected override void ApplyResourceResistances(CraftResource oldResource)
+    //    {
+     //   }
 
         public Earrings(Serial serial)
             : base(serial)

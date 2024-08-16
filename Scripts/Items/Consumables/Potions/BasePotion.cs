@@ -62,8 +62,19 @@ namespace Server.Items
 		UltimeCure,
 		Experience,
         Perfume,
-		EtherealManifestation
-		
+		EtherealManifestation,
+		IntelligenceLesser,
+		Intelligence,
+		IntelligenceGreater,
+		IntelligenceSuperior,
+		ManaLesser,
+		Mana,
+		ManaGreater,
+		ManaSuperior
+
+
+
+
 	}
 
     public abstract class BasePotion : Item, ICraftable, ICommodity

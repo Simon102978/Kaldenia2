@@ -9,6 +9,9 @@ namespace Server.Items.Crops
 {
 	public class BaseGrapeVine : Item
 	{
+		public virtual bool CanGrowGarden { get { return Config.Get("Farming.CanGrowGarden", true); } }
+
+
 		private const int max = 5;
 		private DateTime lastpicked;
 		private int m_yield;

@@ -18,8 +18,9 @@ namespace Server.Items
 
         [Constructable]
         public Grapeshot(int amount)
-            : base(0x994A)
+            : base(0xA5BF)
         {
+			Name = "Boulet Avancé";
             Stackable = true;
             Amount = amount;
         }

@@ -210,13 +210,35 @@ namespace Server.Items
 							from.SendLocalizedMessage(500861); // Can't Dye clothing that is being worn.
 						else if (((IDyable)item).Dye(from, m_Tub))
 							from.PlaySound(0x23E);
-						
 
-						
+						if (targeted is IDyable && m_Tub.AllowDyables)
+						{
+							if (targeted is SpecialDyeTub specialTub)
+							{
+								if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(specialTub.GetWorldLocation(), 1))
+								{
+									from.SendLocalizedMessage(500446); // That is too far away.
+								}
+								else if (specialTub.Dye(from, m_Tub))
+								{
+									from.PlaySound(0x23E);
+									if (m_Tub.Charges > 1)
+									{
+										m_Tub.Charges -= 1;
+									}
+									else
+									{
+										m_Tub.Delete();
+										from.AddToBackpack(new BacVide());
+										from.SendMessage("Votre bac de teinture n'a plus de charge.");
+									}
+								}
+							}
 
-						
 
-						if (m_Tub.Charges > 1)
+
+
+							if (m_Tub.Charges > 1)
 						{
 							m_Tub.Charges -= 1;
 						}
@@ -509,4 +531,5 @@ namespace Server.Items
             }
         }
     }
+}
 }

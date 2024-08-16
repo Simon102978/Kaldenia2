@@ -172,7 +172,7 @@ namespace Server.Gumps
 			AddBackground( 0, 0, 450, 250, 9250 );
 
 			AddAlphaRegion( 12, 12, 426, 22 );
-			AddHtml( 13, 13, 379, 20, "<BASEFONT COLOR=WHITE>Vinyard Ground Addon Placement Successful</BASEFONT>", false, false );
+			AddHtml( 13, 13, 379, 20, "<BASEFONT COLOR=WHITE>Vignoble placé avec succès</BASEFONT>", false, false );
 
 			AddAlphaRegion( 12, 39, 426, 199 );
 
@@ -199,7 +199,7 @@ namespace Server.Gumps
 			{
 				case 0:
 				{
-					from.SendMessage( "Enjoy your new vinyard." );
+					from.SendMessage( "Bonne chance avec votre Vignoble!" );
 					break;
 				}
 
