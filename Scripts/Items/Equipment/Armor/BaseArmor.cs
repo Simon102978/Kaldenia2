@@ -394,41 +394,41 @@ namespace Server.Items
         {
             if (PhysicalResistance != 0 || m_RefinedPhysical != 0)
             {
-                if (m_RefinedPhysical != 0)
+/*                if (m_RefinedPhysical != 0)
                     list.Add(1153735, string.Format("{0}\t{1}\t{2}", PhysicalResistance.ToString(), "", m_RefinedPhysical.ToString()));// physical resist ~1_val~% / ~2_symb~~3_val~% Max
-                else
+                else*/
                     list.Add(1060448, PhysicalResistance.ToString()); // physical resist ~1_val~%
             }
 
             if (FireResistance != 0 || m_RefinedFire != 0)
             {
-                if (m_RefinedFire != 0)
+  /*              if (m_RefinedFire != 0)
                     list.Add(1153737, string.Format("{0}\t{1}\t{2}", FireResistance.ToString(), "", m_RefinedFire.ToString()));// physical resist ~1_val~% / ~2_symb~~3_val~% Max
-                else
+                else*/
                     list.Add(1060447, FireResistance.ToString()); // physical resist ~1_val~%
             }
 
             if (ColdResistance != 0 || m_RefinedCold != 0)
             {
-                if (m_RefinedCold != 0)
+    /*            if (m_RefinedCold != 0)
                     list.Add(1153739, string.Format("{0}\t{1}\t{2}", ColdResistance.ToString(), "", m_RefinedCold.ToString()));// physical resist ~1_val~% / ~2_symb~~3_val~% Max
-                else
+                else*/
                     list.Add(1060445, ColdResistance.ToString()); // physical resist ~1_val~%
             }
 
             if (PoisonResistance != 0 || m_RefinedPoison != 0)
             {
-                if (m_RefinedPoison != 0)
+       /*         if (m_RefinedPoison != 0)
                     list.Add(1153736, string.Format("{0}\t{1}\t{2}", PoisonResistance.ToString(), "", m_RefinedPoison.ToString()));// physical resist ~1_val~% / ~2_symb~~3_val~% Max
-                else
+                else*/
                     list.Add(1060449, PoisonResistance.ToString()); // physical resist ~1_val~%
             }
 
             if (EnergyResistance != 0 || m_RefinedEnergy != 0)
             {
-                if (m_RefinedEnergy != 0)
+        /*        if (m_RefinedEnergy != 0)
                     list.Add(1153738, string.Format("{0}\t{1}\t{2}", EnergyResistance.ToString(), "", m_RefinedEnergy.ToString()));// physical resist ~1_val~% / ~2_symb~~3_val~% Max
-                else
+                else*/
                     list.Add(1060446, EnergyResistance.ToString()); // physical resist ~1_val~%
             }
 
@@ -1407,7 +1407,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(18); // version
+            writer.Write(19); // version
 
             // Version 16 - Removed Pre-AOS Armor Properties
             // Version 14 - removed VvV Item (handled in VvV System) and BlockRepair (Handled as negative attribute)
@@ -1624,6 +1624,7 @@ namespace Server.Items
 
             switch (version)
             {
+                case 19:
 				case 18:
 				case 17:
                 case 16:
@@ -1937,9 +1938,57 @@ namespace Server.Items
                 ((Mobile)Parent).CheckStatTimers();
 
 
-			if (version < 18)
+			if (version < 19)
 			{
-				Hue = CraftResources.GetHue(m_Resource); 
+                // Sauver l'information...
+               ItemQuality oldQuality = Quality;
+               CraftResource oldRessource= Resource;
+
+             
+               
+               Quality = ItemQuality.Normal;
+               Resource = DefaultResource;
+
+               PhysicalBonus = 1 ;
+               FireBonus =  0;
+               ColdBonus = 0;
+               PoisonBonus = 0;
+               EnergyBonus = 0;
+
+               switch (MaterialType)
+				{
+                    // Armure lvl 3 et 4
+					case ArmorMaterialType.Bone:
+					case ArmorMaterialType.Ringmail:
+                    case ArmorMaterialType.Wood:
+                	case ArmorMaterialType.Stone:
+                    {
+                        m_RefinedPhysical = 1;
+                        m_RefinedCold = 1;
+                        m_RefinedEnergy = 1;
+                        m_RefinedPoison = 1;
+                        m_RefinedFire = 1;
+                        break;
+                    }
+				  // Armure lvl 5 et 6
+					case ArmorMaterialType.Chainmail:
+					case ArmorMaterialType.Plate:
+					case ArmorMaterialType.Dragon:
+                    {
+                        m_RefinedPhysical = 2;
+                        m_RefinedCold = 2;
+                        m_RefinedEnergy = 2;
+                        m_RefinedPoison = 2;
+                        m_RefinedFire = 2;
+                        break;
+                    }					
+					default:
+						break;
+				}
+             
+                Resource = oldRessource;
+                Quality = oldQuality;
+			
 			}
 
 
@@ -2351,9 +2400,9 @@ namespace Server.Items
 			if (m_Quality == ItemQuality.Exceptional)
 				list.Add("Exceptionnelle");
 			else if (m_Quality == ItemQuality.Epic)
-				list.Add("Épique");
+				list.Add("ï¿½pique");
 			else if (m_Quality == ItemQuality.Legendary)
-				list.Add("Légendaire");
+				list.Add("Lï¿½gendaire");
 
 			if (IsImbued)
 				list.Add(1080418); // (Imbued)
@@ -2673,6 +2722,39 @@ namespace Server.Items
 
         public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
+
+                switch (MaterialType)
+				{
+                    // Armure lvl 3 et 4
+					case ArmorMaterialType.Bone:
+					case ArmorMaterialType.Ringmail:
+                    case ArmorMaterialType.Wood:
+                	case ArmorMaterialType.Stone:
+                    {
+                        RefinedPhysical = 1;
+                        RefinedCold = 1;
+                        RefinedEnergy = 1;
+                        RefinedPoison = 1;
+                        RefinedFire = 1;
+                        break;
+                    }
+				  // Armure lvl 5 et 6
+					case ArmorMaterialType.Chainmail:
+					case ArmorMaterialType.Plate:
+					case ArmorMaterialType.Dragon:
+                    {
+                        RefinedPhysical = 2;
+                        RefinedCold = 2;
+                        RefinedEnergy = 2;
+                        RefinedPoison = 2;
+                        RefinedFire = 2;
+                        break;
+                    }					
+					default:
+						break;
+				}
+
+
             Quality = (ItemQuality)quality;
 
             if (makersMark)
@@ -2722,6 +2804,7 @@ namespace Server.Items
                 DistributeMaterialBonus(attrInfo);
             }
 
+            
             return quality;
         }
 
@@ -2751,7 +2834,7 @@ namespace Server.Items
 					Mod += 2; // Argent
 					break;
 				case CraftResource.Boreale:
-					Mod += 2; // Boréale
+					Mod += 2; // Borï¿½ale
 					break;
 				case CraftResource.Chrysteliar:
 					Mod += 2; // Chrysteliar
@@ -2941,7 +3024,7 @@ namespace Server.Items
 					Mod += 3; // Argent
 					break;
 				case CraftResource.Boreale:
-					Mod += 3; // Boréale
+					Mod += 3; // Borï¿½ale
 					break;
 				case CraftResource.Chrysteliar:
 					Mod += 3; // Chrysteliar
@@ -3130,7 +3213,7 @@ namespace Server.Items
 					Mod += 4; // Argent
 					break;
 				case CraftResource.Boreale:
-					Mod += 4; // Boréale
+					Mod += 4; // Borï¿½ale
 					break;
 				case CraftResource.Chrysteliar:
 					Mod += 4; // Chrysteliar
