@@ -13,11 +13,6 @@ namespace Server.Items
 	{
 		private static Dictionary<string, int[]> AnimalPacks = new Dictionary<string, int[]>
 		{
-			{ "TP1", new int[] { 6, 279, 831, 254 } },
-			{ "TP2", new int[] { 205, 238, 717, 269 } },
-			{ "TP3", new int[] { 52, 278, 738, 734 } },
-			{ "TP4", new int[] { 207, 208, 733, 203 } },
-			{ "TP5", new int[] { 282, 717, 727, 715 } },
 			{ "P1", new int[] { 5, 217, 726, 25 } },
 			{ "P2", new int[] { 58, 254, 729, 29 } },
 			{ "P3", new int[] { 81, 302, 731, 74 } },
@@ -45,7 +40,7 @@ namespace Server.Items
 
 		private static HashSet<int> NonTransformableBodyValues = new HashSet<int>
 		{
-		//	203, 254, 269, 715, 734
+			203, 254, 269, 715, 734
 		};
 
 		[Constructable]
@@ -150,9 +145,6 @@ namespace Server.Items
 
 		private static Dictionary<int, string> CreatureNames = new Dictionary<int, string>
 	{
-		{6, "Oiseau"}, {52, "Serpent"}, {205, "Lapin"}, {207, "Mouton"}, {208, "Poule"},
-		{238, "Rat"}, {278, "Écureuil"}, {279, "Belette"}, {282, "Perroquet"}, {283, "Corbeau"},
-		{717, "Lézard volant"}, {727, "Petit serpent cornu"}, {733, "Lézard ailé"}, {738, "Mythe"}, {831, "Perroquet"},
 		{5, "Aigle"}, {6, "Oiseau"}, {11, "Araignée bleu"}, {12, "Dragon gris"}, {20, "Araignée violette"},
 		{21, "Serpent géant"}, {25, "Loup gris"}, {28, "Araignée brune"}, {29, "Gorille"}, {48, "Scorpion"},
 		{52, "Serpent"}, {58, "Wisp"}, {59, "Dragon rouge"}, {60, "Dragonneau gris"}, {61, "Dragon rouge"},
@@ -181,7 +173,7 @@ namespace Server.Items
 		private TamerTransformBrush m_Brush;
 
 		public TransformGump(Mobile from, BaseCreature creature, int[] bodyValues, TamerTransformBrush brush)
-	  : base(50, 50)
+		   : base(50, 50)
 		{
 			m_From = from;
 			m_Creature = creature;
@@ -189,15 +181,16 @@ namespace Server.Items
 			m_Brush = brush;
 
 			AddPage(0);
-			AddBackground(0, 0, 450, 480, 5054); 
-			AddBackground(10, 10, 430, 460, 3000);  
+			AddBackground(0, 0, 450, 450, 5054);
+			AddBackground(10, 10, 430, 430, 3000);
 
 			AddHtml(20, 20, 410, 25, "<CENTER><BIG>Menu de transformation</BIG></CENTER>", false, false);
 
-			AddHtmlLocalized(20, 50, 400, 25, 1154037, false, false); // Choose a new form:
 
-			AddButton(20, 430, 4005, 4007, 0, GumpButtonType.Reply, 0);  
-			AddHtmlLocalized(55, 430, 200, 25, 1011012, false, false); // CANCEL
+			AddHtmlLocalized(20, 30, 400, 25, 1154037, false, false); // Choose a new form:
+
+			AddButton(20, 400, 4005, 4007, 0, GumpButtonType.Reply, 0);
+			AddHtmlLocalized(55, 400, 200, 25, 1011012, false, false); // CANCEL
 
 			AddPage(1);
 
@@ -206,7 +199,7 @@ namespace Server.Items
 			for (int i = 0; i < bodyValues.Length; i++)
 			{
 				int x = 30 + ((i % 2) * 200);
-				int y = 105 + ((i / 2) * 100);  
+				int y = 85 + ((i / 2) * 100);
 
 				AddRadio(x, y, 210, 211, false, i + 1);
 
@@ -219,8 +212,8 @@ namespace Server.Items
 				AddLabel(x + 80, y + 20, 0, $"Taming requis: {tamingRequirements[i]}");
 			}
 
-			AddButton(180, 430, 4005, 4007, 1, GumpButtonType.Reply, 0);  
-			AddHtmlLocalized(215, 430, 200, 25, 1011036, false, false); // OKAY
+			AddButton(180, 400, 4005, 4007, 1, GumpButtonType.Reply, 0);
+			AddHtmlLocalized(215, 400, 200, 25, 1011036, false, false); // OKAY
 		}
 
 		private int[] GetTamingRequirements(int packSize)

@@ -27,7 +27,7 @@ namespace Server.Misc
 			0x013, 0x015,
 			0x150, 0x155,
 			0x15A, 0x15C,
-			0x31F5
+			0x31F5,
 		};
 
 		public static int[] HouseTiles = new int[]
@@ -50,6 +50,7 @@ namespace Server.Misc
 			0x2E5, 0x305,
 			0x777, 0x791,
 			0x98C, 0x9BF,
+			0x31F5,
 		};
 
 		public static int[] GroundTiles = new int[]
@@ -72,6 +73,7 @@ namespace Server.Misc
 			0x6A1, 0x6C2,
 			0x6DE, 0x6E1,
 			0x73F, 0x742,
+			0x31F5,
 		};
 
 		public static bool ValidatePlacement( Point3D loc, Mobile m_From, object m_Obj )
