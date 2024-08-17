@@ -70,11 +70,12 @@ namespace Server.Spells.Fifth
 
         public override void OnCast()
         {
-         /*   if (!Caster.CanBeginAction(typeof(IncognitoSpell)))
+            if (!Caster.CanBeginAction(typeof(IncognitoSpell)))
             {
-                Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
+                StopTimer(Caster);
+             //   Caster.SendLocalizedMessage(1005559); // This spell is already in effect.
             }
-            else*/ if (Caster.BodyMod == 183 || Caster.BodyMod == 184)
+            else if (Caster.BodyMod == 183 || Caster.BodyMod == 184)
             {
                 Caster.SendLocalizedMessage(1042402); // You cannot use incognito while wearing body paint
             }
