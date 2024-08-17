@@ -7,7 +7,7 @@ namespace Server.Mobiles
         public Sewerrat()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "un rat d'égout";
+            Name = "un rat d'ï¿½gout";
             Body = 238;
             BaseSoundID = 0xCC;
 
@@ -44,6 +44,7 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
+        public override bool CanReveal => false;
 
 		public override int Meat => Utility.RandomMinMax(1, 2);
 

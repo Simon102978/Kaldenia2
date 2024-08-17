@@ -45,6 +45,8 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 
+        public override bool CanReveal => false;
+
 		public override int Meat => Utility.RandomMinMax(4, 8);
         public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override void Serialize(GenericWriter writer)

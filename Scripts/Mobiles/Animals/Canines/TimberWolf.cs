@@ -48,6 +48,7 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
+       	public override bool CanReveal => false;
 		public override int Meat => Utility.RandomMinMax(1, 4);
 
 		public override int Hides => Utility.RandomMinMax(2, 6);

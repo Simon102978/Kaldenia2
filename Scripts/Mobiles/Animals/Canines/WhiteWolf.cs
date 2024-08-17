@@ -43,6 +43,7 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
+       	public override bool CanReveal => false;
 		public WhiteWolf(Serial serial)
             : base(serial)
         {

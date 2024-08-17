@@ -42,6 +42,7 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
+        public override bool CanReveal => false;
 		public Snake(Serial serial)
             : base(serial)
         {

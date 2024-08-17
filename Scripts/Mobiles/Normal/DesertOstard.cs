@@ -5,7 +5,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public DesertOstard()
-            : this("un ostard du désert")
+            : this("un ostard du dï¿½sert")
         {
         }
 
@@ -47,6 +47,8 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
+
+        public override bool CanReveal => false;
 		public override int Meat => 3;
         public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
         public override PackInstinct PackInstinct => PackInstinct.Ostard;

@@ -61,6 +61,7 @@ namespace Server.Mobiles
         public override int Hides => 5;
         public override FoodType FavoriteFood => FoodType.FruitsAndVegies | FoodType.GrainsAndHay;
 		public override bool CanBeParagon => false;
+        public override bool CanReveal => false;
 		public override bool CanAutoStable => (Backpack == null || Backpack.Items.Count == 0) && base.CanAutoStable;
 
         public PackHorse(Serial serial)

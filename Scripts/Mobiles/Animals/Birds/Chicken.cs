@@ -43,6 +43,8 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 
+       	public override bool CanReveal => false;
+
 		public override int Meat => Utility.RandomMinMax(1, 2);
 		public override MeatType MeatType => MeatType.Chicken;
         public override FoodType FavoriteFood => FoodType.GrainsAndHay;

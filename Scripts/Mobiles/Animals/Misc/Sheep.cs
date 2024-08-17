@@ -43,6 +43,8 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
+
+       	public override bool CanReveal => false;
 		public Sheep(Serial serial)
             : base(serial)
         {

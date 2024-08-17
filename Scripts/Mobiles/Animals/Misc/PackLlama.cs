@@ -62,6 +62,8 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 
+        public override bool CanReveal => false;
+
 		public override bool CanAutoStable => (Backpack == null || Backpack.Items.Count == 0) && base.CanAutoStable;
 
         public PackLlama(Serial serial)

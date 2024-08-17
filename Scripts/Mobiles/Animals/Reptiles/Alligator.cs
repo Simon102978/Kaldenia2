@@ -54,6 +54,7 @@ namespace Server.Mobiles
 		public override BoneType BoneType => BoneType.Reptilien;
 
 		public override bool CanBeParagon => false;
+        public override bool CanReveal => false;
 
 		public override FoodType FavoriteFood => FoodType.Meat | FoodType.Fish;
 

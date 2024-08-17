@@ -38,6 +38,7 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
+       	public override bool CanReveal => false;
 		public Dog(Serial serial)
             : base(serial)
         {

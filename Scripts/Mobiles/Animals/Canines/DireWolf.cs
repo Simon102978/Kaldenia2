@@ -46,6 +46,8 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
+        
+        public override bool CanReveal => false;
 		public DireWolf(Serial serial)
             : base(serial)
         {

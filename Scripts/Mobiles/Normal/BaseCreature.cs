@@ -7863,6 +7863,8 @@ namespace Server.Mobiles
 		}
 
 
+
+
 		public virtual void TryFindPlayer()
 		{
 			if (Deleted || Map == null)

@@ -2,14 +2,14 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("le corps d'une panthère")]
+    [CorpseName("le corps d'une panthï¿½re")]
     public class Panther : BaseCreature
     {
         [Constructable]
         public Panther()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
-            Name = "une panthère";
+            Name = "une panthï¿½re";
             Body = 0xD6;
             Hue = 0x901;
             BaseSoundID = 0x462;
@@ -48,6 +48,7 @@ namespace Server.Mobiles
         }
 
 		public override bool CanBeParagon => false;
+        public override bool CanReveal => false;
 		public override int Meat => Utility.RandomMinMax(1, 3);
 
 		public override int Hides => Utility.RandomMinMax(2, 6);

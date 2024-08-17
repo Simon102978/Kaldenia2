@@ -45,6 +45,8 @@ namespace Server.Mobiles
 
 		public override bool CanBeParagon => false;
 
+        public override bool CanReveal => false;
+
 		public override int Bones => Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Regular;
 

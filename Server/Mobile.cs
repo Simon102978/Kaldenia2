@@ -2870,6 +2870,9 @@ namespace Server
 			return ret;
 		}
 
+		public virtual bool CanReveal => true;
+
+
 		/// <summary>
 		///     Overridable. Event invoked before the Mobile <see cref="Move">moves</see>.
 		/// </summary>
@@ -2894,6 +2897,7 @@ namespace Server
 		}
 
 
+
 		public virtual void JetDetection(int bonus = 0)
 		{
 			foreach (Mobile m in this.GetMobilesInRange(10))
@@ -2912,6 +2916,7 @@ namespace Server
 
 
 
+		
 
 		public virtual void Detection(Mobile mobile)
 		{
@@ -2934,7 +2939,7 @@ namespace Server
 				bonus = 1;
 			}
 
-			if (chance < bonus)
+			if (chance < bonus && CanReveal)
 			{
 				mobile.Reveal(this);
 			}
