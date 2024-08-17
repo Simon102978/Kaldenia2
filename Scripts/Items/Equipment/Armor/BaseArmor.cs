@@ -2400,9 +2400,9 @@ namespace Server.Items
 			if (m_Quality == ItemQuality.Exceptional)
 				list.Add("Exceptionnelle");
 			else if (m_Quality == ItemQuality.Epic)
-				list.Add("�pique");
+				list.Add("Epique");
 			else if (m_Quality == ItemQuality.Legendary)
-				list.Add("L�gendaire");
+				list.Add("Legendaire");
 
 			if (IsImbued)
 				list.Add(1080418); // (Imbued)
