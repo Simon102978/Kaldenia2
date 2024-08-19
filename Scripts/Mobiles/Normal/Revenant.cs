@@ -18,7 +18,7 @@ namespace Server.Mobiles
             Body = 400;
             Hue = -1;
 
-            double scalar = caster.Skills[SkillName.SpiritSpeak].Value * 0.01;
+            double scalar = caster.Skills[SkillName.EvalInt].Value * 0.01;
 
             m_Target = target;
             m_ExpireTime = DateTime.UtcNow + duration;

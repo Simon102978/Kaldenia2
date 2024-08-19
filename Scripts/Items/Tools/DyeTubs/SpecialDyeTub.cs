@@ -21,6 +21,9 @@ namespace Server.Items
 		public override bool AllowDyables => true;
 		public override bool AllowMetal => true;
 		public override bool AllowWeapons => true;
+		
+
+
 
 		public override CustomHuePicker CustomHuePicker => CustomHuePicker.SpecialDyeTub;
         public override int LabelNumber => 1041285;// Special Dye Tub
@@ -46,6 +49,7 @@ namespace Server.Items
 				return true;
 			}
 			return false;
+
 		}
 		public override void OnDoubleClick(Mobile from)
         {

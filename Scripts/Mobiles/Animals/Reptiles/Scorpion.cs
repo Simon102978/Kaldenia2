@@ -53,11 +53,11 @@ namespace Server.Mobiles
 		
 		public override int Meat => Utility.RandomMinMax(2, 3);
 
-		public override int Hides => Utility.RandomMinMax(2, 3);
+		public override int Hides => 0;//Utility.RandomMinMax(2, 3);
 		public override HideType HideType => HideType.Arachnide;
 
 
-		public override int Bones => Utility.RandomMinMax(2, 3);
+		public override int Bones => 0; // Utility.RandomMinMax(2, 3);
 		public override BoneType BoneType => BoneType.Arachnide;
 
 

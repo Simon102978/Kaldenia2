@@ -49,16 +49,17 @@ namespace Custom.Jerbal.Jako
             get;
         }
 
-        public virtual uint MaxBonus(BaseCreature bc)
-        {
-            if (GetStat(bc) >= Cap)
-                return (GetStat(bc));
-            if ((int)((GetStat(bc) - IncreasedBy) * CapScale) > Cap)
-                return Cap;
-            return (uint)((GetStat(bc) - IncreasedBy) * CapScale);
-        }
+		public virtual uint MaxBonus(BaseCreature bc)
+		{
+			uint currentStat = GetStat(bc);
+			if (currentStat >= Cap)
+				return currentStat;
 
-        public virtual string DoOnClick(BaseCreature bc)
+			uint maxBonus = (uint)Math.Min((currentStat - IncreasedBy) * CapScale, Cap);
+			return Math.Max(maxBonus, currentStat);
+		}
+
+		public virtual string DoOnClick(BaseCreature bc)
         {
             if (MaxBonus(bc) <= (GetStat(bc) + AttributesGiven))
                 return "That would place this creature's stat above maximum.";
@@ -80,17 +81,19 @@ namespace Custom.Jerbal.Jako
 
         new public abstract string ToString();
 
-        public virtual bool SetBonus(BaseCreature bc, uint toThis)
-        {
-            if (toThis > MaxBonus(bc))
-                return false;
-            uint oldTraits = TraitsGiven;
-            TraitsGiven += ((toThis - GetStat(bc)) / AttributesGiven) * PointsTaken;            
-            bc.Traits -= TraitsGiven - oldTraits;
-            SetStat(bc, toThis);
-            return true;
-        }
-        public virtual void Serialize(GenericWriter writer)
+		public virtual bool SetBonus(BaseCreature bc, uint toThis)
+		{
+			uint currentStat = GetStat(bc);
+			if (toThis < currentStat || toThis > MaxBonus(bc))
+				return false;
+
+			uint oldTraits = TraitsGiven;
+			TraitsGiven += ((toThis - currentStat) / AttributesGiven) * PointsTaken;
+			bc.Traits -= TraitsGiven - oldTraits;
+			SetStat(bc, toThis);
+			return true;
+		}
+		public virtual void Serialize(GenericWriter writer)
         {
 
             writer.Write(1);//Version

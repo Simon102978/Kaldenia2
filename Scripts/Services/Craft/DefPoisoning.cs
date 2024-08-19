@@ -105,7 +105,7 @@ namespace Server.Engines.Craft
             index = AddCraft(typeof(PoisonPotion), "Poisons", "Potion de poison", 25.0, 50.0, typeof(Nightshade), 1044358, 2, 1044366);
             AddRes(index, typeof(Bottle), 1044529, 1, 500315);
 
-            index = AddCraft(typeof(GreaterPoisonPotion), "Poisons", "Potion de poison majeure", 50.0, 75.0, typeof(Nightshade), 1044358, 4, 1044366);
+            index = AddCraft(typeof(GreaterPoisonPotion), "Poisons", "Potion de poison majeure", 45.0, 75.0, typeof(Nightshade), 1044358, 4, 1044366);
             AddRes(index, typeof(Bottle), 1044529, 1, 500315);
 
             index = AddCraft(typeof(DeadlyPoisonPotion), "Poisons", "Potion de poison supérieure", 75.0, 100.0, typeof(Nightshade), 1044358, 8, 1044366);

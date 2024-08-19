@@ -80,7 +80,7 @@ namespace Server.Custom
 				{
 					if (m_SummonMaster != null)
 					{
-						m_SummonMaster.Followers -= ControlSlots;
+						//m_SummonMaster.Followers -= ControlSlots;
 					}
 
 					m_SummonMaster = value;
@@ -91,7 +91,7 @@ namespace Server.Custom
 						Controlled = true;
 						ControlTarget = m_SummonMaster;
 						ControlOrder = OrderType.Come;
-						m_SummonMaster.Followers += ControlSlots;
+						//m_SummonMaster.Followers += ControlSlots;
 					}
 				}
 			}
@@ -159,7 +159,7 @@ namespace Server.Custom
 			SetMana(0);
 
 			Summoned = false;
-			ControlSlots = 3;
+			ControlSlots = 0;
 			SetControlMaster(owner);
 			Controlled = true;
 			ControlTarget = owner;
@@ -236,7 +236,7 @@ namespace Server.Custom
         ControlOrder = OrderType.Come;
         Map = master.Map;
         Location = master.Location;
-      //  master.Followers += ControlSlots;
+        master.Followers = +3;
 
         m_IsMaterialized = true;
         MaterializationInProgress = false;
@@ -258,7 +258,7 @@ namespace Server.Custom
 		{
 			if (ControlMaster != null)
 			{
-				//ControlMaster.Followers -= ControlSlots; 
+				ControlMaster.Followers = - 3; 
 				ControlMaster.SendMessage("Vous avez dématérialisé le golem.");
 			}
 
@@ -315,9 +315,8 @@ namespace Server.Custom
 			if (SummonMaster != null && Map != null && Map != Map.Internal)
 			{
 				SummonMaster.SendLocalizedMessage(1006265, Name); // ~1_NAME~ has been killed.
-			//	SummonMaster.Followers -= ControlSlots;
+				SummonMaster.Followers = -3;
 			}
-
 			Delete();
 		}
 
@@ -729,18 +728,25 @@ namespace Server.Custom
 					// Transfert de propriété
 					Mobile oldOwner = m_Golem.SummonMaster;
 
-					if (oldOwner != null)
+					// Vérifier si le nouveau propriétaire a assez de slots de follower disponibles
+					if (m_Golem.IsMaterialized && from.Followers + 3 > from.FollowersMax)
 					{
-					//	oldOwner.Followers -= m_Golem.ControlSlots;
+						from.SendMessage("Vous n'avez pas assez de slots de follower disponibles pour contrôler ce golem.");
+						return;
+					}
+
+					// Ajuster les followers seulement si le golem est matérialisé
+					if (m_Golem.IsMaterialized)
+					{
+						if (oldOwner != null)
+						{
+							oldOwner.Followers -= 3;
+						}
+						from.Followers += 3;
 					}
 
 					m_Golem.SummonMaster = from;
 					m_Golem.SetControlMaster(from);
-
-					if (m_Golem.IsMaterialized)
-					{
-						//from.Followers += m_Golem.ControlSlots;
-					}
 
 					from.SendMessage("Vous êtes maintenant le propriétaire de ce MiniGolem.");
 					if (oldOwner != null && oldOwner.NetState != null)
@@ -750,7 +756,9 @@ namespace Server.Custom
 					this.Golem = m_Golem;
 					this.InvalidateProperties();
 				}
+
 			}
+		
 			else
 			{
 				base.OnDoubleClick(from);
