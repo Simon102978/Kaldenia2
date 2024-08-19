@@ -253,8 +253,87 @@ namespace Server.Items
 				}
 			}
 
-			// Logique pour pécher un poisson normal
-			if (m_Bait != Bait.Aucun && m_Charge > 0)
+			// Pêcher une skillcard
+
+			bool canFishSkillCard = fishingSkill >= 50 && from.Map == Map.Felucca;
+			if (canFishSkillCard && chance < 0.05) // 5% de chance
+			{
+				SkillCard skillCard = new SkillCard();
+
+			if (from.AddToBackpack(skillCard))
+			{
+				from.SendMessage("Vous avez pêché une carte mystérieuse !");
+				return; // Terminer la méthode ici, pas besoin de pêcher un poisson
+			}
+			else
+			{
+				skillCard.Delete(); // Supprimer la skillcard si elle ne peut pas être ajoutée au sac
+				from.SendMessage("Vous avez pêché une carte mystérieuse, mais votre sac est plein. La skillcard est perdue.");
+			}
+
+				// Pêcher un objet aléatoire avec 10% de chance
+
+				var possibleItems = new[]
+				{
+	(typeof(CoquillageHautsFonds), "Coquillage des hauts fonds"),
+	(typeof(CoquillageArcEnCiel), "Coquillage arc-en-ciel"),
+	(typeof(CoquilleDoree), "Coquille dorée"),
+	(typeof(CoquilleEcarlate), "Coquille écarlate"),
+	(typeof(CoquillePlate), "Coquille plate"),
+	(typeof(CoquilleTachetee), "Coquille tachetée"),
+	(typeof(DentRequin), "Dent de requin"),
+	(typeof(DentAlligator), "Dent d'alligator"),
+	(typeof(GraisseSole), "Graisse de sole"),
+	(typeof(OeilRaie), "Oeil de raie"),
+	(typeof(OeufThon), "Oeuf de thon"),
+	(typeof(SangAnguille), "Sang d'anguille"),
+	(typeof(UnfinishedBarrel), "Baril inachevé"),
+	(typeof(Stool), "Tabouret"),
+	(typeof(ClockFrame), "Horloge cassée"),
+	(typeof(Globe), "Globe terrestre"),
+	(typeof(BarrelLid), "Tonnelier"),
+	(typeof(PrizedFish), "Poisson primé"),
+	(typeof(WondrousFish), "Poisson merveilleux"),
+	(typeof(TrulyRareFish), "Poisson vraiment rare"),
+	(typeof(PeculiarFish), "Poisson particulier"),
+	(typeof(Boots), "Bottes"),
+	(typeof(Shoes), "Chaussures"),
+	(typeof(Sandals), "Sandales"),
+	(typeof(ThighBoots), "Cuissardes"),
+	(typeof(BlackPearl), "Perle noire"),
+	(typeof(WhitePearl), "Perle blanche"),
+	(typeof(BaseHighseasFish), "Poisson des bas fonds")
+};
+
+				// 10% de chance de pêcher un objet spécial
+				if (Utility.RandomDouble() < 0.10)
+				{
+					// Sélectionner un objet aléatoire
+					var (itemType, itemName) = possibleItems[Utility.Random(possibleItems.Length)];
+
+					// Créer l'objet
+					Item item = (Item)Activator.CreateInstance(itemType);
+
+					if (from.AddToBackpack(item))
+					{
+						from.SendMessage($"Vous avez pêché un(e) {itemName} !");
+						return; // Terminer la méthode ici, pas besoin de pêcher un poisson
+					}
+					else
+					{
+						item.Delete(); // Supprimer l'objet s'il ne peut pas être ajouté au sac
+						from.SendMessage($"Vous avez pêché un(e) {itemName}, mais votre sac est plein. L'objet est perdu.");
+					}
+				}
+				else
+				{
+					from.SendMessage("Vous n'avez rien pêché de spécial cette fois-ci.");
+				}
+
+
+
+				// Logique pour pécher un poisson normal
+				if (m_Bait != Bait.Aucun && m_Charge > 0)
 			{
 				if (chance * 100 < chanceSpecificFish) // Chance basée sur le skill de pécher le poisson spécifique
 				{
@@ -346,13 +425,16 @@ namespace Server.Items
 			{
 				from.SendMessage("[ aucun appât ]");
 			}
-		
-
-
-
-
 		}
-		
+	}
+
+
+
+
+
+
+
+
 
 		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
 		{

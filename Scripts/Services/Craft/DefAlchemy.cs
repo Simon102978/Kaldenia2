@@ -177,28 +177,36 @@ namespace Server.Engines.Craft
 
 
 			index = AddCraft(typeof(LesserCurePotion), "Antidote", "Potion d'antidote mineure", 0.0, 25.0, typeof(Garlic), "Ail", 1, "Vous n'avez pas suffisament d'Ail");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
 			index = AddCraft(typeof(CurePotion), "Antidote", "Potion d'antidote", 25.0, 50.0, typeof(Garlic), "Ail", 3, "Vous n'avez pas suffisament d'Ail");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
 			index = AddCraft(typeof(GreaterCurePotion), "Antidote", "Potion d'antidote majeure", 50.0, 75.0, typeof(Garlic), "Ail", 5, "Vous n'avez pas suffisament d'Ail");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
 			index = AddCraft(typeof(SuperiorCurePotion), "Antidote", "Pot. antidote supérieure", 75.0, 100.0, typeof(Garlic), "Ail", 7, "Vous n'avez pas suffisament d'Ail");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRecipe(index, (int)AlchemyRecipes.SuperiorCurePotion);
 
 			index = AddCraft(typeof(LesserAgilityPotion), "Dextérité", "Potion de dextérité mineure", 0.0, 25.0, typeof(Bloodmoss), "Mousse de Sang", 1, "Vous n'avez pas suffisament de Mousse de sang");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
 			index = AddCraft(typeof(AgilityPotion), "Dextérité", "Potion de dextérité", 25.0, 50.0, typeof(Bloodmoss), "Mousse de Sang", 3, "Vous n'avez pas suffisament de Mousse de sang");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
 			index = AddCraft(typeof(GreaterAgilityPotion), "Dextérité", "Potion de dextérité majeure", 50.0, 75.0, typeof(Bloodmoss), "Mousse de Sang", 5, "Vous n'avez pas suffisament de Mousse de sang");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
 			index = AddCraft(typeof(SuperiorAgilityPotion), "Dextérité", "Pot. dex supérieure", 75.0, 100.0, typeof(Bloodmoss), "Mousse de Sang", 7, "Vous n'avez pas suffisament de Mousse de sang");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRecipe(index, (int)AlchemyRecipes.SuperiorAgilityPotion);
 
@@ -206,26 +214,33 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
 			index = AddCraft(typeof(StrengthPotion), "Force", "Potion de force", 25.0, 50.0, typeof(MandrakeRoot), "Racine de Mandragore", 3, "Vous n'avez pas suffisament de Racine de Mandragore");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
 			index = AddCraft(typeof(GreaterStrengthPotion), "Force", "Potion de force majeure", 50.0, 75.0, typeof(MandrakeRoot), "Racine de Mandragore", 5, "Vous n'avez pas suffisament de Racine de Mandragore");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
 			index = AddCraft(typeof(SuperiorStrengthPotion), "Force", "Pot. force supérieure", 75.0, 100.0, typeof(MandrakeRoot), "Racine de Mandragore", 7, "Vous n'avez pas suffisament de Racine de Mandragore");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRecipe(index, (int)AlchemyRecipes.SuperiorStrengthPotion);
 
 
-			index = AddCraft(typeof(LesserIntelligencePotion), "Intelligence", "Potion Intelligence mineure", 0.0, 25.0, typeof(DentRequin), "Dent de Requin", 1, "Vous n'avez pas suffisament de Dent de Requin");
+			index = AddCraft(typeof(LesserIntelligencePotion), "Intelligence", "Potion Intelligence mineure", 0.0, 25.0, typeof(BlackPearl), "Perle Noire", 1, "Vous n'avez pas suffisament de Perle Noire");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			index = AddCraft(typeof(IntelligencePotion), "Intelligence", "Potion Intelligence", 25.0, 50.0, typeof(DentRequin), "Dent de Requin", 3, "Vous n'avez pas suffisament de Dent de Requin");
+			index = AddCraft(typeof(IntelligencePotion), "Intelligence", "Potion Intelligence", 25.0, 50.0, typeof(BlackPearl), "Perle Noire", 3, "Vous n'avez pas suffisament de Perle Noire");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			index = AddCraft(typeof(GreaterIntelligencePotion), "Intelligence", "Potion Intel. majeure", 50.0, 75.0, typeof(DentRequin), "Dent de Requin", 5, "Vous n'avez pas suffisament de Dent de Requin");
+			index = AddCraft(typeof(GreaterIntelligencePotion), "Intelligence", "Potion Intel. majeure", 50.0, 75.0, typeof(BlackPearl), "Perle Noire", 5, "Vous n'avez pas suffisament de Perle Noire");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			//index = AddCraft(typeof(SuperiorIntelligencePotion), "Intelligence", "Pot. Intel. supérieure", 75.0, 100.0, typeof(DentRequin), "Dent de Requin", 7, "Vous n'avez pas suffisament de Dent de Requin");
+			//index = AddCraft(typeof(SuperiorIntelligencePotion), "Intelligence", "Pot. Intel. supérieure", 75.0, 100.0,typeof(BlackPearl), "Perle Noire", 7, "Vous n'avez pas suffisament de Perle Noire");
+			//AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			//AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			//AddRecipe(index, (int)AlchemyRecipes.SuperiorIntelligencePotion);
 
@@ -294,7 +309,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(EodonianPotion), "Autres", "Brassage de Barako", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
-			AddRes(index, typeof(WhitePearl), 1044360, 5, 1044368);
+			AddRes(index, typeof(WhitePearl), "Perle Blanche", 5, "Vous n'avez pas suffisament de perle blanche");
 			
 
 			index = AddCraft(typeof(UraliTranceTonic), "Autres", "Tonic de Urali", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
@@ -401,7 +416,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(VertPrintanierDyeTub), "Teintures", "Vert Printanier", 65.0, 85.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un Bac Vide");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
-			AddRes(index, typeof(VeriteIngot), "Lingot de Vérite", 2, "Vous n'avez pas suffisament de Lingot de Vérite");
+			AddRes(index, typeof(Fougere), "Fougere", 2, "Vous n'avez pas suffisament de Fougere");
 
 			index = AddCraft(typeof(VertIridescentDyeTub), "Teintures", "Vert Iridescent", 80, 100.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un Bac Vide");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");

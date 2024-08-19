@@ -66,18 +66,14 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class Chapelet : BaseNecklace
+	public class Chapelet : BaseNecklace, IDyable
 	{
-
 		[Constructable]
-		public Chapelet()
-				: base(0xA4E3)
-
+		public Chapelet() : base(0xA4E3)
 		{
 			Weight = 2.0;
 			Name = "Chapelet";
 			Layer = Layer.Waist;
-			
 		}
 
 		public bool Dye(Mobile from, DyeTub sender)
@@ -88,29 +84,24 @@ namespace Server.Items
 			Hue = sender.DyedHue;
 			return true;
 		}
-	
 
-	public Chapelet(Serial serial)
-				: base(serial)
-
+		public Chapelet(Serial serial) : base(serial)
 		{
 		}
-
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-
 			writer.Write(0); // version
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
-
 			int version = reader.ReadInt();
 		}
 	}
+
 	public class Collier2 : BaseNecklace
 
 	{

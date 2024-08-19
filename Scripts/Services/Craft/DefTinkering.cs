@@ -559,10 +559,7 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(HeatingStand), "Support chauffant", 4, 1044253);
 			AddRes(index, typeof(CopperWire), "Fil de cuivre", 20, 1044253);
 			ForceNonExceptional(index);
-			index = AddCraft(typeof(AdvancedTrainingDummySouthDeed), "Assemblages", "Mannequin d'entrainement avancé (S)", 80.0, 110.0, typeof(TrainingDummySouthDeed), 1044336, 1, 1044253);
-			ForceNonExceptional(index);
-			index = AddCraft(typeof(AdvancedTrainingDummyEastDeed), "Assemblages", "Mannequin d'entrainement avancé (E)", 80.0, 110.0, typeof(TrainingDummyEastDeed), 1044335, 1, 1044253);
-			ForceNonExceptional(index);
+			
 			#endregion
 
 			#region Ustensiles

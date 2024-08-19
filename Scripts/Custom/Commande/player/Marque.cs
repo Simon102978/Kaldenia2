@@ -40,7 +40,22 @@ namespace Server.Scripts.Commands
                 if (targeted is Item item )
                 {
 
-					if (item.Createur != from)
+						if (item is BaseJewel || item is BaseBracelet || item is BaseEarrings || item is BaseRing || item is BaseNecklace)
+						{
+							if (!item.IsChildOf(from.Backpack))
+							{
+								from.SendMessage("L'item doit être dans votre sac.");
+								return;
+							}
+							else
+							{
+								item.Description = m_Name;
+								from.SendMessage("Vous avez marqué le bijou avec succès.");
+								return;
+							}
+						}
+
+						if (item.Createur != from)
 					{
 						from.SendMessage("Vous devez avoir créer l'objet pour mettre votre marque.");
 						return;
@@ -59,6 +74,8 @@ namespace Server.Scripts.Commands
                 {
                     from.SendMessage("Vous devez choisir un Item.");
                 }
+
+
 
 				
             }

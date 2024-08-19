@@ -695,8 +695,7 @@ namespace Server.Items
         {
             Layer = layer;
             Hue = hue;
-
-            m_Resource = DefaultResource;
+			m_Resource = DefaultResource;
             m_Quality = ItemQuality.Normal;
 
             m_HitPoints = m_MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
@@ -772,8 +771,34 @@ namespace Server.Items
 
             InvalidateProperties();
         }
+		public void AdjustWeightByQuality()
+		{
+			double baseWeight = Weight;
+			switch (Quality)
+			{
+				case ItemQuality.Low:
+					Weight = baseWeight * 2;
+					break;
+				case ItemQuality.Normal:
+					break;
+				case ItemQuality.Exceptional:
+					Weight = baseWeight / 2;
+					break;
+				case ItemQuality.Epic:
+					Weight = baseWeight / 3;
+					break;
+				case ItemQuality.Legendary:
+					Weight = baseWeight / 5;
+					break;
+			}
+		}
 
-        public override bool CheckPropertyConfliction(Mobile m)
+		public void SetQuality(ItemQuality newQuality)
+		{
+			Quality = newQuality;
+			AdjustWeightByQuality();
+		}
+		public override bool CheckPropertyConfliction(Mobile m)
         {
             if (base.CheckPropertyConfliction(m))
                 return true;

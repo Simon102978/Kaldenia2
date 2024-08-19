@@ -29,7 +29,7 @@ namespace Server.Items
 				return;
 			}
 
-			from.SendMessage("Sélectionnez une cuve de teinture spéciale pour appliquer ce pigment.");
+			from.SendMessage("Sélectionnez une cuve de teinture pour appliquer ce pigment.");
 			from.Target = new InternalTarget(this);
 		}
 
@@ -44,30 +44,49 @@ namespace Server.Items
 
 			protected override void OnTarget(Mobile from, object targeted)
 			{
-				if (targeted is SpecialDyeTub tub)
+				if (targeted is SpecialDyeTub specialTub)
 				{
-					if (tub.Charges > 0)
+					if (specialTub.Charges > 0)
 					{
-						tub.DyedHue = m_Pigment.m_Hue;
-						tub.Charges--;
-						from.SendMessage($"Vous avez appliqué le pigment {m_Pigment.m_PigmentName} à la cuve de teinture spéciale.");
-						m_Pigment.Delete(); // Détruit la fiole de pigment après utilisation
+						specialTub.DyedHue = m_Pigment.m_Hue;
+						specialTub.Charges--;
+						from.SendMessage($"Vous avez appliqué le pigment {m_Pigment.m_PigmentName} à la cuve de teinture spéciale. Il reste {specialTub.Charges} charges.");
+						m_Pigment.Delete();
 					}
 					else
 					{
 						from.SendMessage("Cette cuve de teinture spéciale n'a plus de charges.");
 					}
 				}
+				else if (targeted is DyeTub regularTub)
+				{
+					if (regularTub.Charges > 1)
+					{
+						regularTub.DyedHue = m_Pigment.m_Hue;
+						regularTub.Charges--;
+						from.SendMessage($"Vous avez appliqué le pigment {m_Pigment.m_PigmentName} à la cuve de teinture. Il reste {regularTub.Charges} charges.");
+						m_Pigment.Delete();
+					}
+					else if (regularTub.Charges == 1)
+					{
+						regularTub.DyedHue = m_Pigment.m_Hue;
+						regularTub.Charges = 0;
+						from.SendMessage($"Vous avez appliqué le pigment {m_Pigment.m_PigmentName} à la cuve de teinture. La cuve n'a plus de charges.");
+						m_Pigment.Delete();
+					}
+					else
+					{
+						from.SendMessage("Cette cuve de teinture n'a plus de charges.");
+					}
+				}
 				else
 				{
-					from.SendMessage("Ce n'est pas une cuve de teinture spéciale.");
+					from.SendMessage("Ce n'est pas une cuve de teinture.");
 				}
 			}
 		}
 
-
-
-public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
 			writer.Write(0); // version
@@ -83,6 +102,8 @@ public override void Serialize(GenericWriter writer)
 			m_PigmentName = reader.ReadString();
 		}
 	}
+
+
 
 
 // Bleu

@@ -101,7 +101,7 @@ namespace Server.Items
 	public class GolemCendreFeu : BaseGolemAsh
 	{
 		public override string AshName => "Cendres Élémentaires de Feu";
-		public override int AshHue => 1161;
+		public override int AshHue => 2952;
 
 		[Constructable]
 		public GolemCendreFeu() : base() { }
@@ -126,7 +126,7 @@ namespace Server.Items
 	public class GolemCendreEau : BaseGolemAsh
 	{
 		public override string AshName => "Cendres Élémentaires d'Eau";
-		public override int AshHue => 1156;
+		public override int AshHue => 2733;
 
 		[Constructable]
 		public GolemCendreEau() : base() { }
@@ -151,7 +151,7 @@ namespace Server.Items
 	public class GolemCendreGlace : BaseGolemAsh
 	{
 		public override string AshName => "Cendres Élémentaires de Glace";
-		public override int AshHue => 1152;
+		public override int AshHue => 2988;
 
 		[Constructable]
 		public GolemCendreGlace() : base() { }
@@ -176,7 +176,7 @@ namespace Server.Items
 	public class GolemCendrePoison : BaseGolemAsh
 	{
 		public override string AshName => "Cendres Élémentaires de Poison";
-		public override int AshHue => 1193;
+		public override int AshHue => 2971;
 
 		[Constructable]
 		public GolemCendrePoison() : base() { }
@@ -201,7 +201,7 @@ namespace Server.Items
 	public class GolemCendreSang : BaseGolemAsh
 	{
 		public override string AshName => "Cendres Élémentaires de Sang";
-		public override int AshHue => 1194;
+		public override int AshHue => 2958;
 
 		[Constructable]
 		public GolemCendreSang() : base() { }
@@ -226,7 +226,7 @@ namespace Server.Items
 	public class GolemCendreSylvestre : BaseGolemAsh
 	{
 		public override string AshName => "Cendres Élémentaires Sylvestres";
-		public override int AshHue => 1190;
+		public override int AshHue => 2949;
 
 		[Constructable]
 		public GolemCendreSylvestre() : base() { }
@@ -276,7 +276,7 @@ namespace Server.Items
 	public class GolemCendreVent : BaseGolemAsh
 	{
 		public override string AshName => "Cendres Élémentaires de Vent";
-		public override int AshHue => 2834;
+		public override int AshHue => 2794;
 
 		[Constructable]
 		public GolemCendreVent() : base() { }

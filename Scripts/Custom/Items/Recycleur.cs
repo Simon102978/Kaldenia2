@@ -82,6 +82,11 @@ namespace Server.Items
                     BaseShoes shoes = (BaseShoes)targeted;
                     resource = shoes.Resource;
                 }
+				else if (targeted is BaseJewel)
+				{
+					BaseJewel jewel = (BaseJewel)targeted;
+					resource = jewel.Resource;
+				}
 				else
                 {
                     from.SendMessage( "Cet article ne peut pas être recyclé.");
