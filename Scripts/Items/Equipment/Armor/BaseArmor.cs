@@ -2463,7 +2463,8 @@ namespace Server.Items
 				AddQuestItemProperty(list);
 
 			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
-
+			if (this is BaseArmor)
+			list.Add($"Enchantement: {Enchantement}/3");
 
 			if (m_GorgonLenseCharges > 0)
                 list.Add(1112590, m_GorgonLenseCharges.ToString()); //Gorgon Lens Charges: ~1_val~         

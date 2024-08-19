@@ -37,7 +37,8 @@ namespace Server.Misc
 			0x515, 0x516,
 			0x517, 0x518,
 			0x31F4, 0x31F9,
-			0x31FA, 0x31FB
+			0x31FA, 0x31FB,
+			0x31F5
 		};
 
 		public static int[] DirtTiles = new int[]
@@ -114,6 +115,10 @@ namespace Server.Misc
 			{
 				m_From.SendMessage( "You must be standing in your house to place this");
 				return false;
+			}
+			if (m_Map.Tiles.GetLandTile(loc.X, loc.Y).ID == 0x31F5)
+			{
+				return true;
 			}
 
 			if ( !AllowPlayerYards )
@@ -220,6 +225,10 @@ namespace Server.Misc
 
 		public static bool ValidateHouseTiles( Map map, int x, int y )
 		{
+			int landTileID = map.Tiles.GetLandTile(x, y).ID & 0x3FFF;
+			if (landTileID == 0x31F5)
+				return true;
+
 			bool ground = false;
 
             StaticTile[] tiles = map.Tiles.GetStaticTiles(x, y, true);

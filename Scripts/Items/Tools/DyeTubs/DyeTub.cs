@@ -303,7 +303,39 @@ namespace Server.Items
 						}
 					}
 
-					else if	(item is FurnitureDyeTub fdye )
+						else if (item is BaseClothing || item is BaseHat || item is Chapelet)
+						{
+							if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
+							{
+								from.SendLocalizedMessage(500446); // That is too far away.
+							}
+							else if (!item.Movable)
+							{
+								from.SendLocalizedMessage(1042419); // You may not dye items which are locked down.
+							}
+							else if (item.Parent is Mobile)
+							{
+								from.SendLocalizedMessage(500861); // Can't Dye clothing that is being worn.
+							}
+							else
+							{
+								item.Hue = m_Tub.DyedHue;
+								from.PlaySound(0x23E);
+
+								if (m_Tub.Charges > 1)
+								{
+									m_Tub.Charges -= 1;
+								}
+								else
+								{
+									m_Tub.Delete();
+									from.AddToBackpack(new BacVide());
+									from.SendMessage("Votre bac de teinture n'a plus de charge.");
+								}
+							}
+						}
+
+						else if	(item is FurnitureDyeTub fdye )
 					{
 						if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
 						{

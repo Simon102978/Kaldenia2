@@ -1729,24 +1729,32 @@ namespace Server
                 {
                     item = Loot.RandomInstrument();
                 }
-           /*     else if (Type == typeof(Ambre)) // gem
-                {
-                    item = Loot.RandomGem();
-                }
-                else if (Type == typeof(BlueDiamant)) // rare gem
-                {
-                    item = Loot.RandomRareGem();
-                }*/
-                else
-                {
-                    item = Activator.CreateInstance(Type) as Item;
+				/*     else if (Type == typeof(Ambre)) // gem
+					 {
+						 item = Loot.RandomGem();
+					 }
+					 else if (Type == typeof(BlueDiamant)) // rare gem
+					 {
+						 item = Loot.RandomRareGem();
+					 }*/
+				else
+				{
+					if (Type.IsAbstract)
+					{
+						Console.WriteLine($"Tentative de création d'une instance d'une classe abstraite : {Type.FullName}");
+						return null;
+					}
+
+					item = Activator.CreateInstance(Type) as Item;
                 }
 
                 return item;
             }
             catch (Exception e)
             {
-                Diagnostics.ExceptionLogging.LogException(e);
+				Console.WriteLine($"Erreur lors de la création de l'objet de type {Type.FullName}: {e.Message}");
+				Console.WriteLine($"Stack Trace: {e.StackTrace}");
+				Diagnostics.ExceptionLogging.LogException(e);
             }
 
             return null;

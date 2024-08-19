@@ -977,8 +977,12 @@ namespace Server.Mobiles
                 if (HoldGold > 0)
                     return;
             }
-
-            Destroy(true);
+			Item contratVendeur = new ContractOfEmployment();
+			if (from.Backpack != null && !from.Backpack.TryDropItem(from, contratVendeur, false))
+			{
+				contratVendeur.MoveToWorld(from.Location, from.Map);
+			}
+			Destroy(true);
         }
 
         public void Rename(Mobile from)

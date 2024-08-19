@@ -282,26 +282,26 @@ namespace Server.Engines.Craft
 
 
 
-			index = AddCraft(typeof(JukariBurnPoiltice), 1116349, "Potion de résistances", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
+			index = AddCraft(typeof(JukariBurnPoiltice), "Autres", "Potion de résistances", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(SangAnguille), "Sang D'anguille", 5, "Vous n'avez pas suffisament de sang d'anguille");
 
 
-			index = AddCraft(typeof(KurakAmbushersEssence), 1116349, "Essence de Kurak", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
+			index = AddCraft(typeof(KurakAmbushersEssence), "Autres", "Essence de Kurak", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(DentAlligator), "Dent Alligator", 5, "Vous n'avez pas suffisament de dents d'alligator");
 
 
-			index = AddCraft(typeof(EodonianPotion), 1116349, "Brassage de Barako", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
+			index = AddCraft(typeof(EodonianPotion), "Autres", "Brassage de Barako", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(WhitePearl), 1044360, 5, 1044368);
 			
 
-			index = AddCraft(typeof(UraliTranceTonic), 1116349, "Tonic de Urali", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
+			index = AddCraft(typeof(UraliTranceTonic), "Autres", "Tonic de Urali", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(OeufThon), "Oeuf de Thon", 5, "Vous n'avez pas suffisament d'oeuf de Thon");
 			
-			index = AddCraft(typeof(SakkhraProphylaxisPotion), 1116349, "Potion de Sakkhra", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
+			index = AddCraft(typeof(SakkhraProphylaxisPotion), "Autres", "Potion de Sakkhra", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(GraisseSole), "Graisse de Sole", 5, "Vous n'avez pas suffisament de graisse de sole");
 			
@@ -543,7 +543,283 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(PlumesSaliva), "Plume de saliva", 3, "Vous n'avez pas suffisament de plumes de Saliva");
 		    AddRes(index, typeof(DentDeLion), "Dent-de-lion", 3, "Il Vous manque :  Dent-de-lion");
           	AddRes(index, typeof(Fougere), "Fougère", 3, "Il Vous manque : Fougere");
-            #endregion
+			#endregion
+			#region Pigments
+
+			// Bleu
+			index = AddCraft(typeof(BleuOceanPigment), "Pigments", "Bleu océan", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(GolemCendreEau), "Cendre élémentaire d'eau", 5, "Il vous faut de la cendre élémentaire d'eau");
+
+			index = AddCraft(typeof(BleuFruitePigment), "Pigments", "Bleu fruité", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Blackberry), "Mûres", 5, "Il vous faut des Mûres");
+
+			index = AddCraft(typeof(BleuAzurPigment), "Pigments", "Bleu azur", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(GolemCendreGlace), "Cendre élémentaire de glace", 5, "Il vous faut de la cendre élémentaire de glace");
+
+			index = AddCraft(typeof(BleuCobaltPigment), "Pigments", "Bleu Cobalt", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(GlaciasIngot), "Lingot de Glacias", 5, "Il vous faut des lingots de glacias");
+
+			index = AddCraft(typeof(BleuElectriquePigment), "Pigments", "Bleu électrique", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(SaphirEtoile), "Saphir étoilé", 5, "Il vous faut des saphirs étoilés");
+
+			// Vert
+			index = AddCraft(typeof(VertForestierPigment), "Pigments", "Vert forestier", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(CheneBoard), "Planche de chêne", 5, "Il vous faut des planches de chêne");
+
+			index = AddCraft(typeof(VertMoussePigment), "Pigments", "Vert mousse", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(CedreBoard), "Planche de cèdre", 5, "Il vous faut des planches de cèdre");
+
+			index = AddCraft(typeof(VertJadePigment), "Pigments", "Vert jade", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(DurianIngot), "Lingot de Durian", 5, "Il vous faut du durian");
+
+			index = AddCraft(typeof(VertBouteillePigment), "Pigments", "Vert Bouteille", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(GolemCendrePoison), "Cendre élémentaire de poison", 5, "Il vous faut de la cendre élémentaire de poison");
+
+			index = AddCraft(typeof(VertLimePigment), "Pigments", "Vert lime", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Emeraude), "Émeraude", 5, "Il vous faut des émeraudes");
+
+			// Jaune
+			index = AddCraft(typeof(JauneImperialPigment), "Pigments", "Jaune impérial", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Lemon), "Citron", 5, "Il vous faut des citrons");
+
+			index = AddCraft(typeof(JauneSablePigment), "Pigments", "Jaune sable", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(DentDeLion), "Dent de lion", 5, "Il vous faut des dents de lion");
+
+			index = AddCraft(typeof(JauneMaisPigment), "Pigments", "Jaune maïs", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Corn), "Maïs", 5, "Il vous faut du maïs");
+
+			index = AddCraft(typeof(JauneCanariPigment), "Pigments", "Jaune canari", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Citrine), "Citrine", 5, "Il vous faut des citrines");
+
+			index = AddCraft(typeof(JauneDOrPigment), "Pigments", "Jaune d'or", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Gold), "Pièces d'or", 500, "Il vous faut 500 pièces d'or");
+
+			// Orange
+			index = AddCraft(typeof(OrangeCendrePigment), "Pigments", "Orange cendré", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(GolemCendreEau), "Cendre élémentaire de feu", 5, "Il vous faut de la cendre élémentaire de feu");
+
+			index = AddCraft(typeof(OrangeRustiquePigment), "Pigments", "Orange rustique", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Carrot), "Carotte", 5, "Il vous faut des carottes");
+
+			index = AddCraft(typeof(OrangeEpicePigment), "Pigments", "Orange épicé", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Safran), "Safran", 5, "Il vous faut du safran");
+
+			index = AddCraft(typeof(OrangeSanguinePigment), "Pigments", "Orange sanguine", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(GeuleDeDragon), "Gueule de dragon", 5, "Il vous faut des gueules de dragon");
+
+			index = AddCraft(typeof(OrangeBrulePigment), "Pigments", "Orange brûlé", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Ambre), "Ambre", 5, "Il vous faut de l'ambre");
+
+			// Rouge
+			index = AddCraft(typeof(RougeBriquePigment), "Pigments", "Rouge brique", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Camomille), "Camomille", 5, "Il vous faut de la camomille");
+
+			index = AddCraft(typeof(RougeCerisePigment), "Pigments", "Rouge cerise", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Beet), "Betterave", 5, "Il vous faut des betteraves");
+
+			index = AddCraft(typeof(RougeGrenatPigment), "Pigments", "Rouge grenat", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Tulipe), "Tulipe", 5, "Il vous faut des tulipes");
+
+			index = AddCraft(typeof(RougeAntiquePigment), "Pigments", "Rouge antique", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(DemoniaqueBone), "Os démoniaque", 5, "Il vous faut des os démoniaques");
+
+			index = AddCraft(typeof(RougeEcarlatePigment), "Pigments", "Rouge écarlate", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Rubis), "Rubis", 5, "Il vous faut des rubis");
+
+			// Mauve
+			index = AddCraft(typeof(MauveLavandePigment), "Pigments", "Mauve lavande", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Lilas), "Lilas", 5, "Il vous faut des lilas");
+
+			index = AddCraft(typeof(MauvePolairePigment), "Pigments", "Mauve polaire", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Ombrella), "Ombrella", 5, "Il vous faut des ombrellas");
+
+			index = AddCraft(typeof(MauveGlacePigment), "Pigments", "Mauve glacé", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(BorealeIngot), "Boréal", 5, "Il vous faut du boréal");
+
+			index = AddCraft(typeof(VieuxMauvePigment), "Pigments", "Vieux mauve", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Avocado), "Avocat", 5, "Il vous faut des avocats");
+
+			index = AddCraft(typeof(MauveIntensePigment), "Pigments", "Mauve intense", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Indigo), "Indigo", 5, "Il vous faut de l'indigo");
+
+			// Rose
+			index = AddCraft(typeof(RoseThePigment), "Pigments", "Rose thé", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(RoseSauvage), "Rose sauvage", 5, "Il vous faut des roses sauvages");
+
+			index = AddCraft(typeof(RoseTremierePigment), "Pigments", "Rose trémière", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(RoseTremiere), "Rose trémière", 5, "Il vous faut des roses trémières");
+
+			index = AddCraft(typeof(RoseFoncePigment), "Pigments", "Rose foncé", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Cranberry), "Canneberge", 5, "Il vous faut des canneberges");
+
+			index = AddCraft(typeof(RoseTenebreuxPigment), "Pigments", "Rose ténébreux", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Cramelia), "Cramelia", 5, "Il vous faut des cramelias");
+
+			index = AddCraft(typeof(FuchsiaPigment), "Pigments", "Fuchsia", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Dahlia), "Dahlia", 5, "Il vous faut des dahlias");
+
+			// Brun/Beige
+			index = AddCraft(typeof(BrunTaupePigment), "Pigments", "Brun taupe", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(BlackRose2), "Rose noire", 5, "Il vous faut des roses noires");
+
+			index = AddCraft(typeof(BeigeNaturelPigment), "Pigments", "Beige naturel", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(ErableBoard), "Planche d'érable", 5, "Il vous faut des planches d'érable");
+
+			index = AddCraft(typeof(BeigeChampagnePigment), "Pigments", "Beige champagne", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(KhandariumIngot), "Lingot de Khandarium", 5, "Il vous faut du khandarium");
+
+			index = AddCraft(typeof(BeigePoussiereuxPigment), "Pigments", "Beige poussiéreux", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(AbyssiumIngot), " Lingot d'Abyssium", 5, "Il vous faut de l'abyssium");
+
+			index = AddCraft(typeof(BrunDeSiennePigment), "Pigments", "Brun de sienne", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(GolemCendreTerre), "Cendre élémentaire de terre", 5, "Il vous faut de la cendre élémentaire de terre");
+
+			// Noir/Blanc
+			index = AddCraft(typeof(BlancVieillitPigment), "Pigments", "Blanc vieillit", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillage");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(LithiarIngot), "Lingot de Lithiar", 5, "Il vous faut des lingots de Lithiar");
+
+
+			// Noir/Blanc (suite)
+			index = AddCraft(typeof(IvoirePigment), "Pigments", "Ivoire", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(DentAlligator), "Dent d'alligator", 5, "Il vous faut des dents d'alligator");
+
+			index = AddCraft(typeof(ChauxPigment), "Pigments", "Chaux", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Tourmaline), "Tourmaline", 5, "Il vous faut des tourmalines");
+
+			index = AddCraft(typeof(NeigeViolaceePigment), "Pigments", "Neige violacée", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Givrelle), "Givrelle", 5, "Il vous faut des givrelles");
+
+			index = AddCraft(typeof(AlbatrePigment), "Pigments", "Albâtre", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(ArgentIngot), "Lingot d'argent", 5, "Il vous faut des lingots d'argent");
+
+			index = AddCraft(typeof(BlancPerlePigment), "Pigments", "Blanc perle", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Lys), "Lys", 5, "Il vous faut des lys");
+
+			index = AddCraft(typeof(NoirPrunePigment), "Pigments", "Noir prune", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(EbeneBoard), "Planche d'ébène", 5, "Il vous faut des planches d'ébène");
+
+			// Bicolor
+			index = AddCraft(typeof(TerreDeSiennePigment), "Pigments", "Terre de sienne", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Ginseng), "Ginseng", 5, "Il vous faut du ginseng");
+
+			index = AddCraft(typeof(AntiquePigment), "Pigments", "Antique", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(Fougere), "Fougère", 5, "Il vous faut des fougères");
+
+			index = AddCraft(typeof(ChartreusePigment), "Pigments", "Chartreuse", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(VeninAraigneeNoire), "Venin d'araignée noire", 5, "Il vous faut du venin d'araignée noire");
+
+			index = AddCraft(typeof(FinDuMondePigment), "Pigments", "Fin du monde", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(GolemCendreFeu), "Cendre volcanique", 5, "Il vous faut de la cendre volcanique");
+
+			index = AddCraft(typeof(AuroreBorealePigment), "Pigments", "Aurore boréale", 85, 135.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
+			AddRes(index, typeof(BlackPearl), "Perle noire", 5, "Il vous faut des perles noires");
+
+			#endregion
+
 		}
 	}
 }

@@ -7,7 +7,7 @@
 		{
 			Name = "Marchandises";
 			Hue = 542;
-			Weight = 0.3;
+			Weight = 0.1;
 			Stackable = true;
 		}
 

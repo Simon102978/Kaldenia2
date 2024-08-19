@@ -77,9 +77,20 @@ namespace Server.Items
 			Weight = 2.0;
 			Name = "Chapelet";
 			Layer = Layer.Waist;
+			
 		}
 
-		public Chapelet(Serial serial)
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
+		}
+	
+
+	public Chapelet(Serial serial)
 				: base(serial)
 
 		{
