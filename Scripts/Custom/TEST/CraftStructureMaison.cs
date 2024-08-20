@@ -11,7 +11,7 @@ namespace Server.Items
 		private bool m_Used;
 
 		[Constructable]
-		public CopyToolbox() : base(0x1EB8)
+		public CopyToolbox() : base(0x1EBA)
 		{
 			Name = "Boîte à outils de Charpente";
 			m_Used = false;

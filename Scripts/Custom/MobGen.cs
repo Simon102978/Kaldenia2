@@ -133,7 +133,6 @@ namespace Server.Scripts.Commands
 						sb.AppendLine($"\t\t\tTamable = true;");
 						sb.AppendLine($"\t\t\tControlSlots = {creature.ControlSlots};");
 						sb.AppendLine($"\t\t\tMinTameSkill = {Math.Round(creature.MinTameSkill, 1).ToString(System.Globalization.CultureInfo.InvariantCulture)};");
-						sb.AppendLine("\t\t\tFavoriteFood = FoodType.Fish | FoodType.Meat | FoodType.FruitsAndVegies | FoodType.Eggs;");
 					}
 
 					if (creature.BodyValue == 400 || creature.BodyValue == 401)

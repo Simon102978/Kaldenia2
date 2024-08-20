@@ -150,7 +150,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(CeintureBaril), "Ceintures", "Ceinture Barril", 60.0, 80.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Ceinture2), "Ceintures", "Ceinture boucle carrée", 60.0, 80.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			index = AddCraft(typeof(Ceinture4), "Ceintures", "Ceinture à pochettes", 65.0, 85.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
-			index = AddCraft(typeof(Ceinture7), "Ceintures", "Ceinture en tissu", 70.0, 90.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");							
+			index = AddCraft(typeof(Ceinture7), "Ceintures", "Ceinture en tissus", 70.0, 90.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");							
 			#endregion
 
 

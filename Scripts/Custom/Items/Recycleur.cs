@@ -87,6 +87,11 @@ namespace Server.Items
 					BaseJewel jewel = (BaseJewel)targeted;
 					resource = jewel.Resource;
 				}
+				else if (targeted is BaseClothing)
+				{
+					BaseClothing clothing = (BaseClothing)targeted;
+					resource = clothing.Resource;
+				}
 				else
                 {
                     from.SendMessage( "Cet article ne peut pas être recyclé.");
@@ -131,7 +136,6 @@ namespace Server.Items
 
 
 
-
 					case CraftResource.LupusLeather:     m_CraftSystem = DefTailoring.CraftSystem; break;
 					case CraftResource.ReptilienLeather:	        m_CraftSystem = DefTailoring.CraftSystem; break;
 					case CraftResource.GeantLeather:	    m_CraftSystem = DefTailoring.CraftSystem; break;
@@ -142,7 +146,8 @@ namespace Server.Items
                     case CraftResource.AncienLeather:        m_CraftSystem = DefTailoring.CraftSystem; break;
                     case CraftResource.RegularLeather:       m_CraftSystem = DefTailoring.CraftSystem; break;
 
-                    case CraftResource.RegularBone:        m_CraftSystem = DefBoneTailoring.CraftSystem; break;
+
+					case CraftResource.RegularBone:        m_CraftSystem = DefBoneTailoring.CraftSystem; break;
 					case CraftResource.LupusBone:	            m_CraftSystem = DefBoneTailoring.CraftSystem; break;
 					case CraftResource.ReptilienBone:	        m_CraftSystem = DefBoneTailoring.CraftSystem; break;
 					case CraftResource.GeantBone:	        m_CraftSystem = DefBoneTailoring.CraftSystem; break;

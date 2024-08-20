@@ -6,6 +6,8 @@ using Server.Items;
 using Server.Mobiles;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+
 #endregion
 
 namespace Server.Engines.Craft
@@ -1404,7 +1406,7 @@ namespace Server.Engines.Craft
 
 		public double GetCraftBonus(Mobile from)
 		{
-			if (from is PlayerMobile player)
+			if (from is CustomPlayerMobile player)
 			{
 				int hungerLevel = player.Hunger;
 				int thirstLevel = player.Thirst;
@@ -1413,10 +1415,19 @@ namespace Server.Engines.Craft
 				double craftBonus = (hungerLevel + thirstLevel) / 40.0; // 1.0 à 20/20
 
 				// Multiplier par 5 pour obtenir un bonus maximal de 5x
-				return 1 + (2 * craftBonus); // 1 à 5x
+				double baseBonus = 1 + (2 * craftBonus); // 1 à 5x
+
+				// Ajouter le bonus si la classe est un métier de craft
+				if (HasMatchingClassAndJob(player))
+				{
+					baseBonus *= 2; // Double le bonus si la classe est un métier de craft
+				}
+
+				return baseBonus;
 			}
 			return 1.0; // Pas de bonus pour les non-joueurs
 		}
+
 
 		public double GetLegendaryChance(CraftSystem system, double successChance, Mobile from)
 		{
@@ -1473,8 +1484,26 @@ namespace Server.Engines.Craft
 				// Appliquer le bonus de craft
 				exceptionalChance *= GetCraftBonus(from);
 			}
-			return Math.Min(exceptionalChance, 0.50); // Max 50%
+			return Math.Min(exceptionalChance, 0.50); // Max 50
 		}
+
+		private bool HasMatchingClassAndJob(CustomPlayerMobile player)
+		{
+			string[] craftJobs = new string[]
+			{
+		
+		"Historien Ingénieur", "Historien Styliste", "Historien Épicier",
+		"Ingénieur Styliste", "Ingénieur Épicier", "Styliste Épicier",
+		"Historien Ingénieur Styliste", "Historien Ingénieur Épicier",
+		"Historien Épicier Styliste", "Ingénieur Styliste Épicier"
+			};
+
+			// Vérifier si la classe du joueur est l'un des métiers de craft
+			return craftJobs.Contains(player.Metier.ToString());
+		}
+
+
+
 
 		public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills, int maxAmount)
 		{

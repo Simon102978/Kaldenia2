@@ -225,56 +225,200 @@ namespace Server.Items
 			Type fishType = null;
 			double chance = Utility.RandomDouble();
 
-			// Vérifier la compétence de pêche
 			from.CheckSkill(SkillName.Fishing, 0, 100);
 
 			double fishingSkill = from.Skills[SkillName.Fishing].Value;
 
-			// Calculer les chances basées sur le skill
 			double chanceSpecificFish = (fishingSkill / 10.0) + 5.0;
 			double chanceNormalFish = (fishingSkill / 5.0) + 20.0;
 
-			// Vérifier si le joueur peut pécher une carte au trésor
-			bool canFishTreasureMap = fishingSkill >= 50 && from.Map == Map.Felucca;
-			if (canFishTreasureMap && chance < 0.005) // 0.5% de chance
+			// Logique pour pêcher un poisson
+			if (m_Bait != Bait.Aucun && m_Charge > 0)
 			{
-				// Pécher une carte au trésor
-				int level = Utility.RandomMinMax(1, 3); // Niveau 1, 2 ou 3
-				TreasureMap treasureMap = new TreasureMap(level, from.Map);
-				if (from.AddToBackpack(treasureMap))
+				if (chance * 100 < chanceSpecificFish)
 				{
-					from.SendMessage("Vous avez pêché une carte au trésor !");
-					return; // Terminer la méthode ici, pas besoin de pécher un poisson
+					if (baitFishMap.TryGetValue(m_Bait, out Type[] fishTypes))
+					{
+						fishType = fishTypes[0];
+					}
 				}
-				else
+				else if (chance * 100 < (chanceSpecificFish + chanceNormalFish))
 				{
-					treasureMap.Delete(); // Supprimer la carte si elle ne peut pas étre ajoutée au sac
-					from.SendMessage("Vous avez pêché une carte au trésor, mais votre sac est plein. La carte est perdue.");
+					fishType = typeof(Fish);
 				}
-			}
-
-			// Pêcher une skillcard
-
-			bool canFishSkillCard = fishingSkill >= 50 && from.Map == Map.Felucca;
-			if (canFishSkillCard && chance < 0.05) // 5% de chance
-			{
-				SkillCard skillCard = new SkillCard();
-
-			if (from.AddToBackpack(skillCard))
-			{
-				from.SendMessage("Vous avez pêché une carte mystérieuse !");
-				return; // Terminer la méthode ici, pas besoin de pêcher un poisson
+				UseBait();
 			}
 			else
 			{
-				skillCard.Delete(); // Supprimer la skillcard si elle ne peut pas être ajoutée au sac
-				from.SendMessage("Vous avez pêché une carte mystérieuse, mais votre sac est plein. La skillcard est perdue.");
+				if (chance * 100 < chanceNormalFish)
+				{
+					fishType = typeof(Fish);
+				}
 			}
 
-				// Pêcher un objet aléatoire avec 10% de chance
-
-				var possibleItems = new[]
+			// Pêcher le poisson
+			if (fishType != null)
+			{
+				Item harvested = Activator.CreateInstance(fishType) as Item;
+				if (harvested != null)
 				{
+					AddFishToInventory(from, harvested, fishType);
+				}
+			}
+			else
+			{
+				from.SendMessage("Vous n'avez rien attrapé cette fois-ci.");
+			}
+
+			// Chance de pêcher des objets bonus
+			TryFishBonusItem(from, fishingSkill);
+
+			// Notifier le joueur du statut de l'appât et de la charge
+			NotifyBaitStatus(from);
+		}
+
+		private void AddFishToInventory(Mobile from, Item harvested, Type fishType)
+		{
+			int weight = 1;
+
+			if (harvested is RareFish rarefish && FishInfo.IsRareFish(rarefish.GetType()))
+			{
+				rarefish.Fisher = from;
+				rarefish.DateCaught = DateTime.Now;
+				rarefish.Stackable = false;
+				rarefish.Weight = Math.Max(1, 200 - (int)Math.Sqrt(Utility.RandomMinMax(0, 40000)));
+				weight = (int)rarefish.Weight;
+			}
+
+			if (from.Backpack.TryDropItem(from, harvested, false))
+			{
+				if (harvested is RareFish)
+				{
+					from.SendMessage($"Vous attrapez un {fishType.Name} pesant {weight} stones!");
+				}
+				else
+				{
+					from.SendMessage($"Vous attrapez un {fishType.Name}!");
+				}
+				from.CheckSkill(SkillName.Fishing, 0, 100);
+				if (harvested is RareFish)
+				{
+					from.CheckSkill(SkillName.Fishing, 0, 100);
+				}
+			}
+			else
+			{
+				harvested.MoveToWorld(from.Location, from.Map);
+				from.SendMessage($"Votre sac est plein. Le {fishType.Name} tombe à vos pieds.");
+			}
+		}
+
+		private void TryFishBonusItem(Mobile from, double fishingSkill)
+		{
+			// Vérifier si le joueur peut pêcher une carte au trésor
+			if (fishingSkill >= 50 && from.Map == Map.Felucca && Utility.RandomDouble() < 0.005)
+			{
+				FishTreasureMap(from);
+			}
+
+			// Pêcher une skillcard
+			if (fishingSkill >= 50 && from.Map == Map.Felucca && Utility.RandomDouble() < 0.05)
+			{
+				FishSkillCard(from);
+			}
+
+			// Pêcher un objet aléatoire avec 10% de chance
+			if (Utility.RandomDouble() < 0.10)
+			{
+				FishRandomItem(from);
+			}
+		}
+
+		private void FishTreasureMap(Mobile from)
+		{
+			int level = Utility.RandomMinMax(1, 3);
+			TreasureMap treasureMap = new TreasureMap(level, from.Map);
+			if (from.AddToBackpack(treasureMap))
+			{
+				from.SendMessage("Vous avez aussi pêché une carte au trésor !");
+			}
+			else
+			{
+				treasureMap.Delete();
+				from.SendMessage("Vous avez aussi pêché une carte au trésor, mais votre sac est plein. La carte est perdue.");
+			}
+		}
+
+		private void FishSkillCard(Mobile from)
+		{
+			SkillCard skillCard = new SkillCard();
+			if (from.AddToBackpack(skillCard))
+			{
+				from.SendMessage("Vous avez aussi pêché une carte mystérieuse !");
+			}
+			else
+			{
+				skillCard.Delete();
+				from.SendMessage("Vous avez aussi pêché une carte mystérieuse, mais votre sac est plein. La skillcard est perdue.");
+			}
+		}
+
+		private void FishRandomItem(Mobile from)
+		{
+			var (itemType, itemName) = possibleItems[Utility.Random(possibleItems.Length)];
+			Item item = (Item)Activator.CreateInstance(itemType);
+
+			if (from.AddToBackpack(item))
+			{
+				from.SendMessage($"Vous avez aussi pêché un(e) {itemName} !");
+			}
+			else
+			{
+				item.Delete();
+				from.SendMessage($"Vous avez aussi pêché un(e) {itemName}, mais votre sac est plein. L'objet est perdu.");
+			}
+		}
+
+		private void NotifyBaitStatus(Mobile from)
+		{
+			if (m_Bait != Bait.Aucun && m_Charge > 0)
+			{
+				from.SendMessage($"[{m_Bait} / {m_Charge} charge{(m_Charge > 1 ? "s" : "")}]");
+			}
+			else
+			{
+				from.SendMessage("[ aucun appât ]");
+			}
+		}
+
+
+
+		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+		{
+			if (from.Alive && m_Bait != Bait.Aucun && m_Charge > 0)
+			{
+				list.Add(new RemoveBaitEntry(from, this));
+			}
+			base.GetContextMenuEntries(from, list);
+
+			BaseHarvestTool.AddContextMenuEntries(from, this, list, CustomFishing.System);
+		}
+
+		public override void AddCraftedProperties(ObjectPropertyList list)
+		{
+			base.AddCraftedProperties(list);
+
+			if (m_Bait != Bait.Aucun && m_Charge > 0)
+			{
+				list.Add($"[{m_Bait} / {m_Charge} charge{(m_Charge > 1 ? "s" : "")}]");
+			}
+			else
+			{
+				list.Add("[ aucun appât ]");
+			}
+}
+		private static readonly (Type, string)[] possibleItems = new[]
+	{
 	(typeof(CoquillageHautsFonds), "Coquillage des hauts fonds"),
 	(typeof(CoquillageArcEnCiel), "Coquillage arc-en-ciel"),
 	(typeof(CoquilleDoree), "Coquille dorée"),
@@ -305,165 +449,9 @@ namespace Server.Items
 	(typeof(BaseHighseasFish), "Poisson des bas fonds")
 };
 
-				// 10% de chance de pêcher un objet spécial
-				if (Utility.RandomDouble() < 0.10)
-				{
-					// Sélectionner un objet aléatoire
-					var (itemType, itemName) = possibleItems[Utility.Random(possibleItems.Length)];
-
-					// Créer l'objet
-					Item item = (Item)Activator.CreateInstance(itemType);
-
-					if (from.AddToBackpack(item))
-					{
-						from.SendMessage($"Vous avez pêché un(e) {itemName} !");
-						return; // Terminer la méthode ici, pas besoin de pêcher un poisson
-					}
-					else
-					{
-						item.Delete(); // Supprimer l'objet s'il ne peut pas être ajouté au sac
-						from.SendMessage($"Vous avez pêché un(e) {itemName}, mais votre sac est plein. L'objet est perdu.");
-					}
-				}
-				else
-				{
-					from.SendMessage("Vous n'avez rien pêché de spécial cette fois-ci.");
-				}
 
 
-
-				// Logique pour pécher un poisson normal
-				if (m_Bait != Bait.Aucun && m_Charge > 0)
-			{
-				if (chance * 100 < chanceSpecificFish) // Chance basée sur le skill de pécher le poisson spécifique
-				{
-					if (baitFishMap.TryGetValue(m_Bait, out Type[] fishTypes))
-					{
-						fishType = fishTypes[0];
-					}
-				}
-				else if (chance * 100 < (chanceSpecificFish + chanceNormalFish)) // Chance additionnelle de pécher un poisson normal
-				{
-					fishType = typeof(Fish);
-				}
-				// Le reste résulte en aucune prise
-				// Consommer l'appât
-				UseBait();
-			}
-			else
-			{
-				// Sans appât, uniquement la chance de pécher un poisson normal
-				if (chance * 100 < chanceNormalFish)
-				{
-					fishType = typeof(Fish);
-				}
-			}
-
-			if (fishType != null)
-			{
-				// Créer le poisson
-				Item harvested = Activator.CreateInstance(fishType) as Item;
-				if (harvested != null)
-				{
-					int weight = 1;
-
-					if (harvested is RareFish rarefish && FishInfo.IsRareFish(rarefish.GetType()))
-					{
-						rarefish.Fisher = from;
-						rarefish.DateCaught = DateTime.Now;
-						rarefish.Stackable = false;
-						rarefish.Weight = Math.Max(1, 200 - (int)Math.Sqrt(Utility.RandomMinMax(0, 40000)));
-						weight = (int)rarefish.Weight;
-					}
-					// Nous ne définissons plus de poids aléatoire pour les poissons non-rares
-
-					// Vérifier si le joueur peut porter le poisson
-					int currentWeight = from.TotalWeight;
-					int maxWeight = from.MaxWeight;
-					if (currentWeight + weight <= maxWeight)
-					{
-						if (from.Backpack.TryDropItem(from, harvested, false))
-						{
-							if (harvested is RareFish)
-							{
-								from.SendMessage($"Vous attrapez un {fishType.Name} pesant {weight} stones!");
-							}
-							else
-							{
-								from.SendMessage($"Vous attrapez un {fishType.Name}!");
-							}
-							from.CheckSkill(SkillName.Fishing, 0, 100);
-							if (harvested is RareFish)
-							{
-								from.CheckSkill(SkillName.Fishing, 0, 100);
-							}
-						}
-						else
-						{
-							harvested.MoveToWorld(from.Location, from.Map);
-							from.SendMessage($"Votre sac est plein. Le {fishType.Name} tombe à vos pieds.");
-						}
-					}
-					else
-					{
-						harvested.MoveToWorld(from.Location, from.Map);
-						from.SendMessage($"Le {fishType.Name} est trop lourd pour vous. Il tombe à vos pieds.");
-					}
-				}
-			}
-			else
-			{
-				from.SendMessage("Vous n'avez rien attrapé cette fois-ci.");
-			}
-
-			// Notifier le joueur du statut de l'appât et de la charge
-			if (m_Bait != Bait.Aucun && m_Charge > 0)
-			{
-				from.SendMessage($"[{m_Bait} / {m_Charge} charge{(m_Charge > 1 ? "s" : "")}]");
-			}
-			else
-			{
-				from.SendMessage("[ aucun appât ]");
-			}
-		}
-	}
-
-
-
-
-
-
-
-
-
-		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
-		{
-			if (from.Alive && m_Bait != Bait.Aucun && m_Charge > 0)
-			{
-				list.Add(new RemoveBaitEntry(from, this));
-			}
-			base.GetContextMenuEntries(from, list);
-
-			BaseHarvestTool.AddContextMenuEntries(from, this, list, CustomFishing.System);
-		}
-
-		public override void AddCraftedProperties(ObjectPropertyList list)
-		{
-			base.AddCraftedProperties(list);
-
-			if (m_Bait != Bait.Aucun && m_Charge > 0)
-			{
-				list.Add($"[{m_Bait} / {m_Charge} charge{(m_Charge > 1 ? "s" : "")}]");
-			}
-			else
-			{
-				list.Add("[ aucun appât ]");
-			}
-}
-	
-
-
-public LargeFishingPole(Serial serial) : base(serial)
+		public LargeFishingPole(Serial serial) : base(serial)
 		{
 		}
 

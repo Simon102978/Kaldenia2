@@ -19,7 +19,11 @@ namespace Server.Items
 			get { return m_MaxRange; }
 			set { m_MaxRange = value; }
 		}
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int FreezeDuration { get; set; } = Utility.RandomMinMax(2, 5); // Durée du gel en secondes
 
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int BleedDuration { get; set; } = Utility.RandomMinMax(3, 7); // Durée du saignement en secondes
 		public Fouet() : this(4)
 		{
 		}
@@ -84,67 +88,79 @@ namespace Server.Items
 			if (pm != null)
 			{
 				pm.RevealingAction();
-
-
-		/*		if (!pm.Mounted)
-					return;*/
-
 				SpellHelper.Turn(from, receveur);
 
+				double snooping = pm.Skills[SkillName.Snooping].Value;
+				double stealing = pm.Skills[SkillName.Stealing].Value;
+
+				double freezeChance = (snooping + stealing) / 400.0; // Max 50% chance at 100 in both skills
+				double bleedChance = (snooping + stealing) / 285.0; // Max 70% chance at 100 in both skills
+
+				if (receveur is BaseCreature bc && !(receveur is BaseHire))
+				{
+					// Appliquer l'effet de gel
+					if (Utility.RandomDouble() < freezeChance)
+					{
+						bc.Frozen = true;
+						Timer.DelayCall(TimeSpan.FromSeconds(FreezeDuration), () =>
+						{
+							if (bc != null && !bc.Deleted)
+							{
+								bc.Frozen = false;
+							}
+						});
+						from.SendMessage("Vous gelez votre cible !");
+						receveur.SendMessage("Vous êtes gelé !");
+					}
+
+					// Appliquer l'effet de saignement
+					if (Utility.RandomDouble() < bleedChance)
+					{
+						ApplyBleedEffect(bc);
+						from.SendMessage("Votre cible commence à saigner !");
+						receveur.SendMessage("Vous commencez à saigner !");
+					}
+				}
+
+				// Logique pour déranger le sort
+				if (receveur.Spell != null)
+				{
+					int spellDisruptChance = (int)((snooping + stealing) / 15) * 2;
+					if (receveur is PlayerMobile)
+						spellDisruptChance -= (int)(receveur.Skills[SkillName.Wrestling].Value * 0.15);
+
+					if (spellDisruptChance > Utility.Random(100))
+					{
+						receveur.Spell.OnCasterHurt();
+						from.SendMessage("Vous dérangez votre cible !");
+						Animation(from, receveur);
+					}
+				}
+
+				// Logique pour voler ou faire tomber l'arme
 				Item handOne = receveur.FindItemOnLayer(Layer.OneHanded);
 				Item handTwo = receveur.FindItemOnLayer(Layer.TwoHanded);
 
 				if (handTwo != null && handTwo is BaseArmor)
 					handTwo = null;
 
-				double snooping = pm.Skills.Snooping.Value;
-				double stealing = pm.Skills.Snooping.Value;
-
 				int chance_de_voler = (int)((snooping + stealing) / 20) * 2;
 				int chance = (int)((snooping + stealing) / 15) * 2;
 
-				bool goodtarget = true;       /* !(receveur is OrderGuard) && !(receveur is Copie) && !(receveur is Fetichisme);*/
-
-				if (receveur is BaseCreature && !(receveur is BaseHire))
+				if (handOne != null && handTwo == null)
 				{
-					goodtarget = false;
-				}
-
-
-				if (receveur.Spell != null)
-				{
-					if (receveur is PlayerMobile && ((PlayerMobile)receveur) != null)
-							chance -= (int)(receveur.Skills[SkillName.Wrestling].Value * 0.15);
-
-					if (chance > Utility.Random(100))
-					{
-						receveur.Spell.OnCasterHurt();
-						from.SendMessage("Vous dérangez votre cible !");
-						Animation(from, receveur);
-					}
-
-
-					
-					if (from is PlayerMobile)
-						AOS.Damage(receveur, from,10,100,0,0,0,0);
-				}
-				else if (handOne != null && handTwo == null)
-				{
-					if (goodtarget && chance_de_voler > Utility.Random(100))
+					if (chance_de_voler > Utility.Random(100))
 					{
 						if (from.AddToBackpack(handOne))
-						{
 							from.SendMessage("Vous volez l'arme de votre cible !");
-						}
 						else
 						{
 							handOne.MoveToWorld(from.Location);
 							from.SendMessage("Vous faites tomber l'arme de votre cible !");
 						}
-
 						Animation(from, receveur);
 					}
-					else if (goodtarget && chance > Utility.Random(100))
+					else if (chance > Utility.Random(100))
 					{
 						handOne.MoveToWorld(receveur.Location);
 						from.SendMessage("Vous faites tomber l'arme de votre cible !");
@@ -152,15 +168,10 @@ namespace Server.Items
 					}
 					else
 						from.SendMessage("Vous échouez à voler ou à faire tomber l'arme de votre cible !");
-
-					if (from is PlayerMobile)
-						AOS.Damage(receveur, from, 10, 100, 0, 0, 0, 0);
-					//AOS.Damage(receveur, from, (int)((PlayerMobile)from).Skills[SkillName.Wrestling].Value, 100);
-
 				}
 				else if (handOne == null && handTwo != null)
 				{
-					if (goodtarget && chance > Utility.Random(100))
+					if (chance > Utility.Random(100))
 					{
 						handTwo.MoveToWorld(receveur.Location);
 						from.SendMessage("Vous faites tomber l'arme de votre cible !");
@@ -168,21 +179,34 @@ namespace Server.Items
 					}
 					else
 						from.SendMessage("Vous échouez à faire tomber l'arme de votre cible !");
-
-					if (from is PlayerMobile)
-						AOS.Damage(receveur, from, 10, 100, 0, 0, 0, 0);
-					//	AOS.Damage(receveur, from, (int)((PlayerMobile)from).Skills[SkillName.Wrestling].Value, 100);
 				}
 				else
 				{
 					from.SendMessage("Vous ne parvenez pas à fouetter cette cible!");
 					receveur.PlaySound(0x238);
-
-					if (from is PlayerMobile)
-						AOS.Damage(receveur, from, 10, 100, 0, 0, 0, 0);
-					//AOS.Damage(receveur, from, (int)((PlayerMobile)from).Skills[SkillName.Wrestling].Value, 100);
 				}
+
+				// Appliquer les dégâts
+				if (from is PlayerMobile)
+					AOS.Damage(receveur, from, 10, 100, 0, 0, 0, 0);
+
+				// Animation finale
+				Animation(from, receveur);
 			}
+		}
+
+
+		private void ApplyBleedEffect(BaseCreature creature)
+		{
+			Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(2), BleedDuration / 2, () =>
+			{
+				if (!creature.Deleted && creature.Alive)
+				{
+					creature.Damage(Utility.RandomMinMax(1, 5));
+					creature.PlaySound(0x133);
+					creature.FixedParticles(0x377A, 244, 25, 9950, 31, 0, EffectLayer.Waist);
+				}
+			});
 		}
 
 		public void Animation(Mobile from, Mobile receveur)
