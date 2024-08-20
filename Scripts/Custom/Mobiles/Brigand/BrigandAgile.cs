@@ -95,6 +95,14 @@ namespace Server.Mobiles
         public override void AlterMeleeDamageTo(Mobile to, ref int damage)
 		{
 
+            if (to == null)
+            {
+                return;
+            }
+
+
+
+
             if (Utility.Random(10) < 2)
             {
                   Item toDisarm = to.FindItemOnLayer(Layer.OneHanded);
