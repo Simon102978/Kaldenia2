@@ -331,14 +331,14 @@ namespace Server.Custom
 		{
 			switch (ashType)
 			{
-				case GolemAsh.AshType.Feu: return 1161;
-				case GolemAsh.AshType.Eau: return 1156;
-				case GolemAsh.AshType.Glace: return 1152;
-				case GolemAsh.AshType.Poison: return 1193;
-				case GolemAsh.AshType.Sang: return 1194;
-				case GolemAsh.AshType.Sylvestre: return 1190;
+				case GolemAsh.AshType.Feu: return 2952;
+				case GolemAsh.AshType.Eau: return 2733;
+				case GolemAsh.AshType.Glace: return 2988;
+				case GolemAsh.AshType.Poison: return 2971;
+				case GolemAsh.AshType.Sang: return 2958;
+				case GolemAsh.AshType.Sylvestre: return 2949;
 				case GolemAsh.AshType.Terre: return 1175;
-				case GolemAsh.AshType.Vent: return -1;
+				case GolemAsh.AshType.Vent: return 2794;
 				default: return 0;
 			}
 		}
@@ -784,14 +784,14 @@ namespace Server.Custom
 		{
 			switch (ashType)
 			{
-				case GolemAsh.AshType.Feu: return 1161;
-				case GolemAsh.AshType.Eau: return 1156;
-				case GolemAsh.AshType.Glace: return 1152;
-				case GolemAsh.AshType.Poison: return 1193;
-				case GolemAsh.AshType.Sang: return 1194;
-				case GolemAsh.AshType.Sylvestre: return 1190;
+				case GolemAsh.AshType.Feu: return 2952;
+				case GolemAsh.AshType.Eau: return 2733;
+				case GolemAsh.AshType.Glace: return 2988;
+				case GolemAsh.AshType.Poison: return 2971;
+				case GolemAsh.AshType.Sang: return 2958;
+				case GolemAsh.AshType.Sylvestre: return 2949;
 				case GolemAsh.AshType.Terre: return 1175;
-				case GolemAsh.AshType.Vent: return -1;
+				case GolemAsh.AshType.Vent: return 2794;
 				default: return 0;
 			}
 		}

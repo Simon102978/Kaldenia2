@@ -4,6 +4,7 @@ using Server.Items;
 
 namespace Server.Items
 {
+	[Flipable(0x1718, 0x1540, 0x171A, 0x1717, 0xA3BE, 0xA350, 0xA34B, 0xA468, 0x278F)]
 	public class ChapeauArchimage : BaseHat
 	{
 		public override int BasePhysicalResistance => 0;
@@ -14,6 +15,7 @@ namespace Server.Items
 
 		public override int InitMinHits => 20;
 		public override int InitMaxHits => 30;
+
 
 		[Constructable]
 		public ChapeauArchimage() : this(0)

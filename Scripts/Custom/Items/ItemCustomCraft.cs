@@ -1,4 +1,5 @@
 ﻿using System;
+using Server.Targeting;
 
 namespace Server.Items
 {
@@ -1065,36 +1066,123 @@ public class RangementAlchimie : FurnitureContainer
 
 		}
 	}
-
 	public class BacVide : Item
 	{
+		private static int[] m_WaterTiles = new int[]
+		{
+		168, 169, 170, 171,
+		0xA8, 0xAB,
+		0x136, 0x137,
+		0xA8, 0xAB,
+		0x136, 0x137,
+		0x00A8, 0x0B44, 0x179A,
+		0x00A9, 0x0E7B, 0x179B,
+		0x00AA, 0x0FFA, 0x179C,
+		0x00AB, 0x154D,
+		0x0136, 0x1559,
+		0x0137, 0x1796,
+		0x0B41, 0x1797,
+		0x0B42, 0x1798,
+		0x0B43, 0x1799,
+		0xA8, 0xAB,
+		0x136, 0x137,
+		0x00A8, 0x0B44, 0x179A,
+		0x00A9, 0x0E7B, 0x179B,
+		0x00AA, 0x0FFA, 0x179C,
+		0x00AB, 0x154D,
+		0x0136, 0x1559,
+		0x0137, 0x1796,
+		0x0B41, 0x1797,
+		0x0B42, 0x1798,
+		0x0B43, 0x1799,
+		0x9967, 0x9968,
+		0xE7B, 0x154D,
+		39271, 39272,
+		3707, 5453,
+		};
+
 		[Constructable]
-		public BacVide()
-			: base(0x0E83)
+		public BacVide() : base(0x0E83)
 		{
 			Weight = 1.0;
 			Name = "Un bac Vide";
-
 		}
 
-		public BacVide(Serial serial)
-			: base(serial)
+		public BacVide(Serial serial) : base(serial)
 		{
+		}
+
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (!IsChildOf(from.Backpack))
+			{
+				from.SendLocalizedMessage(1042001); // Cet objet doit être dans votre sac pour que vous puissiez l'utiliser.
+				return;
+			}
+
+			from.SendMessage("Sélectionnez une source d'eau pour remplir le bac.");
+			from.Target = new InternalTarget(this);
+		}
+
+		private class InternalTarget : Target
+		{
+			private BacVide m_Bac;
+
+			public InternalTarget(BacVide bac) : base(3, true, TargetFlags.None)
+			{
+				m_Bac = bac;
+			}
+
+			protected override void OnTarget(Mobile from, object targeted)
+			{
+				if (m_Bac.Deleted)
+					return;
+
+				if (targeted is Static staticItem && Array.IndexOf(m_WaterTiles, staticItem.ItemID) != -1)
+				{
+					// C'est une tuile d'eau valide
+					FillBac(from);
+				}
+				else if (targeted is AddonComponent addonComponent && addonComponent.Addon is FountainAddon)
+				{
+					// C'est une fontaine
+					FillBac(from);
+				}
+				else if (targeted is Item item && Array.IndexOf(m_WaterTiles, item.ItemID) != -1)
+				{
+					// C'est un item d'eau valide (comme un WaterTrough)
+					FillBac(from);
+				}
+				else
+				{
+					from.SendMessage("Ceci n'est pas une source d'eau valide.");
+				}
+			}
+
+			private void FillBac(Mobile from)
+			{
+				if (from.Backpack != null)
+				{
+					DyeTub newTub = new DyeTub();
+					from.Backpack.DropItem(newTub);
+					from.SendMessage("Vous avez rempli le bac avec de l'eau et obtenu une cuve de teinture.");
+					m_Bac.Delete();
+				}
+			}
 		}
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-
 			writer.Write(0);
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
-
 			int version = reader.ReadInt();
-
 		}
 	}
+
+
 }

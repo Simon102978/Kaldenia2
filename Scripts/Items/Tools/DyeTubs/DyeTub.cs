@@ -20,7 +20,8 @@ namespace Server.Items
         private int m_DyedHue;
         private SecureLevel m_SecureLevel;
 		private int m_Charges;
-		
+		private bool m_IsInUse;
+
 		[Constructable]
         public DyeTub()
             : base(0xFAB)
@@ -52,7 +53,9 @@ namespace Server.Items
         public virtual bool AllowDyables => true;
         public virtual bool AllowMetal => false;
 		public virtual bool AllowWeapons => false;
-	
+		public virtual bool AllowJewels => false;
+
+
 
 
 
@@ -132,33 +135,49 @@ namespace Server.Items
             SetSecureLevelEntry.AddTo(from, this, list);
         }
 
-        public override void OnDoubleClick(Mobile from)
-        {
-			
-			
-				if (from.InRange(GetWorldLocation(), 1))
-            {
-                from.SendLocalizedMessage(TargetMessage);
-                from.Target = new InternalTarget(this);
-            }
-            else
-            {
-                from.SendLocalizedMessage(500446); // That is too far away.
-            }
-        }
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (m_IsInUse)
+			{
+				from.SendMessage("Ce bac de teinture est déjà en cours d'utilisation.");
+				return;
+			}
 
-        private class InternalTarget : Target
-        {
-            private readonly DyeTub m_Tub;
+			if (from.InRange(GetWorldLocation(), 1))
+			{
+				m_IsInUse = true;
+				from.SendLocalizedMessage(TargetMessage);
+				from.Target = new InternalTarget(this);
+			}
+			else
+			{
+				from.SendLocalizedMessage(500446); // That is too far away.
+			}
+		}
 
-            public InternalTarget(DyeTub tub)
-                : base(1, false, TargetFlags.None)
-            {
-                m_Tub = tub;
-            }
+		private class InternalTarget : Target
+		{
+			private readonly DyeTub m_Tub;
 
-            protected override void OnTarget(Mobile from, object targeted)
+			public InternalTarget(DyeTub tub) : base(1, false, TargetFlags.None)
+			{
+				m_Tub = tub;
+			}
+
+			protected override void OnTargetCancel(Mobile from, TargetCancelType cancelType)
+			{
+				base.OnTargetCancel(from, cancelType);
+				m_Tub.m_IsInUse = false;
+			}
+
+			protected override void OnTarget(Mobile from, object targeted)
             {
+				if (targeted is SpecialDyeTub)
+				{
+					from.SendMessage("Vous ne pouvez pas teindre un bac de teinture spécial avec un autre bac de teinture.");
+					m_Tub.m_IsInUse = false;
+					return;
+				}
 
 				if (targeted is Item item)
 				{
@@ -398,7 +417,37 @@ namespace Server.Items
 							}
 						}
 					}
-					else if (m_Tub.AllowStatuettes && (item is MonsterStatuette || m_Tub.CanForceDye(item)))
+						else if (m_Tub.AllowJewels && (item is BaseJewel || item is Chapelet || item is BaseRing || item is BaseBracelet || item is BaseNecklace || m_Tub.CanForceDye(item)))
+						{
+							if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
+							{
+								from.SendMessage("C'est trop loin!"); 
+							}
+							else if (!item.Movable)
+							{
+								from.SendMessage("Vous ne pouvez pas teindre un item verouillé!"); 
+							}
+							else
+							{
+								item.Hue = m_Tub.DyedHue;
+								from.PlaySound(0x23E);
+
+
+								if (m_Tub.Charges > 1)
+								{
+									m_Tub.Charges -= 1;
+								}
+
+								else
+								{
+									m_Tub.Delete();
+									from.AddToBackpack(bacvide);
+									from.SendMessage("Votre bac de teinture n'a plus de charge.");
+
+								}
+							}
+						}
+						else if (m_Tub.AllowStatuettes && (item is MonsterStatuette || m_Tub.CanForceDye(item)))
 					{
 						if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
 						{
@@ -560,7 +609,8 @@ namespace Server.Items
                 {
                     from.SendLocalizedMessage(m_Tub.FailMessage);
                 }
-            }
+					m_Tub.m_IsInUse = false;
+				}
         }
     }
 }

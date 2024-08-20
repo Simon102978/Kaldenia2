@@ -21,7 +21,11 @@ namespace Server.Items
 		public override bool AllowDyables => true;
 		public override bool AllowMetal => true;
 		public override bool AllowWeapons => true;
-		
+		public override bool AllowJewels => true;
+
+
+
+
 
 
 

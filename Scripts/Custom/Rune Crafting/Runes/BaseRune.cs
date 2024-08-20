@@ -15,7 +15,7 @@ namespace Server.Items
 	{
 
 
-		public virtual int SkillRequis => 80;
+		public virtual int SkillRequis => 70;
 
 
 		[Constructable]

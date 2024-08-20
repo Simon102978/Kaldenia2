@@ -1,4 +1,5 @@
-﻿using Server.Items;
+﻿using Server.Custom.Packaging.Packages;
+using Server.Items;
 
 using System;
 using System.Linq;
@@ -187,9 +188,12 @@ namespace Server.Engines.Craft
 
 			#region Divers
 
-		
+
 
 			
+			
+
+
 			index = AddCraft(typeof(MatchLight), "Divers", "Allumettes", 0.0, 30.0, typeof(Kindling), "Petit Bois", 1, "Vous n'avez pas assez de petit bois.");
 			index = AddCraft(typeof(BacVide), "Divers", "Bac Vide", 00.0, 20.0, typeof(PalmierBoard), 1044041, 3, 1044351);
 			index = AddCraft(typeof(PalmierWoodResourceCrate), "Divers", "Caisse de ressource de bois", 10.0, 60.0, typeof(PalmierBoard), 1044041, 150, 1044351);
@@ -215,6 +219,11 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Cloth), 1044286, 60, 1044287);
 			index = AddCraft(typeof(PickpocketDipSouthDeed), "Divers", "Mannequin de vol à la tir (S)", 50.0, 70.0, typeof(PalmierBoard), 1044041, 65, 1044351);
 			AddRes(index, typeof(Cloth), 1044286, 60, 1044287);
+
+			index = AddCraft(typeof(AdvancedTrainingDummySouthDeed), "Divers", "Mannequin d'entrainement avancé (S)", 80.0, 110.0, typeof(TrainingDummySouthDeed), 1044336, 1, 1044253);
+			ForceNonExceptional(index);
+			index = AddCraft(typeof(AdvancedTrainingDummyEastDeed), "Divers", "Mannequin d'entrainement avancé (E)", 80.0, 110.0, typeof(TrainingDummyEastDeed), 1044335, 1, 1044253);
+			ForceNonExceptional(index);
 			index = AddCraft(typeof(LiquorBarrel), "Divers", "Tonneau d'alcool", 55.0, 75.0, typeof(BarrelStaves), "Douve de Tonneau", 4, 1044253);
 			AddRes(index, typeof(BarrelHoops), "Cercles de Tonneau", 2, 1044253);
 			AddRes(index, typeof(BarrelLid), "Couvercle de Tonneau", 1, 1044253);
@@ -236,7 +245,8 @@ namespace Server.Engines.Craft
 
 
 			#endregion Divers
-
+			index = AddCraft(typeof(CopyToolbox), "Batiment", "Outils de Charpente", 70.0, 110.0, typeof(Materiaux), "Matériaux", 50, "Vous n'avez pas assez de matériaux");
+			ForceNonExceptional(index);
 
 			#region Armes et Boucliers
 			index = AddCraft(typeof(TrainingSword), "Armes et bouclier", "Épée d'entrainement", 0.0, 50.0, typeof(PalmierBoard), 1044041, 5, 1044351);
