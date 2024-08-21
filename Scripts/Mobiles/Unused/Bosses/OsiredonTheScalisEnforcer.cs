@@ -256,7 +256,7 @@ namespace Server.Mobiles
 
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.SuperBoss, 5);
+            AddLoot(LootPack.SuperBoss, 2);
         //    AddLoot(LootPack.LootItemCallback(RandomRecipe, 10.0, 1, false, false));
         }
 
