@@ -3735,6 +3735,9 @@ namespace Server.Mobiles
 				case AIType.ArcherMageAI:
 					m_AI = new ArcherMageAI(this);
 					break;
+				case AIType.MaritimeArcherAI:
+					m_AI = new MaritimeArcherAI(this);
+					break;
 				//case AIType.LegionnaireAi:
 				//	m_AI = new LegionnaireAI(this);
 				//	break;

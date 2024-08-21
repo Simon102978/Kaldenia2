@@ -40,7 +40,8 @@ namespace Server.Mobiles
 		MaritimeMeleeAI,
 		MaritimeMageAI,
         ArcherMageAI,
-        LegionnaireAi
+        LegionnaireAi,
+        MaritimeArcherAI
 
 	}
 
