@@ -21,13 +21,16 @@ namespace Server.Scripts
 		{
 			if (e.Mobile is PlayerMobile player)
 			{
-				if (!m_PlayerLastChecks.ContainsKey(player))
+				lock (m_PlayerLastChecks)
 				{
-					m_PlayerLastChecks[player] = DateTime.UtcNow;
-				}
-				else
-				{
-					CheckPlayerDurability(player);
+					if (!m_PlayerLastChecks.ContainsKey(player))
+					{
+						m_PlayerLastChecks[player] = DateTime.UtcNow;
+					}
+					else
+					{
+						CheckPlayerDurability(player);
+					}
 				}
 			}
 		}
@@ -42,7 +45,13 @@ namespace Server.Scripts
 
 		public static void OnWorldSave(WorldSaveEventArgs e)
 		{
-			foreach (var player in m_PlayerLastChecks.Keys)
+			List<PlayerMobile> playersToCheck;
+			lock (m_PlayerLastChecks)
+			{
+				playersToCheck = new List<PlayerMobile>(m_PlayerLastChecks.Keys);
+			}
+
+			foreach (var player in playersToCheck)
 			{
 				if (player.NetState != null) // Only check online players
 				{
@@ -53,10 +62,14 @@ namespace Server.Scripts
 
 		public static void CheckPlayerDurability(PlayerMobile player)
 		{
-			if (!m_PlayerLastChecks.TryGetValue(player, out DateTime lastCheck))
+			DateTime lastCheck;
+			lock (m_PlayerLastChecks)
 			{
-				lastCheck = DateTime.UtcNow;
-				m_PlayerLastChecks[player] = lastCheck;
+				if (!m_PlayerLastChecks.TryGetValue(player, out lastCheck))
+				{
+					lastCheck = DateTime.UtcNow;
+					m_PlayerLastChecks[player] = lastCheck;
+				}
 			}
 
 			TimeSpan timeSinceLastCheck = DateTime.UtcNow - lastCheck;
@@ -70,7 +83,10 @@ namespace Server.Scripts
 					}
 				}
 
-				m_PlayerLastChecks[player] = DateTime.UtcNow;
+				lock (m_PlayerLastChecks)
+				{
+					m_PlayerLastChecks[player] = DateTime.UtcNow;
+				}
 			}
 		}
 

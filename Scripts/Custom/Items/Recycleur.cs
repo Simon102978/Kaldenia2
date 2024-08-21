@@ -181,8 +181,8 @@ namespace Server.Items
 
                 CraftResourceInfo info = CraftResources.GetInfo(resource);
 
-                if (info == null || info.ResourceTypes.Length == 0)
-                {
+				if ((info == null || info.ResourceTypes.Length == 0) && !(targeted is BaseClothing))
+				{
                     from.SendMessage( "Vous ne pouvez pas recycler ceci. (Code: 1)");
                     return;
                 }
