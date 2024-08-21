@@ -9,6 +9,8 @@ namespace Server.Items
             : base(PotionEffect.IntelligenceLesser)
         {
 			Name = "Potion d'intelligence mineure";
+			Hue = 2080;
+
 		}
 
 		public LesserIntelligencePotion(Serial serial)

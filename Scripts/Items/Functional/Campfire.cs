@@ -188,15 +188,31 @@ namespace Server.Items
 
 		private void ApplyCampfireEffects(Mobile player)
 		{
+			if (player == null)
+			{
+				return; 
+			}
+
+			if (m_Table == null || !m_Table.ContainsKey(player))
+			{
+				return; 
+			}
+
 			if (player.Hits < player.HitsMax && player.CanHeal())
 				player.Hits += 1;
 
 			Effects.SendLocationParticles(this, 0x3779, 1, 30, 1160, 3, 9502, 0);
 
-			if (!((CampfireEntry)m_Table[player]).IsBuffed)
+			CampfireEntry entry = m_Table[player] as CampfireEntry;
+			if (entry == null)
+			{
+				return;
+			}
+
+			if (!entry.IsBuffed)
 			{
 				DoBuff(player);
-				((CampfireEntry)m_Table[player]).IsBuffed = true;
+				entry.IsBuffed = true;
 			}
 		}
 

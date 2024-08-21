@@ -539,6 +539,7 @@ namespace Server.Engines.VvV
         public GreaterStaminaPotion()
         {
             Hue = 437;
+			Name = "Potion de Stamina Majeure";
         }
 
         public override bool CheckUse(Mobile m)

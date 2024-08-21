@@ -161,16 +161,20 @@ namespace Server.Engines.Craft
                
                 if (context.MarkOption == CraftMarkOption.DoNotMark)
                     AddHtml(685, 465, 200, 20, "<h3><basefont color=#FFFFFF>Marquer<basefont></h3>", false, false);
-                else
-                    AddHtml(685, 465, 200, 20, "<h3><basefont color=#FFFFFF>Ne Pas Marquer<basefont></h3>", false, false);
-        
-        
-        //    AddButton(270, 362, 4005, 4007, GetButtonID(6, 6), GumpButtonType.Reply, 0);
-            //    AddHtmlLocalized(305, 365, 150, 18, 1044017 + (context == null ? 0 : (int)context.MarkOption), LabelColor, false, false); // MARK ITEM
-            
-            
-            
-            }
+
+				else if (context.MarkOption == CraftMarkOption.MarkItem)
+
+					AddHtml(685, 465, 200, 20, "<h3><basefont color=#FFFFFF>Ne Pas Marquer<basefont></h3>", false, false);
+				else
+					AddHtml(685, 465, 200, 20, "<h3><basefont color=#FFFFFF>Confirmer avant de marquer<basefont></h3>", false, false);
+
+
+				//    AddButton(270, 362, 4005, 4007, GetButtonID(6, 6), GumpButtonType.Reply, 0);
+				//    AddHtmlLocalized(305, 365, 150, 18, 1044017 + (context == null ? 0 : (int)context.MarkOption), LabelColor, false, false); // MARK ITEM
+
+
+
+			}
             // ****************************************
 
             // Enhance option

@@ -7,6 +7,7 @@ namespace Server.Items
             : base(PotionEffect.ManaSuperior)
         {
 			Name = "Potion de mana supérieure";
+			Hue = 2079;
 		}
 
 		public SuperiorManaPotion(Serial serial)

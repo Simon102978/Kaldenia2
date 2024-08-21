@@ -1088,12 +1088,15 @@ namespace Server.Items
 			if (!(from is PlayerMobile player) || m_Owner is PlayerMobile || m_SnoopingBonusApplied)
 				return;
 
+			if (m_Owner is BaseCreature ownerCreature && ownerCreature.Tamable)
+				return;
+
 			m_SnoopingBonusApplied = true;
 
 			double snoopingSkill = player.Skills[SkillName.Snooping].Value;
 			double baseChance = 0.0; // 0% chance de base
-			double snoopingBonus = snoopingSkill * 0.01; // 1% par point de compétence
-			double totalChance = Math.Min(baseChance + snoopingBonus, 0.80); // Plafond à 80%
+			double snoopingBonus = snoopingSkill * 0.005; // 1% par point de compétence
+			double totalChance = Math.Min(baseChance + snoopingBonus, 0.50); // Plafond à 50%
 
 			if (Utility.RandomDouble() < totalChance)
 			{
@@ -1126,7 +1129,7 @@ namespace Server.Items
 	typeof(LesserCurePotion),
 	typeof(LesserPoisonPotion),
 	typeof(LesserExplosionPotion),
-	typeof(LesserAgilityPotion),
+	typeof(AgilityPotion),
 	typeof(LesserStrengthPotion),
 	typeof(GreaterHealPotion),
 	typeof(GreaterCurePotion),

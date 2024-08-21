@@ -726,7 +726,7 @@ namespace Server.Items
 
 		public virtual int OnHit(BaseWeapon weapon, int damageTaken)
 		{
-			ClothingDurabilitySystem.ApplyTimeDegradation(this);
+			// Ne pas appeler ApplyTimeDegradation ici, car cela sera géré par le système global
 
 			if (m_MaxHitPoints == 0)
 				return damageTaken;
@@ -778,8 +778,12 @@ namespace Server.Items
 					}
 				}
 			}
+
+			LastDurabilityCheck = DateTime.UtcNow;
+
 			return damageTaken;
 		}
+
 
 		private double ModifyChanceByQuality(double chance)
 		{
