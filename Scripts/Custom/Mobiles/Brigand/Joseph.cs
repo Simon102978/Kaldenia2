@@ -127,11 +127,10 @@ namespace Server.Mobiles
 							break;
 						default:
 							break;
-					}				
-				}				
-				m_GlobalTimer = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(2, 5));
-			
+					}	
 
+					m_GlobalTimer = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(2, 5));			
+				}
 
 		}
 
@@ -191,7 +190,7 @@ namespace Server.Mobiles
 					}
 
 				DelayWarCrie = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(30, 60));
-
+			
 			}
 		}
 
