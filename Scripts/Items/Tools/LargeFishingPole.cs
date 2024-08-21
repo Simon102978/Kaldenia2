@@ -469,7 +469,7 @@ namespace Server.Items
 	(typeof(ThighBoots), "Cuissardes"),
 	(typeof(BlackPearl), "Perle noire"),
 	(typeof(WhitePearl), "Perle blanche"),
-	(typeof(BaseHighseasFish), "Poisson des bas fonds")
+	//(typeof(BaseHighseasFish), "Poisson des bas fonds")
 };
 
 

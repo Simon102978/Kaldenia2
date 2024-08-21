@@ -12,9 +12,11 @@ namespace Server.Items
         public Blowpipe()
             : base(0xE8A)
         {
-        }
+			Name = "Tube à souffler le verre";
 
-        [Constructable]
+		}
+
+		[Constructable]
         public Blowpipe(int uses)
             : base(uses, 0xE8A)
         {

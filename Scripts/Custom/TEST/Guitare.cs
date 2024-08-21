@@ -30,7 +30,7 @@ namespace Server.Items
 		{
 			Name = "Guitare";
 			Weight = 5.0;
-			Layer = Layer.TwoHanded;
+			Layer = Layer.OneHanded;
 			Notes = new int[_MAX_SIZE];
 			for (int i = 0; i < _MAX_SIZE; ++i)
 				Notes[i] = 0;
@@ -47,9 +47,9 @@ namespace Server.Items
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			  if (IsChildOf(from.Backpack) || Parent == from)
-				{
-				from.SendMessage("Vous devez avoir l'instrument en main ou dans votre sac."); // That must be in your pack for you to use it."
+			if (!IsChildOf(from.Backpack) && Parent != from)
+			{
+				from.SendMessage("Vous devez avoir l'instrument en main ou dans votre sac.");
 			}
 			else
 			{
