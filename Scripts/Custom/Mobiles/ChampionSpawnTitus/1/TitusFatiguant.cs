@@ -33,6 +33,8 @@ namespace Server.Mobiles
 
 			SetDamage(10, 23);
 
+			SetHits(200,225);
+
 			SetSkill(SkillName.Fencing, 66.0, 97.5);
 			SetSkill(SkillName.Macing, 65.0, 87.5);
 			SetSkill(SkillName.MagicResist, 25.0, 47.5);

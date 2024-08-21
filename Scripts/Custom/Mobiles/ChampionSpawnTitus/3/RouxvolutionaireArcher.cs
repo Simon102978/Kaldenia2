@@ -33,7 +33,7 @@ namespace Server.Mobiles
 
 			SetDamage(15, 25);
 
-
+			SetHits(251, 350);
 			SetSkill(SkillName.MagicResist, 60, 80);
 			SetSkill(SkillName.Archery, 70, 110);
 			SetSkill(SkillName.Tactics, 80, 100);

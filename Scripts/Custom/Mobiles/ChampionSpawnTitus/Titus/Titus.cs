@@ -92,7 +92,7 @@ namespace Server.Mobiles
 			Title = "Bébé Titan Roux";
 			Body = 76;
 			BaseSoundID = 609;
-			Hue = 1395;
+			Hue = 1161;
 
 			SetStr(600, 700);
 			SetDex(76, 82);
@@ -195,7 +195,7 @@ namespace Server.Mobiles
 		public void Enrager()
 		{
 			AdjustSpeeds();
-			Hue = 1197;
+			Hue = 1157;
 
 			Mana = ManaMax;
 			Stam = StamMax;
@@ -1163,7 +1163,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.PeculiarSeed1);
             AddLoot(LootPack.LootItem<Items.RoastPig>(10.0));
-			AddLoot(LootPack.LootItem<Items.Gold>(15000,20000));
+			AddLoot(LootPack.LootItem<Items.Gold>(5000,10000));
 		}
 
         public override void Serialize(GenericWriter writer)

@@ -46,7 +46,7 @@ namespace Server.Mobiles
 
 			SetDamage(20, 30);
 
-
+			SetHits(251, 350);
 			SetDamageType(ResistanceType.Physical, 100);
 
             SetSkill(SkillName.Fencing, 70, 110);

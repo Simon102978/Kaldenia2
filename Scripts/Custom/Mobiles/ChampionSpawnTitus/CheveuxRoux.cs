@@ -5,7 +5,7 @@ namespace Server.Mobiles
     {
         [Constructable]
         public CheveuxRoux()
-            : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "Amas de cheveux roux";
             Body = 51;
@@ -19,6 +19,8 @@ namespace Server.Mobiles
 
             SetHits(15, 19);
 
+            SetMana(1000);
+
             SetDamage(1, 5);
 
             SetDamageType(ResistanceType.Physical, 100);
@@ -26,10 +28,11 @@ namespace Server.Mobiles
             SetResistance(ResistanceType.Physical, 5, 10);
             SetResistance(ResistanceType.Poison, 10, 20);
 
-            SetSkill(SkillName.Poisoning, 30.1, 50.0);
-            SetSkill(SkillName.MagicResist, 15.1, 20.0);
-            SetSkill(SkillName.Tactics, 19.3, 34.0);
-            SetSkill(SkillName.Wrestling, 19.3, 34.0);
+	        SetSkill(SkillName.MagicResist, 125, 140);
+			SetSkill(SkillName.Tactics, 50, 120);
+			SetSkill(SkillName.Wrestling, 80, 130);
+			SetSkill(SkillName.Magery, 70, 100);
+			SetSkill(SkillName.EvalInt, 70, 100);
 
             Fame = 300;
             Karma = -300;
@@ -40,8 +43,8 @@ namespace Server.Mobiles
         {
         }
 		public override TribeType Tribe => TribeType.Titusien;
-		public override Poison PoisonImmune => Poison.Lesser;
-        public override Poison HitPoison => Poison.Lesser;
+		public override Poison PoisonImmune => Poison.Lethal;
+        public override Poison HitPoison => Poison.Lethal;
         public override FoodType FavoriteFood => FoodType.Meat | FoodType.Fish | FoodType.FruitsAndVegies | FoodType.GrainsAndHay | FoodType.Eggs;
 
 		public int RouxCouleur()
