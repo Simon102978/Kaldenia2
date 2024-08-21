@@ -225,7 +225,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.PeculiarSeed1);
             AddLoot(LootPack.LootItem<Items.RoastPig>(10.0));
-			AddLoot(LootPack.LootItem<Items.Gold>(15000,25000));
+			AddLoot(LootPack.LootItem<Items.Gold>(5000,10000));
 		}
 
         public override void Serialize(GenericWriter writer)
