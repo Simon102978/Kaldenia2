@@ -30,9 +30,6 @@ namespace Server.Mobiles
         public override double TreasureMapChance => .50;
         public override int TreasureMapLevel => 7;
 
-        public override Type[] UniqueList => new Type[] { typeof(EnchantedCoralBracelet), typeof(WandOfThunderingGlory), typeof(LeviathanHideBracers), typeof(SmilingMoonBlade) };
-        public override Type[] SharedList => new Type[] { typeof(MiniSoulForgeDeed) };
-        public override Type[] DecorativeList => new Type[] { typeof(EnchantedBladeDeed), typeof(EnchantedVortexDeed) };
 
         public override bool NoGoodies => true;
 
@@ -45,7 +42,7 @@ namespace Server.Mobiles
         public Osiredon(Mobile fisher)
             : base(fisher, AIType.AI_NecroMage, FightMode.Closest)
         {
-            Name = "osiredon the scalis enforcer";
+            Name = "Osiredon";
             Body = 1068;
             BaseSoundID = 589;
 
@@ -63,7 +60,7 @@ namespace Server.Mobiles
             SetInt(125, 137);
 
             SetMana(4000);
-            SetHits(75000);
+            SetHits(5000);
 
             SetDamage(19, 26);
 
@@ -86,8 +83,8 @@ namespace Server.Mobiles
             SetSkill(SkillName.EvalInt, 100.1, 120.0);
             SetSkill(SkillName.Tracking, 100.0);
 
-            Fame = 25000;
-            Karma = -25000;
+            Fame = 5000;
+            Karma = -5000;
         }
 
         public void AddEel(Mobile eel)
@@ -260,13 +257,10 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.SuperBoss, 5);
-            AddLoot(LootPack.LootItemCallback(RandomRecipe, 10.0, 1, false, false));
+        //    AddLoot(LootPack.LootItemCallback(RandomRecipe, 10.0, 1, false, false));
         }
 
-        private Item RandomRecipe(IEntity e)
-        {
-            return Utility.RandomBool() ? new RecipeScroll(1100) : new RecipeScroll(1108);
-        }
+     
 
         public Osiredon(Serial serial)
             : base(serial)
