@@ -261,7 +261,14 @@ namespace Server.Mobiles
                     });
                 }
 
-                Disarm.AddImmunity(to, TimeSpan.FromSeconds(10));
+                	try
+					{
+						Disarm.AddImmunity(to, TimeSpan.FromSeconds(10));
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine($"Erreur lors de l'appel � Disarm.AddImmunity : {ex.Message}");
+					}
         }
          public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
