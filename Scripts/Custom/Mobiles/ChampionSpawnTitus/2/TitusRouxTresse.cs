@@ -8,7 +8,7 @@ namespace Server.Mobiles
 	{
 		[Constructable]
 		public TitusRouxTresse()
-			: base(AIType.AI_Mage, FightMode.Evil, 10, 1, 0.05, 0.2)
+			: base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.05, 0.2)
 		{
 			SpeechHue = Utility.RandomDyedHue();
 			Title = Utility.RandomBool() ? "Roux-Tresse" : "Prêtresse de Titus";
