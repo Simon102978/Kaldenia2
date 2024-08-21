@@ -187,7 +187,7 @@ namespace Server.Gumps
 
 		public static void ShowStatsDetailGump(Mobile from)
 		{
-			string detail = "Force: \n  -Détermine les points de vie\n  -Détermine la quantité que peux porter un personnage\n  -Détermine les dégats au corps à corps\n  -Détermine si vous pouvez porter une armure \n\nDextérité:\n  -Aide au chance de parrer un coup\n  -Détermine les chances d'avoir un objet de meilleurs qualités\n  -Détermine le temps entre chaque bandage\n\nIntelligence:\n  -Détermine la mana\n  -Influence la regénération de mana\n";
+			string detail = "Force: \n  -Détermine les points de vie\n  -Détermine la quantité que peux porter un personnage\n  -Détermine les dégats au corps à corps\n  -Détermine si vous pouvez porter une armure \n\nDextérité:\n  -Aide au chance de parrer un coup\n  -Détermine les chances d'avoir un objet de meilleurs qualités\n  -Détermine le temps entre chaque bandage\n\nIntelligence:\n  -Détermine la mana\n  -Influence la regénération de mana\n  -Dégats des sortilèges\n";
 
 			Gump detailGump = new Gump(100, 100);
 			detailGump.AddBackground(0, 0, 400, 300, 9200);
