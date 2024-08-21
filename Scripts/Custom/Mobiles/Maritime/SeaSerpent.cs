@@ -93,7 +93,7 @@ namespace Server.Mobiles
             {
                 if (DelayOnHit1 < DateTime.UtcNow)
                 {
-                    Cleave();
+                    Cleave(damage);
                 }				
             }
 
@@ -102,7 +102,7 @@ namespace Server.Mobiles
 			base.AlterMeleeDamageTo(to, ref damage);
 		}
 
-    	public void Cleave()
+    	public void Cleave(int dmg)
 		{
 
 			if (DelayOnHit1 < DateTime.UtcNow)
@@ -136,7 +136,7 @@ namespace Server.Mobiles
 				if (targets.Count > 0)
 				{
 
-					int dmg = 25;
+					
 
 
 
