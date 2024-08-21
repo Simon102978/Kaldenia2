@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using Server.Items;
+using Server.Targeting;
 
 namespace Server.Mobiles
 {
@@ -10,20 +11,21 @@ namespace Server.Mobiles
     public class EnergyVortex : BaseCreature
     {
         [Constructable]
-        public EnergyVortex() : this(false)
-        {
+		public EnergyVortex(Mobile caster) : this(caster, false)
+		{
         }
 
 		private DateTime m_lastTargetSearch = DateTime.MinValue;
-
+		private Mobile m_Controller;
 
 		[Constructable]
-        public EnergyVortex(bool summoned)
-            : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
+		public EnergyVortex(Mobile caster, bool summoned)
+			: base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
             Name = "un elementaire de vent";
+			m_Controller = caster;
 
-            if (0.002 > Utility.RandomDouble()) // Per OSI FoF, it's a 1/500 chance.
+			if (0.002 > Utility.RandomDouble()) // Per OSI FoF, it's a 1/500 chance.
             {
                 // Llama vortex!
                 Body = 0xDC;
@@ -65,25 +67,20 @@ namespace Server.Mobiles
             ControlSlots = 2;
         }
 
-        public EnergyVortex(Serial serial)
-            : base(serial)
-        {
-        }
+		public EnergyVortex(Serial serial) : base(serial)
+		{
+		}
 
-        public override bool DeleteCorpseOnDeath => Summoned;
+		public override bool DeleteCorpseOnDeath => true;
+		public override bool AlwaysMurderer => true;
+		public override double DispelDifficulty => 80.0;
+		public override double DispelFocus => 20.0;
+		public override bool BleedImmune => true;
+		public override Poison PoisonImmune => Poison.Lethal;
+		public override bool IsHouseSummonable => true;
 
-        public override bool AlwaysMurderer => true; // Or Llama vortices will appear gray.
 
-        public override double DispelDifficulty => 80.0;
-
-        public override double DispelFocus => 20.0;
-
-        public override bool BleedImmune => true;
-
-        public override Poison PoisonImmune => Poison.Lethal;
-
-      
-        public override int GetAngerSound()
+		public override int GetAngerSound()
         {
             return 0x15;
         }
@@ -104,52 +101,64 @@ namespace Server.Mobiles
 		{
 			base.OnThink();
 
-			if (Combatant == null || !Combatant.Alive || Combatant.Deleted)
+			if (m_Controller != null && !m_Controller.Deleted && m_Controller.Alive)
 			{
-				if (DateTime.UtcNow - m_lastTargetSearch > TimeSpan.FromSeconds(2))
+				if (Combatant == null)
 				{
-					FindNewTarget();
-					m_lastTargetSearch = DateTime.UtcNow;
+					if (DateTime.UtcNow - m_lastTargetSearch > TimeSpan.FromSeconds(2))
+					{
+						FindNewTarget();
+						m_lastTargetSearch = DateTime.UtcNow;
+					}
 				}
+			}
+			else
+			{
+				Delete();
 			}
 		}
 
 		private void FindNewTarget()
 		{
-			Mobile closestMobile = null;
-			double closestDistance = double.MaxValue;
-
-			IPooledEnumerable eable = GetMobilesInRange(10);
-			foreach (Mobile m in eable)
+			Mobile closest = null;
+			double closestDist = double.MaxValue;
+			foreach (Mobile m in m_Controller.GetMobilesInRange(10))
 			{
-				if (m != this && m.Alive && !m.IsDeadBondedPet && CanBeHarmful(m))
+				if (m != m_Controller && m != this && CanBeHarmful(m))
 				{
-					double distance = GetDistanceToSqrt(m);
-					if (distance < closestDistance)
+					double dist = GetDistanceToSqrt(m);
+					if (dist < closestDist)
 					{
-						closestMobile = m;
-						closestDistance = distance;
+						closest = m;
+						closestDist = dist;
 					}
 				}
 			}
-			eable.Free();
-
-			if (closestMobile != null)
+			if (closest != null)
 			{
-				Combatant = closestMobile;
+				Combatant = closest;
 			}
+		}
+
+		public override bool CheckTarget(Mobile from, Target targ, object targeted)
+		{
+			if (from != m_Controller)
+				return false;
+			return base.CheckTarget(from, targ, targeted);
 		}
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
 			writer.Write((int)0); // version
+			writer.Write(m_Controller);
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
 			int version = reader.ReadInt();
+			m_Controller = reader.ReadMobile();
 		}
 	}
 }

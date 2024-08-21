@@ -6,7 +6,7 @@ using Server.Custom.Packaging.Packages;
 using Arya.Chess;
 using Server.Engines.VvV;
 using Server.Scripts.Commands;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
+//using static System.Windows.Forms.VisualStyles.VisualStyleElement.TreeView;
 using System.Threading.Tasks;
 using System.Web.UI.WebControls.WebParts;
 using static CustomRecipeScrolls;
@@ -574,7 +574,7 @@ namespace Server
 			new LootPackItem(typeof(DecoArrowShafts), 1),
 			new LootPackItem(typeof(Shaft), 4),
 			new LootPackItem(typeof(BasketOfHerbs), 1),
-			new LootPackItem(typeof(Branch), 1),
+			//new LootPackItem(typeof(Branch), 1),
 			new LootPackItem(typeof(BlueScales), 1),
 			new LootPackItem(typeof(Bloodmoss), 1),
 			new LootPackItem(typeof(Candle), 1),

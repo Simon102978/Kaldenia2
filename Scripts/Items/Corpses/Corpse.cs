@@ -127,13 +127,15 @@ namespace Server.Items
         {
             DropItem(carved);        
         }
+		private bool m_SnoopingBonusApplied;
 
-        public override bool IsDecoContainer => false;
+		public override bool IsDecoContainer => false;
 
         [CommandProperty(AccessLevel.GameMaster)]
         public DateTime TimeOfDeath { get; set; }
 
-        public override bool DisplayWeight => false;
+
+		public override bool DisplayWeight => false;
 
         public HairInfo Hair { get; }
 
@@ -340,8 +342,8 @@ namespace Server.Items
 
             Name = owner.Name;
             Hue = owner.Hue;
-
-            Direction = owner.Direction;
+			m_SnoopingBonusApplied = false;
+			Direction = owner.Direction;
             Light = (LightType)Direction;
 
             m_Owner = owner;
@@ -459,9 +461,10 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(12); // version
+            writer.Write(13); // version
 
-            if (RestoreEquip == null)
+			writer.Write(m_SnoopingBonusApplied);
+			if (RestoreEquip == null)
             {
                 writer.Write(false);
             }
@@ -529,10 +532,17 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch (version)
-            {
-                case 12:
-                    {
+			switch (version)
+			{
+				case 13:
+					{
+
+						m_SnoopingBonusApplied = reader.ReadBool();
+
+						goto case 12;
+					}
+				case 12:
+					{
                         if (reader.ReadBool())
                         {
                             RestoreEquip = reader.ReadStrongItemList();
@@ -948,9 +958,15 @@ namespace Server.Items
                         }
                     }
                 }
-                #endregion
+				#endregion
 
-                base.OnDoubleClick(from);
+				if (from is PlayerMobile && from != m_Owner && !(m_Owner is PlayerMobile))
+				{
+					ApplySnoopingBonus(from);
+				}
+
+
+				base.OnDoubleClick(from);
             }
             else
             {
@@ -967,7 +983,11 @@ namespace Server.Items
                 if (from.Corpse != null)
                     from.NetState.Send(new RemoveWaypoint(from.Corpse.Serial));
             }
-        }
+			if (from is PlayerMobile player && !m_SnoopingBonusApplied)
+			{
+				ApplySnoopingBonus(player);
+			}
+		}
 
         public override bool CheckContentDisplay(Mobile from)
         {
@@ -1063,8 +1083,164 @@ namespace Server.Items
 
             return true;
         }
+		public void ApplySnoopingBonus(Mobile from)
+		{
+			if (!(from is PlayerMobile player) || m_Owner is PlayerMobile || m_SnoopingBonusApplied)
+				return;
 
-        public override void Delete()
+			m_SnoopingBonusApplied = true;
+
+			double snoopingSkill = player.Skills[SkillName.Snooping].Value;
+			double baseChance = 0.0; // 0% chance de base
+			double snoopingBonus = snoopingSkill * 0.01; // 1% par point de compétence
+			double totalChance = Math.Min(baseChance + snoopingBonus, 0.80); // Plafond à 80%
+
+			if (Utility.RandomDouble() < totalChance)
+			{
+				Item bonusLoot = CreateBonusLoot();
+				if (bonusLoot != null)
+				{
+					DropItem(bonusLoot);
+					player.SendMessage("Fouiller la dépouille vous a permis de trouver : " + bonusLoot.Name);
+					player.CheckSkill(SkillName.Snooping, 0.0, 100.0); // Chance d'augmenter la compétence Snooping
+				}
+			}
+			else
+			{
+				player.SendMessage("Vous ne trouvez rien d'intéressant.");
+			}
+		}
+
+		private Item CreateBonusLoot()
+		{
+			// Liste des types d'items pour le bonus de loot
+			Type[] bonusItemTypes = new Type[]
+			{
+		typeof(Gold),
+	typeof(Bandage),
+	typeof(Bottle),
+	typeof(Lantern),
+	typeof(Candle),
+	typeof(Torch),
+	typeof(LesserHealPotion),
+	typeof(LesserCurePotion),
+	typeof(LesserPoisonPotion),
+	typeof(LesserExplosionPotion),
+	typeof(LesserAgilityPotion),
+	typeof(LesserStrengthPotion),
+	typeof(GreaterHealPotion),
+	typeof(GreaterCurePotion),
+	typeof(GreaterPoisonPotion),
+	typeof(GreaterExplosionPotion),
+	typeof(GreaterAgilityPotion),
+	typeof(GreaterStrengthPotion),
+	typeof(TotalRefreshPotion),
+	typeof(Arrow),
+	typeof(Bolt),
+	typeof(Bow),
+	typeof(Crossbow),
+	typeof(Dagger),
+	typeof(Katana),
+	typeof(Kryss),
+	typeof(Longsword),
+	typeof(Mace),
+	typeof(Spear),
+	typeof(WarHammer),
+	typeof(BlackPearl),
+	typeof(Bloodmoss),
+	typeof(Garlic),
+	typeof(Ginseng),
+	typeof(MandrakeRoot),
+	typeof(Nightshade),
+	typeof(SulfurousAsh),
+	typeof(SpidersSilk),
+	typeof(BreadLoaf),
+	typeof(Fish),
+	typeof(Apple),
+	typeof(CheesePizza),
+	typeof(RawRibs),
+	typeof(CookedBird),
+	typeof(WoodenBox),
+	typeof(MetalBox),
+	typeof(Key),
+	typeof(Lockpick),
+	typeof(Bedroll),
+	typeof(Backpack),
+	typeof(LeatherGorget),
+	typeof(LeatherGloves),
+	typeof(LeatherArms),
+	typeof(LeatherLegs),
+	typeof(LeatherChest),
+	typeof(Robe),
+	typeof(Diamant),
+	typeof(Rubis),
+	typeof(Citrine),
+	typeof(Tourmaline),
+	typeof(Amethyste),
+	typeof(Emeraude),
+	typeof(Sapphire),
+	typeof(SaphirEtoile),
+	typeof(ClockworkAssembly),
+	typeof(Clock),
+	typeof(BarrelHoops),
+	typeof(BarrelStaves),
+	typeof(Springs),
+	typeof(Gears),
+	typeof(Hinge),
+	typeof(SextantParts),
+	typeof(Axle),
+	typeof(Nails),
+	typeof(JointingPlane),
+	typeof(MouldingPlane),
+	typeof(SmoothingPlane),
+	typeof(Saw),
+	typeof(Scorp),
+	typeof(Inshave),
+	typeof(Froe),
+	typeof(Shovel),
+	typeof(Hammer),
+	typeof(DrawKnife),
+	typeof(Pickaxe),
+	typeof(Pitchfork),
+	typeof(Tinker),
+	typeof(TinkerTools),
+	typeof(SmithHammer),
+	typeof(SewingKit),
+	typeof(FletcherTools),
+	typeof(MapmakersPen),
+	typeof(ScribesPen),
+	typeof(Scales),
+	typeof(MortarPestle),
+	typeof(Spellbook),
+	typeof(SkillCard),
+	typeof(BlankScroll)
+};
+
+
+			Type itemType = bonusItemTypes[Utility.Random(bonusItemTypes.Length)];
+			Item item = null;
+
+			try
+			{
+				if (itemType == typeof(Gold))
+				{
+					int amount = Utility.RandomMinMax(15, 75);
+					item = new Gold(amount);
+				}
+				else
+				{
+					item = (Item)Activator.CreateInstance(itemType);
+				}
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine("Erreur lors de la création de l'item bonus : " + e.Message);
+			}
+
+			return item;
+		}
+
+		public override void Delete()
         {
             base.Delete();
 

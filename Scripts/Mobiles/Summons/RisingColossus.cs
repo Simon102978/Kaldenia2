@@ -1,4 +1,6 @@
 using Server.Items;
+using Server.Multis;
+using Server.Targeting;
 using System;
 
 namespace Server.Mobiles
@@ -6,7 +8,8 @@ namespace Server.Mobiles
     public class RisingColossus : BaseCreature
     {
         private int m_DispelDifficulty;
-        public override double DispelDifficulty => m_DispelDifficulty;
+		private Mobile m_Controller;
+		public override double DispelDifficulty => m_DispelDifficulty;
         public override double DispelFocus => 45.0;
 
         [Constructable]
@@ -20,8 +23,10 @@ namespace Server.Mobiles
 
             Name = "a rising colossus";
             Body = 829;
+			m_Controller = m;
 
-            SetHits(315 + hitsbonus);
+
+			SetHits(315 + hitsbonus);
 
             SetStr(677 + statbonus);
             SetDex(107 + statbonus);
@@ -59,8 +64,48 @@ namespace Server.Mobiles
         {
             return (m.Int + m.Skills[SkillName.Magery].Value) / Math.Max(GetDistanceToSqrt(m), 1.0);
         }
-
-        public override bool AlwaysMurderer => true;
+		public override bool CheckTarget(Mobile from, Target targ, object targeted)
+		{
+			if (from != m_Controller)
+				return false;
+			return base.CheckTarget(from, targ, targeted);
+		}
+		public override void OnThink()
+		{
+			base.OnThink();
+			if (m_Controller != null && !m_Controller.Deleted && m_Controller.Alive)
+			{
+				if (Combatant == null)
+				{
+					Mobile closest = null;
+					int detectionRange = 10; // Distance maximale de détection en cases
+					double closestDist = double.MaxValue;
+					foreach (Mobile m in m_Controller.GetMobilesInRange(detectionRange))
+					{
+						if (m != m_Controller && m != this && CanBeHarmful(m))
+						{
+							double dist = GetDistanceToSqrt(m);
+							if (dist < closestDist)
+							{
+								closest = m;
+								closestDist = dist;
+							}
+						}
+					}
+					if (closest != null)
+					{
+						Combatant = closest;
+					}
+				}
+			}
+			else
+			{
+				Delete();
+			}
+		}
+		public override bool DeleteCorpseOnDeath => true;
+		public override bool IsHouseSummonable => true;
+		public override bool AlwaysMurderer => true;
 
         public override bool BleedImmune => true;
 
@@ -80,20 +125,23 @@ namespace Server.Mobiles
             return 0x629;
         }
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(0);
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0);
+			writer.Write(m_DispelDifficulty);
+			writer.Write(m_Controller);
+		}
 
-            writer.Write(m_DispelDifficulty);
-        }
-
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            reader.ReadInt();
-
-            m_DispelDifficulty = reader.ReadInt();
-        }
-    }
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+			m_DispelDifficulty = reader.ReadInt();
+			if (version >= 0)
+			{
+				m_Controller = reader.ReadMobile();
+			}
+		}
+	}
 }

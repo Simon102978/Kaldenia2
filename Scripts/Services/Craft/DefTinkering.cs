@@ -7,6 +7,7 @@ using Xanthos.ShrinkSystem;
 using Server.Custom;
 using static Server.Custom.GolemCrystal;
 using Discord;
+using Server.Custom.Packaging.Packages;
 
 namespace Server.Engines.Craft
 {
@@ -805,6 +806,9 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LargeFishingPole), "Divers", "Canne à pêche", 10.0, 30.0, typeof(PalmierBoard), 1044041, 5, 1044351); //This is in the categor of Other during AoS
 			AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
 			SetUseSubRes2(index, true);
+			index = AddCraft(typeof(CustomSign), "Divers", "Affiche Personnalisée", 30.0, 80.0, typeof(Materiaux), "Matériaux", 10, "Vous n'avez pas assez de matériaux");
+			AddRes(index, typeof(BlankScroll), "Parchemin Vierge", 3, "Vous n'avez pas suffisament de parchemin vierge");
+			ForceNonExceptional(index);
 			index = AddCraft(typeof(Spyglass), "Divers", "Longue vue", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(Fouet4), "Divers", "Fouet 4 mètres", 50.0, 70.0, typeof(Leather), 1044462, 3, 1044463);
 			index = AddCraft(typeof(Fouet6), "Divers", "Fouet 6 mètres", 65.0, 85.0, typeof(Leather), 1044462, 4, 1044463);

@@ -247,6 +247,7 @@ namespace Server.Engines.Craft
 			#endregion Divers
 			index = AddCraft(typeof(CopyToolbox), "Batiment", "Outils de Charpente", 70.0, 110.0, typeof(Materiaux), "Matériaux", 50, "Vous n'avez pas assez de matériaux");
 			ForceNonExceptional(index);
+			
 
 			#region Armes et Boucliers
 			index = AddCraft(typeof(TrainingSword), "Armes et bouclier", "Épée d'entrainement", 0.0, 50.0, typeof(PalmierBoard), 1044041, 5, 1044351);

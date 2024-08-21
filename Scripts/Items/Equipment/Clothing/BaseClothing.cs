@@ -6,6 +6,7 @@ using Server.Mobiles;
 
 using System;
 using System.Collections.Generic;
+using Server.Scripts;
 
 namespace Server.Items
 {
@@ -65,8 +66,9 @@ namespace Server.Items
         private int m_MaxHitPoints;
         private int m_HitPoints;
         private Mobile m_Crafter;
-        private ItemQuality m_Quality;
-        protected CraftResource m_Resource;
+		private double m_BaseWeight;
+		private ItemQuality m_Quality;
+		protected CraftResource m_Resource;
         private int m_StrReq = -1;
 
         private bool m_Altered;
@@ -88,39 +90,36 @@ namespace Server.Items
         private ReforgedPrefix m_ReforgedPrefix;
         private ReforgedSuffix m_ReforgedSuffix;
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int MaxHitPoints
-        {
-            get { return m_MaxHitPoints; }
-            set
-            {
-                m_MaxHitPoints = value;
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int MaxHitPoints
+		{
+			get { return m_MaxHitPoints; }
+			set
+			{
+				m_MaxHitPoints = value;
+				InvalidateProperties();
+			}
+		}
 
-                InvalidateProperties();
-            }
-        }
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int HitPoints
+		{
+			get { return m_HitPoints; }
+			set
+			{
+				if (value != m_HitPoints && MaxHitPoints > 0)
+				{
+					m_HitPoints = value;
+					if (m_HitPoints < 0)
+						Delete();
+					else if (m_HitPoints > MaxHitPoints)
+						m_HitPoints = MaxHitPoints;
+					InvalidateProperties();
+				}
+			}
+		}
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public int HitPoints
-        {
-            get { return m_HitPoints; }
-            set
-            {
-                if (value != m_HitPoints && MaxHitPoints > 0)
-                {
-                    m_HitPoints = value;
-
-                    if (m_HitPoints < 0)
-                        Delete();
-                    else if (m_HitPoints > MaxHitPoints)
-                        m_HitPoints = MaxHitPoints;
-
-                    InvalidateProperties();
-                }
-            }
-        }
-
-        [CommandProperty(AccessLevel.GameMaster)]
+		[CommandProperty(AccessLevel.GameMaster)]
         public Mobile Crafter
         {
             get { return m_Crafter; }
@@ -150,18 +149,55 @@ namespace Server.Items
             }
         }
 
-        [CommandProperty(AccessLevel.GameMaster)]
-        public ItemQuality Quality
-        {
-            get { return m_Quality; }
-            set
-            {
-                m_Quality = value;
-                InvalidateProperties();
-            }
-        }
 
-        [CommandProperty(AccessLevel.GameMaster)]
+		
+		[CommandProperty(AccessLevel.GameMaster)]
+		public ItemQuality Quality
+		{
+			get { return m_Quality; }
+			set
+			{
+				if (m_Quality != value)
+				{
+					m_Quality = value;
+					UpdateMaxHitPoints();
+					InvalidateProperties();
+				}
+			}
+		}
+
+		private void UpdateMaxHitPoints()
+		{
+			int newMaxHitPoints = GetMaxHitPointsForQuality();
+
+			// Ajuster les points de vie actuels proportionnellement
+			if (m_MaxHitPoints > 0)
+			{
+				double ratio = (double)m_HitPoints / m_MaxHitPoints;
+				m_HitPoints = (int)(newMaxHitPoints * ratio);
+			}
+			else
+			{
+				m_HitPoints = newMaxHitPoints;
+			}
+
+			m_MaxHitPoints = newMaxHitPoints;
+		}
+
+		private int GetMaxHitPointsForQuality()
+		{
+			switch (m_Quality)
+			{
+				case ItemQuality.Low: return 50;
+				case ItemQuality.Normal: return 100;
+				case ItemQuality.Exceptional: return 150;
+				case ItemQuality.Epic: return 200;
+				case ItemQuality.Legendary: return 250;
+				default: return 100;
+			}
+		}
+
+		[CommandProperty(AccessLevel.GameMaster)]
         public bool PlayerConstructed { get; set; }
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -219,7 +255,10 @@ namespace Server.Items
         [CommandProperty(AccessLevel.GameMaster)]
         public int EnergyNonImbuing { get; set; }
 
-        public virtual int[] BaseResists
+		[CommandProperty(AccessLevel.GameMaster)]
+		public DateTime LastDurabilityCheck { get; set; }
+
+		public virtual int[] BaseResists
         {
             get
             {
@@ -274,7 +313,40 @@ namespace Server.Items
             }
         }
 
-        public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+		private void InitializeDurability()
+		{
+			int minHits, maxHits;
+
+			switch (Quality)
+			{
+				case ItemQuality.Low:
+					minHits = 25;
+					maxHits = 75;
+					break;
+				case ItemQuality.Exceptional:
+					minHits = 80;
+					maxHits = 130;
+					break;
+				case ItemQuality.Epic:
+					minHits = 130;
+					maxHits = 180;
+					break;
+				case ItemQuality.Legendary:
+					minHits = 200;
+					maxHits = 250;
+					break;
+				default: // Normal quality
+					minHits = 75;
+					maxHits = 125;
+					break;
+			}
+
+			m_MaxHitPoints = Utility.RandomMinMax(minHits, maxHits);
+			m_HitPoints = m_MaxHitPoints;
+		}
+
+
+		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
         {
             base.GetContextMenuEntries(from, list);
 
@@ -374,8 +446,25 @@ namespace Server.Items
                 return base.DisplayWeight;
             }
         }
-
-        public virtual int BaseStrBonus => 0;
+		private double AdjustWeightByQuality(double baseWeight)
+		{
+			switch (Quality)
+			{
+				case ItemQuality.Low:
+					return baseWeight * 2;
+				case ItemQuality.Normal:
+					return baseWeight;
+				case ItemQuality.Exceptional:
+					return baseWeight / 2;
+				case ItemQuality.Epic:
+					return baseWeight / 3;
+				case ItemQuality.Legendary:
+					return baseWeight / 5;
+				default:
+					return baseWeight;
+			}
+		}
+		public virtual int BaseStrBonus => 0;
         public virtual int BaseDexBonus => 0;
         public virtual int BaseIntBonus => 0;
 
@@ -389,10 +478,25 @@ namespace Server.Items
                 return 50;
             }
         }
+		
 
-        public override bool CanEquip(Mobile from)
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (CanEquip(from))
+			{
+				base.OnDoubleClick(from);
+			}
+		}
+
+		public override bool CanEquip(Mobile from)
         {
-            if (from.IsPlayer())
+			if (HitPoints <= MaxHitPoints * 0.1) // 10% de la durabilité maximale
+			{
+				from.SendLocalizedMessage(1158140); // Cet objet est trop endommagé pour être utilisé.
+				return false;
+			}
+		
+				if (from.IsPlayer())
             {
                 if (_Owner != null && _Owner != from)
                 {
@@ -463,7 +567,7 @@ namespace Server.Items
             return base.CanEquip(from);
         }
 
-        public virtual int StrReq => 10;
+        public virtual int StrReq => 0;
 
         public virtual int InitMinHits => 0;
         public virtual int InitMaxHits => 0;
@@ -620,72 +724,94 @@ namespace Server.Items
 
         public DateTime NextSelfRepair { get; set; }
 
-        public virtual int OnHit(BaseWeapon weapon, int damageTaken)
-        {
-            if (m_MaxHitPoints == 0)
-                return damageTaken;
+		public virtual int OnHit(BaseWeapon weapon, int damageTaken)
+		{
+			ClothingDurabilitySystem.ApplyTimeDegradation(this);
 
-            int Absorbed = Utility.RandomMinMax(1, 4);
+			if (m_MaxHitPoints == 0)
+				return damageTaken;
 
-            damageTaken -= Absorbed;
+			int Absorbed = Utility.RandomMinMax(1, 4);
+			damageTaken -= Absorbed;
+			if (damageTaken < 0)
+				damageTaken = 0;
 
-            if (damageTaken < 0)
-                damageTaken = 0;
+			double chance = NegativeAttributes.Antique > 0 ? 80 : 25;
+			chance = ModifyChanceByQuality(chance);
 
-            double chance = NegativeAttributes.Antique > 0 ? 80 : 25;
+			if (chance >= Utility.Random(100))
+			{
+				int selfRepair = m_AosClothingAttributes.SelfRepair + (IsSetItem && m_SetEquipped ? m_SetSelfRepair : 0);
+				if (selfRepair > 0 && NextSelfRepair < DateTime.UtcNow)
+				{
+					HitPoints += selfRepair;
+					NextSelfRepair = DateTime.UtcNow + TimeSpan.FromSeconds(60);
+				}
+				else
+				{
+					int wear = CalculateWearByQuality(weapon, Absorbed);
+					if (wear > 0 && m_MaxHitPoints > 0)
+					{
+						if (m_HitPoints >= wear)
+						{
+							HitPoints -= wear;
+							wear = 0;
+						}
+						else
+						{
+							wear -= HitPoints;
+							HitPoints = 0;
+						}
+						if (wear > 0)
+						{
+							if (m_MaxHitPoints > wear)
+							{
+								MaxHitPoints -= wear;
+								if (Parent is Mobile)
+									((Mobile)Parent).LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121); // Your equipment is severely damaged.
+							}
+							else
+							{
+								Delete();
+							}
+						}
+					}
+				}
+			}
+			return damageTaken;
+		}
 
-            if (chance >= Utility.Random(100)) // 25% chance to lower durability
-            {
-                int selfRepair = m_AosClothingAttributes.SelfRepair + (IsSetItem && m_SetEquipped ? m_SetSelfRepair : 0);
+		private double ModifyChanceByQuality(double chance)
+		{
+			switch (Quality)
+			{
+				case ItemQuality.Low: return chance * 1.0; //1,2
+				case ItemQuality.Normal: return chance * 0.4;  // 0.0 
+				case ItemQuality.Exceptional: return chance * 0.3; // 0.8
+				case ItemQuality.Epic: return chance * 0.2; // 0.6
+				case ItemQuality.Legendary: return chance * 0.1; // 0.4
+				default: return chance;
+			}
+		}
 
-                if (selfRepair > 0 && NextSelfRepair < DateTime.UtcNow)
-                {
-                    HitPoints += selfRepair;
+		private int CalculateWearByQuality(BaseWeapon weapon, int absorbed)
+		{
+			int baseWear = weapon.Type == WeaponType.Bashing ? absorbed / 2 : 1;
 
-                    NextSelfRepair = DateTime.UtcNow + TimeSpan.FromSeconds(60);
-                }
-                else
-                {
-                    int wear = 1;
+			switch (Quality)
+			{
+				case ItemQuality.Low: return baseWear * 2;
+				case ItemQuality.Normal: return baseWear;
+				case ItemQuality.Exceptional: return Math.Max(1, baseWear / 2);
+				case ItemQuality.Epic: return Math.Max(1, baseWear / 3);
+				case ItemQuality.Legendary: return Math.Max(1, baseWear / 4);
+				default: return baseWear;
+			}
+		}
 
-                    if (weapon.Type == WeaponType.Bashing)
-                        wear = Absorbed / 2;
 
-                    if (wear > 0 && m_MaxHitPoints > 0)
-                    {
-                        if (m_HitPoints >= wear)
-                        {
-                            HitPoints -= wear;
-                            wear = 0;
-                        }
-                        else
-                        {
-                            wear -= HitPoints;
-                            HitPoints = 0;
-                        }
 
-                        if (wear > 0)
-                        {
-                            if (m_MaxHitPoints > wear)
-                            {
-                                MaxHitPoints -= wear;
-
-                                if (Parent is Mobile)
-                                    ((Mobile)Parent).LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061121); // Your equipment is severely damaged.
-                            }
-                            else
-                            {
-                                Delete();
-                            }
-                        }
-                    }
-                }
-            }
-
-            return damageTaken;
-        }
-
-        public BaseClothing(int itemID, Layer layer)
+		public BaseClothing(int itemID, Layer layer)
             : this(itemID, layer, 0)
         {
         }
@@ -697,10 +823,10 @@ namespace Server.Items
             Hue = hue;
 			m_Resource = DefaultResource;
             m_Quality = ItemQuality.Normal;
+			InitializeDurability();
+			UpdateMaxHitPoints();
 
-            m_HitPoints = m_MaxHitPoints = Utility.RandomMinMax(InitMinHits, InitMaxHits);
-
-            m_AosAttributes = new AosAttributes(this);
+			m_AosAttributes = new AosAttributes(this);
             m_AosClothingAttributes = new AosArmorAttributes(this);
             m_AosSkillBonuses = new AosSkillBonuses(this);
             m_AosResistances = new AosElementAttributes(this);
@@ -771,32 +897,11 @@ namespace Server.Items
 
             InvalidateProperties();
         }
-		public void AdjustWeightByQuality()
-		{
-			double baseWeight = Weight;
-			switch (Quality)
-			{
-				case ItemQuality.Low:
-					Weight = baseWeight * 2;
-					break;
-				case ItemQuality.Normal:
-					break;
-				case ItemQuality.Exceptional:
-					Weight = baseWeight / 2;
-					break;
-				case ItemQuality.Epic:
-					Weight = baseWeight / 3;
-					break;
-				case ItemQuality.Legendary:
-					Weight = baseWeight / 5;
-					break;
-			}
-		}
+	
 
 		public void SetQuality(ItemQuality newQuality)
 		{
 			Quality = newQuality;
-			AdjustWeightByQuality();
 		}
 		public override bool CheckPropertyConfliction(Mobile m)
         {
@@ -923,6 +1028,15 @@ namespace Server.Items
 			else if (m_Quality == ItemQuality.Legendary)
 				list.Add("Légendaire");
 
+			if (m_HitPoints >= 0 && m_MaxHitPoints > 0)
+			{
+				double percentage = (double)m_HitPoints / m_MaxHitPoints;
+				string durabilityQualifier = GetDurabilityQualifier(percentage);
+				list.Add($"<BASEFONT COLOR=#808080>{durabilityQualifier}</BASEFONT>");
+			}
+
+			list.Add($"Usure: {HitPoints} / {MaxHitPoints}");
+
 			if (IsImbued == true)
 				list.Add(1080418); // (Imbued)
 
@@ -961,6 +1075,7 @@ namespace Server.Items
 				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
 			else
 				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
+
 
 			var desc = Description ?? String.Empty;
 
@@ -1189,14 +1304,14 @@ namespace Server.Items
             if ((prop = m_AosClothingAttributes.LowerStatReq) != 0)
                 list.Add(1060435, prop.ToString()); // lower requirements ~1_val~%
 
-            if ((prop = ComputeStatReq(StatType.Str)) > 0)
-                list.Add(1061170, prop.ToString()); // strength requirement ~1_val~
+         //   if ((prop = ComputeStatReq(StatType.Str)) > 0)
+         //       list.Add(1061170, prop.ToString()); // strength requirement ~1_val~
 
             if ((prop = m_AosClothingAttributes.DurabilityBonus) > 0)
                 list.Add(1151780, prop.ToString()); // durability +~1_VAL~%
 
-            if (m_HitPoints >= 0 && m_MaxHitPoints > 0)
-                list.Add(1060639, "{0}\t{1}", m_HitPoints, m_MaxHitPoints); // durability ~1_val~ / ~2_val~
+        //    if (m_HitPoints >= 0 && m_MaxHitPoints > 0)
+        //        list.Add("Usure:", "{0}\t{1}", m_HitPoints, m_MaxHitPoints); // durability ~1_val~ / ~2_val~
 
             if (IsSetItem && !m_SetEquipped)
             {
@@ -1205,7 +1320,23 @@ namespace Server.Items
             }
         }
 
-        public override void AddItemPowerProperties(ObjectPropertyList list)
+		private string GetDurabilityQualifier(double percentage)
+		{
+			if (percentage <= 0.2)
+				return "Usé à la corde";
+			else if (percentage <= 0.4)
+				return "Très usé";
+			else if (percentage <= 0.6)
+				return "Usé";
+			else if (percentage <= 0.8)
+				return "Légèrement usé";
+			else if (percentage < 1.0)
+				return "Presque neuf";
+			else
+				return "État Neuf";
+		}
+
+		public override void AddItemPowerProperties(ObjectPropertyList list)
         {
             if (m_ItemPower != ItemPower.None)
             {
@@ -1319,10 +1450,12 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(12); // version
+			writer.Write(13); // nouvelle version
 
-            // Embroidery Tool version 11
-            writer.Write(m_EngravedText);
+			writer.Write(LastDurabilityCheck); // Timer pour la durabilité des vêtements
+
+			// Embroidery Tool version 11
+			writer.Write(m_EngravedText);
 
             // Version 10 - removed VvV Item (handled in VvV System) and BlockRepair (Handled as negative attribute)
 
@@ -1475,10 +1608,15 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-            switch (version)
-            {
-                case 12:
-                case 11:
+			switch (version)
+			{
+				case 13:
+					{
+						LastDurabilityCheck = reader.ReadDateTime();
+						goto case 12;
+					}
+				case 12:
+				case 11:
                     {
                         m_EngravedText = reader.ReadString();
                         goto case 9;
@@ -1708,7 +1846,15 @@ namespace Server.Items
                 AddStatBonuses(parent);
                 parent.CheckStatTimers();
             }
-        }
+			if (m_MaxHitPoints == 0 && m_HitPoints == 0)
+			{
+				InitializeDurability();
+			}
+			if (LastDurabilityCheck == DateTime.MinValue)
+			{
+				LastDurabilityCheck = DateTime.UtcNow;
+			}
+		}
 
         #endregion
 
