@@ -98,7 +98,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot(LootPack.Average);
+			AddLoot(LootPack.Average,4);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 4));
 		}
 
