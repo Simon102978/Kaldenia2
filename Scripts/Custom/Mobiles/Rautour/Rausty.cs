@@ -3,23 +3,25 @@ using Server.Items;
 namespace Server.Mobiles
 {
     [CorpseName("le corps d'un rautour")]
-    public class Wyvern : BaseCreature
+    public class Rausty : BaseCreature
     {
+        public bool BlockReflect { get; set; }
+
         [Constructable]
-        public Wyvern()
+        public Rausty()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
             Name = "un rautour";
             Body = 62;
             BaseSoundID = 362;
 
-            SetStr(202, 240);
-            SetDex(153, 172);
+            SetStr(500, 600);
+            SetDex(200, 300);
             SetInt(51, 90);
 
-            SetHits(250, 300);
+            SetHits(500, 700);
 
-            SetDamage(8, 19);
+            SetDamage(10, 25);
 
             SetDamageType(ResistanceType.Physical, 50);
             SetDamageType(ResistanceType.Poison, 50);
@@ -30,30 +32,68 @@ namespace Server.Mobiles
             SetResistance(ResistanceType.Poison, 90, 100);
             SetResistance(ResistanceType.Energy, 30, 40);
 
-            SetSkill(SkillName.Anatomy, 85.1, 95.0);
-            SetSkill(SkillName.MagicResist, 82.6, 90.5);
-            SetSkill(SkillName.Tactics, 95.1, 105.0);
-            SetSkill(SkillName.Wrestling, 97.6, 107.5);
-
+            SetSkill(SkillName.Poisoning, 60.1, 80.0);
+            SetSkill(SkillName.MagicResist, 65.1, 80.0);
+            SetSkill(SkillName.Tactics, 65.1, 90.0);
+            SetSkill(SkillName.Wrestling, 65.1, 80.0);
 
             Fame = 4000;
             Karma = -4000;
         }
 
-        public Wyvern(Serial serial)
+        public Rausty(Serial serial)
             : base(serial)
         {
         }
+
+        public override void AlterMeleeDamageTo(Mobile to, ref int damage)
+		{
+
+			if (to is BaseCreature creature)
+			{
+				if (creature.Controlled || creature.Summoned)
+				{
+
+					Say("Yummy !! *Tout en fesant une bouché de " + creature.Name + "*");
+
+					if (Hits < HitsMax)
+						Hits = HitsMax;
+
+					creature.Kill();
+
+					Effects.PlaySound(Location, Map, 0x574);
+				}
+			}
+
+			base.AlterMeleeDamageTo(to, ref damage);
+		}
+
+	    public override int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
+		{
+			int dam = base.Damage(amount, from, informMount, checkDisrupt);
+
+			if (!BlockReflect && from != null && dam > 0)
+			{
+				BlockReflect = true;
+				AOS.Damage(from, this, dam, 0, 0, 0, 0, 0, 0, 50);
+				BlockReflect = false;
+
+				from.PlaySound(0x1F1);
+			}
+
+			return dam;
+		}
+
 
         public override bool ReacquireOnMovement => true;
         public override Poison PoisonImmune => Poison.Deadly;
         public override Poison HitPoison => Poison.Deadly;
         public override int TreasureMapLevel => 2;
         public override int Meat => Utility.RandomMinMax(5, 10);
-        public override int Hides => Utility.RandomMinMax(2, 3);
+        public override int Hides => Utility.RandomMinMax(6, 12);
         public override HideType HideType => HideType.Dragonique;
 
-		public override int Bones => Utility.RandomMinMax(2, 3);
+		public override int Bones => Utility.RandomMinMax(6, 12);
 		public override BoneType BoneType => BoneType.Dragonique;
 
 		public override bool CanFly => true;

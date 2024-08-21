@@ -3,28 +3,30 @@ using Server.Items;
 namespace Server.Mobiles
 {
     [CorpseName("le corps d'un rautour")]
-    public class Wyvern : BaseCreature
+    public class WyvernElite : BaseCreature
     {
         [Constructable]
-        public Wyvern()
-            : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
+        public WyvernElite()
+            : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "un rautour";
+            Name = "un rautour enragé";
             Body = 62;
             BaseSoundID = 362;
+            Hue = 1172;
 
-            SetStr(202, 240);
-            SetDex(153, 172);
-            SetInt(51, 90);
+            SetStr(300, 400);
+            SetDex(253, 272);
+            SetInt(250, 350);
 
-            SetHits(250, 300);
+            SetHits(300, 500);
+            SetMana(1000);
 
             SetDamage(8, 19);
 
             SetDamageType(ResistanceType.Physical, 50);
             SetDamageType(ResistanceType.Poison, 50);
 
-            SetResistance(ResistanceType.Physical, 35, 45);
+            SetResistance(ResistanceType.Physical, 15, 35);
             SetResistance(ResistanceType.Fire, 30, 40);
             SetResistance(ResistanceType.Cold, 20, 30);
             SetResistance(ResistanceType.Poison, 90, 100);
@@ -34,13 +36,16 @@ namespace Server.Mobiles
             SetSkill(SkillName.MagicResist, 82.6, 90.5);
             SetSkill(SkillName.Tactics, 95.1, 105.0);
             SetSkill(SkillName.Wrestling, 97.6, 107.5);
+            SetSkill(SkillName.EvalInt, 100.0);
+            SetSkill(SkillName.Magery, 70.1, 80.0);
+            SetSkill(SkillName.Meditation, 85.1, 95.0);
 
 
             Fame = 4000;
             Karma = -4000;
         }
 
-        public Wyvern(Serial serial)
+        public WyvernElite(Serial serial)
             : base(serial)
         {
         }
@@ -50,10 +55,10 @@ namespace Server.Mobiles
         public override Poison HitPoison => Poison.Deadly;
         public override int TreasureMapLevel => 2;
         public override int Meat => Utility.RandomMinMax(5, 10);
-        public override int Hides => Utility.RandomMinMax(2, 3);
+        public override int Hides => Utility.RandomMinMax(6, 12);
         public override HideType HideType => HideType.Dragonique;
 
-		public override int Bones => Utility.RandomMinMax(2, 3);
+		public override int Bones => Utility.RandomMinMax(6, 12);
 		public override BoneType BoneType => BoneType.Dragonique;
 
 		public override bool CanFly => true;
