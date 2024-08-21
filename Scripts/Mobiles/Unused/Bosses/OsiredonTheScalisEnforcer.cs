@@ -228,7 +228,7 @@ namespace Server.Mobiles
         {
             base.OnDeath(c);
 
-            FishingPole pole = new FishingPole();
+   /*         FishingPole pole = new FishingPole();
             BaseRunicTool.ApplyAttributesTo(pole, false, 0, Utility.RandomMinMax(2, 5), 50, 100);
             c.DropItem(pole);
 
@@ -236,7 +236,7 @@ namespace Server.Mobiles
             c.DropItem(new SpecialFishingNet());
             c.DropItem(new SpecialFishingNet());
 
-            SkillMasteryPrimer.CheckPrimerDrop(this);
+            SkillMasteryPrimer.CheckPrimerDrop(this);*/
         }
 
         public override void Delete()
@@ -253,10 +253,18 @@ namespace Server.Mobiles
 
             base.Delete();
         }
+       	public override int Hides => Utility.RandomMinMax(15, 25);
+		public override HideType HideType => HideType.Ancien;
+
+
+		public override int Bones => Utility.RandomMinMax(15, 25);
+
+		public override BoneType BoneType => BoneType.Ancien;
 
         public override void GenerateLoot()
         {
             AddLoot(LootPack.SuperBoss, 2);
+            AddLoot(LootPack.LootItem<Items.Gold>(5000,7500));
         //    AddLoot(LootPack.LootItemCallback(RandomRecipe, 10.0, 1, false, false));
         }
 
