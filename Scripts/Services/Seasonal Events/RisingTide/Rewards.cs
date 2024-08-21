@@ -122,7 +122,7 @@ namespace Server.Items
     }
 
 	[Flipable(0xA537, 0xA538)]
-	public class ShoulderParrot : BaseOuterTorso
+	public class ShoulderParrot : Item
 	{
 		private DateTime _NextFly;
 		private DateTime _FlyEnd;

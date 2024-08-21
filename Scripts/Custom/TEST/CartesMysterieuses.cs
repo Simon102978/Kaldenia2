@@ -113,7 +113,7 @@ public class SkillCard : Item
 			return;
 		}
 
-		if (!from.CheckSkill(SkillName.Cartography, m_Level * 20, 120))
+		if (!from.CheckSkill(SkillName.Cartography, m_Level * 17, 110))
 		{
 			from.SendMessage("Vous n'avez pas réussi à décrypter la carte. Essayez encore.");
 			return;

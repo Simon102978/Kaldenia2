@@ -7,6 +7,8 @@ namespace Server.Items
             : base(PotionEffect.ManaLesser)
         {
 			Name = "Potion de mana mineure";
+			Hue = 2079;
+
 		}
 
 		public LesserManaPotion(Serial serial)

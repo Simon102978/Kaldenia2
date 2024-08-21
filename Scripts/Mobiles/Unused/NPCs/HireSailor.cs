@@ -63,8 +63,10 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
-
-        public override bool ClickTitle => false;
+		public override Poison PoisonImmune => Poison.Greater;
+		public override Poison HitPoison => Poison.Regular;
+		public override double HitPoisonChance => 0.50;
+		public override bool ClickTitle => false;
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

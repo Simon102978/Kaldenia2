@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Server;
 using Server.Items;
 using Server.Mobiles;
@@ -7,64 +8,79 @@ namespace Server.Scripts
 {
 	public class ClothingDurabilitySystem
 	{
+		private static Dictionary<PlayerMobile, DateTime> m_PlayerLastChecks = new Dictionary<PlayerMobile, DateTime>();
+
 		public static void Initialize()
 		{
-			EventSink.WorldLoad += OnWorldLoad;
+			EventSink.Login += OnLogin;
+			EventSink.Logout += OnLogout;
 			EventSink.WorldSave += OnWorldSave;
 		}
 
-		private static DateTime m_LastGlobalCheck;
-		private static TimeSpan m_CheckInterval = TimeSpan.FromHours(1);
-
-		public static void OnWorldLoad()
+		public static void OnLogin(LoginEventArgs e)
 		{
-			m_LastGlobalCheck = DateTime.UtcNow;
-			Timer.DelayCall(TimeSpan.FromMinutes(5), TimeSpan.FromMinutes(5), CheckGlobalDurability);
+			if (e.Mobile is PlayerMobile player)
+			{
+				if (!m_PlayerLastChecks.ContainsKey(player))
+				{
+					m_PlayerLastChecks[player] = DateTime.UtcNow;
+				}
+				else
+				{
+					CheckPlayerDurability(player);
+				}
+			}
+		}
+
+		public static void OnLogout(LogoutEventArgs e)
+		{
+			if (e.Mobile is PlayerMobile player)
+			{
+				CheckPlayerDurability(player);
+			}
 		}
 
 		public static void OnWorldSave(WorldSaveEventArgs e)
 		{
-			CheckGlobalDurability();
-		}
-
-		public static void CheckGlobalDurability()
-		{
-			if (DateTime.UtcNow - m_LastGlobalCheck < m_CheckInterval)
-				return;
-
-			foreach (var m in World.Mobiles.Values)
+			foreach (var player in m_PlayerLastChecks.Keys)
 			{
-				if (m is PlayerMobile player)
+				if (player.NetState != null) // Only check online players
 				{
-					foreach (var item in player.Items)
-					{
-						if (item is BaseClothing clothing)
-						{
-							ApplyTimeDegradation(clothing);
-						}
-					}
+					CheckPlayerDurability(player);
 				}
 			}
-
-			m_LastGlobalCheck = DateTime.UtcNow;
 		}
 
-		public static void ApplyTimeDegradation(BaseClothing clothing)
+		public static void CheckPlayerDurability(PlayerMobile player)
 		{
-			if (clothing.LastDurabilityCheck == DateTime.MinValue)
-				clothing.LastDurabilityCheck = DateTime.UtcNow;
+			if (!m_PlayerLastChecks.TryGetValue(player, out DateTime lastCheck))
+			{
+				lastCheck = DateTime.UtcNow;
+				m_PlayerLastChecks[player] = lastCheck;
+			}
 
-			TimeSpan timeSinceLastCheck = DateTime.UtcNow - clothing.LastDurabilityCheck;
+			TimeSpan timeSinceLastCheck = DateTime.UtcNow - lastCheck;
 			if (timeSinceLastCheck.TotalHours >= 2)
 			{
-				int twoHourPeriodsElapsed = (int)(timeSinceLastCheck.TotalHours / 2);
-				int degradation = twoHourPeriodsElapsed * CalculateTimeDegradation(clothing);
+				foreach (var item in player.Items)
+				{
+					if (item is BaseClothing clothing)
+					{
+						ApplyTimeDegradation(clothing, timeSinceLastCheck);
+					}
+				}
 
-				clothing.HitPoints -= degradation;
-				if (clothing.HitPoints < 0) clothing.HitPoints = 0;
-
-				clothing.LastDurabilityCheck = DateTime.UtcNow;
+				m_PlayerLastChecks[player] = DateTime.UtcNow;
 			}
+		}
+
+		public static void ApplyTimeDegradation(BaseClothing clothing, TimeSpan timeSinceLastCheck)
+		{
+			int twoHourPeriodsElapsed = (int)(timeSinceLastCheck.TotalHours / 2);
+			int degradation = twoHourPeriodsElapsed * CalculateTimeDegradation(clothing);
+
+			clothing.HitPoints -= degradation;
+			if (clothing.HitPoints < 0) clothing.HitPoints = 0;
 		}
 
 		public static int CalculateTimeDegradation(BaseClothing clothing)

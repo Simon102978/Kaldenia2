@@ -6,6 +6,7 @@ namespace Server.Items
         public ManaPotion() : base(PotionEffect.Mana)
         {
 			Name = "Potion de mana";
+			Hue = 2079;
 		}
 
 		public ManaPotion(Serial serial)

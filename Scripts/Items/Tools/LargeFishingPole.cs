@@ -366,16 +366,39 @@ namespace Server.Items
 		private void FishRandomItem(Mobile from)
 		{
 			var (itemType, itemName) = possibleItems[Utility.Random(possibleItems.Length)];
-			Item item = (Item)Activator.CreateInstance(itemType);
+			Item item = null;
 
-			if (from.AddToBackpack(item))
+			try
 			{
-				from.SendMessage($"Vous avez aussi pêché un(e) {itemName} !");
+				// Essayez d'abord de créer l'objet avec un constructeur sans paramètres
+				item = (Item)Activator.CreateInstance(itemType);
 			}
-			else
+			catch (MissingMethodException)
 			{
-				item.Delete();
-				from.SendMessage($"Vous avez aussi pêché un(e) {itemName}, mais votre sac est plein. L'objet est perdu.");
+				try
+				{
+					// Si cela échoue, essayez de créer l'objet avec un constructeur qui prend un seul paramètre int
+					item = (Item)Activator.CreateInstance(itemType, new object[] { 1 });
+				}
+				catch
+				{
+					// Si cela échoue aussi, loggez l'erreur et passez à l'item suivant
+					Console.WriteLine($"Impossible de créer un objet de type {itemType.Name}");
+					return;
+				}
+			}
+
+			if (item != null)
+			{
+				if (from.AddToBackpack(item))
+				{
+					from.SendMessage($"Vous avez aussi pêché un(e) {itemName} !");
+				}
+				else
+				{
+					item.Delete();
+					from.SendMessage($"Vous avez aussi pêché un(e) {itemName}, mais votre sac est plein. L'objet est perdu.");
+				}
 			}
 		}
 

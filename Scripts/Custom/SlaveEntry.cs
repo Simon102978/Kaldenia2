@@ -22,6 +22,7 @@ namespace Server
 		Archer,
 		Marin,
 		Voleur
+
 	}
 
 	[Parsable]

@@ -9,6 +9,8 @@ namespace Server.Items
             : base(PotionEffect.IntelligenceGreater)
         {
 			Name = "Potion d'intelligence majeure";
+			Hue = 2080;
+
 		}
 
 		public GreaterIntelligencePotion(Serial serial)

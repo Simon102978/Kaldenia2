@@ -89,16 +89,15 @@ namespace Server.Items
 				}
 				else if (targeted is BaseClothing)
 				{
-					BaseClothing clothing = (BaseClothing)targeted;
-					resource = clothing.Resource;
+					resource = CraftResource.None;
 				}
 				else
                 {
                     from.SendMessage( "Cet article ne peut pas être recyclé.");
                 }
 
-                if (resource == CraftResource.None)
-                {
+				if (resource == CraftResource.None && !(targeted is BaseClothing))
+				{
                     from.SendMessage( "Vous ne pouvez pas recycler ceci. (Code: -1)");
                     return;
                 }
@@ -170,7 +169,7 @@ namespace Server.Items
 					case CraftResource.AncienWood: m_CraftSystem = DefCarpentry.CraftSystem; break;
 
 
-
+					case CraftResource.None: m_CraftSystem = DefTailoring.CraftSystem; break;
 
 				}
 
@@ -357,7 +356,19 @@ namespace Server.Items
                     }
                 }
 
-                int newAmount = (int)(craftResource.Amount * 0.5);
+				else if (targeted is BaseClothing)
+				{
+					switch (resource)
+					{
+						case CraftResource.None:
+						default:
+							resItem = new Cloth();
+							break;
+					}
+				}
+
+
+				int newAmount = (int)(craftResource.Amount * 0.5);
                 
                 if (newAmount < 1)
                     newAmount = 1;
@@ -379,7 +390,9 @@ namespace Server.Items
 
                 from.PlaySound(0x5CA);
             }
-        }
+		}
+	
+
 
 		public override void Serialize( GenericWriter writer )
 		{
