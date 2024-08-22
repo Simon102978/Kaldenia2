@@ -11,9 +11,6 @@ namespace Server.Mobiles
     public class Keos : KepushBase
 	{
 
-		public bool BlockReflect { get; set; }
-
-
 		[Constructable]
         public Keos()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
@@ -92,23 +89,6 @@ namespace Server.Mobiles
 
 		
 		}
-
-		public override int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
-        {
-            int dam = base.Damage(amount, from, informMount, checkDisrupt);
-
-            if (!BlockReflect && from != null && dam > 0)
-            {
-                BlockReflect = true;
-                AOS.Damage(from, this, dam, 0, 0, 0, 0, 0, 0, 50);
-                BlockReflect = false;
-
-                from.PlaySound(0x1F1);
-            }
-
-            return dam;
-        }
-
 
 
 		public Keos(Serial serial)

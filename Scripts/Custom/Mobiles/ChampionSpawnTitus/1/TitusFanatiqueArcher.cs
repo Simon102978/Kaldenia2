@@ -70,7 +70,7 @@ namespace Server.Mobiles
 
 		public override void GenerateLoot()
 		{
-			AddLoot(LootPack.Average);
+			AddLoot(LootPack.Average,4);
 			AddLoot(LootPack.LootItem<Arrow>(10, 25, true));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 4));
 		}
