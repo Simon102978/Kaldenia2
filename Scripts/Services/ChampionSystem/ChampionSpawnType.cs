@@ -265,7 +265,7 @@ namespace Server.Engines.CannedEvil
 				},
 				new List<string>()
 			),
-		   new ChampionSpawnInfo( "Ceos", typeof( Ceos ), new[]{ "Banisher", "Enforcer", "Eradicator" } , new[] // Ceos
+		   new ChampionSpawnInfo( "Ceos", typeof( Keos ), new[]{ "Banisher", "Enforcer", "Eradicator" } , new[] // Ceos
             {
 				new[]{ typeof(Trollvillageois), typeof(Trollvagabond)},
 				new[]{ typeof(Troll),  typeof(Ogre)   },
