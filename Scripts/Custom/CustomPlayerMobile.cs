@@ -100,7 +100,10 @@ namespace Server.Mobiles
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool Journaliste { get; set; }
 
-	   [CommandProperty(AccessLevel.Administrator)]
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool CrieurPublic { get; set; }
+
+		[CommandProperty(AccessLevel.Administrator)]
 		public bool RaceRestreinte { get; set; }
 
 		[CommandProperty(AccessLevel.GameMaster)]
@@ -2383,6 +2386,11 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+				case 39:
+					{
+						CrieurPublic = reader.ReadBool();
+					goto case 37;
+					}
 				case 38:
 				case 37:
 				{
@@ -2643,8 +2651,10 @@ namespace Server.Mobiles
         {        
             base.Serialize(writer);
 
-            writer.Write(38); // version
+            writer.Write(39); // version
 
+
+			writer.Write(CrieurPublic);
 			writer.Write(TeleportStone);
 			writer.Write(m_LastEvolutionClasse);
 			writer.Write(m_LastEvolutionMetier);
