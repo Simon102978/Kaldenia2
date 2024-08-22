@@ -7,15 +7,18 @@ using System.Linq;
 
 namespace Server.Mobiles
 {
-    [CorpseName("Corp de Ceos")]
-    public class Ceos : BasePeerless
+    [CorpseName("Corp de Keos")]
+    public class Keos : KepushBase
 	{
 
+		public bool BlockReflect { get; set; }
+
+
 		[Constructable]
-        public Ceos()
+        public Keos()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "Ceos";
+            Name = "Keos";
             Body = 76;
             BaseSoundID = 609;
 
@@ -57,71 +60,9 @@ namespace Server.Mobiles
 			base.OnDamage(amount, from, willKill);
 
 			
-			if (Utility.Random(100) <= 10)
-				{
-					switch (Utility.Random(3))
-					{
-						case 0:
-							{
-								Say("Oupsie!");
-								break;
-							}
-						case 1:
-							{
-								Say("C'est pas moi, c'est lui ! *Pointant quelqu'un d'autre au hasard*");
-								break;
-							}
-						case 2:
-							{
-								Say("Quoi ?! ");
-								break;
-							}
-						default:
-							{
-								Say("*roule les yeux*");
-								break;
 
-							}
-					}
-
-					Effects.SendLocationParticles(EffectItem.Create(Location, Map, EffectItem.DefaultDuration), 0x36B0, 1, 14, 63, 7, 9915, 0);
-					Effects.PlaySound(Location, Map, 0x229);
-
-					List<Mobile> targets = new List<Mobile>();
-
-					if (Map != null)
-					{
-
-						int Range = 3;
-
-						IPooledEnumerable eable = Map.GetMobilesInRange(Location, Range);
-
-						foreach (Mobile m in eable)
-						{
-							if (this != m && CanBeHarmful(m, false) && !(m is BaseCeosSpawn) && !m.IsStaff())
-							{
-								targets.Add(m);
-							}
-						}
-						eable.Free();
-					}
-
-
-					if (targets.Count > 0)
-					{
-						for (int i = 0; i < targets.Count; ++i)
-						{
-							Mobile m = targets[i];
-
-							DoHarmful(m);
-
-							m.ApplyPoison(this, Poison.Greater);
-						}
-					}
-
-				}
 			// eats pet or summons
-			else if (from is BaseCreature)
+			if (from is BaseCreature)
 			{
 				BaseCreature creature = (BaseCreature)from;
 
@@ -152,70 +93,39 @@ namespace Server.Mobiles
 		
 		}
 
+		public override int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
+        {
+            int dam = base.Damage(amount, from, informMount, checkDisrupt);
 
-		public override bool CanSpawnHelpers => true;
+            if (!BlockReflect && from != null && dam > 0)
+            {
+                BlockReflect = true;
+                AOS.Damage(from, this, dam, 0, 0, 0, 0, 0, 0, 50);
+                BlockReflect = false;
 
-		public override int MaxHelpersWaves => 1;
+                from.PlaySound(0x1F1);
+            }
 
-		public override void SpawnHelpers()
-		{
-			int count = 4;
-
-			if (Altar != null)
-			{
-				count = Math.Min(Altar.Fighters.Count, 4);
-
-				for (int i = 0; i < count; i++)
-				{
-					Mobile fighter = Altar.Fighters[i];
-
-					if (CanBeHarmful(fighter))
-					{
-						Ogresse satyr = new Ogresse
-						{
-							FightMode = FightMode.Closest
-						};
-						SpawnHelper(satyr, GetSpawnPosition(fighter.Location, fighter.Map, 2));
-
-						satyr.Combatant = fighter;
-
-						Say("À moi !");
-
-						//fighter.SendLocalizedMessage(1075116); // A twisted satyr scrambles onto the branch beside you and attacks!
-					}
-				}
-			}
-			else
-			{
-				for (int i = 0; i < count; i++)
-					SpawnHelper(new Ogresse(), 4);
-			}
-		}
+            return dam;
+        }
 
 
 
-
-
-
-
-
-
-
-		public Ceos(Serial serial)
+		public Keos(Serial serial)
             : base(serial)
         {
         }
 
 
 		public override int Meat => 4;
-        public override Poison PoisonImmune => Poison.Greater;
+        public override Poison PoisonImmune => Poison.Lethal;
 
 		public override bool Unprovokable => true;
 		public override int TreasureMapLevel => 5;
 		public override int Hides => 8;
-		public override HideType HideType => HideType.Geant;
+		public override HideType HideType => HideType.Ancien;
 		public override int Bones => 8;
-		public override BoneType BoneType => BoneType.Geant;
+		public override BoneType BoneType => BoneType.Ancien;
 
 	
 		public override void GenerateLoot()

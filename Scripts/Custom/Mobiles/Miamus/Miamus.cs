@@ -37,8 +37,6 @@ namespace Server.Mobiles
 		public override bool Uncalmable => true;
 		public override Poison PoisonImmune => Poison.Lethal;
 
-		public bool BlockReflect { get; set; }
-
 		public override bool CanBeParagon => false;
 
 		public DateTime m_LastParole = DateTime.MinValue;
@@ -132,7 +130,71 @@ namespace Server.Mobiles
 		{
 			base.OnDamage(amount, from, willKill);
 			
-		 if (from is BaseCreature)
+				if (Utility.Random(100) <= 10)
+				{
+					switch (Utility.Random(3))
+					{
+						case 0:
+							{
+								Say("Oupsie!");
+								break;
+							}
+						case 1:
+							{
+								Say("C'est pas moi, c'est lui ! *Pointant quelqu'un d'autre au hasard*");
+								break;
+							}
+						case 2:
+							{
+								Say("Quoi ?! ");
+								break;
+							}
+						default:
+							{
+								Say("*roule les yeux*");
+								break;
+
+							}
+					}
+
+					Effects.SendLocationParticles(EffectItem.Create(Location, Map, EffectItem.DefaultDuration), 0x36B0, 1, 14, 63, 7, 9915, 0);
+					Effects.PlaySound(Location, Map, 0x229);
+
+					List<Mobile> targets = new List<Mobile>();
+
+					if (Map != null)
+					{
+
+						int Range = 3;
+
+						IPooledEnumerable eable = Map.GetMobilesInRange(Location, Range);
+
+						foreach (Mobile m in eable)
+						{
+							if (this != m && CanBeHarmful(m, false) && !(m is BaseCeosSpawn) && !m.IsStaff())
+							{
+								targets.Add(m);
+							}
+						}
+						eable.Free();
+					}
+
+
+					if (targets.Count > 0)
+					{
+						for (int i = 0; i < targets.Count; ++i)
+						{
+							Mobile m = targets[i];
+
+							DoHarmful(m);
+
+							m.ApplyPoison(this, Poison.Greater);
+						}
+					}
+
+				}
+
+			if (from is BaseCreature)
 			{
 				BaseCreature creature = (BaseCreature)from;
 
@@ -153,21 +215,7 @@ namespace Server.Mobiles
 			Parole();
 		}
 
-		public override int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
-        {
-            int dam = base.Damage(amount, from, informMount, checkDisrupt);
-
-            if (!BlockReflect && from != null && dam > 0)
-            {
-                BlockReflect = true;
-                AOS.Damage(from, this, dam, 0, 0, 0, 0, 0, 0, 50);
-                BlockReflect = false;
-
-                from.PlaySound(0x1F1);
-            }
-
-            return dam;
-        }
+		
 
 		public void Parole()
 		{
@@ -411,7 +459,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.PeculiarSeed1);
             AddLoot(LootPack.LootItem<Items.RoastPig>(10.0));
-			AddLoot(LootPack.LootItem<Items.Gold>(15000,20000));
+			AddLoot(LootPack.LootItem<Items.Gold>(5000,10000));
 		}
 
         public override void Serialize(GenericWriter writer)
