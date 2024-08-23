@@ -6,11 +6,17 @@ namespace Server.Items
 {
 	public class Ecraseur : Item
 	{
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Charges { get; set; }
+
+
 		[Constructable]
 		public Ecraseur() : base(4787)
 		{
 			Name = "Écraseur";
 			Weight = 1.0;
+			Charges = Utility.RandomMinMax(25, 50);
 		}
 
 		public Ecraseur(Serial serial)
@@ -37,7 +43,7 @@ namespace Server.Items
 			{
 				BaseShell shell = (BaseShell)o;
 
-				int amount = Utility.RandomMinMax(1, 5);
+				int amount = Utility.RandomMinMax(1, 3);
 				PoudreCoquillages poudre = new PoudreCoquillages(amount);
 
 				if (from.AddToBackpack(poudre))

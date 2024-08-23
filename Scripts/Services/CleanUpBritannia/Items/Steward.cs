@@ -732,9 +732,11 @@ namespace Server.Mobiles
             : base(0x14F0)
         {
             LootType = LootType.Blessed;
-        }
+			Name = "un mannequin";
 
-        public StewardDeed(Serial serial)
+		}
+
+		public StewardDeed(Serial serial)
             : base(serial)
         {
         }

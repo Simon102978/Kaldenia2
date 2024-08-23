@@ -247,16 +247,16 @@ namespace Server.Engines.Craft
 			Resizable = false;
 
 			AddPage(0);
-			AddBackground(0, 0, 240, 135, 5054);
+			AddBackground(0, 0, 240, 135, 9200);
 			AddAlphaRegion(10, 10, 220, 115);
 
-			AddHtml(10, 10, 220, 75, "Cet objet est épique ou légendaire. Êtes-vous sûr de vouloir le fondre ?", false, false);
+			AddHtml(10, 10, 220, 75, "<BASEFONT COLOR=#FFFFFF>Cet objet est épique ou légendaire. Êtes-vous sûr de vouloir le fondre ?</BASEFONT>", false, false);
 
 			AddButton(40, 95, 4005, 4007, 1, GumpButtonType.Reply, 0);
-			AddHtml(75, 95, 100, 35, "OUI", false, false);
+			AddHtml(75, 95, 100, 35, "<BASEFONT COLOR=#FFFFFF>OUI</BASEFONT>", false, false);
 
 			AddButton(135, 95, 4005, 4007, 0, GumpButtonType.Reply, 0);
-			AddHtml(170, 95, 100, 35, "NON", false, false);
+			AddHtml(170, 95, 100, 35, "<BASEFONT COLOR=#FFFFFF>NON</BASEFONT>", false, false);
 		}
 
 		public override void OnResponse(Server.Network.NetState sender, RelayInfo info)

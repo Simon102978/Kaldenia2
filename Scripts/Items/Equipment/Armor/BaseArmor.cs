@@ -299,143 +299,143 @@ namespace Server.Items
 								ar += 0;
 								break;
 							case CraftResource.LupusLeather:
-								ar += 2;
+								ar += 1;
 								break;
 							case CraftResource.ReptilienLeather:
-								ar += 4;
+								ar += 2;
 								break;
 							case CraftResource.GeantLeather:
-								ar += 6;
+								ar += 4;
 								break;
 							case CraftResource.OphidienLeather:
-								ar += 8;
+								ar += 6;
 								break;
 							case CraftResource.ArachnideLeather:
-								ar += 10;
+								ar += 8;
 								break;
 							case CraftResource.DragoniqueLeather:
-								ar += 12;
+								ar += 10;
 								break;
 							case CraftResource.DemoniaqueLeather:
-								ar += 14;
+								ar += 12;
 								break;
 							case CraftResource.AncienLeather:
-								ar += 16;
+								ar += 14;
 								break;
 
 							// Os 
 							case CraftResource.RegularBone:
-								ar += 4;
+								ar += 2;
 								break;
 							case CraftResource.LupusBone:
-								ar += 6;
+								ar += 4;
 								break;
 							case CraftResource.ReptilienBone:
-								ar += 8;
+								ar += 6;
 								break;
 							case CraftResource.GeantBone:
-								ar += 10;
+								ar += 8;
 								break;
 							case CraftResource.OphidienBone:
-								ar += 12;
+								ar += 10;
 								break;
 							case CraftResource.ArachnideBone:
-								ar += 14;
+								ar += 12;
 								break;
 							case CraftResource.DragoniqueBone:
-								ar += 16;
+								ar += 14;
 								break;
 							case CraftResource.DemoniaqueBone:
-								ar += 18;
+								ar += 16;
 								break;
 							case CraftResource.AncienBone:
-								ar += 20;
+								ar += 18;
 								break;
 
 							// Métaux 
 							case CraftResource.Iron:
-								ar += 8;
+								ar += 4;
 								break;
 							case CraftResource.Bronze:
-								ar += 10;
+								ar += 6;
 								break;
 							case CraftResource.Copper:
-								ar += 12;
+								ar += 8;
 								break;
 							case CraftResource.Sonne:
-								ar += 14;
+								ar += 10;
 								break;
 							case CraftResource.Argent:
-								ar += 16;
+								ar += 12;
 								break;
 							case CraftResource.Boreale:
-								ar += 16;
+								ar += 14;
 								break;
 							case CraftResource.Chrysteliar:
-								ar += 16;
+								ar += 14;
 								break;
 							case CraftResource.Glacias:
-								ar += 18;
+								ar += 14;
 								break;
 							case CraftResource.Lithiar:
-								ar += 18;
+								ar += 16;
 								break;
 							case CraftResource.Acier:
-								ar += 20;
+								ar += 16;
 								break;
 							case CraftResource.Durian:
-								ar += 20;
+								ar += 16;
 								break;
 							case CraftResource.Equilibrum:
-								ar += 22;
+								ar += 16;
 								break;
 							case CraftResource.Gold:
-								ar += 24;
+								ar += 18;
 								break;
 							case CraftResource.Jolinar:
-								ar += 26;
+								ar += 20;
 								break;
 							case CraftResource.Justicium:
-								ar += 26;
+								ar += 20;
 								break;
 							case CraftResource.Abyssium:
-								ar += 28;
+								ar += 22;
 								break;
 							case CraftResource.Bloodirium:
-								ar += 28;
+								ar += 22;
 								break;
 							case CraftResource.Herbrosite:
-								ar += 30;
+								ar += 24;
 								break;
 							case CraftResource.Khandarium:
-								ar += 30;
+								ar += 24;
 								break;
 							case CraftResource.Mytheril:
-								ar += 32;
+								ar += 26;
 								break;
 							case CraftResource.Sombralir:
-								ar += 34;
+								ar += 26;
 								break;
 							case CraftResource.Draconyr:
-								ar += 36;
+								ar += 28;
 								break;
 							case CraftResource.Heptazion:
-								ar += 35;
+								ar += 28;
 								break;
 							case CraftResource.Oceanis:
-								ar += 38;
+								ar += 28;
 								break;
 							case CraftResource.Brazium:
-								ar += 38;
+								ar += 28;
 								break;
 							case CraftResource.Lunerium:
-								ar += 38;
+								ar += 28;
 								break;
 							case CraftResource.Marinar:
-								ar += 38;
+								ar += 28;
 								break;
 							case CraftResource.Nostalgium:
-								ar += 40;
+								ar += 30;
 								break;
 						}
 
