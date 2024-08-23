@@ -9,18 +9,19 @@ namespace Server.Mobiles
 
         [Constructable]
         public Rausty()
-            : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
+            : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "un rautour";
+            Name = "Rausty";
             Body = 62;
             BaseSoundID = 362;
+            Hue = 2078;
 
             SetStr(500, 600);
             SetDex(200, 300);
-            SetInt(51, 90);
+            SetInt(200, 300);
 
-            SetHits(500, 700);
-
+            SetHits(1000, 1500);
+            SetMana(1000, 1500);
             SetDamage(10, 25);
 
             SetDamageType(ResistanceType.Physical, 50);
@@ -32,10 +33,14 @@ namespace Server.Mobiles
             SetResistance(ResistanceType.Poison, 90, 100);
             SetResistance(ResistanceType.Energy, 30, 40);
 
-            SetSkill(SkillName.Poisoning, 60.1, 80.0);
-            SetSkill(SkillName.MagicResist, 65.1, 80.0);
-            SetSkill(SkillName.Tactics, 65.1, 90.0);
-            SetSkill(SkillName.Wrestling, 65.1, 80.0);
+            SetSkill(SkillName.Poisoning, 90.1, 100.0);
+            SetSkill(SkillName.Anatomy, 85.1, 95.0);
+            SetSkill(SkillName.MagicResist, 82.6, 90.5);
+            SetSkill(SkillName.Tactics, 95.1, 105.0);
+            SetSkill(SkillName.Wrestling, 97.6, 107.5);
+            SetSkill(SkillName.EvalInt, 100.0);
+            SetSkill(SkillName.Magery, 70.1, 80.0);
+            SetSkill(SkillName.Meditation, 85.1, 95.0);
 
             Fame = 4000;
             Karma = -4000;
@@ -106,6 +111,8 @@ namespace Server.Mobiles
 			AddLoot(LootPack.LootItem<Items.GemmePoison>(), (double)5);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(7, 14));
 			AddLoot(LootPack.LootItem<SangDragon>(4, true));
+            AddLoot(LootPack.LootItem<Items.Gold>(100,200));
+        
 
 
 		}
