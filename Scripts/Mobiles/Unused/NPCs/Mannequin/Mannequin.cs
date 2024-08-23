@@ -8,6 +8,7 @@ using Server.Misc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using Server.Spells;
 
 namespace Server.Mobiles
 {
@@ -700,62 +701,107 @@ namespace Server.Mobiles
 
 
 
-    [Flipable(0x14F0, 0x14EF)]
-    public class MannequinDeed : Item
-    {
-        public override int LabelNumber => 1151602;  // Mannequin Deed
+	[Flipable(0x14F0, 0x14EF)]
+	public class MannequinDeed : Item
+	{
+		//public override int LabelNumber => 1151602;  // Mannequin Deed
 
-        [Constructable]
-        public MannequinDeed()
-            : base(0x14F0)
-        {
-            LootType = LootType.Blessed;
-        }
+		[Constructable]
+		public MannequinDeed()
+			: base(0x14F0)
+		{
+			Name = IsFemale ? "Un Mannequin (femme)" : "Un Mannequin (homme)";
+			LootType = LootType.Blessed;
+		}
 
-        public MannequinDeed(Serial serial)
-            : base(serial)
-        {
-        }
+		public bool IsFemale => (ItemID == 0x14EF);
 
-        public override void OnDoubleClick(Mobile from)
-        {
-            if (IsChildOf(from.Backpack))
-            {
-                BaseHouse house = BaseHouse.FindHouseAt(from);
 
-                if (house != null)
-                {
-                    if (house.Owner == from || house.IsCoOwner(from))
-                    {
-                        from.SendLocalizedMessage(1151657); // Where do you wish to place this?
-                        from.Target = new PlaceTarget(this);
-                    }
-                    else
-                    {
-                        from.SendLocalizedMessage(502096); // You must own the house to do this.
-                    }
-                }
-                else
-                {
-                    from.SendLocalizedMessage(502092); // You must be in your house to do this.
-                }
-            }
-            else
-            {
-                from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
-            }
-        }
+		public MannequinDeed(Serial serial) : base(serial)
+		{
+		}
 
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(0); // version
-        }
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (IsChildOf(from.Backpack))
+			{
+				BaseHouse house = BaseHouse.FindHouseAt(from);
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            reader.ReadInt();
-        }
-    }
+				if (house != null)
+				{
+					if (house.IsOwner(from))
+					{
+						from.SendLocalizedMessage(1151657); // Where do you wish to place this?
+						from.Target = new PlaceTarget(this);
+					}
+					else
+					{
+						from.SendLocalizedMessage(502096); // You must own the house to do this.
+					}
+				}
+				else
+				{
+					from.SendLocalizedMessage(502092); // You must be in your house to do this.
+				}
+			}
+			else
+			{
+				from.SendLocalizedMessage(1042001); // That must be in your pack for you to use it.
+			}
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			reader.ReadInt();
+		}
+	}
+	private class PlaceTarget : Target
+	{
+		private readonly MannequinDeed _deed;
+
+		public PlaceTarget(MannequinDeed deed) : base(-1, true, TargetFlags.None)
+		{
+			_deed = deed;
+		}
+
+		protected override void OnTarget(Mobile from, object targeted)
+		{
+			IPoint3D p = targeted as IPoint3D;
+			Map map = from.Map;
+
+			if (p == null || map == null || _deed.Deleted)
+				return;
+
+			SpellHelper.GetSurfaceTop(ref p);
+			BaseHouse house = BaseHouse.FindHouseAt(new Point3D(p), map, 20);
+
+			if (house == null || !house.IsOwner(from))
+			{
+				from.SendLocalizedMessage(1042036); // That location is not in your house.
+			}
+			else
+			{
+				Point3D p3d = new Point3D(p);
+				Mannequin mannequin = new Mannequin(from)
+				{
+					Name = _deed.Name,
+					Female = _deed.IsFemale,
+					Body = _deed.IsFemale ? 401 : 400
+				};
+
+				mannequin.MoveToWorld(p3d, map);
+
+				_deed.Delete();
+				from.SendLocalizedMessage(1151658); // The mannequin has been placed in your house.
+			}
+		}
+	}
 }
+

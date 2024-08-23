@@ -68,7 +68,7 @@ namespace Server.Mobiles
 
             if (Parent is PlayerVendor && item is Container && ((Container)item).Items.OfType<Container>().Any())
             {
-                ((PlayerVendor)Parent).SayTo(m, 1017381); // You cannot place a container that has other containers in it on a vendor.
+                ((PlayerVendor)Parent).SayTo(m, " You cannot place a container that has other containers in it on a vendor."); // You cannot place a container that has other containers in it on a vendor.
 
                 return false;
             }

@@ -1,4 +1,5 @@
 using System;
+using System.Text;
 using Server;
 using Server.Network;
 using Server.Multis;
@@ -16,11 +17,33 @@ namespace Server.Misc
 		{
 			Mobile speaker = e.Mobile;
 			MessageType type = e.Type;
+			string speech = e.Speech.Trim();
+
+			// Convertir le message pour gérer les accents
+			string convertedSpeech = RemoveDiacritics(speech);
+
+			BaseHouse speakerHouse = BaseHouse.FindHouseAt(speaker);
+
+			// Si le locuteur n'est pas dans une maison, permettre le comportement par défaut
+			if (speakerHouse == null)
+			{
+				return; // Sortir de la méthode sans bloquer le message
+			}
+
+			// À partir d'ici, le code ne s'applique que si le locuteur est dans une maison
+
+			// Vérifier si le message commence par "I wish" (insensible à la casse)
+			if (speech.StartsWith("I wish", StringComparison.OrdinalIgnoreCase))
+			{
+				// Si c'est une commande "I wish", ne pas bloquer le message
+				return;
+			}
 
 			if (type != MessageType.Regular && type != MessageType.Whisper)
 				return;
 
-			BaseHouse speakerHouse = BaseHouse.FindHouseAt(speaker);
+			// Envoyer le message au locuteur lui-même
+			speaker.Send(new UnicodeMessage(speaker.Serial, speaker.Body, type, e.Hue, 3, "FRA", speaker.Name, convertedSpeech));
 
 			foreach (NetState state in NetState.Instances)
 			{
@@ -33,33 +56,42 @@ namespace Server.Misc
 
 				bool canHear = false;
 
-				if (speakerHouse != null)
+				if (listenerHouse == speakerHouse) // L'auditeur est dans la même maison
 				{
-					if (type == MessageType.Whisper)
-					{
-						// Les chuchotements ne sont entendus que dans la même maison
-						canHear = (speakerHouse == listenerHouse);
-					}
-					else // MessageType.Regular
-					{
-						// Les messages normaux sont entendus dans la maison et à proximité à l'extérieur
-						canHear = (speakerHouse == listenerHouse) ||
-								  (listenerHouse == null && speaker.InRange(listener, 2));
-					}
+					canHear = true; // Peut entendre tous les types de messages
 				}
-				else // Le locuteur est à l'extérieur
+				else if (type == MessageType.Regular) // Message normal
 				{
-					// Comportement normal pour l'extérieur
-					canHear = speaker.InRange(listener, type == MessageType.Whisper ? 1 : 2);
+					// L'auditeur est à l'extérieur, à 2 tiles de la maison
+					canHear = speaker.GetDistanceToSqrt(listener) <= 2;
 				}
 
 				if (canHear)
 				{
-					listener.Send(new AsciiMessage(speaker.Serial, speaker.Body, type, e.Hue, 3, speaker.Name, e.Speech));
+					listener.Send(new UnicodeMessage(speaker.Serial, speaker.Body, type, e.Hue, 3, "FRA", speaker.Name, convertedSpeech));
 				}
 			}
 
-			e.Blocked = true;
+			e.Blocked = true; // Bloquer le message original seulement si le locuteur est dans une maison
+		}
+
+	
+
+public static string RemoveDiacritics(string text)
+		{
+			var normalizedString = text.Normalize(NormalizationForm.FormD);
+			var stringBuilder = new StringBuilder();
+
+			foreach (var c in normalizedString)
+			{
+				var unicodeCategory = System.Globalization.CharUnicodeInfo.GetUnicodeCategory(c);
+				if (unicodeCategory != System.Globalization.UnicodeCategory.NonSpacingMark)
+				{
+					stringBuilder.Append(c);
+				}
+			}
+
+			return stringBuilder.ToString().Normalize(NormalizationForm.FormC);
 		}
 	}
 }

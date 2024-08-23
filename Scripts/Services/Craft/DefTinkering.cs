@@ -808,6 +808,11 @@ namespace Server.Engines.Craft
 			SetUseSubRes2(index, true);
 			index = AddCraft(typeof(CustomSign), "Divers", "Affiche Personnalisée", 30.0, 80.0, typeof(Materiaux), "Matériaux", 10, "Vous n'avez pas assez de matériaux");
 			AddRes(index, typeof(BlankScroll), "Parchemin Vierge", 3, "Vous n'avez pas suffisament de parchemin vierge");
+
+			index = AddCraft(typeof(MannequinDeed), "Divers", "Mannequin", 60.0, 100.0, typeof(Materiaux), "Matériaux", 35, "Vous n'avez pas assez de matériaux");
+			AddRes(index, typeof(Cloth), "Tissus", 20, "Vous n'avez pas suffisament de tissus");
+
+
 			ForceNonExceptional(index);
 			index = AddCraft(typeof(Spyglass), "Divers", "Longue vue", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(Fouet4), "Divers", "Fouet 4 mètres", 50.0, 70.0, typeof(Leather), 1044462, 3, 1044463);

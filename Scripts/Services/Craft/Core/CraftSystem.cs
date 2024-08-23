@@ -103,6 +103,14 @@ namespace Server.Engines.Craft
 
         public bool QuestOption { get; set; }
 
+		private bool m_Pratiquer;
+
+		public bool Pratiquer
+		{
+			get { return m_Pratiquer; }
+			set { m_Pratiquer = value; }
+		}
+
 
 		#endregion
 

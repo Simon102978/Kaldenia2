@@ -166,7 +166,7 @@ namespace Server.Engines.Craft
 
 					AddHtml(685, 465, 200, 20, "<h3><basefont color=#FFFFFF>Ne Pas Marquer<basefont></h3>", false, false);
 				else
-					AddHtml(685, 465, 200, 20, "<h3><basefont color=#FFFFFF>Confirmer avant de marquer<basefont></h3>", false, false);
+					AddHtml(685, 465, 200, 20, "<h3><basefont color=#FFFFFF>Conf. pour marquer<basefont></h3>", false, false);
 
 
 				//    AddButton(270, 362, 4005, 4007, GetButtonID(6, 6), GumpButtonType.Reply, 0);
@@ -175,33 +175,39 @@ namespace Server.Engines.Craft
 
 
 			}
-            // ****************************************
+			// Pratiquer option
+			if (craftSystem.Pratiquer)
+			{
+				AddButton(15, 462, 4005, 4007, GetButtonID(6, 12), GumpButtonType.Reply, 0);
+				AddHtml(50, 465, 200, 20, "<h3><basefont color=#FFFFFF>Pratiquer<basefont></h3>", false, false);
+			}
+			// ****************************************
 
-            // Enhance option
-  /*        if (m_CraftSystem.CanEnhance)
-            {
-                AddButton(270, 382, 4005, 4007, GetButtonID(6, 8), GumpButtonType.Reply, 0);
-                AddHtmlLocalized(305, 385, 150, 18, 1061001, LabelColor, false, false); // ENHANCE ITEM
-            } */
-            // ****************************************
+			// Enhance option
+			/*        if (m_CraftSystem.CanEnhance)
+					  {
+						  AddButton(270, 382, 4005, 4007, GetButtonID(6, 8), GumpButtonType.Reply, 0);
+						  AddHtmlLocalized(305, 385, 150, 18, 1061001, LabelColor, false, false); // ENHANCE ITEM
+					  } */
+			// ****************************************
 
-            // Alter option
-      /*      if (m_CraftSystem.CanAlter)
-            {
-                AddButton(270, 402, 4005, 4007, GetButtonID(6, 9), GumpButtonType.Reply, 0);
-                AddHtmlLocalized(304, 405, 250, 18, 1094726, LabelColor, false, false); // ALTER ITEM (Gargoyle)
-            }*/
-            // ****************************************
+			// Alter option
+			/*      if (m_CraftSystem.CanAlter)
+				  {
+					  AddButton(270, 402, 4005, 4007, GetButtonID(6, 9), GumpButtonType.Reply, 0);
+					  AddHtmlLocalized(304, 405, 250, 18, 1094726, LabelColor, false, false); // ALTER ITEM (Gargoyle)
+				  }*/
+			// ****************************************
 
-            // Quest item
-     //       AddButton(270, 422, 4005, 4007, GetButtonID(6, 10), GumpButtonType.Reply, 0);
-    //        AddHtmlLocalized(305, 425, 150, 18, context != null && context.QuestOption == CraftQuestOption.QuestItem ? 1112534 : 1112533, LabelColor, false, false); // QUEST ITEM
-            // ****************************************
+			// Quest item
+			//       AddButton(270, 422, 4005, 4007, GetButtonID(6, 10), GumpButtonType.Reply, 0);
+			//        AddHtmlLocalized(305, 425, 150, 18, context != null && context.QuestOption == CraftQuestOption.QuestItem ? 1112534 : 1112533, LabelColor, false, false); // QUEST ITEM
+			// ****************************************
 
-//            AddButton(270, 442, 4005, 4007, GetButtonID(6, 2), GumpButtonType.Reply, 0);
-  //          AddHtmlLocalized(305, 445, 150, 18, 1044013, LabelColor, false, false); // MAKE LAST
+			//            AddButton(270, 442, 4005, 4007, GetButtonID(6, 2), GumpButtonType.Reply, 0);
+			//          AddHtmlLocalized(305, 445, 150, 18, 1044013, LabelColor, false, false); // MAKE LAST
 
-            int total = 1;
+			int total = 1;
             int made = 0;
 
             if (Locked && AutoCraftTimer.AutoCraftTable.ContainsKey(m_From))
@@ -937,10 +943,63 @@ namespace Server.Engines.Craft
                                     AutoCraftTimer.EndTimer(m_From);
                                     break;
                                 }
-                        }
+							case 12: // Pratiquer
+								{
+									if (m_CraftSystem.Pratiquer)
+									{
+										BaseTool tool = GetCraftingTool(m_From, m_CraftSystem);
+										if (tool != null && CanCraft(m_From, tool))
+										{
+											Pratiquer.Do(m_From, m_CraftSystem, tool);
+										}
+									}
+									break;
+								}
+						}
                         break;
                     }
             }
         }
-    }
+		private static BaseTool GetCraftingTool(Mobile from, CraftSystem craftSystem)
+		{
+			Item item = from.FindItemOnLayer(Layer.OneHanded);
+
+			if (item is BaseTool && craftSystem.CraftItems.SearchForSubclass(item.GetType()) != null)
+			{
+				return (BaseTool)item;
+			}
+
+			item = from.FindItemOnLayer(Layer.TwoHanded);
+
+			if (item is BaseTool && craftSystem.CraftItems.SearchForSubclass(item.GetType()) != null)
+			{
+				return (BaseTool)item;
+			}
+
+			return null;
+		}
+
+		public static bool CanCraft(Mobile from, BaseTool tool)
+		{
+			if (tool == null || tool.Deleted)
+			{
+				from.SendMessage("Vous n'avez pas d'outil valide.");
+				return false;
+			}
+
+			if (tool.UsesRemaining <= 0)
+			{
+				from.SendMessage("Vous avez usé votre outil !");
+				return false;
+			}
+
+			if (!tool.IsAccessibleTo(from))
+			{
+				from.SendMessage("L'outil doit être dans votre inventaire pour l'utiliser.");
+				return false;
+			}
+
+			return true;
+		}
+	}
 }
