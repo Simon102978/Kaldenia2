@@ -10,8 +10,8 @@ using Server.Network;
 
 namespace Server.Mobiles
 {
-	[CorpseName("Corp de Rugal")]
-	public class Rugal : BaseCreature, IAuraCreature
+	[CorpseName("Corp de Ruyal")]
+	public class Ruyal : BaseCreature, IAuraCreature
 	{
 
 		public override bool CanStealth => true;
@@ -44,10 +44,10 @@ namespace Server.Mobiles
 		public DateTime m_LastBlockParole = DateTime.MinValue;
 
 		[Constructable]
-		public Rugal()
+		public Ruyal()
 			: base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
 		{
-			Name = "Rugal";
+			Name = "Ruyal";
 			Title = "Titan Furtif";
 			Body = 76;
 			BaseSoundID = 609;
@@ -190,7 +190,7 @@ namespace Server.Mobiles
 
 			m.Mana -= 20;
 
-            m.SendMessage("Vous etes mentalement affecté par la présence de Rugal.");
+            m.SendMessage("Vous etes mentalement affecté par la présence de Ruyal.");
         }
 
 
@@ -422,7 +422,7 @@ namespace Server.Mobiles
 			base.Attack(e);
 		}
 
-		public Rugal(Serial serial)
+		public Ruyal(Serial serial)
 			: base(serial)
 		{
 		}
