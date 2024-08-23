@@ -270,6 +270,8 @@ namespace Server.Mobiles
 						Console.WriteLine($"Erreur lors de l'appel � Disarm.AddImmunity : {ex.Message}");
 					}
         }
+
+
          public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
 			base.OnDamage(amount, from, willKill);
