@@ -17,10 +17,10 @@ namespace Server.Items
 		{
 		}
 
-		public override int BasePhysicalResistance => 6;
+		public override int BasePhysicalResistance => 5;
 		public override int BaseFireResistance => 3;
 		public override int BaseColdResistance => 2;
-		public override int BasePoisonResistance => 3;
+		public override int BasePoisonResistance => 1;
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
@@ -56,10 +56,10 @@ public override bool Disguise { get { return true; } }
 		{
 		}
 
-		public override int BasePhysicalResistance => 6;
+		public override int BasePhysicalResistance => 5;
 		public override int BaseFireResistance => 3;
 		public override int BaseColdResistance => 2;
-		public override int BasePoisonResistance => 3;
+		public override int BasePoisonResistance => 1;
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
@@ -93,10 +93,10 @@ public override bool Disguise { get { return true; } }
 		{
 		}
 
-		public override int BasePhysicalResistance => 6;
+		public override int BasePhysicalResistance => 5;
 		public override int BaseFireResistance => 3;
 		public override int BaseColdResistance => 2;
-		public override int BasePoisonResistance => 3;
+		public override int BasePoisonResistance => 1;
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
@@ -132,10 +132,10 @@ public override bool Disguise { get { return true; } }
 		{
 		}
 
-		public override int BasePhysicalResistance => 6;
+		public override int BasePhysicalResistance => 5;
 		public override int BaseFireResistance => 3;
 		public override int BaseColdResistance => 2;
-		public override int BasePoisonResistance => 3;
+		public override int BasePoisonResistance => 1;
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;
@@ -171,10 +171,10 @@ public override bool Disguise { get { return true; } }
 		{
 		}
 
-		public override int BasePhysicalResistance => 6;
+		public override int BasePhysicalResistance => 5;
 		public override int BaseFireResistance => 3;
 		public override int BaseColdResistance => 2;
-		public override int BasePoisonResistance => 3;
+		public override int BasePoisonResistance => 1;
 		public override int BaseEnergyResistance => 2;
 		public override int InitMinHits => 50;
 		public override int InitMaxHits => 65;

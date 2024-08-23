@@ -1,137 +1,113 @@
 using Server.Engines.PartySystem;
-using Server.Targeting;
 using System;
 using System.Collections.Generic;
 
 namespace Server.Spells.Fourth
 {
-    public class ArchProtectionSpell : MagerySpell
-    {
-        private static readonly SpellInfo m_Info = new SpellInfo(
-            "Arch Protection", "Vas Uus Sanct",
-            239,
-            9011,
-            Reagent.Garlic,
-            Reagent.Ginseng,
-            Reagent.MandrakeRoot);
-        public ArchProtectionSpell(Mobile caster, Item scroll)
-            : base(caster, scroll, m_Info)
-        {
-        }
+	public class ArchProtectionSpell : MagerySpell
+	{
+		private static readonly SpellInfo m_Info = new SpellInfo(
+			"Arch Protection", "Vas Uus Sanct",
+			239,
+			9011,
+			Reagent.Garlic,
+			Reagent.Ginseng,
+			Reagent.MandrakeRoot);
+
+		public ArchProtectionSpell(Mobile caster, Item scroll)
+			: base(caster, scroll, m_Info)
+		{
+		}
 
 		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Obeissance, 8) }; } }
 		public override SpellCircle Circle => SpellCircle.Fourth;
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
 
-        public void Target(IPoint3D p)
-        {
-            if (!Caster.CanSee(p))
-            {
-                Caster.SendLocalizedMessage(500237); // Target can not be seen.
-            }
-            else if (CheckSequence())
-            {
-                SpellHelper.Turn(Caster, p);
+		public override void OnCast()
+		{
+			if (CheckSequence())
+			{
+				List<Mobile> targets = new List<Mobile>();
+				Map map = Caster.Map;
 
-                SpellHelper.GetSurfaceTop(ref p);
+				if (map != null)
+				{
+					IPooledEnumerable eable = map.GetMobilesInRange(Caster.Location, 10);
 
-                List<Mobile> targets = new List<Mobile>();
+					foreach (Mobile m in eable)
+					{
+						if (Caster.CanBeBeneficial(m, false))
+							targets.Add(m);
+					}
 
-                Map map = Caster.Map;
+					eable.Free();
+				}
 
-                if (map != null)
-                {
-                    IPooledEnumerable eable = map.GetMobilesInRange(new Point3D(p), 2);
+				Party party = Party.Get(Caster);
 
-                    foreach (Mobile m in eable)
-                    {
-                        if (Caster.CanBeBeneficial(m, false))
-                            targets.Add(m);
-                    }
+				for (int i = 0; i < targets.Count; ++i)
+				{
+					Mobile m = targets[i];
 
-                    eable.Free();
-                }
+					if (m == Caster || (party != null && party.Contains(m)))
+					{
+						Caster.DoBeneficial(m);
+						Second.ProtectionSpell.Toggle(Caster, m, true);
+						AddEntry(m, Caster);
+					}
+				}
 
-                Party party = Party.Get(Caster);
+				Caster.PlaySound(0x299);
+				Caster.FixedParticles(0x3779, 10, 20, 5002, EffectLayer.Waist);
+			}
 
-                for (int i = 0; i < targets.Count; ++i)
-                {
-                    Mobile m = targets[i];
+			FinishSequence();
+		}
 
-                    if (m == Caster || (party != null && party.Contains(m)))
-                    {
-                        Caster.DoBeneficial(m);
-                        Second.ProtectionSpell.Toggle(Caster, m, true);
-                    }
-                }
-            }
+		private static readonly Dictionary<Mobile, Timer> _Table = new Dictionary<Mobile, Timer>();
 
-            FinishSequence();
-        }
+		private static void AddEntry(Mobile m, Mobile caster)
+		{
+			if (_Table.ContainsKey(m))
+			{
+				_Table[m].Stop();
+			}
 
-        private static readonly Dictionary<Mobile, int> _Table = new Dictionary<Mobile, int>();
+			Timer t = new InternalTimer(m, caster);
+			t.Start();
+			_Table[m] = t;
+		}
 
-        private static void AddEntry(Mobile m, int v)
-        {
-            _Table[m] = v;
-        }
+		public static void RemoveEntry(Mobile m)
+		{
+			if (_Table.ContainsKey(m))
+			{
+				_Table[m].Stop();
+				_Table.Remove(m);
+				m.EndAction(typeof(ArchProtectionSpell));
+				m.SendLocalizedMessage(1005587); // The protection spell has expired.
+			}
+		}
 
-        public static void RemoveEntry(Mobile m)
-        {
-            if (_Table.ContainsKey(m))
-            {
-                int v = _Table[m];
-                _Table.Remove(m);
-                m.EndAction(typeof(ArchProtectionSpell));
-            }
-        }
+		private class InternalTimer : Timer
+		{
+			private readonly Mobile m_Owner;
 
-        private class InternalTimer : Timer
-        {
-            private readonly Mobile m_Owner;
+			public InternalTimer(Mobile target, Mobile caster)
+				: base(TimeSpan.FromSeconds(0))
+			{
+				double time = caster.Skills[SkillName.Magery].Value * 1.2;
+				if (time > 144)
+					time = 144;
+				Delay = TimeSpan.FromSeconds(time);
+				Priority = TimerPriority.OneSecond;
 
-            public InternalTimer(Mobile target, Mobile caster)
-                : base(TimeSpan.FromSeconds(0))
-            {
-                double time = caster.Skills[SkillName.Magery].Value * 1.2;
-                if (time > 144)
-                    time = 144;
-                Delay = TimeSpan.FromSeconds(time);
-                Priority = TimerPriority.OneSecond;
+				m_Owner = target;
+			}
 
-                m_Owner = target;
-            }
-
-            protected override void OnTick()
-            {
-                RemoveEntry(m_Owner);
-            }
-        }
-
-        private class InternalTarget : Target
-        {
-            private readonly ArchProtectionSpell m_Owner;
-            public InternalTarget(ArchProtectionSpell owner)
-                : base(10, true, TargetFlags.None)
-            {
-                m_Owner = owner;
-            }
-
-            protected override void OnTarget(Mobile from, object o)
-            {
-                IPoint3D p = o as IPoint3D;
-
-                if (p != null)
-                    m_Owner.Target(p);
-            }
-
-            protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-    }
+			protected override void OnTick()
+			{
+				RemoveEntry(m_Owner);
+			}
+		}
+	}
 }

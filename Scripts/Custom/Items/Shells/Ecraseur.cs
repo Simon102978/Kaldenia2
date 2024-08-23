@@ -7,54 +7,66 @@ namespace Server.Items
 	public class Ecraseur : Item
 	{
 		[Constructable]
-		public Ecraseur() : base( 4787 )
+		public Ecraseur() : base(4787)
 		{
 			Name = "Écraseur";
 			Weight = 1.0;
 		}
 
-        public Ecraseur(Serial serial)
-            : base(serial)
+		public Ecraseur(Serial serial)
+			: base(serial)
 		{
 		}
 
-        public override void OnDoubleClick(Mobile from)
-        {
-            if (IsChildOf(from.Backpack))
-            {
-                from.SendMessage("Que voulez-vous écraser?");
-                from.BeginTarget(1, false, TargetFlags.None, new TargetCallback(OnTarget));
-            }
-            else
-            {
-                from.SendMessage("L'objet doit être dans votre sac pour être utilisé.");
-            }
-        }
-
-        private void OnTarget(Mobile from, object o)
-        {
-            if (o is BaseShell)
-            {
-                BaseShell shell = (BaseShell)o;
-
-                shell.ScissorHelper(from, new PoudreCoquillages(), 1, false);
-            }
-            else
-            {
-                from.SendMessage("Vous ne pouvez écraser cela.");
-            }
-        }
-
-		public override void Serialize( GenericWriter writer )
+		public override void OnDoubleClick(Mobile from)
 		{
-			base.Serialize( writer );
-
-			writer.Write( (int) 0 ); // version
+			if (IsChildOf(from.Backpack))
+			{
+				from.SendMessage("Que voulez-vous écraser?");
+				from.BeginTarget(1, false, TargetFlags.None, new TargetCallback(OnTarget));
+			}
+			else
+			{
+				from.SendMessage("L'objet doit être dans votre sac pour être utilisé.");
+			}
 		}
 
-		public override void Deserialize( GenericReader reader )
+		private void OnTarget(Mobile from, object o)
 		{
-			base.Deserialize( reader );
+			if (o is BaseShell)
+			{
+				BaseShell shell = (BaseShell)o;
+
+				int amount = Utility.RandomMinMax(1, 5);
+				PoudreCoquillages poudre = new PoudreCoquillages(amount);
+
+				if (from.AddToBackpack(poudre))
+				{
+					from.SendMessage($"Vous avez écrasé le coquillage et obtenu {amount} poudre(s) de coquillages.");
+					shell.Consume(1);
+				}
+				else
+				{
+					poudre.Delete();
+					from.SendMessage("Votre sac est trop plein pour contenir la poudre de coquillages.");
+				}
+			}
+			else
+			{
+				from.SendMessage("Vous ne pouvez écraser cela.");
+			}
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
 
 			int version = reader.ReadInt();
 		}

@@ -280,7 +280,7 @@ namespace Server.Items
 
         public static int GetBardRange(Mobile bard, SkillName skill)
         {
-            return 8 + (int)(bard.Skills[skill].Value / 15);
+            return 10 + (int)(bard.Skills[skill].Value / 15);
         }
 
         public static void PickInstrument(Mobile from, InstrumentPickedCallback callback)
@@ -402,8 +402,12 @@ namespace Server.Items
 
             if (m_Quality == ItemQuality.Exceptional)
                 val -= 5.0; // 10%
+			if (m_Quality == ItemQuality.Epic)
+				val -= 10.0; // 20%
+			if (m_Quality == ItemQuality.Legendary)
+				val -= 20.0; // 40%
 
-            if (m_Slayer != SlayerName.None)
+			if (m_Slayer != SlayerName.None)
             {
                 SlayerEntry entry = SlayerGroup.GetEntryByName(m_Slayer);
 
@@ -471,11 +475,39 @@ namespace Server.Items
             if (m_Crafter != null)
                 list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
 
-            if (m_Quality == ItemQuality.Exceptional)
-                list.Add(1060636); // exceptional
-        }
+			if (m_Quality == ItemQuality.Exceptional)
+				list.Add("Exceptionnelle");
+			else if (m_Quality == ItemQuality.Epic)
+				list.Add("Epique");
+			else if (m_Quality == ItemQuality.Legendary)
+				list.Add("Legendaire");
+		}
 
-        public override void AddUsesRemainingProperties(ObjectPropertyList list)
+		public override void AddNameProperties(ObjectPropertyList list)
+		{
+			var name = Name ?? String.Empty;
+
+			if (String.IsNullOrWhiteSpace(name))
+				name = System.Text.RegularExpressions.Regex.Replace(GetType().Name, "[A-Z]", " $0");
+
+			
+			 if (Quality == ItemQuality.Legendary)
+				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Epic)
+				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Exceptional)
+				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
+			else
+				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
+
+			var desc = Description ?? String.Empty;
+
+			if (!String.IsNullOrWhiteSpace(desc))
+				list.Add(desc);
+
+		}
+
+		public override void AddUsesRemainingProperties(ObjectPropertyList list)
         {
             list.Add(1060584, UsesRemaining.ToString()); // uses remaining: ~1_val~
         }

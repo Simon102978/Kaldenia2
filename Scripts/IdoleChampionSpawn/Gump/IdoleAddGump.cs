@@ -29,12 +29,14 @@ namespace Server.Gumps
 			m_Niveau = level;
 
             m_SearchString = searchString;
-            m_SearchResults = searchResults;
-            m_Page = page;
+			m_SearchResults = searchResults ?? new ArrayList(); 
+			m_Page = page;
 
             m_EntryIndex = entryindex;
 
-            from.CloseGump(typeof(IdoleAddGump));
+	
+
+			from.CloseGump(typeof(IdoleAddGump));
 
             AddPage(0);
 
@@ -214,31 +216,45 @@ namespace Server.Gumps
 
                             break;
                         }
-                    default:
-                        {
-                            int index = info.ButtonID - 4;
+					default:
+						{
+							int index = info.ButtonID - 4;
 
-                             Type type = ((SearchEntry)m_SearchResults[index]).EntryType;
+							if (index >= 0 && index < m_SearchResults.Count)
+							{
+								SearchEntry entry = (SearchEntry)m_SearchResults[index];
+								Type type = entry.EntryType;
 
-                             if (type.IsSubclassOf(typeof(Mobile)))
-                             {
+								if (type.IsSubclassOf(typeof(Mobile)))
+								{
+									if (m_EntryIndex >= 0 && m_EntryIndex < m_Niveau.Types.Count)
+									{
+										m_Niveau.Types[m_EntryIndex] = new IdoleTypeInfo(1, type);
+										from.SendGump(new IdoleNiveauGump(from, m_Stone, m_IdoleInfo, m_Niveau, 0));
+									}
+									else
+									{
+										from.SendMessage("Index d'entrée invalide.");
+										from.SendGump(new IdoleAddGump(from, m_SearchString, m_Page, m_SearchResults, true, m_EntryIndex, m_Stone, m_IdoleInfo, m_Niveau));
+									}
 
-                                m_Niveau.Types[m_EntryIndex] = new IdoleTypeInfo(1, type) ;
-                                from.SendGump(new IdoleNiveauGump(from, m_Stone,m_IdoleInfo,m_Niveau, 0));	
-                                
-                             }
-                             else
-                             {
-                                from.SendMessage("Seulement les mobiles peuvent être selectionné.");
-                                from.SendGump(new IdoleAddGump(from, m_SearchString, m_Page , m_SearchResults, true, m_EntryIndex, m_Stone,m_IdoleInfo,m_Niveau));
-                             }
+								}
+								else
+								{
+									from.SendMessage("Seulement les mobiles peuvent être sélectionnés.");
+									from.SendGump(new IdoleAddGump(from, m_SearchString, m_Page, m_SearchResults, true, m_EntryIndex, m_Stone, m_IdoleInfo, m_Niveau));
+								}
+							}
+							else
+							{
+								from.SendMessage("Sélection invalide.");
+								from.SendGump(new IdoleAddGump(from, m_SearchString, m_Page, m_SearchResults, true, m_EntryIndex, m_Stone, m_IdoleInfo, m_Niveau));
+							}
+							break;
+						}
 
-
-
-                            break;
-                        }
-                }
-            }
+				}
+			}
 
            
         }

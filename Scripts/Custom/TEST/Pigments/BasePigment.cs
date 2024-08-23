@@ -63,14 +63,16 @@ namespace Server.Items
 					if (regularTub.Charges > 1)
 					{
 						regularTub.DyedHue = m_Pigment.m_Hue;
-						regularTub.Charges--;
+						regularTub.Charges = 5;
+						regularTub.Name = $"Bac de Teinture ({m_Pigment.m_PigmentName}) ";
 						from.SendMessage($"Vous avez appliqué le pigment {m_Pigment.m_PigmentName} à la cuve de teinture. Il reste {regularTub.Charges} charges.");
 						m_Pigment.Delete();
 					}
 					else if (regularTub.Charges == 1)
 					{
 						regularTub.DyedHue = m_Pigment.m_Hue;
-						regularTub.Charges = 0;
+						regularTub.Charges = 1;
+						regularTub.Name = $"Bac de Teinture ({m_Pigment.m_PigmentName}) ";
 						from.SendMessage($"Vous avez appliqué le pigment {m_Pigment.m_PigmentName} à la cuve de teinture. La cuve n'a plus de charges.");
 						m_Pigment.Delete();
 					}

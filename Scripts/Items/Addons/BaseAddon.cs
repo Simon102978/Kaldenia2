@@ -86,66 +86,65 @@ namespace Server.Items
         public virtual bool RetainDeedHue => Hue != 0 && CraftResources.GetHue(Resource) != Hue;
         public virtual bool RetainComponentHue => false;
 
-        public virtual void OnChop(Mobile from)
-        {
-            BaseHouse house = BaseHouse.FindHouseAt(this);
+		public virtual void OnChop(Mobile from)
+		{
+			BaseHouse house = BaseHouse.FindHouseAt(this);
 
-            #region High Seas
-            BaseBoat boat = BaseBoat.FindBoatAt(from, from.Map);
-            if (boat != null && boat is BaseGalleon)
-            {
-                ((BaseGalleon)boat).OnChop(this, from);
-                return;
-            }
-            #endregion
+			#region High Seas
+			BaseBoat boat = BaseBoat.FindBoatAt(from, from.Map);
+			if (boat != null && boat is BaseGalleon)
+			{
+				((BaseGalleon)boat).OnChop(this, from);
+				return;
+			}
+			#endregion
 
-            //if (house != null && (house.IsOwner(from) || (house.Addons.ContainsKey(this) && house.Addons[this] == from)))
-			if(house != null && house.IsCoOwner(from))
-            {
-                Effects.PlaySound(GetWorldLocation(), Map, 0x3B3);
-                from.SendLocalizedMessage(500461); // You destroy the item.
+			if (house != null && (house.IsOwner(from) || house.IsCoOwner(from) || (house.Addons.ContainsKey(this) && house.Addons[this] == from)))
+			{
+				Effects.PlaySound(GetWorldLocation(), Map, 0x3B3);
+				from.SendLocalizedMessage(500461); // You destroy the item.
 
-                int hue = 0;
+				int hue = 0;
 
-                if (RetainDeedHue)
-                {
-                    for (int i = 0; hue == 0 && i < m_Components.Count; ++i)
-                    {
-                        AddonComponent c = m_Components[i];
+				if (RetainDeedHue)
+				{
+					for (int i = 0; hue == 0 && i < m_Components.Count; ++i)
+					{
+						AddonComponent c = m_Components[i];
 
-                        if (c.Hue != 0)
-                            hue = c.Hue;
-                    }
-                }
+						if (c.Hue != 0)
+							hue = c.Hue;
+					}
+				}
 
-                Delete();
+				Delete();
 
-                house.Addons.Remove(this);
+				house.Addons.Remove(this);
 
-                BaseAddonDeed deed = GetDeed();
+				BaseAddonDeed deed = GetDeed();
 
-                if (deed != null)
-                {
-                    if (!RetainComponentHue)
-                    {
-                        if (RetainDeedHue)
-                            deed.Hue = hue;
-                        else
-                            deed.Hue = 0;
-                    }
+				if (deed != null)
+				{
+					if (!RetainComponentHue)
+					{
+						if (RetainDeedHue)
+							deed.Hue = hue;
+						else
+							deed.Hue = 0;
+					}
 
-                    deed.IsReDeed = true;
+					deed.IsReDeed = true;
 
-                    from.AddToBackpack(deed);
-                }
-            }
-            else
-            {
-                from.SendLocalizedMessage(1113134); // You can only redeed items in your own house!
-            }
-        }
+					from.AddToBackpack(deed);
+				}
+			}
+			else
+			{
+				from.SendLocalizedMessage(1113134); // You can only redeed items in your own house!
+			}
+		}
 
-        public virtual BaseAddonDeed Deed => null;
+		public virtual BaseAddonDeed Deed => null;
 
         public virtual BaseAddonDeed GetDeed()
         {

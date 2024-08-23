@@ -47,8 +47,12 @@ namespace Server.Mobiles
             SetSkill(SkillName.Tactics, 5, 27);
             SetSkill(SkillName.Wrestling, 5, 5);
             SetSkill(SkillName.Swords, 5, 27);
+			SetSkill(SkillName.Mining, 5, 27);
+			SetSkill(SkillName.Fishing, 5, 27);
+			SetSkill(SkillName.Lumberjacking, 5, 27);
 
-            Fame = 0;
+
+			Fame = 0;
             Karma = 0;
 
             AddItem(new Sandals(Utility.RandomNeutralHue()));

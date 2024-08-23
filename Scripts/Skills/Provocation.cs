@@ -120,7 +120,7 @@ namespace Server.SkillHandlers
                     }
                     else if (m_Creature != target)
                     {
-                        from.NextSkillTime = Core.TickCount + 10000;
+                        from.NextSkillTime = Core.TickCount + 5000;
 
                         double diff = ((m_Instrument.GetDifficultyFor(m_Creature) + m_Instrument.GetDifficultyFor(target)) * 0.5) - 5.0;
                         double music = from.Skills[SkillName.Musicianship].Value;
@@ -141,7 +141,7 @@ namespace Server.SkillHandlers
                         {
                             if (from.Player && !BaseInstrument.CheckMusicianship(from))
                             {
-                                from.NextSkillTime = Core.TickCount + (10000 - ((masteryBonus / 5) * 1000));
+                                from.NextSkillTime = Core.TickCount + (5000 - (masteryBonus * 200)); ;
                                 from.SendLocalizedMessage(500612); // You play poorly, and there is no effect.
                                 m_Instrument.PlayInstrumentBadly(from);
                                 m_Instrument.ConsumeUse(from);
@@ -150,7 +150,7 @@ namespace Server.SkillHandlers
                             {
                                 if (!from.CheckTargetSkill(SkillName.Provocation, target, diff - 25.0, diff + 25.0))
                                 {
-                                    from.NextSkillTime = Core.TickCount + (10000 - ((masteryBonus / 5) * 1000));
+                                    from.NextSkillTime = Core.TickCount + (5000 - (masteryBonus * 200)); ;
                                     from.SendLocalizedMessage(501599); // Your music fails to incite enough anger.
                                     m_Instrument.PlayInstrumentBadly(from);
                                     m_Instrument.ConsumeUse(from);

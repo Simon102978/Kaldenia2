@@ -2,6 +2,7 @@ using System;
 using Server.Network;
 using Server.Targeting;
 using Server.Mobiles;
+using Server.Gumps;
 
 namespace Server.Items
 {
@@ -28,21 +29,18 @@ namespace Server.Items
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-
 			writer.Write((int)0); // version
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
-
 			int version = reader.ReadInt();
 		}
 
 		public override void OnDoubleClick(Mobile from)
 		{
 			from.SendLocalizedMessage(502434); // What should I use these scissors on?
-
 			from.Target = new InternalTarget(this);
 		}
 
@@ -60,38 +58,17 @@ namespace Server.Items
 				if (m_Item.Deleted)
 					return;
 
-				/*if ( targeted is Item && !((Item)targeted).IsStandardLoot() )
+				if (targeted is IScissorable obj)
 				{
-					from.SendLocalizedMessage( 502440 ); // Scissors can not be used on that to produce anything.
-				}
-				else */
-				if (Core.AOS && targeted == from)
-				{
-					from.HairItemID = 0;
-					from.FacialHairItemID = 0;
-					//from.SendLocalizedMessage( 1062845 + Utility.Random( 3 ) );	//"That doesn't seem like the smartest thing to do." / "That was an encounter you don't wish to repeat." / "Ha! You missed!"
-				}
-				else if (Utility.RandomDouble() > .20 && (from.Direction & Direction.Running) != 0 &&
-						 (Core.TickCount - from.LastMoveTime) < from.ComputeMovementSpeed(from.Direction))
-				{
-					from.SendLocalizedMessage(1063305); // Didn't your parents ever tell you not to run with scissors in your hand?!
-				}
-				else if (targeted is Item && !((Item)targeted).Movable)
-				{
-					if (targeted is IScissorable && (targeted is PlagueBeastInnard || targeted is PlagueBeastMutationCore))
+					if (IsEpicOrLegendary(targeted))
 					{
-						IScissorable obj = (IScissorable)targeted;
-
+						from.SendGump(new ConfirmationGump(from, m_Item, obj));
+					}
+					else
+					{
 						if (obj.Scissor(from, m_Item))
 							from.PlaySound(0x248);
 					}
-				}
-				else if (targeted is IScissorable)
-				{
-					IScissorable obj = (IScissorable)targeted;
-
-					if (obj.Scissor(from, m_Item))
-						from.PlaySound(0x248);
 				}
 				else
 				{
@@ -99,18 +76,56 @@ namespace Server.Items
 				}
 			}
 
-			protected override void OnNonlocalTarget(Mobile from, object targeted)
+			private bool IsEpicOrLegendary(object item)
 			{
-				if (targeted is IScissorable && (targeted is PlagueBeastInnard || targeted is PlagueBeastMutationCore))
+				if (item is IQuality qualityItem)
 				{
-					IScissorable obj = (IScissorable)targeted;
-
-					if (obj.Scissor(from, m_Item))
-						from.PlaySound(0x248);
+					return qualityItem.Quality == ItemQuality.Epic || qualityItem.Quality == ItemQuality.Legendary;
 				}
-				else
-					base.OnNonlocalTarget(from, targeted);
+				return false;
 			}
+		}
+	}
+
+	public class ConfirmationGump : Gump
+	{
+		private Mobile m_From;
+		private Scissors m_Scissors;
+		private IScissorable m_Target;
+
+		public ConfirmationGump(Mobile from, Scissors scissors, IScissorable target) : base(50, 50)
+		{
+			m_From = from;
+			m_Scissors = scissors;
+			m_Target = target;
+
+			Closable = true;
+			Disposable = true;
+			Dragable = true;
+			Resizable = false;
+
+			AddPage(0);
+			AddBackground(0, 0, 240, 135, 5054);
+			AddAlphaRegion(10, 10, 220, 115);
+
+			AddHtml(10, 10, 220, 75, "Cet objet est épique ou légendaire. Êtes-vous sûr de vouloir le découper ?", false, false);
+
+			AddButton(40, 95, 4005, 4007, 1, GumpButtonType.Reply, 0);
+			AddHtml(75, 95, 100, 35, "OUI", false, false);
+
+			AddButton(135, 95, 4005, 4007, 0, GumpButtonType.Reply, 0);
+			AddHtml(170, 95, 100, 35, "NON", false, false);
+		}
+
+		public override void OnResponse(NetState sender, RelayInfo info)
+		{
+			if (info.ButtonID == 1)
+			{
+				// L'utilisateur a confirmé, procédez au découpage
+				if (m_Target.Scissor(m_From, m_Scissors))
+					m_From.PlaySound(0x248);
+			}
+			// Si ButtonID == 0, l'utilisateur a annulé, ne faites rien
 		}
 	}
 }

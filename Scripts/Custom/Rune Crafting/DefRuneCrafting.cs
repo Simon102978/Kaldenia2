@@ -92,7 +92,7 @@ namespace Server.Engines.Craft
 
 		public override void InitCraftList()
 		{
-			int index = AddCraft( typeof( BlankRune ), "Misc", "Parchemin vierge", 45.0, 80.0, typeof(BlankScroll), 1044377, 10, 1044378);
+			int index = AddCraft( typeof( BlankRune ), "Misc", "Rune Vierge", 45.0, 80.0, typeof(BlankScroll), "Parchemin Vierge", 10, "Vous n'avez pas suffisament de Parchemin Vierge");
 /*
 			int index = AddCraft( typeof( LowerManaCostRune ), "Casting", "Lower Mana Cost", 75.5, 115.0, typeof( DaemonBlood ), "Daemon Blood", 5, "You do not have enough daemon blood to make that." );
 				AddRes( index, typeof ( RoughStone ), "Rough Stone", 1, "You do not have any Rough Stones to make that."  );
