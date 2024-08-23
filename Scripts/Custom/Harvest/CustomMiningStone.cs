@@ -1,4 +1,5 @@
 ﻿using Server.Engines.Harvest;
+using Server.Gumps;
 
 namespace Server.Items
 {
@@ -207,9 +208,10 @@ namespace Server.Items
 			FerDropChance = 100;
 		}
 
-		public override void OnDoubleClick(Mobile from)
-		{
-		}
+	 	 public override void OnDoubleClick(Mobile from)
+        {
+            from.SendGump(new PropertiesGump(from, this));
+        }
 
 		public CustomMiningStone(Serial serial) : base(serial)
 		{
