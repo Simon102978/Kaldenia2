@@ -31,7 +31,7 @@ namespace Server.Mobiles
 		};
 
 
-
+		public override TribeType Tribe => TribeType.Undead;
 
 		public DateTime DelayAttraction;
 		public DateTime m_GlobalTimer;
@@ -57,7 +57,6 @@ namespace Server.Mobiles
 
 		public DateTime m_LastParole = DateTime.MinValue;
 
-		public override TribeType Tribe => TribeType.Ophidian;
 
 		[Constructable]
 		public Josephine()

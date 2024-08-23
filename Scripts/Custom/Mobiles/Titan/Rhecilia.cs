@@ -57,6 +57,7 @@ namespace Server.Mobiles
 		public override bool Unprovokable => true;
 		public override bool Uncalmable => true;
 		public override Poison PoisonImmune => Poison.Lethal;
+		public override TribeType Tribe => TribeType.Orc;
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool EnArmure
@@ -84,7 +85,6 @@ namespace Server.Mobiles
 
 		public DateTime m_LastParole = DateTime.MinValue;
 
-		public override TribeType Tribe => TribeType.Ophidian;
 
 		[Constructable]
 		public Rhecilia()
@@ -514,6 +514,8 @@ namespace Server.Mobiles
 			SetResistance(ResistanceType.Poison, 80, 90);
 			SetResistance(ResistanceType.Energy, 80, 90);
 
+			SetDamage(15, 20);
+
 			Say("Vous m'y avez forcer !");
 
 			SetWeaponAbility(WeaponAbility.MortalStrike);
@@ -535,6 +537,7 @@ namespace Server.Mobiles
 			SetResistance(ResistanceType.Cold, 30, 40);
 			SetResistance(ResistanceType.Poison, 55, 65);
 			SetResistance(ResistanceType.Energy, 50, 60);
+			SetDamage(23, 27);
 
 			Say("Ohh, plus besoin !");
 

@@ -48,7 +48,7 @@ namespace Server.Mobiles
 		public DateTime m_NextSpawn;
 
 
-
+		public override TribeType Tribe => TribeType.Titusien;
 		public virtual int StrikingRange => 12;
 
 
@@ -82,7 +82,6 @@ namespace Server.Mobiles
 
 		public DateTime m_LastParole = DateTime.MinValue;
 
-		public override TribeType Tribe => TribeType.Ophidian;
 
 		[Constructable]
 		public Titus()

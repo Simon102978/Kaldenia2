@@ -49,7 +49,7 @@ namespace Server.Mobiles
 
 		public DateTime m_LastParole = DateTime.MinValue;
 
-		public override TribeType Tribe => TribeType.Ophidian;
+		public override TribeType Tribe => TribeType.Undead;
 
 		[Constructable]
 		public JosephineLibere()
