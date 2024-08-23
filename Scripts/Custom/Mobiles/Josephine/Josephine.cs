@@ -67,7 +67,7 @@ namespace Server.Mobiles
 			Title = "Titan Travestie";
 			Body = 76;
 			BaseSoundID = 609;
-			Hue = 1198;
+			Hue = 2095;
 
 			SetStr(600, 700);
 			SetDex(76, 82);

@@ -9,7 +9,7 @@ namespace Server.Mobiles
         public WailingBanshee()
             : base(AIType.AI_Melee, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "a wailing banshee";
+            Name = "Banshee";
             Body = 310;
             BaseSoundID = 0x482;
 

@@ -59,7 +59,7 @@ namespace Server.Mobiles
 			Title = "Travestie liberée";
 			Body = 310;
 			BaseSoundID = 0x482;
-			Hue = 1198;
+			Hue = 2095;
 
 			SetStr(600, 700);
 			SetDex(76, 82);
@@ -349,7 +349,7 @@ namespace Server.Mobiles
 			AddLoot(LootPack.MedScrolls);
 			AddLoot(LootPack.PeculiarSeed1);
 			AddLoot(LootPack.LootItem<Items.RoastPig>(10.0));
-			AddLoot(LootPack.LootItem<Items.Gold>(15000, 20000));
+			AddLoot(LootPack.LootItem<Items.Gold>(5000, 10000));
 		}
 
 
