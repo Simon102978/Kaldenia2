@@ -708,19 +708,27 @@ namespace Server.Custom
 
 					if (m_Golem.IsMaterialized)
 					{
+						from.Freeze(TimeSpan.FromSeconds(3));
 						m_Golem.Dematerialize();
 						from.SendMessage("Le golem a été dématérialisé.");
 					}
 					else
 					{
-						if (m_Golem.MaterializationInProgress)
+						from.Freeze(TimeSpan.FromSeconds(10));
+						from.PlaySound(0x2E6);
+						from.FixedParticles(0x376A, 9, 32, 5030, EffectLayer.Waist);
+
+						from.Animate(AnimationType.Spell, 263);
+
+						Timer.DelayCall(TimeSpan.FromSeconds(10), () =>
 						{
-							from.SendMessage("Le golem est déjà en cours de matérialisation.");
-						}
-						else
-						{
+							from.Frozen = false;
 							m_Golem.Materialize(from);
-						}
+
+							from.Animate(AnimationType.Spell, 0);
+						});
+
+						from.SendMessage("Vous commencez à matérialiser le golem...");
 					}
 				}
 				else if (from != m_Golem.SummonMaster && from.Alive)

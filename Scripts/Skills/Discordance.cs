@@ -52,7 +52,7 @@ namespace Server.SkillHandlers
             from.RevealingAction();
             from.SendLocalizedMessage(1049541); // Choose the target for your song of discordance.
             from.Target = new DiscordanceTarget(from, instrument);
-            from.NextSkillTime = Core.TickCount + 6000;
+            from.NextSkillTime = Core.TickCount + 3000;
         }
 
         public static bool GetEffect(Mobile targ, ref int effect)
@@ -261,7 +261,7 @@ namespace Server.SkillHandlers
                             info.m_Timer = Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(1.25), ProcessDiscordance, info);
 
                             m_Table[targ] = info;
-                            from.NextSkillTime = Core.TickCount + (8000 - ((masteryBonus / 5) * 1000));
+                            from.NextSkillTime = Core.TickCount + (5000 - (masteryBonus * 200)); ;
                         }
                         else
                         {
@@ -276,7 +276,7 @@ namespace Server.SkillHandlers
                             m_Instrument.PlayInstrumentBadly(from);
                             m_Instrument.ConsumeUse(from);
 
-                            from.NextSkillTime = Core.TickCount + 5000;
+                            from.NextSkillTime = Core.TickCount + 3000;
                         }
                     }
                     else

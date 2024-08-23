@@ -86,7 +86,7 @@ namespace Server.SkillHandlers
                             m_Instrument.PlayInstrumentBadly(from);
                             m_Instrument.ConsumeUse(from);
 
-                            from.NextSkillTime = Core.TickCount + (10000 - ((masteryBonus / 5) * 1000));
+                            from.NextSkillTime = Core.TickCount + (5000 - (masteryBonus * 200));
                         }
                         else if (!from.CheckSkill(SkillName.Peacemaking, 0.0, 120.0))
                         {
@@ -94,11 +94,11 @@ namespace Server.SkillHandlers
                             m_Instrument.PlayInstrumentBadly(from);
                             m_Instrument.ConsumeUse(from);
 
-                            from.NextSkillTime = Core.TickCount + (10000 - ((masteryBonus / 5) * 1000));
+                            from.NextSkillTime = Core.TickCount + (5000 - (masteryBonus * 200));
                         }
                         else
                         {
-                            from.NextSkillTime = Core.TickCount + 5000;
+                            from.NextSkillTime = Core.TickCount + 2000;
                             m_Instrument.PlayInstrumentWell(from);
                             m_Instrument.ConsumeUse(from);
 

@@ -176,9 +176,14 @@ namespace Server.Custom.System
                         line++;
                         AddHtml(x, y + (space * line++), 450, 20, "<BASEFONT COLOR=#FFFFFF>Votre titre est " + m_Guild.GetTitleByRank(m_Guild.GetMobileRank(m_From)) + " (" + "Rang " + m_Guild.GetMobileRank(m_From) + ")</BASEFONT>", false, false);
                         AddHtml(x, y + (space * line++), 450, 20, "<BASEFONT COLOR=#FFFFFF>Votre rente est de " + m_Guild.GetSalaryByRank(m_Guild.GetMobileRank(m_From)) + " pièces d'or par semaine.</BASEFONT>", false, false);
-                        AddHtml(x, y + (space * line++), 450, 45, $"<BASEFONT COLOR=#FFFFFF>Votre rente sera déposée dans votre coffre de banque le {CustomPersistence.ProchainePay.ToLongDateString()}.</BASEFONT>", false, false);
-                    }
-                }
+						AddHtml(x, y + (space * line++), 450, 45, $"<BASEFONT COLOR=#FFFFFF>Votre rente sera déposée dans votre coffre de banque le {CustomPersistence.ProchainePay.ToLongDateString()}.</BASEFONT>", false, false);
+
+						if (m_Guild.GetMobileRank(m_From) == 4)
+						{
+							AddButtonLabeled(x, y + (space * line++), GetButtonID(3, 2), "<BASEFONT COLOR=#FFFFFF>Liste des membres de la guilde</BASEFONT>");
+						}
+					}
+				}
             }
         }
 
