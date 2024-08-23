@@ -1,22 +1,25 @@
+using Server.Items;
+
 namespace Server.Mobiles
 {
-    [CorpseName("le corps d'un cyclope")]
-    public class CyclopsMage : BaseCreature
+    [CorpseName("le corps d'un ettin")]
+    public class EttinMage : BaseCreature
     {
         [Constructable]
-        public CyclopsMage()
+        public EttinMage()
             : base(AIType.AI_Mage, FightMode.Closest, 10, 1, 0.2, 0.4)
         {
-            Name = "un cyclope mage";
-            Body = 75;
-            BaseSoundID = 604;
+            Name = "un ettin Mage";
+            Body = 18;
+            BaseSoundID = 367;
+
             Hue = 1158;
 
             SetStr(336, 385);
             SetDex(96, 115);
-            SetInt(310, 355);
+            SetInt(310, 550);
 
-            SetHits(202, 231);
+            SetHits(252, 331);
             SetMana(1000);
 
             SetDamage(7, 23);
@@ -36,33 +39,33 @@ namespace Server.Mobiles
             SetSkill(SkillName.Magery, 70.1, 80.0);
             SetSkill(SkillName.Meditation, 85.1, 95.0);
 
-            Fame = 4500;
-            Karma = -4500;
         }
 
-        public CyclopsMage(Serial serial)
+        public EttinMage(Serial serial)
             : base(serial)
         {
         }
-		public override int Hides => Utility.RandomMinMax(5, 10);
+		public override int Hides => Utility.RandomMinMax(2, 4);
 
 		public override HideType HideType => HideType.Geant;
 
-
-		public override int Bones => Utility.RandomMinMax(5, 10);
-
+		public override void GenerateLootParagon()
+		{
+			AddLoot(LootPack.LootItem<SangEnvoutePhysique>(), Utility.RandomMinMax(2, 4));
+		}
+		public override int Bones =>  Utility.RandomMinMax(2, 4);
 		public override BoneType BoneType => BoneType.Geant;
-		public override int Meat => Utility.RandomMinMax(5, 10);
-
-		public override int TreasureMapLevel => 3;
-        public override void GenerateLoot()
+		public override bool CanRummageCorpses => true;
+        public override int TreasureMapLevel => 1;
+        public override int Meat => Utility.RandomMinMax(2, 4);
+		public override void GenerateLoot()
         {
-            AddLoot(LootPack.Rich);
+            AddLoot(LootPack.Rich,2);
             AddLoot(LootPack.Average);
-			AddLoot(LootPack.Others, Utility.RandomMinMax(3, 7));
-            AddLoot(LootPack.MedScrolls, 2);
-            AddLoot(LootPack.MageryRegs, 5, 15);
-            AddLoot(LootPack.NecroRegs, 5, 15);
+            AddLoot(LootPack.Potions);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+			AddLoot(LootPack.LootItem<CheveuxGeant>(3, 7));
+
 
 		}
 
