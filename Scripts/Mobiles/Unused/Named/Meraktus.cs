@@ -6,32 +6,13 @@ using System.Collections;
 namespace Server.Mobiles
 {
     [CorpseName("the remains of Meraktus")]
-    public class Meraktus : BaseChampion
+    public class Meraktus : BaseCreature
     {
-        public override ChampionSkullType SkullType => ChampionSkullType.Pain;
-
-        public override Type[] UniqueList => new Type[] { typeof(Subdue) };
-        public override Type[] SharedList => new Type[]
-                {
-                    typeof(RoyalGuardSurvivalKnife),
-                    typeof(TheMostKnowledgePerson),
-                    typeof(OblivionsNeedle)
-                };
-        public override Type[] DecorativeList => new Type[]
-                {
-                    typeof(ArtifactLargeVase),
-                    typeof(ArtifactVase),
-                    typeof(MinotaurStatueDeed)
-                };
-
-        public override MonsterStatuetteType[] StatueTypes => new MonsterStatuetteType[]
-                {
-                    MonsterStatuetteType.Minotaur
-                };
+        
 
         [Constructable]
         public Meraktus()
-            : base(AIType.AI_Melee)
+               : base(AIType.AI_Melee, FightMode.Closest, 18, 1, 0.1, 0.2)
         {
             Name = "Meraktus";
             Title = "Le tourmenté";
@@ -65,7 +46,7 @@ namespace Server.Mobiles
 
             NoKillAwards = true;
 
-            Timer.DelayCall(TimeSpan.FromSeconds(1), SpawnTormented);
+  //          Timer.DelayCall(TimeSpan.FromSeconds(1), SpawnTormented);
 
             SetWeaponAbility(WeaponAbility.Dismount);
         }
