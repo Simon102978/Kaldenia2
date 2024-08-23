@@ -19,16 +19,16 @@ namespace Server.Mobiles
 			"Quoi encore?!",
 			"*Soupire* Je crois que m'en va me tuer...",
 			"Ou sont mes affreux !? Je suis toujours obligée de faire tout toute seule.",
+			"Allez vous en ! Je dois trouver mon prince charmant!",
 		};
 
 		public static List<string> EnArmureParole = new List<string>()
 		{
 			"Allez les affreux, massacrer les !",
-
-
-
-			"GRRRR! TU VAS CREUVER À LA FIN ?",
-			"Vous vous moquerez plus de ma rousseur !"
+			"Meme pas mal !",
+			"Amenez vous ! Je fais que ca de mes journées",
+			"Mourrez tous bande d'abrutis.",
+			"Vous me forcez vraiment à faire quelque chose ?",
 		};
 
 		public DateTime DelayCharge;
