@@ -14,12 +14,13 @@ namespace Server.Mobiles
             BaseSoundID = 442;
             Hue = 1175;
 
-            SetStr(66, 215);
-            SetDex(66, 75);
-            SetInt(101, 250);
+            SetStr(300, 600);
+            SetDex(200, 250);
+            SetInt(301, 650);
 
-            SetHits(40, 129);
+            SetHits(500, 750);
             SetStam(0);
+            SetMana(1000);
 
             SetDamage(9, 11);
 
@@ -52,7 +53,7 @@ namespace Server.Mobiles
         public override bool DisallowAllMoves => true;
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.Average);
+            AddLoot(LootPack.Rich,2);
             AddLoot(LootPack.LootItem<PalmierLog>(5));
             AddLoot(LootPack.LootItem<MandrakeRoot>(5));
 			AddLoot(LootPack.LootItem<EcorceArbreMaudit>(3, 10));
