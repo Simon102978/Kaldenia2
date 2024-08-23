@@ -811,6 +811,8 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(MannequinDeed), "Divers", "Mannequin", 60.0, 100.0, typeof(Materiaux), "Matériaux", 35, "Vous n'avez pas assez de matériaux");
 			AddRes(index, typeof(Cloth), "Tissus", 20, "Vous n'avez pas suffisament de tissus");
+			index = AddCraft(typeof(MannequinDeed), "Divers", "Mannequin steward", 60.0, 100.0, typeof(Materiaux), "Matériaux", 35, "Vous n'avez pas assez de matériaux");
+			AddRes(index, typeof(Cloth), "Tissus", 20, "Vous n'avez pas suffisament de tissus");
 
 
 			ForceNonExceptional(index);
