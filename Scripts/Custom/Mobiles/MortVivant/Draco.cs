@@ -35,24 +35,57 @@ namespace Server.Mobiles
             Name = "Draco";
             Title = "un bebe dragon necrotique";
             Body = 104;
-            Hue = 2299;
             BaseSoundID = 0x488;
 
             SetStr(136, 206);
             SetDex(123, 222);
             SetInt(118, 127);
 
-            SetHits(409, 842);
+            SetHits(300, 400);
 
 			SetDamage(19, 28);
 
-			SetDamageType(ResistanceType.Physical, 100);
+		   int fire = 100, cold = 100, poison = 100, energy = 100;
 
-            SetResistance(ResistanceType.Physical, 46, 47);
-            SetResistance(ResistanceType.Fire, 32, 40);
-            SetResistance(ResistanceType.Cold, 34, 49);
-            SetResistance(ResistanceType.Poison, 40, 48);
-            SetResistance(ResistanceType.Energy, 35, 39);
+            switch (Utility.Random(4))
+            {
+                case 0:
+                    {
+                        Hue = 2634;
+                        SetDamageType(ResistanceType.Fire, 100);
+                        cold = 5;
+                        break;
+                    }
+                case 1:
+                    {
+                        Hue = 2581;
+                        SetDamageType(ResistanceType.Cold, 100);
+                        fire = 5;
+                        break;
+                    }
+                case 2:
+                    {
+                        Hue = 2688;
+                        SetDamageType(ResistanceType.Poison, 100);
+                        energy = 5;
+                        break;
+                    }
+                case 3:
+                    {
+                        Hue = 2717;
+                        SetDamageType(ResistanceType.Energy, 100);
+                        poison = 5;
+                        break;
+                    }
+            }
+
+		   SetResistance(ResistanceType.Physical, 95);
+            SetResistance(ResistanceType.Fire, fire);
+            SetResistance(ResistanceType.Cold, cold);
+            SetResistance(ResistanceType.Poison, poison);
+            SetResistance(ResistanceType.Energy, energy);
+
+
 			
 			SetSkill(SkillName.EvalInt, 45, 60);
             SetSkill(SkillName.Magery, 50, 65);
@@ -71,7 +104,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.UltraRich, 2);
 
             AddLoot(LootPack.Parrot);
-			AddLoot(LootPack.LootItem<Items.Gold>(100, 175));
+			AddLoot(LootPack.LootItem<Items.Gold>(250, 350));
 			AddLoot(LootPack.RandomLootItem(new System.Type[] { typeof(SilverRing), typeof(Necklace), typeof(SilverNecklace), typeof(Collier), typeof(Collier2),  typeof(Collier3), typeof(Couronne3),  typeof(Collier4), typeof(Tiare), }, 10.0, 1, false, true));
 			AddLoot(LootPack.LootItem<Items.Gemme>(), (double) 5);
 
