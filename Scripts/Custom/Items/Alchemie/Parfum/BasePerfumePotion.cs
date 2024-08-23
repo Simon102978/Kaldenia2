@@ -690,5 +690,119 @@ namespace Server.Items
         }
     }
 
-    
+    public class PerfumRougeOrangePotion : BasePerfumePotion
+    {
+
+        public override Perfume Perfume
+        {
+            get
+            {
+                return new Perfume("Ambre Suave", 239, "#ff5733", TimeSpan.FromDays(7)); } }
+
+                [Constructable]
+                public PerfumRougeOrangePotion()
+                    : base()
+                {
+
+
+
+                }
+
+                public PerfumRougeOrangePotion(Serial serial)
+                    : base(serial)
+                {
+                }
+
+                public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write(0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
+
+    public class PerfumMauveFoncePotion : BasePerfumePotion
+    {
+
+        public override Perfume Perfume
+        {
+            get
+            {
+                return new Perfume("Mousse fraîche", 212, "#3a0575", TimeSpan.FromDays(7)); } }
+
+                [Constructable]
+                public PerfumMauveFoncePotion()
+                    : base()
+                {
+
+
+
+                }
+
+                public PerfumMauveFoncePotion(Serial serial)
+                    : base(serial)
+                {
+                }
+
+                public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write(0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
+
+  public class PerfumVertFoncePotion : BasePerfumePotion
+    {
+
+        public override Perfume Perfume
+        {
+            get
+            {
+                return new Perfume("Boisé opulent", 1267, "#1a4a3a", TimeSpan.FromDays(7)); } }
+
+                [Constructable]
+                public PerfumVertFoncePotion()
+                    : base()
+                {
+
+
+
+                }
+
+                public PerfumVertFoncePotion(Serial serial)
+                    : base(serial)
+                {
+                }
+
+                public override void Serialize(GenericWriter writer)
+        {
+            base.Serialize(writer);
+
+            writer.Write(0); // version
+        }
+
+        public override void Deserialize(GenericReader reader)
+        {
+            base.Deserialize(reader);
+
+            int version = reader.ReadInt();
+        }
+    }
+
+
 }
