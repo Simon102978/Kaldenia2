@@ -12,6 +12,7 @@ namespace Server.Mobiles
             Name = "un arbre maudit";
             Body = 47;
             BaseSoundID = 442;
+            Hue = 1175;
 
             SetStr(66, 215);
             SetDex(66, 75);
