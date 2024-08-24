@@ -643,7 +643,7 @@ namespace Server.Multis
             return false;
         }
 
-        public override void OnSpeech(SpeechEventArgs e)
+ /*       public override void OnSpeech(SpeechEventArgs e)
         {
             if (CheckDecay())
                 return;
@@ -714,7 +714,7 @@ namespace Server.Multis
                     }
                 }
             }
-        }
+        }*/
 
         public override void OnAfterDelete()
         {
