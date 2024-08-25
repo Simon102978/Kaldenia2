@@ -357,6 +357,8 @@ namespace Server
 
 			m_Player.StatutSocial = m_Statut;
 
+			m_Player.ChangeTribeValue(TribeType.Legion, 25);
+
 	//		Dictionary<SkillName, int> m_skills = new Dictionary<SkillName, int>();
 
 
