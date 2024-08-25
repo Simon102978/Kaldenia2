@@ -1168,7 +1168,7 @@ namespace Server.Engines.Craft
 			#endregion
 
 
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
         }
     }
 }

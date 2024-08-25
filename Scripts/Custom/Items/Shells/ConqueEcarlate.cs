@@ -8,7 +8,7 @@ namespace Server.Items
 		[Constructable]
 		public ConqueEcarlate() : base(4042)
 		{
-            Name = "coquillage";
+            Name = "Conque Ecarlate";
 		}
 
         public ConqueEcarlate(Serial serial) : base(serial)

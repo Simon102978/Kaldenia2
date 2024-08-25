@@ -343,7 +343,7 @@ namespace Server.Engines.Craft
 			AddSubRes(typeof(DemoniaqueLeather), "Demoniaque", 90.0, "Vous ne savez pas travailler le cuir Demoniaque");
 			AddSubRes(typeof(AncienLeather), "Ancien", 95.0, "Vous ne savez pas travailler le cuir Ancien");
 
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
             Repair = true;
             CanEnhance = true;
             CanAlter = true;

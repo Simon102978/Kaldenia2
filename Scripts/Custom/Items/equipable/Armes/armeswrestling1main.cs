@@ -63,7 +63,7 @@ namespace Server.Items
 		public override int InitMaxHits => 65;
 
 		[Constructable]
-		public LameAffutee() : base(0xA24D)
+		public LameAffutee() : base(0x27A4)
 		{
 			Name = "Lame Affutée";
 			Weight = 8.0;

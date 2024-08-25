@@ -139,7 +139,7 @@ namespace Server.Engines.Craft
             AddCraft(typeof(GlassStaff), 1111745, 1095368, 53.6, 103.6, typeof(Sand), 1044625, 10, 1044627);
 */
             Repair = true;
-            MarkOption = true;
+            MarkOption = true; Pratiquer = true;
         }
 
         // Delay to synchronize the sound with the hit on the anvil

@@ -81,16 +81,41 @@ namespace Server.Engines.Craft
             }
             else
             {
-                if (quality == 0)
-                    return 502785; // You were barely able to make this item.  It's quality is below average.
-                else if (makersMark && quality == 2)
-                    return 1044156; // You create an exceptional quality item and affix your maker's mark.
-                else if (quality == 2)
-                    return 1044155; // You create an exceptional quality item.
-                else
-                    return 1044154; // You create the item.
-            }
-        }
+				if (quality == 0)
+				{
+					return 502785; // You were barely able to make this item.  It's quality is below average.
+				}
+
+				if (makersMark && quality == 2)
+				{
+					return 1044156; // You create an exceptional quality item and affix your maker's mark.
+				}
+
+				if (quality == 2)
+				{
+					return 1044155; // You create an exceptional quality item.
+				}
+				if (makersMark && quality == 3)
+				{
+					from.SendMessage("Vous créez un item de qualité Épique et apposer votre marque."); ; // You create an epic quality item.			
+				}
+				if (quality == 3)
+				{
+					from.SendMessage("Vous créez un item de qualité Épique."); ; // You create an epic quality item.
+				}
+				if (makersMark && quality == 4)
+				{
+					from.SendMessage("Vous créez un item de qualité Légendaire et apposer votre marque."); ; // You create a legendary quality item.
+				}
+				if (quality == 4)
+				{
+					from.SendMessage("Vous créez un item de qualité Légendaire."); ; // You create a legendary quality item.
+				}
+				return 1044154; // You create the item.
+			}
+
+		}
+	
 
         public override void InitCraftList()
         {
@@ -134,7 +159,7 @@ namespace Server.Engines.Craft
 			AddSubRes(typeof(DemoniaqueBone), "Demoniaque", 90.0, 1049312);
 			AddSubRes(typeof(AncienBone), "Ancien", 95.0, 1049312);
 
-            MarkOption = true;
+            MarkOption = true; Pratiquer = true;
             Repair = true;
             CanEnhance = true;
             CanAlter = true;

@@ -809,9 +809,9 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(CustomSign), "Divers", "Affiche Personnalisée", 30.0, 80.0, typeof(Materiaux), "Matériaux", 10, "Vous n'avez pas assez de matériaux");
 			AddRes(index, typeof(BlankScroll), "Parchemin Vierge", 3, "Vous n'avez pas suffisament de parchemin vierge");
 
-			index = AddCraft(typeof(MannequinDeed), "Divers", "Mannequin", 60.0, 100.0, typeof(Materiaux), "Matériaux", 35, "Vous n'avez pas assez de matériaux");
+			index = AddCraft(typeof(MannequinDeed), "Divers", "Mannequin (F)", 60.0, 100.0, typeof(Materiaux), "Matériaux", 35, "Vous n'avez pas assez de matériaux");
 			AddRes(index, typeof(Cloth), "Tissus", 20, "Vous n'avez pas suffisament de tissus");
-			index = AddCraft(typeof(MannequinDeed), "Divers", "Mannequin steward", 60.0, 100.0, typeof(Materiaux), "Matériaux", 35, "Vous n'avez pas assez de matériaux");
+			index = AddCraft(typeof(MannequinDeed), "Divers", "Mannequin (M)", 60.0, 100.0, typeof(Materiaux), "Matériaux", 35, "Vous n'avez pas assez de matériaux");
 			AddRes(index, typeof(Cloth), "Tissus", 20, "Vous n'avez pas suffisament de tissus");
 
 
@@ -889,7 +889,7 @@ namespace Server.Engines.Craft
 			AddSubRes2(typeof(AncienBoard), "Ancien", 100.0, "Vous ne savez pas travailler le bois ancien");
 
 
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
 			Repair = true;
 			CanEnhance = true;
 			CanAlter = true;

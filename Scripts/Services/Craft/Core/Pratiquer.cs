@@ -14,7 +14,7 @@ namespace Server.Engines.Craft
 		{
 		}
 
-		public static void Do(Mobile from, CraftSystem craftSystem, BaseTool tool)
+		public static void Do(Mobile from, CraftSystem craftSystem, ITool tool)
 		{
 			try
 			{
@@ -103,7 +103,7 @@ namespace Server.Engines.Craft
 			}
 		}
 
-		private static void StartCraftingProcess(CraftSystem craftSystem, Mobile from, BaseTool tool)
+		private static void StartCraftingProcess(CraftSystem craftSystem, Mobile from, ITool tool)
 		{
 			int count = 0;
 			Timer timer = null;
@@ -138,7 +138,7 @@ namespace Server.Engines.Craft
 
 					if (from is CustomPlayerMobile pm)
 					{
-						int chance = 20;
+						int chance = 100;
 
 						if (chance < 5)
 							chance = 5;
@@ -151,7 +151,43 @@ namespace Server.Engines.Craft
 					}
 
 					if (checkSkills)
-						from.CheckSkill(craftSystem.MainSkill, 0.0, 100.0);
+					{
+						double minSkill = 0.0;
+						double maxSkill = 100.0;
+
+						// Obtenir le niveau actuel de la compétence
+						double currentSkill = from.Skills[craftSystem.MainSkill].Base;
+
+						// Déterminer la difficulté en fonction du niveau de compétence actuel
+						double difficulty;
+						if (currentSkill < 50.0)
+						{
+							difficulty = 10.0;
+						}
+						else if (currentSkill < 75.0)
+						{
+							difficulty = 20.0;
+						}
+						else
+						{
+							difficulty = 30.0;
+						}
+
+						// Ajouter un élément aléatoire à la difficulté
+						difficulty += Utility.RandomDouble() * 10.0;
+
+						// Effectuer le SkillCheck
+						bool skillGain = from.CheckSkill(craftSystem.MainSkill, difficulty, maxSkill);
+
+						if (skillGain)
+						{
+							from.SendMessage($"Votre compétence en {craftSystem.MainSkill} a augmenté.");
+						}
+						else
+						{
+							from.SendMessage("Vous avez pratiqué, mais n'avez pas amélioré votre compétence cette fois-ci.");
+						}
+					}
 
 					if (toolBroken)
 					{
@@ -168,3 +204,4 @@ namespace Server.Engines.Craft
 		}
 	}
 }
+

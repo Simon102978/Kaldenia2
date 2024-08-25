@@ -504,6 +504,8 @@ namespace Server.Items
 
 			if (!String.IsNullOrWhiteSpace(desc))
 				list.Add(desc);
+			AddCraftedProperties(list);
+			AddUsesRemainingProperties(list);
 
 		}
 

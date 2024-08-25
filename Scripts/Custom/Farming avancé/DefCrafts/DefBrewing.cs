@@ -107,7 +107,7 @@ namespace Server.Engines.Craft
 			AddSubRes( typeof( ElvenHops ),	"Elven Hops", 70.0, skillNotice);
 			AddSubRes( typeof( SweetHops ),	"Sweet Hops", 90.0, skillNotice);
 
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
 			Repair = false;
 		}
 	}

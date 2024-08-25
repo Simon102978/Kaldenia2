@@ -25,17 +25,17 @@ namespace Server.Mobiles
         {
             public InternalBuyInfo(Mobile m)
             {
-				     Add(new GenericBuyInfo("1041205", typeof(SmallBoatDeed), 20000, 20, 0x14F2, 0));
+				/*     Add(new GenericBuyInfo("1041205", typeof(SmallBoatDeed), 20000, 20, 0x14F2, 0));
 				     Add(new GenericBuyInfo("1041206", typeof(SmallDragonBoatDeed), 25000, 20, 0x14F2, 0));
 				     Add(new GenericBuyInfo("1041207", typeof(MediumBoatDeed), 35000, 20, 0x14F2, 0));
 				     Add(new GenericBuyInfo("1041208", typeof(MediumDragonBoatDeed), 40000, 20, 0x14F2, 0));
 				     Add(new GenericBuyInfo("1041209", typeof(LargeBoatDeed), 50000, 20, 0x14F2, 0));
-				     Add(new GenericBuyInfo("1041210", typeof(LargeDragonBoatDeed), 60000, 20, 0x14F2, 0));
+				     Add(new GenericBuyInfo("1041210", typeof(LargeDragonBoatDeed), 60000, 20, 0x14F2, 0)); */
 
-				//Add(new GenericBuyInfo("Grand Bateau", typeof(BritannianShipDeed), 200000, 3, 0x14F2, 0));
-				//Add(new GenericBuyInfo("Moyen Bateau", typeof(TokunoGalleonDeed), 150000, 3, 0x14F2, 0));
-				//Add(new GenericBuyInfo("Petit Bateau", typeof(GalleonDeed), 100000, 3, 0x14F2, 0));
-				//     Add(new GenericBuyInfo("1116491", typeof(RowBoatDeed), 6252, 20, 0x14F2, 0));
+				Add(new GenericBuyInfo("Grand Bateau", typeof(BritannianShipDeed), 200000, 3, 0x14F2, 0));
+				Add(new GenericBuyInfo("Moyen Bateau", typeof(TokunoGalleonDeed), 150000, 3, 0x14F2, 0));
+				Add(new GenericBuyInfo("Petit Bateau", typeof(GalleonDeed), 100000, 3, 0x14F2, 0));
+			   // Add(new GenericBuyInfo("1116491", typeof(RowBoatDeed), 6252, 20, 0x14F2, 0));
 
 
 				Add(new GenericBuyInfo("Boat Paint", typeof(BoatPaint), 10000, 20, 4011, 276, new object[] { 276 }));

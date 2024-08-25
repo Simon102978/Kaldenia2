@@ -339,7 +339,7 @@ namespace Server.Engines.Craft
 					  SetData(index, CraftableItemType.DarkPaver);
 					  SetDisplayID(index, 1313);
 		  */
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
 			Repair = true;
 			CanEnhance = true;
 
