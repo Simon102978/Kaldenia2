@@ -20,6 +20,8 @@ namespace Server.Mobiles
 		public Mobile Owner { get; set; }
 		public string Description { get; set; }
 
+		    private List<MannequinAction> _actions;
+
 		[Constructable]
 		public Mannequin(Mobile owner)
 			: base(AIType.AI_Use_Default, FightMode.None, 1, 1, 0.2, 0.2)
@@ -39,7 +41,7 @@ namespace Server.Mobiles
 			Owner = owner;
 			Body = 0x190;
 			Race = Race.Human;
-			Name = "a Mannequin";
+			Name = "un Mannequin";
 			Hue = 1828;
 			Direction = Direction.South;
 		}
@@ -105,8 +107,80 @@ namespace Server.Mobiles
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			DisplayPaperdollTo(from);
+			if (IsOwner(from))
+			{
+				from.SendGump(new MannequinActionGump(this, from));
+			}
+			else
+			{
+				base.OnDoubleClick(from);
+			}
 		}
+
+		private class MannequinActionGump : Gump
+		{
+			private Mannequin _mannequin;
+			private Mobile _from;
+
+			public MannequinActionGump(Mannequin mannequin, Mobile from) : base(50, 50)
+			{
+				_mannequin = mannequin;
+				_from = from;
+
+				AddPage(0);
+				AddBackground(0, 0, 300, 300, 9200);
+				AddAlphaRegion(10, 10, 280, 280);
+
+				AddHtml(20, 20, 260, 20, "<CENTER>Actions du Mannequin</CENTER>", false, false);
+
+				AddButton(20, 50, 4005, 4007, 1, GumpButtonType.Reply, 0);
+				AddHtml(55, 50, 200, 20, "Voir les statistiques de la tenue", false, false);
+
+				AddButton(20, 80, 4005, 4007, 2, GumpButtonType.Reply, 0);
+				AddHtml(55, 80, 200, 20, "Comparer avec l'objet sélectionné", false, false);
+
+				AddButton(20, 110, 4005, 4007, 3, GumpButtonType.Reply, 0);
+				AddHtml(55, 110, 200, 20, "Personnaliser le corps", false, false);
+
+				AddButton(20, 140, 4005, 4007, 4, GumpButtonType.Reply, 0);
+				AddHtml(55, 140, 200, 20, "Tourner", false, false);
+
+				AddButton(20, 170, 4005, 4007, 5, GumpButtonType.Reply, 0);
+				AddHtml(55, 170, 200, 20, "Récupérer", false, false);
+			}
+
+			public override void OnResponse(NetState sender, RelayInfo info)
+			{
+				Mobile from = sender.Mobile;
+
+				switch (info.ButtonID)
+				{
+					case 1:
+						from.SendGump(new MannequinStatsGump(_mannequin));
+						break;
+					case 2:
+						from.SendLocalizedMessage(1159294); // Target the item you wish to compare.
+						from.Target = new CompareItemTarget(_mannequin);
+						break;
+					case 3:
+						from.SendGump(new MannequinGump(from, _mannequin));
+						break;
+					case 4:
+						int direction = (int)_mannequin.Direction;
+						direction = (direction + 1) % 8;
+						_mannequin.Direction = (Direction)direction;
+						from.SendMessage("Vous avez tourné le mannequin.");
+						from.SendGump(new MannequinActionGump(_mannequin, from));
+						break;
+					case 5:
+						_mannequin.Delete();
+						from.AddToBackpack(new MannequinDeed());
+						from.SendMessage("Vous avez récupéré le mannequin.");
+						break;
+				}
+			}
+		}
+
 
 		public override void OnStatsQuery(Mobile from)
 		{
@@ -138,7 +212,28 @@ namespace Server.Mobiles
 				}
 			}
 		}
+		private class CompareItemTarget : Target
+		{
+			private readonly Mannequin _Mannequin;
 
+			public CompareItemTarget(Mannequin m)
+				: base(-1, false, TargetFlags.None)
+			{
+				_Mannequin = m;
+			}
+
+			protected override void OnTarget(Mobile from, object targeted)
+			{
+				if (targeted is Item item)
+				{
+					from.SendGump(new MannequinCompareGump(_Mannequin, item));
+				}
+				else
+				{
+					from.SendLocalizedMessage(1149667); // Invalid target.
+				}
+			}
+		}
 		private readonly List<Layer> SameLayers = new List<Layer>
 		{
 			Layer.FirstValid,
@@ -326,14 +421,24 @@ namespace Server.Mobiles
 
 			mobile.Delete();
 		}
+		public class MannequinAction
+		{
+			public string Name { get; set; }
+			public Action<Mobile, Mannequin> Execute { get; set; }
 
-		private class ViewSuitsEntry : ContextMenuEntry
+			public MannequinAction(string name, Action<Mobile, Mannequin> execute)
+			{
+				Name = name;
+				Execute = execute;
+			}
+		}
+		private class ViewSuitsEntry : CustomContextMenuEntry
 		{
 			private readonly Mobile _From;
 			private readonly Mannequin _Mannequin;
 
 			public ViewSuitsEntry(Mobile from, Mannequin m)
-				: base(1159296, 3) // View Suit Stats
+				: base("Voir les statistiques de la tenue", 3)
 			{
 				_From = from;
 				_Mannequin = m;
@@ -344,14 +449,31 @@ namespace Server.Mobiles
 				_From.SendGump(new MannequinStatsGump(_Mannequin));
 			}
 		}
+		public class CustomContextMenuEntry : ContextMenuEntry
+		{
+			private readonly string _Text;
 
-		private class CompareWithItemInSlotEntry : ContextMenuEntry
+			public CustomContextMenuEntry(string text, int range) : base(3000000 + text.GetHashCode() % 10000, range)
+			{
+				_Text = text;
+			}
+
+			public override void OnClick()
+			{
+			}
+
+			public override string ToString()
+			{
+				return _Text;
+			}
+		}
+		private class CompareWithItemInSlotEntry : CustomContextMenuEntry
 		{
 			private readonly Mobile _From;
 			private readonly Mannequin _Mannequin;
 
 			public CompareWithItemInSlotEntry(Mobile from, Mannequin m)
-				: base(1159295, 3) // View Suit Stats With Selected Item
+				: base("Comparer avec l'objet sélectionné", 3) // View Suit Stats With Selected Item
 			{
 				_From = from;
 				_Mannequin = m;
@@ -424,13 +546,13 @@ namespace Server.Mobiles
 			}
 		}
 
-		private class AddDescriptionEntry : ContextMenuEntry
+		private class AddDescriptionEntry : CustomContextMenuEntry
 		{
 			private readonly Mobile _From;
 			private readonly Mannequin _Mannequin;
 
 			public AddDescriptionEntry(Mobile from, Mannequin m)
-				: base(1159411, 3) // Add Description
+				: base("Ajouter une description", 3) // Add Description
 			{
 				_From = from;
 				_Mannequin = m;
@@ -488,13 +610,13 @@ namespace Server.Mobiles
 			}
 		}
 
-		private class CustomizeBodyEntry : ContextMenuEntry
+		private class CustomizeBodyEntry : CustomContextMenuEntry
 		{
 			private readonly Mobile _From;
 			private readonly Mobile _Mannequin;
 
 			public CustomizeBodyEntry(Mobile from, Mobile m)
-				: base(1151585, 4)
+				: base("Modifier le mannequin", 4)
 			{
 				_From = from;
 				_Mannequin = m;
@@ -611,13 +733,13 @@ namespace Server.Mobiles
 			from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1151607); // You quickly swap clothes with the mannequin.
 		}
 
-		private class RotateEntry : ContextMenuEntry
+		private class RotateEntry : CustomContextMenuEntry
 		{
 			private readonly Mobile _From;
 			private readonly Mobile _Mannequin;
 
 			public RotateEntry(Mobile from, Mobile m)
-				: base(1151586, 2)
+				: base("Tourner", 2)
 			{
 				_From = from;
 				_Mannequin = m;
@@ -637,13 +759,13 @@ namespace Server.Mobiles
 			}
 		}
 
-		private class RedeedEntry : ContextMenuEntry
+		private class RedeedEntry : CustomContextMenuEntry
 		{
 			private readonly Mobile _From;
 			private readonly Mobile _Mannequin;
 
 			public RedeedEntry(Mobile from, Mobile m)
-				: base(1151601, 2)
+				: base("Remettre en Deed", 2)
 			{
 				_From = from;
 				_Mannequin = m;

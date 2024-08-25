@@ -54,7 +54,7 @@ namespace Server.Mobiles
             House = house;
             Body = 0x190;
             Race = Race.Human;
-            Name = "a Steward";
+            Name = "un mannequin";
             Hue = 1828;
             Direction = Direction.South;
 
@@ -67,6 +67,91 @@ namespace Server.Mobiles
             };
             AddItem(pack);
         }
+		private class MannequinActionGump : Gump
+		{
+			private Steward _mannequin;
+			private Mobile _from;
+
+			public MannequinActionGump(Steward mannequin, Mobile from) : base(50, 50)
+			{
+				_mannequin = mannequin;
+				_from = from;
+
+				AddPage(0);
+				AddBackground(0, 0, 300, 300, 9200);
+				AddAlphaRegion(10, 10, 280, 280);
+
+				AddHtml(20, 20, 260, 20, "<CENTER>Actions du Mannequin</CENTER>", false, false);
+
+				AddButton(20, 50, 4005, 4007, 1, GumpButtonType.Reply, 0);
+				AddHtml(55, 50, 200, 20, "Voir les statistiques de la tenue", false, false);
+
+				AddButton(20, 80, 4005, 4007, 2, GumpButtonType.Reply, 0);
+				AddHtml(55, 80, 200, 20, "Comparer avec l'objet sélectionné", false, false);
+
+				AddButton(20, 110, 4005, 4007, 3, GumpButtonType.Reply, 0);
+				AddHtml(55, 110, 200, 20, "Personnaliser le corps", false, false);
+
+				AddButton(20, 140, 4005, 4007, 4, GumpButtonType.Reply, 0);
+				AddHtml(55, 140, 200, 20, "Tourner", false, false);
+
+				AddButton(20, 170, 4005, 4007, 5, GumpButtonType.Reply, 0);
+				AddHtml(55, 170, 200, 20, "Récupérer", false, false);
+			}
+
+			public override void OnResponse(NetState sender, RelayInfo info)
+			{
+				Mobile from = sender.Mobile;
+
+				switch (info.ButtonID)
+				{
+					case 1:
+						from.SendGump(new MannequinStatsGump(_mannequin));
+						break;
+					case 2:
+						from.SendLocalizedMessage(1159294); // Target the item you wish to compare.
+						from.Target = new CompareItemTarget(_mannequin);
+						break;
+					case 3:
+						from.SendGump(new MannequinGump(from, _mannequin));
+						break;
+					case 4:
+						int direction = (int)_mannequin.Direction;
+						direction = (direction + 1) % 8;
+						_mannequin.Direction = (Direction)direction;
+						from.SendMessage("Vous avez tourné le mannequin.");
+						from.SendGump(new MannequinActionGump(_mannequin, from));
+						break;
+					case 5:
+						_mannequin.Delete();
+						from.AddToBackpack(new MannequinDeed());
+						from.SendMessage("Vous avez récupéré le mannequin.");
+						break;
+				}
+			}
+		}
+		private class CompareItemTarget : Target
+		{
+			private readonly Mannequin _Mannequin;
+
+			public CompareItemTarget(Mannequin m)
+				: base(-1, false, TargetFlags.None)
+			{
+				_Mannequin = m;
+			}
+
+			protected override void OnTarget(Mobile from, object targeted)
+			{
+				if (targeted is Item item)
+				{
+					from.SendGump(new MannequinCompareGump(_Mannequin, item));
+				}
+				else
+				{
+					from.SendLocalizedMessage(1149667); // Invalid target.
+				}
+			}
+		}
 
 		public bool IsOwner(Mobile m)
 		{
@@ -117,12 +202,19 @@ namespace Server.Mobiles
             return false;
         }
 
-        public override void OnDoubleClick(Mobile from)
-        {
-            DisplayPaperdollTo(from);
-        }
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (IsOwner(from))
+			{
+				from.SendGump(new MannequinActionGump(this, from));
+			}
+			else
+			{
+				base.OnDoubleClick(from);
+			}
+		}
 
-        public override bool OnDragDrop(Mobile from, Item dropped)
+		public override bool OnDragDrop(Mobile from, Item dropped)
         {
             if (IsOwner(from) && Backpack != null)
             {
