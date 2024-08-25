@@ -6,17 +6,15 @@ namespace Server.Items
 {
 	public class Ecraseur : Item
 	{
-
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int Charges { get; set; }
-
 
 		[Constructable]
 		public Ecraseur() : base(4787)
 		{
 			Name = "Écraseur";
 			Weight = 1.0;
-			Charges = Utility.RandomMinMax(25, 50);
+			Charges = Utility.RandomMinMax(50, 100);
 		}
 
 		public Ecraseur(Serial serial)
@@ -28,8 +26,15 @@ namespace Server.Items
 		{
 			if (IsChildOf(from.Backpack))
 			{
-				from.SendMessage("Que voulez-vous écraser?");
-				from.BeginTarget(1, false, TargetFlags.None, new TargetCallback(OnTarget));
+				if (Charges > 0)
+				{
+					from.SendMessage("Que voulez-vous écraser?");
+					from.BeginTarget(1, false, TargetFlags.None, new TargetCallback(OnTarget));
+				}
+				else
+				{
+					from.SendMessage("L'écraseur n'a plus de charges.");
+				}
 			}
 			else
 			{
@@ -39,6 +44,12 @@ namespace Server.Items
 
 		private void OnTarget(Mobile from, object o)
 		{
+			if (Charges <= 0)
+			{
+				from.SendMessage("L'écraseur n'a plus de charges.");
+				return;
+			}
+
 			if (o is BaseShell)
 			{
 				BaseShell shell = (BaseShell)o;
@@ -50,6 +61,15 @@ namespace Server.Items
 				{
 					from.SendMessage($"Vous avez écrasé le coquillage et obtenu {amount} poudre(s) de coquillages.");
 					shell.Consume(1);
+
+					Charges--;
+					from.SendMessage($"Il reste {Charges} charges à l'écraseur.");
+
+					if (Charges <= 0)
+					{
+						from.SendMessage("L'écraseur s'est brisé après cette utilisation.");
+						this.Delete();
+					}
 				}
 				else
 				{
@@ -63,11 +83,18 @@ namespace Server.Items
 			}
 		}
 
+		public override void GetProperties(ObjectPropertyList list)
+		{
+			base.GetProperties(list);
+			list.Add($"Charges: {Charges}");
+		}
+
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
 
-			writer.Write((int)0); // version
+			writer.Write((int)1); // version
+			writer.Write((int)Charges);
 		}
 
 		public override void Deserialize(GenericReader reader)
@@ -75,6 +102,15 @@ namespace Server.Items
 			base.Deserialize(reader);
 
 			int version = reader.ReadInt();
+
+			if (version >= 1)
+			{
+				Charges = reader.ReadInt();
+			}
+			else
+			{
+				Charges = Utility.RandomMinMax(25, 50);
+			}
 		}
 	}
 }

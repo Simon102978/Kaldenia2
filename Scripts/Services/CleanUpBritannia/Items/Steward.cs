@@ -68,15 +68,22 @@ namespace Server.Mobiles
             AddItem(pack);
         }
 
-        public bool IsOwner(Mobile m)
-        {
-            if (m.AccessLevel >= AccessLevel.GameMaster)
-                return true;
+		public bool IsOwner(Mobile m)
+		{
+			if (m.AccessLevel >= AccessLevel.GameMaster)
+				return true;
 
-            return m == Owner;
-        }
+			BaseHouse house = BaseHouse.FindHouseAt(this);
 
-        public override bool CanBeDamaged()
+			if (house != null)
+			{
+				return house.IsOwner(m) || house.IsCoOwner(m);
+			}
+
+			return m == Owner || AccountHandler.CheckAccount(m, Owner);
+		}
+
+		public override bool CanBeDamaged()
         {
             return false;
         }

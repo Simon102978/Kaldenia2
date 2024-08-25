@@ -133,6 +133,7 @@ namespace Server.Engines.Craft
 		public override int PlayEndingEffect(
 	Mobile from, bool failed, bool lostMaterial, bool toolBroken, int quality, bool makersMark, CraftItem item)
 		{
+
 			if (toolBroken)
 			{
 				from.SendLocalizedMessage(1044038); // You have worn out your tool
@@ -565,7 +566,7 @@ namespace Server.Engines.Craft
 
 			#endregion
 
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
 			Repair = true;
 			CanEnhance = true;
 			CanAlter = true;

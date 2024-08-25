@@ -103,7 +103,7 @@ namespace Server.Engines.Craft
 			AddSubRes(typeof(RiceSheath), "Rice Sheathes", 100.0, skillNotice);
 			AddSubRes(typeof(Dandelion), "Dandelions", 125.0, skillNotice);
 
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
 			Repair = false;
 		}
 	}

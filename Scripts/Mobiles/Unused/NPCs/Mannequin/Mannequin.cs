@@ -46,10 +46,17 @@ namespace Server.Mobiles
 
 		public bool IsOwner(Mobile m)
 		{
-			if (m == Owner || m.AccessLevel >= AccessLevel.GameMaster)
+			if (m.AccessLevel >= AccessLevel.GameMaster)
 				return true;
 
-			return AccountHandler.CheckAccount(m, Owner);
+			BaseHouse house = BaseHouse.FindHouseAt(this);
+
+			if (house != null)
+			{
+				return house.IsOwner(m) || house.IsCoOwner(m);
+			}
+
+			return m == Owner || AccountHandler.CheckAccount(m, Owner);
 		}
 
 		public override bool CanBeDamaged()

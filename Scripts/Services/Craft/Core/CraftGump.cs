@@ -176,7 +176,7 @@ namespace Server.Engines.Craft
 
 			}
 			// Pratiquer option
-			if (craftSystem.Pratiquer)
+			if (m_CraftSystem.Pratiquer)
 			{
 				AddButton(15, 462, 4005, 4007, GetButtonID(6, 12), GumpButtonType.Reply, 0);
 				AddHtml(50, 465, 200, 20, "<h3><basefont color=#FFFFFF>Pratiquer<basefont></h3>", false, false);
@@ -331,12 +331,12 @@ namespace Server.Engines.Craft
                         resourceCount += items[i].Amount;
                 }
 
-                AddButton(15, 470, 4005, 4007, GetButtonID(6, 7), GumpButtonType.Reply, 0);
+                AddButton(130, 442, 4005, 4007, GetButtonID(6, 7), GumpButtonType.Reply, 0);
 
                 if (nameNumber > 0)
-                    AddHtmlLocalized(50, 470, 250, 18, nameNumber, resourceCount.ToString(), LabelColor, false, false);
+                    AddHtmlLocalized(170, 442, 250, 18, nameNumber, resourceCount.ToString(), LabelColor, false, false);
                 else
-                    AddHtml(50, 470, 450, 40, "<h3><basefont color=#FFFFFF>" + nameString + " " + resourceCount + "<basefont></h3>", false, false);
+                    AddHtml(170, 442, 450, 40, "<h3><basefont color=#FFFFFF>" + nameString + " " + resourceCount + "<basefont></h3>", false, false);
                   //  AddLabel(50, 385, LabelHue, string.Format("{0} ({1} Available)", nameString, resourceCount));
             }
             // ****************************************
@@ -945,61 +945,18 @@ namespace Server.Engines.Craft
                                 }
 							case 12: // Pratiquer
 								{
-									if (m_CraftSystem.Pratiquer)
-									{
-										BaseTool tool = GetCraftingTool(m_From, m_CraftSystem);
-										if (tool != null && CanCraft(m_From, tool))
-										{
-											Pratiquer.Do(m_From, m_CraftSystem, tool);
-										}
-									}
-									break;
+									if (system.Pratiquer)
+										Pratiquer.Do(m_From, system, m_Tool);
 								}
-						}
-                        break;
-                    }
+						
+						break;
+					}
             }
-        }
-		private static BaseTool GetCraftingTool(Mobile from, CraftSystem craftSystem)
-		{
-			Item item = from.FindItemOnLayer(Layer.OneHanded);
-
-			if (item is BaseTool && craftSystem.CraftItems.SearchForSubclass(item.GetType()) != null)
-			{
-				return (BaseTool)item;
+					break;
 			}
-
-			item = from.FindItemOnLayer(Layer.TwoHanded);
-
-			if (item is BaseTool && craftSystem.CraftItems.SearchForSubclass(item.GetType()) != null)
-			{
-				return (BaseTool)item;
-			}
-
-			return null;
-		}
-
-		public static bool CanCraft(Mobile from, BaseTool tool)
-		{
-			if (tool == null || tool.Deleted)
-			{
-				from.SendMessage("Vous n'avez pas d'outil valide.");
-				return false;
-			}
-
-			if (tool.UsesRemaining <= 0)
-			{
-				from.SendMessage("Vous avez usé votre outil !");
-				return false;
-			}
-
-			if (!tool.IsAccessibleTo(from))
-			{
-				from.SendMessage("L'outil doit être dans votre inventaire pour l'utiliser.");
-				return false;
-			}
-
-			return true;
 		}
 	}
 }
+
+
+

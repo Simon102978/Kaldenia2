@@ -11,6 +11,7 @@ namespace Server.Items
 		{
             Weight = 0.5;
             Movable = true;
+			Stackable = true;
 		}
 
 		public BaseShell( Serial serial ) : base( serial )

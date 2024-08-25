@@ -126,7 +126,7 @@ namespace Server.Engines.Craft
 			AddSubRes( typeof( SweetPotato ),	"SweetPotato", 20.0, skillNotice );
 			AddSubRes( typeof( Turnip ),		"Turnip", 20.0, skillNotice );
 
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
 			Repair = false;
 		}
 	}

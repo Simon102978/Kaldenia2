@@ -8,7 +8,8 @@ namespace Server.Items
 		[Constructable]
 		public Nautile() : base(4039)
 		{
-            Name = "coquillage";
+            Name = "Nautile";
+
 		}
 
         public Nautile(Serial serial) : base(serial)

@@ -307,7 +307,7 @@ namespace Server.Engines.Craft
 
 
 			Resmelt = true;
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
 			Repair = true;
 			CanEnhance = true;
 		}

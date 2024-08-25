@@ -834,7 +834,7 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(BlackPearl), "Perle noire", 5, "Il vous faut des perles noires");
 
 			#endregion
-
+			Pratiquer = true;
 		}
 	}
 }

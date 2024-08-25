@@ -8,7 +8,7 @@ namespace Server.Items
 		[Constructable]
 		public CoquillageHautsFonds() : base(4043)
 		{
-            Name = "coquillage";
+            Name = "Coquillage Hauts Fonds";
 		}
 
         public CoquillageHautsFonds(Serial serial) : base(serial)

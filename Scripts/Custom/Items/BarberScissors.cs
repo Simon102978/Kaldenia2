@@ -97,10 +97,15 @@ namespace Server.Items
 
 					from.SendGump(new CoiffureGump(from2, m, 0, m_Item));
 				}
-
-
-
-
+				else if (targeted is BaseCreature)
+				{
+					BaseCreature creature = (BaseCreature)targeted;
+					if (creature.Name.Contains("Mannequin")) // Vérifie si le nom contient "Mannequin"
+					{
+						CustomPlayerMobile from2 = from as CustomPlayerMobile;
+						from.SendGump(new CoiffureGump(from2, creature, 0, m_Item));
+					}
+				}
 				else
                 {
                     from.SendLocalizedMessage(502440); // Scissors can not be used on that to produce anything.

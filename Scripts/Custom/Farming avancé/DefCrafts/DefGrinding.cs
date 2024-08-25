@@ -64,7 +64,7 @@ namespace Server.Engines.Craft
             index = AddCraft(typeof(BagOfCocoa), "Grounds", "Bag of Cocoa", 50.0, 100.00, typeof(CocoaBean), "Cocoa Bean", 10, "You need more Cocoa Bean's.");
             AddRes(index, typeof(Bag), "Bag", 1, "You need a bag to put the cocoa grounds in.");
 
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
 			Repair = false;
 		}
 	}

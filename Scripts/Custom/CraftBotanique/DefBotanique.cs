@@ -331,7 +331,7 @@ namespace Server.Engines.Craft
 			AddSubRes(typeof(AncienBoard), "Ancien", 100.0, "Vous ne savez pas travailler le bois ancien");
 
 
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
 			Repair = true;
 			CanEnhance = true;
 			CanAlter = true;

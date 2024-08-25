@@ -742,7 +742,7 @@ namespace Server.Engines.Craft
 
 			Resmelt = true;
 			Repair = true;
-			MarkOption = true;
+			MarkOption = true; Pratiquer = true;
 			CanEnhance = true;
 			CanAlter = true;
 		}

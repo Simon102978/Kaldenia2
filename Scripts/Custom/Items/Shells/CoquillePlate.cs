@@ -8,7 +8,7 @@ namespace Server.Items
 		[Constructable]
 		public CoquillePlate() : base(4040)
 		{
-            Name = "coquillage";
+            Name = "Coquille Plate";
 		}
 
         public CoquillePlate(Serial serial) : base(serial)
