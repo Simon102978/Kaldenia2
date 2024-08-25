@@ -1022,7 +1022,7 @@ namespace Server.Multis
 					return false;
 				}
 
-				if (cm.Skills[SkillName.Cartography].Value >= 50)
+				if (cm.Skills[SkillName.Fishing].Value >= 50)
 				{
 					return true;
 				}
