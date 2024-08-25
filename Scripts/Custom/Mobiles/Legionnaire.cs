@@ -1,5 +1,8 @@
+using Server.ContextMenus;
 using Server.Items;
+using Server.Regions;
 using System;
+using System.Collections.Generic;
 
 namespace Server.Mobiles
 {
@@ -7,6 +10,12 @@ namespace Server.Mobiles
     {
 		public DateTime DelayCharge;
 		public DateTime TuerSummoneur;
+
+		public override bool CanDetectHidden => true;
+     	public override bool BardImmune => true;
+
+		public override TribeType Tribe => TribeType.Legion;
+
 
 		[Constructable]
         public Legionnaire()
@@ -235,8 +244,8 @@ namespace Server.Mobiles
 				TuerSummoneur = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(30, 50));
 			}
 		}
-
-
+	
+		
 
 		public override int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
         {
@@ -252,7 +261,7 @@ namespace Server.Mobiles
             }
 
             return dam;
-        }
+		}
 
         public override void GenerateLoot()
         {
