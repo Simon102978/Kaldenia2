@@ -48,7 +48,7 @@ namespace Server.Items
 		public override void Enchant(Item item, Mobile from)
 		{
 
-			int augmentper = Utility.Random(6) + 1;
+			int augmentper = Utility.Random(10) + 5;
 
 			if (item is BaseWeapon Weapon)
 			{				

@@ -4704,6 +4704,8 @@ namespace Server.Items
 
 			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
 
+			list.Add($"Enchantement: {Enchantement}/1");
+
 			#region Mondain's Legacy Sets
 			if (IsSetItem)
             {

@@ -11,25 +11,25 @@ using Server.Misc;
 
 namespace Server.Items
 {
-	public class DamageIncRune : BaseRune
+	public class LowerManaCostRune : BaseRune
 	{
-
 		[Constructable]
-		public DamageIncRune() : base()
+		public LowerManaCostRune() : base( 0x1F14 )
 		{
 			Weight = 0.2;  // ?
-			Name = "Degat";
-			Hue = 2584;
+			Name = "Reduction du cout de Mana";
+			Hue = 1266;
 		}
-
 		public override bool CanEnchant(Item item, Mobile from)
 		{
-			if (item is BaseWeapon)
+
+			if (item is BaseJewel)
 			{
 				return true;
 			}
 
-			from.SendMessage("Vous ne pouvez enchanter que les armes avec cette rune.");
+
+			from.SendMessage("Vous pouvez enchanter que les bijoux avec cette rune.");
 
 			return base.CanEnchant(item, from);
 		}
@@ -39,30 +39,29 @@ namespace Server.Items
 
 			int augmentper = Utility.Random(10) + 5;
 
-			if (item is BaseWeapon Weapon)
-			{				
-				Weapon.Attributes.WeaponDamage += augmentper;								
+			if (item is BaseJewel Jewel)
+			{
+				Jewel.Attributes.LowerManaCost += augmentper;
 			}
-
 
 			base.Enchant(item, from);
 		}
 
 
-		public DamageIncRune( Serial serial ) : base( serial )
+		public LowerManaCostRune(Serial serial) : base(serial)
 		{
 		}
 
-		public override void Serialize( GenericWriter writer )
+		public override void Serialize(GenericWriter writer)
 		{
-			base.Serialize( writer );
+			base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
+			writer.Write((int)0); // version
 		}
 
-		public override void Deserialize( GenericReader reader )
+		public override void Deserialize(GenericReader reader)
 		{
-			base.Deserialize( reader );
+			base.Deserialize(reader);
 
 			int version = reader.ReadInt();
 		}

@@ -448,6 +448,7 @@ namespace Server.Items
 	(typeof(CoquilleEcarlate), "Coquille écarlate"),
 	(typeof(CoquillePlate), "Coquille plate"),
 	(typeof(CoquilleTachetee), "Coquille tachetée"),
+	(typeof(WhitePearl), "Perle blanche"),
 	(typeof(DentRequin), "Dent de requin"),
 	(typeof(DentAlligator), "Dent d'alligator"),
 	(typeof(GraisseSole), "Graisse de sole"),
@@ -469,6 +470,7 @@ namespace Server.Items
 	(typeof(ThighBoots), "Cuissardes"),
 	(typeof(BlackPearl), "Perle noire"),
 	(typeof(WhitePearl), "Perle blanche"),
+
 	//(typeof(BaseHighseasFish), "Poisson des bas fonds")
 };
 

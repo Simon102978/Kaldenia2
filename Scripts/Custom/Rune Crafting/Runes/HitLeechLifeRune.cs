@@ -11,15 +11,14 @@ using Server.Misc;
 
 namespace Server.Items
 {
-	public class AttackChanceRune : BaseRune
+	public class HitLeechLifeRune : BaseRune
 	{
-
 		[Constructable]
-		public AttackChanceRune() : base()
+		public HitLeechLifeRune() : base( 0x1F14 )
 		{
 			Weight = 0.2;  // ?
-			Name = "Chance de toucher";
-			Hue = 2584;
+			Name = "Vol de Vie";
+			Hue = 2075;
 		}
 
 		public override bool CanEnchant(Item item, Mobile from)
@@ -40,29 +39,29 @@ namespace Server.Items
 			int augmentper = Utility.Random(10) + 5;
 
 			if (item is BaseWeapon Weapon)
-			{				
-				Weapon.Attributes.AttackChance += augmentper;								
+			{
+				Weapon.WeaponAttributes.HitLeechHits += augmentper;
 			}
 
 			base.Enchant(item, from);
 		}
 
-		public override bool DisplayLootType{ get{ return false; } }  // ha ha!
+		public override bool DisplayLootType { get { return false; } }  // ha ha!
 
-		public AttackChanceRune( Serial serial ) : base( serial )
+		public HitLeechLifeRune(Serial serial) : base(serial)
 		{
 		}
 
-		public override void Serialize( GenericWriter writer )
+		public override void Serialize(GenericWriter writer)
 		{
-			base.Serialize( writer );
+			base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
+			writer.Write((int)0); // version
 		}
 
-		public override void Deserialize( GenericReader reader )
+		public override void Deserialize(GenericReader reader)
 		{
-			base.Deserialize( reader );
+			base.Deserialize(reader);
 
 			int version = reader.ReadInt();
 		}

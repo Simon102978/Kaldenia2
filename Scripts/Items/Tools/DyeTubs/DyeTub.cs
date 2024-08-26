@@ -322,7 +322,7 @@ namespace Server.Items
 						}
 					}
 
-						else if (item is BaseClothing || item is BaseHat || item is Chapelet)
+						else if (item is BaseClothing || item is BaseHat || item is Chapelet || item is BaseBook)
 						{
 							if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
 							{
@@ -387,7 +387,7 @@ namespace Server.Items
 
 					}
 
-					else if (m_Tub.AllowRunebooks && (item is Runebook || item is RecallRune || item is Spellbook || m_Tub.CanForceDye(item)))
+					else if (m_Tub.AllowRunebooks && (item is Runebook || item is RecallRune || item is BaseBook || item is Spellbook || m_Tub.CanForceDye(item)))
 					{
 						if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
 						{

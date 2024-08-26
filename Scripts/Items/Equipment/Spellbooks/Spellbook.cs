@@ -804,6 +804,7 @@ namespace Server.Items
 
 			AddCraftedProperties(list);
 
+			list.Add($"Enchantement: {Enchantement}/1");
 
 			if (m_EngravedText != null)
             {

@@ -330,6 +330,12 @@ public class SkillCard : Item
 
 		from.SendMessage("La carte se désintègre après avoir libéré son pouvoir.");
 		this.Delete();
+
+		BuffInfo buff = new BuffInfo(BuffIcon.PoisonImmunity, 1075814, 1075815, TimeSpan.FromHours(1), from, $"{m_Skill}: +{effectiveBonus:F1}%");
+		effect.Buff = buff;
+
+		// Ajoutez le buff à la BuffBar
+		BuffInfo.AddBuff(from, buff);
 	}
 
 	private static void RemoveEffect(SkillCardEffect effect)
@@ -354,7 +360,7 @@ public class SkillCard : Item
 				effectsForMobile.Remove(effect.Skill);
 
 				effect.Owner.SendMessage($"Le bonus de compétence {effect.Skill} s'est dissipé. Votre progression naturelle a été conservée.");
-
+				BuffInfo.RemoveBuff(effect.Owner, effect.Buff);
 				if (effectsForMobile.Count == 0)
 				{
 					s_ActiveEffects.Remove(effect.Owner);
@@ -452,6 +458,8 @@ public class SkillCard : Item
 		public DateTime ExpireTime { get; set; }
 		public SkillMod SkillMod { get; set; }
 		public double InitialBaseValue { get; set; }
+
+		public BuffInfo Buff { get; set; }
 	}
 }
 

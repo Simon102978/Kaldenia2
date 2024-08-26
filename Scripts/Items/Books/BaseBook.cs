@@ -54,7 +54,7 @@ namespace Server.Items
         }
     }
 
-    public class BaseBook : Item, ISecurable
+    public class BaseBook : Item, ISecurable, IDyable
     {
         private string m_Title;
         private string m_Author;
@@ -389,8 +389,15 @@ namespace Server.Items
             from.Send(new BookHeader(from, this));
             from.Send(new BookPageDetails(this));
         }
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
 
-        public string ContentAsString
+			Hue = sender.DyedHue;
+			return true;
+		}
+		public string ContentAsString
         {
             get
             {
