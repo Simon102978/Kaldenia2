@@ -2386,6 +2386,7 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
+				case 40:
 				case 39:
 					{
 						CrieurPublic = reader.ReadBool();
@@ -2639,9 +2640,9 @@ namespace Server.Mobiles
                     }
             }
 
-			if (version <= 37)
+			if (version <= 39)
 			{
-				ChangeTribeValue(TribeType.Legion, 25);
+				TribeRelation[TribeType.Legion] = 75;
 			}
 
 
@@ -2651,7 +2652,7 @@ namespace Server.Mobiles
         {        
             base.Serialize(writer);
 
-            writer.Write(39); // version
+            writer.Write(40); // version
 
 
 			writer.Write(CrieurPublic);
