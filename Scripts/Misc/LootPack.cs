@@ -789,11 +789,16 @@ namespace Server
 	new LootPackItem(typeof(GreaterHitsMaxBuffFoodRecipeScroll), 1),
 	new LootPackItem(typeof(CoffreFortRecipeScroll), 1),
 	new LootPackItem(typeof(SuperiorHealPotionRecipeScroll), 1),
-	new LootPackItem(typeof(EnclumeEastRecipeScroll), 1)
-};
+	new LootPackItem(typeof(EnclumeEastRecipeScroll), 1),
+	new LootPackItem(typeof(KeprishPotionScroll), 1),
 
 
+		};
+		public static readonly LootPackItem[] CustomRecipesScroll4 = new LootPackItem[]
+		{
+		new LootPackItem(typeof(KeprishPotionScroll), 1),
 
+		};
 
 		#endregion
 

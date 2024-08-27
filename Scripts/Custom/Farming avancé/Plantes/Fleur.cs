@@ -500,7 +500,46 @@ namespace Server.Items
         }
     }
 
-    public class GeuleDeDragon : BaseFlower
+	public class Hellebore : BaseFlower
+	{
+		[Constructable]
+		public Hellebore()
+				: this(1)
+		{
+		}
+
+		[Constructable]
+		public Hellebore(int amount)
+			  : base(0xC3C)
+		{
+			Name = "Hellebore";
+			Stackable = true;
+			Weight = 0.5;
+			Amount = amount;
+		}
+
+		public Hellebore(Serial serial)
+				: base(serial)
+		{
+		}
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.Write((int)0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadInt();
+		}
+	}
+
+
+	public class GeuleDeDragon : BaseFlower
     {
     [Constructable]
     public GeuleDeDragon()

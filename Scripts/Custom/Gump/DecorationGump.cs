@@ -38,6 +38,7 @@ namespace Server.Gumps
 
 			//Backgound
 			AddImage(100, 100, 5011);
+		
 
 			//Nudge
 			AddButton(160, 235, 5600, 5604, 1, GumpButtonType.Reply, 0);

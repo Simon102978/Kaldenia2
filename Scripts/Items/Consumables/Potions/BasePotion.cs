@@ -70,7 +70,8 @@ namespace Server.Items
 		ManaLesser,
 		Mana,
 		ManaGreater,
-		ManaSuperior
+		ManaSuperior,
+		Keprish
 
 
 

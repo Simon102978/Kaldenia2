@@ -1554,11 +1554,12 @@ namespace Server.Items
 
 		public override void Serialize(GenericWriter writer)
 		{
+
 			base.Serialize(writer);
 
 			writer.Write(3); // version
 
-			var flags = SaveFlag.None;
+			SaveFlag flags = SaveFlag.None;
 
 			SetSaveFlag(ref flags, SaveFlag.MaxItems, m_MaxItems != -1);
 			SetSaveFlag(ref flags, SaveFlag.GumpID, m_GumpID != -1);
@@ -1598,10 +1599,16 @@ namespace Server.Items
 		{
 			base.Deserialize(reader);
 
-			var version = reader.ReadInt();
+			int version = reader.ReadInt();
 
 			switch (version)
 			{
+				case 4:
+					{
+						// Lire et ignorer la qualité
+						reader.ReadInt();
+						goto case 3;
+					}
 				case 3:
 				case 2:
 					{

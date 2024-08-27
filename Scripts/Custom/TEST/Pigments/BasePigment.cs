@@ -130,7 +130,7 @@ public class BleuCobaltPigment : BasePigment
 	public class BleuElectriquePigment : BasePigment
 	{
 		[Constructable]
-		public BleuElectriquePigment() : base(2748, "Bleu électrique") { }
+		public BleuElectriquePigment() : base(2482, "Bleu électrique") { }
 		public BleuElectriquePigment(Serial serial) : base(serial) { }
 		public override void Serialize(GenericWriter writer)
 		{
@@ -512,7 +512,7 @@ public class BleuCobaltPigment : BasePigment
 	public class RougeEcarlatePigment : BasePigment
 	{
 		[Constructable]
-		public RougeEcarlatePigment() : base(2552, "Rouge écarlate") { }
+		public RougeEcarlatePigment() : base(2252, "Rouge écarlate") { }
 		public RougeEcarlatePigment(Serial serial) : base(serial) { }
 		public override void Serialize(GenericWriter writer)
 		{

@@ -478,14 +478,21 @@ namespace Server.Items
                 return 50;
             }
         }
-		
+
 
 		public override void OnDoubleClick(Mobile from)
 		{
-			if (CanEquip(from))
-			{
-				base.OnDoubleClick(from);
-			}
+			var oldItem = from.FindItemOnLayer(this.Layer);
+
+			if (oldItem == this)
+				return;
+
+			if (oldItem != null)
+				from.PlaceInBackpack(oldItem);
+
+			from.EquipItem(this);
+
+			base.OnDoubleClick(from);
 		}
 
 		public override bool CanEquip(Mobile from)
@@ -685,8 +692,8 @@ namespace Server.Items
 
             base.OnAdded(parent);
         }
-
-        public override void OnRemoved(object parent)
+		
+		public override void OnRemoved(object parent)
         {
             Mobile mob = parent as Mobile;
 

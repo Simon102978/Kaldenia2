@@ -515,8 +515,49 @@ namespace Server.Items
             int version = reader.ReadEncodedInt();
         }
     }
+	public class FarmableHellebore : FarmableCrop
+	{
+		public override double SkillNecessaire => 00.0;
 
-    public class FarmableGeuleDeDragon : FarmableCrop
+		[Constructable]
+		public FarmableHellebore()
+					: base(GetCropID())
+		{
+			Name = "Hellebore";
+		}
+
+		public FarmableHellebore(Serial serial)
+					: base(serial)
+		{
+		}
+
+		public static int GetCropID()
+		{
+			return 3132;
+		}
+
+		public override Item GetCropObject()
+		{
+			Hellebore onion = new Hellebore();
+			return onion;
+		}
+
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+
+			writer.WriteEncodedInt(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+
+			int version = reader.ReadEncodedInt();
+		}
+	}
+	public class FarmableGeuleDeDragon : FarmableCrop
     {
         public override double SkillNecessaire => 85.2;
 

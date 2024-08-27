@@ -51,6 +51,7 @@ namespace Server.Mobiles
 		public override void GenerateLootParagon()
 		{
 			AddLoot(LootPack.LootItem<SangEnvouteWyvern>(), Utility.RandomMinMax(2, 4));
+
 		}
 
 

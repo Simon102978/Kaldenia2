@@ -73,33 +73,14 @@ namespace Server.Engines.Craft
 					}
 					else
 					{
-						string notice = "";
-
-						if (craftSystem is DefBlacksmithy)
-							notice = "Vous n'avez pas assez de lingot.";
-						else if (craftSystem is DefBowFletching)
-							notice = "Vous n'avez pas assez de matériaux.";
-						else if (craftSystem is DefCarpentry)
-							notice = "Vous n'avez pas assez de planche.";
-						else if (craftSystem is DefCartography)
-							notice = "Vous n'avez pas assez de carte vierge.";
-						else if (craftSystem is DefCooking)
-							notice = "Vous n'avez pas assez de pâte.";
-						else if (craftSystem is DefInscription)
-							notice = "Vous n'avez pas assez de parchemin vierge.";
-						else if (craftSystem is DefTailoring)
-							notice = "Vous n'avez pas assez de tissu.";
-						else if (craftSystem is DefTinkering)
-							notice = "Vous n'avez pas assez de lingot.";
-						else if (craftSystem is DefAlchemy)
-							notice = "Vous n'avez pas assez de bouteille.";
-
+						string notice = "Vous n'avez pas assez de matériaux pour pratiquer.";
 						from.SendGump(new CraftGump(from, craftSystem, tool, notice));
 					}
 				}
 			}
-			catch
+			catch (Exception e)
 			{
+				Console.WriteLine($"Erreur dans Pratiquer.Do: {e.Message}");
 			}
 		}
 
@@ -130,78 +111,77 @@ namespace Server.Engines.Craft
 					NextAllowedTime = DateTime.UtcNow + TimeSpan.FromSeconds(10.0);
 					from.SendGump(new CraftGump(from, craftSystem, tool, null));
 				}
-				else if (count == 3)
-				{
-					NextAllowedTime = DateTime.UtcNow;
-					bool checkSkills = true;
-					bool toolBroken = false;
+			 else if (count == 3)
+                {
+                    NextAllowedTime = DateTime.UtcNow;
+                    bool toolBroken = false;
 
-					if (from is CustomPlayerMobile pm)
-					{
-						int chance = 100;
+                    if (from is PlayerMobile pm)
+                    {
+                        int chance = 100;
 
-						if (chance < 5)
-							chance = 5;
+                        if (chance < 5)
+                            chance = 5;
 
-						if (chance > Utility.RandomMinMax(0, 100))
-							tool.UsesRemaining--;
+                        if (chance > Utility.RandomMinMax(0, 100))
+                            tool.UsesRemaining--;
 
-						if (tool.UsesRemaining < 1)
-							toolBroken = true;
-					}
+                        if (tool.UsesRemaining < 1)
+                            toolBroken = true;
+                    }
 
-					if (checkSkills)
-					{
-						double minSkill = 0.0;
-						double maxSkill = 100.0;
+                    Skill skill = from.Skills[craftSystem.MainSkill];
+                    double oldValue = skill.Base;
 
-						// Obtenir le niveau actuel de la compétence
-						double currentSkill = from.Skills[craftSystem.MainSkill].Base;
+                    if (AttemptSkillGain(oldValue))
+                    {
+                        double gainAmount = CalculateSkillGain(oldValue);
+                        skill.Base += gainAmount;
+                        from.SendMessage($"Votre compétence en {craftSystem.MainSkill} a augmenté de {gainAmount:F1} points.");
+                    }
+                    else
+                    {
+                        from.SendMessage("Vous avez pratiqué, mais n'avez pas amélioré votre compétence cette fois-ci.");
+                    }
 
-						// Déterminer la difficulté en fonction du niveau de compétence actuel
-						double difficulty;
-						if (currentSkill < 50.0)
-						{
-							difficulty = 10.0;
-						}
-						else if (currentSkill < 75.0)
-						{
-							difficulty = 20.0;
-						}
-						else
-						{
-							difficulty = 30.0;
-						}
+                    if (toolBroken)
+                    {
+                        from.SendMessage("Vous avez brisé votre outil.");
+                        tool.Delete();
+                    }
 
-						// Ajouter un élément aléatoire à la difficulté
-						difficulty += Utility.RandomDouble() * 10.0;
+                    timer.Stop();
+                    return;
+                }
 
-						// Effectuer le SkillCheck
-						bool skillGain = from.CheckSkill(craftSystem.MainSkill, difficulty, maxSkill);
+                count++;
+            });
+        }
 
-						if (skillGain)
-						{
-							from.SendMessage($"Votre compétence en {craftSystem.MainSkill} a augmenté.");
-						}
-						else
-						{
-							from.SendMessage("Vous avez pratiqué, mais n'avez pas amélioré votre compétence cette fois-ci.");
-						}
-					}
+        private static bool AttemptSkillGain(double currentSkill)
+        {
+            int baseChance = 70; // 70% de chance de base pour gagner une compétence
 
-					if (toolBroken)
-					{
-						from.SendMessage("Vous avez brisé votre outil.");
-						tool.Delete();
-					}
+            if (currentSkill < 50.0)
+                baseChance += 20; // 90% de chance pour les compétences inférieures à 50
+            else if (currentSkill < 70.0)
+                baseChance += 10; // 80% de chance pour les compétences entre 50 et 70
+            else if (currentSkill >= 90.0)
+                baseChance -= 20; // 50% de chance pour les compétences supérieures à 90
 
-					timer.Stop();
-					return;
-				}
+            return Utility.RandomMinMax(1, 100) <= baseChance;
+        }
 
-				count++;
-			});
-		}
-	}
+        private static double CalculateSkillGain(double currentSkill)
+        {
+            if (currentSkill < 50.0)
+                return Utility.RandomDouble() * 0.5;
+            else if (currentSkill < 70.0)
+                return Utility.RandomDouble() * 0.3;
+            else if (currentSkill < 90.0)
+                return Utility.RandomDouble() * 0.1;
+            else
+                return Utility.RandomDouble() * 0.05;
+        }
+    }
 }
-
