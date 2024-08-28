@@ -6163,7 +6163,8 @@ namespace Server.Mobiles
 			typeof(ManteauVoyageurRecipeScroll),
 			typeof(CoffreMetalVisqueuxRecipeScroll),
 			typeof(StamMaxBuffFoodRecipeScroll),
-			typeof(SuperiorCurePotionRecipeScroll)
+			typeof(SuperiorCurePotionRecipeScroll),
+		typeof(KeprishPotionScroll),
 };
 
 		public virtual double TreasureMapChance => TreasureMap.LootChance;

@@ -400,6 +400,15 @@ public class CustomRecipeScrolls
 		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
 	}
 
+	public class KeprishPotionScroll : RecipeScroll
+	{
+		[Constructable]
+		public KeprishPotionScroll() : base(70011) { }
+		public KeprishPotionScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
 	public class SuperiorAgilityPotionRecipeScroll : RecipeScroll
 	{
 		[Constructable]

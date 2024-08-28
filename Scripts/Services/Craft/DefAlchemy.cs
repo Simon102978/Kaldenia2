@@ -36,9 +36,10 @@ namespace Server.Engines.Craft
 		SuperiorManaPotion = 70009,
 		[Description("Potion intelligence supérieure")]
 		SuperiorIntelligencePotion = 70010,
+		[Description("Potion de Keprish")]
+		KeprishPotion = 70011,
 
 		
-
 	}
 
 	public class DefAlchemy : CraftSystem
@@ -319,8 +320,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(SakkhraProphylaxisPotion), "Autres", "Potion de Sakkhra", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(GraisseSole), "Graisse de Sole", 5, "Vous n'avez pas suffisament de graisse de sole");
-			
-			
+
+			index = AddCraft(typeof(AutoResPotion), "Autres", "Potion d'auto résurrection", 85.0, 120.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
+			AddRes(index, typeof(Hellebore), "Hellebore", 5, "Vous n'avez pas suffisament de Hellebore");
+			AddRecipe(index, (int)AlchemyRecipes.KeprishPotion);
 
 
 			index = AddCraft(typeof(HairDye), "Teinture pour cheveux", "Teinture à Cheveux", 75.0, 100.0, typeof(BacVide), "Bac Vide", 1, "Il vous faut un bac vide");

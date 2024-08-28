@@ -530,34 +530,10 @@ namespace Server.Multis
             return m_SecurityEntry.IsPublic;
         }
 
-		public virtual bool CanCommand(Mobile m)
+		public override bool CanCommand(Mobile m)
 		{
-
-			if (m is CustomPlayerMobile)
-			{
-				CustomPlayerMobile cm = (CustomPlayerMobile)m;
-
-				if (cm.Skills[SkillName.Cartography].Value >= 50)
-				{
-					return true;
-				}
-				else
-				{
-					return false;
-				}
-			}
-
-
-
-
-
-
-
-
-
-			return true;
+			return GetSecurityLevel(m) >= SecurityLevel.Crewman;
 		}
-
 
 		public override bool HasAccess(Mobile from)
         {

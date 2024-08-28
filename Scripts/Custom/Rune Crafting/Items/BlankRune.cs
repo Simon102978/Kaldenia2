@@ -13,7 +13,7 @@ namespace Server.Items
 		public BlankRune( int amount ) : base( 0x2808 )
 		{
 			Weight = 0.0;
-			Stackable = false;
+			Stackable = true;
 			Name = "Rune vierge";
 			//Amount = amount;
 			Hue = 998;
