@@ -9,7 +9,7 @@ namespace Server.Mobiles
         public override bool CanStealth => true;  //Stays Hidden until Combatant in range.
         [Constructable]
         public DauphinMalefiqueBleu()
-            : base(AIType.MaritimeArcherAI, FightMode.Aggressor, 10, 8, 0.2, 0.4)
+            : base(AIType.MaritimeArcherAI, FightMode.Closest, 10, 8, 0.2, 0.4)
         {
             Name = "Dauphin malefique Bleu";
             Body = 0x97;
