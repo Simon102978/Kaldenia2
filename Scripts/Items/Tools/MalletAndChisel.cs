@@ -6,14 +6,14 @@ namespace Server.Items
     {
         [Constructable]
         public MalletAndChisel()
-            : base(0x12B3)
+            : base(0x0FB4)
         {
-	
-        }
+			Name = "Maillet et Ciseau";
+		}
 
         [Constructable]
         public MalletAndChisel(int uses)
-            : base(uses, 0x12B3)
+            : base(uses, 0x0FB4)
         {
             Weight = 1.0;
 			Name = "Maillet et Ciseau";

@@ -232,25 +232,25 @@ namespace Server.Engines.Craft
 			SetDisplayID(index, 1945);
 
 			// Cuisine
-			AddCraft(typeof(StoneOvenEastDeed), "Cuisine", "Four en pierre (E)", 68.4, 93.4, typeof(Granite), 1044041, 40, 1044351);
+			AddCraft(typeof(StoneOvenEastDeed), "Cuisine", "Four en pierre (E)", 68.4, 93.4, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			AddSkill(index, SkillName.Tinkering, 50.0, 55.0);
-			AddCraft(typeof(StoneOvenSouthDeed), "Cuisine", "Four en pierre (S)", 68.4, 93.4, typeof(Granite), 1044041, 40, 1044351);
+			AddCraft(typeof(StoneOvenSouthDeed), "Cuisine", "Four en pierre (S)", 68.4, 93.4, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			AddSkill(index, SkillName.Tinkering, 50.0, 55.0);
-			AddCraft(typeof(StoneFireplaceEastDeedExp), "Cuisine", "Foyer en pierre (E)", 68.4, 93.4, typeof(Granite), 1044041, 40, 1044351);
+			AddCraft(typeof(StoneFireplaceEastDeedExp), "Cuisine", "Foyer en pierre (E)", 68.4, 93.4, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			AddSkill(index, SkillName.Tinkering, 50.0, 55.0);
-			AddCraft(typeof(StoneFireplaceSouthDeedExp), "Cuisine", "Foyer en pierre (S)", 68.4, 93.4, typeof(Granite), 1044041, 40, 1044351);
+			AddCraft(typeof(StoneFireplaceSouthDeedExp), "Cuisine", "Foyer en pierre (S)", 68.4, 93.4, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			AddSkill(index, SkillName.Tinkering, 50.0, 55.0);
-			AddCraft(typeof(GrayBrickFireplaceEastDeedExp), "Cuisine", "Foyer en brique (E)", 68.4, 93.4, typeof(Granite), 1044041, 40, 1044351);
+			AddCraft(typeof(GrayBrickFireplaceEastDeedExp), "Cuisine", "Foyer en brique (E)", 68.4, 93.4, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			AddSkill(index, SkillName.Tinkering, 50.0, 55.0);
-			AddCraft(typeof(GrayBrickFireplaceSouthDeedExp), "Cuisine", "Foyer en brique (S)", 68.4, 93.4, typeof(Granite), 1044041, 40, 1044351);
+			AddCraft(typeof(GrayBrickFireplaceSouthDeedExp), "Cuisine", "Foyer en brique (S)", 68.4, 93.4, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			AddSkill(index, SkillName.Tinkering, 50.0, 55.0);
-			AddCraft(typeof(SandstoneFireplaceEastDeedExp), "Cuisine", "Foyer en grès (E)", 68.4, 93.4, typeof(Granite), 1044041, 40, 1044351);
+			AddCraft(typeof(SandstoneFireplaceEastDeedExp), "Cuisine", "Foyer en grès (E)", 68.4, 93.4, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			AddSkill(index, SkillName.Tinkering, 50.0, 55.0);
-			AddCraft(typeof(SandstoneFireplaceSouthDeedExp), "Cuisine", "Foyer en grès (S)", 68.4, 93.4, typeof(Granite), 1044041, 40, 1044351);
+			AddCraft(typeof(SandstoneFireplaceSouthDeedExp), "Cuisine", "Foyer en grès (S)", 68.4, 93.4, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			AddSkill(index, SkillName.Tinkering, 50.0, 55.0);
-			AddCraft(typeof(ElvenStoveSouthDeed), "Cuisine", "Four élégant (S)", 85.0, 110.0, typeof(Granite), 1044041, 40, 1044351);
+			AddCraft(typeof(ElvenStoveSouthDeed), "Cuisine", "Four élégant (S)", 85.0, 110.0, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			ForceNonExceptional(index);
-			AddCraft(typeof(ElvenStoveEastDeed), "Cuisine", "Four élégant (E)", 85.0, 110.0, typeof(Granite), 1044041, 40, 1044351);
+			AddCraft(typeof(ElvenStoveEastDeed), "Cuisine", "Four élégant (E)", 85.0, 110.0, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			ForceNonExceptional(index);
 
 			// Forge

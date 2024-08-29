@@ -137,9 +137,9 @@ namespace Server.Items
 			if (m_Quality == ItemQuality.Exceptional)
 				list.Add("Exceptionnelle");
 			else if (m_Quality == ItemQuality.Epic)
-				list.Add("�pique");
+				list.Add("Épique");
 			else if (m_Quality == ItemQuality.Legendary)
-				list.Add("L�gendaire");
+				list.Add("Légendaire");
 		}
 		public override void AddNameProperties(ObjectPropertyList list)
 		{

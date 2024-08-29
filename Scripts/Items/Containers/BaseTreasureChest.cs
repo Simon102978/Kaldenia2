@@ -5,7 +5,28 @@ namespace Server.Items
 {
     public class BaseTreasureChest : LockableContainer
     {
-        private TreasureLevel m_TreasureLevel;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool TrapActive => TrapType != TrapType.None;
+
+		public override void GetProperties(ObjectPropertyList list)
+		{
+			base.GetProperties(list);
+
+			if (TrapActive)
+			{
+				list.Add("Piège actif"); // ~1_val~: Active
+			}
+			else
+			{
+				list.Add("Piège inactif"); // ~1_val~: Inactive
+			}
+
+			list.Add($"Niveau {GetLevel()}"); // Level ~1_val~
+		}
+
+
+		private TreasureLevel m_TreasureLevel;
         private short m_MaxSpawnTime = 60;
         private short m_MinSpawnTime = 10;
         private TreasureResetTimer m_ResetTimer;
@@ -131,9 +152,9 @@ namespace Server.Items
             get
             {
                 if (Locked)
-                    return "a locked treasure chest";
+                    return "Un coffre au trésor verrouillé";
 
-                return "a treasure chest";
+                return "un coffre au trésor";
             }
         }
         public override void Serialize(GenericWriter writer)

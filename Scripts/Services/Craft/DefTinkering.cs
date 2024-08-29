@@ -8,6 +8,7 @@ using Server.Custom;
 using static Server.Custom.GolemCrystal;
 using Discord;
 using Server.Custom.Packaging.Packages;
+using Server.Engines.Chat;
 
 namespace Server.Engines.Craft
 {
@@ -78,6 +79,8 @@ namespace Server.Engines.Craft
 		public override string GumpTitleString => "Bricolage";
 
 		private static CraftSystem m_CraftSystem;
+		private CraftSystem craftSystem;
+		private ITool tool;
 
 		public static CraftSystem CraftSystem
 		{
@@ -198,7 +201,9 @@ namespace Server.Engines.Craft
 
 			if (quality == 2)
 			{
-				return 1044155; // You create an exceptional quality item.
+				 from.SendGump(new CraftGump(from, craftSystem, tool, "Vous créez un item de qualité exceptionnel."));
+
+				//return 1044155; // You create an exceptional quality item.
 			}
 			if (makersMark && quality == 3)
 			{
@@ -808,6 +813,9 @@ namespace Server.Engines.Craft
 			SetUseSubRes2(index, true);
 			index = AddCraft(typeof(CustomSign), "Divers", "Affiche Personnalisée", 30.0, 80.0, typeof(Materiaux), "Matériaux", 10, "Vous n'avez pas assez de matériaux");
 			AddRes(index, typeof(BlankScroll), "Parchemin Vierge", 3, "Vous n'avez pas suffisament de parchemin vierge");
+
+			index = AddCraft(typeof(CommodityDeedBox), "Divers", "Boite de Commoditée", 30.0, 80.0, typeof(Materiaux), "Matériaux", 30, "Vous n'avez pas assez de matériaux");
+			AddRes(index, typeof(BlankScroll), "Parchemin Vierge", 10, "Vous n'avez pas suffisament de parchemin vierge");
 
 			index = AddCraft(typeof(MannequinDeed), "Divers", "Mannequin (F)", 60.0, 100.0, typeof(Materiaux), "Matériaux", 35, "Vous n'avez pas assez de matériaux");
 			AddRes(index, typeof(Cloth), "Tissus", 20, "Vous n'avez pas suffisament de tissus");

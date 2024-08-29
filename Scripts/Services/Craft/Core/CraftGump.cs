@@ -45,47 +45,41 @@ namespace Server.Engines.Craft
             m_Tool = tool;
             m_Page = page;
 
-               
-
-            CraftContext context = craftSystem.GetContext(from);
-
-               
-
-            if (list.Count == 0)
-            {
 
 
-                if (context != null && context.LastGroupIndex > -1)
-                {                  
-                    CraftGroupCol craftGroupCol = m_CraftSystem.CraftGroups;
-                    CraftGroup craftGroup = craftGroupCol.GetAt(context.LastGroupIndex);
+			CraftContext context = craftSystem?.GetContext(from);
 
-                    if (craftGroup != null)
-                    {
-                        CraftItemCol craftItemCol = craftGroup.CraftItems;
+			if (list.Count == 0 && context != null && context.LastGroupIndex > -1)
+			{
+				CraftGroupCol craftGroupCol = m_CraftSystem?.CraftGroups;
+				if (craftGroupCol != null)
+				{
+					CraftGroup craftGroup = craftGroupCol.GetAt(context.LastGroupIndex);
+					if (craftGroup != null)
+					{
+						CraftItemCol craftItemCol = craftGroup.CraftItems;
+						if (craftItemCol != null)
+						{
+							foreach (CraftItem item1 in craftItemCol)
+							{
+								if (item1 != null && item1.CanSee(from, m_CraftSystem))
+								{
+									m_list.Add(item1);
+								}
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				m_list = list ?? new List<CraftItem>();
+			}
 
-                        foreach (CraftItem item1 in craftItemCol)
-                        {
-                            if (item1.CanSee(from, m_CraftSystem))
-                            {
-                                m_list.Add(item1);
-                            }
-                        }
 
-                    }
 
-                           
-                }  
 
-            }
-            else
-            {
-                m_list = list;
-            }   
-
-            
-
-            from.CloseGump(typeof(CraftGump));
+			from.CloseGump(typeof(CraftGump));
             from.CloseGump(typeof(CraftGumpItem));
 
           

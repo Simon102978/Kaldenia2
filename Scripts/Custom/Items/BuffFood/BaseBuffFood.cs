@@ -67,7 +67,44 @@ namespace Server.Items
             return (handOne == null || handTwo == null);
         }
 
-        public override void OnDoubleClick(Mobile from)
+		protected void AddBuffEffect(Mobile from, TimeSpan duration)
+		{
+			BuffInfo.AddBuff(from, new BuffInfo(GetBuffIcon(), GetBuffTitle(), GetBuffDescription(), duration, from));
+		}
+
+		protected virtual BuffIcon GetBuffIcon()
+		{
+			switch (m_BuffFoodEffect)
+			{
+				case BuffFoodEffect.HitsMaxLesser:
+				case BuffFoodEffect.HitsMax:
+				case BuffFoodEffect.HitsMaxGreater:
+					return BuffIcon.FishPie;
+				case BuffFoodEffect.ManaMaxLesser:
+				case BuffFoodEffect.ManaMax:
+				case BuffFoodEffect.ManaMaxGreater:
+					return BuffIcon.FishPie;
+				case BuffFoodEffect.StamMaxLesser:
+				case BuffFoodEffect.StamMax:
+				case BuffFoodEffect.StamMaxGreater:
+					return BuffIcon.FishPie;
+				default:
+					return BuffIcon.FishPie; // Icône par défaut
+			}
+		}
+
+		protected virtual int GetBuffTitle()
+		{
+			// Retournez l'ID du titre approprié pour votre buff
+			return 1151394; // Exemple: "Augmentation de compétence"
+		}
+
+		protected virtual int GetBuffDescription()
+		{
+			// Retournez l'ID de la description appropriée pour votre buff
+			return 1151395; // Exemple: "Vos compétences sont augmentées"
+		}
+		public override void OnDoubleClick(Mobile from)
         {
             if (!Movable)
                 return;
@@ -101,10 +138,12 @@ namespace Server.Items
 
         public abstract void Eat(Mobile from);
 
-        public static void PlayDrinkEffect(Mobile m)
-        {
+		public virtual void PlayDrinkEffect(Mobile m, TimeSpan duration)
+		{
+
             m.RevealingAction();
 			m.PlaySound(Utility.Random(0x3A, 3));
+			AddBuffEffect(m, duration); // Ajout du buff
 			//m.AddToBackpack(new Bottle());
 
 			if (m.Body.IsHuman && !m.Mounted)

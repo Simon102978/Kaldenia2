@@ -687,12 +687,12 @@ namespace Server.Mobiles
 					}
 				case 2: // Elf
 					{
-
+						_Mannequin.Race = Race.Human;
 						break;
 					}
 				case 3: // Gargoyle
 					{
-
+						_Mannequin.Race = Race.Human;
 						break;
 					}
 				case 4: // Male

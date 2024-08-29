@@ -2972,6 +2972,12 @@ namespace Server.Mobiles
 
 		public override void OnDoubleClick(Mobile from)
 		{
+			if (TiedRope.IsTied(this) && from == TiedRope.TiedBy(this))
+			{
+				TiedRope.OnTiedDoubleClick(from, this);
+				return;
+			}
+
 			if (this == from && !Warmode)
 			{
 				IMount mount = Mount;
@@ -2984,6 +2990,7 @@ namespace Server.Mobiles
 
 			base.OnDoubleClick(from);
 		}
+
 
 		public override void DisplayPaperdollTo(Mobile to)
 		{
@@ -3133,8 +3140,27 @@ namespace Server.Mobiles
 
 			return false;
 		}
+		public override bool CheckNonlocalDrop(Mobile from, Item item, Item target)
+		{
+			if (TiedRope.CheckNonlocalDrop(from, this, item, target))
+			{
+				return true;
+			}
+			return base.CheckNonlocalDrop(from, item, target);
+		}
 
-		private static int CheckContentForTrade(Item item)
+		public override bool CheckNonlocalLift(Mobile from, Item item)
+		{
+			if (TiedRope.CheckNonlocalLift(from, this, item))
+			{
+				return true;
+			}
+			return base.CheckNonlocalLift(from, item);
+		}
+
+		
+	
+	private static int CheckContentForTrade(Item item)
 		{
 			if (item is TrapableContainer container && container.TrapType != TrapType.None)
 			{

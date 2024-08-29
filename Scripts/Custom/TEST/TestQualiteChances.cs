@@ -53,7 +53,7 @@ public class TestQualiteChances
 			{
 				count++;
 				var craftItem = new CraftItem(typeof(RingmailGloves), "Armure Légère", "Gants d'anneaux"); 
-				quality = craftItem.GetQuality(DefBlacksmithy.CraftSystem, 4, pm, 5);
+				quality = craftItem.GetQuality(DefBlacksmithy.CraftSystem, 4, pm);
 
 				if (quality.ToString().ToLower() == targetQuality)
 				{

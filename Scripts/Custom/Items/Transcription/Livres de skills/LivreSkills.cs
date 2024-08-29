@@ -69,8 +69,19 @@ namespace Server.Items
 		{
 			base.GetProperties(list);
 
-			if (m_Marque != null && m_Marque != "")
-				list.Add(1060527, m_Marque);
+			list.Add(1060658, "Skill\t{0}", m_Skill.ToString());
+			list.Add(1060659, "Level\t{0}", m_Level.ToString("F1"));
+			list.Add(1060660, "Growth\t{0}", m_GrowValue.ToString("F1"));
+			list.Add(1060661, "Max\t{0}", m_Max.ToString("F1"));
+
+			if (m_Author != null)
+				list.Add(1060662, "Author\t{0}", m_Author.Name);
+
+			if (m_Owner != null)
+				list.Add(1060663, "Owner\t{0}", m_Owner.Name);
+
+			if (!string.IsNullOrEmpty(m_Marque))
+				list.Add(1060664, "Mark\t{0}", m_Marque);
 		}
 
 		public LivreSkills() : this(SkillName.Alchemy, 0.0, 0.0)
@@ -271,7 +282,7 @@ namespace Server.Items
 				}
 			}
 		}
-
+		
 		public override void OnAosSingleClick(Mobile from)
 		{
 			LabelTo(from, Name);

@@ -102,6 +102,7 @@ namespace Server.Items
         public CommodityDeed(Item commodity)
             : base(0x14F0)
         {
+			Name = "Parchemin de commodité";
             Weight = 1.0;
             Hue = 0x47;
 

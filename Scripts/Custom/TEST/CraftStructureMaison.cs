@@ -57,7 +57,7 @@ namespace Server.Items
 
 				BaseHouse house = BaseHouse.FindHouseAt(from);
 
-				if (house == null || !house.IsOwner(from))
+				if (house == null || !house.IsOwner(from) || !house.IsCoOwner(from))
 				{
 					from.SendMessage("Vous devez être dans une maison dont vous êtes propriétaire pour utiliser cet outil.");
 					return;

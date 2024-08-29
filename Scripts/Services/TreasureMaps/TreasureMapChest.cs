@@ -11,7 +11,25 @@ namespace Server.Items
 {
     public class TreasureMapChest : LockableContainer
     {
-		     public static Type[] Artifacts => m_Artifacts;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool TrapActive => TrapType != TrapType.None;
+
+		public override void GetProperties(ObjectPropertyList list)
+		{
+			base.GetProperties(list);
+
+			if (TrapActive)
+			{
+				list.Add("Piège actif"); // ~1_val~: Active
+			}
+			else
+			{
+				list.Add("Piège inactif"); // ~1_val~: Inactive
+			}
+		}
+
+		public static Type[] Artifacts => m_Artifacts;
 			  private static readonly Type[] m_Artifacts = new Type[]
 			  {
 				  typeof(CandelabraOfSouls),typeof(AdmiralsHeartyRum), typeof(AncientShipModelOfTheHMSCape), typeof(GoldBricks),

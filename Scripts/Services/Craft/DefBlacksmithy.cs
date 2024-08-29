@@ -378,9 +378,9 @@ namespace Server.Engines.Craft
 
 
 			AddCraft(typeof(CasqueMaille), "Armure Intermédiaire", "Coiffe de mailles matelassée", 40.0, 60.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(GantsMaille), "Armure Intermédiaire", "Gants de mailles matelassées", 43.0, 63.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(JambiereMaille), "Armure Intermédiaire", "Jambière de mailles matelassée", 48.0, 68.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(PlastronMaille), "Armure Intermédiaire", "Tunique de mailles matelassée", 50.0, 70.0, typeof(IronIngot), "Fer", 20, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(GantsMaille), "Armure Intermédiaire", "Gants de mailles matelassées", 32.0, 52.0, typeof(IronIngot), "Fer", 10, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(JambiereMaille), "Armure Intermédiaire", "Jambière de mailles matelassée", 38.0, 58.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(PlastronMaille), "Armure Intermédiaire", "Tunique de mailles matelassée", 42.0, 62.0, typeof(IronIngot), "Fer", 20, "Vous n'avez pas suffisament de lingot de Fer");
 			#endregion
 
 			#region "Armure Lourde"

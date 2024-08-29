@@ -3,6 +3,7 @@ using Server;
 using Server.Items;
 using Server.Mobiles;
 using Server.Gumps;
+using Server.Misc;
 
 namespace Server.Engines.Craft
 {
@@ -50,22 +51,7 @@ namespace Server.Engines.Craft
 					if (index < 0)
 						index = 0;
 
-					Type itemType = null;
-
-					if (craftSystem is DefTailoring)
-						itemType = typeof(Cloth);
-					else if (craftSystem is DefCartography)
-						itemType = typeof(BlankMap);
-					else if (craftSystem is DefCooking)
-						itemType = typeof(Dough);
-					else if (craftSystem is DefInscription)
-						itemType = typeof(BlankScroll);
-					else if (craftSystem is DefTinkering)
-						itemType = typeof(IronIngot);
-					else if (craftSystem is DefAlchemy)
-						itemType = typeof(Bottle);
-					else
-						itemType = craftSystem.CraftSubRes.GetAt(index).ItemType;
+					Type itemType = GetRequiredItemType(craftSystem);
 
 					if (pack.ConsumeUpTo(itemType, 1) > 0)
 					{
@@ -82,6 +68,24 @@ namespace Server.Engines.Craft
 			{
 				Console.WriteLine($"Erreur dans Pratiquer.Do: {e.Message}");
 			}
+		}
+
+		private static Type GetRequiredItemType(CraftSystem craftSystem)
+		{
+			if (craftSystem is DefTailoring)
+				return typeof(Cloth);
+			else if (craftSystem is DefCartography)
+				return typeof(BlankMap);
+			else if (craftSystem is DefCooking)
+				return typeof(Dough);
+			else if (craftSystem is DefInscription)
+				return typeof(BlankScroll);
+			else if (craftSystem is DefTinkering)
+				return typeof(IronIngot);
+			else if (craftSystem is DefAlchemy)
+				return typeof(Bottle);
+			else
+				return craftSystem.CraftSubRes.GetAt(0).ItemType;
 		}
 
 		private static void StartCraftingProcess(CraftSystem craftSystem, Mobile from, ITool tool)
@@ -111,77 +115,75 @@ namespace Server.Engines.Craft
 					NextAllowedTime = DateTime.UtcNow + TimeSpan.FromSeconds(10.0);
 					from.SendGump(new CraftGump(from, craftSystem, tool, null));
 				}
-			 else if (count == 3)
-                {
-                    NextAllowedTime = DateTime.UtcNow;
-                    bool toolBroken = false;
+				else if (count == 3)
+				{
+					NextAllowedTime = DateTime.UtcNow;
+					bool toolBroken = false;
 
-                    if (from is PlayerMobile pm)
-                    {
-                        int chance = 100;
+					if (from is PlayerMobile pm)
+					{
+						int chance = 100;
 
-                        if (chance < 5)
-                            chance = 5;
+						if (chance < 5)
+							chance = 5;
 
-                        if (chance > Utility.RandomMinMax(0, 100))
-                            tool.UsesRemaining--;
+						if (chance > Utility.RandomMinMax(0, 100))
+							tool.UsesRemaining--;
 
-                        if (tool.UsesRemaining < 1)
-                            toolBroken = true;
-                    }
+						if (tool.UsesRemaining < 1)
+							toolBroken = true;
+					}
 
-                    Skill skill = from.Skills[craftSystem.MainSkill];
-                    double oldValue = skill.Base;
+					SkillName skillName = craftSystem.MainSkill;
+					Skill skill = from.Skills[skillName];
+					double minSkill = 0.0;
+					double maxSkill = 100.0;
 
-                    if (AttemptSkillGain(oldValue))
-                    {
-                        double gainAmount = CalculateSkillGain(oldValue);
-                        skill.Base += gainAmount;
-                        from.SendMessage($"Votre compétence en {craftSystem.MainSkill} a augmenté de {gainAmount:F1} points.");
-                    }
-                    else
-                    {
-                        from.SendMessage("Vous avez pratiqué, mais n'avez pas amélioré votre compétence cette fois-ci.");
-                    }
+					if (SkillCheck.Mobile_SkillCheckLocation(from, skillName, minSkill, maxSkill))
+					{
+						from.SendMessage($"Vous avez amélioré votre compétence en {craftSystem.MainSkill}.");
 
-                    if (toolBroken)
-                    {
-                        from.SendMessage("Vous avez brisé votre outil.");
-                        tool.Delete();
-                    }
+						if (from.SkillsTotal >= from.SkillsCap)
+						{
+							Skill skillToDecrease = FindSkillToDecrease(from, skill);
 
-                    timer.Stop();
-                    return;
-                }
+							if (skillToDecrease != null)
+							{
+								double decrease = 0.1;
+								skillToDecrease.Base -= decrease;
+								from.SendMessage($"Votre compétence en {skillToDecrease.Info.Name} a diminué de {decrease:F1} points pour compenser.");
+							}
+						}
+					}
+					else
+					{
+						from.SendMessage("Vous avez pratiqué, mais n'avez pas amélioré votre compétence cette fois-ci.");
+					}
 
-                count++;
-            });
-        }
+					if (toolBroken)
+					{
+						from.SendMessage("Vous avez brisé votre outil.");
+						tool.Delete();
+					}
 
-        private static bool AttemptSkillGain(double currentSkill)
-        {
-            int baseChance = 70; // 70% de chance de base pour gagner une compétence
+					timer.Stop();
+					return;
+				}
 
-            if (currentSkill < 50.0)
-                baseChance += 20; // 90% de chance pour les compétences inférieures à 50
-            else if (currentSkill < 70.0)
-                baseChance += 10; // 80% de chance pour les compétences entre 50 et 70
-            else if (currentSkill >= 90.0)
-                baseChance -= 20; // 50% de chance pour les compétences supérieures à 90
+				count++;
+			});
+		}
 
-            return Utility.RandomMinMax(1, 100) <= baseChance;
-        }
-
-        private static double CalculateSkillGain(double currentSkill)
-        {
-            if (currentSkill < 50.0)
-                return Utility.RandomDouble() * 0.5;
-            else if (currentSkill < 70.0)
-                return Utility.RandomDouble() * 0.3;
-            else if (currentSkill < 90.0)
-                return Utility.RandomDouble() * 0.1;
-            else
-                return Utility.RandomDouble() * 0.05;
-        }
-    }
+		private static Skill FindSkillToDecrease(Mobile from, Skill skillToIncrease)
+		{
+			foreach (Skill skill in from.Skills)
+			{
+				if (skill != skillToIncrease && skill.Lock == SkillLock.Down && skill.Base > 0)
+				{
+					return skill;
+				}
+			}
+			return null;
+		}
+	}
 }

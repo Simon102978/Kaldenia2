@@ -1,8 +1,6 @@
-using Server;
-using System;
 using Server.Gumps;
-using Server.Items;
 using Server.Network;
+using Server;
 
 public class BoatRentalGump : Gump
 {
@@ -38,11 +36,5 @@ public class BoatRentalGump : Gump
 
 			m_NPC.StartBoatRental(from);
 		}
-	
-			else
-			{
-				from.SendMessage("Vous n'avez pas assez d'or pour louer un bateau.");
-			}
-		}
 	}
-
+}

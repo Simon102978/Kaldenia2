@@ -321,7 +321,7 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(GraisseSole), "Graisse de Sole", 5, "Vous n'avez pas suffisament de graisse de sole");
 
-			index = AddCraft(typeof(AutoResPotion), "Autres", "Potion d'auto résurrection", 85.0, 120.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			index = AddCraft(typeof(KeprishPotion), "Autres", "Potion Keprish", 85.0, 120.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(Hellebore), "Hellebore", 5, "Vous n'avez pas suffisament de Hellebore");
 			AddRecipe(index, (int)AlchemyRecipes.KeprishPotion);

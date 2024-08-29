@@ -8,7 +8,7 @@ using System.Collections.Generic;
 
 namespace Server.Items
 {
-    [Flipable(0x225A, 0x225B)]
+    [Flipable(0x225A, 0x225B, 0xA3F3, 0xA3F9)]
     public class BookOfMasteries : Spellbook
     {
         public override SpellbookType SpellbookType => SpellbookType.SkillMasteries;

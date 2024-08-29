@@ -16,6 +16,7 @@ namespace Server.Mobiles
 		private GrandeurEnum m_Grandeur;
 		private GrosseurEnum m_Grosseur;
 		private AppearanceEnum m_Beaute;
+		private Timer m_SkillImproveTimer;
 
 		public override FoodType FavoriteFood => FoodType.Meat;
 
@@ -67,11 +68,11 @@ namespace Server.Mobiles
 
 
 			Race.AddRace(this);
-			ControlSlots = 2;	
+			ControlSlots = 3;	
 			IsBonded = true;
 
 
-
+			m_SkillImproveTimer = Timer.DelayCall(TimeSpan.FromHours(1), TimeSpan.FromHours(1), new TimerCallback(ImproveSkills));
 
 		}
 
@@ -153,6 +154,11 @@ namespace Server.Mobiles
 				PayTimer.RegisterTimer(this);
 			}*/
 		}
+		private void ImproveSkills()
+		{
+			ImproveAllSkills();
+		}
+
 
 		public override bool OnBeforeDeath()
 		{
@@ -182,14 +188,24 @@ namespace Server.Mobiles
 			DoCustomSpeech(text, keywords, type);
 		}
 
-
+		public void ImproveAllSkills()
+		{
+			foreach (SkillName skillName in Enum.GetValues(typeof(SkillName)))
+			{
+				Skill skill = Skills[skillName];
+				if ((skill.Base > 0)  || (skill.Base > 6))
+				{
+					skill.Base = Math.Min(skill.Base + 0.3, skill.Cap);
+				}
+			}
+		}
 		public override void Delete()
 		{
 			if (GetOwner() != null && GetOwner() is CustomPlayerMobile cp)
 			{
 				cp.RemoveEsclave(this);
 			}
-
+			m_SkillImproveTimer.Stop();
 
 
 			base.Delete();
@@ -312,8 +328,37 @@ namespace Server.Mobiles
 			}
 		}
 
+		public override bool EquipItem(Item item)
+		{
+			if (item is BaseArmor armor)
+			{
+				if (armor.MaterialType == ArmorMaterialType.Plate ||
+					armor.MaterialType == ArmorMaterialType.Chainmail ||
+					armor.MaterialType == ArmorMaterialType.Ringmail)
+				{
+					// Si le BaseHire porte déjà un arc ou une arbalète, ne pas équiper l'armure
+					if (FindItemOnLayer(Layer.TwoHanded) is BaseRanged)
+					{
+						return false;
+					}
+				}
+			}
+			else if (item is BaseRanged ranged)
+			{
+				// Si le BaseHire porte déjà une armure en plate, chainmail ou ringmail, ne pas équiper l'arc ou l'arbalète
+				if (FindItemOnLayer(Layer.InnerTorso) is BaseArmor innerArmor &&
+					(innerArmor.MaterialType == ArmorMaterialType.Plate ||
+					 innerArmor.MaterialType == ArmorMaterialType.Chainmail ||
+					 innerArmor.MaterialType == ArmorMaterialType.Ringmail))
+				{
+					return false;
+				}
+			}
 
-		public override bool AllowEquipFrom(Mobile from)
+			return base.EquipItem(item);
+		}
+	
+	public override bool AllowEquipFrom(Mobile from)
 		{
 			if (from == GetOwner())
 				return true;

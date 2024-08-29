@@ -12,6 +12,7 @@ namespace Server.Items
         {
             Hue = 0x47;
             Weight = 4.0;
+			Name = "Boite de Commoditée";
         }
 
         public CommodityDeedBox(Serial serial)

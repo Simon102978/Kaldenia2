@@ -23,6 +23,9 @@ namespace Server.Items
 
 		public TiedRope(Serial serial) : base(serial) { }
 
+		public Mobile Tied => m_Tied;
+		public Mobile Owner => m_Owner;
+
 		public override void OnDoubleClick(Mobile from)
 		{
 			if (!IsChildOf(from.Backpack))
@@ -78,7 +81,7 @@ namespace Server.Items
 		{
 			m_Tied = target;
 			m_Owner = from;
-			target.SendMessage($"{from.Name} vous a attaché."); // 
+			target.SendMessage($"{from.Name} vous a attaché.");
 			from.SendMessage($"Vous avez attaché {target.Name}.");
 			target.Frozen = true;
 			StartFollowing();
@@ -89,7 +92,7 @@ namespace Server.Items
 			if (m_Tied != null)
 			{
 				m_Tied.Frozen = false;
-				m_Tied.SendMessage("Vous avez été libéré de vos liens."); 
+				m_Tied.SendMessage("Vous avez été libéré de vos liens.");
 				from.SendMessage($"Vous avez détaché {m_Tied.Name}.");
 
 				StopFollowing();
@@ -157,71 +160,153 @@ namespace Server.Items
 				StartFollowing();
 			}
 		}
-	}
 
-	public class TieTarget : Target
-	{
-		private TiedRope m_Rope;
-
-		public TieTarget(TiedRope rope) : base(10, false, TargetFlags.None)
+		public class TieTarget : Target
 		{
-			m_Rope = rope;
+			private TiedRope m_Rope;
+
+			public TieTarget(TiedRope rope) : base(10, false, TargetFlags.None)
+			{
+				m_Rope = rope;
+			}
+
+			protected override void OnTarget(Mobile from, object targeted)
+			{
+				if (targeted is Mobile mobile)
+				{
+					m_Rope.Tie(from, mobile);
+				}
+				else
+				{
+					from.SendMessage("Vous ne pouvez attacher que des joueurs.");
+				}
+			}
 		}
 
-		protected override void OnTarget(Mobile from, object targeted)
+		public class ConfirmTieGump : Gump
 		{
-			if (targeted is Mobile mobile)
+			private Mobile m_From;
+			private Mobile m_Target;
+			private TiedRope m_Rope;
+
+			public ConfirmTieGump(Mobile from, Mobile target, TiedRope rope) : base(50, 65)
 			{
-				m_Rope.Tie(from, mobile);
+				m_From = from;
+				m_Target = target;
+				m_Rope = rope;
+
+				Closable = true;
+				Disposable = true;
+				Dragable = true;
+				Resizable = false;
+
+				AddPage(0);
+				AddBackground(0, 0, 240, 120, 9200);
+				AddAlphaRegion(10, 10, 220, 100);
+
+				AddHtml(10, 10, 220, 80, $"{from.Name} veut vous attacher. Acceptez-vous ?", false, false);
+
+				AddButton(10, 90, 4005, 4007, 1, GumpButtonType.Reply, 0);
+				AddHtmlLocalized(45, 90, 150, 20, 1011011, false, false); // CONTINUE
+
+				AddButton(170, 90, 4005, 4007, 0, GumpButtonType.Reply, 0);
+				AddHtmlLocalized(205, 90, 150, 20, 1011012, false, false); // CANCEL
 			}
-			else
+
+			public override void OnResponse(NetState sender, RelayInfo info)
 			{
-				from.SendMessage("Vous ne pouvez attacher que des joueurs.");
+				Mobile from = sender.Mobile;
+
+				if (info.ButtonID == 1)
+				{
+					m_Rope.ConfirmTie(m_From, m_Target);
+				}
+				else
+				{
+					m_From.SendMessage($"{m_Target.Name} a refusé d'être attaché.");
+				}
 			}
 		}
-	}
 
-	public class ConfirmTieGump : Gump
-	{
-		private Mobile m_From;
-		private Mobile m_Target;
-		private TiedRope m_Rope;
-
-		public ConfirmTieGump(Mobile from, Mobile target, TiedRope rope) : base(50, 65)
+		// Nouvelles méthodes pour gérer le fouillage et le déplacement d'objets
+		public static bool IsTied(Mobile m)
 		{
-			m_From = from;
-			m_Target = target;
-			m_Rope = rope;
-
-			Closable = true;
-			Disposable = true;
-			Dragable = true;
-			Resizable = false;
-
-			AddPage(0);
-			AddBackground(0, 0, 240, 120, 9200);
-			AddAlphaRegion(10, 10, 220, 100);
-
-			AddHtml(10, 10, 220, 80, $"{from.Name} veut vous attacher. Acceptez-vous ?", false, false);
-
-			AddButton(10, 90, 4005, 4007, 1, GumpButtonType.Reply, 0);
-			AddHtmlLocalized(45, 90, 150, 20, 1011011, false, false); // CONTINUE
-
-			AddButton(170, 90, 4005, 4007, 0, GumpButtonType.Reply, 0);
-			AddHtmlLocalized(205, 90, 150, 20, 1011012, false, false); // CANCEL
+			foreach (Item item in World.Items.Values)
+			{
+				if (item is TiedRope rope && rope.Tied == m)
+				{
+					return true;
+				}
+			}
+			return false;
 		}
 
-		public override void OnResponse(NetState sender, RelayInfo info)
+		public static Mobile TiedBy(Mobile m)
 		{
-			Mobile from = sender.Mobile;
-
-			if (info.ButtonID == 1)
+			foreach (Item item in World.Items.Values)
 			{
-				m_Rope.ConfirmTie(m_From, m_Target);
+				if (item is TiedRope rope && rope.Tied == m)
+				{
+					return rope.Owner;
+				}
 			}
-			else
+			return null;
+		}
+
+		public static bool CheckNonlocalDrop(Mobile from, Mobile tied, Item item, Item target)
+		{
+			if (IsTied(tied) && from == TiedBy(tied))
 			{
-				m_From.SendMessage($"{m_Target.Name} a refusé d'être attaché.");
+				return true;
+			}
+			return false;
+		}
+
+		public static bool CheckNonlocalLift(Mobile from, Mobile tied, Item item)
+		{
+			if (IsTied(tied) && from == TiedBy(tied))
+			{
+				return true;
+			}
+			return false;
+		}
+
+		public static void OnTiedDoubleClick(Mobile from, Mobile tied)
+		{
+			if (IsTied(tied) && from == TiedBy(tied))
+			{
+				from.SendMessage("Vous fouillez le sac de " + tied.Name + ".");
+				from.Target = new LootTarget(tied);
+			}
+		}
+
+		private class LootTarget : Target
+		{
+			private Mobile m_Tied;
+
+			public LootTarget(Mobile tied) : base(-1, false, TargetFlags.None)
+			{
+				m_Tied = tied;
+			}
+
+			protected override void OnTarget(Mobile from, object targeted)
+			{
+				if (targeted is Item item && item.IsChildOf(m_Tied.Backpack))
+				{
+					if (from.AddToBackpack(item))
+					{
+						from.SendMessage("Vous avez pris " + item.Name + " du sac de " + m_Tied.Name + ".");
+						m_Tied.SendMessage(from.Name + " a pris " + item.Name + " de votre sac.");
+					}
+					else
+					{
+						from.SendMessage("Vous n'avez pas assez de place dans votre sac pour prendre cet objet.");
+					}
+				}
+				else
+				{
+					from.SendMessage("Cet objet n'est pas dans le sac de " + m_Tied.Name + ".");
+				}
 			}
 		}
 	}

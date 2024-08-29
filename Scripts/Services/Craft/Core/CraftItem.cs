@@ -1404,7 +1404,7 @@ namespace Server.Engines.Craft
             return false;
         }
 
-		public double GetCraftBonus(Mobile from)
+		public double GetCraftBonus(Mobile from, CraftSystem system)
 		{
 			if (from is CustomPlayerMobile player)
 			{
@@ -1412,20 +1412,78 @@ namespace Server.Engines.Craft
 				int thirstLevel = player.Thirst;
 
 				// Calculer le bonus basé sur la faim et la soif
-				double craftBonus = (hungerLevel + thirstLevel) / 40.0; // 1.0 à 20/20
+				double craftBonus = (hungerLevel + thirstLevel) / 80.0; // 0,5 à 20/20
 
 				// Multiplier par 5 pour obtenir un bonus maximal de 5x
-				double baseBonus = 1 + (2 * craftBonus); // 1 à 5x
+				double baseBonus = 1 + (1 * craftBonus); // 1 à 5x
 
-				// Ajouter le bonus si la classe est un métier de craft
-				if (HasMatchingClassAndJob(player))
+				// Appliquer le nouveau bonus basé sur la classe et le métier
+				baseBonus *= GetClassJobBonus(player);
+
+				// Appliquer le bonus secret entre 17h et 18h
+				if (IsSecretBonusTime())
 				{
-					baseBonus *= 2; // Double le bonus si la classe est un métier de craft
+					baseBonus *= 2;
 				}
+
+				
+				
 
 				return baseBonus;
 			}
 			return 1.0; // Pas de bonus pour les non-joueurs
+		}
+		private bool IsSecretBonusTime()
+		{
+			int hours, minutes;
+			Clock.GetTime(null, 0, 0, out hours, out minutes);
+			return hours >= 17 && hours < 18;
+		}
+
+
+		private double GetClassJobBonus(CustomPlayerMobile player)
+		{
+			string[] craftJobs = new string[]
+			{
+				"Historien", "Ingénieur", "Styliste", "Épicier"
+			};
+
+			HashSet<string> uniqueJobs = new HashSet<string>();
+
+			// Vérifier la classe
+			foreach (string job in craftJobs)
+			{
+				if (player.Classe.ToString().Contains(job))
+				{
+					uniqueJobs.Add(job);
+				}
+			}
+
+			// Vérifier le métier
+			foreach (string job in craftJobs)
+			{
+				if (player.Metier.ToString().Contains(job))
+				{
+					uniqueJobs.Add(job);
+				}
+			}
+
+			int jobCount = uniqueJobs.Count;
+
+			// Déterminer le multiplicateur de bonus
+			switch (jobCount)
+			{
+				case 0:
+					return 0.5; // Réduit les chances de moitié
+				case 1:
+					return 1.0; // Pas de changement
+				case 2:
+					return 2.0; // Double les chances
+				case 3:
+					return 3.0; // Triple les chances
+				default:
+					return 4.0; // Quadruple les chances (pour 4 métiers ou plus)
+			}
 		}
 
 
@@ -1433,94 +1491,63 @@ namespace Server.Engines.Craft
 		{
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
-			var chanceLegendary = 0.0;
+
 			if (from is CustomPlayerMobile pm)
 			{
 				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
 				double dexFactor = pm.Dex / 100.0;
-				// Base chance at 100 skill, 0 dex: 0.001%
-				// Max chance at 100 skill, 100 dex: 0.002%
-				chanceLegendary = 0.00001 * skillFactor * (1 + 0.1 * dexFactor);
-
-				// Appliquer le bonus de craft
-				chanceLegendary *= GetCraftBonus(from);
+				double chanceLegendary = 0.0001 * skillFactor * (1 + 0.1 * dexFactor);
+				chanceLegendary *= GetCraftBonus(from, system);
+				return Math.Min(chanceLegendary, 0.005); // Max 0.5%
 			}
-			return Math.Min(chanceLegendary, 0.0001); // Max 0.01%
+
+			return 0.0;
 		}
 
 		public double GetEpicChance(CraftSystem system, double successChance, Mobile from)
 		{
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
-			var chanceEpic = 0.0;
+
 			if (from is CustomPlayerMobile pm)
 			{
 				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
 				double dexFactor = pm.Dex / 100.0;
-				// Base chance at 100 skill, 0 dex: 0.2%
-				// Max chance at 100 skill, 100 dex: 0.4%
-				chanceEpic = 0.002 * skillFactor * (1 + 0.1 * dexFactor);
-
-				// Appliquer le bonus de craft
-				chanceEpic *= GetCraftBonus(from);
+				double chanceEpic = 0.005 * skillFactor * (1 + 0.1 * dexFactor);
+				chanceEpic *= GetCraftBonus(from, system);
+				return Math.Min(chanceEpic, 0.05); // Max 5%
 			}
-			return Math.Min(chanceEpic, 0.02); // Max 2%
+
+			return 0.0;
 		}
 
 		public double GetExceptionalChance(CraftSystem system, double successChance, Mobile from)
 		{
 			if (ForceNonExceptional || successChance <= 0)
 				return 0.0;
-			var exceptionalChance = 0.0;
+
 			if (from is CustomPlayerMobile pm)
 			{
 				double skillFactor = pm.Skills[system.MainSkill].Value / 100.0;
 				double dexFactor = pm.Dex / 100.0;
-				// Base chance at 100 skill, 0 dex: 5%
-				// Max chance at 100 skill, 100 dex: 10%
-				// At 0 skill, 100 dex: 5%
-				exceptionalChance = 0.05 * (skillFactor + 0.5 * dexFactor);
-
-				// Appliquer le bonus de craft
-				exceptionalChance *= GetCraftBonus(from);
+				double exceptionalChance = 0.05 * (skillFactor + 0.5 * dexFactor);
+				exceptionalChance *= GetCraftBonus(from, system);
+				return Math.Min(exceptionalChance, 0.50); // Max 50%
 			}
-			return Math.Min(exceptionalChance, 0.50); // Max 50
+
+			return 0.0;
 		}
-
-		private bool HasMatchingClassAndJob(CustomPlayerMobile player)
-		{
-			string[] craftJobs = new string[]
-			{
-		
-		"Historien Ingénieur", "Historien Styliste", "Historien Épicier",
-		"Ingénieur Styliste", "Ingénieur Épicier", "Styliste Épicier",
-		"Historien Ingénieur Styliste", "Historien Ingénieur Épicier",
-		"Historien Épicier Styliste", "Ingénieur Styliste Épicier"
-			};
-
-			// Vérifier si la classe du joueur est l'un des métiers de craft
-			return craftJobs.Contains(player.Metier.ToString());
-		}
-
-
-
 
 		public bool CheckSkills(Mobile from, Type typeRes, CraftSystem craftSystem, ref int quality, ref bool allRequiredSkills, int maxAmount)
 		{
 			return CheckSkills(from, typeRes, craftSystem, ref quality, ref allRequiredSkills, true, maxAmount);
 		}
 
-		public ItemQuality GetQuality(CraftSystem system, double successChance, Mobile from, int expertise)
+		public ItemQuality GetQuality(CraftSystem system, double successChance, Mobile from)
 		{
 			double chanceLegendary = GetLegendaryChance(system, successChance, from);
 			double chanceEpic = GetEpicChance(system, successChance, from);
 			double chanceExceptional = GetExceptionalChance(system, successChance, from);
-
-			// Apply expertise bonus
-			double expertiseBonus = expertise * 0.0001; // 0.0001% per expertise level
-			chanceLegendary += expertiseBonus;
-			chanceEpic += expertiseBonus * 2;
-			chanceExceptional += expertiseBonus * 3;
 
 			double roll = Utility.RandomDouble();
 
@@ -1532,8 +1559,6 @@ namespace Server.Engines.Craft
 				return ItemQuality.Exceptional;
 
 			return ItemQuality.Normal;
-
-		
 		}
 
 		public bool CheckSkills(
@@ -1545,32 +1570,16 @@ namespace Server.Engines.Craft
 			double epicChance = GetEpicChance(craftSystem, chance, from);
 			double exceptionalChance = GetExceptionalChance(craftSystem, chance, from);
 
-			// Apply expertise bonus
-			int expertise = 0; // You need to implement a way to get the expertise level
-			double expertiseBonus = expertise * 0.0001; // 0.0001% per expertise level
-			legendaryChance += expertiseBonus;
-			epicChance += expertiseBonus * 2;
-			exceptionalChance += expertiseBonus * 3;
-
-
 			double roll = Utility.RandomDouble();
 
 			if (roll < legendaryChance)
-			{
 				quality = 4;
-			}
 			else if (roll < legendaryChance + epicChance)
-			{
 				quality = 3;
-			}
 			else if (roll < legendaryChance + epicChance + exceptionalChance)
-			{
 				quality = 2;
-			}
 			else
-			{
 				quality = 1;
-			}
 
 			return (chance > Utility.RandomDouble());
 		}

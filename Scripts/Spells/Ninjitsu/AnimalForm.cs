@@ -436,8 +436,8 @@ namespace Server.Spells.Ninjitsu
 
         private static readonly AnimalFormEntry[] m_Entries = new[]
         {
-            new AnimalFormEntry(typeof(Kirin), "kirin", 9632, 0, 1070811, 100.0, 0x84, 0, 0, false, true, false),
-            new AnimalFormEntry(typeof(Unicorn), "unicorn", 9678, 0, 1070812, 100.0, 0x7A, 0, 0, false, true, false),
+            new AnimalFormEntry(typeof(Kirin), "kirin", 9632, 0, 1070811, 80.0, 0x84, 0, 0, false, true, false),
+            new AnimalFormEntry(typeof(Unicorn), "unicorn", 9678, 0, 1070812, 80.0, 0x7A, 0, 0, false, true, false),
             new AnimalFormEntry(typeof(BakeKitsune), "bake-kitsune", 10083, 0, 1070810, 82.5, 0xF6, 0, 0, false, true, false),
             new AnimalFormEntry(typeof(GreyWolf), "wolf", 9681, 2309, 1070810, 82.5, 0x19, 0x8FD, 0x90E, false, true, false),
             new AnimalFormEntry(typeof(Llama), "llama", 8438, 0, 1070809, 70.0, 0xDC, 0, 0, false, true, false),
@@ -451,7 +451,7 @@ namespace Server.Spells.Ninjitsu
             new AnimalFormEntry(typeof(Squirrel), "squirrel", 11671, 0, 0, 20.0, 0x116, 0, 0, false, false, false),
             new AnimalFormEntry(typeof(Ferret), "ferret", 11672, 0, 1075220, 40.0, 0x117, 0, 0, false, false, true),
             new AnimalFormEntry(typeof(CuSidhe), "cu sidhe", 11670, 0, 1075221, 60.0, 0x115, 0, 0, false, false, false),
-            new AnimalFormEntry(typeof(Reptalon), "reptalon", 11669, 0, 1075222, 90.0, 0x114, 0, 0, false, false, false),
+            new AnimalFormEntry(typeof(Reptalon), "reptalon", 11669, 0, 1075222, 80.0, 0x114, 0, 0, false, false, false),
             new AnimalFormEntry(typeof(WildWhiteTiger), "white tiger", 38980, 2500, 0, 0, 0x4E7, 0, 0, false, false, false),
         };
 

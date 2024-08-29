@@ -5,6 +5,7 @@ using Server.Items;
 using Server.Multis;
 using System;
 using System.Linq;
+using Server.Targeting;
 
 public class BoatRentalNPC : BaseVendor
 {
@@ -26,11 +27,11 @@ public class BoatRentalNPC : BaseVendor
 		{
 			if (ActiveRentals.Count == 0)
 				return "Aucune location active";
-
 			return string.Join("\n", ActiveRentals.Select(r =>
 				$"{r.Key.Name}: {r.Value.GetRemainingTime().Hours}h {r.Value.GetRemainingTime().Minutes}m restantes"));
 		}
 	}
+
 	[Constructable]
 	public BoatRentalNPC() : base("l'agent de location de bateaux")
 	{
@@ -65,8 +66,8 @@ public class BoatRentalNPC : BaseVendor
 	{
 		if (from.Backpack.ConsumeTotal(typeof(Gold), 1000))
 		{
-			from.SendMessage("Démarrage de la location de bateau.");
-			FinishBoatRental(from);
+			from.SendMessage("Sélectionnez l'emplacement où vous souhaitez placer votre bateau de location.");
+			from.Target = new InternalTarget(this, from);
 		}
 		else
 		{
@@ -74,44 +75,70 @@ public class BoatRentalNPC : BaseVendor
 		}
 	}
 
-	public void FinishBoatRental(Mobile from)
+	private class InternalTarget : Target
 	{
-		from.SendMessage("Début du processus de location.");
+		private BoatRentalNPC m_NPC;
+		private Mobile m_From;
 
-		if (from.Backpack.ConsumeTotal(typeof(Gold), 1000))
+		public InternalTarget(BoatRentalNPC npc, Mobile from) : base(-1, true, TargetFlags.None)
 		{
-			from.SendMessage("1000 pièces d'or ont été prélevées.");
+			m_NPC = npc;
+			m_From = from;
+		}
 
-			MediumBoatDeed deed = new MediumBoatDeed();
-			from.SendMessage("Deed de bateau créé.");
-
-			if (from.AddToBackpack(deed))
+		protected override void OnTarget(Mobile from, object targeted)
+		{
+			if (targeted is IPoint3D point)
 			{
-				from.SendMessage("Deed ajouté à votre sac.");
+				Point3D loc = new Point3D(point);
+				Map map = from.Map;
 
-				BoatRental rental = new BoatRental(from, deed, DefaultRentalDuration);
-				ActiveRentals[from] = rental;
+				if (map == null)
+				{
+					from.SendMessage("Vous ne pouvez pas placer un bateau ici.");
+					RefundGold(from);
+					return;
+				}
 
-				rental.RentalTimer = Timer.DelayCall(TimeSpan.FromMinutes(30), TimeSpan.FromMinutes(30), () => CheckRentalTime(from));
+				// Vérifiez si la zone ciblée est de l'eau
+			
+				// Ajustez la hauteur du bateau
+				loc.Z = map.GetAverageZ(loc.X, loc.Y);
 
-				from.SendMessage($"Location enregistrée. Vous avez loué un bateau pour {DefaultRentalDuration.TotalHours} heures.");
-				from.SendMessage("Utilisez le deed pour placer votre bateau sur l'eau.");
+				Galleon boat = new Galleon(Direction.North);
+				boat.Owner = from;
 
-				InvalidateProperties(); // Force la mise à jour des propriétés
+				// Vérifiez si le bateau peut être placé à cet endroit
+				if (boat.CanFit(loc, map, boat.ItemID))
+				{
+					boat.MoveToWorld(loc, map);
+
+					BoatRental rental = new BoatRental(from, boat, m_NPC.DefaultRentalDuration);
+					m_NPC.ActiveRentals[from] = rental;
+					rental.RentalTimer = Timer.DelayCall(TimeSpan.FromMinutes(30), TimeSpan.FromMinutes(30), () => m_NPC.CheckRentalTime(from));
+
+					from.SendMessage($"Vous avez loué un bateau pour {m_NPC.DefaultRentalDuration.TotalHours} heures.");
+				}
+				else
+				{
+					from.SendMessage("Le bateau ne peut pas être placé à cet endroit. Choisissez un autre emplacement.");
+					RefundGold(from);
+				}
 			}
 			else
 			{
-				deed.Delete();
-				from.AddToBackpack(new Gold(1000));
-				from.SendMessage("Impossible d'ajouter le deed à votre sac. Location annulée et remboursée.");
+				from.SendMessage("Vous devez cibler une zone d'eau pour placer le bateau.");
+				RefundGold(from);
 			}
 		}
-		else
+
+
+		private void RefundGold(Mobile from)
 		{
-			from.SendMessage("Vous n'avez pas assez d'or pour louer un bateau.");
+			from.AddToBackpack(new Gold(1000));
+			from.SendMessage("Votre or a été remboursé.");
 		}
 	}
-
 
 	private void CheckRentalTime(Mobile from)
 	{
@@ -133,29 +160,20 @@ public class BoatRentalNPC : BaseVendor
 	{
 		if (ActiveRentals.TryGetValue(from, out BoatRental rental))
 		{
-			// Supprimer le deed du sac du joueur s'il y est toujours
-			from.Backpack?.RemoveItem(rental.Deed);
-
-			// Si le bateau a été placé, le supprimer
-			if (rental.Deed.Boat != null)
+			if (rental.Boat != null)
 			{
-				rental.Deed.Boat.Delete();
+				rental.Boat.Delete();
 			}
-
-			// Supprimer le deed
-			rental.Deed.Delete();
-
 			rental.RentalTimer.Stop();
 			ActiveRentals.Remove(from);
-			from.SendMessage("Votre location de bateau a expiré. Le bateau et son deed ont été retournés.");
+			from.SendMessage("Votre location de bateau a expiré. Le bateau a été retourné.");
 		}
-			InvalidateProperties(); // Force la mise à jour des propriétés
+		InvalidateProperties();
 	}
 
 	public override void GetProperties(ObjectPropertyList list)
 	{
 		base.GetProperties(list);
-
 		if (ActiveRentals.Count > 0)
 		{
 			list.Add($"Locations actives : {ActiveRentals.Count}");
@@ -177,7 +195,6 @@ public class BoatRentalNPC : BaseVendor
 			list.Add("Aucune location active");
 		}
 
-		// Propriété pour les GameMasters
 		if (AccessLevel.GameMaster <= AccessLevel)
 		{
 			list.Add($"[GM] Durée de location par défaut: {DefaultRentalDuration.TotalHours} heures");
@@ -188,14 +205,11 @@ public class BoatRentalNPC : BaseVendor
 	{
 		base.Serialize(writer);
 		writer.Write((int)0); // version
-
 		writer.Write(ActiveRentals.Count);
 		foreach (var kvp in ActiveRentals)
 		{
 			writer.Write(kvp.Key);
-			writer.Write(kvp.Value.Renter);
-			writer.Write(kvp.Value.Deed);
-			writer.Write(kvp.Value.EndTime);
+			kvp.Value.Serialize(writer);
 		}
 	}
 
@@ -203,18 +217,13 @@ public class BoatRentalNPC : BaseVendor
 	{
 		base.Deserialize(reader);
 		int version = reader.ReadInt();
-
 		int count = reader.ReadInt();
 		for (int i = 0; i < count; i++)
 		{
 			Mobile key = reader.ReadMobile();
-			Mobile renter = reader.ReadMobile();
-			MediumBoatDeed deed = reader.ReadItem() as MediumBoatDeed;
-			DateTime endTime = reader.ReadDateTime();
-
-			if (key != null && renter != null && deed != null)
+			BoatRental rental = new BoatRental(reader);
+			if (key != null)
 			{
-				BoatRental rental = new BoatRental(renter, deed, endTime - DateTime.Now);
 				ActiveRentals[key] = rental;
 				rental.RentalTimer = Timer.DelayCall(TimeSpan.FromMinutes(30), TimeSpan.FromMinutes(30), () => CheckRentalTime(key));
 			}

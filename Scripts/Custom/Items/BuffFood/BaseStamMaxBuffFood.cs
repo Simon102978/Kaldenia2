@@ -113,7 +113,7 @@ namespace Server.Items
 		{
 			if (DoEffect(from))
 			{
-				PlayDrinkEffect(from);
+				PlayDrinkEffect(from, TimeSpan.FromMinutes(10)); 
 				Consume();
 			}
 		}

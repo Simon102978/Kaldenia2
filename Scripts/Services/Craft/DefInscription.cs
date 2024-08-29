@@ -1122,7 +1122,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(CustomRecipeBook), "Autres", "Livre de recettes personnalisées", 25.0, 50.0, typeof(BlankScroll), 1044377, 10, 1044378);
 
 			index = AddCraft(typeof(BookOfMasteries), "Autres", "Livre de Barde", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
+
 			index = AddCraft(typeof(NewSpellbook), "Autres", "Livre de sort", 50.0, 126, typeof(BlankScroll), 1044377, 10, 1044378);
+
+			index = AddCraft(typeof(CommodityDeed), "Autres", "Parchemin de commodité", 50.0, 126, typeof(BlankScroll), 1044377, 5, 1044378);
+
 
 			index = AddCraft(typeof(BlueBook), "Autres", "Livre Bleu", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, 1044361);
 			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);

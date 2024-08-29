@@ -6,6 +6,9 @@ using Server.Mobiles;
 
 public class SkillCard : Item
 {
+	
+
+
 	[CommandProperty(AccessLevel.GameMaster)]
 	public int Level
 	{
@@ -308,6 +311,12 @@ public class SkillCard : Item
 		SkillMod mod = new DefaultSkillMod(m_Skill, true, effectiveBonus);
 		from.AddSkillMod(mod);
 
+		// Créez le BuffInfo avec un icône plus approprié
+		BuffInfo buff = new BuffInfo(BuffIcon.ArcaneEmpowerment, 1151394, 1151395, TimeSpan.FromHours(1), from, $"{m_Skill}: +{effectiveBonus:F1}%");
+
+		// Ajoutez le buff immédiatement
+		BuffInfo.AddBuff(from, buff);
+
 		SkillCardEffect effect = new SkillCardEffect
 		{
 			Owner = from,
@@ -331,11 +340,7 @@ public class SkillCard : Item
 		from.SendMessage("La carte se désintègre après avoir libéré son pouvoir.");
 		this.Delete();
 
-		BuffInfo buff = new BuffInfo(BuffIcon.PoisonImmunity, 1075814, 1075815, TimeSpan.FromHours(1), from, $"{m_Skill}: +{effectiveBonus:F1}%");
-		effect.Buff = buff;
 
-		// Ajoutez le buff à la BuffBar
-		BuffInfo.AddBuff(from, buff);
 	}
 
 	private static void RemoveEffect(SkillCardEffect effect)
@@ -349,6 +354,8 @@ public class SkillCard : Item
 			{
 				effect.Owner.RemoveSkillMod(effect.SkillMod);
 
+				BuffInfo.RemoveBuff(effect.Owner, effect.Buff);
+
 				double currentBaseValue = effect.Owner.Skills[effect.Skill].Base;
 				double naturalProgression = currentBaseValue - effect.InitialBaseValue;
 
@@ -360,7 +367,7 @@ public class SkillCard : Item
 				effectsForMobile.Remove(effect.Skill);
 
 				effect.Owner.SendMessage($"Le bonus de compétence {effect.Skill} s'est dissipé. Votre progression naturelle a été conservée.");
-				BuffInfo.RemoveBuff(effect.Owner, effect.Buff);
+
 				if (effectsForMobile.Count == 0)
 				{
 					s_ActiveEffects.Remove(effect.Owner);

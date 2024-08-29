@@ -39,7 +39,7 @@ namespace Server.Items
 				from.FixedEffect(0x375A, 10, 15);
 				from.PlaySound(0x1E7);
 
-				BuffInfo.AddBuff(from, new BuffInfo(BuffIcon.Cunning, 1075845, Duration, from, scale.ToString()));
+				BuffInfo.AddBuff(from, new BuffInfo(BuffIcon.Cunning, 1075843, Duration, from, scale.ToString()));
 
 				return true;
 			}

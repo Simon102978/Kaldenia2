@@ -4,9 +4,11 @@ namespace Server.Mobiles
 {
     public class HireBard : BaseHire
     {
-        [Constructable]
-        public HireBard()
-        {
+
+		[Constructable]
+		public HireBard()
+			: base(AIType.AI_Archer)
+		{
             SpeechHue = Utility.RandomDyedHue();
             Hue = Utility.RandomSkinHue();
 

@@ -146,7 +146,7 @@ namespace Server.Mobiles
 				AddHtml(55, 140, 200, 20, "Tourner", false, false);
 
 				AddButton(20, 170, 4005, 4007, 5, GumpButtonType.Reply, 0);
-				AddHtml(55, 170, 200, 20, "Récupérer", false, false);
+				AddHtml(55, 170, 200, 20, "Récupérer le Deed", false, false);
 			}
 
 			public override void OnResponse(NetState sender, RelayInfo info)
@@ -759,39 +759,35 @@ namespace Server.Mobiles
 			}
 		}
 
-		private class RedeedEntry : CustomContextMenuEntry
-		{
-			private readonly Mobile _From;
-			private readonly Mobile _Mannequin;
+		
 
-			public RedeedEntry(Mobile from, Mobile m)
-				: base("Remettre en Deed", 2)
+			private class RedeedEntry : CustomContextMenuEntry
 			{
-				_From = from;
-				_Mannequin = m;
-			}
+				private readonly Mobile _From;
+				private readonly Mannequin _Mannequin;
 
-			public override void OnClick()
-			{
-				List<Item> mannequinItems = new List<Item>();
-
-				foreach (var item in _Mannequin.Items.Where(IsEquipped))
+				public RedeedEntry(Mobile from, Mannequin m)
+					: base("Remettre en Deed", 2)
 				{
-					mannequinItems.Add(item);
+					_From = from;
+					_Mannequin = m;
 				}
 
-				for (var index = 0; index < mannequinItems.Count; index++)
+				public override void OnClick()
 				{
-					var x = mannequinItems[index];
+					if (_Mannequin.Items.Any(item => Mannequin.IsEquipped(item)))
+					{
+						_From.SendMessage("Vous ne pouvez pas récupérer le deed tant que le mannequin porte des objets.");
+						return;
+					}
 
-					_From.AddToBackpack(x);
+					_Mannequin.Delete();
+					_From.AddToBackpack(new MannequinDeed());
+					_From.SendMessage("Vous avez récupéré le deed du mannequin.");
 				}
-
-				_Mannequin.Delete();
-
-				_From.AddToBackpack(new MannequinDeed());
 			}
-		}
+		
+
 
 		public Mannequin(Serial serial) : base(serial)
 		{
