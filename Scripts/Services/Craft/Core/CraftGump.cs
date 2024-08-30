@@ -44,11 +44,21 @@ namespace Server.Engines.Craft
             m_CraftSystem = craftSystem;
             m_Tool = tool;
             m_Page = page;
-
+			m_list = list ?? new List<CraftItem>();
 
 
 			CraftContext context = craftSystem?.GetContext(from);
 
+			if (context == null)
+			{
+				// Gérer le cas où le contexte est null
+				return;
+			}
+			if (craftSystem == null)
+			{
+				// Gérer le cas où craftSystem est null
+				return;
+			}
 			if (list.Count == 0 && context != null && context.LastGroupIndex > -1)
 			{
 				CraftGroupCol craftGroupCol = m_CraftSystem?.CraftGroups;

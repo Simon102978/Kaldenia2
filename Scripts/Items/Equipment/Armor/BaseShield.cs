@@ -16,8 +16,8 @@ namespace Server.Items
             : base(serial)
         {
         }
-
-        public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
+		public virtual int MaxEnchantements => 3;
+		public override ArmorMaterialType MaterialType => ArmorMaterialType.Plate;
 
         public override double ArmorRating
         {

@@ -1128,26 +1128,26 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(CommodityDeed), "Autres", "Parchemin de commodité", 50.0, 126, typeof(BlankScroll), 1044377, 5, 1044378);
 
 
-			index = AddCraft(typeof(BlueBook), "Autres", "Livre Bleu", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, 1044361);
-			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);
-			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
+			index = AddCraft(typeof(BlueBook), "Autres", "Livre Bleu", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, "Vous n'avez pas suffisament de parchemin vierge");
+			AddRes(index, typeof(Leather), "Cuir", 2, "Vous n'avez pas suffisament de cuir");
+			AddRes(index, typeof(Beeswax), "Cire d'abeille", 2, "Vous n'avez pas suffisament de cire d'abeille");
 
-			index = AddCraft(typeof(BrownBook), "Autres", "Livre Brun", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, 1044361);
-			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);
-			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
+			index = AddCraft(typeof(BrownBook), "Autres", "Livre Brun", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, "Vous n'avez pas suffisament de parchemin vierge");
+			AddRes(index, typeof(Leather), "Cuir", 2, "Vous n'avez pas suffisament de cuir");
+			AddRes(index, typeof(Beeswax), "Cire d'abeille", 2, "Vous n'avez pas suffisament de cire d'abeille");
 
-			index = AddCraft(typeof(RedBook), "Autres", "Livre Rouge", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, 1044361);
-			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);
-			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
+			index = AddCraft(typeof(RedBook), "Autres", "Livre Rouge", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, "Vous n'avez pas suffisament de parchemin vierge");
+			AddRes(index, typeof(Leather), "Cuir", 2, "Vous n'avez pas suffisament de cuir");
+			AddRes(index, typeof(Beeswax), "Cire d'abeille", 2, "Vous n'avez pas suffisament de cire d'abeille");
 
-			index = AddCraft(typeof(TanBook), "Autres", "Livre Beige", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, 1044361);
-			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);
-			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
+			index = AddCraft(typeof(TanBook), "Autres", "Livre Beige", 5.0, 35.0, typeof(BlankScroll), "Parchemin Vierge", 5, "Vous n'avez pas suffisament de parchemin vierge");
+			AddRes(index, typeof(Leather), "Cuir", 2, "Vous n'avez pas suffisament de cuir");
+			AddRes(index, typeof(Beeswax), "Cire d'abeille", 2, "Vous n'avez pas suffisament de cire d'abeille");
 
 
 			index = AddCraft(typeof(GargoyleBook100), "Autres", "Livre 100 pages", 60.0, 100.0, typeof(BlankScroll), 1044377, 40, 1044378);
-			AddRes(index, typeof(Leather), "Cuir", 2, 1044463);
-			AddRes(index, typeof(Beeswax), 1025154, 2, 1053098);
+			AddRes(index, typeof(Leather), "Cuir", 2, "Vous n'avez pas suffisament de cuir");
+			AddRes(index, typeof(Beeswax), "Cire d'abeille", 2, "Vous n'avez pas suffisament de cire d'abeille");
 
 			index = AddCraft(typeof(GlassblowingBook), "Autres", "Conn Verre", 30, 100, typeof(BlankScroll), 1044377, 20, 1044378);
 			AddRecipe(index, (int)InscriptionRecipes.GlassblowingBook);

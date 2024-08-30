@@ -1,3 +1,4 @@
+using System.Diagnostics.Tracing;
 using Server.Engines.Craft;
 
 namespace Server.Items
@@ -23,6 +24,8 @@ namespace Server.Items
             Weight = 1.0;
             Hue = 0x3B9;
 			Name = "Tube à souffler le verre";
+			Layer = Layer.TwoHanded;
+			
         }
 
         public Blowpipe(Serial serial)

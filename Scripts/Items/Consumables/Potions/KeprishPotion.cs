@@ -25,7 +25,7 @@ namespace Server.Items
 		{
 			if (from is CustomPlayerMobile customPlayer)
 			{
-				if (customPlayer.RaceRestreinte)
+				if (customPlayer.Race.RaceID == 7)
 				{
 					TransformToBloodElemental(customPlayer);
 				}

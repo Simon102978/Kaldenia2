@@ -37,7 +37,13 @@ namespace Server.Items
 
     public class Spellbook : Item, ICraftable, ISlayer, IEngravable, IVvVItem, IOwnerRestricted, IWearableDurability
     {
-        private static readonly Dictionary<Mobile, List<Spellbook>> m_Table = new Dictionary<Mobile, List<Spellbook>>();
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Enchantement { get; set; }
+		public virtual int MaxEnchantements => 1;
+
+
+		private static readonly Dictionary<Mobile, List<Spellbook>> m_Table = new Dictionary<Mobile, List<Spellbook>>();
 
         private static readonly int[] m_LegendPropertyCounts = new[]
         {

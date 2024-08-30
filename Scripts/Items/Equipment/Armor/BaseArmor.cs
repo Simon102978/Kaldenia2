@@ -22,7 +22,10 @@ namespace Server.Items
         private Mobile _Owner;
         private string _OwnerName;
 
-        [CommandProperty(AccessLevel.GameMaster)]
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Enchantement { get; set; }
+		public virtual int MaxEnchantements => 3;
+		[CommandProperty(AccessLevel.GameMaster)]
         public bool IsVvVItem
         {
             get { return _VvVItem; }

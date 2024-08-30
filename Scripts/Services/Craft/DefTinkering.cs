@@ -96,6 +96,8 @@ namespace Server.Engines.Craft
 		private DefTinkering()
 			: base(3, 4, 1.50)// base( 1, 1, 3.0 )
 		{
+			craftSystem = this;
+			tool = null; 
 		}
 
 	
@@ -201,9 +203,8 @@ namespace Server.Engines.Craft
 
 			if (quality == 2)
 			{
-				 from.SendGump(new CraftGump(from, craftSystem, tool, "Vous créez un item de qualité exceptionnel."));
 
-				//return 1044155; // You create an exceptional quality item.
+				return 1044155; // You create an exceptional quality item.
 			}
 			if (makersMark && quality == 3)
 			{

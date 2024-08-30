@@ -1489,6 +1489,14 @@ namespace Server.Mobiles
 			if (Mount is Server.Multis.RowBoat)
 				return true;
 
+			if (Mount is Server.Multis.BaseBoat)
+				return true;
+
+			if (Mount is Server.Multis.BaseGalleon)
+				return true;
+
+
+
 			if (AccessLevel >= AccessLevel.GameMaster)
 				return true;
 
@@ -1549,11 +1557,12 @@ namespace Server.Mobiles
 			}
 
 
-			
 
-			BaseMount mount = (BaseMount)Mount;
 
-			mount.Rider = null;
+			if (Mount is BaseMount mount)
+			{
+
+				mount.Rider = null;
 			mount.Location = oldLocation;
 
 			TileToDontFall = 3;
@@ -1564,7 +1573,7 @@ namespace Server.Mobiles
 			double seconds = 12.0 - (Skills[SkillName.Equitation].Value / 10);
 
 			SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(seconds), false);
-
+			}
 
 			return false;
 		}

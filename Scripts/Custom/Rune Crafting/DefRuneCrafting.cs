@@ -133,6 +133,9 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(LowerRegCostRune), "Bijoux", "Reduction de reactifs", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteCentaur), "Sang Envouté de Centaur", 3, "Il vous manquent de sang envouté de Centaur.");
+
+			index = AddCraft(typeof(LowerAmmoCostRune), "Bijoux", "Reduction des munitions", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			AddRes(index, typeof(SangEnvouteCentaur), "Sang Envouté de Centaur", 3, "Il vous manquent de sang envouté de Centaur.");
 			#endregion
 
 

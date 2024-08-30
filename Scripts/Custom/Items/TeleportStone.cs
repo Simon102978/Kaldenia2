@@ -252,13 +252,13 @@ namespace Server.Items
            return;
         }
 
-        if (from.InRange(Location, 3))
-        {
-            from.SendMessage("Vous devez vous approcher de la pierre.");
-            return;
-        }
+			if (!from.InRange(GetWorldLocation(), 3)) 
+			{
+				from.SendMessage("Vous devez vous approcher de la pierre.");
+				return;
+			}
 
-        LinkToStone((CustomPlayerMobile)from);
+			LinkToStone((CustomPlayerMobile)from);
          
     }
 

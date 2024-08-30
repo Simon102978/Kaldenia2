@@ -78,6 +78,9 @@ namespace Server.Items
 		}
 		#endregion
 
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Enchantement { get; set; }
+		public virtual int MaxEnchantements => 1;
 		private bool _VvVItem;
         private Mobile _Owner;
         private string _OwnerName;

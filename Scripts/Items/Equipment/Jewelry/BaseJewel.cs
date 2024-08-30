@@ -28,6 +28,9 @@ namespace Server.Items
 		private int m_MaxHitPoints;
 		private int m_HitPoints;
 
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Enchantement { get; set; }
+		public virtual int MaxEnchantements => 1;
 		private AosAttributes m_AosAttributes;
 		private AosElementAttributes m_AosResistances;
 		private AosSkillBonuses m_AosSkillBonuses;

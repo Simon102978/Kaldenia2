@@ -58,25 +58,13 @@ namespace Server.Items
 			if (IsRented)
 			{
 				TimeSpan remaining = RentalEnd - DateTime.UtcNow;
+				list.Add($"Loué par: {Renter.Name}"); // Loué par: ~1_NAME~
 
-				if (remaining != null)
-				{
-					list.Add($"Temps restant: {remaining.Hours:D2}:{remaining.Minutes:D2}");
-				}
-				else
-				{
-					list.Add("Temps restant: Non disponible");
-				}
-
-				// Vérifiez que Renter n'est pas null et que Name n'est pas vide
-				if (Renter != null && !string.IsNullOrEmpty(Renter.Name))
-				{
-					list.Add($"Loué par: {Renter.Name}");
-				}
-				else
-				{
-					list.Add("Loué par: Non spécifié");
-				}
+				list.Add($"Temps Restant: {remaining.Hours:D2}:{remaining.Minutes:D2}"); // Temps restant: ~1_VAL~
+			}
+			else
+			{
+				list.Add("Bateau à Louer"); // Bateau à louer
 			}
 		}
 
@@ -100,62 +88,84 @@ namespace Server.Items
 
 		public Mobile Pilot => Boat?.Pilot;
 
-		public override void OnDoubleClickDead(Mobile m)
+		public override void OnDoubleClickDead(Mobile from)
 		{
-			OnDoubleClick(m);
+			OnDoubleClick(from);
 		}
-
 		public override void OnDoubleClick(Mobile from)
-
 		{
 			from.RevealingAction();
 
-			BaseBoat boat = BaseBoat.FindBoatAt(from, from.Map);
-			Item mount = from.FindItemOnLayer(Layer.Mount);
-
-			if (boat == null || Boat == null || Boat != boat)
+			if (Boat == null || Boat != BaseBoat.FindBoatAt(from, from.Map))
 			{
-				from.SendLocalizedMessage(1116724); // You cannot pilot a ship unless you are aRegularBoard it!
+				from.SendLocalizedMessage(1116724); // You cannot pilot a ship unless you are aboard it!
+				Boat?.RemovePilot(from); // Assurez-vous que le pilote est retiré même s'il n'est pas sur le bateau
+				return;
 			}
 			else if (Pilot != null && Pilot != from && (Pilot == Boat.Owner || (IsRented && Pilot == Renter)))
 			{
 				from.SendLocalizedMessage(502221); // Someone else is already using this item.
 			}
-			else if (from.Flying)
+
+			if (from.Flying)
 			{
 				from.SendLocalizedMessage(1116615); // You cannot pilot a ship while flying!
+				Boat.RemovePilot(from);
+				return;
 			}
-			else if (!Boat.IsOwner(from) && !IsRented && Renter != from)
-			{
-				from.SendMessage("Vous n'êtes pas autorisé à piloter ce bateau.");
-			}
-			else if (boat.Stuck)
+
+			if (Boat.Stuck)
 			{
 				from.SendMessage("Le bateau est pris, vous ne pouvez pas le déplacer.");
+				Boat.RemovePilot(from);
+				return;
 			}
-			else if (from.Mounted && !(mount is BoatMountItem))
+
+			if (Pilot == from)
 			{
-				from.SendLocalizedMessage(1010097); // You cannot use this while mounted or flying.
+				Boat.RemovePilot(from);
+				from.SendLocalizedMessage(502333); // You stop piloting the ship.
 			}
-			else if (Pilot == null && Boat.Scuttled)
+			else if (Pilot != null && Pilot != from)
+			{
+				from.SendLocalizedMessage(502221); // Someone else is already using this item.
+			}
+			else if (Boat.Scuttled)
 			{
 				from.SendLocalizedMessage(1116725); // This ship is too damaged to sail!
+			}
+			else if (!Boat.IsOwner(from) && (!IsRented || Renter != from))
+			{
+				from.SendMessage("Vous n'êtes pas autorisé à piloter ce bateau.");
 			}
 			else if (Pilot != null)
 			{
 				if (from != Pilot) // High authorized player takes control of the ship
 				{
-					boat.RemovePilot(from);
-					boat.LockPilot(from);
+					Boat.RemovePilot(Pilot); // Remove the current pilot first
+					Boat.LockPilot(from);
 				}
 				else
 				{
-					boat.RemovePilot(from);
+					Boat.RemovePilot(from);
 				}
 			}
 			else
 			{
-				boat.LockPilot(from);
+				Boat.LockPilot(from);
+			}
+		}
+
+		public void ForceRemovePilot(Mobile from)
+		{
+			if (Boat != null)
+			{
+				Boat.RemovePilot(from);
+			}
+
+			if (from.Frozen)
+			{
+				from.Frozen = false;
 			}
 		}
 
@@ -182,22 +192,25 @@ namespace Server.Items
 			if (Boat.IsRowBoat)
 				return;
 
-			if (Boat != null && Boat.Contains(from))
+			if (Boat != null)
 			{
-				if (Boat.IsOwner(from))
-					list.Add(new RenameShipEntry(this, from));
+				if (Boat.Contains(from))
+				{
+					if (Boat.IsOwner(from))
+						list.Add(new RenameShipEntry(this, from));
 
-				list.Add(new EmergencyRepairEntry(this, from));
-				list.Add(new ShipRepairEntry(this, from));
+					list.Add(new EmergencyRepairEntry(this, from));
+					list.Add(new ShipRepairEntry(this, from));
 
-				if (!IsRented)
-					list.Add(new RentBoatEntry(this, from));
-				else if (from == Renter)
-					list.Add(new EndRentalEntry(this, from));
-			}
-			else if (Boat.IsOwner(from))
-			{
-				list.Add(new DryDockEntry(Boat, from));
+					if (!IsRented)
+						list.Add(new RentBoatEntry(this, from));
+					else if (from == Renter)
+						list.Add(new EndRentalEntry(this, from));
+				}
+				else if (Boat.IsOwner(from))
+				{
+					list.Add(new DryDockEntry(Boat, from));
+				}
 			}
 		}
 
@@ -384,7 +397,7 @@ namespace Server.Items
 			private readonly Mobile m_From;
 
 			public RentBoatEntry(TillerMan tillerman, Mobile from)
-				: base(1011530, 10) // "Louer le bateau"
+				: base(1062637, 10) // "Louer le bateau"
 			{
 				m_TillerMan = tillerman;
 				m_From = from;
@@ -392,13 +405,22 @@ namespace Server.Items
 
 			public override void OnClick()
 			{
-				if (m_From.Backpack.ConsumeTotal(typeof(Gold), m_TillerMan.RentalCost))
+				if (m_From.BankBox == null)
 				{
+					m_From.SendMessage("Vous n'avez pas de compte en banque.");
+					return;
+				}
+
+				int goldInBank = m_From.BankBox.GetAmount(typeof(Gold));
+				if (goldInBank >= m_TillerMan.RentalCost)
+				{
+					m_From.BankBox.ConsumeTotal(typeof(Gold), m_TillerMan.RentalCost);
 					m_TillerMan.StartRental(m_From);
+					m_From.SendMessage($"Vous avez loué ce bateau pour {m_TillerMan.RentalDuration.TotalHours} heures. {m_TillerMan.RentalCost} pièces d'or ont été prélevées de votre compte en banque.");
 				}
 				else
 				{
-					m_From.SendMessage($"Vous n'avez pas assez d'or pour louer ce bateau. (Coût: {m_TillerMan.RentalCost} gold)");
+					m_From.SendMessage($"Vous n'avez pas assez d'or dans votre compte en banque pour louer ce bateau. (Coût: {m_TillerMan.RentalCost} gold)");
 				}
 			}
 		}
@@ -409,7 +431,7 @@ namespace Server.Items
 			private readonly Mobile m_From;
 
 			public EndRentalEntry(TillerMan tillerman, Mobile from)
-				: base(503207, 10) // "Terminer la location"
+				: base(1062638, 10) // "Terminer la location"
 			{
 				m_TillerMan = tillerman;
 				m_From = from;

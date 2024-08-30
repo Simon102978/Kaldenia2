@@ -28,21 +28,52 @@ namespace Server.Items
 
 		public virtual bool CanEnchant(Item item, Mobile from)
 		{
-
-		
+			if (item is BaseWeapon)
+			{
+				BaseWeapon weapons = (BaseWeapon)item;
+				return weapons.Enchantement < weapons.MaxEnchantements;
+			}
+			else if (item is BaseArmor)
+			{
+				BaseArmor armor = (BaseArmor)item;
+				return armor.Enchantement < armor.MaxEnchantements;
+			}
+			else if (item is Spellbook)
+			{
+				Spellbook spellbook = (Spellbook)item;
+				return spellbook.Enchantement < spellbook.MaxEnchantements;
+			}
+			else if (item is BaseJewel)
+			{
+				BaseJewel jewel = (BaseJewel)item;
+				return jewel.Enchantement < jewel.MaxEnchantements;
+			}
 
 			return false;
-
 		}
 
 
 		public virtual void Enchant(Item item, Mobile from)
 		{
+			if (CanEnchant(item, from))
+			{
+				if (item is BaseWeapon weapon)
+					weapon.Enchantement++;
+				else if (item is BaseArmor armor)
+					armor.Enchantement++;
+				else if (item is Spellbook spellbook)
+					spellbook.Enchantement++;
+				else if (item is BaseJewel jewel)
+					jewel.Enchantement++;
 
-			item.Enchantement++;
-
-			from.PlaySound(0x1F5);
-			this.Delete();
+				from.PlaySound(0x1F5);
+				from.SendMessage("Vous avez enchanté l'objet avec succès.");
+				this.Delete();
+			}
+			else
+			{
+				from.SendMessage("Cet objet ne peut pas recevoir plus d'enchantements.");
+			}
 		}
 
 
@@ -100,11 +131,6 @@ namespace Server.Items
 						from.SendMessage("Cet objet ne peut pas être enchanté avec cette rune.");
 						return;
 					}
-					else if (item.Enchantement >= 3)
-					{
-						from.SendMessage("Cet objet a déjà trois enchantements.");
-						return;
-					}
 					else if (!from.InRange(item.GetWorldLocation(), 1))
 					{
 						from.SendMessage("Vous êtes trop loin de l'objet.");
@@ -118,7 +144,6 @@ namespace Server.Items
 					else
 					{
 						m_Rune.Enchant(item, from);
-						from.SendMessage("Vous enchantez l'objet.");
 					}
 				}
 				else
@@ -135,18 +160,27 @@ namespace Server.Items
 		{
 		}
 
-		public override void Serialize( GenericWriter writer )
+		public override void Serialize(GenericWriter writer)
 		{
-			base.Serialize( writer );
+			base.Serialize(writer);
 
-			writer.Write( (int) 0 ); // version
+			writer.Write(1); // version
+
+			writer.Write(Enchantement);
+
+			
 		}
 
-		public override void Deserialize( GenericReader reader )
+		public override void Deserialize(GenericReader reader)
 		{
-			base.Deserialize( reader );
+			base.Deserialize(reader);
 
 			int version = reader.ReadInt();
+
+			if (version >= 1)
+			{
+				Enchantement = reader.ReadInt();
+			}
 		}
 	}
 }

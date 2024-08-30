@@ -211,7 +211,7 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(AltarBlanc), "Statues", "Autel Blanc", 74.0, 124.0, typeof(Granite), 1044514, 30, 1044513);
 			AddCraft(typeof(StatueDieu), "Statues", "Statue Dieu", 76.0, 126.0, typeof(Granite), 1044514, 20, 1044513); 
 
-			// Paliers
+	/*		// Paliers
 			index = AddCraft(typeof(CraftableHouseItem), "Paliers", "Palier 1", 60.0, 110.0, typeof(Granite), 1044514, 5, 1044513);
 			SetData(index, CraftableItemType.RoughBlock);
 			SetDisplayID(index, 1928);
@@ -229,7 +229,7 @@ namespace Server.Engines.Craft
 			SetDisplayID(index, 1941);
 			index = AddCraft(typeof(CraftableHouseItem), "Paliers", "Palier 6", 60.0, 110.0, typeof(Granite), 1044514, 5, 1044513);
 			SetData(index, CraftableItemType.RoughRoundedInsetSteps);
-			SetDisplayID(index, 1945);
+			SetDisplayID(index, 1945);*/
 
 			// Cuisine
 			AddCraft(typeof(StoneOvenEastDeed), "Cuisine", "Four en pierre (E)", 68.4, 93.4, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");

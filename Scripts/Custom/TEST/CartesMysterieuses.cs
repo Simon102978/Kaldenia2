@@ -1,12 +1,28 @@
 using System;
 using System.Collections.Generic;
+using System.IO;
 using Server;
 using Server.ContextMenus;
 using Server.Mobiles;
 
 public class SkillCard : Item
 {
-	
+	public static void Initialize()
+	{
+		EventSink.WorldSave += OnWorldSave;
+		EventSink.WorldLoad += OnWorldLoad;
+	}
+
+	private static void OnWorldSave(WorldSaveEventArgs e)
+	{
+		SaveActiveEffects();
+	}
+
+	private static void OnWorldLoad()
+	{
+		LoadActiveEffects();
+	}
+
 
 
 	[CommandProperty(AccessLevel.GameMaster)]
@@ -375,6 +391,81 @@ public class SkillCard : Item
 			}
 		}
 	}
+	public static void SaveActiveEffects()
+	{
+		using (StreamWriter writer = new StreamWriter("Data/SkillCardEffects.txt"))
+		{
+			foreach (var kvp in s_ActiveEffects)
+			{
+				foreach (var effect in kvp.Value)
+				{
+					writer.WriteLine($"{kvp.Key.Serial},{effect.Key},{effect.Value.Bonus},{effect.Value.ExpireTime.Ticks},{effect.Value.InitialBaseValue}");
+				}
+			}
+		}
+	}
+
+	public static void LoadActiveEffects()
+	{
+		if (File.Exists("Data/SkillCardEffects.txt"))
+		{
+			using (StreamReader reader = new StreamReader("Data/SkillCardEffects.txt"))
+			{
+				string line;
+				while ((line = reader.ReadLine()) != null)
+				{
+					string[] parts = line.Split(',');
+					if (parts.Length == 5)
+					{
+						int serialInt;
+						if (int.TryParse(parts[0], out serialInt))
+						{
+							Mobile owner = World.FindMobile((Serial)serialInt);
+							if (owner != null)
+							{
+								SkillName skill = (SkillName)Enum.Parse(typeof(SkillName), parts[1]);
+								double bonus = Convert.ToDouble(parts[2]);
+								DateTime expireTime = new DateTime(Convert.ToInt64(parts[3]));
+								double initialBaseValue = Convert.ToDouble(parts[4]);
+
+								if (expireTime > DateTime.UtcNow)
+								{
+									SkillMod mod = new DefaultSkillMod(skill, true, bonus);
+									owner.AddSkillMod(mod);
+
+									BuffInfo buff = new BuffInfo(BuffIcon.ArcaneEmpowerment, 1151394, 1151395, expireTime - DateTime.UtcNow, owner, $"{skill}: +{bonus:F1}%");
+									BuffInfo.AddBuff(owner, buff);
+
+									SkillCardEffect effect = new SkillCardEffect
+									{
+										Owner = owner,
+										Skill = skill,
+										Bonus = bonus,
+										ExpireTime = expireTime,
+										SkillMod = mod,
+										InitialBaseValue = initialBaseValue,
+										Buff = buff
+									};
+
+									if (!s_ActiveEffects.ContainsKey(owner))
+									{
+										s_ActiveEffects[owner] = new Dictionary<SkillName, SkillCardEffect>();
+									}
+									s_ActiveEffects[owner][skill] = effect;
+
+									Timer.DelayCall(expireTime - DateTime.UtcNow, () => RemoveEffect(effect));
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+
+
+
 
 	private static bool IsSkillCardActive(Mobile from, SkillName skill)
 	{

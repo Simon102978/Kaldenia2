@@ -52,7 +52,10 @@ namespace Server.Multis
 
         public static List<BaseBoat> Boats { get; } = new List<BaseBoat>();
 
-        public static BaseBoat FindBoatAt(IEntity entity)
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool IsRentable { get; set; }
+
+		public static BaseBoat FindBoatAt(IEntity entity)
         {
             return FindBoatAt(entity, entity.Map);
         }
@@ -2138,7 +2141,12 @@ namespace Server.Multis
 
         public void BeginRename(Mobile from)
         {
-            if (CheckDecay())
+			if (!IsOwner(from))
+			{
+				from.SendMessage("Seul le propriétaire peut renommer le bateau.");
+				return;
+			}
+			if (CheckDecay())
                 return;
 
             if (from.AccessLevel < AccessLevel.GameMaster && from != Owner)
@@ -3194,27 +3202,49 @@ namespace Server.Multis
                 StopMove(false);
         }
 
-        public void RemovePilot(Mobile from)
-        {
-            Pilot.RemoveItem(VirtualMount);
-            VirtualMount.Internalize();
+		public void RemovePilot(Mobile from)
+		{
+			if (Pilot == null)
+			{
+				Console.WriteLine($"RemovePilot called but Pilot is null. Called by: {from?.Name ?? "Unknown"}");
+				return;
+			}
 
-            if (IsMoving)
-                StopMove(false);
+			if (Pilot != from)
+			{
+				Console.WriteLine($"RemovePilot called with wrong mobile. Pilot: {Pilot.Name}, From: {from?.Name ?? "Unknown"}");
+				return;
+			}
 
-            Pilot.SendLocalizedMessage(1149592); // You are no longer piloting this vessel.
+			if (VirtualMount != null)
+			{
+				Pilot.RemoveItem(VirtualMount);
+				VirtualMount.Internalize();
+			}
+			else
+			{
+				Console.WriteLine($"VirtualMount is null for Pilot: {Pilot.Name}");
+			}
 
-            Refresh(from);
+			if (IsMoving)
+			{
+				StopMove(false);
+			}
 
-            GetEntitiesOnRegularBoard().OfType<PlayerMobile>().Where(x => x != Pilot).ToList().ForEach(y =>
-            {
-                y.SendLocalizedMessage(1149668, Pilot.Name); // ~1_NAME~ has relinquished control of the ship.
-            });
+			Pilot.SendLocalizedMessage(1149592); // You are no longer piloting this vessel.
+			Refresh(from);
 
-            Pilot = null;
-        }
+			var playersOnBoard = GetEntitiesOnRegularBoard().OfType<PlayerMobile>().Where(x => x != Pilot).ToList();
+			foreach (var player in playersOnBoard)
+			{
+				player.SendLocalizedMessage(1149668, Pilot.Name); // ~1_NAME~ has relinquished control of the ship.
+			}
 
-        public void RowBoat_Tick_Callback()
+			Pilot = null;
+		}
+
+
+		public void RowBoat_Tick_Callback()
         {
             if (!MobilesOnRegularBoard.Any())
                 Delete();

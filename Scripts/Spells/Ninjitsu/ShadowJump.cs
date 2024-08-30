@@ -27,9 +27,9 @@ namespace Server.Spells.Ninjitsu
         public override bool CheckCast()
         {
             PlayerMobile pm = Caster as PlayerMobile; // IsStealthing should be moved to Server.Mobiles
-            if (!pm.IsStealthing)
+            if (!pm.Hidden)
             {
-                Caster.SendLocalizedMessage(1063087); // You must be in stealth mode to use this ability.
+                Caster.SendMessage("Vous devez être caché pour effectué cette abilité"); // You must be in stealth mode to use this ability.
                 return false;
             }
 
@@ -59,7 +59,7 @@ namespace Server.Spells.Ninjitsu
 
             PlayerMobile pm = Caster as PlayerMobile; // IsStealthing should be moved to Server.Mobiles
 
-            if (!pm.IsStealthing)
+            if (!pm.Hidden)
             {
                 Caster.SendLocalizedMessage(1063087); // You must be in stealth mode to use this ability.
             }

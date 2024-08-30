@@ -270,57 +270,53 @@ namespace Server.Items
 
 						}
 					}
-					else if (m_Tub.AllowFurniture && (FurnitureAttribute.Check(item) || m_Tub.CanForceDye(item) || item is AddonComponent ))
-					{
-						if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
+						else if (m_Tub.AllowFurniture && (FurnitureAttribute.Check(item) || m_Tub.CanForceDye(item) || item is AddonComponent || AllowedTypes.Contains(item.GetType())))
 						{
-							from.SendLocalizedMessage(500446); // That is too far away.
-						}
-						else
-						{
-							bool okay = (item.IsChildOf(from.Backpack));
-
-							if (!okay)
+							if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
 							{
-								if (item.Parent == null)
-								{
-									BaseHouse house = BaseHouse.FindHouseAt(item);
+								from.SendLocalizedMessage(500446); // That is too far away.
+							}
+							else
+							{
+								bool okay = (item.IsChildOf(from.Backpack));
 
-									if (!house.IsCoOwner(from))
-										from.SendLocalizedMessage(501023); // You must be the owner to use this item.
-									else if (house == null || (!house.IsLockedDown(item) && !house.IsSecure(item)) && (!(item is AddonComponent) || !house.Addons.ContainsKey(((AddonComponent)item).Addon)))
-										from.SendLocalizedMessage(501022); // Furniture must be locked down to paint it.
+								if (!okay)
+								{
+									if (item.Parent == null)
+									{
+										BaseHouse house = BaseHouse.FindHouseAt(item);
+
+										if (!house.IsCoOwner(from))
+											from.SendLocalizedMessage(501023); // You must be the owner to use this item.
+										else if (house == null || (!house.IsLockedDown(item) && !house.IsSecure(item)) && (!(item is AddonComponent) || !house.Addons.ContainsKey(((AddonComponent)item).Addon)))
+											from.SendLocalizedMessage(501022); // Furniture must be locked down to paint it.
+										else
+											okay = true;
+									}
 									else
-										okay = true;
+									{
+										from.SendLocalizedMessage(1048135); // The furniture must be in your backpack to be painted.
+									}
 								}
-								else
+
+								if (okay)
 								{
-									from.SendLocalizedMessage(1048135); // The furniture must be in your backpack to be painted.
+									item.Hue = m_Tub.DyedHue;
+									from.PlaySound(0x23E);
+
+									if (m_Tub.Charges > 1)
+									{
+										m_Tub.Charges -= 1;
+									}
+									else
+									{
+										m_Tub.Delete();
+										from.AddToBackpack(bacvide);
+										from.SendMessage("Votre bac de teinture n'a plus de charge.");
+									}
 								}
 							}
-
-							if (okay)
-							{
-								item.Hue = m_Tub.DyedHue;
-								from.PlaySound(0x23E);
-
-
-								if (m_Tub.Charges > 1)
-								{
-									m_Tub.Charges -= 1;
-								}
-
-								else
-								{
-									m_Tub.Delete();
-									from.AddToBackpack(bacvide);
-									from.SendMessage("Votre bac de teinture n'a plus de charge.");
-
-								}
-							}
-
 						}
-					}
 
 						else if (item is BaseClothing || item is BaseHat || item is Chapelet || item is BaseBook)
 						{
@@ -612,6 +608,187 @@ namespace Server.Items
 					m_Tub.m_IsInUse = false;
 				}
         }
-    }
+			private static readonly HashSet<Type> AllowedTypes = new HashSet<Type>
+	{
+		typeof(MatchLight),
+		typeof(BacVide),
+		typeof(PalmierWoodResourceCrate),
+		typeof(BarrelStaves),
+		typeof(BarrelLid),
+		typeof(BarrelHoops),
+		typeof(LargeFishingPole),
+		typeof(PipeCourte),
+		typeof(PipeLongue),
+		typeof(PipeCourbee),
+		typeof(Keg),
+		typeof(ShortMusicStandLeft),
+		typeof(TrainingDummyEastDeed),
+		typeof(TrainingDummySouthDeed),
+		typeof(PickpocketDipEastDeed),
+		typeof(PickpocketDipSouthDeed),
+		typeof(AdvancedTrainingDummySouthDeed),
+		typeof(AdvancedTrainingDummyEastDeed),
+		typeof(LiquorBarrel),
+		typeof(Watertub),
+		typeof(PlayerBBEast),
+		typeof(PlayerBBSouth),
+		typeof(TallMusicStandLeft),
+		typeof(EasleSouth),
+		typeof(ElvenPodium),
+		typeof(CopyToolbox),
+		typeof(TrainingSword),
+		typeof(TrainingKryss),
+		typeof(TrainingMace),
+		typeof(TrainingDoublelames),
+		typeof(ShepherdsCrook),
+		typeof(QuarterStaff),
+		typeof(GnarledStaff),
+		typeof(Bokuto),
+		typeof(Fukiya),
+		typeof(Tetsubo),
+		typeof(WildStaff),
+		typeof(Club),
+		typeof(BlackStaff),
+		typeof(BatonDragonique),
+		typeof(BatonErmite),
+		typeof(Eterfer),
+		typeof(CanneSapphire),
+		typeof(Crochire),
+		typeof(BatonVagabond),
+		typeof(WoodenShield),
+		typeof(LapHarp),
+		typeof(RuneLute),
+		typeof(Harp),
+		typeof(Drums),
+		typeof(Lute),
+		typeof(Tambourine),
+		typeof(TambourineTassel),
+		typeof(BambooFlute),
+		typeof(AudChar),
+		typeof(GuitareSolo),
+		typeof(HarpeLongue),
+		typeof(CelloDeed),
+		typeof(TrumpetDeed),
+		typeof(pianomodernAddonDeed),
+		typeof(pianomodern2AddonDeed),
+		typeof(FireHorn),
+		typeof(WoodenBox),
+		typeof(SmallCrate),
+		typeof(MediumCrate),
+		typeof(LargeCrate),
+		typeof(WoodenChest),
+		typeof(PlainWoodenChest),
+		typeof(OrnateWoodenChest),
+		typeof(GildedWoodenChest),
+		typeof(WoodenFootLocker),
+		typeof(CoffreMaritime),
+		typeof(FinishedWoodenChest),
+		typeof(OrnateElvenChestSouthDeed),
+		typeof(OrnateElvenChestEastDeed),
+		typeof(RarewoodChest),
+		typeof(DecorativeBox),
+		typeof(Chest),
+		typeof(FootStool),
+		typeof(Stool),
+		typeof(BambooChair),
+		typeof(WoodenChair),
+		typeof(FancyWoodenChairCushion),
+		typeof(WoodenChairCushion),
+		typeof(Throne),
+		typeof(OrnateElvenChair),
+		typeof(BigElvenChair),
+		typeof(ElvenReadingChair),
+		typeof(ElvenLoveseatSouthDeed),
+		typeof(ElvenLoveseatEastDeed),
+		typeof(FancyCouchEastDeed),
+		typeof(FancyCouchWestDeed),
+		typeof(FancyCouchSouthDeed),
+		typeof(FancyCouchNorthDeed),
+		typeof(Nightstand),
+		typeof(WritingTable),
+		typeof(LargeTable),
+		typeof(YewWoodTable),
+		typeof(TableNappe),
+		typeof(TableNappe2),
+		typeof(ComptoirNappe),
+		typeof(ElegantLowTable),
+		typeof(PlainLowTable),
+		typeof(ShortCabinet),
+		typeof(OrnateElvenTableSouthDeed),
+		typeof(OrnateElvenTableEastDeed),
+		typeof(FancyElvenTableSouthDeed),
+		typeof(FancyElvenTableEastDeed),
+		typeof(BarComptoir),
+		typeof(Comptoir),
+		typeof(LongTableSouthDeed),
+		typeof(LongTableEastDeed),
+		typeof(AlchemistTableSouthDeed),
+		typeof(AlchemistTableEastDeed),
+		typeof(EmptyBookcase),
+		typeof(FullBookcase),
+		typeof(FancyArmoire),
+		typeof(Armoire),
+		typeof(TallCabinet),
+		typeof(RedArmoire),
+		typeof(ElegantArmoire),
+		typeof(MapleArmoire),
+		typeof(CherryArmoire),
+		typeof(ArcaneBookShelfDeedSouth),
+		typeof(ArcaneBookShelfDeedEast),
+		typeof(AcademicBookCase),
+		typeof(ElvenWashBasinSouthWithDrawerDeed),
+		typeof(ElvenWashBasinEastWithDrawerDeed),
+		typeof(ElvenDresserDeedSouth),
+		typeof(ElvenDresserDeedEast),
+		typeof(FancyElvenArmoire),
+		typeof(SimpleElvenArmoire),
+		typeof(Drawer),
+		typeof(FancyDrawer),
+		typeof(TerMurDresserEastDeed),
+		typeof(TerMurDresserSouthDeed),
+		typeof(NormDresser),
+		typeof(SmallBedSouthDeed),
+		typeof(SmallBedEastDeed),
+		typeof(LargeBedSouthDeed),
+		typeof(LargeBedEastDeed),
+		typeof(TallElvenBedSouthDeed),
+		typeof(TallElvenBedEastDeed),
+		typeof(ElvenBedSouthDeed),
+		typeof(ElvenBedEastDeed),
+		typeof(RedHangingLantern),
+		typeof(WhiteHangingLantern),
+		typeof(ShojiScreen),
+		typeof(BambooScreen),
+		typeof(Paravent),
+		typeof(Incubator),
+		typeof(ChickenCoop),
+		typeof(DartBoardSouthDeed),
+		typeof(DartBoardEastDeed),
+		typeof(VanityDeed),
+		typeof(PoteauChaine),
+		typeof(ArcanistStatueSouthDeed),
+		typeof(ArcanistStatueEastDeed),
+		typeof(WarriorStatueSouthDeed),
+		typeof(WarriorStatueEastDeed),
+		typeof(SquirrelStatueSouthDeed),
+		typeof(SquirrelStatueEastDeed),
+		typeof(GiantReplicaAcorn),
+		typeof(MountedDreadHorn),
+		typeof(SewingMachineDeed),
+		typeof(SpinningwheelEastDeed),
+		typeof(SpinningwheelSouthDeed),
+		typeof(ElvenSpinningwheelEastDeed),
+		typeof(ElvenSpinningwheelSouthDeed),
+		typeof(LoomEastDeed),
+		typeof(LoomSouthDeed),
+		typeof(DressformFront),
+		typeof(DressformSide),
+		typeof(FlourMillEastDeed),
+		typeof(FlourMillSouthDeed),
+		typeof(WaterTroughEastDeed),
+		typeof(WaterTroughSouthDeed)
+	};
+
+		}
 }
 }

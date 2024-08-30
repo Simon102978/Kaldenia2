@@ -87,16 +87,13 @@ namespace Server.Items
 					BaseJewel jewel = (BaseJewel)targeted;
 					resource = jewel.Resource;
 				}
-				else if (targeted is BaseClothing)
-				{
-					resource = CraftResource.None;
-				}
+				
 				else
                 {
                     from.SendMessage( "Cet article ne peut pas être recyclé.");
                 }
 
-				if (resource == CraftResource.None && !(targeted is BaseClothing))
+				if (resource == CraftResource.None )
 				{
                     from.SendMessage( "Vous ne pouvez pas recycler ceci. (Code: -1)");
                     return;
@@ -181,7 +178,7 @@ namespace Server.Items
 
                 CraftResourceInfo info = CraftResources.GetInfo(resource);
 
-				if ((info == null || info.ResourceTypes.Length == 0) && !(targeted is BaseClothing))
+				if ((info == null || info.ResourceTypes.Length == 0))
 				{
                     from.SendMessage( "Vous ne pouvez pas recycler ceci. (Code: 1)");
                     return;
@@ -356,16 +353,7 @@ namespace Server.Items
                     }
                 }
 
-				else if (targeted is BaseClothing)
-				{
-					switch (resource)
-					{
-						case CraftResource.None:
-						default:
-							resItem = new Cloth();
-							break;
-					}
-				}
+				
 
 
 				int newAmount = (int)(craftResource.Amount * 0.5);

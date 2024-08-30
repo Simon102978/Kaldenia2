@@ -71,6 +71,7 @@ namespace Server.Items
 					from.SendMessage("Vous avez copié l'ID de l'élément : " + itemID);
 					m_Toolbox.m_Used = true;
 					m_Toolbox.ItemID = itemID;
+					m_Toolbox.Weight = 10;
 					m_Toolbox.Name = "Élément copié (ID: " + itemID + ")";
 				}
 				

@@ -17,6 +17,9 @@ namespace Server.Mobiles
 		private GrosseurEnum m_Grosseur;
 		private AppearanceEnum m_Beaute;
 		private Timer m_SkillImproveTimer;
+		private DateTime _lastAmmoCheck = DateTime.MinValue;
+		private DateTime _lastAmmoWarning = DateTime.MinValue;
+		private DateTime _lastAmmoConsumption = DateTime.MinValue;
 
 		public override FoodType FavoriteFood => FoodType.Meat;
 
@@ -336,7 +339,7 @@ namespace Server.Mobiles
 					armor.MaterialType == ArmorMaterialType.Chainmail ||
 					armor.MaterialType == ArmorMaterialType.Ringmail)
 				{
-					// Si le BaseHire porte déjà un arc ou une arbalète, ne pas équiper l'armure
+					// Si le BaseHire porte déjà un arc ou une arbalète, ne pas équiper l'armure lourde
 					if (FindItemOnLayer(Layer.TwoHanded) is BaseRanged)
 					{
 						return false;
@@ -345,20 +348,27 @@ namespace Server.Mobiles
 			}
 			else if (item is BaseRanged ranged)
 			{
-				// Si le BaseHire porte déjà une armure en plate, chainmail ou ringmail, ne pas équiper l'arc ou l'arbalète
-				if (FindItemOnLayer(Layer.InnerTorso) is BaseArmor innerArmor &&
-					(innerArmor.MaterialType == ArmorMaterialType.Plate ||
-					 innerArmor.MaterialType == ArmorMaterialType.Chainmail ||
-					 innerArmor.MaterialType == ArmorMaterialType.Ringmail))
+				// Vérifier toutes les couches d'armure pertinentes
+				Layer[] armorLayers = { Layer.InnerTorso, Layer.OuterTorso, Layer.Arms, Layer.Pants, Layer.Helm };
+
+				foreach (Layer layer in armorLayers)
 				{
-					return false;
+					if (FindItemOnLayer(layer) is BaseArmor layerArmor)
+					{
+						if (layerArmor.MaterialType == ArmorMaterialType.Plate ||
+							layerArmor.MaterialType == ArmorMaterialType.Chainmail ||
+							layerArmor.MaterialType == ArmorMaterialType.Ringmail)
+						{
+							// Si une pièce d'armure lourde est trouvée, ne pas équiper l'arme à distance
+							return false;
+						}
+					}
 				}
 			}
 
 			return base.EquipItem(item);
 		}
-	
-	public override bool AllowEquipFrom(Mobile from)
+		public override bool AllowEquipFrom(Mobile from)
 		{
 			if (from == GetOwner())
 				return true;
@@ -729,108 +739,181 @@ namespace Server.Mobiles
 		
 		}
 
-        #endregion
+		#endregion
 
-   /*    #region [ Class PayTimer ]
-        public class PayTimer : Timer
-        {
-            public static PayTimer Instance { get; set; }
 
-            public List<BaseHire> Hires { get; set; } = new List<BaseHire>();
 
-            public PayTimer()
-                : base(TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1))
-            {
-            }
+		public override void OnActionCombat()
+		{
+			base.OnActionCombat();
 
-            public static TimeSpan GetInterval()
-            {
-                return TimeSpan.FromMinutes(30.0);
-            }
+			Item weapon = FindItemOnLayer(Layer.TwoHanded);
+			if (weapon is BaseRanged)
+			{
+				// Consommer des munitions toutes les 2.5 secondes
+				if (DateTime.UtcNow - _lastAmmoConsumption > TimeSpan.FromSeconds(2.5))
+				{
+					ConsumeAmmo();
+					_lastAmmoConsumption = DateTime.UtcNow;
+				}
+			}
+		}
 
-            protected override void OnTick()
-            {
-                var list = Hires.Where(v => v.NextPay <= DateTime.UtcNow).ToList();
+		private void ConsumeAmmo()
+		{
+			Item weapon = FindItemOnLayer(Layer.TwoHanded);
+			if (weapon is BaseRanged ranged)
+			{
+				Type ammoType = (ranged is BaseBow) ? typeof(Arrow) : typeof(Bolt);
+				Item ammo = Backpack?.FindItemByType(ammoType);
 
-                for (int i = 0; i < list.Count; i++)
-                {
-                    var hire = list[i];
-                    hire.NextPay = DateTime.UtcNow + GetInterval();
+				if (ammo != null && ammo.Amount > 0)
+				{
+					int oldAmount = ammo.Amount;
+					ammo.Consume(1);
+					Console.WriteLine($"ConsumeAmmo: {Name} consumed 1 ammo. Old amount: {oldAmount}, New amount: {ammo.Amount}");
 
-                    int pay = hire.Pay;
+					if (ammo.Amount == 0)
+					{
+						CheckAmmo(); // Vérifier immédiatement si nous sommes à court de munitions
+					}
+				}
+				else
+				{
+					CheckAmmo(); // Vérifier immédiatement si nous sommes à court de munitions
+				}
+			}
+		}
 
-                    if (hire.HoldGold <= pay)
-                    {
-                        hire.GetOwner();
+		private void CheckAmmo()
+		{
+			Item weapon = FindItemOnLayer(Layer.TwoHanded);
+			if (weapon is BaseRanged ranged)
+			{
+				Type ammoType = (ranged is Bow) ? typeof(Arrow) : typeof(Bolt);
+				Item ammo = Backpack?.FindItemByType(ammoType);
 
-                        hire.Say(503235, 0x3B2);// I regret nothing! 
-                        hire.Delete();
-                    }
-                    else
-                    {
-                        hire.HoldGold -= pay;
-                    }
-                }
+				Console.WriteLine($"CheckAmmo: {Name} has {ammo?.Amount ?? 0} {ammoType.Name}");
 
-                ColUtility.Free(list);
-            }
+				if (ammo == null || ammo.Amount == 0)
+				{
+					// Envoyer un message d'avertissement au maximum toutes les 30 secondes
+					if (DateTime.UtcNow - _lastAmmoWarning > TimeSpan.FromSeconds(30))
+					{
+						if (ControlMaster is PlayerMobile master)
+						{
+							master.SendMessage($"Votre mercenaire {Name} n'a plus de munitions !");
+						}
+						_lastAmmoWarning = DateTime.UtcNow;
+					}
 
-            public static void RegisterTimer(BaseHire hire)
-            {
-                if (Instance == null)
-                {
-                    Instance = new PayTimer();
-                }
+					// Arrêter le combat si nous n'avons plus de munitions
+					Combatant = null;
+				}
+			}
+		}
 
-                if (!Instance.Running)
-                {
-                    Instance.Start();
-                }
 
-                if (!Instance.Hires.Contains(hire))
-                {
-                    Instance.Hires.Add(hire);
-                }
-            }
+		/*    #region [ Class PayTimer ]
+			 public class PayTimer : Timer
+			 {
+				 public static PayTimer Instance { get; set; }
 
-            public static void RemoveTimer(BaseHire hire)
-            {
-                if (Instance == null)
-                {
-                    return;
-                }
+				 public List<BaseHire> Hires { get; set; } = new List<BaseHire>();
 
-                if (Instance.Hires.Contains(hire))
-                {
-                    Instance.Hires.Remove(hire);
+				 public PayTimer()
+					 : base(TimeSpan.FromMinutes(1), TimeSpan.FromMinutes(1))
+				 {
+				 }
 
-                    if (Instance.Hires.Count == 0)
-                    {
-                        Instance.Stop();
-                    }
-                }
-            }
-        }
-        #endregion 
+				 public static TimeSpan GetInterval()
+				 {
+					 return TimeSpan.FromMinutes(30.0);
+				 }
 
-        #region [ Class HireEntry ]
-        public class HireEntry : ContextMenuEntry
-        {
-            private readonly Mobile m_Mobile;
-            private readonly BaseHire m_Hire;
+				 protected override void OnTick()
+				 {
+					 var list = Hires.Where(v => v.NextPay <= DateTime.UtcNow).ToList();
 
-            public HireEntry(Mobile from, BaseHire hire)
-                : base(6120, 3)
-            {
-                m_Hire = hire;
-                m_Mobile = from;
-            }
+					 for (int i = 0; i < list.Count; i++)
+					 {
+						 var hire = list[i];
+						 hire.NextPay = DateTime.UtcNow + GetInterval();
 
-            public override void OnClick()
-            {
-                m_Hire.SayHireCost();
-            }
-        }
-        #endregion*/
-    }
+						 int pay = hire.Pay;
+
+						 if (hire.HoldGold <= pay)
+						 {
+							 hire.GetOwner();
+
+							 hire.Say(503235, 0x3B2);// I regret nothing! 
+							 hire.Delete();
+						 }
+						 else
+						 {
+							 hire.HoldGold -= pay;
+						 }
+					 }
+
+					 ColUtility.Free(list);
+				 }
+
+				 public static void RegisterTimer(BaseHire hire)
+				 {
+					 if (Instance == null)
+					 {
+						 Instance = new PayTimer();
+					 }
+
+					 if (!Instance.Running)
+					 {
+						 Instance.Start();
+					 }
+
+					 if (!Instance.Hires.Contains(hire))
+					 {
+						 Instance.Hires.Add(hire);
+					 }
+				 }
+
+				 public static void RemoveTimer(BaseHire hire)
+				 {
+					 if (Instance == null)
+					 {
+						 return;
+					 }
+
+					 if (Instance.Hires.Contains(hire))
+					 {
+						 Instance.Hires.Remove(hire);
+
+						 if (Instance.Hires.Count == 0)
+						 {
+							 Instance.Stop();
+						 }
+					 }
+				 }
+			 }
+			 #endregion 
+
+			 #region [ Class HireEntry ]
+			 public class HireEntry : ContextMenuEntry
+			 {
+				 private readonly Mobile m_Mobile;
+				 private readonly BaseHire m_Hire;
+
+				 public HireEntry(Mobile from, BaseHire hire)
+					 : base(6120, 3)
+				 {
+					 m_Hire = hire;
+					 m_Mobile = from;
+				 }
+
+				 public override void OnClick()
+				 {
+					 m_Hire.SayHireCost();
+				 }
+			 }
+			 #endregion*/
+	}
 }
