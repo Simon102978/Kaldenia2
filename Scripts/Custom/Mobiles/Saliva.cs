@@ -16,6 +16,8 @@ namespace Server.Mobiles
 		public DateTime TuerSummoneur;
 		private DateTime m_GlobalTimer;
 
+		public override bool CanBeParagon => false;
+
 
 		[Constructable]
         public Saliva()

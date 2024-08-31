@@ -58,6 +58,7 @@ namespace Server.Mobiles
 			SetSkill(SkillName.Anatomy, 90.2, 100.0);
             SetSkill(SkillName.MagicResist, 102.8, 117.9);
             SetSkill(SkillName.Hiding, 75.0, 97.5);
+            SetSkill(SkillName.Regeneration, 150.0);
 
             Fame = 5000;
             Karma = -5000;
