@@ -246,7 +246,8 @@ namespace Server.Items
     {
       base.Serialize(writer);
 
-      writer.Write((int)1); // version
+      writer.Write((int)2); // version
+      writer.Write(m_WallHue);
       writer.Write(m_MobActif);
       writer.Write(m_WallName);
       writer.Write(m_Active);
@@ -267,6 +268,11 @@ namespace Server.Items
 
       switch (version)
       {
+        case 2: 
+        {
+          m_WallHue = reader.ReadInt();
+          goto case 1;
+        }
         case 1:
         {
           m_MobActif = reader.ReadBool();
