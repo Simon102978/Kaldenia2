@@ -3,7 +3,7 @@ using Server.Items;
 
 namespace Server.Mobiles
 {
-    [CorpseName("le corps d'un chevalier ophidien")]
+    [CorpseName("le corps de Saveenistia")]
     public class Saveenistia : BaseCreature
     {
 		public DateTime LastFreeze;
