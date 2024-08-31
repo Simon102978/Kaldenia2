@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Multis;
 
 namespace Server.Mobiles
 {
@@ -57,11 +58,25 @@ namespace Server.Mobiles
 		public override BoneType BoneType => BoneType.Dragonique;
 
 		public override bool CanFly => true;
+
+
+        public override int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
+		{
+			
+             if (Combatant != null && BaseBoat.FindBoatAt(Combatant) != null && BaseBoat.FindBoatAt(this) == null)
+            {
+                Emote("*Déploie ses ailes et saute.*");
+                Location = Combatant.Location;
+
+            }
+
+			return base.Damage(amount,from,informMount,checkDisrupt);
+		}
+
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
             AddLoot(LootPack.Meager);
-            AddLoot(LootPack.MedScrolls);
             AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
 			AddLoot(LootPack.LootItem<Items.GemmePoison>(), (double)5);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(7, 14));

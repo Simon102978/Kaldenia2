@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Multis;
 
 namespace Server.Mobiles
 {
@@ -44,6 +45,34 @@ namespace Server.Mobiles
             Fame = 4000;
             Karma = -4000;
         }
+
+        public override int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
+		{
+			
+             if (Combatant != null && BaseBoat.FindBoatAt(Combatant) != null && BaseBoat.FindBoatAt(this) == null)
+            {
+                Emote("*Déploie ses ailes et saute.*");
+
+
+                Location = Combatant.Location;
+
+            }
+
+			return base.Damage(amount,from,informMount,checkDisrupt);
+		}
+
+       	public override void OnThink()
+		{
+			base.OnThink();
+
+            if (Combatant != null && BaseBoat.FindBoatAt(Combatant) != null && BaseBoat.FindBoatAt(this) == null)
+            {
+                Emote("Déploie ses ailes et saute.");
+                Location = Combatant.Location;
+
+            }
+
+		}
 
         public WyvernElite(Serial serial)
             : base(serial)

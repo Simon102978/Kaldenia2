@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Multis;
 
 namespace Server.Mobiles
 {
@@ -50,6 +51,7 @@ namespace Server.Mobiles
             : base(serial)
         {
         }
+       
 
         public override void AlterMeleeDamageTo(Mobile to, ref int damage)
 		{
@@ -85,6 +87,13 @@ namespace Server.Mobiles
 
 				from.PlaySound(0x1F1);
 			}
+
+             if (Combatant != null && BaseBoat.FindBoatAt(Combatant) != null && BaseBoat.FindBoatAt(this) == null)
+            {
+                Emote("*Déploie ses ailes et saute.*");
+                Location = Combatant.Location;
+
+            }
 
 			return dam;
 		}
