@@ -21,6 +21,7 @@ namespace Server.Mobiles
 			"Medusa va être fière de sa fille."
 		};
 
+
 		public DateTime m_GlobalTimer;
 		public DateTime m_NextSpawn;
 
@@ -44,6 +45,22 @@ namespace Server.Mobiles
 		public DateTime m_LastParole = DateTime.MinValue;
 
 		public DateTime m_LastBlockParole = DateTime.MinValue;
+		private WallControlerStone m_Stone;
+
+		[CommandProperty(AccessLevel.GameMaster)]
+        public WallControlerStone Stone
+        {
+            get
+            {
+                return m_Stone;
+            }
+            set
+            {
+                m_Stone = value;
+                
+               
+            }
+        }
 
 		[Constructable]
 		public SaekSsthis()
@@ -89,6 +106,38 @@ namespace Server.Mobiles
 			SetWeaponAbility(WeaponAbility.LightningArrow);
 			//LightningArrow
 		}
+		 protected override void OnCreate()
+        {
+           
+            base.OnCreate();
+             CheckWallControler();
+
+        }
+
+		public void CheckWallControler()
+        {
+
+           IPooledEnumerable eable = Map.GetItemsInRange(this.Location, 10);
+
+            foreach (Item item in eable)
+            {
+                if (item is WallControlerStone wc)
+                {
+                    m_Stone = wc;
+                    break;
+                }
+            }
+            eable.Free();
+
+            if (m_Stone != null)
+            {
+                m_Stone.MobActif = true;
+            }
+
+
+        }
+
+
 
 		public override void GetProperties(ObjectPropertyList list)
 		{
@@ -127,6 +176,11 @@ namespace Server.Mobiles
 
 		public override void OnDeath(Container c)
 		{
+			if (m_Stone != null)
+            {
+                m_Stone.MobActif = false;
+            }
+
 			base.OnDeath(c);
 			Parole();
 
@@ -544,7 +598,6 @@ namespace Server.Mobiles
 		public override int Hides => 6;
 		public override HideType HideType => HideType.Ophidien;
 
-
 		public override int Bones => 6;
 		public override BoneType BoneType => BoneType.Ophidien;
 
@@ -561,7 +614,8 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(0);
+            writer.Write(1);
+			writer.Write(m_Stone);
 
         }
 
@@ -572,7 +626,11 @@ namespace Server.Mobiles
 
 			switch (version)
 			{
-				
+				case 1:
+				{
+				    m_Stone = (WallControlerStone)reader.ReadItem();
+					break;
+				}
 				default:
 					break;
 			}
