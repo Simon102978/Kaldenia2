@@ -39,7 +39,8 @@ namespace Server.Mobiles
 
             Tamable = true;
             ControlSlots = 4;
-            MinTameSkill = 98.7;
+          //  MinTameSkill = 98.7;
+           MinTameSkill = 120.7;
 
             SetWeaponAbility(WeaponAbility.Dismount);
             SetSpecialAbility(SpecialAbility.GraspingClaw);
