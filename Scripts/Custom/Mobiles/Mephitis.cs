@@ -19,6 +19,24 @@ namespace Server.Mobiles
 
         public DateTime m_ParalyseZone;
 
+
+		private WallControlerStone m_Stone;
+
+        [CommandProperty(AccessLevel.GameMaster)]
+        public WallControlerStone Stone
+        {
+            get
+            {
+                return m_Stone;
+            }
+            set
+            {
+                m_Stone = value;
+                
+               
+            }
+        }
+
 		public override bool IsScaryToPets => true;
 
         [Constructable]
@@ -64,6 +82,36 @@ namespace Server.Mobiles
             ForceActiveSpeed = 0.3;
             ForcePassiveSpeed = 0.6;
         }
+		protected override void OnCreate()
+        {
+           
+            base.OnCreate();
+             CheckWallControler();
+
+        }
+
+        public void CheckWallControler()
+        {
+
+           IPooledEnumerable eable = Map.GetItemsInRange(this.Location, 10);
+
+            foreach (Item item in eable)
+            {
+                if (item is WallControlerStone wc)
+                {
+                    m_Stone = wc;
+                    break;
+                }
+            }
+            eable.Free();
+
+            if (m_Stone != null)
+            {
+                m_Stone.MobActif = true;
+            }
+
+
+        }
 
         public Mephitis(Serial serial)
             : base(serial)
@@ -96,6 +144,18 @@ namespace Server.Mobiles
 				m_GlobalTimer = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(2, 5));
 			}
 		}
+		public override void OnDeath(Container c)
+		{
+            if (m_Stone != null)
+            {
+                m_Stone.MobActif = false;
+            }
+
+			base.OnDeath(c);
+		
+
+		}
+
 
 
         private void ParalyzeZone()
@@ -487,12 +547,24 @@ namespace Server.Mobiles
         {
             base.Serialize(writer);
             writer.Write(0); // version
+			writer.Write(m_Stone);
         }
 
         public override void Deserialize(GenericReader reader)
         {
             base.Deserialize(reader);
             int version = reader.ReadInt();
+
+			switch(version)
+			{
+				case 1:
+				{
+					 m_Stone = (WallControlerStone)reader.ReadItem();
+					 break;
+				}
+				default:
+					break;
+			}
         }
     }
 }
