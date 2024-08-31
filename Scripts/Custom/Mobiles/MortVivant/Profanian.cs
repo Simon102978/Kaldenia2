@@ -462,7 +462,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.NecroRegs, 100, 200);
 			AddLoot(LootPack.BodyPartsAndBones, Utility.RandomMinMax(3, 5));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
-			AddLoot(LootPack.LootItem<Items.Gold>(100, 200));
+			AddLoot(LootPack.LootItem<Items.Gold>(1000, 2000));
 			AddLoot(LootPack.LootItem<CerveauLiche>(3, 7));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(5, 12));
 
