@@ -5576,6 +5576,10 @@ namespace Server
 				{
 					m_LastKiller = from;
 
+					from.OnKill(this);
+
+
+
 					m_InternalCanRegen = false;
 
 					Hits = 0;
@@ -5596,6 +5600,12 @@ namespace Server
 			}
 
 			return amount;
+		}
+
+		public virtual void OnKill(Mobile killed)
+		{
+
+
 		}
 
 		public virtual void SendDamagePacket(Mobile from, int amount)

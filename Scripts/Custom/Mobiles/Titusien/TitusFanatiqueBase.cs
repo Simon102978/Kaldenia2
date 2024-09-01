@@ -3,6 +3,7 @@ using Server.Spells;
 using System.Collections.Generic;
 using System;
 using Server.Mobiles;
+using Server.Network;
 
 namespace Server.Mobiles
 {
@@ -45,7 +46,28 @@ namespace Server.Mobiles
 			base.OnThink();
 			Parole();
 
+
 		}
+
+
+		public virtual void Roucifier(Mobile m)
+		{
+			if (m is CustomPlayerMobile cp && !cp.CheckRoux())
+			{
+				int couleur = RouxCouleur();
+			    cp.HairHue = couleur;
+
+		        if (!cp.Female)
+				{
+				  cp.FacialHairHue = couleur;
+				}
+						 
+				PublicOverheadMessage(MessageType.Emote, 0x3B2,false, $"*Fait une teinture à {cp.Name}*"); 
+
+			}
+
+		}
+
 
 		public override void OnDeath(Container c)
 		{
@@ -53,6 +75,8 @@ namespace Server.Mobiles
 			Parole();
 
 		}
+
+
 
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
@@ -142,6 +166,14 @@ namespace Server.Mobiles
 		}
 
 
+		public override void OnKill(Mobile killed)
+		{
+			if (killed is CustomPlayerMobile cp && killed.InRange(this,3))
+			{
+				Roucifier(cp);
+			}
+
+		}
 
 
 

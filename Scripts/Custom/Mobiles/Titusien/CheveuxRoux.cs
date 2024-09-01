@@ -1,3 +1,5 @@
+using Server.Network;
+
 namespace Server.Mobiles
 {
     [CorpseName("Cheveux")]
@@ -70,16 +72,36 @@ namespace Server.Mobiles
 			return roux;
 		}
 
-		public override bool CheckMovement(Direction d, out int newZ)
+        public override void OnKill(Mobile m)
         {
-            if (!base.CheckMovement(d, out newZ))
-                return false;
+            if (m is CustomPlayerMobile cp && !cp.CheckRoux())
+            {
+                Roucifier(m);
+                
+            }
 
-            if (Region.IsPartOf("Underworld") && newZ > Location.Z)
-                return false;
 
-            return true;
         }
+        public virtual void Roucifier(Mobile m)
+		{
+			if (m is CustomPlayerMobile cp && !cp.CheckRoux())
+			{
+				int couleur = RouxCouleur();
+			    cp.HairHue = couleur;
+
+		        if (!cp.Female)
+				{
+				  cp.FacialHairHue = couleur;
+				}
+						 
+				PublicOverheadMessage(MessageType.Emote, 0x3B2,false, $"*Les cheveux de {cp.Name} devient roux.*"); 
+
+			}
+
+		}
+
+
+
 
         public override void Serialize(GenericWriter writer)
         {
