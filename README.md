@@ -17,6 +17,7 @@
    5- Augmenter le prix a 10k ou le mettre en recompense de marchandises (?)
 -Regarder les potions suivante : UltimeCurePotion, ElixirOfRebirth,BarrabHemolymphConcentrate, JukariBurnPoiltice, KurakAmbushersEssence, BarakoDraftOfMight,  UraliTranceTonic, SakkhraProphylaxisPotion, ScouringToxin 
 -Revoir tout le systeme de taming.
+-Revoir le systeme de Magie au complet.
 
 
 
