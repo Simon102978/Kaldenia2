@@ -1,4 +1,5 @@
 using Server.Items;
+using Server.Multis;
 using System;
 
 namespace Server.Mobiles
@@ -84,6 +85,18 @@ namespace Server.Mobiles
                 if (combatant is PlayerMobile && combatant.Mount != null)
                 {
                     (combatant as PlayerMobile).SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(10), true);
+                }
+
+                if (Combatant != null && BaseBoat.FindBoatAt(Combatant) != null)
+                {
+                  BaseBoat boat = BaseBoat.FindBoatAt(Combatant);
+
+                  if (!boat.Stuck)
+				  {
+					Emote("*La boule bloque le navire.*");
+					boat.Stuck = true;		
+			      }			
+
                 }
 
                 m_NextWaterBall = DateTime.UtcNow + TimeSpan.FromMinutes(1);
