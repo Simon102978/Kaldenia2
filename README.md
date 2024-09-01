@@ -1,35 +1,26 @@
-# A fixer - Kaldenia
+# A fixer - Kaldenia2
 
-```
--PlayerVendor et maison fonctionne avec l'account, donc possibilité d'accèder au information de son alt.
--les baits sont en jeu, les baits ne donne pas + de chance de capturer le poisson relié au bait
--Protection en arcane retire entierement le MR et 13 physical resist.
--Les guildes bug vs le nom // Deguisement ?
--Fixer le healing, qui ramene le fantome a son corps, lorsque healer avec bandage
--Quand on est deguise, notre nom sur la pierre de guilde et sur la plancarte (old) de maison change pour le nom de notre deguisement.
--Si tu delog deguise, ca brise les infos de ton bodyvalue (tu te ramasse avec le mauvais skins et mauvaise teinte de peau.)
--Valider que les aoe touche pas les invocations pour les sortilèges.
--Fixer les crafts de nourritures de skills (a rescripter, les bouffe se stacks a l'infini (peu atteindre 200 dans un skills) mais ne dure que 2 minutes après la création)
--Faire en sorte que les cadeaux puisse etre pièger.
--les crops plantées dans une maison se suppriment apres un certain temps
--on peu pas nourirre les triton avec de la meat... meme si ses supposer etre meat 
--? ta machine espresso etait defectueuse ! y avait un delais de plusieurs jour que mon café soit pret !! et imposible de le sortir du baril ensuite 
--Esclave (Qui fait planter, y'a un bug a quek part)
--Cisseau de barbier, joueur et esclave ne marche pas
--Esclave delog avec personnage
--Josephine liberé fait planter le serveur lors de sa mort.
+
 ```
 
 # A faire ?
 
-```
--Possibilité de pouvoir drag un joueur assomer avec une commande?
--Renom vs item id
--Spell d'animation qui créer des mobs sinon j'avais rien d'autre lol
--Enlever l'or prelever directement dans la banque, pour les achats (?)
--Les statues ne semblent plus prendre la teinte du granit utilisé, même une fois 'complétée'.
--dans le .deco il y a le .flip de commenté aussi
--Crash Log n'apparait pas lorsqu'utiliser avec Linux...
+`
+- Augmenter le niveau de hiding pour changer son nom (50 est un peu bas)
+- Retirer la fonction pour pas collorer les trucs (le craft permet de faire une armure en Jolinar, et la garder en hue 0)
+- Revoir le systeme d'armure, les armures donnent trop d'ar, et tu te retrouve avec 150 de resitance physique, quand le cap est a 86.
+- Modifier le BedRollTent: 
+   1- Temps de cast pour l'ouvrir
+   2- Rajouter un Skills (Camping?)
+   3- Bloquer si tu es pas sur Dirt, grass ou Désert
+   4- Permettre au joueurs de la détruire
+   5- Augmenter le prix a 10k ou le mettre en recompense de marchandises (?)
+-Regarder les potions suivante : UltimeCurePotion, ElixirOfRebirth,BarrabHemolymphConcentrate, JukariBurnPoiltice, KurakAmbushersEssence, BarakoDraftOfMight,  UraliTranceTonic, SakkhraProphylaxisPotion, ScouringToxin 
+-Revoir tout le systeme de taming.
+
+
+
+
 ```
 
 
