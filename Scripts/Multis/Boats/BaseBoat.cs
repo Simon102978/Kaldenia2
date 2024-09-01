@@ -426,6 +426,8 @@ namespace Server.Multis
 
 						RemovePilot(pm);
 
+                        OnTakenDamage(20000);
+
 						pm.SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(30), true);
 
 						LastStuck = DateTime.Now;
