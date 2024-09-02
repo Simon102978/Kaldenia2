@@ -132,7 +132,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(2);
+            writer.Write(3);
 
             writer.Write(GatheredFur);
         }
@@ -142,7 +142,26 @@ namespace Server.Mobiles
             base.Deserialize(reader);
             int version = reader.ReadInt();
 
-            GatheredFur = reader.ReadBool();
+            switch (version)
+            {
+                case 3:
+                case 2:
+                case 1:
+                {
+                    GatheredFur = reader.ReadBool();
+                    break;
+                }
+                default:
+                break;
+            }
+
+            if (version < 3)
+            {
+                CurrentTameSkill = 80.1;
+                ControlSlots = 3;
+            }
+
+           
         }
     }
 }
