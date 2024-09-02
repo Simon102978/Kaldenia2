@@ -208,9 +208,15 @@ namespace Server.Mobiles
 			{
 				cp.RemoveEsclave(this);
 			}
-			m_SkillImproveTimer.Stop();
+			
+			if (m_SkillImproveTimer != null)
+			{
+				m_SkillImproveTimer.Stop();
+			}
+		
 
 
+		
 			base.Delete();
 
 	//		PayTimer.RemoveTimer(this);
@@ -339,7 +345,7 @@ namespace Server.Mobiles
 					armor.MaterialType == ArmorMaterialType.Chainmail ||
 					armor.MaterialType == ArmorMaterialType.Ringmail)
 				{
-					// Si le BaseHire porte déjà un arc ou une arbalète, ne pas équiper l'armure lourde
+					// Si le BaseHire porte dï¿½jï¿½ un arc ou une arbalï¿½te, ne pas ï¿½quiper l'armure lourde
 					if (FindItemOnLayer(Layer.TwoHanded) is BaseRanged)
 					{
 						return false;
@@ -348,7 +354,7 @@ namespace Server.Mobiles
 			}
 			else if (item is BaseRanged ranged)
 			{
-				// Vérifier toutes les couches d'armure pertinentes
+				// Vï¿½rifier toutes les couches d'armure pertinentes
 				Layer[] armorLayers = { Layer.InnerTorso, Layer.OuterTorso, Layer.Arms, Layer.Pants, Layer.Helm };
 
 				foreach (Layer layer in armorLayers)
@@ -359,7 +365,7 @@ namespace Server.Mobiles
 							layerArmor.MaterialType == ArmorMaterialType.Chainmail ||
 							layerArmor.MaterialType == ArmorMaterialType.Ringmail)
 						{
-							// Si une pièce d'armure lourde est trouvée, ne pas équiper l'arme à distance
+							// Si une piï¿½ce d'armure lourde est trouvï¿½e, ne pas ï¿½quiper l'arme ï¿½ distance
 							return false;
 						}
 					}
@@ -775,12 +781,12 @@ namespace Server.Mobiles
 
 					if (ammo.Amount == 0)
 					{
-						CheckAmmo(); // Vérifier immédiatement si nous sommes à court de munitions
+						CheckAmmo(); // Vï¿½rifier immï¿½diatement si nous sommes ï¿½ court de munitions
 					}
 				}
 				else
 				{
-					CheckAmmo(); // Vérifier immédiatement si nous sommes à court de munitions
+					CheckAmmo(); // Vï¿½rifier immï¿½diatement si nous sommes ï¿½ court de munitions
 				}
 			}
 		}
@@ -807,7 +813,7 @@ namespace Server.Mobiles
 						_lastAmmoWarning = DateTime.UtcNow;
 					}
 
-					// Arrêter le combat si nous n'avons plus de munitions
+					// Arrï¿½ter le combat si nous n'avons plus de munitions
 					Combatant = null;
 				}
 			}
