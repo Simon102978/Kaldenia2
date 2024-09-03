@@ -4,7 +4,7 @@ namespace Server.Items
 {
     public class ShipWheel : Item, IGalleonFixture
     {
-		public static double CartographyRequirement => 50.0;
+//		public static double CartographyRequirement => 50.0;
 		public override int LabelNumber => 1149698;  // wheel
 
         [CommandProperty(AccessLevel.GameMaster)]
@@ -47,10 +47,10 @@ namespace Server.Items
             {
                 from.SendLocalizedMessage(1116615); // You cannot pilot a ship while flying!
             }
-			else if (from.Skills[SkillName.Camping].Base < CartographyRequirement)
+/*			else if (from.Skills[SkillName.Camping].Base < CartographyRequirement)
 			{
 				from.SendMessage("Vous n'êtes pas assez doué en camping pour pouvoir naviguer!"); // Cartographie < 50 
-			}
+			}*/
 			else if (from.Mounted && !(mount is BoatMountItem))
             {
                 from.SendLocalizedMessage(1010097); // You cannot use this while mounted or flying.
