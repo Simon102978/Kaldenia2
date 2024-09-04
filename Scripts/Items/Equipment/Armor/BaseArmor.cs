@@ -1532,7 +1532,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(20); // version
+            writer.Write(21); // version
 
             writer.Write(Enchantement);
 
@@ -1745,12 +1745,9 @@ namespace Server.Items
 
             int version = reader.ReadInt();
 
-
-
-
-
             switch (version)
             {
+                case 21:
                 case 20:
                 {
                     Enchantement = reader.ReadInt();
@@ -2070,7 +2067,7 @@ namespace Server.Items
                 ((Mobile)Parent).CheckStatTimers();
 
 
-			if (version < 19)
+			if (version < 21)
 			{
                 // Sauver l'information...
                ItemQuality oldQuality = Quality;
@@ -2086,6 +2083,15 @@ namespace Server.Items
                ColdBonus = 0;
                PoisonBonus = 0;
                EnergyBonus = 0;
+               Attributes.BonusDex = 0;
+               Attributes.BonusHits = 0;
+               Attributes.BonusInt = 0;
+               Attributes.BonusMana = 0;
+               Attributes.BonusStam = 0;
+               Attributes.BonusStr = 0;
+               Attributes.DefendChance = 0;
+               ArmorAttributes.SelfRepair = 0;
+               Enchantement = 0;
 
                switch (MaterialType)
 				{
@@ -2117,14 +2123,21 @@ namespace Server.Items
 					default:
 						break;
 				}
+
+
              
                 Resource = oldRessource;
                 Quality = oldQuality;
+
+                ResetArmor();
 			
 			}
 
 
         }
+
+        public virtual void ResetArmor()
+        {}
 
         public virtual CraftResource DefaultResource => CraftResource.Iron;
 

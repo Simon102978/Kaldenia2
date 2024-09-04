@@ -3412,7 +3412,7 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(23); // version
+            writer.Write(24); // version
 
 
             writer.Write(Enchantement);
@@ -3799,6 +3799,7 @@ namespace Server.Items
 
             switch (version)
             {
+                case 24:
                 case 23:
                 {
                     Enchantement = reader.ReadInt();
@@ -4329,8 +4330,90 @@ namespace Server.Items
 				Hue = CraftResources.GetHue(m_Resource);
 			}
 
+            if (version < 24)
+			{
+                // Sauver l'information...
+               ItemQuality oldQuality = Quality;
+               CraftResource oldRessource= Resource;
+
+                     
+               Quality = ItemQuality.Normal;
+               Resource = CraftResource.Iron;
+
+               Attributes.AttackChance = 0;
+               Attributes.BonusDex = 0;
+               Attributes.BonusHits = 0;
+               Attributes.BonusInt = 0;
+               Attributes.BonusMana = 0;
+               Attributes.BonusStam = 0;
+               Attributes.BonusStr = 0;
+               Attributes.CastRecovery = 0;
+               Attributes.CastSpeed = 0;
+               Attributes.WeaponDamage = 0;
+               WeaponAttributes.HitLeechHits = 0;
+               WeaponAttributes.HitLeechMana = 0;
+               WeaponAttributes.HitLeechStam = 0;
+               Attributes.SpellDamage = 0;
+               Attributes.WeaponSpeed = 0;
+               WeaponAttributes.SelfRepair  = 0;
+               WeaponAttributes.UseBestSkill = 0;
+               Enchantement = 0;
+
+        
+        
+                Resource = oldRessource;
+                Quality = oldQuality;   
+
+   
+                if (Quality == ItemQuality.Exceptional)
+                {
+                    Attributes.WeaponDamage += 20;
+                }
+                if (Quality == ItemQuality.Epic)
+                {
+                    Attributes.WeaponDamage += 40;
+                }
+                if (Quality == ItemQuality.Legendary)
+                {
+                    Attributes.WeaponDamage += 60;
+                }
+
+
+                if (Quality >= ItemQuality.Exceptional && Createur != null)
+                {
+                    double div = Siege.SiegeShard ? 12.5 : 20;
+
+                    Attributes.WeaponDamage += (int)(Createur.Skills.ArmsLore.Value / div);    
+                            
+                }
+
+                CraftResourceInfo resInfo = CraftResources.GetInfo(m_Resource);
+
+                if (resInfo != null)
+                {
+                   CraftAttributeInfo attrInfo = resInfo.AttributeInfo;
+
+                    if (attrInfo != null)
+                    {
+                           Attributes.WeaponDamage += attrInfo.WeaponDamage;
+                          
+                    }  
+                }
+
+               
+                ResetWeapon();
+			
+			}
+
 		}
 		#endregion
+
+        public virtual void ResetWeapon()
+        {
+
+        }
+
+
 
 		public BaseWeapon(int itemID)
             : base(itemID)
@@ -5471,7 +5554,7 @@ namespace Server.Items
                 }
             }
 
-            if (Quality == ItemQuality.Exceptional)
+            if (Quality >= ItemQuality.Exceptional)
             {
                 double div = Siege.SiegeShard ? 12.5 : 20;
 

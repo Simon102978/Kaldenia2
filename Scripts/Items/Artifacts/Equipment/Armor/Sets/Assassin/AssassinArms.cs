@@ -28,6 +28,30 @@ namespace Server.Items
             SetEnergyBonus = 4;
         }
 
+        public override void ResetArmor()
+        {
+			Name = "Brassards du roi Ssins";
+			Hue = 2833;
+			SetHue = 2833;
+
+            Attributes.BonusStam = 2;
+            Attributes.WeaponSpeed = 5;
+
+            SetSkillBonuses.SetValues(0, SkillName.Hiding, 30);
+
+            SetSelfRepair = 3;
+
+            SetAttributes.BonusDex = 12;
+
+            SetPhysicalBonus = 5;
+            SetFireBonus = 4;
+            SetColdBonus = 3;
+            SetPoisonBonus = 4;
+            SetEnergyBonus = 4;
+
+
+        }
+
         public SsinsArms(Serial serial)
             : base(serial)
         {

@@ -23,10 +23,17 @@ public class CapeOfKnowledge : BaseArmor
 	{
 		Weight = 4.0;
 		Name = "Cape Du Savoir";
-		Hue = 1157; // Un bleu foncé, vous pouvez ajuster selon vos préférences
+		Hue = 1157; // Un bleu foncï¿½, vous pouvez ajuster selon vos prï¿½fï¿½rences
 
 		Attributes.BonusMana = 10;
 	}
+
+	public override void ResetArmor()
+    {
+		Attributes.BonusMana = 10;
+    }
+
+
 
 	public CapeOfKnowledge(Serial serial) : base(serial)
 	{
@@ -65,10 +72,15 @@ public class CapeOfCourage : BaseArmor
 	{
 		Weight = 4.0;
 		Name = "Cape Du Courage";
-		Hue = 1645; // Un rouge, vous pouvez ajuster selon vos préférences
+		Hue = 1645; // Un rouge, vous pouvez ajuster selon vos prï¿½fï¿½rences
 
 		Attributes.BonusHits = 10;
 	}
+
+	public override void ResetArmor()
+    {
+		Attributes.BonusHits = 10;
+    }
 
 	public CapeOfCourage(Serial serial) : base(serial)
 	{
@@ -107,11 +119,17 @@ public class CapeOfDetermination : BaseArmor
 	public CapeOfDetermination() : base(0x1515)
 	{
 		Weight = 4.0;
-		Name = "Cape De Détermination";
-		Hue = 2213; // Un vert, vous pouvez ajuster selon vos préférences
+		Name = "Cape De Dï¿½termination";
+		Hue = 2213; // Un vert, vous pouvez ajuster selon vos prï¿½fï¿½rences
 
 		Attributes.BonusStam = 10;
 	}
+
+	public override void ResetArmor()
+    {
+		Attributes.BonusStam = 10;
+    }
+
 
 	public CapeOfDetermination(Serial serial) : base(serial)
 	{

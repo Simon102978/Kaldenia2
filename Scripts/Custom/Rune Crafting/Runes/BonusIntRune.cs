@@ -39,11 +39,6 @@ namespace Server.Items
 				Armor.Attributes.BonusInt += augmentper;				
 			}
 
-			else if (item is BaseShield Shield)
-			{			
-						Shield.Attributes.BonusInt += augmentper;					
-			}
-
 			else if (item is BaseJewel Jewel)
 			{
 						Jewel.Attributes.BonusInt += augmentper;								

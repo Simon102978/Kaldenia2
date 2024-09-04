@@ -1014,7 +1014,7 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(7); // version
+            writer.Write(8); // version
 
             writer.Write(Enchantement);
 
@@ -1050,6 +1050,7 @@ namespace Server.Items
 
             switch (version)
             {
+                case 8:
                 case 7:
                 {
                     Enchantement = reader.ReadInt();    
@@ -1157,6 +1158,20 @@ namespace Server.Items
             if (Parent is Mobile)
             {
                 ((Mobile)Parent).CheckStatTimers();
+            }
+            
+            if (version < 8)
+            {
+                Attributes.CastRecovery = 0;
+                Attributes.CastSpeed  = 0;
+                Attributes.SpellDamage  = 0;
+
+                if (Quality == BookQuality.Legendary)
+					Attributes.SpellDamage = 30;
+				else if (Quality == BookQuality.Epic)
+					Attributes.SpellDamage = 20;
+				else if (Quality == BookQuality.Exceptional)
+					Attributes.SpellDamage = 10;
             }
         }
 

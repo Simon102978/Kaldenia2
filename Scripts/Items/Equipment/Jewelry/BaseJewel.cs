@@ -985,7 +985,7 @@ namespace Server.Items
 		{
 			base.Serialize(writer);
 
-			writer.Write(14); // version
+			writer.Write(15); // version
 
 			writer.Write(Enchantement);
 
@@ -1062,6 +1062,7 @@ namespace Server.Items
 
 			switch (version)
 			{
+				case 15:
 				case 14:
 				{
 					Enchantement = reader.ReadInt();	
@@ -1226,6 +1227,25 @@ namespace Server.Items
 			{
 				//m_Resource = CraftResource.Iron;
 				m_GemType = GemType.None;
+			}
+
+			if (version < 15)
+			{
+				Attributes.BonusDex = 0;
+				Attributes.BonusHits = 0;
+				Attributes.BonusInt = 0;
+				Attributes.BonusMana = 0;
+				Attributes.BonusStam = 0;
+				Attributes.BonusStr = 0;
+				Attributes.LowerAmmoCost = 0 ;
+				Attributes.LowerManaCost = 0;
+				Attributes.LowerRegCost = 0;
+				Attributes.RegenHits = 0;
+				Attributes.RegenMana = 0;
+				Attributes.RegenStam = 0;
+				Enchantement = 0;
+
+
 			}
 		}
 

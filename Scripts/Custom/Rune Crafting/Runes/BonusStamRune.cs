@@ -38,10 +38,7 @@ namespace Server.Items
 				Armor.Attributes.BonusStam += augmentper;				
 			}
 
-			else if (item is BaseShield Shield)
-			{			
-						Shield.Attributes.BonusStam += augmentper;					
-			}
+
 
 			else if (item is BaseJewel Jewel)
 			{

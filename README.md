@@ -18,8 +18,16 @@
 -Regarder les potions suivante : UltimeCurePotion, ElixirOfRebirth,BarrabHemolymphConcentrate, JukariBurnPoiltice, KurakAmbushersEssence, BarakoDraftOfMight,  UraliTranceTonic, SakkhraProphylaxisPotion, ScouringToxin 
 -Revoir tout le systeme de taming.
 -Revoir le systeme de Magie au complet.
+-Suprimer le systeme d enchantement.
 
+-Dans baseweapon, suprimer : 
+            if (Quality == ItemQuality.Exceptional)
+            {
+                double div = Siege.SiegeShard ? 12.5 : 20;
 
+                Attributes.WeaponDamage += (int)(from.Skills.ArmsLore.Value / div);
+                from.CheckSkill(SkillName.ArmsLore, 0, 100);
+            }
 
 
 ```

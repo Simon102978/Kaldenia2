@@ -34,6 +34,11 @@ namespace Server.Items
         {
         }
 
+
+        public override void ResetArmor()
+        {
+        }
+
       //  public override int LabelNumber => 1074304;// Assassin Armor
         public override SetItem SetID => SetItem.Assassin;
         public override int Pieces => 5;
