@@ -546,7 +546,7 @@ namespace Server.Mobiles
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(0); // version
+            writer.Write(1); // version
 			writer.Write(m_Stone);
         }
 
