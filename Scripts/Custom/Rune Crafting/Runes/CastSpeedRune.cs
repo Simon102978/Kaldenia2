@@ -14,7 +14,7 @@ namespace Server.Items
 	public class CastSpeedRune : BaseRune
 	{
 		[Constructable]
-		public CastSpeedRune() : base( 0x1F14 )
+		public CastSpeedRune() : base(  )
 		{
 			Weight = 0.2;  // ?
 			Name = "Vitesse d'incantation";
@@ -22,14 +22,15 @@ namespace Server.Items
 		}
 
 
+
 		public override bool CanEnchant(Item item, Mobile from)
 		{
-			if (item is BaseWeapon || item is Spellbook)
+			if (!(item is BaseWeapon) && !(item is Spellbook))
 			{
-				return true;
-			}
-
-			from.SendMessage("Vous pouvez enchanter que les armes et les livres de sorts avec cette rune.");
+				
+				from.SendMessage("Vous pouvez enchanter que les armes et les livres de sorts avec cette rune.");
+				return false;
+			}	
 
 			return base.CanEnchant(item, from);
 		}

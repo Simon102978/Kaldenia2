@@ -22,30 +22,6 @@ namespace Server.Items
 			Hue = 2101;
 		}
 
-		public override bool CanEnchant(Item item, Mobile from)
-		{
-			if (item is BaseWeapon)
-			{
-				return true;
-			}
-			else if (item is BaseArmor)
-			{
-				return true;
-			}
-			else if(item is BaseShield)
-			{
-				return true;
-			}
-			else if (item is BaseJewel)
-			{
-				return true;
-			}
-
-			from.SendMessage("Vous pouvez enchanter les armes, les armures, les boucliers et les bijoux avec cette rune.");
-
-			return base.CanEnchant(item, from);
-		}
-
 		public override void Enchant(Item item, Mobile from)
 		{
 

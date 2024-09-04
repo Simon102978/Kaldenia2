@@ -22,18 +22,6 @@ namespace Server.Items
 			Hue = 2584;
 		}
 
-		public override bool CanEnchant(Item item, Mobile from)
-		{
-			if (item is BaseWeapon)
-			{
-				return true;
-			}
-
-			from.SendMessage("Vous pouvez enchanter que les armes avec cette rune.");
-
-			return base.CanEnchant(item, from);
-		}
-
 		public override void Enchant(Item item, Mobile from)
 		{
 

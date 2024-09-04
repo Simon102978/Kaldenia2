@@ -1532,7 +1532,9 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(19); // version
+            writer.Write(20); // version
+
+            writer.Write(Enchantement);
 
             // Version 16 - Removed Pre-AOS Armor Properties
             // Version 14 - removed VvV Item (handled in VvV System) and BlockRepair (Handled as negative attribute)
@@ -1749,6 +1751,11 @@ namespace Server.Items
 
             switch (version)
             {
+                case 20:
+                {
+                    Enchantement = reader.ReadInt();
+                    goto case 19;
+                }
                 case 19:
 				case 18:
 				case 17:

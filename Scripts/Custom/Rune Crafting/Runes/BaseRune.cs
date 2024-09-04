@@ -28,25 +28,50 @@ namespace Server.Items
 
 		public virtual bool CanEnchant(Item item, Mobile from)
 		{
-			if (item is BaseWeapon)
+			if (item is BaseWeapon weapons)
 			{
-				BaseWeapon weapons = (BaseWeapon)item;
-				return weapons.Enchantement < weapons.MaxEnchantements;
+				if (weapons.Enchantement < weapons.MaxEnchantements)
+				{
+
+					return true;
+				}
+
+				from.SendMessage("Cet objet ne peut pas recevoir plus d'enchantements.");
+				return false;
 			}
-			else if (item is BaseArmor)
-			{
-				BaseArmor armor = (BaseArmor)item;
-				return armor.Enchantement < armor.MaxEnchantements;
+			else if (item is BaseArmor armor)
+			{	
+				if (armor.Enchantement < armor.MaxEnchantements)
+				{
+
+					return true;
+				}
+
+				from.SendMessage("Cet objet ne peut pas recevoir plus d'enchantements.");
+				return false;
+
 			}
-			else if (item is Spellbook)
+			else if (item is Spellbook spellbook)
 			{
-				Spellbook spellbook = (Spellbook)item;
-				return spellbook.Enchantement < spellbook.MaxEnchantements;
+				if (spellbook.Enchantement < spellbook.MaxEnchantements)
+				{
+
+					return true;
+				}
+
+				from.SendMessage("Cet objet ne peut pas recevoir plus d'enchantements.");
+				return false;
 			}
-			else if (item is BaseJewel)
+			else if (item is BaseJewel jewel)
 			{
-				BaseJewel jewel = (BaseJewel)item;
-				return jewel.Enchantement < jewel.MaxEnchantements;
+				if (jewel.Enchantement < jewel.MaxEnchantements)
+				{
+
+					return true;
+				}
+
+				from.SendMessage("Cet objet ne peut pas recevoir plus d'enchantements.");
+				return false;
 			}
 
 			return false;
@@ -55,8 +80,7 @@ namespace Server.Items
 
 		public virtual void Enchant(Item item, Mobile from)
 		{
-			if (CanEnchant(item, from))
-			{
+
 				if (item is BaseWeapon weapon)
 					weapon.Enchantement++;
 				else if (item is BaseArmor armor)
@@ -69,11 +93,8 @@ namespace Server.Items
 				from.PlaySound(0x1F5);
 				from.SendMessage("Vous avez enchanté l'objet avec succès.");
 				this.Delete();
-			}
-			else
-			{
-				from.SendMessage("Cet objet ne peut pas recevoir plus d'enchantements.");
-			}
+			
+			
 		}
 
 
@@ -128,7 +149,8 @@ namespace Server.Items
 				{
 					if (!m_Rune.CanEnchant(item, from))
 					{
-						from.SendMessage("Cet objet ne peut pas être enchanté avec cette rune.");
+					
+					//	from.SendMessage("Cet objet ne peut pas être enchanté avec cette rune.");
 						return;
 					}
 					else if (!from.InRange(item.GetWorldLocation(), 1))

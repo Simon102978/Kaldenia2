@@ -14,7 +14,7 @@ namespace Server.Items
 	public class CastRecoveryRune : BaseRune
 	{
 		[Constructable]
-		public CastRecoveryRune() : base(0x1F14)
+		public CastRecoveryRune() : base()
 		{
 			Weight = 0.2;  // ?
 			Name = "Récupération après un sort";
@@ -24,12 +24,12 @@ namespace Server.Items
 
 		public override bool CanEnchant(Item item, Mobile from)
 		{
-			if (item is BaseWeapon || item is Spellbook)
+			if (!(item is BaseWeapon) && !(item is Spellbook))
 			{
-				return true;
-			}
-
-			from.SendMessage("Vous pouvez enchanter que les armes et les livres de sorts avec cette rune.");
+				
+				from.SendMessage("Vous pouvez enchanter que les armes et les livres de sorts avec cette rune.");
+				return false;
+			}	
 
 			return base.CanEnchant(item, from);
 		}
@@ -45,7 +45,7 @@ namespace Server.Items
 			}
 			if (item is Spellbook spellbook)
 			{
-				spellbook.Attributes.CastSpeed += augmentper;
+				spellbook.Attributes.CastRecovery += augmentper;
 			}
 			base.Enchant(item, from);
 		}

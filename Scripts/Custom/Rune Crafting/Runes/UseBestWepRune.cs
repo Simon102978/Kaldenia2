@@ -22,8 +22,17 @@ namespace Server.Items
 			Hue = 999;
 		}
 
+
 		public override bool CanEnchant(Item item, Mobile from)
 		{
+			if (!(item is BaseWeapon))
+			{		
+						
+				from.SendMessage("Vous pouvez enchanter que les armes avec cette rune.");
+				return false;
+			}	
+
+
 			if (item is BaseWeapon Weapon)
 			{
 				if (Weapon.WeaponAttributes.UseBestSkill != 0)
@@ -31,17 +40,12 @@ namespace Server.Items
 					from.SendMessage("Cette arme possède déjà cette enchantement.");
 					return false;
 				}
-
-
-
-
-				return true;
 			}
-
-			from.SendMessage("Vous pouvez enchanter que les armes avec cette rune.");
+			
 
 			return base.CanEnchant(item, from);
 		}
+
 
 		public override void Enchant(Item item, Mobile from)
 		{

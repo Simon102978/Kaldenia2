@@ -744,7 +744,7 @@ namespace Server.Items
 
 			if (GemType != GemType.None)
 			{
-				list.Add("Pierre précieuse : {0}", GemType.ToString());
+				list.Add("Pierre prï¿½cieuse : {0}", GemType.ToString());
 
 				if (this is BaseBracelet || this is BaseNecklace)
 					list.Add($"Enchantement: {Enchantement}/1");
@@ -830,7 +830,7 @@ namespace Server.Items
 				list.Add($"Bonus de points de force {prop}"); // strength bonus ~1_val~
 
 			if ((prop = m_AosAttributes.BonusDex) != 0)
-				list.Add($"Bonus de points de dextérité {prop}"); // dexterity bonus ~1_val~
+				list.Add($"Bonus de points de dextï¿½ritï¿½ {prop}"); // dexterity bonus ~1_val~
 
 			if ((prop = m_AosAttributes.BonusInt) != 0)
 				list.Add($"Bonus de points d'intelligence {prop}"); // intelligence bonus ~1_val~
@@ -845,13 +845,13 @@ namespace Server.Items
 				list.Add($"Bonus de points de mana {prop}"); // mana increase ~1_val~
 
 			if ((prop = m_AosAttributes.RegenHits) != 0)
-				list.Add($"Bonus de regénération de points de vie {prop}"); // hit point regeneration ~1_val~
+				list.Add($"Bonus de regï¿½nï¿½ration de points de vie {prop}"); // hit point regeneration ~1_val~
 
 			if ((prop = m_AosAttributes.RegenStam) != 0)
-				list.Add($"Bonus de regénération de points de stamina {prop}"); // stamina regeneration ~1_val~
+				list.Add($"Bonus de regï¿½nï¿½ration de points de stamina {prop}"); // stamina regeneration ~1_val~
 
 			if ((prop = m_AosAttributes.RegenMana) != 0)
-				list.Add($"Bonus de regénération de points de mana {prop}"); // mana regeneration ~1_val~
+				list.Add($"Bonus de regï¿½nï¿½ration de points de mana {prop}"); // mana regeneration ~1_val~
 
 			if ((prop = m_AosAttributes.Luck) != 0)
 				list.Add($"Chance {prop}"); // luck ~1_val~
@@ -860,7 +860,7 @@ namespace Server.Items
 				list.Add(1060411, prop.ToString()); // enhance potions ~1_val~%
 
 			if ((prop = m_AosAttributes.ReflectPhysical) != 0)
-				list.Add($"Réflection des dégâts physiques {prop}"); // reflect physical damage ~1_val~%
+				list.Add($"Rï¿½flection des dï¿½gï¿½ts physiques {prop}"); // reflect physical damage ~1_val~%
 
 			if ((prop = m_AosAttributes.AttackChance) != 0)
 				list.Add($"Chances de toucher {prop}"); // hit chance increase ~1_val~%
@@ -869,7 +869,7 @@ namespace Server.Items
 				list.Add($"Vitesse de frappe {prop}"); // swing speed increase ~1_val~%
 
 			if ((prop = m_AosAttributes.WeaponDamage) != 0)
-				list.Add($"Dégâts physiques {prop}"); // damage increase ~1_val~%
+				list.Add($"Dï¿½gï¿½ts physiques {prop}"); // damage increase ~1_val~%
 
 			if ((prop = m_AosAttributes.DefendChance) != 0)
 				list.Add($"Chances d'esquive {prop}"); // defense chance increase ~1_val~%
@@ -881,16 +881,16 @@ namespace Server.Items
 				list.Add($"Vitesse d'incantation {prop}"); // faster casting ~1_val~
 
 			if ((prop = m_AosAttributes.SpellDamage) != 0)
-				list.Add($"Dégâts magiques {prop}"); // spell damage increase ~1_val~%
+				list.Add($"Dï¿½gï¿½ts magiques {prop}"); // spell damage increase ~1_val~%
 
 			if ((prop = m_AosAttributes.LowerManaCost) != 0)
-				list.Add($"Réduction en coût de mana {prop}"); // lower mana cost ~1_val~%
+				list.Add($"Rï¿½duction en coï¿½t de mana {prop}"); // lower mana cost ~1_val~%
 
 			if ((prop = m_AosAttributes.LowerRegCost) != 0)
-				list.Add($"Réduction en coût d'essence {prop}"); // lower reagent cost ~1_val~%      
+				list.Add($"Rï¿½duction en coï¿½t d'essence {prop}"); // lower reagent cost ~1_val~%      
 
 			if ((prop = m_AosAttributes.LowerAmmoCost) != 0)
-				list.Add($"Réduction en coût de munition {prop}");
+				list.Add($"Rï¿½duction en coï¿½t de munition {prop}");
 
 			
 
@@ -918,9 +918,9 @@ namespace Server.Items
 			if (m_Quality == ItemQuality.Exceptional)
 				list.Add("Exceptionnelle");
 			else if (m_Quality == ItemQuality.Epic)
-				list.Add("Épique");
+				list.Add("ï¿½pique");
 			else if (m_Quality == ItemQuality.Legendary)
-				list.Add("Légendaire");
+				list.Add("Lï¿½gendaire");
 
 			if (IsImbued)
 				list.Add(1080418); // (Imbued)
@@ -985,7 +985,9 @@ namespace Server.Items
 		{
 			base.Serialize(writer);
 
-			writer.Write(13); // version
+			writer.Write(14); // version
+
+			writer.Write(Enchantement);
 
 			//Version 13
 
@@ -1060,6 +1062,11 @@ namespace Server.Items
 
 			switch (version)
 			{
+				case 14:
+				{
+					Enchantement = reader.ReadInt();	
+					goto case 13;
+				}
 				case 13:
 					{
 					//	AptitudeBonus = (Aptitude)reader.ReadInt();

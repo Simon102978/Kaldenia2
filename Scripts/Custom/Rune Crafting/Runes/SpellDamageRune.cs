@@ -14,24 +14,27 @@ namespace Server.Items
 	public class SpellDamageRune : BaseRune
 	{
 		[Constructable]
-		public SpellDamageRune() : base( 0x1F14 )
+		public SpellDamageRune() : base(  )
 		{
 			Weight = 0.2;  // ?
 			Name = "Puissance des sorts";
 			Hue = 1266;
 		}
 
+
 		public override bool CanEnchant(Item item, Mobile from)
 		{
-			if (item is BaseWeapon || item is Spellbook )
+			if (!(item is BaseWeapon) && !(item is Spellbook))
 			{
-				return true;
-			}
-
-			from.SendMessage("Vous pouvez enchanter que les armes et les livres de sorts avec cette rune.");
+				
+				from.SendMessage("Vous pouvez enchanter que les armes et les livres de sorts avec cette rune.");
+				return false;
+			}	
 
 			return base.CanEnchant(item, from);
 		}
+
+
 
 		public override void Enchant(Item item, Mobile from)
 		{
@@ -45,7 +48,7 @@ namespace Server.Items
 
 			if (item is Spellbook spellbook)
 			{
-				spellbook.Attributes.CastSpeed += augmentper;
+				spellbook.Attributes.SpellDamage += augmentper;
 			}
 
 			base.Enchant(item, from);

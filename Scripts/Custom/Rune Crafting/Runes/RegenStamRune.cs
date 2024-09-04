@@ -24,17 +24,15 @@ namespace Server.Items
 
 		public override bool CanEnchant(Item item, Mobile from)
 		{
-
-			if (item is BaseJewel)
-			{
-				return true;
-			}
-
-			from.SendMessage("Vous pouvez enchanter que les bijoux avec cette rune.");
-
+			if (!(item is BaseJewel))
+			{				
+				from.SendMessage("Vous pouvez enchanter que les bijoux avec cette rune.");
+				return false;
+			}	
 
 			return base.CanEnchant(item, from);
 		}
+
 
 		public override void Enchant(Item item, Mobile from)
 		{

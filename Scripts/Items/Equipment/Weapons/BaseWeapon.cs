@@ -3412,8 +3412,10 @@ namespace Server.Items
         {
             base.Serialize(writer);
 
-            writer.Write(22); // version
+            writer.Write(23); // version
 
+
+            writer.Write(Enchantement);
             // Version 20 - Removes all era checks and old code
             // Version 19 - Removes m_SearingWeapon as its handled as a socket now
             // Version 18 - removed VvV Item (handled in VvV System) and BlockRepair (Handled as negative attribute)
@@ -3797,6 +3799,11 @@ namespace Server.Items
 
             switch (version)
             {
+                case 23:
+                {
+                    Enchantement = reader.ReadInt();
+                    goto case 22;
+                }
 				case 22:
 				case 21:
                 case 20: // Removed Eras

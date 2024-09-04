@@ -14,7 +14,7 @@ namespace Server.Items
 	public class HitLeechStamRune : BaseRune
 	{
 		[Constructable]
-		public HitLeechStamRune() : base( 0x1F14 )
+		public HitLeechStamRune() : base(  )
 		{
 			Weight = 0.2;  // ?
 			Name = "Vol de Stamina";
@@ -23,15 +23,15 @@ namespace Server.Items
 
 		public override bool CanEnchant(Item item, Mobile from)
 		{
-			if (item is BaseWeapon)
-			{
-				return true;
-			}
-
-			from.SendMessage("Vous pouvez enchanter que les armes avec cette rune.");
+			if (!(item is BaseWeapon))
+			{				
+				from.SendMessage("Vous pouvez enchanter que les armes avec cette rune.");
+				return false;
+			}	
 
 			return base.CanEnchant(item, from);
 		}
+
 
 		public override void Enchant(Item item, Mobile from)
 		{
@@ -40,7 +40,7 @@ namespace Server.Items
 
 			if (item is BaseWeapon Weapon)
 			{
-				Weapon.WeaponAttributes.HitLeechHits += augmentper;
+				Weapon.WeaponAttributes.HitLeechStam += augmentper;
 			}
 
 			base.Enchant(item, from);

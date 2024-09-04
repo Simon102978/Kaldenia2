@@ -1014,7 +1014,9 @@ namespace Server.Items
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
-            writer.Write(6); // version
+            writer.Write(7); // version
+
+            writer.Write(Enchantement);
 
             m_NegativeAttributes.Serialize(writer);
 
@@ -1048,6 +1050,11 @@ namespace Server.Items
 
             switch (version)
             {
+                case 7:
+                {
+                    Enchantement = reader.ReadInt();    
+                    goto case 6;
+                } 
                 case 6:
                     {
                         m_NegativeAttributes = new NegativeAttributes(this, reader);

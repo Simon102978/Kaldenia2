@@ -240,7 +240,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(ResistPhysRune), "Armures", "Resistance physique", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvoutePhysique), "Sang Envouté Physique", 3, "Il vous manquent de sang envouté physique.");
 			index = AddCraft(typeof(ResistPoisRune), "Armures", "Resistance au poison", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
-			AddRes(index, typeof(SangEnvoutePoison), "Sang Envouté Poison", 3, "Il vous manquent de sang envouté Force.");
+			AddRes(index, typeof(SangEnvoutePoison), "Sang Envouté Poison", 3, "Il vous manquent de sang envouté poison.");
 			#endregion
 
 

@@ -22,18 +22,18 @@ namespace Server.Items
 			Hue = 2584;
 		}
 
+
 		public override bool CanEnchant(Item item, Mobile from)
 		{
-			if (item is BaseWeapon)
+			if (!(item is BaseWeapon) && !(item is Spellbook))
 			{
-				return true;
-			}
-
-			from.SendMessage("Vous ne pouvez enchanter que les armes avec cette rune.");
+				
+				from.SendMessage("Vous pouvez enchanter que les armes et les livres de sorts avec cette rune.");
+				return false;
+			}	
 
 			return base.CanEnchant(item, from);
 		}
-
 		public override void Enchant(Item item, Mobile from)
 		{
 

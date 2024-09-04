@@ -14,7 +14,7 @@ namespace Server.Items
 	public class HitLeechManaRune : BaseRune
 	{
 		[Constructable]
-		public HitLeechManaRune() : base( 0x1F14 )
+		public HitLeechManaRune() : base(  )
 		{
 			Weight = 0.2;  // ?
 			Name = "Vol de Mana";
@@ -23,15 +23,15 @@ namespace Server.Items
 
 		public override bool CanEnchant(Item item, Mobile from)
 		{
-			if (item is BaseWeapon)
-			{
-				return true;
-			}
-
-			from.SendMessage("Vous pouvez enchanter que les armes avec cette rune.");
+			if (!(item is BaseWeapon))
+			{				
+				from.SendMessage("Vous pouvez enchanter que les armes avec cette rune.");
+				return false;
+			}	
 
 			return base.CanEnchant(item, from);
 		}
+
 
 		public override void Enchant(Item item, Mobile from)
 		{

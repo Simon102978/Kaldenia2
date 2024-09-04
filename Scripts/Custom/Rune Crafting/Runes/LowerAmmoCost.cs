@@ -14,26 +14,25 @@ namespace Server.Items
 	public class LowerAmmoCostRune : BaseRune
 	{
 		[Constructable]
-		public LowerAmmoCostRune() : base( 0x1F14 )
+		public LowerAmmoCostRune() : base(  )
 		{
 			Weight = 0.2;  // ?
 			Name = "Reduction du cout de munitions";
 			Hue = 1268;
 		}
 
+
 		public override bool CanEnchant(Item item, Mobile from)
 		{
-
-			if (item is BaseJewel)
-			{
-				return true;
-			}
-
-
-			from.SendMessage("Vous pouvez enchanter que les bijoux avec cette rune.");
+			if (!(item is BaseJewel))
+			{				
+				from.SendMessage("Vous pouvez enchanter que les bijoux avec cette rune.");
+				return false;
+			}	
 
 			return base.CanEnchant(item, from);
 		}
+
 
 		public override void Enchant(Item item, Mobile from)
 		{
