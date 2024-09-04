@@ -184,8 +184,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(SpellDamageRune), "Armes", "Puissance des sorts", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDrake), "Sang Envouté de Drake", 3, "Il vous manquent de sang envouté de Drake.");
 
-			index = AddCraft(typeof(SpellChannelRune), "Armes", "Canalisation Magique", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
-			AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
+	//		index = AddCraft(typeof(SpellChannelRune), "Armes", "Canalisation Magique", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+	//		AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
 
 			index = AddCraft(typeof(SelfRepairRune), "Armes", "Auto-Réparation", 65.5, 95.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteLezard), "Sang Envouté Lezard", 3, "Il vous manquent de sang envouté de Lezard.");
@@ -266,8 +266,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(DefenceChanceRune), "Bouclier", "Defense", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
 
-			index = AddCraft(typeof(SpellChannelRune), "Bouclier", "Canalisation Magique", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
-			AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
+		//	index = AddCraft(typeof(SpellChannelRune), "Bouclier", "Canalisation Magique", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+		//	AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
 
 
 			index = AddCraft(typeof(ResistColdRune), "Bouclier", "Resistance au froid", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
