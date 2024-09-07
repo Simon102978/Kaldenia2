@@ -46,7 +46,7 @@ namespace Server.Spells.Mysticism
             }
             else if (SpellHelper.CheckTown(p, Caster) && CheckSequence())
             {
-                int level = (int)((GetBaseSkill(Caster) + GetBoostSkill(Caster)) / 2.0);
+                int level = (int)((GetBaseSkill(Caster) + GetBoostSkill(Caster)) / 5.0);
 
                 TimeSpan duration = TimeSpan.FromSeconds(10 + level);
 

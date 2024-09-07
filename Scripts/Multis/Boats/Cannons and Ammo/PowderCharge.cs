@@ -15,8 +15,9 @@ namespace Server.Items
 
         [Constructable]
         public PowderCharge(int amount)
-            : base(0x9949)
+            : base(0xA5D8)
         {
+			Name = "Poudre à Canon";
             Stackable = true;
             Amount = amount;
         }

@@ -9,6 +9,8 @@ using static Server.Custom.GolemCrystal;
 using Discord;
 using Server.Custom.Packaging.Packages;
 using Server.Engines.Chat;
+using System.Runtime.ConstrainedExecution;
+using System.Linq;
 
 namespace Server.Engines.Craft
 {
@@ -100,7 +102,31 @@ namespace Server.Engines.Craft
 			tool = null; 
 		}
 
-	
+		private void AddBeverageRes(int index, BeverageType beverageType, int quantity, string message)
+		{
+			AddRes(index, typeof(Pitcher), $"Pichet de {GetBeverageName(beverageType)}", 1, message);
+
+			CraftItem craftItem = CraftItems.GetAt(index);
+			craftItem.RequiredBeverage = beverageType;
+
+			// Ajouter une propriété pour la quantité requise si elle n'existe pas déjà
+			if (!craftItem.GetType().GetProperties().Any(p => p.Name == "RequiredBeverageQuantity"))
+			{
+				throw new InvalidOperationException("La classe CraftItem doit avoir une propriété RequiredBeverageQuantity.");
+			}
+			craftItem.GetType().GetProperty("RequiredBeverageQuantity").SetValue(craftItem, quantity);
+		}
+
+		private string GetBeverageName(BeverageType type)
+		{
+			switch (type)
+			{
+				case BeverageType.Milk: return "lait";
+				case BeverageType.Water: return "eau";
+				// Ajoutez d'autres types de boissons ici
+				default: return type.ToString().ToLower();
+			}
+		}
 
 		public override double GetChanceAtMin(CraftItem item)
 		{
@@ -850,6 +876,43 @@ namespace Server.Engines.Craft
 
 
 			#endregion
+			#region Canons
+
+			index = AddCraft(typeof(Cannonball), "Canons", "Boulet de Canon", 10.0, 60.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
+			
+			index = AddCraft(typeof(Grapeshot), "Canons", "Boulet Avancé", 15.0, 70.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
+			AddRes(index, typeof(Cloth), "Tissus", 2, "Vous n'avez pas suffisament de tissus");
+			
+			index = AddCraft(typeof(LightShipCannonDeed), "Canons", "Canon Léger", 65.0, 100.0, typeof(IronIngot), "Lingot de Fer", 300, "Vous n'avez pas suffisament de lingot de fer");
+			
+			index = AddCraft(typeof(HeavyShipCannonDeed), "Canons", "Canon Lourd", 75.0, 110.0, typeof(IronIngot), "Lingot de Fer", 500, "Vous n'avez pas suffisament de lingot de fer");
+			
+			index = AddCraft(typeof(Charcoal), "Canons", "Charbon", 30.0, 50.0, typeof(PalmierBoard), "Planches", 1, "Vous n'avez pas suffisament de planches");
+			
+			index = AddCraft(typeof(BlackPowder), "Canons", "Poudre Noire", 65.0, 120.0, typeof(Charcoal), "Charbon", 3, "Vous n'avez pas suffisament de charbon");
+			AddRes(index, typeof(SulfurousAsh), "Sulfure", 3, "Vous n'avez pas suffisament de sulfure");
+			
+			index = AddCraft(typeof(PowderCharge), "Canons", "Poudre à Canon", 65.0, 120.0, typeof(BlackPowder), "Poudre Noire", 4, "Vous n'avez pas suffisament de poudre noire");
+			AddRes(index, typeof(Cloth), "Tissus", 1, "Vous n'avez pas suffisament de tissus");
+			
+			index = AddCraft(typeof(FuseCord), "Canons", "Mèche", 55.0, 110.0, typeof(Rope), "Corde", 1, "Vous n'avez pas suffisament de corde");
+			AddBeverageRes(index, BeverageType.Water, 1, "Vous avez besoin d'un pichet d'eau avec 1 charge");
+			AddRes(index, typeof(BlackPowder), "Poudre Noire", 1, "Vous n'avez pas suffisament de poudre noire");
+			AddRes(index, typeof(Potash), "Potasse", 1, "Vous n'avez pas suffisament de potasse");
+
+			index = AddCraft(typeof(Potash), "Canons", "Potasse", 15.0, 50.0, typeof(PalmierBoard), "Planches", 1, "Vous n'avez pas suffisament de planches");
+			AddBeverageRes(index, BeverageType.Water, 1, "Vous avez besoin d'un pichet d'eau avec 1 charge");
+
+			index = AddCraft(typeof(Ramrod), "Canons", "Baguette", 00.0, 50.0, typeof(PalmierBoard), "Planches", 8, "Vous n'avez pas suffisament de planches");
+
+			index = AddCraft(typeof(Torch), "Canons", "Torche", 00.0, 50.0, typeof(PalmierBoard), "Planches", 3, "Vous n'avez pas suffisament de planches");
+			AddRes(index, typeof(Cloth), "Tissus", 2, "Vous n'avez pas suffisament de tissus");
+
+			index = AddCraft(typeof(Rope), "Canons", "Corde", 60.0, 120.0, typeof(Cloth), "Tissus", 10, "Vous avez besoin de plus de tissus");
+
+
+			#endregion
+
 
 			// Set the overridable material
 			SetSubRes(typeof(IronIngot), 1044022);

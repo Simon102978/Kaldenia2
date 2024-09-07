@@ -4471,7 +4471,7 @@ namespace Server.Items
 
 
         }
-
+		
         public BaseWeapon(Serial serial)
             : base(serial)
         { }
