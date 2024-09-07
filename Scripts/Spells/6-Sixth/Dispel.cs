@@ -5,36 +5,39 @@ using Server.Targeting;
 
 namespace Server.Spells.Sixth
 {
-    public class DispelSpell : MagerySpell
-    {
-        private static readonly SpellInfo m_Info = new SpellInfo(
-            "Dispel", "An Ort",
-            218,
-            9002,
-            Reagent.Garlic,
-            Reagent.MandrakeRoot,
-            Reagent.SulfurousAsh);
-        public DispelSpell(Mobile caster, Item scroll)
-            : base(caster, scroll, m_Info)
-        {
-        }
+	public class DispelSpell : MagerySpell
+	{
+		private static readonly SpellInfo m_Info = new SpellInfo(
+			"Dispel", "An Ort",
+			218,
+			9002,
+			Reagent.Garlic,
+			Reagent.MandrakeRoot,
+			Reagent.SulfurousAsh);
+
+		public DispelSpell(Mobile caster, Item scroll)
+			: base(caster, scroll, m_Info)
+		{
+		}
 
 		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Obeissance, 10) }; } }
 
 		public override SpellCircle Circle => SpellCircle.Sixth;
-        public override void OnCast()
-        {
-            Caster.Target = new InternalTarget(this);
-        }
 
-        public class InternalTarget : Target
-        {
-            private readonly DispelSpell m_Owner;
-            public InternalTarget(DispelSpell owner)
-                : base(10, false, TargetFlags.Harmful)
-            {
-                m_Owner = owner;
-            }
+		public override void OnCast()
+		{
+			Caster.Target = new InternalTarget(this);
+		}
+
+		public class InternalTarget : Target
+		{
+			private readonly DispelSpell m_Owner;
+
+			public InternalTarget(DispelSpell owner)
+				: base(10, false, TargetFlags.Harmful)
+			{
+				m_Owner = owner;
+			}
 
 			protected override void OnTarget(Mobile from, object o)
 			{
@@ -47,11 +50,11 @@ namespace Server.Spells.Sixth
 					{
 						from.SendLocalizedMessage(500237); // Target can not be seen.
 					}
-					else if (bc == null || !bc.IsDispellable)
+					else if (bc == null || !bc.Summoned)
 					{
 						from.SendLocalizedMessage(1005049); // That cannot be dispelled.
 					}
-					else if (bc.SummonMaster == from || m_Owner.CheckHSequence(m))
+					else if (m_Owner.CheckHSequence(m))
 					{
 						SpellHelper.Turn(from, m);
 
@@ -62,7 +65,15 @@ namespace Server.Spells.Sixth
 							Effects.SendLocationParticles(EffectItem.Create(m.Location, m.Map, EffectItem.DefaultDuration), 0x3728, 8, 20, 5042);
 							Effects.PlaySound(m, m.Map, 0x201);
 
-							m.Delete();
+							int damage = bc.Hits / 2;
+							bc.Hits -= damage;
+
+							from.SendMessage($"Vous avez réussi à affaiblir la créature invoquée de {damage} points de vie.");
+
+							if (bc.Hits <= 0)
+							{
+								bc.Kill();
+							}
 						}
 						else
 						{
@@ -95,9 +106,9 @@ namespace Server.Spells.Sixth
 			}
 
 			protected override void OnTargetFinish(Mobile from)
-            {
-                m_Owner.FinishSequence();
-            }
-        }
-    }
+			{
+				m_Owner.FinishSequence();
+			}
+		}
+	}
 }

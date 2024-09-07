@@ -58,7 +58,7 @@ namespace Server.Spells.Necromancy
                 * The effect lasts for ((Spirit Speak skill level * 80) / 120) + 10 seconds.
                 */
 
-                TimeSpan duration = TimeSpan.FromSeconds(((GetDamageSkill(Caster) * 80) / 120) + 10);
+                TimeSpan duration = TimeSpan.FromSeconds(((GetDamageSkill(Caster) * 80) / 100) + 10);
 
                 Revenant rev = new Revenant(Caster, m, duration);
 

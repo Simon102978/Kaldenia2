@@ -397,11 +397,14 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Collier10), "Colliers", "Collier simple avec pendentif", 35.0, 55.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			index = AddCraft(typeof(Collier11), "Colliers", "Collier simple", 35.0, 55.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			index = AddCraft(typeof(Collier12), "Colliers", "Grand collier doré avec pendentif", 40.0, 60.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
-			index = AddCraft(typeof(DiademeFeuilleOr), "Colliers", "Collier doré avec pendentif", 40.0, 60.0, typeof(GoldIngot), "lingots d'or", 3, "Vous n'avez pas assez de lingots.");
+			index = AddCraft(typeof(DiademeFeuilleOr), "Colliers", "Collier doré avec pendentif", 40.0, 60.0, typeof(Diamant), "Diamant", 1, "Vous n'avez pas assez de diamant.");
+			AddRes(index, typeof(GoldIngot), "Lingot d'or", 5, "Vous n'avez pas assez de lingot d'or.");
 			AddRecipe(index, (int)TinkerRecipes.DiademeFeuilleOr);
 
 
-			index = AddCraft(typeof(EpauletteDoree), "Colliers", "Grand collier Usekh", 40.0, 60.0, typeof(GoldIngot), "lingots d'or", 5, "Vous n'avez pas assez de lingots.");
+			index = AddCraft(typeof(EpauletteDoree), "Colliers", "Grand collier Usekh", 40.0, 60.0, typeof(Diamant), "Diamant", 1, "Vous n'avez pas assez de diamant.");
+			AddRes(index, typeof(GoldIngot), "Lingot d'or", 5, "Vous n'avez pas assez de lingot d'or.");
+
 			AddRecipe(index, (int)TinkerRecipes.EpauletteDoree);
 
 

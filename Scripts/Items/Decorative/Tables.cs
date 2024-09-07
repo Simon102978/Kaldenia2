@@ -162,7 +162,7 @@
         }
     }
 	[Flipable(0x1910, 0x1911, 0x1912, 0x1913, 0x1918, 0x1919, 0x191A, 0x191B, 0x191C, 0x191D, 0x191E, 0x191F)]
-	public class BarComptoir : CraftableFurniture
+	public class BarComptoir : CraftableFurniture, IDyable
 	{
 
 
@@ -173,7 +173,17 @@
 			Weight = 15;
 			Name = "Comptoir Bar";
 		}
+		public virtual bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+			{
+				return false;
+			}
 
+			Hue = sender.DyedHue;
+
+			return true;
+		}
 
 
 		public BarComptoir(Serial serial)
