@@ -32,7 +32,9 @@ namespace Server.Items
 		[Constructable]
 		public TrayNS() : base()
 		{
+			Name = "Plateau";
 			this.ItemID = 2450;
+			Weight = 1.0;
 		}
 
 		public TrayNS( Serial serial ) : base( serial )

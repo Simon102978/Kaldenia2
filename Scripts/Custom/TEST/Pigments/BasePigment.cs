@@ -712,7 +712,7 @@ public class BleuCobaltPigment : BasePigment
 	public class RoseTremierePigment : BasePigment
 	{
 		[Constructable]
-		public RoseTremierePigment() : base(2922, "Rose trémière") { }
+		public RoseTremierePigment() : base(2662, "Rose trémière") { } // 2727
 		public RoseTremierePigment(Serial serial) : base(serial) { }
 		public override void Serialize(GenericWriter writer)
 		{

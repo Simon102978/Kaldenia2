@@ -130,28 +130,28 @@ namespace Server.Engines.Craft
 			#endregion
 			#region Bacs Arbustres
 
-			index = AddCraft(typeof(BacArbutre1), "Bacs Arbustres", "Petit Arbuste", 30.0, 50.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas de Terre Fertile");
+			index = AddCraft(typeof(BacArbutre1), "Bacs Arbustres", "Petit Arbutre", 30.0, 50.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas de Terre Fertile");
 			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
 
-			index = AddCraft(typeof(BacArbutre2), "Bacs Arbustres", "Arbuste Moyen", 35.0, 55.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas assez de Terre Fertile");
+			index = AddCraft(typeof(BacArbutre2), "Bacs Arbustres", "Arbutre Moyen", 35.0, 55.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas assez de Terre Fertile");
 			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
 
-			index = AddCraft(typeof(BacArbutre3), "Bacs Arbustres", "Grand Arbuste", 40.0, 60.0, typeof(FertileDirt), "Terre Fertile", 3, "Vous n'avez pas assez de Terre Fertile");
+			index = AddCraft(typeof(BacArbutre3), "Bacs Arbustres", "Grand Arbutre", 40.0, 60.0, typeof(FertileDirt), "Terre Fertile", 3, "Vous n'avez pas assez de Terre Fertile");
 			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
 
-			index = AddCraft(typeof(BacArbutre4), "Bacs Arbustres", "Arbuste Touffu", 45.0, 65.0, typeof(FertileDirt), "Terre Fertile", 4, "Vous n'avez pas assez de Terre Fertile");
+			index = AddCraft(typeof(BacArbutre4), "Bacs Arbustres", "Arbutre Touffu", 45.0, 65.0, typeof(FertileDirt), "Terre Fertile", 4, "Vous n'avez pas assez de Terre Fertile");
 			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
 
-			index = AddCraft(typeof(BacArbutre5), "Bacs Arbustres", "Arbuste Décoratif", 50.0, 70.0, typeof(FertileDirt), "Terre Fertile", 5, "Vous n'avez pas assez de Terre Fertile");
+			index = AddCraft(typeof(BacArbutre5), "Bacs Arbustres", "Arbutre Décoratif", 50.0, 70.0, typeof(FertileDirt), "Terre Fertile", 5, "Vous n'avez pas assez de Terre Fertile");
 			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
 
-			index = AddCraft(typeof(BacArbutre6), "Bacs Arbustres", "Arbuste Exotique", 55.0, 75.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas de Terre Fertile");
+			index = AddCraft(typeof(BacArbutre6), "Bacs Arbustres", "Arbutre Exotique", 55.0, 75.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas de Terre Fertile");
 			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
 
-			index = AddCraft(typeof(BacArbutre7), "Bacs Arbustres", "Arbuste Rare", 60.0, 80.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas de Terre Fertile");
+			index = AddCraft(typeof(BacArbutre7), "Bacs Arbustres", "Arbutre Rare", 60.0, 80.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas de Terre Fertile");
 			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
 
-			index = AddCraft(typeof(BacArbutre8), "Bacs Arbustres", "Arbuste de Luxe", 65.0, 85.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas de Terre Fertile");
+			index = AddCraft(typeof(BacArbutre8), "Bacs Arbustres", "Arbutre de Luxe", 65.0, 85.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas de Terre Fertile");
 			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
 
 			index = AddCraft(typeof(BacArbre), "Bacs et Terre Fertile", "Bac avec arbre pour Arbre", 70.0, 90.0, typeof(PalmierBoard), "Bois", 15, "Vous n'avez pas assez de bois");

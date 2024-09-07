@@ -18,9 +18,11 @@ namespace Server.Items
 		public BonusDexRune() : base()
 		{
 			Weight = 0.2;  // ?
-			Name = "Dexterité";
+			Name = "Rune de Dexterité";
 			Hue = 2101;
 		}
+
+
 
 		public override void Enchant(Item item, Mobile from)
 		{

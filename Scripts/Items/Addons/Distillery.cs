@@ -1,3 +1,4 @@
+using System;
 using Server.Engines.Distillation;
 using Server.Multis;
 
@@ -87,7 +88,10 @@ namespace Server.Items
         {
             BaseHouse house = BaseHouse.FindHouseAt(component);
 
-            if (house == null || house.IsCoOwner(from))
+			// Afficher l'ItemID dans la console
+			//Console.WriteLine($"ItemID: {component.ItemID}");
+
+			if (house == null || house.IsCoOwner(from))
                 from.SendGump(new DistillationGump(from));
         }
 

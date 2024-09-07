@@ -247,7 +247,11 @@ namespace Server.Spells.Necromancy
 
         private static void SummonDelay_Callback(object state)
         {
-            object[] states = (object[])state;
+
+			
+
+
+			object[] states = (object[])state;
 
             Mobile caster = (Mobile)states[0];
             Corpse corpse = (Corpse)states[1];
@@ -337,7 +341,8 @@ namespace Server.Spells.Necromancy
             if (summoned is SkeletalDragon)
                 Scale((SkeletalDragon)summoned, 50); // lose 50% hp and strength
 
-            summoned.Fame = 0;
+		
+			summoned.Fame = 0;
             summoned.Karma = -1500;
 
             summoned.MoveToWorld(loc, map);
@@ -345,7 +350,13 @@ namespace Server.Spells.Necromancy
             corpse.Hue = 1109;
             corpse.Animated = true;
 
-            Register(caster, summoned);
+			summoned.Controlled = true;
+			summoned.ControlMaster = caster;
+			summoned.ControlOrder = OrderType.Guard;
+			summoned.PassiveSpeed = 0.2;
+			summoned.ActiveSpeed = 0.1;
+
+			Register(caster, summoned);
         }
 
         public static void Scale(BaseCreature bc, int scalar)

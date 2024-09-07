@@ -11,7 +11,7 @@ using Server.Custom;
 
 namespace Server.Items
 {
-	public abstract class BaseFouet : Item //BaseJet
+	public abstract class BaseFouet :  BaseKnife //BaseJet
     {
         public BaseFouet() : base(5742)
 		{
@@ -19,6 +19,18 @@ namespace Server.Items
 			Name = "Fouet";
 			Weight = 2.0;
         }
+
+		public override WeaponAbility PrimaryAbility => WeaponAbility.ShadowStrike;
+		public override WeaponAbility SecondaryAbility => WeaponAbility.InfectiousStrike;
+		public override int StrengthReq => 10;
+		public override int MinDamage => 10;
+		public override int MaxDamage => 12;
+		public override float Speed => 2.00f;
+		public override int InitMinHits => 25;
+		public override int InitMaxHits => 60;
+		public override SkillName DefSkill => SkillName.Fencing;
+		public override WeaponType DefType => WeaponType.Piercing;
+		public override WeaponAnimation DefAnimation => WeaponAnimation.Slash1H;
 
 		public BaseFouet( Serial serial ) : base( serial )
 		{

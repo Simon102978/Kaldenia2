@@ -80,7 +80,16 @@ namespace Server.Items
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public int Enchantement { get; set; }
-		public virtual int MaxEnchantements => 1;
+
+		public virtual int MaxEnchantements
+		{
+			get
+			{
+				if (Layer == Layer.TwoHanded)
+					return 2;
+				return 1;
+			}
+		}
 		private bool _VvVItem;
         private Mobile _Owner;
         private string _OwnerName;
@@ -4797,7 +4806,7 @@ namespace Server.Items
 
 			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
 
-			list.Add($"Enchantement: {Enchantement}/1");
+			list.Add($"Enchantement: {Enchantement}/{MaxEnchantements}");
 
 			#region Mondain's Legacy Sets
 			if (IsSetItem)

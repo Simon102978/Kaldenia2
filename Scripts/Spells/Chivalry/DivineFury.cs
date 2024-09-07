@@ -22,7 +22,7 @@ namespace Server.Spells.Chivalry
 		public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(1.0);
         public override double RequiredSkill => 25.0;
         public override int RequiredMana => 15;
-        public override int RequiredTithing => 10;
+        public override int RequiredTithing => 0;
         public override int MantraNumber => 1060722;// Divinum Furis
         public override bool BlocksMovement => false;
         public static bool UnderEffect(Mobile m)
@@ -74,7 +74,7 @@ namespace Server.Spells.Chivalry
         {
             if (m_Table.ContainsKey(m))
             {
-                return m.Skills[SkillName.EvalInt].Value >= 120.0 && m.Karma >= 10000 ? 20 : 10;
+                return m.Skills[SkillName.Magery].Value >= 120.0 && m.Dex >= 100 ? 20 : 10;
             }
 
             return 0;
@@ -84,7 +84,7 @@ namespace Server.Spells.Chivalry
         {
             if (m_Table.ContainsKey(m))
             {
-                return m.Skills[SkillName.EvalInt].Value >= 120.0 && m.Karma >= 10000 ? 15 : 10;
+                return m.Skills[SkillName.Magery].Value >= 120.0 && m.Dex >= 100 ? 15 : 10;
             }
 
             return 0;
@@ -94,7 +94,7 @@ namespace Server.Spells.Chivalry
         {
             if (m_Table.ContainsKey(m))
             {
-                return m.Skills[SkillName.EvalInt].Value >= 120.0 && m.Karma >= 10000 ? 15 : 10;
+                return m.Skills[SkillName.Magery].Value >= 120.0 && m.Karma >= 100 ? 15 : 10;
             }
 
             return 0;
@@ -104,7 +104,7 @@ namespace Server.Spells.Chivalry
         {
             if (m_Table.ContainsKey(m))
             {
-                return m.Skills[SkillName.EvalInt].Value >= 120.0 && m.Karma >= 10000 ? 10 : 20;
+                return m.Skills[SkillName.Magery].Value >= 120.0 && m.Dex >= 100 ? 10 : 20;
             }
 
             return 0;

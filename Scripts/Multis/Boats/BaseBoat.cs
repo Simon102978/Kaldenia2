@@ -46,11 +46,16 @@ namespace Server.Multis
         private static readonly double WoodPer = 5;
         private static readonly double ClothPer = 10;
 
-        public static readonly int EmergencyRepairClothCost = 10;
-        public static readonly int EmergencyRepairWoodCost = 5;
-        public static readonly TimeSpan EmergencyRepairSpan = TimeSpan.FromMinutes(6);
+        public static readonly int EmergencyRepairClothCost = 20;
+        public static readonly int EmergencyRepairWoodCost = 10;
+        public static readonly TimeSpan EmergencyRepairSpan = TimeSpan.FromMinutes(15);
 
-        public static List<BaseBoat> Boats { get; } = new List<BaseBoat>();
+		public Mobile Renter { get; set; }
+		public DateTime RentalEnd { get; set; }
+
+		public bool IsRented => Renter != null && DateTime.UtcNow < RentalEnd;
+
+		public static List<BaseBoat> Boats { get; } = new List<BaseBoat>();
 
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool IsRentable { get; set; }
@@ -648,7 +653,7 @@ namespace Server.Multis
             return false;
         }
 
- /*       public override void OnSpeech(SpeechEventArgs e)
+        public override void OnSpeech(SpeechEventArgs e)
         {
             if (CheckDecay())
                 return;
@@ -719,7 +724,7 @@ namespace Server.Multis
                     }
                 }
             }
-        }*/
+        }
 
         public override void OnAfterDelete()
         {
@@ -1004,18 +1009,10 @@ namespace Server.Multis
                 item is EffectItem;
         }
 
-        public virtual bool CanCommand(Mobile m)
-        {
-
-		
-
-
-
-
+		public virtual bool CanCommand(Mobile m)
+		{
 			if (m is CustomPlayerMobile cm)
 			{
-
-
 				if (Stuck)
 				{
 					cm.SendMessage("Le bateau est pris, vous ne pouvez pas le déplacer.");
@@ -1026,24 +1023,28 @@ namespace Server.Multis
 					cm.SendMessage("Vous ne pouvez pas commander le bateau en étant caché.");
 					return false;
 				}
-
-				
+				else if (m.AccessLevel >= AccessLevel.GameMaster)
+				{
+					return true;
+				}
+				else if (m == Owner)
+				{
+					return true;
+				}
+				else if (TillerMan is TillerMan tillerMan && tillerMan.IsRented && tillerMan.Renter == m)
+				{
+					return true;
+				}
 				else
 				{
+					cm.SendMessage("Vous n'êtes pas autorisé à commander ce bateau.");
 					return false;
 				}
 			}
 
+			return false;
+		}
 
-
-
-
-
-
-
-
-            return true;
-        }
 
         public virtual bool CanMoveOver(IEntity entity)
         {
@@ -1743,41 +1744,51 @@ namespace Server.Multis
             return TimeSpan.Zero;
         }
 
-        public bool TryEmergencyRepair(Mobile from)
-        {
-            if (from == null || from.Backpack == null)
-                return false;
+		public bool TryEmergencyRepair(Mobile from)
+		{
+			if (from == null || from.Backpack == null)
+				return false;
 
-            int clothNeeded = EmergencyRepairClothCost;
-            int woodNeeded = EmergencyRepairWoodCost;
-            Container pack = from.Backpack;
-            Container hold = this is BaseGalleon ? ((BaseGalleon)this).GalleonHold : null;
-            TimeSpan ts = EmergencyRepairSpan;
+			int clothNeeded = EmergencyRepairClothCost;
+			int woodNeeded = EmergencyRepairWoodCost;
+			int goldNeeded = 200; // Coût en or pour la réparation d'urgence
+			Container pack = from.Backpack;
+			Container hold = this is BaseGalleon ? ((BaseGalleon)this).GalleonHold : null;
+			TimeSpan ts = EmergencyRepairSpan;
 
-            int wood1 = pack.GetAmount(typeof(PalmierBoard));
-            int wood2 = pack.GetAmount(typeof(PalmierLog));
-            int wood3 = 0; int wood4 = 0;
+			int wood1 = pack.GetAmount(typeof(PalmierBoard));
+			int wood2 = pack.GetAmount(typeof(PalmierLog));
+			int wood3 = 0; int wood4 = 0;
 
-            int cloth1 = pack.GetAmount(typeof(Cloth));
-            int cloth2 = pack.GetAmount(typeof(UncutCloth));
-            int cloth3 = 0; int cloth4 = 0;
+			int cloth1 = pack.GetAmount(typeof(Cloth));
+			int cloth2 = pack.GetAmount(typeof(UncutCloth));
+			int cloth3 = 0; int cloth4 = 0;
 
-            if (hold != null)
-            {
-                wood3 = hold.GetAmount(typeof(PalmierBoard));
-                wood4 = hold.GetAmount(typeof(PalmierLog));
-                cloth3 = hold.GetAmount(typeof(Cloth));
-                cloth4 = hold.GetAmount(typeof(UncutCloth));
-            }
+			if (hold != null)
+			{
+				wood3 = hold.GetAmount(typeof(PalmierBoard));
+				wood4 = hold.GetAmount(typeof(PalmierLog));
+				cloth3 = hold.GetAmount(typeof(Cloth));
+				cloth4 = hold.GetAmount(typeof(UncutCloth));
+			}
 
-            int totalWood = wood1 + wood2 + wood3 + wood4;
-            int totalCloth = cloth1 + cloth2 + cloth3 + cloth4;
+			int totalWood = wood1 + wood2 + wood3 + wood4;
+			int totalCloth = cloth1 + cloth2 + cloth3 + cloth4;
 
-            if (totalWood >= woodNeeded && totalCloth >= clothNeeded)
-            {
-                int toConsume = 0;
+			// Vérifier d'abord si le joueur a assez d'or
+			if (pack.ConsumeTotal(typeof(Gold), goldNeeded))
+			{
+				from.SendMessage(0x35, $"Réparation d'urgence effectuée avec {goldNeeded} pièces d'or.");
+				m_EmergencyRepairTimer = new EmergencyRepairDamageTimer(this, ts);
+				return true;
+			}
 
-                if (woodNeeded > 0 && wood1 > 0)
+			// Si pas assez d'or, procéder avec les ressources comme avant
+			if (totalWood >= woodNeeded && totalCloth >= clothNeeded)
+			{
+				int toConsume = 0;
+
+				if (woodNeeded > 0 && wood1 > 0)
                 {
                     toConsume = Math.Min(woodNeeded, wood1);
                     pack.ConsumeTotal(typeof(PalmierBoard), toConsume);
@@ -1829,8 +1840,9 @@ namespace Server.Multis
 
                 return true;
             }
-            return false;
-        }
+			from.SendMessage(0x22, $"Vous avez besoin de {woodNeeded} bois, {clothNeeded} tissus, ou {goldNeeded} pièces d'or pour effectuer une réparation d'urgence.");
+			return false;
+		}
 
         public void EndEmergencyRepairEffects()
         {
@@ -1839,19 +1851,21 @@ namespace Server.Multis
             SendMessageToAllOnRegularBoard(1116765);  // The emergency repairs have given out!
         }
 
-        public void TryRepairs(Mobile from)
-        {
-            if (from == null || from.Backpack == null)
-                return;
+		public void TryRepairs(Mobile from)
+		{
+			if (from == null || from.Backpack == null)
+				return;
 
-            Container pack = from.Backpack;
-            Container hold = this is BaseGalleon ? ((BaseGalleon)this).GalleonHold : null;
-            Container secure = SecureContainer;
+			Container pack = from.Backpack;
+			Container hold = this is BaseGalleon ? ((BaseGalleon)this).GalleonHold : null;
+			Container secure = SecureContainer;
 
-            double wood = 0;
-            double cloth = 0;
+			double wood = 0;
+			double cloth = 0;
+			int goldNeeded = 1000; // Coût en or pour la réparation complète
 
-            for (int i = 0; i < WoodTypes.Length; i++)
+
+			for (int i = 0; i < WoodTypes.Length; i++)
             {
                 Type type = WoodTypes[i];
                 if (pack != null) wood += pack.GetAmount(type);
@@ -1869,8 +1883,15 @@ namespace Server.Multis
 
             double durability = (Hits / (double)MaxHits) * 100;
 
-            //Now, how much do they need for 100% repair
-            double woodNeeded = WoodPer * (100.0 - durability);
+			if (pack.ConsumeTotal(typeof(Gold), goldNeeded))
+			{
+				m_Hits = MaxHits;
+				ComputeDamage();
+				from.SendMessage(0x35, $"Vous avez réparé votre navire en utilisant {goldNeeded} pièces d'or. Le navire est maintenant complètement réparé.");
+				return;
+			}
+			//Now, how much do they need for 100% repair
+			double woodNeeded = WoodPer * (100.0 - durability);
             double clothNeeded = ClothPer * (100.0 - durability);
 
             //Apply skill bonus

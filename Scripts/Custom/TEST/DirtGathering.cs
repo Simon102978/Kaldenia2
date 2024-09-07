@@ -179,7 +179,7 @@ namespace Server.Engines.Harvest
 				}
 
 				// Démarrer le timer
-				_harvestTimer = Timer.DelayCall(TimeSpan.FromSeconds(10), () => _harvestTimer = null);
+				_harvestTimer = Timer.DelayCall(TimeSpan.FromSeconds(5), () => _harvestTimer = null);
 			}
 
 

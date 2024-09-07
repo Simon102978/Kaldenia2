@@ -55,6 +55,9 @@ namespace Server.Items
 		public virtual bool AllowWeapons => false;
 		public virtual bool AllowJewels => false;
 
+		public virtual bool AllowStatuetteCire => true;
+
+
 
 
 
@@ -382,8 +385,48 @@ namespace Server.Items
 						}
 
 					}
+						else if (m_Tub.AllowStatuetteCire && AllowedTypes.Contains(item.GetType()) ||
+								 item is PileOfBlankCandles ||
+								 item is SomeBlankCandles ||
+								 item is OfficialSealingWax ||
+								 item is RawWaxBust ||
+								 item is OrigamiButterfly ||
+								 item is OrigamiSwan ||
+								 item is OrigamiFrog ||
+								 item is OrigamiShape ||
+								 item is OrigamiSongbird ||
+								 item is OrigamiFish ||
+								 item is OrigamiDragon ||
+								 item is OrigamiBunny)
+						{
+							if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
+							{
+								from.SendLocalizedMessage(500446); // That is too far away.
+							}
+							else if (!item.Movable)
+							{
+								from.SendLocalizedMessage(1042419); // You may not dye items which are locked down.
+							}
+							else
+							{
+								item.Hue = m_Tub.DyedHue;
+								from.PlaySound(0x23E);
 
-					else if (m_Tub.AllowRunebooks && (item is Runebook || item is RecallRune || item is BaseBook || item is Spellbook || m_Tub.CanForceDye(item)))
+								if (m_Tub.Charges > 1)
+								{
+									m_Tub.Charges -= 1;
+								}
+								else
+								{
+									m_Tub.Delete();
+									from.AddToBackpack(new BacVide());
+									from.SendMessage("Votre bac de teinture n'a plus de charge.");
+								}
+							}
+						}
+
+
+						else if (m_Tub.AllowRunebooks && (item is Runebook || item is RecallRune || item is BaseBook || item is Spellbook || m_Tub.CanForceDye(item)))
 					{
 						if (!from.InRange(m_Tub.GetWorldLocation(), 1) || !from.InRange(item.GetWorldLocation(), 1))
 						{
@@ -786,7 +829,20 @@ namespace Server.Items
 		typeof(FlourMillEastDeed),
 		typeof(FlourMillSouthDeed),
 		typeof(WaterTroughEastDeed),
-		typeof(WaterTroughSouthDeed)
+		typeof(WaterTroughSouthDeed),
+
+	typeof(PileOfBlankCandles),
+	typeof(SomeBlankCandles),
+	typeof(OfficialSealingWax),
+	typeof(RawWaxBust),
+	typeof(OrigamiButterfly),
+	typeof(OrigamiSwan),
+	typeof(OrigamiFrog),
+	typeof(OrigamiShape),
+	typeof(OrigamiSongbird),
+	typeof(OrigamiFish),
+	typeof(OrigamiDragon),
+	typeof(OrigamiBunny)
 	};
 
 		}

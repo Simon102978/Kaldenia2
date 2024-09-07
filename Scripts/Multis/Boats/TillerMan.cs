@@ -1,4 +1,5 @@
 ﻿using Server.ContextMenus;
+using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
 using System;
@@ -17,10 +18,10 @@ namespace Server.Items
 		public DateTime RentalEnd { get; private set; }
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public TimeSpan RentalDuration { get; set; } = TimeSpan.FromHours(3);
+		public TimeSpan RentalDuration { get; set; } = TimeSpan.FromHours(1);
 
 		[CommandProperty(AccessLevel.GameMaster)]
-		public int RentalCost { get; set; } = 1000;
+		public int RentalCost { get; set; } = 1500;
 
 		public TillerMan(BaseBoat boat)
 			: base(0x3E4E)
@@ -212,6 +213,10 @@ namespace Server.Items
 					list.Add(new DryDockEntry(Boat, from));
 				}
 			}
+	//		if (!from.Alive)
+	//		{
+	//			list.Add(new ResurrectEntry(this, from));
+	//		}
 		}
 
 		public void StartRental(Mobile from)
@@ -314,7 +319,36 @@ namespace Server.Items
 			if (Boat == null)
 				Delete();
 		}
+	/*	private class ResurrectEntry : ContextMenuEntry
+		{
+			private TillerMan m_TillerMan;
+			private Mobile m_From;
 
+			public ResurrectEntry(TillerMan tillerMan, Mobile from) : base(6195, 5) // 6107 est l'index du cliloc pour "Résurrection"
+			{
+				m_TillerMan = tillerMan;
+				m_From = from;
+			}
+
+			public override void OnClick()
+			{
+				if (!m_From.Alive)
+				{
+					if (Banker.Withdraw(m_From, 500))
+					{
+						m_From.PlaySound(0x214);
+						m_From.FixedEffect(0x376A, 10, 16);
+
+						m_From.Resurrect();
+						m_From.SendMessage("Vous avez été ressuscité pour 500 pièces d'or.");
+					}
+					else
+					{
+						m_From.SendMessage("Vous n'avez pas assez d'or dans votre banque pour être ressuscité.");
+					}
+				}
+			}
+		}*/
 		private class EmergencyRepairEntry : ContextMenuEntry
 		{
 			private readonly TillerMan m_TillerMan;

@@ -23,7 +23,7 @@ public class CapeOfKnowledge : BaseArmor
 	{
 		Weight = 4.0;
 		Name = "Cape Du Savoir";
-		Hue = 1157; // Un bleu fonc�, vous pouvez ajuster selon vos pr�f�rences
+		Hue = 1365; // Un bleu fonc�, vous pouvez ajuster selon vos pr�f�rences
 
 		Attributes.BonusMana = 10;
 	}

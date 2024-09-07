@@ -781,7 +781,7 @@ public class BacArbutre1 : Item
 	public BacArbutre1() : base(0xA59D)
 	{
 		Weight = 1.0;
-		Name = "Bac Arbutre 1";
+		Name = "Bac Arbuste 1";
 	}
 
 	public BacArbutre1(Serial serial) : base(serial) { }
@@ -805,7 +805,7 @@ public class BacArbutre2 : Item
 	public BacArbutre2() : base(0xA59F)
 	{
 		Weight = 1.0;
-		Name = "Bac Arbutre 2";
+		Name = "Bac Arbuste 2";
 	}
 
 	public BacArbutre2(Serial serial) : base(serial) { }
@@ -829,7 +829,7 @@ public class BacArbutre3 : Item
 	public BacArbutre3() : base(0xA5A0)
 	{
 		Weight = 1.0;
-		Name = "Bac Arbutre 3";
+		Name = "Bac Arbuste 3";
 	}
 
 	public BacArbutre3(Serial serial) : base(serial) { }
@@ -853,7 +853,7 @@ public class BacArbutre4 : Item
 	public BacArbutre4() : base(0xA5A1)
 	{
 		Weight = 1.0;
-		Name = "Bac Arbutre 4";
+		Name = "Bac Arbuste 4";
 	}
 
 	public BacArbutre4(Serial serial) : base(serial) { }
@@ -877,7 +877,7 @@ public class BacArbutre5 : Item
 	public BacArbutre5() : base(0xA5A2)
 	{
 		Weight = 1.0;
-		Name = "Bac Arbutre 5";
+		Name = "Bac Arbuste 5";
 	}
 
 	public BacArbutre5(Serial serial) : base(serial) { }
@@ -901,7 +901,7 @@ public class BacArbutre6 : Item
 	public BacArbutre6() : base(0xA5A3)
 	{
 		Weight = 1.0;
-		Name = "Bac Arbutre 6";
+		Name = "Bac Arbuste 6";
 	}
 
 	public BacArbutre6(Serial serial) : base(serial) { }
@@ -925,7 +925,7 @@ public class BacArbutre7 : Item
 	public BacArbutre7() : base(0xA5A4)
 	{
 		Weight = 1.0;
-		Name = "Bac Arbutre 7";
+		Name = "Bac Arbuste 7";
 	}
 
 	public BacArbutre7(Serial serial) : base(serial) { }
@@ -950,7 +950,7 @@ public class BacArbutre8 : Item
 	public BacArbutre8() : base(0x9A20)
 	{
 		Weight = 1.0;
-		Name = "Bac Arbutre 8";
+		Name = "Bac Arbuste 8";
 	}
 
 	public BacArbutre8(Serial serial) : base(serial) { }

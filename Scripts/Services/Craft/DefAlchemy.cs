@@ -194,6 +194,10 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRecipe(index, (int)AlchemyRecipes.SuperiorCurePotion);
 
+			index = AddCraft(typeof(UltimeCurePotion), "Antidote", "Pot. antidote Ultime", 90.0, 150.0, typeof(Garlic), "Ail", 20, "Vous n'avez pas suffisament d'Ail");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
+			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+
 			index = AddCraft(typeof(LesserAgilityPotion), "Dextérité", "Potion de dextérité mineure", 0.0, 25.0, typeof(Bloodmoss), "Mousse de Sang", 1, "Vous n'avez pas suffisament de Mousse de sang");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 3, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
@@ -647,7 +651,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(OrangeCendrePigment), "Pigments", "Orange cendré", 45, 95.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
-			AddRes(index, typeof(GolemCendreEau), "Cendre élémentaire de feu", 5, "Il vous faut de la cendre élémentaire de feu");
+			AddRes(index, typeof(GolemCendreFeu), "Cendre élémentaire de feu", 5, "Il vous faut de la cendre élémentaire de feu");
 
 			index = AddCraft(typeof(OrangeRustiquePigment), "Pigments", "Orange rustique", 55, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
@@ -657,7 +661,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(OrangeEpicePigment), "Pigments", "Orange épicé", 65, 115.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");
 			AddRes(index, typeof(DyeTub), "Bac de Teinture", 1, "Il vous faut un bac de teinture");
-			AddRes(index, typeof(Safran), "Safran", 5, "Il vous faut du safran");
+			AddRes(index, typeof(Safran), "Safran (La Fleur)", 5, "Il vous faut du safran (La Fleur)");
 
 			index = AddCraft(typeof(OrangeSanguinePigment), "Pigments", "Orange sanguine", 75, 125.0, typeof(Bottle), "Bouteille Vide", 1, "Il vous faut une bouteille vide");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillages", 5, "Vous n'avez pas suffisament de Poudre de Coquillages");

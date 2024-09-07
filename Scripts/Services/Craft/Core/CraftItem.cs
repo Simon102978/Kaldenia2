@@ -380,8 +380,10 @@ namespace Server.Engines.Craft
 		private static readonly int[] m_Distillerys = new[]
 		{
 		    // 0x3DB8, 0x3DB9, 0x3DBA, 0x3DBB
-            	0x22B0, 0x22B1, 0x22AF, 0x22AE
+				 8878, 8879, 0x22B0, 0x22B1
 		};
+
+		
 		private static readonly int[] m_SteamPoweredBeverageMakers = new[]
 		{
 			0x9A96, 0x9A96
@@ -1423,7 +1425,7 @@ namespace Server.Engines.Craft
 				// Appliquer le bonus secret entre 17h et 18h
 				if (IsSecretBonusTime())
 				{
-					baseBonus *= 2;
+					baseBonus *= 3;
 				}
 
 				

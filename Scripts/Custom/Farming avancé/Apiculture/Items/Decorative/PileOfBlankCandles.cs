@@ -3,7 +3,7 @@ using Server;
 
 namespace Server.Items
 {
-	public class PileOfBlankCandles : Item
+	public class PileOfBlankCandles : Item, IDyable
 	{
 
 		[Constructable]
@@ -12,6 +12,14 @@ namespace Server.Items
 			Name = "Pile of Blank Candles";
 			Weight = 3.0;
 			Hue = 1153;
+		}
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
 		}
 
 		public PileOfBlankCandles( Serial serial ) : base( serial )

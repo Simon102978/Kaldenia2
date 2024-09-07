@@ -175,6 +175,46 @@ namespace Server.Engines.Craft
 						SetUseAllRes(index, true);
 			#endregion
 
+			#region Munitions par Archery
+			index = AddCraft(typeof(Kindling), "Munitions (Archer)", "Brindilles (5)", 0.0, 0.0, typeof(PalmierBoard), 1044041, 1, 1044351);
+			AddSkill(index, SkillName.Archery, 0.0, 50.0);
+
+			index = AddCraft(typeof(Kindling), "Munitions (Archer)" , "Brindilles (Max)", 0.0, 0.0, typeof(PalmierBoard), 1044041, 1, 1044351);
+			AddSkill(index, SkillName.Archery, 0.0, 50.0);
+			SetUseAllRes(index, true);
+
+			index = AddCraft(typeof(Shaft), "Munitions (Archer)" , "Fût (5)", 0.0, 0.0, typeof(PalmierBoard), "Planche", 1, "Vous n'avez pas suffisament de planche");
+			AddSkill(index, SkillName.Archery, 0.0, 50.0);
+
+			index = AddCraft(typeof(Shaft), "Munitions (Archer)" , "Fût (Max)", 0.0, 0.0, typeof(PalmierBoard), "Planche", 1, "Vous n'avez pas suffisament de planche");
+			AddSkill(index, SkillName.Archery, 0.0, 50.0);
+			SetUseAllRes(index, true);
+
+
+			index = AddCraft(typeof(Arrow), "Munitions (Archer)" , "Flèche (1)", 0.0, 0.0, typeof(Shaft), 1044560, 1, 1044561);
+			AddRes(index, typeof(Feather), 1044562, 1, 1044563);
+			AddSkill(index, SkillName.Archery, 10.0, 60.0);
+
+			index = AddCraft(typeof(Arrow), "Munitions (Archer)" , "Flèche (Max)", 0.0, 0.0, typeof(Shaft), 1044560, 1, 1044561);
+			AddRes(index, typeof(Feather), 1044562, 1, 1044563);
+			SetUseAllRes(index, true);
+			AddSkill(index, SkillName.Archery, 10.0, 60.0);
+
+			index = AddCraft(typeof(Bolt), "Munitions (Archer)" , "Carreaux (1)", 0.0, 0.0, typeof(Shaft), 1044560, 1, 1044561);
+			AddRes(index, typeof(Feather), 1044562, 1, 1044563);
+			AddSkill(index, SkillName.Archery, 10.0, 60.0);
+
+			index = AddCraft(typeof(Bolt), "Munitions (Archery)" , "Carreaux (Max)", 0.0, 0.0, typeof(Shaft), 1044560, 1, 1044561);
+			AddRes(index, typeof(Feather), 1044562, 1, 1044563);
+			SetUseAllRes(index, true);
+			AddSkill(index, SkillName.Archery, 10.0, 60.0);
+
+			index = index = AddCraft(typeof(FukiyaDarts), "Munitions (Archery)" , 1030246, 0.0, 0.0, typeof(PalmierBoard), 1044041, 1, 1044351);
+			SetUseAllRes(index, true);
+			AddSkill(index, SkillName.Archery, 50.0, 80.0);
+
+			#endregion
+
 
 			#region Arcs
 			index = AddCraft(typeof(TrainingBow), "Arcs", "Arc d'entrainement", 0.0, 50.0, typeof(PalmierBoard), 1044041, 5, 1044351);

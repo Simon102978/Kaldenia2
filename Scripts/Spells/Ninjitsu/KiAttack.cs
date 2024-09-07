@@ -9,7 +9,7 @@ namespace Server.Spells.Ninjitsu
         private static readonly Hashtable m_Table = new Hashtable();
 
         public override int BaseMana => 25;
-        public override double RequiredSkill => 80.0;
+        public override double RequiredSkill => 50.0;
         public override TextDefinition AbilityMessage => new TextDefinition(1063099);// Your Ki Attack must be complete within 2 seconds for the damage bonus!
 
 		public override MagicAptitudeRequirement[] AffinityRequirements { get { return new MagicAptitudeRequirement[] { new MagicAptitudeRequirement(MagieType.Obeissance, 11) }; } }
@@ -48,7 +48,7 @@ namespace Server.Spells.Ninjitsu
             if (from.Hidden && from.AllowedStealthSteps > 0)
             {
                 from.SendLocalizedMessage(1063127); // You cannot use this ability while in stealth mode.
-                return false;
+                return true;
             }
 
             BaseRanged ranged = from.Weapon as BaseRanged;

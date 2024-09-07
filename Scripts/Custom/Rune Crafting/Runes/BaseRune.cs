@@ -8,6 +8,7 @@ using Server.ContextMenus;
 using Server.Spells;
 using Server.Targeting;
 using Server.Misc;
+using Server.Engines.Quests;
 
 namespace Server.Items
 {
@@ -82,15 +83,29 @@ namespace Server.Items
 		{
 
 				if (item is BaseWeapon weapon)
-					weapon.Enchantement++;
-				else if (item is BaseArmor armor)
-					armor.Enchantement++;
-				else if (item is Spellbook spellbook)
-					spellbook.Enchantement++;
-				else if (item is BaseJewel jewel)
-					jewel.Enchantement++;
+			{
+				weapon.Enchantement++;
+				weapon.InvalidateProperties();
 
-				from.PlaySound(0x1F5);
+			}
+			else if (item is BaseArmor armor)
+			{
+				armor.Enchantement++;
+				armor.InvalidateProperties();
+
+			}
+			else if (item is Spellbook spellbook)
+			{
+
+					spellbook.Enchantement++;
+					spellbook.InvalidateProperties();
+			}
+					else if (item is BaseJewel jewel)
+			{
+				jewel.Enchantement++;
+				jewel.InvalidateProperties();
+			}
+			from.PlaySound(0x1F5);
 				from.SendMessage("Vous avez enchanté l'objet avec succès.");
 				this.Delete();
 			

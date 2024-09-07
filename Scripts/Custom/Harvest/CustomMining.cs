@@ -418,7 +418,7 @@ namespace Server.Engines.Harvest
 
 		public override void OnHarvestFinished(Mobile from, Item tool, HarvestDefinition def, HarvestVein vein, HarvestBank bank, HarvestResource resource, object harvested)
 		{
-			if (tool is Pickaxe && def == OreAndStone && 0.03 > Utility.RandomDouble())
+			if ((tool is Pickaxe ||  tool is Shovel) && def == OreAndStone && 0.03 > Utility.RandomDouble())
 			{
 				var res = vein.PrimaryResource;
 
@@ -444,6 +444,7 @@ namespace Server.Engines.Harvest
 									spawned.OnBeforeSpawn(new Point3D(x, y, from.Z), map);
 									spawned.MoveToWorld(new Point3D(x, y, from.Z), map);
 									spawned.Combatant = from;
+									from.SendMessage("La Terre tremble sous vos pieds");
 									return;
 								}
 								else

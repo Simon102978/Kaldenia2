@@ -54,9 +54,10 @@ namespace Server.Items
         public BankCheck(int worth)
             : base(0x14F0)
         {
+			Name = "Un Chèque de banque";
             Weight = 1.0;
             Hue = 0x34;
-            LootType = LootType.Blessed;
+          //  LootType = LootType.Blessed;
 
             m_Worth = worth;
         }
@@ -72,9 +73,9 @@ namespace Server.Items
             }
         }
 
-        public override bool DisplayLootType => true;
+        //public override bool DisplayLootType => true;
 
-        public override int LabelNumber => 1041361;  // A bank check
+        //public override int LabelNumber => 1041361;  // A bank check
 
         public override void Serialize(GenericWriter writer)
         {

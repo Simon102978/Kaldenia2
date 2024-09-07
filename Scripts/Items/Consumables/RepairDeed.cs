@@ -282,7 +282,9 @@ namespace Server.Items
                 new RepairSkillInfo(DefBowFletching.CraftSystem,    typeof(Bowyer),     1061134, 1023005),
                 new RepairSkillInfo(DefMasonry.CraftSystem,         typeof(Carpenter),  1061135, 1060774, 1044635),
                 new RepairSkillInfo(DefGlassblowing.CraftSystem,    typeof(Alchemist),  1111838, 1115634, 1044636),
-        };
+				new RepairSkillInfo(DefLeatherArmor.CraftSystem,    typeof(LeatherWorker),     "Cuir", "Cuir"),
+
+		};
 
         private readonly CraftSystem m_System;
         private readonly Type[] m_NearbyTypes;

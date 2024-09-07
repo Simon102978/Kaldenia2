@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-	public class FoodPlate : Item
+	public class FoodPlate : BaseUtensil
 	{
 		[Constructable]
 		public FoodPlate() : base( 0x9D7 )

@@ -678,7 +678,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(OceanisIngot), "Alliages", "Lingot d'Océanis", 80, 110, typeof(IronIngot), "Lingot de Fer", 4, "You do not have enough iron ingots to make that.");
 			AddRes(index, typeof(CopperIngot), "Lingot de Cuivre", 3, "You do not have enough Cuivre ingot to make that.");
 			AddRes(index, typeof(BorealeIngot), "Lingot de Boréale", 2, "You do not have enough Boreale ingot to make that.");
-			AddRes(index, typeof(JolinarIngot), "Lingot de Équilibrum", 1, "You do not have enough Equilibrum ingot to make that.");
+			AddRes(index, typeof(EquilibrumIngot), "Lingot de Équilibrum", 1, "You do not have enough Equilibrum ingot to make that.");
 
 			index = AddCraft(typeof(BraziumIngot), "Alliages", "Lingot de Brazium", 80, 110, typeof(IronIngot), "Lingot de Fer", 4, "You do not have enough bloodirium ingots to make that.");
 			AddRes(index, typeof(BronzeIngot), "Lingot de Bronze", 3, "You do not have enough Bronze ingot to make that.");

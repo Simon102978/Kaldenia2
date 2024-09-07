@@ -9,7 +9,7 @@ using Server.Gumps;
 
 namespace Server.Items
 {
-	public abstract class Fouet : Item
+	public abstract class Fouet : BaseKnife
 	{
 		private int m_MaxRange;
 
@@ -36,7 +36,17 @@ namespace Server.Items
 
 			m_MaxRange = maxRange;
 		}
-
+		public override WeaponAbility PrimaryAbility => WeaponAbility.ShadowStrike;
+		public override WeaponAbility SecondaryAbility => WeaponAbility.InfectiousStrike;
+		public override int StrengthReq => 10;
+		public override int MinDamage => 10;
+		public override int MaxDamage => 12;
+		public override float Speed => 2.00f;
+		public override int InitMinHits => 25;
+		public override int InitMaxHits => 60;
+		public override SkillName DefSkill => SkillName.Fencing;
+		public override WeaponType DefType => WeaponType.Piercing;
+		public override WeaponAnimation DefAnimation => WeaponAnimation.Slash1H;
 		public Fouet(Serial serial) : base(serial)
 		{
 		}
@@ -83,6 +93,10 @@ namespace Server.Items
 
 		public virtual void Fouetage(Mobile from, Mobile receveur)
 		{
+			if (from == null || receveur == null || from.Deleted || receveur.Deleted)
+			{
+				return; // Sortir si l'un des mobiles est null ou supprimé
+			}
 			PlayerMobile pm = from as PlayerMobile;
 
 			if (pm != null)
@@ -198,14 +212,21 @@ namespace Server.Items
 
 		private void ApplyBleedEffect(BaseCreature creature)
 		{
+			if (creature == null || creature.Deleted)
+			{
+				return; // Sortir immédiatement si la créature est null ou supprimée
+			}
+
 			Timer.DelayCall(TimeSpan.Zero, TimeSpan.FromSeconds(2), BleedDuration / 2, () =>
 			{
-				if (!creature.Deleted && creature.Alive)
+				if (creature == null || creature.Deleted || !creature.Alive)
 				{
-					creature.Damage(Utility.RandomMinMax(1, 5));
-					creature.PlaySound(0x133);
-					creature.FixedParticles(0x377A, 244, 25, 9950, 31, 0, EffectLayer.Waist);
+					return; // Ne rien faire si la créature n'est plus valide
 				}
+
+				creature.Damage(Utility.RandomMinMax(1, 5));
+				creature.PlaySound(0x133);
+				creature.FixedParticles(0x377A, 244, 25, 9950, 31, 0, EffectLayer.Waist);
 			});
 		}
 

@@ -58,9 +58,11 @@ namespace Server.Mobiles
             AddLoot(LootPack.MageryRegs, 3);
             AddLoot(LootPack.NecroRegs, 3, 10);
             AddLoot(LootPack.LootItem<Bone>());
-        }
+			AddLoot(LootPack.LootItem<PoussiereNecrotique>(Utility.RandomMinMax(1, 3), true));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(0);

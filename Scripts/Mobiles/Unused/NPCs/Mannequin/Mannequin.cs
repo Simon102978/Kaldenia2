@@ -131,22 +131,22 @@ namespace Server.Mobiles
 				AddBackground(0, 0, 300, 300, 9200);
 				AddAlphaRegion(10, 10, 280, 280);
 
-				AddHtml(20, 20, 260, 20, "<CENTER>Actions du Mannequin</CENTER>", false, false);
+				AddHtml(20, 20, 260, 20, "<BASEFONT COLOR=#FFFFFF><CENTER>Actions du Mannequin</CENTER></BASEFONT>", false, false);
 
 				AddButton(20, 50, 4005, 4007, 1, GumpButtonType.Reply, 0);
-				AddHtml(55, 50, 200, 20, "Voir les statistiques de la tenue", false, false);
+				AddHtml(55, 50, 200, 20, "<BASEFONT COLOR=#FFFFFF>Voir les statistiques de la tenue</BASEFONT>", false, false);
 
 				AddButton(20, 80, 4005, 4007, 2, GumpButtonType.Reply, 0);
-				AddHtml(55, 80, 200, 20, "Comparer avec l'objet sélectionné", false, false);
+				AddHtml(55, 80, 200, 20, "<BASEFONT COLOR=#FFFFFF>Comparer avec l'objet sélectionné</BASEFONT>", false, false);
 
 				AddButton(20, 110, 4005, 4007, 3, GumpButtonType.Reply, 0);
-				AddHtml(55, 110, 200, 20, "Personnaliser le corps", false, false);
+				AddHtml(55, 110, 200, 20, "<BASEFONT COLOR=#FFFFFF>Personnaliser le corps</BASEFONT>", false, false);
 
 				AddButton(20, 140, 4005, 4007, 4, GumpButtonType.Reply, 0);
-				AddHtml(55, 140, 200, 20, "Tourner", false, false);
+				AddHtml(55, 140, 200, 20, "<BASEFONT COLOR=#FFFFFF>Tourner</BASEFONT>", false, false);
 
 				AddButton(20, 170, 4005, 4007, 5, GumpButtonType.Reply, 0);
-				AddHtml(55, 170, 200, 20, "Récupérer le Deed", false, false);
+				AddHtml(55, 170, 200, 20, "<BASEFONT COLOR=#FFFFFF>Récupérer le Deed</BASEFONT>", false, false);
 			}
 
 			public override void OnResponse(NetState sender, RelayInfo info)

@@ -88,18 +88,24 @@ namespace Server.Mobiles
 				from.PlaySound(0x1F1);
 			}
 
-             if (Combatant != null && BaseBoat.FindBoatAt(Combatant) != null && BaseBoat.FindBoatAt(this) == null)
-            {
-                Emote("*Déploie ses ailes et saute.*");
-                Location = Combatant.Location;
-
-            }
+			if (Combatant != null && BaseBoat.FindBoatAt(Combatant) != null && BaseBoat.FindBoatAt(this) == null)
+			{
+				if (InRange(Combatant.Location, 20))
+				{
+					Emote("*Déploie ses ailes et saute.*");
+					Location = Combatant.Location;
+				}
+				else
+				{
+					Emote("*Regarde au loin, incapable d'atteindre sa cible.*");
+				}
+			}
 
 			return dam;
 		}
 
 
-        public override bool ReacquireOnMovement => true;
+		public override bool ReacquireOnMovement => true;
         public override Poison PoisonImmune => Poison.Deadly;
         public override Poison HitPoison => Poison.Deadly;
         public override int TreasureMapLevel => 2;

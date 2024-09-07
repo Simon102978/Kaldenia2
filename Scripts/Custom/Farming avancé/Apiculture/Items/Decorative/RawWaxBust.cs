@@ -7,7 +7,7 @@ using Server.Mobiles;
 namespace Server.Items
 {
 	[Flipable( 0x12CA, 0x12CB )]
-	public class RawWaxBust : Item
+	public class RawWaxBust : Item, IDyable
 	{
 		private bool m_Pictured = false;
 
@@ -17,6 +17,15 @@ namespace Server.Items
 			Name = "Raw Wax Bust";
 			Weight = 0.5;
 			Hue = 1150;
+		}
+
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
 		}
 
 

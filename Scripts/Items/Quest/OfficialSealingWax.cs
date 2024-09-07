@@ -1,6 +1,6 @@
 namespace Server.Items
 {
-    public class OfficialSealingWax : Item
+    public class OfficialSealingWax : Item, IDyable
     {
         public override int LabelNumber => 1072744; // Official Sealing Wax
 
@@ -13,7 +13,16 @@ namespace Server.Items
             Hue = 0x84;
         }
 
-        public OfficialSealingWax(Serial serial)
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
+		}
+
+		public OfficialSealingWax(Serial serial)
             : base(serial)
         {
         }

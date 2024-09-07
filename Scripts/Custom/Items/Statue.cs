@@ -39,9 +39,11 @@ namespace Server.Items
         public Statue(int itemID, int hue)
             : base(itemID)
         {
-        }
+			this.Hue = hue;
 
-        public Statue(Serial serial)
+		}
+
+		public Statue(Serial serial)
             : base(serial)
         {
         }
@@ -200,6 +202,7 @@ namespace Server.Items
 
 			Crafter = from;
 
+			this.Hue = resHue;
 
 			return quality;
 

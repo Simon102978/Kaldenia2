@@ -47,17 +47,15 @@ namespace Server.Items
 
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            if (_Resource > CraftResource.Iron)
-            {
-                list.Add(1053099, "#{0}\t{1}", CraftResources.GetLocalizationNumber(_Resource), string.Format("#{0}", LabelNumber.ToString())); // ~1_oretype~ ~2_armortype~
-            }
-            else
-            {
-                base.AddNameProperty(list);
-            }
-        }
 
-        public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
+			
+				base.AddNameProperty(list);
+				list.Add("Ressource: " + CraftResources.GetDescription(Resource));
+
+
+		}
+
+		public virtual int OnCraft(int quality, bool makersMark, Mobile from, CraftSystem craftSystem, Type typeRes, ITool tool, CraftItem craftItem, int resHue)
         {
             Quality = (ItemQuality)quality;
 
@@ -69,7 +67,7 @@ namespace Server.Items
                 if (typeRes == null)
                     typeRes = craftItem.Resources.GetAt(0).ItemType;
 
-                Resource = CraftResources.GetFromType(typeRes);
+              //  Resource = CraftResources.GetFromType(typeRes);
             }
 
             return quality;

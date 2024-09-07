@@ -56,6 +56,8 @@ namespace Server.Mobiles
             AddLoot(LootPack.MageryRegs, 10);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 			AddLoot(LootPack.LootItem<CerveauSpectre>(2, true));
+			AddLoot(LootPack.LootItem<PoussiereNecrotique>(Utility.RandomMinMax(1, 3), true));
+
 		}
 
 		public override void Serialize(GenericWriter writer)

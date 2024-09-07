@@ -414,7 +414,8 @@ namespace Server.Items
         [Constructable]
         public PewterMug()
         {
-            Weight = 1.0;
+			Name = "Mug";
+			Weight = 1.0;
         }
 
         [Constructable]
@@ -460,7 +461,8 @@ namespace Server.Items
         [Constructable]
         public Goblet()
         {
-            Weight = 1.0;
+			Name = "Gobelet";
+			Weight = 1.0;
         }
 
         [Constructable]

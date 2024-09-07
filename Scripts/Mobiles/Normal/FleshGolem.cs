@@ -50,7 +50,8 @@ namespace Server.Mobiles
         public override void GenerateLoot()
         {
             AddLoot(LootPack.Average);
-        }
+			AddLoot(LootPack.LootItem<PoussiereNecrotique>(Utility.RandomMinMax(1, 3), true));
+		}
 
         public override void Serialize(GenericWriter writer)
         {

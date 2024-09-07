@@ -13,7 +13,7 @@ namespace Server.Items
 		public RuneChisel() : base( 0x10E7 )
 		{
 			Name = "Ciseau runique";
-			Hue = 2962;
+			Hue = 2046;
 			Weight = 4.0;
 		}
 
@@ -21,7 +21,7 @@ namespace Server.Items
 		public RuneChisel( int uses ) : base( uses, 0x10E7 )
 		{
 			Name = "Ciseau runique";
-			Hue = 2962;
+			Hue = 2046;
 			Weight = 4.0;
 			Layer = Layer.OneHanded;
 		}

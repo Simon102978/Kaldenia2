@@ -34,6 +34,11 @@ namespace Server.Mobiles
 				this.Add( new GenericBuyInfo( "Plant Bowl", typeof( Engines.Plants.PlantBowl ), 10, 50, 0x15FD, 0 ) );
 					this.Add( new GenericBuyInfo( "Terre Fertile", typeof( FertileDirt ), 3, 999, 0xF81, 0 ) );
 					this.Add( new GenericBuyInfo( "Random Plant Seed", typeof( Engines.Plants.Seed ), 20, 100, 0xDCF, 0 ) );
+					this.Add(new GenericBuyInfo("Random Plant Seed", typeof(Engines.Plants.Seed), 20, 100, 0xDCF, 0));
+					this.Add(new GenericBuyInfo("Random Plant Seed", typeof(Engines.Plants.Seed), 20, 100, 0xDCF, 0));
+					this.Add(new GenericBuyInfo("Random Plant Seed", typeof(Engines.Plants.Seed), 20, 100, 0xDCF, 0));
+
+
 
 
 				//	//	this.Add( new GenericBuyInfo( typeof( GreaterCurePotion ), 45, 20, 0xF07, 0 ) );

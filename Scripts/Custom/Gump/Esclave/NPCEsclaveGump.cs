@@ -57,6 +57,8 @@ namespace Server.Gumps
 
 			AddButtonHtlml(x + 5, y + 40 + line++ * 25, 2, "Relacher", "#FFFFFF");
 
+			AddLabel(x + 200, y + 40 + line++ * 25, 0, $"Loyauté: {bh.Loyalty}%");
+
 
 
 			AddSection(x + 311, y, 289, 452, "Talents");

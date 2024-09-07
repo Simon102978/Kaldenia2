@@ -53,7 +53,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.Poor);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 			AddLoot(LootPack.LootItem<CerveauSpectre>(1, true));
-			AddLoot(LootPack.LootItem<PoussiereNecrotique>(5, true));
+			AddLoot(LootPack.LootItem<PoussiereNecrotique>(Utility.RandomMinMax(1, 3), true));
 			AddLoot(LootPack.LootItem<FluideAstral>(1, true));
 
 

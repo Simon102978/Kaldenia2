@@ -37,7 +37,7 @@ namespace Server.Spells.Second
 
                 if (p != null)
                 {
-                    int chanceToCure = 10000 + (int)(Caster.Skills[SkillName.Magery].Value * 75) - ((p.RealLevel + 1) * (p.RealLevel < 4 ? 3300 : 3100));
+                    int chanceToCure = 10000 + (int)(Caster.Skills[SkillName.Magery].Value * 107) - ((p.RealLevel + 1) * (p.RealLevel < 4 ? 3300 : 3100));
                     chanceToCure /= 100;
 
                     if (chanceToCure > Utility.Random(100))

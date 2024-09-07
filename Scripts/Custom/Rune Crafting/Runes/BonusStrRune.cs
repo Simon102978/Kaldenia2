@@ -18,8 +18,8 @@ namespace Server.Items
 		public BonusStrRune() : base()
 		{
 			Weight = 0.2;  // ?
-			Name = "Force";
-			Hue = 2101;
+			Name = "Rune de Force";
+			Hue = 2107;
 		}
 
 

@@ -61,6 +61,8 @@ namespace Server.Mobiles
             AddLoot(LootPack.NecroRegs, 3, 10);
             AddLoot(LootPack.LootItem<Bone>());
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+			AddLoot(LootPack.LootItem<PoussiereNecrotique>(Utility.RandomMinMax(1, 3), true));
+
 
 		}
 

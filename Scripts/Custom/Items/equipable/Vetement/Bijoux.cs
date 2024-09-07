@@ -478,7 +478,7 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
-	public class Ceinture10 : BaseWaist
+	public class Ceinture10 : BaseNecklace, IDyable
 
 	{
 
@@ -492,24 +492,28 @@ namespace Server.Items
 			Layer = Layer.Waist;
 		}
 
-		public Ceinture10(Serial serial)
-				: base(serial)
-
+		public bool Dye(Mobile from, DyeTub sender)
 		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
 		}
 
+		public Ceinture10(Serial serial) : base(serial)
+		{
+		}
 
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
-
 			writer.Write(0); // version
 		}
 
 		public override void Deserialize(GenericReader reader)
 		{
 			base.Deserialize(reader);
-
 			int version = reader.ReadInt();
 		}
 	}

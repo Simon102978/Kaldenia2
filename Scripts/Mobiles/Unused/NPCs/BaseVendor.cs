@@ -1883,39 +1883,60 @@ namespace Server.Mobiles
             {
                 bought = true;
             }
+			if (!bought && totalCost >= 20000)
+			{
+				// Chercher un chèque dans l'inventaire du joueur
+				BankCheck check = buyer.Backpack?.FindItemByType<BankCheck>();
 
-   /*        if (!bought)
-            {
-                if (totalCost <= int.MaxValue)
-                {
-                    if (Banker.Withdraw(buyer, (int)totalCost))
-                    {
-                        bought = true;
-                        fromBank = true;
-                    }
-                }
-                else if (buyer.Account != null && AccountGold.Enabled)
-                {
-                    if (buyer.Account.WithdrawCurrency(totalCost / AccountGold.CurrencyThreshold))
-                    {
-                        bought = true;
-                        fromBank = true;
-                    }
-                }
-            }*/
+				if (check != null && check.Worth >= totalCost)
+				{
+					// Le joueur a un chèque suffisant
+					int remainingValue = check.Worth - (int)totalCost;
+					check.Delete();
 
-      /*      if (!bought)
-            {
-                cont = buyer.FindBankNoCreate();
+					if (remainingValue > 0)
+					{
+						// Créer un nouveau chèque avec la valeur restante
+						BankCheck newCheck = new BankCheck(remainingValue);
+						buyer.AddToBackpack(newCheck);
+					}
 
-                if (cont != null && ConsumeGold(cont, totalCost))
-                {
-                    bought = true;
-                    fromBank = true;
-                }
-            }*/
+					bought = true;
+				}
+			}
 
-            if (!bought)
+			/*        if (!bought)
+					 {
+						 if (totalCost <= int.MaxValue)
+						 {
+							 if (Banker.Withdraw(buyer, (int)totalCost))
+							 {
+								 bought = true;
+								 fromBank = true;
+							 }
+						 }
+						 else if (buyer.Account != null && AccountGold.Enabled)
+						 {
+							 if (buyer.Account.WithdrawCurrency(totalCost / AccountGold.CurrencyThreshold))
+							 {
+								 bought = true;
+								 fromBank = true;
+							 }
+						 }
+					 }*/
+
+			/*      if (!bought)
+				  {
+					  cont = buyer.FindBankNoCreate();
+
+					  if (cont != null && ConsumeGold(cont, totalCost))
+					  {
+						  bought = true;
+						  fromBank = true;
+					  }
+				  }*/
+
+			if (!bought)
             {
                 // ? Begging thy pardon, but thy bank account lacks these funds. 
                 // : Begging thy pardon, but thou casnt afford that.

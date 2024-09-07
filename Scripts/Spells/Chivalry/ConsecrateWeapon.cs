@@ -23,7 +23,7 @@ namespace Server.Spells.Chivalry
 		public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(0.5);
         public override double RequiredSkill => 15.0;
         public override int RequiredMana => 10;
-        public override int RequiredTithing => 10;
+        public override int RequiredTithing => 0;
         public override int MantraNumber => 1060720;// Consecrus Arma
         public override bool BlocksMovement => false;
         public override void OnCast()
@@ -86,7 +86,7 @@ namespace Server.Spells.Chivalry
                 else if (pkarma >= 999)
                     seconds = 6.0;
                 else
-                    seconds = 5.0;
+                    seconds = 10.0;
 
                 TimeSpan duration = TimeSpan.FromSeconds(seconds);
                 ConsecratedWeaponContext context;
@@ -148,12 +148,12 @@ namespace Server.Spells.Chivalry
         {
             get
             {
-                if (Owner.Skills.Chivalry.Value >= 80)
+                if (Owner.Skills.Magery.Value >= 80)
                 {
                     return 100;
                 }
 
-                return (int)Owner.Skills.Chivalry.Value;
+                return (int)Owner.Skills.Magery.Value;
             }
         }
 
@@ -161,7 +161,7 @@ namespace Server.Spells.Chivalry
         {
             get
             {
-                double value = Owner.Skills.Chivalry.Value;
+                double value = Owner.Skills.Magery.Value;
 
                 if (value >= 90)
                 {

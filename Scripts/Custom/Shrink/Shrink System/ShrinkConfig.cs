@@ -32,11 +32,11 @@ namespace Xanthos.ShrinkSystem
 		public static bool PetAsStatuette = true;		// Deed or statuette form
 		public static bool AllowLocking = false;		// Allow players to lock the shrunken pet or not
 		public static bool ShowPetDetails = true;		// Show stats and skills on the properties of the shrunken pet
-		public static double ShrunkenWeight = 10.0;
+		public static double ShrunkenWeight = 50.0;
 		public static bool BlessedLeash = true;
 		public static BlessStatus LootStatus = BlessStatus.None;	// How the shruken pet should be as loot
 		public static double TamingRequired = 0;		// set to zero for no skill requirement to use shrink tools
-		public static int ShrinkCharges = 20;			// set to -1 for infinite uses
+		public static int ShrinkCharges = 1;			// set to -1 for infinite uses
 
 		public static Type[] PackAnimals = new Type []
 		{

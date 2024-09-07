@@ -96,7 +96,42 @@ namespace Server.Scripts
 			int degradation = twoHourPeriodsElapsed * CalculateTimeDegradation(clothing);
 
 			clothing.HitPoints -= degradation;
-			if (clothing.HitPoints < 0) clothing.HitPoints = 0;
+
+			if (clothing.HitPoints <= 0)
+			{
+				clothing.HitPoints = 0;
+
+				if (clothing.Parent is Mobile mobile)
+				{
+					if (mobile.FindItemOnLayer(clothing.Layer) == clothing)
+					{
+						mobile.SendLocalizedMessage(1061168); // Your equipment is severely damaged and cannot be used until repaired.
+						mobile.PlaySound(0x3BE);
+						clothing.MoveToBackpack(mobile);
+					}
+				}
+			}
+		}
+		public static void CheckDamagedClothing(PlayerMobile player)
+		{
+			List<BaseClothing> damagedClothing = new List<BaseClothing>();
+
+			foreach (var item in player.Items)
+			{
+				if (item is BaseClothing clothing && clothing.HitPoints == 0)
+				{
+					damagedClothing.Add(clothing);
+				}
+			}
+
+			foreach (var clothing in damagedClothing)
+			{
+				if (player.FindItemOnLayer(clothing.Layer) == clothing)
+				{
+					player.SendLocalizedMessage(1061168); // Your equipment is severely damaged and cannot be used until repaired.
+					clothing.MoveToBackpack(player);
+				}
+			}
 		}
 
 		public static int CalculateTimeDegradation(BaseClothing clothing)

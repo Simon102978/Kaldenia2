@@ -482,6 +482,14 @@ namespace Server.Items
 
 		public override void OnDoubleClick(Mobile from)
 		{
+			// Vérifier si l'objet est sur le Layer.Shirt
+			if (this.Layer == Layer.Shirt)
+			{
+				// Si c'est le cas, on empêche l'utilisation et on envoie un message
+				from.SendMessage("Vous ne pouvez pas utiliser le layer shirt.");
+				return;
+			}
+
 			var oldItem = from.FindItemOnLayer(this.Layer);
 
 			if (oldItem == this)
@@ -779,20 +787,24 @@ namespace Server.Items
 							}
 							else
 							{
-								Delete();
+								HitPoints = 0;
+								if (Parent is Mobile mobile)
+								{
+									mobile.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1061168); // Your equipment is severely damaged and cannot be used until repaired.
+									MoveToBackpack(mobile);
+								}
 							}
 						}
 					}
 				}
 			}
-
 			LastDurabilityCheck = DateTime.UtcNow;
 
 			return damageTaken;
 		}
+			
 
-
-		private double ModifyChanceByQuality(double chance)
+			private double ModifyChanceByQuality(double chance)
 		{
 			switch (Quality)
 			{
@@ -804,7 +816,14 @@ namespace Server.Items
 				default: return chance;
 			}
 		}
-
+		public void MoveToBackpack(Mobile mobile)
+		{
+			if (mobile.Backpack != null)
+			{
+				mobile.Backpack.DropItem(this);
+				mobile.SendLocalizedMessage(1064529, this.Name); // Your ~1_NAME~ has been moved to your backpack.
+			}
+		}
 		private int CalculateWearByQuality(BaseWeapon weapon, int absorbed)
 		{
 			int baseWear = weapon.Type == WeaponType.Bashing ? absorbed / 2 : 1;

@@ -22,7 +22,7 @@ namespace Server.Spells.Chivalry
 
         public override double RequiredSkill => 45.0;
         public override int RequiredMana => 20;
-        public override int RequiredTithing => 10;
+        public override int RequiredTithing => 0;
         public override int MantraNumber => 1060723;  // Forul Solum
         public override bool BlocksMovement => false;
 
@@ -225,7 +225,7 @@ namespace Server.Spells.Chivalry
 
         private void UpdateDamage()
         {
-            int chivalry = (int)m_Owner.Skills.EvalInt.Value;
+            int chivalry = (int)m_Owner.Skills.Magery.Value;
             m_DamageScalar = 10 + ((chivalry - 40) * 9) / 10;
 
             if (m_PlayerOrPet != null)

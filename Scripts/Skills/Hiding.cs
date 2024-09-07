@@ -77,6 +77,14 @@ namespace Server.SkillHandlers
 
         public static TimeSpan OnUse(Mobile m)
         {
+			BaseBoat boat = BaseBoat.FindBoatAt(m, m.Map);
+			if (boat != null)
+			{
+				m.SendMessage("Vous ne pouvez pas vous cacher ou rester caché sur un bateau.");
+				m.RevealingAction();
+				BuffInfo.RemoveBuff(m, BuffIcon.HidingAndOrStealth);
+				return TimeSpan.FromSeconds(2.0);
+			}
 
 			if (m.Hidden)
 			{
@@ -99,6 +107,7 @@ namespace Server.SkillHandlers
 					BuffInfo.RemoveBuff(m, BuffIcon.HidingAndOrStealth);
 					return TimeSpan.FromSeconds(2.0);
 					}
+
 				
 				else
 				{

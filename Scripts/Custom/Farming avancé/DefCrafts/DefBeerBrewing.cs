@@ -1,4 +1,6 @@
 using System;
+using System.Linq;
+using System.Reflection;
 using Server;
 using Server.Items;
 
@@ -31,10 +33,51 @@ namespace Server.Engines.Craft
 
         private DefBeerBrewing() : base(1, 1, 1.25) { }
 
-        public override int CanCraft(Mobile from, ITool tool, Type itemType)
-        {
-			if (((Item)tool).Deleted || tool.UsesRemaining < 0 ) return 1044038;
+		public override int CanCraft(Mobile from, ITool tool, Type itemType)
+		{
+			if (((Item)tool).Deleted || tool.UsesRemaining < 0)
+				return 1044038;
+
+			CraftItem craftItem = CraftItems.SearchFor(itemType);
+			if (craftItem != null && craftItem.NeedDistillery && !IsNearDistillery(from))
+			{
+				from.SendMessage("Vous devez être près d'une distillerie pour brasser cette bière.");
+				return 1;
+			}
+
 			return 0;
+		}
+
+		private static readonly int[] m_Distillerys = new[]
+  {
+		8878, 8879, 0x22B0, 0x22B1
+	};
+
+		public static bool IsNearDistillery(Mobile from)
+		{
+			IPooledEnumerable eable = from.Map.GetItemsInRange(from.Location, 2);
+
+			foreach (Item item in eable)
+			{
+				if (item is AddonComponent component)
+				{
+					BaseAddon addon = component.Addon;
+					if (addon is DistillerySouthAddon || addon is DistilleryEastAddon)
+					{
+						eable.Free();
+						return true;
+					}
+				}
+
+				if (m_Distillerys.Contains(item.ItemID))
+				{
+					eable.Free();
+					return true;
+				}
+			}
+
+			eable.Free();
+			return false;
 		}
 
 		public override void PlayCraftEffect( Mobile from )

@@ -21,7 +21,6 @@ namespace Server.Items
 			{
 				return true;
 			}
-
 			from.SendMessage("Cette rune ne peut être utilisée que sur des armes, armures, bijoux, instruments ou grimoires.");
 			return false;
 		}
@@ -32,26 +31,82 @@ namespace Server.Items
 			{
 				ResetAttributes(weapon.Attributes);
 				ResetAttributes(weapon.WeaponAttributes);
+				AdjustDamageIncrease(weapon);
+
+				CraftResourceInfo resInfo = CraftResources.GetInfo(weapon.Resource);
+				if (resInfo != null)
+				{
+					CraftAttributeInfo attrInfo = resInfo.AttributeInfo;
+					if (attrInfo != null)
+					{
+						weapon.Attributes.WeaponDamage += attrInfo.WeaponDamage;
+					}
+				}
+
+				weapon.Enchantement = 0;
 			}
 			else if (item is BaseArmor armor)
 			{
 				ResetAttributes(armor.Attributes);
 				ResetAttributes(armor.ArmorAttributes);
+				armor.Enchantement = 0;
+
 			}
 			else if (item is BaseJewel jewel)
 			{
 				ResetAttributes(jewel.Attributes);
+				jewel.Enchantement = 0;
+
 			}
-		
 			else if (item is Spellbook spellbook)
 			{
 				ResetAttributes(spellbook.Attributes);
+				AdjustSpellDamageIncrease(spellbook);
+				spellbook.Enchantement = 0;
+
 			}
 
 			item.Enchantement = 0;
 			from.SendMessage("Tous les enchantements ont été retirés de l'objet.");
 			from.PlaySound(0x1F5);
 			this.Delete();
+		}
+
+		private void AdjustDamageIncrease(BaseWeapon weapon)
+		{
+			switch (weapon.Quality)
+			{
+				case ItemQuality.Exceptional:
+					weapon.Attributes.WeaponDamage = 40;
+					break;
+				case ItemQuality.Epic:
+					weapon.Attributes.WeaponDamage = 80;
+					break;
+				case ItemQuality.Legendary:
+					weapon.Attributes.WeaponDamage = 120;
+					break;
+				default:
+					weapon.Attributes.WeaponDamage = 0;
+					break;
+			}
+		}
+		private void AdjustSpellDamageIncrease(Spellbook spellbook)
+		{
+			switch (spellbook.Quality)
+			{
+				case BookQuality.Exceptional:
+					spellbook.Attributes.SpellDamage = 10;
+					break;
+				case BookQuality.Epic:
+					spellbook.Attributes.SpellDamage = 20;
+					break;
+				case BookQuality.Legendary:
+					spellbook.Attributes.SpellDamage = 30;
+					break;
+				default:
+					spellbook.Attributes.SpellDamage = 0;
+					break;
+			}
 		}
 
 		private void ResetAttributes(AosAttributes attributes)

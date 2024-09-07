@@ -1,23 +1,28 @@
+using Server.Engines.Craft;
+
 namespace Server.Items
 {
-    public class Earrings : BaseArmor
-    {
-        public override ArmorMaterialType MaterialType => ArmorMaterialType.Chainmail;
+    public class Earrings : BaseArmor, IRepairable
+	{
+		public CraftSystem RepairSystem => DefTinkering.CraftSystem;
+
+		public override ArmorMaterialType MaterialType => ArmorMaterialType.Leather;
         public override ArmorMeditationAllowance DefMedAllowance => ArmorMeditationAllowance.All;
 
-        public override int BasePhysicalResistance => 0;
-        public override int BaseFireResistance => 0;
-        public override int BaseColdResistance => 0;
-        public override int BasePoisonResistance => 0;
-        public override int BaseEnergyResistance => 0;
+        public override int BasePhysicalResistance => Utility.RandomMinMax(0, 3);
+        public override int BaseFireResistance => Utility.RandomMinMax(0, 3);
+		public override int BaseColdResistance => Utility.RandomMinMax(0, 3);
+		public override int BasePoisonResistance => Utility.RandomMinMax(0, 3);
+		public override int BaseEnergyResistance => Utility.RandomMinMax(0, 3);
 
-        public override int InitMinHits => 30;
-        public override int InitMaxHits => 40;
+		public override int InitMinHits => 20;
+        public override int InitMaxHits => 50;
 
         [Constructable]
         public Earrings()
             : base(0x4213)
         {
+			Name = "Boucles d'oreilles pendantes";
             Layer = Layer.Earrings;
         }
 

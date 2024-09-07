@@ -61,7 +61,7 @@ namespace Server.Items
         }
     }
 
-    public class OrigamiButterfly : Item
+    public class OrigamiButterfly : Item, IDyable
     {
         [Constructable]
         public OrigamiButterfly()
@@ -70,7 +70,16 @@ namespace Server.Items
 			Name = "Papillon de cire";
         }
 
-        public OrigamiButterfly(Serial serial)
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
+		}
+
+		public OrigamiButterfly(Serial serial)
             : base(serial)
         {
         }
@@ -91,7 +100,7 @@ namespace Server.Items
         }
     }
 
-    public class OrigamiSwan : Item
+    public class OrigamiSwan : Item, IDyable
     {
         [Constructable]
         public OrigamiSwan()
@@ -100,7 +109,16 @@ namespace Server.Items
 			Name = "Un Cygne de Cire";
         }
 
-        public OrigamiSwan(Serial serial)
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
+		}
+
+		public OrigamiSwan(Serial serial)
             : base(serial)
         {
         }
@@ -121,7 +139,7 @@ namespace Server.Items
         }
     }
 
-    public class OrigamiFrog : Item
+    public class OrigamiFrog : Item, IDyable
     {
         [Constructable]
         public OrigamiFrog()
@@ -129,8 +147,15 @@ namespace Server.Items
         {
 			Name = "Une Grenouille de Cire";
         }
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
 
-        public OrigamiFrog(Serial serial)
+			Hue = sender.DyedHue;
+			return true;
+		}
+		public OrigamiFrog(Serial serial)
             : base(serial)
         {
         }
@@ -151,7 +176,7 @@ namespace Server.Items
         }
     }
 
-    public class OrigamiShape : Item
+    public class OrigamiShape : Item, IDyable
     {
         [Constructable]
         public OrigamiShape()
@@ -160,7 +185,16 @@ namespace Server.Items
 			Name = "Une forme de Cire";
         }
 
-        public OrigamiShape(Serial serial)
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
+		}
+
+		public OrigamiShape(Serial serial)
             : base(serial)
         {
         }
@@ -181,7 +215,7 @@ namespace Server.Items
         }
     }
 
-    public class OrigamiSongbird : Item
+    public class OrigamiSongbird : Item, IDyable
     {
         [Constructable]
         public OrigamiSongbird()
@@ -190,7 +224,16 @@ namespace Server.Items
 			Name = "Un Oiseau de Cire";
         }
 
-        public OrigamiSongbird(Serial serial)
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
+		}
+
+		public OrigamiSongbird(Serial serial)
             : base(serial)
         {
         }
@@ -211,7 +254,7 @@ namespace Server.Items
         }
     }
 
-    public class OrigamiFish : Item
+    public class OrigamiFish : Item, IDyable
     {
         [Constructable]
         public OrigamiFish()
@@ -220,7 +263,16 @@ namespace Server.Items
 			Name = "Un poisson de Cire";
         }
 
-        public OrigamiFish(Serial serial)
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
+		}
+
+		public OrigamiFish(Serial serial)
             : base(serial)
         {
         }
@@ -241,7 +293,7 @@ namespace Server.Items
         }
     }
 
-    public class OrigamiDragon : Item
+    public class OrigamiDragon : Item, IDyable
     {
         //public override int LabelNumber{ get{ return 1030296; } } // a delicate origami butterfly
 
@@ -255,7 +307,16 @@ namespace Server.Items
           
         }
 
-        public OrigamiDragon(Serial serial)
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
+		}
+
+		public OrigamiDragon(Serial serial)
             : base(serial)
         {
         }
@@ -276,7 +337,7 @@ namespace Server.Items
     }
 
     // [FlipableAttribute( 0x4B1E, 0x4B1F )]
-    public class OrigamiBunny : Item
+    public class OrigamiBunny : Item, IDyable
     {
         //public override int LabelNumber{ get{ return 1030296; } } // a delicate origami butterfly
 
@@ -289,7 +350,16 @@ namespace Server.Items
             
         }
 
-        public OrigamiBunny(Serial serial)
+		public bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+				return false;
+
+			Hue = sender.DyedHue;
+			return true;
+		}
+
+		public OrigamiBunny(Serial serial)
             : base(serial)
         {
         }

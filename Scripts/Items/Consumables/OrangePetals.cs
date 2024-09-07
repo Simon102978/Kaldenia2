@@ -75,7 +75,7 @@ namespace Server.Items
             Timer timer = new OrangePetalsTimer(from);
             timer.Start();
 
-            BuffInfo.AddBuff(from, new BuffInfo(BuffIcon.OrangePetals, 1153785, 1153814, TimeSpan.FromMinutes(5.0), from));
+            BuffInfo.AddBuff(from, new BuffInfo(BuffIcon.OrangePetals, 1153785, 1153814, TimeSpan.FromMinutes(30.0), from));
 
             AddContext(from, new OrangePetalsContext(timer));
 
@@ -117,7 +117,7 @@ namespace Server.Items
         {
             private readonly Mobile m_Mobile;
             public OrangePetalsTimer(Mobile from)
-                : base(TimeSpan.FromMinutes(5.0))
+                : base(TimeSpan.FromMinutes(30.0))
             {
                 m_Mobile = from;
             }

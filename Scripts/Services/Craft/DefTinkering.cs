@@ -132,7 +132,7 @@ namespace Server.Engines.Craft
 			typeof(KnifeLeft), typeof(KnifeRight),
 			typeof(Plate), typeof(Eventail),
 			typeof(Goblet), typeof(PewterMug),
-			typeof(KeyRing),
+			typeof(KeyRing), typeof(FoodPlate),
 			typeof(Candelabra), typeof(Scales),
 			typeof(Key), typeof(Globe), typeof(Eventail),
 			typeof(Spyglass), typeof(Lantern),
@@ -431,6 +431,9 @@ namespace Server.Engines.Craft
 
 
 			AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles", 10.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
+			
+			AddCraft(typeof(Earrings), "Boucles d'oreilles", "Boucles d'oreilles  pendantes", 80.0, 150.0, typeof(IronIngot), "Lingot de fer", 3, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
+			AddRes(index, typeof(GoldWire), "Fil d'or", 1, "Vous n'avez pas assez de fil d'or pour fabriquer ces boucles d'oreilles");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti d'ambre", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
 			AddRes(index, typeof(Ambre), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer ces boucles d'oreilles.");
@@ -841,8 +844,10 @@ namespace Server.Engines.Craft
 			SetUseAllRes(index, true);
 			AddCraft(typeof(EmptyWineBottle), "Divers", "Bouteille de Vin", 22.5, 42.5, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			AddCraft(typeof(EmptyAleBottle), "Divers", "Bouteille de Bière", 32.5, 52.5, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(PetLeash), "Divers", "Harnais pour animaux", 70.0, 110.0, typeof(Leather), 1044462, 5, 1044463);
+			index = AddCraft(typeof(PetLeash), "Divers", "Harnais pour animaux", 80.0, 130.0, typeof(Leather), 1044462, 5, 1044463);
 			AddRes(index, typeof(PoussiereNecrotique), "Poussière Nécrotique", 10, "Vous n'avez pas suffisament de Poussière Nécrotique");
+			AddRes(index, typeof(Gold), "Pièce d'or", 100, "Vous n'avez pas suffisament de pièces d'or.");
+
 
 			#endregion
 

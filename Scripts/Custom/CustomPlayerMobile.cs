@@ -580,7 +580,7 @@ namespace Server.Mobiles
 
 			missive.Delete();
 
-			SendMessage("Vous avez reçu une missive.");
+			SendMessage(0x22, "Vous avez reçu une nouvelle missive !");
 		}
 
 		public virtual void GetMissive()
@@ -595,6 +595,22 @@ namespace Server.Mobiles
 				}
 			}
 			MissiveEnAttente = new List<MissiveContent>();
+
+			UpdateMissiveIndicator();
+
+		}
+		private MissiveIndicatorGump m_MissiveIndicatorGump;
+		private void UpdateMissiveIndicator()
+		{
+			if (m_MissiveIndicatorGump != null)
+			{
+				m_MissiveIndicatorGump.Update(MissiveEnAttente.Count);
+			}
+			else
+			{
+				m_MissiveIndicatorGump = new MissiveIndicatorGump(this, MissiveEnAttente.Count);
+				SendGump(m_MissiveIndicatorGump);
+			}
 		}
 
 		#endregion
