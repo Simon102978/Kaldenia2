@@ -148,7 +148,12 @@ namespace Server
 			set { SetValue(TribeType.Legion, value); }
 		}
 
-
+		[CommandProperty(AccessLevel.GameMaster)]
+		public int Pirate
+		{
+			get { return GetValue(TribeType.Pirate); }
+			set { SetValue(TribeType.Pirate, value); }
+		}
 		#endregion
 
 

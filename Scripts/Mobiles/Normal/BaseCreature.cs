@@ -1587,7 +1587,7 @@ namespace Server.Mobiles
 
 				case TribeType.Pirate:
 					{
-						//		lTribe.Add(TribeType.Brigand);
+							lTribe.Add(TribeType.Legion);
 						//		lTribe.Add(TribeType.Savage);
 
 						break;
@@ -1602,6 +1602,7 @@ namespace Server.Mobiles
 				case TribeType.Legion:
 					{
 						lTribe.Add(TribeType.Kepush);
+						lTribe.Add(TribeType.Pirate);
 
 
 						break;
