@@ -18,7 +18,7 @@ namespace Server.Mobiles
             Body = 400;
             Hue = -1;
 
-            double scalar = caster.Skills[SkillName.EvalInt].Value * 0.01;
+            double scalar = caster.Skills[SkillName.EvalInt].Value * 0.015;
 
             m_Target = target;
             m_ExpireTime = DateTime.UtcNow + duration;
@@ -27,7 +27,7 @@ namespace Server.Mobiles
             SetDex(150);
             SetInt(150);
 
-            SetDamage(16, 17);
+            SetDamage(16, 20);
 
             // Bestiary says 50 phys 50 cold, animal lore says differently
             SetDamageType(ResistanceType.Physical, 100);
@@ -72,7 +72,7 @@ namespace Server.Mobiles
 
         public override Mobile ConstantFocus => m_Target;
         public override bool NoHouseRestrictions => true;
-        public override double DispelDifficulty => 80.0;
+        public override double DispelDifficulty => 125.0;
         public override double DispelFocus => 20.0;
         public override bool AlwaysMurderer => true;
         public override bool BleedImmune => true;

@@ -308,7 +308,39 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Monstera), "Plantes Décoratives", "Monstera", 50.0, 70.0, typeof(FertileDirt), "Terre Fertile", 3, "Vous n'avez pas assez de Terre Fertile");
 
 			#endregion
+			#region Arbres
 
+			index = AddCraft(typeof(AppleTreeDeed), "Arbres", "Pommier", 65.0, 120.0, typeof(FertileDirt), "Terre Fertile", 50, "Vous n'avez pas de Terre Fertile");
+			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
+			AddRes(index, typeof(Apple), "Pomme", 5, "Vous n'avez pas de pomme");
+
+			index = AddCraft(typeof(PeachTreeDeed), "Arbres", "Pêcher", 65.0, 120.0, typeof(FertileDirt), "Terre Fertile", 50, "Vous n'avez pas de Terre Fertile");
+			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
+			AddRes(index, typeof(Peach), "Pêche", 5, "Vous n'avez pas de pêche");
+
+			index = AddCraft(typeof(PlumTreeAddonDeed), "Arbres", "Prunier", 65.0, 120.0, typeof(FertileDirt), "Terre Fertile", 50, "Vous n'avez pas de Terre Fertile");
+			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
+			AddRes(index, typeof(Plum), "Prune", 5, "Vous n'avez pas de prune");
+
+			index = AddCraft(typeof(CherryBlossomTreeDeed), "Arbres", "Cerisier", 65.0, 120.0, typeof(FertileDirt), "Terre Fertile", 50, "Vous n'avez pas de Terre Fertile");
+			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
+			AddRes(index, typeof(Cherry), "Cerise", 5, "Vous n'avez pas de cerise");
+
+
+			index = AddCraft(typeof(MapleTreeDeed), "Arbres", "Érable", 65.0, 120.0, typeof(FertileDirt), "Terre Fertile", 50, "Vous n'avez pas de Terre Fertile");
+			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
+
+			index = AddCraft(typeof(YuccaTree), "Arbres", "Yucca", 65.0, 120.0, typeof(FertileDirt), "Terre Fertile", 50, "Vous n'avez pas de Terre Fertile");
+			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
+
+
+			index = AddCraft(typeof(WillowTreeDeed), "Arbres", "Saule", 65.0, 120.0, typeof(FertileDirt), "Terre Fertile", 50, "Vous n'avez pas de Terre Fertile");
+			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
+
+			index = AddCraft(typeof(TreeStumpDeed), "Arbres", "Souche", 65.0, 120.0, typeof(FertileDirt), "Terre Fertile", 50, "Vous n'avez pas de Terre Fertile");
+			AddRes(index, typeof(BacVideTerre), "Bac Vide", 1, "Vous n'avez pas de bac vide");
+
+			#endregion 
 
 
 

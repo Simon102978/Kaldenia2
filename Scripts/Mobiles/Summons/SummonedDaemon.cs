@@ -42,11 +42,11 @@ namespace Server.Mobiles
         {
         }
 
-        public override double DispelDifficulty => 125.0;
+        public override double DispelDifficulty => 150.0;
 
         public override double DispelFocus => 45.0;
 
-        public override Poison PoisonImmune => Poison.Greater;
+        public override Poison PoisonImmune => Poison.Deadly;
 
         public override bool CanFly => true;
 
