@@ -58,31 +58,40 @@ namespace Server.Spells.Sixth
 					{
 						SpellHelper.Turn(from, m);
 
-						double dispelChance = CalculateDispelChance(from, bc);
-
-						if (dispelChance > Utility.RandomDouble())
+						if (bc.ControlMaster == from) // Si la créature appartient au lanceur
 						{
 							Effects.SendLocationParticles(EffectItem.Create(m.Location, m.Map, EffectItem.DefaultDuration), 0x3728, 8, 20, 5042);
 							Effects.PlaySound(m, m.Map, 0x201);
-
-							int damage = bc.Hits / 2;
-							bc.Hits -= damage;
-
-							from.SendMessage($"Vous avez réussi à affaiblir la créature invoquée de {damage} points de vie.");
-
-							if (bc.Hits <= 0)
-							{
-								bc.Kill();
-							}
+							bc.Delete();
+							from.SendMessage("Vous avez dissipé votre créature invoquée.");
 						}
-						else
+						else // Si la créature appartient à quelqu'un d'autre
 						{
-							m.FixedEffect(0x3779, 10, 20);
-							from.SendLocalizedMessage(1010084); // The creature resisted the attempt to dispel it!
+							double dispelChance = CalculateDispelChance(from, bc);
+
+							if (dispelChance > Utility.RandomDouble())
+							{
+								Effects.SendLocationParticles(EffectItem.Create(m.Location, m.Map, EffectItem.DefaultDuration), 0x3728, 8, 20, 5042);
+								Effects.PlaySound(m, m.Map, 0x201);
+								int damage = bc.Hits / 2;
+								bc.Hits -= damage;
+								from.SendMessage($"Vous avez réussi à affaiblir la créature invoquée de {damage} points de vie.");
+
+								if (bc.Hits <= 0)
+								{
+									bc.Kill();
+								}
+							}
+							else
+							{
+								m.FixedEffect(0x3779, 10, 20);
+								from.SendLocalizedMessage(1010084); // The creature resisted the attempt to dispel it!
+							}
 						}
 					}
 				}
 			}
+
 
 			private double CalculateDispelChance(Mobile from, BaseCreature target)
 			{

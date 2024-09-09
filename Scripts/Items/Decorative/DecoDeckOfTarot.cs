@@ -1,6 +1,7 @@
 using Server.ContextMenus;
 using Server.Gumps;
 using Server.Network;
+using System;
 using System.Collections.Generic;
 
 namespace Server.Items
@@ -116,12 +117,13 @@ namespace Server.Items
 
 					if (text != null && !string.IsNullOrEmpty(text.Text))
 					{
+						int seed = Utility.Random(int.MaxValue); // Génère une graine commune
 						foreach (Mobile m in m_Deck.GetMobilesInRange(4))
 						{
 							if (m.NetState != null)
 							{
 								m.CloseGump(typeof(FortuneGump));
-								m.SendGump(new FortuneGump(text.Text, sender.Mobile.Name));
+								m.SendGump(new FortuneGump(text.Text, sender.Mobile.Name, seed));
 							}
 						}
 					}
@@ -133,25 +135,27 @@ namespace Server.Items
 
 		private class FortuneGump : Gump
 		{
-			public FortuneGump(string text, string askerName)
+			public FortuneGump(string text, string askerName, int seed)
 				: base(200, 200)
 			{
 				AddPage(0);
 
 				AddImage(0, 0, 0x7724);
 
-				int one, two, three;
+				Random random = new Random(seed);
 
-				one = Utility.RandomMinMax(1, 19);
-				two = Utility.RandomMinMax(one + 1, 20);
-				three = Utility.RandomMinMax(0, one - 1);
+				int one = random.Next(1, 20);
+				int two = random.Next(1, 20);
+				int three = random.Next(1, 20);
 
 				AddImageTiled(28, 140, 115, 180, 0x7725 + one);
 				AddTooltip(GetTooltip(one));
 				AddHtmlLocalized(28, 115, 125, 20, 1076079, 0x7FFF, false, false); // The Past
+
 				AddImageTiled(171, 140, 115, 180, 0x7725 + two);
 				AddTooltip(GetTooltip(two));
 				AddHtmlLocalized(171, 115, 125, 20, 1076081, 0x7FFF, false, false); // The Question
+
 				AddImageTiled(314, 140, 115, 180, 0x7725 + three);
 				AddTooltip(GetTooltip(three));
 				AddHtmlLocalized(314, 115, 125, 20, 1076080, 0x7FFF, false, false); // The Future

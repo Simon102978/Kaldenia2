@@ -171,27 +171,22 @@ namespace Server.Mobiles
 		{
 			if (TuerSummoneur < DateTime.UtcNow)
 			{
-				if (Combatant is BaseCreature bc)
+				if (Combatant is BaseCreature bc && bc.ControlMaster is CustomPlayerMobile cp)
 				{
-					
-						if (bc.ControlMaster is CustomPlayerMobile cp)
-						{
-							Combatant = cp;
+					Combatant = cp;
 
-							Emote($"*se met à voler et plonge en piquer sur {cp.Name}*");
+					Emote($"*se met à voler et plonge en piquer sur {cp.Name}*");
 
-							cp.Damage(10);
+					cp.Damage(10, this); // Add 'this' as the source of damage
 
-							cp.Freeze(TimeSpan.FromSeconds(3));
+					cp.Freeze(TimeSpan.FromSeconds(3));
 
-							this.Location = cp.Location;
-
-						}
-					
+					this.Location = cp.Location;
 				}
 				TuerSummoneur = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(10, 50));
 			}
 		}
+
 
 		public void CoupVent()
 		{

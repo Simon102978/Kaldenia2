@@ -5525,6 +5525,7 @@ namespace Server
 
 		public virtual int Damage(int amount, Mobile from, bool informMount, bool checkDisrupt)
 		{
+
 			if (!CanBeDamaged() || m_Deleted)
 			{
 				return 0;

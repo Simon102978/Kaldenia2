@@ -3047,21 +3047,23 @@ namespace Server.Multis
         }
 
 
-        public void RemoveFriend(Mobile from, Nom targ, bool fromMessage)
+		public void RemoveFriend(Mobile from, Nom targ, bool fromMessage)
 		{
-			if (!IsCoOwner(from) || Friends == null || targ == null || targ.Mobile == null)
+			if (from == null || !IsCoOwner(from) || Friends == null || targ == null || targ.Mobile == null)
+			{
 				return;
+			}
 
 			if (Friends.Contains(targ))
 			{
 				Friends.Remove(targ);
 				targ.Mobile.Delta(MobileDelta.Noto);
 
-
 				if (fromMessage)
-                    from.SendLocalizedMessage(501298); // Friend removed from list.
-
-                targ.Mobile.SendLocalizedMessage(1060751); // You are no longer a friend of this house.
+				{
+					from.SendLocalizedMessage(501298); // Friend removed from list.
+				}
+				targ.Mobile.SendLocalizedMessage(1060751); // You are no longer a friend of this house.
 
 				List<SecureInfo> infos = GetSecureInfosFor(targ.Mobile);
 				if (infos != null)
@@ -3076,6 +3078,7 @@ namespace Server.Multis
 				}
 			}
 		}
+
 
 
 

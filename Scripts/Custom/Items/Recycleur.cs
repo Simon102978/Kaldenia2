@@ -77,7 +77,17 @@ namespace Server.Items
                     BaseWeapon weapon = (BaseWeapon)targeted;
                     resource = weapon.Resource;
                 }
-                else if (targeted is BaseShoes)
+				else if (targeted is BaseRanged)
+				{
+					BaseRanged weapon = (BaseRanged)targeted;
+					resource = weapon.Resource;
+				}
+				else if (targeted is BaseBow)
+				{
+					BaseBow weapon = (BaseBow)targeted;
+					resource = weapon.Resource;
+				}
+				else if (targeted is BaseShoes)
                 {
                     BaseShoes shoes = (BaseShoes)targeted;
                     resource = shoes.Resource;

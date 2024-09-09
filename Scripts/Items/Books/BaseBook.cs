@@ -1,12 +1,83 @@
 using Server.ContextMenus;
 using Server.Gumps;
+using Server.Items;
 using Server.Multis;
 using Server.Network;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Text;
+namespace Server.ContextMenus
+{
+	public class ProtectEntry : ContextMenuEntry
+	{
+		private Mobile m_From;
+		private BaseBook m_Book;
 
+		public ProtectEntry(Mobile from, BaseBook book)
+			: base(90, 1)
+		{
+			m_From = from;
+			m_Book = book;
+		}
+
+		public override void OnClick()
+		{
+			if (m_Book.Deleted || !m_From.CheckAlive())
+				return;
+
+			if (m_Book.Protected)
+			{
+				m_From.SendMessage("Ce livre est déjà protégé.");
+			}
+			else if (!m_Book.IsInBookCase())
+			{
+				m_From.SendMessage("Ce livre doit être dans une bibliothèque.");
+			}
+			else
+			{
+				m_Book.Protected = true;
+				m_Book.ProtectMaster = m_From;
+				m_From.SendMessage("Vous protégez ce livre.");
+			}
+		}
+	}
+
+	public class UnProtectEntry : ContextMenuEntry
+	{
+		private Mobile m_From;
+		private BaseBook m_Book;
+
+		public UnProtectEntry(Mobile from, BaseBook book)
+			: base(91, 1)
+		{
+			m_From = from;
+			m_Book = book;
+		}
+
+		public override void OnClick()
+		{
+			if (m_Book.Deleted || !m_From.CheckAlive())
+				return;
+
+			if (!m_Book.Protected)
+			{
+				m_From.SendMessage("Ce livre n'est pas protégé.");
+			}
+			else if (m_Book.ProtectMaster != m_From)
+			{
+				m_From.SendMessage("Vous n'avez pas protégé ce livre.");
+			}
+			else
+			{
+				m_Book.Protected = false;
+				m_Book.ProtectMaster = null;
+				m_From.SendMessage("Vous déprotégez le livre.");
+			}
+		}
+	}
+}
 namespace Server.Items
 {
     public class BookPageInfo
@@ -61,8 +132,10 @@ namespace Server.Items
         private BookPageInfo[] m_Pages;
         private bool m_Writable;
         private SecureLevel m_SecureLevel;
+		private bool m_Protected;
+		private Mobile m_ProtectMaster;
 
-        [CommandProperty(AccessLevel.GameMaster)]
+		[CommandProperty(AccessLevel.GameMaster)]
         public string Title
         {
             get
@@ -117,8 +190,34 @@ namespace Server.Items
 			get { return m_Pages; }
 			set { m_Pages = value; }
 		}
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool Protected
+		{
+			get { return m_Protected; }
+			set
+			{
+				if (value)
+				{
+					Movable = false;
+					Writable = false;
+				}
+				else
+				{
+					Movable = true;
+					Writable = true;
+				}
 
-        [Constructable]
+				m_Protected = value;
+			}
+		}
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public Mobile ProtectMaster
+		{
+			get { return m_ProtectMaster; }
+			set { m_ProtectMaster = value; }
+		}
+		[Constructable]
         public BaseBook(int itemID)
             : this(itemID, 20, true)
         {
@@ -246,9 +345,18 @@ namespace Server.Items
         {
             base.GetContextMenuEntries(from, list);
             SetSecureLevelEntry.AddTo(from, this, list);
-        }
 
-        public override void Serialize(GenericWriter writer)
+			if (from.Alive)
+			{
+				if (!m_Protected && IsInBookCase())
+					list.Add(new ProtectEntry(from, this));
+				else if (m_ProtectMaster == from)
+					list.Add(new UnProtectEntry(from, this));
+			}
+
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 
@@ -297,6 +405,7 @@ namespace Server.Items
 
             switch (version)
             {
+
                 case 4:
                     {
                         m_SecureLevel = (SecureLevel)reader.ReadInt();
@@ -377,8 +486,20 @@ namespace Server.Items
             else
                 base.AddNameProperty(list);
         }
+		
+		public virtual bool IsInBookCase()
+		{
+			if (Parent == null)
+				return false;
 
-        public override void OnDoubleClick(Mobile from)
+			Type t = Parent.GetType();
+
+			if (t == typeof(EmptyBookcase) || t == typeof(FullBookcase))
+				return true;
+			else
+				return false;
+		}
+		public override void OnDoubleClick(Mobile from)
         {
             if (m_Title == null && m_Author == null && m_Writable == true)
             {

@@ -20,7 +20,7 @@
 			Hue = 0x5E2;
 			Movable = true;
 			Amount = amount;
-			Name = "Carrot Seed";
+			Name = "Graine de Carotte";
 		}
 
 		public override void OnDoubleClick( Mobile from )
@@ -46,10 +46,10 @@
 	public class CarrotSeedling : BaseSeedling
 	{
 		[Constructable]
-		public CarrotSeedling( Mobile sower ) : base( 0xC68 )
+		public CarrotSeedling( Mobile sower ) : base(0x0C68)
 		{
 			Movable = false;
-			Name = "Carrot Seedling";
+			Name = "Pousse de Carotte";
 			Sower = sower;
 			Init(this, typeof(CarrotCrop));
 		}
@@ -81,13 +81,13 @@
 		public CarrotCrop() : this(null) { }
 
 		[Constructable]
-		public CarrotCrop( Mobile sower ) : base( 0xC76 )
+		public CarrotCrop( Mobile sower ) : base(0xC76)
 		{
 			Movable = false;
-			Name = "Carrot Plant";
+			Name = "Plant de Carotte";
 			Hue = 0x000;
 			Sower = sower;
-			Init(this, 1, 0xC61, 0xC7C, false);
+			Init(this, 1, 0x0C68, 0xC76, false);
 		}
 
 		public override void OnDoubleClick(Mobile from)
@@ -108,7 +108,7 @@
 			base.Deserialize(reader);
 			int version = reader.ReadInt();
 
-			Init(this, 1, 0xC61, 0xC7C, true);
+			Init(this, 1, 0x0C68, 0xC76, true);
 		}
 	}
 }

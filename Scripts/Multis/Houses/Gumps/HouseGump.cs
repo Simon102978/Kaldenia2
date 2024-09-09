@@ -595,34 +595,40 @@ namespace Server.Gumps
             from.SendGump(new HouseGump(HouseGumpPage.Security, from, house));
         }
 
-        public static void ClearFriends_Callback(Mobile from, bool okay, object state)
-        {
-            BaseHouse house = (BaseHouse)state;
+		public static void ClearFriends_Callback(Mobile from, bool okay, object state)
+		{
+			if (from == null || state == null)
+			{
+				return;
+			}
 
-            if (house.Deleted)
-                return;
+			BaseHouse house = state as BaseHouse;
+			if (house == null || house.Deleted)
+			{
+				return;
+			}
 
-            if (okay && house.IsCoOwner(from))
-            {
-                if (house.Friends != null)
-                {
-                    List<Nom> list = new List<Nom>(house.Friends);
+			if (okay && house.IsCoOwner(from))
+			{
+				if (house.Friends != null)
+				{
+					List<Nom> list = new List<Nom>(house.Friends);
+					foreach (Nom m in list)
+					{
+						if (m != null)
+						{
+							house.RemoveFriend(from, m, false);
+						}
+					}
+					ColUtility.Free(list);
+				}
+				from.SendLocalizedMessage(501332); // All friends have been removed from this house.
+			}
+			from.SendGump(new HouseGump(HouseGumpPage.Security, from, house));
+		}
 
-                    foreach (Nom m in list)
-                    {
-                        house.RemoveFriend(from, m, false);
-                    }
 
-                    ColUtility.Free(list);
-                }
-
-                from.SendLocalizedMessage(501332); // All friends have been removed from this house.
-            }
-
-            from.SendGump(new HouseGump(HouseGumpPage.Security, from, house));
-        }
-
-        public static void ClearBans_Callback(Mobile from, bool okay, object state)
+		public static void ClearBans_Callback(Mobile from, bool okay, object state)
         {
             BaseHouse house = (BaseHouse)state;
 
@@ -1450,21 +1456,28 @@ namespace Server.Gumps
 
                         break;
                     }
-                case 11:
-                    {
-                        if (isCoOwner && m_List != null && index >= 0 && index < m_List.Count)
-                        {
-                            m_House.RemoveFriend(from, m_List[index]);
+				case 11:
+					{
+						if (isCoOwner && m_List != null && index >= 0 && index < m_List.Count)
+						{
+							Nom friendToRemove = m_List[index];
+							if (friendToRemove != null)
+							{
+								m_House.RemoveFriend(from, friendToRemove);
 
-                            if (m_House.Friends.Count > 0)
-                                from.SendGump(new HouseGump(HouseGumpPage.RemoveFriend, from, m_House));
-                            else
-                                from.SendGump(new HouseGump(HouseGumpPage.Security, from, m_House));
-                        }
-
-                        break;
-                    }
-                case 12:
+								if (m_House.Friends != null && m_House.Friends.Count > 0)
+								{
+									from.SendGump(new HouseGump(HouseGumpPage.RemoveFriend, from, m_House));
+								}
+								else
+								{
+									from.SendGump(new HouseGump(HouseGumpPage.Security, from, m_House));
+								}
+							}
+						}
+						break;
+					}
+				case 12:
                     {
                         if (m_List != null && index >= 0 && index < m_List.Count)
                         {

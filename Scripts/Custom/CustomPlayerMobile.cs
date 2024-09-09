@@ -2107,13 +2107,32 @@ namespace Server.Mobiles
 
 		public void TrapDamage(int damage, int phys, int fire, int cold, int pois, int nrgy)
 		{
-			DeathShot = true;
+			if (this == null || this.Deleted)
+			{
+				return;
+			}
 
-			AOS.Damage(this, damage, phys, fire, cold, pois, nrgy);
+			try
+			{
+				DeathShot = true;
 
-			DeathShot = false;
+				if (damage < 0)
+				{
+					damage = 0;
+				}
 
+				AOS.Damage(this, damage, phys, fire, cold, pois, nrgy);
+			}
+			catch (Exception e)
+			{
+				Console.WriteLine($"Erreur dans TrapDamage pour {this.Name}: {e.Message}");
+			}
+			finally
+			{
+				DeathShot = false;
+			}
 		}
+
 
 
 		public override void OnAfterResurrect()

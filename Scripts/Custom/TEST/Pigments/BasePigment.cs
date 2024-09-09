@@ -49,7 +49,7 @@ namespace Server.Items
 					if (specialTub.Charges > 0)
 					{
 						specialTub.DyedHue = m_Pigment.m_Hue;
-						specialTub.Charges--;
+						specialTub.Charges =1;
 						from.SendMessage($"Vous avez appliqué le pigment {m_Pigment.m_PigmentName} à la cuve de teinture spéciale. Il reste {specialTub.Charges} charges.");
 						m_Pigment.Delete();
 					}

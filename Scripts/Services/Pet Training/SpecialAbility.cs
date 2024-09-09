@@ -1510,74 +1510,96 @@ namespace Server.Mobiles
         }
     }
 
-    public class ViciousBite : SpecialAbility
-    {
-        public override bool TriggerOnDoMeleeDamage => true;
-        public override int ManaCost => 20;
+	public class ViciousBite : SpecialAbility
+	{
+		public override bool TriggerOnDoMeleeDamage => true;
+		public override int ManaCost => 20;
 
-        private static Dictionary<Mobile, InternalTimer> _Table;
+		private static Dictionary<Mobile, InternalTimer> _Table;
 
-        public override void DoEffects(BaseCreature creature, Mobile defender, ref int damage)
-        {
-            if (_Table != null && _Table.ContainsKey(defender))
-            {
-                return;
-            }
+		public override void DoEffects(BaseCreature creature, Mobile defender, ref int damage)
+		{
+			if (defender == null || defender.Deleted)
+			{
+				return;
+			}
 
-            if (_Table == null)
-            {
-                _Table = new Dictionary<Mobile, InternalTimer>();
-            }
+			if (_Table == null)
+			{
+				_Table = new Dictionary<Mobile, InternalTimer>();
+			}
 
-            defender.SendLocalizedMessage(1112472); // You've suffered a vicious bite!
-            defender.SendLocalizedMessage(1113211); // The kepetch gives you a particularly vicious bite!
+			if (_Table.ContainsKey(defender))
+			{
+				return;
+			}
 
-            Effects.SendPacket(defender.Location, defender.Map, new ParticleEffect(EffectType.FixedFrom, defender.Serial, Serial.Zero, 0x37CC, defender.Location, defender.Location, 1, 10, false, false, 0, 0, 0, 1003, 1, defender.Serial, 8, 0));
+			defender.SendLocalizedMessage(1112472); // You've suffered a vicious bite!
+			defender.SendLocalizedMessage(1113211); // The kepetch gives you a particularly vicious bite!
 
-            _Table[defender] = new InternalTimer(defender);
-        }
+			Effects.SendPacket(defender.Location, defender.Map, new ParticleEffect(EffectType.FixedFrom, defender.Serial, Serial.Zero, 0x37CC, defender.Location, defender.Location, 1, 10, false, false, 0, 0, 0, 1003, 1, defender.Serial, 8, 0));
 
-        private class InternalTimer : Timer
-        {
-            private Mobile Defender { get; }
-            private int Damage { get; set; }
+			_Table[defender] = new InternalTimer(defender);
+		}
 
-            public InternalTimer(Mobile defender)
-                : base(TimeSpan.FromMinutes(1.0), TimeSpan.FromSeconds(20.0), 10)
-            {
-                Defender = defender;
-                Damage = 5;
-                Start();
-            }
+		private class InternalTimer : Timer
+		{
+			private Mobile Defender { get; }
+			private int Damage { get; set; }
 
-            protected override void OnTick()
-            {
-                if (!Defender.Alive || Defender.IsDeadBondedPet)
-                {
-                    Stop();
+			public InternalTimer(Mobile defender)
+				: base(TimeSpan.FromMinutes(1.0), TimeSpan.FromSeconds(20.0), 10)
+			{
+				Defender = defender;
+				Damage = 5;
+				Start();
+			}
 
-                    if (_Table.ContainsKey(Defender))
-                    {
-                        _Table.Remove(Defender);
-                    }
-                }
-                else
-                {
-                    Defender.Damage(Damage);
-                    Defender.SendLocalizedMessage(1112473); // Your vicious wound is festering!
+			protected override void OnTick()
+			{
+				if (Defender == null || !Defender.Alive || Defender.Deleted || Defender.IsDeadBondedPet)
+				{
+					Stop();
 
-                    Damage += 5;
+					if (_Table != null && _Table.ContainsKey(Defender))
+					{
+						_Table.Remove(Defender);
+					}
+					return;
+				}
 
-                    if (Damage > 50)
-                    {
-                        _Table.Remove(Defender);
-                    }
-                }
-            }
-        }
-    }
+				try
+				{
+					Defender.Damage(Damage);
+					Defender.SendLocalizedMessage(1112473); // Your vicious wound is festering!
 
-    public class RuneCorruption : SpecialAbility
+					Damage += 5;
+
+					if (Damage > 50)
+					{
+						Stop();
+						if (_Table != null && _Table.ContainsKey(Defender))
+						{
+							_Table.Remove(Defender);
+						}
+					}
+				}
+				catch (Exception e)
+				{
+					Console.WriteLine($"Exception in ViciousBite.InternalTimer.OnTick: {e.Message}");
+					Console.WriteLine($"Stack Trace: {e.StackTrace}");
+					Stop();
+					if (_Table != null && _Table.ContainsKey(Defender))
+					{
+						_Table.Remove(Defender);
+					}
+				}
+			}
+		}
+	}
+
+
+	public class RuneCorruption : SpecialAbility
     {
         public static Dictionary<Mobile, ExpireTimer> _Table;
 

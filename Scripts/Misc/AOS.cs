@@ -227,56 +227,60 @@ namespace Server
             }
 
             var fromCreature = from as BaseCreature;
-            var toCreature = m as BaseCreature;
+			var toCreature = m as BaseCreature;
 
-            if (from != null && !from.Deleted && from.Alive && !from.IsDeadBondedPet)
-            {
-                Mobile oath = BloodOathSpell.GetBloodOath(from);
+			if (damageable == null)
+			{
+				Console.WriteLine("AOS.Damage: 'damageable' est null");
+				return 0; // Retourne 0 dégâts si damageable est null
+			}
 
-                /* Per EA's UO Herald Pub48 (ML):
-                * ((resist spellsx10)/20 + 10=percentage of damage resisted)
-                * 
-                * Tested 12/29/2017-
-                * No cap, also, above forumula is only in effect vs. creatures
-                */
+			if (from != null && !from.Deleted && from.Alive && !from.IsDeadBondedPet)
+			{
+				Mobile oath = BloodOathSpell.GetBloodOath(from);
 
-                if (oath == m)
-                {
-                    int originalDamage = totalDamage;
-                    totalDamage = (int)(totalDamage * 1.2);
+				if (oath == m)
+				{
+					int originalDamage = totalDamage;
+					totalDamage = (int)(totalDamage * 1.2);
 
-                    if (toCreature != null)
-                    {
-                        from.Damage((int)(originalDamage * (1 - (((from.Skills.MagicResist.Value * .5) + 10) / 100))), m);
-                    }
-                    else
-                    {
-                        from.Damage(originalDamage, m);
-                    }
-                }
-                else if (!ignoreArmor && from != m)
-                {
-                    int reflectPhys = Math.Min(105, AosAttributes.GetValue(m, AosAttribute.ReflectPhysical));
+					if (toCreature != null)
+					{
+						from.Damage((int)(originalDamage * (1 - (((from.Skills.MagicResist.Value * .5) + 10) / 100))), m);
+					}
+					else
+					{
+						from.Damage(originalDamage, m);
+					}
+				}
+				else if (!ignoreArmor && from != m)
+				{
+					int reflectPhys = Math.Min(105, AosAttributes.GetValue(m, AosAttribute.ReflectPhysical));
 
-                    if (reflectPhys != 0)
-                    {
-                        if (from is ExodusMinion && ((ExodusMinion)from).FieldActive || from is ExodusOverseer && ((ExodusOverseer)from).FieldActive)
-                        {
-                            from.FixedParticles(0x376A, 20, 10, 0x2530, EffectLayer.Waist);
-                            from.PlaySound(0x2F4);
-                            m.SendAsciiMessage("Your weapon cannot penetrate the creature's magical barrier");
-                        }
-                        else
-                        {
-                            from.Damage(Scale((damage * phys * (100 - (ignoreArmor ? 0 : m.PhysicalResistance))) / 10000, reflectPhys), m);
-                        }
-                    }
-                }
-            }
-            #endregion
+					if (reflectPhys != 0)
+					{
+						if (from is ExodusMinion minion && minion.FieldActive || from is ExodusOverseer overseer && overseer.FieldActive)
+						{
+							from.FixedParticles(0x376A, 20, 10, 0x2530, EffectLayer.Waist);
+							from.PlaySound(0x2F4);
+							m.SendAsciiMessage("Your weapon cannot penetrate the creature's magical barrier");
+						}
+						else
+						{
+							int reflectedDamage = Scale((damage * phys * (100 - (ignoreArmor ? 0 : m.PhysicalResistance))) / 10000, reflectPhys);
+							if (reflectedDamage > 0)
+							{
+								from.Damage(reflectedDamage, m);
+							}
+						}
+					}
+				}
+			}
 
-            //SHould this go in after or before dragon barding absorb?
-            if (ignoreArmor)
+			#endregion
+
+			//SHould this go in after or before dragon barding absorb?
+			if (ignoreArmor)
                 DamageEaterContext.CheckDamage(m, totalDamage, 0, 0, 0, 0, 0, 100);
             else
                 DamageEaterContext.CheckDamage(m, totalDamage, phys, fire, cold, pois, nrgy, direct);

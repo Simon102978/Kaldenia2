@@ -214,8 +214,9 @@ namespace Server.Items
 			public Carquois(int hue)
 					: base(41794)
 			{
-				Weight = 2.0;
-				Name ="Carquois";
+			Weight = 2.0;
+			WeightReduction = 50;
+			Name = "Carquois";
 			}
 
 		public Carquois(Serial serial)

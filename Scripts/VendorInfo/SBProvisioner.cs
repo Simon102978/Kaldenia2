@@ -88,7 +88,10 @@ namespace Server.Mobiles
                 Add(new GenericBuyInfo(typeof(Backgammon), 2, 20, 0xE1C, 0));
 			//	Add(new GenericBuyInfo(typeof(JeuTarot), 2, 20, 0x0E15, 0));
 				Add(new GenericBuyInfo(typeof(Engines.Mahjong.MahjongGame), 6, 20, 0xFAA, 0));
-                Add(new GenericBuyInfo(typeof(Dices), 2, 20, 0xFA7, 0));
+                Add(new GenericBuyInfo(typeof(Dices), 20, 20, 0xFA7, 0));
+				Add(new GenericBuyInfo(typeof(EnhancedDices), 20, 20, 0xFA7, 0));
+
+				
 				Add(new GenericBuyInfo(typeof(YahtzeeDice), 2, 20, 0xFA7, 0));
 				Add(new GenericBuyInfo(typeof(SmallBagBall), 3, 20, 0x2256, 0));
                 Add(new GenericBuyInfo(typeof(LargeBagBall), 3, 20, 0x2257, 0));
