@@ -422,30 +422,39 @@ namespace Server.Multis
 			}
 			set
 			{
+                if (LastStuck.AddSeconds(60) >= DateTime.Now && value)
+                {
+                    PublicOverheadMessage(MessageType.Regular, 0, false, "*Le bateau resiste.*");	
+                    return;
+                }
+
 				if (!m_Stuck && value)
 				{
 					if (Pilot is PlayerMobile pm && Pilot.Mount != null)
 					{
 
-						PublicOverheadMessage(MessageType.Regular, 0, false, "*Le bateau est coincé.*");
+						RemovePilot(pm);       
 
-						RemovePilot(pm);
+						pm.SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(30), true);			
 
-                        OnTakenDamage(20000);
+					}	
 
-						pm.SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(30), true);
-
-						LastStuck = DateTime.Now;
-
-					}			
+                     StopMove(false);	
+                   
+                    OnTakenDamage(5000);
+                  
+                    PublicOverheadMessage(MessageType.Regular, 0, false, "*Le bateau est coincé.*");	
+                    LastStuck = DateTime.Now;
 				}
 				else if (m_Stuck && !value)
 				{
 					PublicOverheadMessage(MessageType.Regular, 0, false, "*Le bateau se déprend*");
-				}
-
-				m_Stuck = value;
+	            }
+               
+                m_Stuck = value;
+                		
 			}
+
 		}
 
 
@@ -554,7 +563,7 @@ namespace Server.Multis
         public virtual bool IsClassicBoat => true;
         public virtual bool IsRowBoat => false;
         public virtual bool CanLinkToLighthouse => true;
-        public virtual int MaxHits => 25000;
+        public virtual int MaxHits => 50000;
         public virtual double TurnDelay => 0.5;
         public virtual double ScuttleLevel => 25.0;
         public virtual TimeSpan BoatDecayDelay => TimeSpan.FromDays(13);

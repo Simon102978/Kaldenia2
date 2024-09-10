@@ -19,7 +19,7 @@ namespace Server.Multis
         public override int WheelDistance => 3;
         public override int CaptiveOffset => 5;
         public override int MaxCannons => 9;
-        public override int MaxHits => 600000;
+        public override int MaxHits => 200000;
 
         public override double TurnDelay => 3;
         public override TimeSpan BoatDecayDelay => TimeSpan.FromDays(30);

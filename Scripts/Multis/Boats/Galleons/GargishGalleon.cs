@@ -18,7 +18,7 @@ namespace Server.Multis
         public override int MaxCannons => 7;
 
         public override double TurnDelay => 1;
-        public override int MaxHits => 400000;
+        public override int MaxHits => 140000;
 
         public override int ZSurface => 16;
 
