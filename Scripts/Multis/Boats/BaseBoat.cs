@@ -43,8 +43,8 @@ namespace Server.Multis
         private static readonly int SlowSpeed = 1;
         private static readonly int FastSpeed = 1;
 
-        private static readonly double WoodPer = 5;
-        private static readonly double ClothPer = 10;
+        private static readonly double WoodPer = 1;
+        private static readonly double ClothPer = 1;
 
         public static readonly int EmergencyRepairClothCost = 20;
         public static readonly int EmergencyRepairWoodCost = 10;

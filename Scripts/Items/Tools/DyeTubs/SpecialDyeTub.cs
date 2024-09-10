@@ -2,18 +2,17 @@ namespace Server.Items
 {
     public class SpecialDyeTub : DyeTub, Engines.VeteranRewards.IRewardItem, IDyable
     {
-        private bool m_IsRewardItem;
-        [Constructable]
-        public SpecialDyeTub()
-        {
+		private bool m_IsRewardItem;
+
+		[Constructable]
+		public SpecialDyeTub()
+		{
 			Name = "Bac de Teinture (Spéciale)";
 			Charges = 1;
-        }
+		}
 
-        public SpecialDyeTub(Serial serial)
-            : base(serial)
-        {
-        }
+		public SpecialDyeTub(Serial serial) : base(serial) { }
+
 		public override bool AllowRunebooks => true;
 		public override bool AllowFurniture => true;
 		public override bool AllowStatuettes => true;
@@ -22,29 +21,21 @@ namespace Server.Items
 		public override bool AllowMetal => true;
 		public override bool AllowWeapons => true;
 		public override bool AllowJewels => true;
-
-
-
-
-
-
-
-
-
+		public override bool AllowStatuetteCire => true;
 		public override CustomHuePicker CustomHuePicker => CustomHuePicker.SpecialDyeTub;
-        public override int LabelNumber => 1041285;// Special Dye Tub
-        [CommandProperty(AccessLevel.GameMaster)]
-        public bool IsRewardItem
-        {
-            get
-            {
-                return m_IsRewardItem;
-            }
-            set
-            {
-                m_IsRewardItem = value;
-            }
-        }
+		public override int LabelNumber => 1041285; // Special Dye Tub
+
+		[CommandProperty(AccessLevel.GameMaster)]
+		public bool IsRewardItem
+		{
+			get => m_IsRewardItem;
+			set => m_IsRewardItem = value;
+		}
+
+		public override bool CanDyeItem(Item item)
+		{
+			return true; // Le SpecialDyeTub peut teindre n'importe quel objet
+		}
 
 		public bool Dye(Mobile from, DyeTub sender)
 		{
@@ -55,25 +46,23 @@ namespace Server.Items
 				return true;
 			}
 			return false;
-
 		}
+
 		public override void OnDoubleClick(Mobile from)
-        {
-            if (m_IsRewardItem && !Engines.VeteranRewards.RewardSystem.CheckIsUsableBy(from, this, null))
-                return;
+		{
 
-            base.OnDoubleClick(from);
-        }
+			base.OnDoubleClick(from);
+		}
 
-        public override void GetProperties(ObjectPropertyList list)
-        {
-            base.GetProperties(list);
+		public override void GetProperties(ObjectPropertyList list)
+		{
+			base.GetProperties(list);
+			if (m_IsRewardItem)
+				list.Add(1076217); // 1st Year Veteran Reward
+		}
 
-            if (m_IsRewardItem)
-                list.Add(1076217); // 1st Year Veteran Reward
-        }
 
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 

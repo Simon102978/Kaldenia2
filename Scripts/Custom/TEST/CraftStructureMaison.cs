@@ -31,7 +31,7 @@ namespace Server.Items
 
 			BaseHouse house = BaseHouse.FindHouseAt(from);
 
-			if (house == null || !house.IsOwner(from))
+			if (house == null || !(house.IsOwner(from) || house.IsCoOwner(from)))
 			{
 				from.SendMessage("Vous devez être dans une maison dont vous êtes propriétaire pour utiliser cet outil.");
 				return;
@@ -57,7 +57,7 @@ namespace Server.Items
 
 				BaseHouse house = BaseHouse.FindHouseAt(from);
 
-				if (house == null || !house.IsOwner(from) || !house.IsCoOwner(from))
+				if (house == null || !(house.IsOwner(from) || house.IsCoOwner(from)))
 				{
 					from.SendMessage("Vous devez être dans une maison dont vous êtes propriétaire pour utiliser cet outil.");
 					return;
@@ -66,13 +66,13 @@ namespace Server.Items
 				if (targeted is StaticTarget)
 				{
 					StaticTarget t = (StaticTarget)targeted;
-					int itemID = t.ItemID;
+					string name = t.Name;
 
-					from.SendMessage("Vous avez copié l'ID de l'élément : " + itemID);
+					from.SendMessage("Vous avez copié l'ID de l'élément : " + name);
 					m_Toolbox.m_Used = true;
-					m_Toolbox.ItemID = itemID;
+					m_Toolbox.Name = name;
 					m_Toolbox.Weight = 10;
-					m_Toolbox.Name = "Élément copié (ID: " + itemID + ")";
+					m_Toolbox.Name = "Élément copié (ID: " + name + ")";
 				}
 				
 				else

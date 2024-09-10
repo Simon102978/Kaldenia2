@@ -181,11 +181,9 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(LargeStoneTableEastDeed), "Mobilier", "Grande table en granite (E)", 75.0, 125.0, typeof(Granite), 1044514, 9, 1044513);
 			AddCraft(typeof(LargeStoneTableSouthDeed), "Mobilier", "Grande table en granite (S)", 75.0, 125.0, typeof(Granite), 1044514, 9, 1044513);
 			AddCraft(typeof(RitualTableDeed), "Mobilier", "Table rituel", 94.7, 103.5, typeof(Granite), 1044514, 8, 1044513);
-			index = AddCraft(typeof(LargeGargoyleBedSouthDeed), "Mobilier", "Grand lit sculpté (S)", 76.0, 115.0, typeof(Granite), 1044514, 5, 1044513);
-			AddSkill(index, SkillName.Tailoring, 70.0, 75.0);
+			index = AddCraft(typeof(LargeGargoyleBedSouthDeed), "Mobilier", "Grand lit sculpté (S)", 76.0, 115.0, typeof(Granite), 1044514, 20, 1044513);
 			AddRes(index, typeof(Cloth), 1044286, 100, 1044287);
-			index = AddCraft(typeof(LargeGargoyleBedEastDeed), "Mobilier", "Grand lit sculpté (E)", 76.0, 115.0, typeof(Granite), 1044514, 5, 1044513);
-			AddSkill(index, SkillName.Tailoring, 70.0, 75.0);
+			index = AddCraft(typeof(LargeGargoyleBedEastDeed), "Mobilier", "Grand lit sculpté (E)", 76.0, 115.0, typeof(Granite), 1044514, 20, 1044513);
 			AddRes(index, typeof(Cloth), 1044286, 100, 1044287);
 
 			// Statues
