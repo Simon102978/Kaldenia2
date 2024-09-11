@@ -564,10 +564,12 @@ namespace Server.Mobiles
 			{
 				list.Add(1050045, "{0}, \t{1}\t", Race.Name, Apparence()); // ~1_PREFIX~~2_NAME~~3_SUFFIX~
 				list.Add(1050045, "{0}, \t{1}\t", GrandeurString(), GrosseurString());
-	//			list.Add(1050045,"{0}", StatutSocialString());
+				string statut = StatutSocialString();
+				if (statut == "Equite" || statut == "Patre" || statut == "Magistrat" || statut == "Empereur")
+				{
+					list.Add(1050045, "{0}", statut);
+				}
 			}
-	
-
 		}
 
 		#region Missive

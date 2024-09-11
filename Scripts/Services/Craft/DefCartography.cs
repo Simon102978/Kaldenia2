@@ -90,28 +90,32 @@ namespace Server.Engines.Craft
             AddCraft(typeof(SeaChart), "Carte", "Carte des eaux", 35.0, 95.0, typeof(BlankMap), "Carte Vierge", 5, "Vous n'avez pas suffisament de carte vierge");
             AddCraft(typeof(WorldMap), "Carte", "Carte du Monde", 50, 99.5, typeof(BlankMap), "Carte Vierge", 7, "Vous n'avez pas suffisament de carte vierge");
 
-  /*          int index = AddCraft(typeof(TatteredWallMapSouth), 1044448, 1072891, 90.0, 150.0, typeof(TreasureMap), 1073494, 10, 1073495);
-            AddRes(index, typeof(TreasureMap), 1073498, 5, 1073499);
-            AddRes(index, typeof(TreasureMap), 1073500, 3, 1073501);
-            AddRes(index, typeof(TreasureMap), 1073502, 1, 1073503);
-            AddResCallback(index, ConsumeTatteredWallMapRes);
+			/*          int index = AddCraft(typeof(TatteredWallMapSouth), 1044448, 1072891, 90.0, 150.0, typeof(TreasureMap), 1073494, 10, 1073495);
+					  AddRes(index, typeof(TreasureMap), 1073498, 5, 1073499);
+					  AddRes(index, typeof(TreasureMap), 1073500, 3, 1073501);
+					  AddRes(index, typeof(TreasureMap), 1073502, 1, 1073503);
+					  AddResCallback(index, ConsumeTatteredWallMapRes);
 
-            index = AddCraft(typeof(TatteredWallMapEast), 1044448, 1072892, 90.0, 150.0, typeof(TreasureMap), 1073494, 10, 1073495);
-            AddRes(index, typeof(TreasureMap), 1073498, 5, 1073499);
-            AddRes(index, typeof(TreasureMap), 1073500, 3, 1073501);
-            AddRes(index, typeof(TreasureMap), 1073502, 1, 1073503);
-            AddResCallback(index, ConsumeTatteredWallMapRes);
+					  index = AddCraft(typeof(TatteredWallMapEast), 1044448, 1072892, 90.0, 150.0, typeof(TreasureMap), 1073494, 10, 1073495);
+					  AddRes(index, typeof(TreasureMap), 1073498, 5, 1073499);
+					  AddRes(index, typeof(TreasureMap), 1073500, 3, 1073501);
+					  AddRes(index, typeof(TreasureMap), 1073502, 1, 1073503);
+					  AddResCallback(index, ConsumeTatteredWallMapRes);
 
-            index = AddCraft(typeof(EodonianWallMap), 1044448, 1156690, 65.0, 125.0, typeof(BlankMap), 1044449, 50, 1044450);
-            AddRes(index, typeof(UnabridgedAtlasOfEodon), 1156721, 1, 1156722);
-            AddRecipe(index, (int)CartographyRecipes.EodonianWallMap);
+					  index = AddCraft(typeof(EodonianWallMap), 1044448, 1156690, 65.0, 125.0, typeof(BlankMap), 1044449, 50, 1044450);
+					  AddRes(index, typeof(UnabridgedAtlasOfEodon), 1156721, 1, 1156722);
+					  AddRecipe(index, (int)CartographyRecipes.EodonianWallMap);
 
-            index = AddCraft(typeof(StarChart), 1044448, 1158493, 0.0, 60.0, typeof(BlankMap), 1044449, 1, 1044450);
-            SetForceSuccess(index, 75);
-  */
-        }
+					  index = AddCraft(typeof(StarChart), 1044448, 1158493, 0.0, 60.0, typeof(BlankMap), 1044449, 1, 1044450);
+					  SetForceSuccess(index, 75);
+			*/
+			SetSubRes(typeof(BlankMap), "Carte Vierge");
+		}
 
-        public int ConsumeTatteredWallMapRes(Mobile from, ConsumeType type)
+		// Set the overridable material
+		
+
+		public int ConsumeTatteredWallMapRes(Mobile from, ConsumeType type)
         {
             Item[] maps = from.Backpack.FindItemsByType(typeof(TreasureMap));
             List<Item> toConsume = new List<Item>();

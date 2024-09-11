@@ -33,7 +33,7 @@ namespace Server.Items
 
         private string m_EngravedText = string.Empty;
 
-        [CommandProperty(AccessLevel.GameMaster)]
+		[CommandProperty(AccessLevel.GameMaster)]
         public string EngravedText
         {
             get { return m_EngravedText; }
@@ -49,7 +49,10 @@ namespace Server.Items
 
         public override bool IsAccessibleTo(Mobile m)
         {
-            if (!BaseHouse.CheckAccessible(m, this))
+			     if (this.Public)
+					return true;
+
+			if (!BaseHouse.CheckAccessible(m, this))
                 return false;
 
             return base.IsAccessibleTo(m);

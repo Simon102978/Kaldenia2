@@ -844,6 +844,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LargeFishingPole), "Divers", "Canne à pêche", 10.0, 30.0, typeof(PalmierBoard), 1044041, 5, 1044351); //This is in the categor of Other during AoS
 			AddRes(index, typeof(Cloth), 1044286, 5, 1044287);
 			SetUseSubRes2(index, true);
+			index = AddCraft(typeof(ParrotPerchAddonDeed), "Divers", "Perchoir à Perroquet", 30.0, 80.0, typeof(Materiaux), "Matériaux", 40, "Vous n'avez pas assez de matériaux");
+
 			index = AddCraft(typeof(CustomSign), "Divers", "Affiche Personnalisée", 30.0, 80.0, typeof(Materiaux), "Matériaux", 10, "Vous n'avez pas assez de matériaux");
 			AddRes(index, typeof(BlankScroll), "Parchemin Vierge", 3, "Vous n'avez pas suffisament de parchemin vierge");
 

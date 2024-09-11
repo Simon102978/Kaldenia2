@@ -125,7 +125,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
 			AddLoot(LootPack.LootItem<Items.GemmePoison>(), (double)5);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(7, 14));
-			AddLoot(LootPack.LootItem<SangDragon>(4, true));
+			AddLoot(LootPack.LootItem<DragonBlood>(4, true));
             AddLoot(LootPack.LootItem<Items.Gold>(100,200));
         
 

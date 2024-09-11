@@ -85,7 +85,7 @@ namespace Server.Mobiles
 
             foreach (Mobile m in eable)
             {
-                if (m.Player && m.Alive && !m.IsDeadBondedPet && m.Karma <= 0 && m.IsPlayer())
+                if (m.Player && m.Alive && !m.IsDeadBondedPet && m.Int <= 2000 && m.IsPlayer())
                     list.Add(m);
             }
             eable.Free();
@@ -104,7 +104,7 @@ namespace Server.Mobiles
                 if (friendly)
                 {
                     m.FixedEffect(0x37C4, 1, 12, 1109, 3); // At player
-                    m.Mana += 1 - (m.Karma / 1000);
+                    m.Mana += 1 - (m.Int / 25);
                 }
             }
         }

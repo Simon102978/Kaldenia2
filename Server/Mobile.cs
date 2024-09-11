@@ -969,45 +969,41 @@ namespace Server
 				m_Resistances = new[] { Int32.MinValue, Int32.MinValue, Int32.MinValue, Int32.MinValue, Int32.MinValue };
 			}
 
-			for (var i = 0; i < m_Resistances.Length; ++i)
+			var tempResistances = new double[m_Resistances.Length];
+
+			tempResistances[0] += BasePhysicalResistance;
+			tempResistances[1] += BaseFireResistance;
+			tempResistances[2] += BaseColdResistance;
+			tempResistances[3] += BasePoisonResistance;
+			tempResistances[4] += BaseEnergyResistance;
+
+			if (m_ResistMods != null)
 			{
-				m_Resistances[i] = 0;
-			}
-
-			m_Resistances[0] += BasePhysicalResistance;
-			m_Resistances[1] += BaseFireResistance;
-			m_Resistances[2] += BaseColdResistance;
-			m_Resistances[3] += BasePoisonResistance;
-			m_Resistances[4] += BaseEnergyResistance;
-
-			for (var i = 0; m_ResistMods != null && i < m_ResistMods.Count; ++i)
-			{
-				var mod = m_ResistMods[i];
-				var v = (int)mod.Type;
-
-				if (v >= 0 && v < m_Resistances.Length)
+				foreach (var mod in m_ResistMods)
 				{
-					m_Resistances[v] += mod.Offset;
+					var v = (int)mod.Type;
+					if (v >= 0 && v < tempResistances.Length)
+					{
+						tempResistances[v] += mod.Offset;
+					}
 				}
 			}
 
-			for (var i = 0; i < m_Items.Count; ++i)
+			foreach (var item in m_Items)
 			{
-				var item = m_Items[i];
-
 				if (item.CheckPropertyConfliction(this))
 				{
 					continue;
 				}
 
-				m_Resistances[0] += item.PhysicalResistance;
-				m_Resistances[1] += item.FireResistance;
-				m_Resistances[2] += item.ColdResistance;
-				m_Resistances[3] += item.PoisonResistance;
-				m_Resistances[4] += item.EnergyResistance;
+				tempResistances[0] += item.PhysicalResistance;
+				tempResistances[1] += item.FireResistance;
+				tempResistances[2] += item.ColdResistance;
+				tempResistances[3] += item.PoisonResistance;
+				tempResistances[4] += item.EnergyResistance;
 			}
 
-			for (var i = 0; i < m_Resistances.Length; ++i)
+			for (var i = 0; i < tempResistances.Length; ++i)
 			{
 				var min = GetMinResistance((ResistanceType)i);
 				var max = GetMaxResistance((ResistanceType)i);
@@ -1017,16 +1013,15 @@ namespace Server
 					max = min;
 				}
 
-				if (m_Resistances[i] > max)
-				{
-					m_Resistances[i] = max;
-				}
-				else if (m_Resistances[i] < min)
-				{
-					m_Resistances[i] = min;
-				}
+				if (tempResistances[i] < min)
+					tempResistances[i] = min;
+				else if (tempResistances[i] > max)
+					tempResistances[i] = max;
+
+				m_Resistances[i] = (int)Math.Round(tempResistances[i]);
 			}
 		}
+
 
 		public virtual int GetMinResistance(ResistanceType type)
 		{

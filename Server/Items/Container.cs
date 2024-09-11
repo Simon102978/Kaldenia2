@@ -230,6 +230,10 @@ namespace Server.Items
 		{
 			if (!m.IsStaff())
 			{
+				if (this.Public)
+				{
+					return true;
+				}
 				if (IsDecoContainer)
 				{
 					if (message)

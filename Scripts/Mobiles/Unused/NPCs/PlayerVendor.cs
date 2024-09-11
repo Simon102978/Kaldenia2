@@ -512,6 +512,9 @@ namespace Server.Mobiles
 			if (m.AccessLevel >= AccessLevel.GameMaster)
 				return true;
 
+			if (m == Owner)
+				return true;
+
 			if (House != null)
 			{
 				return House.IsOwner(m) || House.IsCoOwner(m);

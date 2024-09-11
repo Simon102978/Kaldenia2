@@ -943,7 +943,7 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Rubis), "Rubis", 10, "Vous n'avez pas assez de Rubis.");
 
 			index = AddCraft(typeof(LivreClasse2Oubli), "Livre de Classe", "livre de l'oubli de classe 2", 90.0, 100, typeof(BlankScroll), 1044377, 10, 1044378);
-			AddRes(index, typeof(DragonBlood), "Sang de Dragon", 5, "Vous n'avez pas assez de Sand de Dragon.");
+			AddRes(index, typeof(DragonBlood), "Sang de Dragon", 5, "Vous n'avez pas assez de Sang de Dragon.");
 
 
 			index = AddCraft(typeof(LivreMetier0Oubli), "Livre de Classe", "livre de l'oubli de métier 0", 50.0, 60, typeof(BlankScroll), 1044377, 10, 1044378);

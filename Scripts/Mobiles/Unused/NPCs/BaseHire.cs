@@ -196,7 +196,7 @@ namespace Server.Mobiles
 			foreach (SkillName skillName in Enum.GetValues(typeof(SkillName)))
 			{
 				Skill skill = Skills[skillName];
-				if (skill.Base > 0 || skillName == SkillName.Discordance && skill.Base > 0)
+				if (skill.Base > 0)
 				{
 					skill.Base = Math.Min(skill.Base + 0.3, skill.Cap);
 				}

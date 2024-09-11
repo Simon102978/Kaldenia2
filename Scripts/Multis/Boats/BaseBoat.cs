@@ -3323,7 +3323,21 @@ namespace Server.Multis
             }
         }
 
-        public void TillerManSay(object message)
+		public virtual void FullRepair()
+		{
+			if (this is BaseGalleon galleon)
+			{
+				galleon.Hits = galleon.MaxHits;
+			}
+			else
+			{
+				this.Hits = this.MaxHits;
+			
+		}
+	}
+		
+
+		public void TillerManSay(object message)
         {
             if (message is int)
             {

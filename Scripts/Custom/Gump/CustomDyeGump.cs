@@ -6,6 +6,7 @@ using Server.Mobiles;
 using Server.Items;
 using Server.Misc;
 using System.Collections.Generic;
+using static Server.MethodEmitter;
 
 
 namespace Server.Gumps
@@ -30,8 +31,9 @@ namespace Server.Gumps
 		private int m_Page;
 		private int m_hue;
 		private DyeTub m_dyeTub;
+		private CustomHuePickerCallback m_Callback;
 
-		public CustomDyeGump(CustomPlayerMobile from, DyeTub tub, int hue, int page = 0)
+		public CustomDyeGump(CustomPlayerMobile from, DyeTub tub, int hue, CustomHuePickerCallback callback, int page = 0) 
 			: base("Couleurs", 560, 360, false)
 		{
 
@@ -39,6 +41,7 @@ namespace Server.Gumps
 			m_hue = hue;
 			m_Page = page;
 			m_dyeTub = tub;
+			m_Callback = callback;
 
 			int x = XBase;
 			int y = YBase;
@@ -99,35 +102,29 @@ namespace Server.Gumps
 		}
 
 		public override void OnResponse(NetState sender, RelayInfo info)
-        {
-
-
-
+		{
 			if (info.ButtonID == 1)
 			{
-				m_dyeTub.DyedHue = m_hue;
+				m_Callback(m_From, m_dyeTub, m_hue);
 				m_From.SendMessage("Vous mélangez les couleurs.");
-
 			}
 			else if (info.ButtonID >= 100 && info.ButtonID < 200)
 			{
-				m_From.SendGump(new CustomDyeGump(m_From, m_dyeTub, m_hue, info.ButtonID - 100));
+				m_From.SendGump(new CustomDyeGump(m_From, m_dyeTub, m_hue, m_Callback, info.ButtonID - 100));
 			}
 			else if (info.ButtonID >= 1000 && info.ButtonID < 5000)
 			{
-
 				int hue = ColorIndex[m_Page].HueChoice[info.ButtonID - 1000];
-
-				m_From.SendGump(new CustomDyeGump(m_From, m_dyeTub, hue, m_Page));
-
-				
+				m_From.SendGump(new CustomDyeGump(m_From, m_dyeTub, hue, m_Callback, m_Page));
 			}
-
-
 		}
 
 
-		public class CouleurSet
+
+	
+
+
+	public class CouleurSet
 		{
 			private string m_Name;
 			private int m_NameHue;
