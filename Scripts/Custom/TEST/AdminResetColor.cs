@@ -62,9 +62,9 @@ namespace Server.Commands
 				case CraftResource.GeantLeather: return 1711;
 				case CraftResource.OphidienLeather: return 2494;
 				case CraftResource.ArachnideLeather: return 2143;
-				case CraftResource.DragoniqueLeather: return 2132;
-				case CraftResource.DemoniaqueLeather: return 2275;
-				case CraftResource.AncienLeather: return 1798;
+				case CraftResource.DragoniqueLeather: return 2146;
+				case CraftResource.DemoniaqueLeather: return 2328;
+				case CraftResource.AncienLeather: return 2337;
 
 				// Bone resources
 				case CraftResource.RegularBone: return 0;
@@ -73,9 +73,9 @@ namespace Server.Commands
 				case CraftResource.GeantBone: return 1711;
 				case CraftResource.OphidienBone: return 2494;
 				case CraftResource.ArachnideBone: return 2143;
-				case CraftResource.DragoniqueBone: return 2132;
-				case CraftResource.DemoniaqueBone: return 2275;
-				case CraftResource.AncienBone: return 1798;
+				case CraftResource.DragoniqueBone: return 2146;
+				case CraftResource.DemoniaqueBone: return 2328;
+				case CraftResource.AncienBone: return 2337;
 
 				// Metal resources
 				case CraftResource.Iron: return 0;

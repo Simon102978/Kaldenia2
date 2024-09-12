@@ -1187,9 +1187,9 @@ namespace Server.Items
 			new CraftResourceInfo( 1711, 0, "Geant", 2,		 CraftAttributeInfo.GeantLeather,          CraftResource.GeantLeather,     typeof( GeantLeather ),     typeof( GeantHides ) ),
 			new CraftResourceInfo( 2494, 0, "Ophidien", 2,   CraftAttributeInfo.OphidienLeather,       CraftResource.OphidienLeather,  typeof( OphidienLeather ),  typeof( OphidienHides ) ),
 			new CraftResourceInfo( 2143, 0, "Arachnide", 3,  CraftAttributeInfo.ArachnideLeather,      CraftResource.ArachnideLeather, typeof( ArachnideLeather ), typeof( ArachnideHides ) ),
-			new CraftResourceInfo( 2132, 0, "Dragonique", 3, CraftAttributeInfo.DragoniqueLeather,     CraftResource.DragoniqueLeather,typeof( DragoniqueLeather ),typeof( DragoniqueHides ) ),
-			new CraftResourceInfo( 2667, 0, "Demoniaque", 4, CraftAttributeInfo.DemoniaqueLeather,     CraftResource.DemoniaqueLeather,typeof( DemoniaqueLeather ),typeof( DemoniaqueHides ) ),
-			new CraftResourceInfo( 1798, 0, "Ancien", 5,	 CraftAttributeInfo.AncienLeather,         CraftResource.AncienLeather,    typeof( AncienLeather ),    typeof( AncienHides ) ),
+			new CraftResourceInfo( 2146, 0, "Dragonique", 3, CraftAttributeInfo.DragoniqueLeather,     CraftResource.DragoniqueLeather,typeof( DragoniqueLeather ),typeof( DragoniqueHides ) ),
+			new CraftResourceInfo( 2328, 0, "Demoniaque", 4, CraftAttributeInfo.DemoniaqueLeather,     CraftResource.DemoniaqueLeather,typeof( DemoniaqueLeather ),typeof( DemoniaqueHides ) ),
+			new CraftResourceInfo( 2337, 0, "Ancien", 5,	 CraftAttributeInfo.AncienLeather,         CraftResource.AncienLeather,    typeof( AncienLeather ),    typeof( AncienHides ) ),
 
 
 		};
@@ -1202,9 +1202,9 @@ namespace Server.Items
 			new CraftResourceInfo( 1711, 0, "Geant", 2, CraftAttributeInfo.GeantBone,          CraftResource.GeantBone,     typeof( GeantBone ) ),
 			new CraftResourceInfo( 2494, 0, "Ophidien", 2, CraftAttributeInfo.OphidienBone,       CraftResource.OphidienBone,  typeof( OphidienBone ) ),
 			new CraftResourceInfo( 2143, 0, "Arachnide", 3, CraftAttributeInfo.ArachnideBone,      CraftResource.ArachnideBone, typeof( ArachnideBone ) ),
-			new CraftResourceInfo( 2132, 0, "Dragonique", 3, CraftAttributeInfo.DragoniqueBone,     CraftResource.DragoniqueBone,typeof( DragoniqueBone ) ),
-			new CraftResourceInfo( 2667, 0, "Demoniaque", 4, CraftAttributeInfo.DemoniaqueBone,     CraftResource.DemoniaqueBone,typeof( DemoniaqueBone ) ),
-			new CraftResourceInfo( 1798, 0, "Ancien", 5, CraftAttributeInfo.AncienBone,         CraftResource.AncienBone,    typeof( AncienBone )),
+			new CraftResourceInfo( 2146, 0, "Dragonique", 3, CraftAttributeInfo.DragoniqueBone,     CraftResource.DragoniqueBone,typeof( DragoniqueBone ) ),
+			new CraftResourceInfo( 2328, 0, "Demoniaque", 4, CraftAttributeInfo.DemoniaqueBone,     CraftResource.DemoniaqueBone,typeof( DemoniaqueBone ) ),
+			new CraftResourceInfo( 2337, 0, "Ancien", 5, CraftAttributeInfo.AncienBone,         CraftResource.AncienBone,    typeof( AncienBone )),
 		};
 
 		private static readonly CraftResourceInfo[] m_WoodInfo = new[]
