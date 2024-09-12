@@ -29,11 +29,12 @@ namespace Server.Scripts.Commands
         private class MarqueTarget : Target
         {
             private string m_Name;
+			private static readonly string[] ForbiddenWords = { "Épique", "Epique", "Légendaire", "Legendaire", "Exceptionnelle" };
 
-            public MarqueTarget(string name)  : base(1, false, TargetFlags.None)
+			public MarqueTarget(string name)  : base(1, false, TargetFlags.None)
             {
-                m_Name = name;
-            }
+				m_Name = CleanAndValidateName(name);
+			}
 
             protected override void OnTarget(Mobile from, object targeted)
             {
@@ -79,7 +80,35 @@ namespace Server.Scripts.Commands
 
 				
             }
-        }
+			private string CleanAndValidateName(string input)
+			{
+				// Supprime les balises BASEFONT
+				string cleanedName = RemoveBaseFontTags(input);
+
+				// Vérifie si le nom contient un mot interdit
+				foreach (string word in ForbiddenWords)
+				{
+					if (cleanedName.IndexOf(word, StringComparison.OrdinalIgnoreCase) >= 0)
+					{
+						// Si un mot interdit est trouvé, retourne une chaîne vide ou un message d'erreur
+						return "Nom non autorisé";
+					}
+				}
+
+				// Si aucun mot interdit n'est trouvé, retourne le nom nettoyé
+				return cleanedName;
+			}
+
+			private string RemoveBaseFontTags(string input)
+			{
+				// Supprime toutes les balises BASEFONT, quelle que soit la casse
+				string pattern = @"</?BASEFONT[^>]*>";
+				string cleanedName = System.Text.RegularExpressions.Regex.Replace(input, pattern, "", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+				// Supprime les espaces en début et fin de chaîne
+				return cleanedName.Trim();
+			}
+		}
 	}
 }
 

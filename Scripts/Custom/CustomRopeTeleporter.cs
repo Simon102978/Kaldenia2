@@ -34,7 +34,7 @@ namespace Server.Items
 
 			if (from is CustomPlayerMobile cp)
 			{
-				Item package = (Item)cp.Backpack.FindItemByType(typeof(Server.Items.Corde));
+				Item package = (Item)cp.Backpack.FindItemByType(typeof(Server.Items.Rope));
 
 				if (package == null)
 				{

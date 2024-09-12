@@ -25,7 +25,7 @@ namespace Server
         Banal,
         [AppearanceAttribute("Commun", "Commune")]
         Commun,
-        [AppearanceAttribute("Mignon", "Mignone")]
+        [AppearanceAttribute("Mignon", "Mignonne")]
         Mignon,
         [AppearanceAttribute("Charmant", "Charmante")]
         Charmant,

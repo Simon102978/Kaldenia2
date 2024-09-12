@@ -15,6 +15,7 @@ namespace Server.Items
             Stackable = true;
             Weight = 1.0;
             Amount = amount;
+			Name = "Corde";
         }
 
         public Rope(Serial serial)

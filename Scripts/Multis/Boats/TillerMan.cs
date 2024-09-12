@@ -430,7 +430,7 @@ namespace Server.Items
 			private readonly Mobile m_From;
 
 			public RentBoatEntry(TillerMan tillerman, Mobile from)
-				: base(1062637, 10) // "Louer le bateau"
+				: base(90, 10) // "Louer le bateau"
 			{
 				m_TillerMan = tillerman;
 				m_From = from;
@@ -472,7 +472,7 @@ namespace Server.Items
 			private readonly Mobile m_From;
 
 			public EndRentalEntry(TillerMan tillerman, Mobile from)
-				: base(1062638, 10) // "Terminer la location"
+				: base(91, 10) // "Terminer la location"
 			{
 				m_TillerMan = tillerman;
 				m_From = from;

@@ -34,12 +34,19 @@ namespace Server.Items
 		public PortableGardenScarecrow(Mobile owner) : base(owner)
 		{
 			ItemID = 0x1E34;
-			Name = "Portable Garden Scarecrow";
-			Movable = true;
+			Name = "Épouvantail";
+			Movable = false;
+			Visible = true;
 			m_Range = 5; // Default range of 5 tiles (11x11 area)
 		}
-
-		public override void OnLocationChange(Point3D oldLocation)
+		public bool IsInRange(Point3D location)
+		{
+			int dx = Math.Abs(location.X - this.X);
+			int dy = Math.Abs(location.Y - this.Y);
+			return dx <= m_Range && dy <= m_Range;
+		}
+	
+	public override void OnLocationChange(Point3D oldLocation)
 		{
 			base.OnLocationChange(oldLocation);
 			UpdateRegion();
@@ -78,13 +85,15 @@ namespace Server.Items
 		[Constructable]
 		public PortableGardenScarecrowDeed() : base()
 		{
-			Name = "Portable Garden Scarecrow Deed";
+			Name = "Epouvantail Deed";
 		}
 
 		public override BaseGarden GetGarden(Mobile from)
 		{
 			return new PortableGardenScarecrow(from);
 		}
+
+
 
 		public PortableGardenScarecrowDeed(Serial serial) : base(serial) { }
 

@@ -12,6 +12,7 @@ using Server.Commands;
 using Server.Targeting;
 using Server.Regions;
 using Xanthos.Interfaces;
+using Server.Custom;
 
 namespace Xanthos.ShrinkSystem
 {
@@ -97,6 +98,9 @@ namespace Xanthos.ShrinkSystem
 
 			else if ( target is Item )
 				from.SendMessage( "You cannot shrink that!" );
+
+			else if (target is GolemZyX)
+				from.SendMessage("Vous ne pouvez pas Shrinker un Golem!");
 
 			else if ( target is PlayerMobile )
 				from.SendMessage( "That person gives you a dirty look!" );

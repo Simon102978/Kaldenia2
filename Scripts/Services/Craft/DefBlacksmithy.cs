@@ -616,11 +616,14 @@ namespace Server.Engines.Craft
 			#region "Divers"
 			index = AddCraft(typeof(IronIngotResourceCrate), "Divers", "Caisse de ressource", 10.0, 60.0, typeof(IronIngot), 1044036, 150, 1044037);
 
-			index = AddCraft(typeof(Cannonball), "Divers", "Boulet de Canon", 10.0, 60.0, typeof(IronIngot), 1044036, 5, 1044037);
-			index = AddCraft(typeof(Grapeshot), "Divers", "Boulet Avancé", 15.0, 70.0, typeof(IronIngot), 1044036, 5, 1044037);
-			AddRes(index, typeof(Cloth), 1044286, 2, 1044287);
-			index = AddCraft(typeof(LightShipCannonDeed), "Divers", "Canon Léger", 75.0, 110.0, typeof(IronIngot), 1044036, 500, 1044037);
-			index = AddCraft(typeof(HeavyShipCannonDeed), "Divers", "Canon Lourd", 90.0, 110.0, typeof(IronIngot), 1044036, 800, 1044037);
+			index = AddCraft(typeof(Cannonball), "Divers", "Boulet de Canon", 10.0, 60.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
+
+			index = AddCraft(typeof(Grapeshot), "Divers", "Boulet Avancé", 15.0, 70.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
+			AddRes(index, typeof(Cloth), "Tissus", 2, "Vous n'avez pas suffisament de tissus");
+
+			index = AddCraft(typeof(LightShipCannonDeed), "Divers", "Canon Léger", 65.0, 100.0, typeof(IronIngot), "Lingot de Fer", 300, "Vous n'avez pas suffisament de lingot de fer");
+
+			index = AddCraft(typeof(HeavyShipCannonDeed), "Divers", "Canon Lourd", 75.0, 110.0, typeof(IronIngot), "Lingot de Fer", 500, "Vous n'avez pas suffisament de lingot de fer");
 			index = AddCraft(typeof(Ancre), "Divers", "Ancre", 90.0, 110.0, typeof(IronIngot), 1044036, 15, 1044037);
 			index = AddCraft(typeof(CoffreFort), "Divers", "Coffre Fort", 80.0, 115.0, typeof(IronIngot), 1044036, 25, 1044037);
 			AddRecipe(index, (int)SmithRecipes.CoffreFort);

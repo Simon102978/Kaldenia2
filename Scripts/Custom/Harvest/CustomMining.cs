@@ -207,7 +207,7 @@ namespace Server.Engines.Harvest
 
 			res = new HarvestResource[]
 			{
-				new HarvestResource(50.0, 30.0, 100.0, 1044631, typeof(Sand))
+				new HarvestResource(00.0, -100.0, 100.0, 1044631, typeof(Sand))
 			};
 
 			veins = new HarvestVein[]
@@ -372,7 +372,7 @@ namespace Server.Engines.Harvest
 			if (!base.CheckHarvest(from, tool, def, toHarvest))
 				return false;
 
-			if (def == Sand && !(from is PlayerMobile && from.Skills[SkillName.Mining].Base >= 50.0 && ((PlayerMobile)from).SandMining))
+			if (def == Sand && !(from is PlayerMobile && from.Skills[SkillName.Mining].Base >= 00.0 && ((PlayerMobile)from).SandMining))
 			{
 				OnBadHarvestTarget(from, tool, toHarvest);
 				return false;

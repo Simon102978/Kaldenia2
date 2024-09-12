@@ -351,7 +351,7 @@ namespace Server.Engines.Craft
 			AddRecipe(index, (int)TailorLeatherRecipe.PeauOursPolaireEst);
 
 
-			index = AddCraft(typeof(Corde), "Divers", "Corde", 60.0, 75.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			index = AddCraft(typeof(Rope), "Divers", "Corde", 60.0, 120.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
 			#endregion
 
 			// Set the overridable material

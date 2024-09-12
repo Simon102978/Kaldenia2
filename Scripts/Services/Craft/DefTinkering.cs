@@ -883,21 +883,21 @@ namespace Server.Engines.Craft
 			#endregion
 			#region Canons
 
-			index = AddCraft(typeof(Cannonball), "Canons", "Boulet de Canon", 10.0, 60.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
+		//	index = AddCraft(typeof(Cannonball), "Canons", "Boulet de Canon", 10.0, 60.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
 			
-			index = AddCraft(typeof(Grapeshot), "Canons", "Boulet Avancé", 15.0, 70.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
-			AddRes(index, typeof(Cloth), "Tissus", 2, "Vous n'avez pas suffisament de tissus");
+//			index = AddCraft(typeof(Grapeshot), "Canons", "Boulet Avancé", 15.0, 70.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
+	//		AddRes(index, typeof(Cloth), "Tissus", 2, "Vous n'avez pas suffisament de tissus");
 			
-			index = AddCraft(typeof(LightShipCannonDeed), "Canons", "Canon Léger", 65.0, 100.0, typeof(IronIngot), "Lingot de Fer", 300, "Vous n'avez pas suffisament de lingot de fer");
+	//		index = AddCraft(typeof(LightShipCannonDeed), "Canons", "Canon Léger", 65.0, 100.0, typeof(IronIngot), "Lingot de Fer", 300, "Vous n'avez pas suffisament de lingot de fer");
 			
-			index = AddCraft(typeof(HeavyShipCannonDeed), "Canons", "Canon Lourd", 75.0, 110.0, typeof(IronIngot), "Lingot de Fer", 500, "Vous n'avez pas suffisament de lingot de fer");
+	//		index = AddCraft(typeof(HeavyShipCannonDeed), "Canons", "Canon Lourd", 75.0, 110.0, typeof(IronIngot), "Lingot de Fer", 500, "Vous n'avez pas suffisament de lingot de fer");
 			
 			index = AddCraft(typeof(Charcoal), "Canons", "Charbon", 30.0, 50.0, typeof(PalmierBoard), "Planches", 1, "Vous n'avez pas suffisament de planches");
 			
-			index = AddCraft(typeof(BlackPowder), "Canons", "Poudre Noire", 65.0, 120.0, typeof(Charcoal), "Charbon", 3, "Vous n'avez pas suffisament de charbon");
+			index = AddCraft(typeof(BlackPowder), "Canons", "Poudre Noire", 55.0, 110.0, typeof(Charcoal), "Charbon", 3, "Vous n'avez pas suffisament de charbon");
 			AddRes(index, typeof(SulfurousAsh), "Sulfure", 3, "Vous n'avez pas suffisament de sulfure");
 			
-			index = AddCraft(typeof(PowderCharge), "Canons", "Poudre à Canon", 65.0, 120.0, typeof(BlackPowder), "Poudre Noire", 4, "Vous n'avez pas suffisament de poudre noire");
+			index = AddCraft(typeof(PowderCharge), "Canons", "Poudre à Canon", 55.0, 110.0, typeof(BlackPowder), "Poudre Noire", 4, "Vous n'avez pas suffisament de poudre noire");
 			AddRes(index, typeof(Cloth), "Tissus", 1, "Vous n'avez pas suffisament de tissus");
 			
 			index = AddCraft(typeof(FuseCord), "Canons", "Mèche", 55.0, 110.0, typeof(Rope), "Corde", 1, "Vous n'avez pas suffisament de corde");

@@ -166,10 +166,9 @@ namespace Server.Mobiles
 
 
 				}
-				
-				else
-				{
 
+				else if (Combatant != null) 
+				{
 					if (Combatant is BaseCreature bc)
 					{
 						AntiSummon();

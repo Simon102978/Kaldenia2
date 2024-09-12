@@ -289,6 +289,7 @@ namespace Server.Custom
 		public override bool NoHouseRestrictions => true;
 		public override bool IsInvulnerable => false;
 		public override bool IsBondable => false;
+
 		public override bool Unprovokable => true;
 		public override bool CanRummageCorpses => false;
 		public override bool BardImmune => true;
@@ -664,6 +665,7 @@ namespace Server.Custom
 			Name = $"Mini Golem de {ashType}";
 			Hue = GetHueForAshType(ashType);
 			LootType = LootType.Blessed;
+			Weight = 100;
 		}
 
 		public MiniGolem(Serial serial) : base(serial) { }

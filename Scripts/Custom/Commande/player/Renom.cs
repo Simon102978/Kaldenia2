@@ -30,10 +30,10 @@ namespace Server.Scripts.Commands
         {
             private string m_Name;
 
-            public RenomTarget(string name)  : base(1, false, TargetFlags.None)
+			public RenomTarget(string name)  : base(1, false, TargetFlags.None)
             {
-                m_Name = name;
-            }
+				m_Name = RemoveBaseFontTags(name);
+			}
 
             protected override void OnTarget(Mobile from, object targeted)
             {
@@ -125,7 +125,16 @@ namespace Server.Scripts.Commands
 
 				
             }
-        }
+			private string RemoveBaseFontTags(string input)
+			{
+				// Supprime toutes les balises BASEFONT, quelle que soit la casse
+				string pattern = @"</?BASEFONT[^>]*>";
+				string cleanedName = System.Text.RegularExpressions.Regex.Replace(input, pattern, "", System.Text.RegularExpressions.RegexOptions.IgnoreCase);
+
+				// Supprime les espaces en début et fin de chaîne
+				return cleanedName.Trim();
+			}
+		}
 	}
 }
 

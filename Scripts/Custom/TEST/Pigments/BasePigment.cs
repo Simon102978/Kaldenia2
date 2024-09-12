@@ -49,7 +49,10 @@ namespace Server.Items
 					if (specialTub.Charges > 0)
 					{
 						specialTub.DyedHue = m_Pigment.m_Hue;
-						specialTub.Charges =1;
+						specialTub.Hue = m_Pigment.m_Hue;
+						specialTub.Charges = 1;
+						specialTub.Name = $"Bac de Teinture spéciale ({m_Pigment.m_PigmentName})";
+
 						from.SendMessage($"Vous avez appliqué le pigment {m_Pigment.m_PigmentName} à la cuve de teinture spéciale. Il reste {specialTub.Charges} charges.");
 						m_Pigment.Delete();
 					}
@@ -63,8 +66,9 @@ namespace Server.Items
 					if (regularTub.Charges > 1)
 					{
 						regularTub.DyedHue = m_Pigment.m_Hue;
+						regularTub.Hue = m_Pigment.m_Hue;
 						regularTub.Charges = 5;
-						regularTub.Name = $"Bac de Teinture ({m_Pigment.m_PigmentName}) ";
+						regularTub.Name = $"Bac de Teinture ({m_Pigment.m_PigmentName})";
 						from.SendMessage($"Vous avez appliqué le pigment {m_Pigment.m_PigmentName} à la cuve de teinture. Il reste {regularTub.Charges} charges.");
 						m_Pigment.Delete();
 					}

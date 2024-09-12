@@ -397,27 +397,39 @@ namespace Server.Items
             OnDoubleClick(m);
         }
 
-        public override void OnDoubleClick(Mobile from)
-        {
-            if (Galleon.GetSecurityLevel(from) >= SecurityLevel.Crewman)
-            {
-                base.OnDoubleClick(from);
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (Galleon == null)
+			{
+				from.SendMessage("Error: Cannon is not attached to a ship.");
+				return;
+			}
 
-                if (!Viewing.Contains(from))
-                {
-                    Viewing.Add(from);
-                }
+			if (Galleon.GetSecurityLevel(from) >= SecurityLevel.Crewman)
+			{
+				base.OnDoubleClick(from);
 
-                AddAction(from, from.Alive && Galleon.Contains(from) && from.InRange(Location, 2) ? 1149653 : 1149654); // You are now operating the cannon. : You are too far away.
-                ResendGump(from, TimeSpan.FromMilliseconds(500));
-            }
-            else
-            {
-                from.Say(1010436); // You do not have permission to do this.
-            }
-        }
+				if (Viewing == null)
+				{
+					Viewing = new List<Mobile>();
+				}
 
-        public Direction GetFacing()
+				if (!Viewing.Contains(from))
+				{
+					Viewing.Add(from);
+				}
+
+				AddAction(from, from.Alive && Galleon.Contains(from) && from.InRange(Location, 2) ? 1149653 : 1149654);
+				ResendGump(from, TimeSpan.FromMilliseconds(500));
+			}
+			else
+			{
+				from.Say(1010436); // You do not have permission to do this.
+			}
+		}
+
+
+		public Direction GetFacing()
         {
             if (BaseGalleon.CannonIDs[0].Any(id => id == ItemID))
             {

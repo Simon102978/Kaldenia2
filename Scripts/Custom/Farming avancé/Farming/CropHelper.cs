@@ -84,6 +84,11 @@ namespace Server.Items.Crops
 			int x = p.X;
 			int y = p.Y;
 
+			if (IsNearScarecrow(map, p))
+			{
+				return true; 
+			}
+
 			if ( seed.CanGrowFarm && ValidateFarmLand( map, x, y ) ) return true;
 			if ( seed.CanGrowHouseTiles && ValidateHouseTiles( map, x, y ) ) return true;
 			if ( seed.CanGrowDirt && ValidateDirt( map, x, y ) ) return true;
@@ -91,6 +96,25 @@ namespace Server.Items.Crops
 			if ( seed.CanGrowSand && ValidateSand( map, x, y ) ) return true;
 			if ( seed.CanGrowSwamp && ValidateSwamp( map, x, y ) ) return true;
 			if ( seed.CanGrowGarden ) { seed.BumpZ = ValidateGardenPlot( map, x, y ); return seed.BumpZ; }
+			return false;
+		}
+		public static bool IsNearScarecrow(Map map, Point3D location)
+		{
+			IPooledEnumerable eable = map.GetItemsInRange(location, 20); // Ajustez la portée si nécessaire
+
+			foreach (Item item in eable)
+			{
+				if (item is PortableGardenScarecrow scarecrow)
+				{
+					if (scarecrow.IsInRange(location))
+					{
+						eable.Free();
+						return true;
+					}
+				}
+			}
+
+			eable.Free();
 			return false;
 		}
 

@@ -40,6 +40,20 @@ namespace Server.Commands
 
 		private static CraftResource GetItemResource(Item item)
 		{
+			CraftResource resource = CraftResource.None;
+
+			try
+			{
+				resource = (CraftResource)item.GetType().GetProperty("Resource")?.GetValue(item, null);
+			}
+			catch
+			{
+				// Si une exception se produit, ignorez-la et continuez avec les vérifications spécifiques
+			}
+
+			if (resource != CraftResource.None)
+				return resource;
+
 			if (item is BaseArmor armor) return armor.Resource;
 			if (item is BaseWeapon weapon) return weapon.Resource;
 			if (item is BaseClothing clothing) return clothing.Resource;
@@ -88,7 +102,7 @@ namespace Server.Commands
 				case CraftResource.Glacias: return 1365;
 				case CraftResource.Lithiar: return 1448;
 				case CraftResource.Acier: return 1102;
-				case CraftResource.Durian: return 1160;
+				//case CraftResource.Durian: return 1160;
 				case CraftResource.Equilibrum: return 2212;
 				case CraftResource.Gold: return 2886;
 				case CraftResource.Jolinar: return 2205;
@@ -96,7 +110,7 @@ namespace Server.Commands
 				case CraftResource.Abyssium: return 1800;
 				case CraftResource.Bloodirium: return 2299;
 				case CraftResource.Herbrosite: return 2831;
-				case CraftResource.Khandarium: return 1746;
+				//case CraftResource.Khandarium: return 1746;
 				case CraftResource.Mytheril: return 2432;
 				case CraftResource.Sombralir: return 2856;
 				case CraftResource.Draconyr: return 1411;
