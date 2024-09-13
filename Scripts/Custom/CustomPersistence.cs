@@ -23,6 +23,128 @@ namespace Server.Custom
 		public static int LocationJardin { get; set; }
 
 
+
+
+		public static bool m_PirateJailActive;
+
+		public static List<Point3D> m_PirateLanding = new List<Point3D>();
+
+
+		[CommandProperty(AccessLevel.GameMaster)]
+    	public static bool PirateJailActive
+        {
+            get
+            {
+				if (m_PirateLanding.Count == 0)
+				{
+					return false;
+				}
+
+
+                return m_PirateJailActive;
+            }
+            set
+            {
+					if (m_PirateLanding.Count > 0 )
+					{
+						 m_PirateJailActive = value;     
+					}
+					else
+					{
+						m_PirateJailActive = false;
+					}
+					 
+            }
+        }
+
+
+      [CommandProperty(AccessLevel.GameMaster)]
+    	public static List<Point3D> PirateLanding
+        {
+            get
+            {
+                return m_PirateLanding;
+            }
+            set
+            {
+                m_PirateLanding = value;
+            }
+        }
+
+
+
+ 	public static void PirateJail(CustomPlayerMobile from)
+    {
+      
+      if (!PirateJailActive)
+      {   
+        return;
+      }
+      else if(PirateLanding.Count == 0)
+      {
+       
+        return;
+      } 
+
+      Point3D loc = GetLocation();
+
+ 
+      from.MoveToWorld(loc, from.Map);
+
+
+
+    }
+
+	public static Point3D GetLocation()
+    {
+
+      for (int i = 0; i < 25; i++)
+      {
+        Point3D p = m_PirateLanding[Utility.Random(m_PirateLanding.Count)];
+
+        if (Map.Felucca.CanSpawnMobile(p))
+        {
+          return p;
+        }       
+      }
+        return m_PirateLanding[Utility.Random(m_PirateLanding.Count)];
+    }
+
+
+
+
+    public static bool AddPirateJailLocation(Point3D location)
+    {
+      if (m_PirateLanding.Contains(location))
+      {
+        return false;
+      }
+      else
+      {
+        m_PirateLanding.Add(location);
+        return true;
+      }
+    }
+
+    public static void DeletePirateJailLocation(int location)
+    {
+      int n = 0;
+
+      List<Point3D> newLanding = new List<Point3D>();
+
+      foreach (Point3D item in m_PirateLanding)
+      {
+        if (location != n)
+        {
+          newLanding.Add(item);
+        }
+        n++;
+      }
+      m_PirateLanding = newLanding;
+      
+    }
+
+
 		public static void AddSellItem(string items, double value)
 		{
 			if (SellItems.ContainsKey(items))
@@ -84,7 +206,16 @@ namespace Server.Custom
                 FilePath,
                 writer =>
                 {
-                    writer.Write(6);
+                    writer.Write(7);
+
+					writer.Write(m_PirateJailActive);
+
+					writer.Write(m_PirateLanding.Count);
+
+					foreach (Point3D item in m_PirateLanding)
+					{
+						writer.Write(item);
+					}
 
 					writer.Write(LocationJardin);
 
@@ -118,6 +249,17 @@ namespace Server.Custom
 
 					switch (version)
 					{
+						case 7:
+						{
+							m_PirateJailActive = reader.ReadBool();
+							int n = reader.ReadInt();
+
+							for (int i = 0; i < n; i++)
+							{
+								m_PirateLanding.Add(reader.ReadPoint3D());
+							}
+							goto case 6;
+						}
 						case 6:
 						{
 							LocationJardin = reader.ReadInt();

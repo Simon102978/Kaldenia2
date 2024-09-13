@@ -6,6 +6,7 @@ using Server.Mobiles;
 using Server.Network;
 using Server.Targeting;
 using System.Linq;
+using Server.Custom;
 
 namespace Server.Mobiles
 {
@@ -17,6 +18,9 @@ namespace Server.Mobiles
 		{
 			"Yaarrg !"
 		};
+
+
+		public static List<CustomPlayerMobile> EnCapture = new List<CustomPlayerMobile>();
 
 		private DateTime m_GlobalTimer;
 
@@ -89,11 +93,7 @@ namespace Server.Mobiles
 
 		public override void AlterMeleeDamageTo(Mobile to, ref int damage)
 		{
-
 			Parole();
-
-
-
 			base.AlterMeleeDamageTo(to, ref damage);
 		}
 
@@ -154,6 +154,43 @@ namespace Server.Mobiles
 
 		}
 
+		public override void OnKill(Mobile killed)
+		{
+			if (killed is CustomPlayerMobile cp && cp.Vulnerability)
+			{
+				JailPerso(cp);
+			}
+			base.OnKill(killed);
+		}
+
+
+#region Jail
+
+
+		public void JailPerso(CustomPlayerMobile cp)
+		{
+			CustomPersistence.PirateJail(cp);
+
+			Timer.DelayCall(TimeSpan.FromSeconds(2), new TimerStateCallback(Ressurect_Callback), cp);
+			
+		}
+
+		private void Ressurect_Callback(object state)
+		{
+			CustomPlayerMobile cp = (CustomPlayerMobile)state;
+
+			cp.Resurrect();
+
+
+		}
+
+
+
+
+
+#endregion
+
+
 		public override bool CanRummageCorpses => true;
 
 		public override bool AlwaysMurderer => true;
@@ -166,92 +203,7 @@ namespace Server.Mobiles
 
 
 #region throwing
-/*
-        public virtual void ThrowExplosive ()
-        {
-            if (Paralyzed || Frozen || (Spell != null && Spell.IsCasting) || ThrowingPotion < 0 )
-            {
-                SendLocalizedMessage(1062725); // You can not use a purple potion while paralyzed.
-                return;
-            }
-         
-            RevealingAction();
 
-            if (m_PotionTimer == null)
-            {
-                SendLocalizedMessage(500236); // You should throw it now!
-
-                m_PotionTimer = Timer.DelayCall(
-                        TimeSpan.FromSeconds(1.0),
-                        TimeSpan.FromSeconds(1.25),
-                        5,
-                        new TimerStateCallback(Detonate_OnTick),
-                        new object[] { this, 3 }); // 3.6 seconds explosion delay
-
-            }
-        }
-
-        public void Explode( Point3D loc, Map map)
-        {
-            if (Deleted || this == null)
-            {
-                return;
-            }
-
-            ThrowingPotion--;
-
-			ThrowingEffect(this.Location, this.Map);
-	
-          	List<Mobile> list = SpellHelper.AcquireIndirectTargets(this, loc, map, ExplosifRange, false).OfType<Mobile>().ToList();
-           
-
-            foreach (Mobile m in list)
-            {
-              ThrowingDetonate(m);
-            }
-
-            list.Clear();
-        }
-
-		public virtual void ThrowingEffect(Point3D loc, Map map)
-		{
-			Effects.PlaySound(loc, map, 0x307);
-
-            Effects.SendLocationEffect(loc, map, 0x36B0, 9, 10, 0, 0);
-		}
-
-
-        private void Detonate_OnTick(object state)
-        {
-            if (Deleted)
-            {
-                return;
-            }
-
-            object[] states = (object[])state;
-            Mobile from = (Mobile)states[0];
-            int timer = (int)states[1];      
-
-            if (timer == 0)
-            {
-                Point3D loc;
-                Map map;
-
-                loc = Location;
-                map = Map;
- 
-                Explode( loc, map);
-                m_PotionTimer = null;
-            }
-            else
-            {
-                this.PublicOverheadMessage(MessageType.Regular, 0x22, false, timer.ToString());
-                states[1] = timer - 1;
-            }
-        }
-
- 
-*/
 
         public void Explode( Point3D loc, Map map)
         {
@@ -288,21 +240,21 @@ namespace Server.Mobiles
 
         public void ThrowBomb(Mobile m)
         {
-			if (ThrowingPotion < 0 )
+			if (ThrowingPotion > 0 )
 			{
      	        DoHarmful(m);
 
 				MovingParticles(m, ExplosifItemId, 1, 0, false, true, 0, 0, 9502, 6014, 0x11D, EffectLayer.Waist, 0);
 
-				new InternalTimer(m, this).Start();
+				new ThrowingTimer(m, this).Start();
 			}
          
         }
- 		private class InternalTimer : Timer
+ 		private class ThrowingTimer : Timer
         {
             private readonly Mobile m_Mobile;
             private readonly PirateBase m_From;
-            public InternalTimer(Mobile m, PirateBase from)
+            public ThrowingTimer(Mobile m, PirateBase from)
                 : base(TimeSpan.FromSeconds(1.0))
             {
                 m_Mobile = m;
