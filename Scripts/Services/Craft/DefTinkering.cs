@@ -894,13 +894,13 @@ namespace Server.Engines.Craft
 			
 			index = AddCraft(typeof(Charcoal), "Canons", "Charbon", 30.0, 50.0, typeof(PalmierBoard), "Planches", 1, "Vous n'avez pas suffisament de planches");
 			
-			index = AddCraft(typeof(BlackPowder), "Canons", "Poudre Noire", 55.0, 110.0, typeof(Charcoal), "Charbon", 3, "Vous n'avez pas suffisament de charbon");
+			index = AddCraft(typeof(BlackPowder), "Canons", "Poudre Noire", 50.0, 100.0, typeof(Charcoal), "Charbon", 3, "Vous n'avez pas suffisament de charbon");
 			AddRes(index, typeof(SulfurousAsh), "Sulfure", 3, "Vous n'avez pas suffisament de sulfure");
 			
-			index = AddCraft(typeof(PowderCharge), "Canons", "Poudre à Canon", 55.0, 110.0, typeof(BlackPowder), "Poudre Noire", 4, "Vous n'avez pas suffisament de poudre noire");
+			index = AddCraft(typeof(PowderCharge), "Canons", "Poudre à Canon", 50.0, 100.0, typeof(BlackPowder), "Poudre Noire", 4, "Vous n'avez pas suffisament de poudre noire");
 			AddRes(index, typeof(Cloth), "Tissus", 1, "Vous n'avez pas suffisament de tissus");
 			
-			index = AddCraft(typeof(FuseCord), "Canons", "Mèche", 55.0, 110.0, typeof(Rope), "Corde", 1, "Vous n'avez pas suffisament de corde");
+			index = AddCraft(typeof(FuseCord), "Canons", "Mèche", 65.0, 110.0, typeof(Rope), "Corde", 1, "Vous n'avez pas suffisament de corde");
 			AddBeverageRes(index, BeverageType.Water, 1, "Vous avez besoin d'un pichet d'eau avec 1 charge");
 			AddRes(index, typeof(BlackPowder), "Poudre Noire", 1, "Vous n'avez pas suffisament de poudre noire");
 			AddRes(index, typeof(Potash), "Potasse", 1, "Vous n'avez pas suffisament de potasse");
@@ -913,7 +913,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Torch), "Canons", "Torche", 00.0, 50.0, typeof(PalmierBoard), "Planches", 3, "Vous n'avez pas suffisament de planches");
 			AddRes(index, typeof(Cloth), "Tissus", 2, "Vous n'avez pas suffisament de tissus");
 
-			index = AddCraft(typeof(Rope), "Canons", "Corde", 60.0, 120.0, typeof(Cloth), "Tissus", 10, "Vous avez besoin de plus de tissus");
+			index = AddCraft(typeof(Rope), "Canons", "Corde", 50.0, 100.0, typeof(Cloth), "Tissus", 10, "Vous avez besoin de plus de tissus");
 
 
 			#endregion

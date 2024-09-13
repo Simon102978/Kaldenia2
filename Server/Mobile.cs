@@ -3953,7 +3953,7 @@ namespace Server
 		private static CreateCorpseHandler m_CreateCorpse;
 
 		public static TimeSpan DefaultCorpseDecay => _DefaultCorpseDecay;
-		public static readonly TimeSpan _DefaultCorpseDecay = TimeSpan.FromMinutes(7);
+		public static readonly TimeSpan _DefaultCorpseDecay = TimeSpan.FromMinutes(15);
 
 		public static CreateCorpseHandler CreateCorpseHandler { get => m_CreateCorpse; set => m_CreateCorpse = value; }
 

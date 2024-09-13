@@ -84,7 +84,7 @@ namespace Server.Spells.Chivalry
         {
             if (m_Table.ContainsKey(m))
             {
-                return m.Skills[SkillName.Magery].Value >= 120.0 && m.Dex >= 100 ? 15 : 10;
+                return m.Skills[SkillName.Magery].Value >= 120.0 && m.Int >= 80 ? 15 : 10;
             }
 
             return 0;
@@ -94,7 +94,7 @@ namespace Server.Spells.Chivalry
         {
             if (m_Table.ContainsKey(m))
             {
-                return m.Skills[SkillName.Magery].Value >= 120.0 && m.Karma >= 100 ? 15 : 10;
+                return m.Skills[SkillName.Magery].Value >= 120.0 && m.Int >= 80 ? 15 : 10;
             }
 
             return 0;
@@ -104,7 +104,7 @@ namespace Server.Spells.Chivalry
         {
             if (m_Table.ContainsKey(m))
             {
-                return m.Skills[SkillName.Magery].Value >= 120.0 && m.Dex >= 100 ? 10 : 20;
+                return m.Skills[SkillName.Magery].Value >= 120.0 && m.Int >= 80 ? 10 : 20;
             }
 
             return 0;

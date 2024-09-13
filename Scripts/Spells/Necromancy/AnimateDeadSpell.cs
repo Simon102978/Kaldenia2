@@ -270,7 +270,10 @@ namespace Server.Spells.Necromancy
             double necromancy = caster.Skills[SkillName.Magery].Value;
             double spiritSpeak = caster.Skills[SkillName.EvalInt].Value;
 
-            int casterAbility = 0;
+			if (spiritSpeak <= 30)
+				spiritSpeak = caster.Int;
+
+			int casterAbility = 0;
 
             casterAbility += (int)(necromancy * 30);
             casterAbility += (int)(spiritSpeak * 70);

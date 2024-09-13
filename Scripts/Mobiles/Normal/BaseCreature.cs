@@ -1273,7 +1273,7 @@ namespace Server.Mobiles
 
 		public virtual void LoseExp(Mobile killer, uint exp, bool tellOwner = true)
 		{
-			if (tellOwner && ControlMaster != null)
+			/*if (tellOwner && ControlMaster != null)
 				ControlMaster.SendMessage("Votre animal de compagnie {0} a perdu {1} points d'expérience !", Name, exp);
 
 			if (exp < m_experience)
@@ -1288,7 +1288,8 @@ namespace Server.Mobiles
 			else
 			{
 				m_experience = 0;
-			}
+			}*/
+			return;
 		}
 
 		private void CalculateExpDist(Mobile m)
@@ -1316,7 +1317,9 @@ namespace Server.Mobiles
 
 		public virtual void DecayExperience(Mobile killer)
 		{
-			uint expLost = (uint)(m_experience * ExpDecayPerc);
+
+			//	uint expLost = (uint)(m_experience * ExpDecayPerc);
+			uint expLost = 0;
 			LoseExp(killer, expLost);
 		}
 

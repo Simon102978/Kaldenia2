@@ -71,24 +71,39 @@ namespace Server.Spells.Chivalry
 
                 // TODO: Should caps be applied?
 
-                int pkarma = Caster.Karma;
+                int pkarma = Caster.Int;
 
-                if (pkarma > 5000)
-                    seconds = 11.0;
-                else if (pkarma >= 4999)
-                    seconds = 10.0;
-                else if (pkarma >= 3999)
-                    seconds = 9.00;
-                else if (pkarma >= 2999)
-                    seconds = 8.0;
-                else if (pkarma >= 1999)
-                    seconds = 7.0;
-                else if (pkarma >= 999)
-                    seconds = 6.0;
-                else
-                    seconds = 10.0;
 
-                TimeSpan duration = TimeSpan.FromSeconds(seconds);
+				if (pkarma > 90)
+					seconds = 11.0;
+				else if (pkarma >= 80)
+					seconds = 10.0;
+				else if (pkarma >= 70)
+					seconds = 9.00;
+				else if (pkarma >= 60)
+					seconds = 8.0;
+				else if (pkarma >= 50)
+					seconds = 7.0;
+				else if (pkarma >= 40)
+					seconds = 6.0;
+				else
+					seconds = 10.0;
+				/*         if (pkarma > 5000)
+							 seconds = 11.0;
+						 else if (pkarma >= 4999)
+							 seconds = 10.0;
+						 else if (pkarma >= 3999)
+							 seconds = 9.00;
+						 else if (pkarma >= 2999)
+							 seconds = 8.0;
+						 else if (pkarma >= 1999)
+							 seconds = 7.0;
+						 else if (pkarma >= 999)
+							 seconds = 6.0;
+						 else
+							 seconds = 10.0; */
+
+				TimeSpan duration = TimeSpan.FromSeconds(seconds);
                 ConsecratedWeaponContext context;
 
                 if (IsUnderEffects(Caster))

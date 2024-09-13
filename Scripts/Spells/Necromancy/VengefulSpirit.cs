@@ -41,8 +41,12 @@ namespace Server.Spells.Necromancy
 
             return true;
         }
-
-        public void Target(Mobile m)
+		private int GetModifiedDamageSkill()
+		{
+			int damageSkill = (int)Caster.Skills[DamageSkill].Value;
+			return damageSkill <= 30 ? Caster.Int : damageSkill;
+		}
+		public void Target(Mobile m)
         {
             if (Caster == m)
             {
@@ -58,7 +62,7 @@ namespace Server.Spells.Necromancy
                 * The effect lasts for ((Spirit Speak skill level * 80) / 120) + 10 seconds.
                 */
 
-                TimeSpan duration = TimeSpan.FromSeconds(((GetDamageSkill(Caster) * 80) / 100) + 10);
+                TimeSpan duration = TimeSpan.FromSeconds(((GetModifiedDamageSkill() * 80) / 100) + 10);
 
                 Revenant rev = new Revenant(Caster, m, duration);
 

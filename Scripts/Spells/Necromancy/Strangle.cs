@@ -101,9 +101,15 @@ namespace Server.Spells.Necromancy
 
                 m_Table[m] = t;
 
-                //Calculations for the buff bar
-                double spiritlevel = Caster.Skills[SkillName.EvalInt].Value / 10;
-                if (spiritlevel < 4)
+				//Calculations for the buff bar
+
+				double evalIntValue = Caster.Skills[SkillName.EvalInt].Value;
+				double effectiveValue = evalIntValue <= 30 ? Caster.Int : evalIntValue;
+				double spiritlevel = effectiveValue / 10;
+				//  double spiritlevel = Caster.Skills[SkillName.EvalInt].Value / 10;
+
+
+				if (spiritlevel < 4)
                     spiritlevel = 4;
                 int d_MinDamage = (int)(4.0 * strength);
                 int d_MaxDamage = (int)(((spiritlevel + 1) * 3) * strength);
@@ -161,9 +167,13 @@ namespace Server.Spells.Necromancy
                 m_Target = target;
                 m_From = from;
 
-                double spiritLevel = from.Skills[SkillName.EvalInt].Value / 10;
 
-                m_MinBaseDamage = (spiritLevel - 2) * strength;
+				double evalIntValue = from.Skills[SkillName.EvalInt].Value;
+				double effectiveValue = evalIntValue <= 30 ? from.Int : evalIntValue;
+				double spiritLevel = effectiveValue / 10;
+				//  double spiritLevel = from.Skills[SkillName.EvalInt].Value / 10;
+
+				m_MinBaseDamage = (spiritLevel - 2) * strength;
                 m_MaxBaseDamage = (spiritLevel + 1) * strength;
 
                 m_HitDelay = 5;

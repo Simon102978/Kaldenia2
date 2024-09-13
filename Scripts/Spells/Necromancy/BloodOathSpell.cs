@@ -83,8 +83,12 @@ namespace Server.Spells.Necromancy
 
             FinishSequence();
         }
-
-        public void ApplyEffects(Mobile m, double strength = 1.0)
+		private int GetModifiedDamageSkill()
+		{
+			int damageSkill = (int)Caster.Skills[DamageSkill].Value;
+			return damageSkill <= 30 ? Caster.Int : damageSkill;
+		}
+		public void ApplyEffects(Mobile m, double strength = 1.0)
         {
             /* Temporarily creates a dark pact between the caster and the target.
                 * Any damage dealt by the target to the caster is increased, but the target receives the same amount of damage.
@@ -112,7 +116,7 @@ namespace Server.Spells.Necromancy
             m.FixedParticles(0x375A, 1, 17, 9919, 33, 7, EffectLayer.Waist);
             m.FixedParticles(0x3728, 1, 13, 9502, 33, 7, (EffectLayer)255);
 
-            TimeSpan duration = TimeSpan.FromSeconds((((GetDamageSkill(Caster) - GetResistSkill(m)) / 8) + 8) * strength);
+            TimeSpan duration = TimeSpan.FromSeconds((((GetModifiedDamageSkill() - GetResistSkill(m)) / 8) + 8) * strength);
             m.CheckSkill(SkillName.MagicResist, 0.0, 120.0);	//Skill check for gain
 
             timer = new ExpireTimer(Caster, m, duration);
@@ -124,8 +128,8 @@ namespace Server.Spells.Necromancy
             m_Table[m] = timer;
             HarmfulSpell(m);
         }
-
-        private class ExpireTimer : Timer
+		
+		private class ExpireTimer : Timer
         {
             private readonly Mobile m_Caster;
             private readonly Mobile m_Target;

@@ -26,7 +26,13 @@ namespace Server.Spells.Necromancy
         public override double RequiredSkill => 60.0;
         public override int RequiredMana => 23;
         public override bool DelayedDamage => false;
-        public override void OnCast()
+
+		private int GetModifiedDamageSkill()
+		{
+			int damageSkill = (int)Caster.Skills[DamageSkill].Value;
+			return damageSkill <= 30 ? Caster.Int : damageSkill;
+		}
+		public override void OnCast()
         {
             if (CheckSequence())
             {
@@ -59,7 +65,7 @@ namespace Server.Spells.Necromancy
                         double damage = Utility.RandomMinMax(30, 35);
                         int karma = m != null ? m.Karma / 100 : 0;
 
-                        damage *= 300 + karma + (GetDamageSkill(Caster) * 10);
+                        damage *= 300 + karma + (GetModifiedDamageSkill() * 10);
                         damage /= 1000;
 
                         int sdiBonus = SpellHelper.GetSpellDamageBonus(Caster, m, CastSkill, m is PlayerMobile);

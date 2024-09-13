@@ -72,7 +72,13 @@ namespace Server.Spells.Necromancy
             FinishSequence();
         }
 
-        public void ApplyEffects(Mobile m, double strength = 1.0)
+		private int GetModifiedDamageSkill()
+		{
+			int damageSkill = (int)Caster.Skills[DamageSkill].Value;
+			return damageSkill <= 30 ? Caster.Int : damageSkill;
+		}
+
+		public void ApplyEffects(Mobile m, double strength = 1.0)
         {
             /* Transmogrifies the flesh of the target creature or player to resemble rotted corpse flesh,
                 * making them more vulnerable to Fire and Poison damage,
@@ -99,13 +105,13 @@ namespace Server.Spells.Necromancy
             m.FixedParticles(0x373A, 1, 15, 9913, 67, 7, EffectLayer.Head);
             m.PlaySound(0x1BB);
 
-            double ss = GetDamageSkill(Caster);
+            double ss = GetModifiedDamageSkill();
             double mr = GetResistSkill(m);
             m.CheckSkill(SkillName.MagicResist, 0.0, m.Skills[SkillName.MagicResist].Cap);	//Skill check for gain
 
             TimeSpan duration = TimeSpan.FromSeconds((((ss - mr) / 2.5) + 40.0) * strength);
 
-            int malus = (int)Math.Min(15, (Caster.Skills[CastSkill].Value + Caster.Skills[DamageSkill].Value) * 0.075);
+            int malus = (int)Math.Min(15, (Caster.Skills[CastSkill].Value + GetModifiedDamageSkill() * 0.075));
 
             ResistanceMod[] mods = new ResistanceMod[4]
                     {

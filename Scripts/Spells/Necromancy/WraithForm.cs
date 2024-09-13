@@ -1,4 +1,5 @@
 using Server.Mobiles;
+using Server.SkillHandlers;
 using System;
 
 namespace Server.Spells.Necromancy
@@ -36,9 +37,12 @@ namespace Server.Spells.Necromancy
             m.PlaySound(0x17F);
             m.FixedParticles(0x374A, 1, 15, 9902, 1108, 4, EffectLayer.Waist);
 
-            int manadrain = Math.Max(8, 5 + (int)(0.16 * m.Skills.EvalInt.Value));
+			//int manadrain = Math.Max(8, 5 + (int)(0.16 * m.Skills.EvalInt.Value));
+			int skillValue = (int)m.Skills.EvalInt.Value;
+			int effectiveValue = skillValue <= 30 ? m.Int : skillValue;
+			int manadrain = Math.Max(8, 5 + (int)(0.16 * effectiveValue));
 
-            BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.WraithForm, 1060524, 1153829, string.Format("15\t5\t5\t{0}", manadrain)));
+			BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.WraithForm, 1060524, 1153829, string.Format("15\t5\t5\t{0}", manadrain)));
         }
 
         public override void RemoveEffect(Mobile m)

@@ -75,8 +75,8 @@ namespace Server.Engines.Harvest
 				MaxRange = 2,
 
 				// Five logs per harvest action
-				ConsumedPerHarvest = 3,
-				ConsumedPerFeluccaHarvest = 3,
+				ConsumedPerHarvest = Utility.RandomMinMax(3, 7),
+				ConsumedPerFeluccaHarvest = Utility.RandomMinMax(3, 7),
 
 				// The chopping effect
 				EffectActions = new int[] { 7 },
@@ -208,6 +208,30 @@ new BonusHarvestResource(0, 1.0, "Vous avez trouvé des baies tribales ", typeof
 
 			return newType;
 		}
+		private string GetSimpleWoodName(Item item)
+		{
+			string typeName = item.GetType().Name;
+			if (typeName.EndsWith("Log"))
+			{
+				typeName = typeName.Substring(0, typeName.Length - 3);
+			}
+
+			switch (typeName)
+			{
+				case "Palmier": return "Palmier";
+				case "Erable": return "Érable";
+				case "Chene": return "Chêne";
+				case "Cedre": return "Cèdre";
+				case "Cypres": return "Cyprès";
+				case "Saule": return "Saule";
+				case "Acajou": return "Acajou";
+				case "Ebene": return "Ébène";
+				case "Amarante": return "Amarante";
+				case "Pin": return "Pin";
+				case "Ancien": return "Ancien";
+				default: return typeName;
+			}
+		}
 
 		public override void SendSuccessTo(Mobile from, Item item, HarvestResource resource)
 		{
@@ -224,9 +248,11 @@ new BonusHarvestResource(0, 1.0, "Vous avez trouvé des baies tribales ", typeof
 					{
 						foreach (Type type in res.Types)
 						{
+							string woodName = GetSimpleWoodName(item);
+
 							if (item.GetType() == type)
 							{
-								//res.SendSuccessTo(from);
+								from.SendMessage($"Vous avez extrait {item.Amount} bûche(s) de {woodName}!");
 								return;
 							}
 						}

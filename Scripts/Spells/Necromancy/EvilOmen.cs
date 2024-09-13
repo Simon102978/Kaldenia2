@@ -115,9 +115,8 @@ namespace Server.Spells.Necromancy
 
             m_Table[m] = resistMalas;
 
-            TimeSpan duration = TimeSpan.FromSeconds(((Caster.Skills[SkillName.EvalInt].Value / 12) + 1.0) * strength);
-
-            Timer.DelayCall(duration, new TimerStateCallback(EffectExpire_Callback), m);
+			TimeSpan duration = TimeSpan.FromSeconds((((Caster.Skills[SkillName.EvalInt].Value <= 30 ? Caster.Int : Caster.Skills[SkillName.EvalInt].Value) / 12) + 1.0) * strength);
+			Timer.DelayCall(duration, new TimerStateCallback(EffectExpire_Callback), m);
 
             BuffInfo.AddBuff(m, new BuffInfo(BuffIcon.EvilOmen, 1075647, 1075648, duration, m));
         }

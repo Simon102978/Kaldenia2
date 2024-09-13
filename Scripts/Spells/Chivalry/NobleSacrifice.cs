@@ -22,7 +22,7 @@ namespace Server.Spells.Chivalry
 		public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(1.5);
         public override double RequiredSkill => 65.0;
         public override int RequiredMana => 20;
-        public override int RequiredTithing => 30;
+        public override int RequiredTithing => 0;
         public override int MantraNumber => 1060725;// Dium Prostra
         public override bool BlocksMovement => false;
         public override void OnCast()
@@ -56,10 +56,12 @@ namespace Server.Spells.Chivalry
 
                 bool sacrifice = false;
 
-                // TODO: Is there really a resurrection chance?
-                double resChance = 0.1 + (0.9 * ((double)Caster.Karma / 10000));
+				// TODO: Is there really a resurrection chance?
+				double resChance = 25 + ((double)Caster.Int / 5);
 
-                for (int i = 0; i < targets.Count; ++i)
+				//double resChance = 0.1 + (0.9 * ((double)Caster.Karma / 10000));
+
+				for (int i = 0; i < targets.Count; ++i)
                 {
                     Mobile m = targets[i];
 

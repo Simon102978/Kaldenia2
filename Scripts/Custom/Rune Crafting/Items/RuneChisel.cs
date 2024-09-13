@@ -4,7 +4,6 @@ using Server.Engines.Craft;
 
 namespace Server.Items
 {
-	[FlipableAttribute( 0x13E4, 0x13E3 )]
 	public class RuneChisel : BaseTool
 	{
 		public override CraftSystem CraftSystem{ get{ return DefRuneCrafting.CraftSystem; } }
@@ -23,7 +22,6 @@ namespace Server.Items
 			Name = "Ciseau runique";
 			Hue = 2046;
 			Weight = 4.0;
-			Layer = Layer.OneHanded;
 		}
 
 		public RuneChisel( Serial serial ) : base( serial )

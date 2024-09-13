@@ -1,6 +1,7 @@
 using Server.Gumps;
 using Server.Mobiles;
 using Server.Network;
+using Server.SkillHandlers;
 using System;
 using System.Collections;
 
@@ -128,7 +129,10 @@ namespace Server.Spells.Necromancy
             double necro = from.Skills[SkillName.Magery].Value;
             double spirit = from.Skills[SkillName.EvalInt].Value;
 
-            for (int i = 0; i < entries.Length; ++i)
+			if (spirit <= 30)
+				spirit = from.Int;
+
+			for (int i = 0; i < entries.Length; ++i)
             {
                 object name = entries[i].Name;
 
@@ -156,7 +160,10 @@ namespace Server.Spells.Necromancy
                 double necro = m_From.Skills[SkillName.Magery].Value;
                 double spirit = m_From.Skills[SkillName.EvalInt].Value;
 
-                BaseCreature check = (BaseCreature)SummonFamiliarSpell.Table[m_From];
+				if (spirit <= 30)
+					spirit = m_From.Int;
+
+				BaseCreature check = (BaseCreature)SummonFamiliarSpell.Table[m_From];
 
                 if (check != null && !check.Deleted)
                 {

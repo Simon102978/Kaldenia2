@@ -2,10 +2,13 @@ using Server.Items;
 using Server.Mobiles;
 using Server.Targeting;
 using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Server.Engines.Harvest
 {
+
+
 	public class CustomMining : HarvestSystem
 	{
 		private static CustomMining m_GeneralSystem { get; set; }
@@ -221,7 +224,7 @@ namespace Server.Engines.Harvest
 			Definitions.Add(sand);
 			#endregion
 		}
-
+	
 		public override Type GetResourceType(Mobile from, Item tool, HarvestDefinition def, Map map, Point3D loc, HarvestResource resource)
 		{
 			if (def == OreAndStone)
@@ -325,10 +328,50 @@ namespace Server.Engines.Harvest
 			return base.GetResourceType(from, tool, def, map, loc, resource);
 		}
 
+		private string GetSimpleResourceName(Item item)
+		{
+			string typeName = item.GetType().Name;
+			if (typeName.EndsWith("Ore") || typeName.EndsWith("Granite"))
+			{
+				typeName = typeName.Replace("Ore", "").Replace("Granite", "");
+			}
+
+			switch (typeName)
+			{
+				case "Iron": return "Fer";
+				case "Bronze": return "Bronze";
+				case "Copper": return "Cuivre";
+				case "Sonne": return "Sonne";
+				case "Argent": return "Argent";
+				case "Boreale": return "Boréale";
+				case "Chrysteliar": return "Chrysteliar";
+				case "Glacias": return "Glacias";
+				case "Lithiar": return "Lithiar";
+				case "Acier": return "Acier";
+				case "Durian": return "Durian";
+				case "Equilibrum": return "Équilibrum";
+				case "Gold": return "Or";
+				case "Jolinar": return "Jolinar";
+				case "Justicium": return "Justicium";
+				case "Abyssium": return "Abyssium";
+				case "Bloodirium": return "Bloodirium";
+				case "Herbrosite": return "Herbrosite";
+				case "Khandarium": return "Khandarium";
+				case "Mytheril": return "Mytheril";
+				case "Sombralir": return "Sombralir";
+				default: return typeName;
+			}
+		}
+
+
 		public override void SendSuccessTo(Mobile from, Item item, HarvestResource resource)
 		{
+			string resourceName = GetSimpleResourceName(item);
 			if (item is BaseGranite)
-				from.SendLocalizedMessage(1044606); // You carefully extract some workable stone from the ore vein!
+
+			from.SendMessage($"Vous avez extrait {item.Amount} granite(s) de {resourceName}!");
+
+			//	from.SendLocalizedMessage(1044606); // You carefully extract some workable stone from the ore vein!
 			else if (item is IGem)
 				from.SendLocalizedMessage(1112233); // You carefully extract a glistening gem from the vein!
 			else if (item != null)
@@ -338,6 +381,7 @@ namespace Server.Engines.Harvest
 						if (item.GetType() == type)
 						{
 							//res.SendSuccessTo(from);
+							from.SendMessage($"Vous avez extrait {item.Amount} minerais de {resourceName}!");
 							return;
 						}
 

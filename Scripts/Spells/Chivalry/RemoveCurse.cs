@@ -27,7 +27,7 @@ namespace Server.Spells.Chivalry
 
         public override int RequiredMana => 20;
 
-        public override int RequiredTithing => 10;
+        public override int RequiredTithing => 0;
 
         public override int MantraNumber => 1060726; // Extermo Vomica
 
@@ -47,21 +47,31 @@ namespace Server.Spells.Chivalry
             {
                 SpellHelper.Turn(Caster, m);
 
-                /* Attempts to remove all Curse effects from Target.
+				/* Attempts to remove all Curse effects from Target.
                 * Curses include Mage spells such as Clumsy, Weaken, Feeblemind and Paralyze
                 * as well as all Necromancer curses.
                 * Chance of removing curse is affected by Caster's Karma.
                 */
 
-                int chance = 0;
+				/*             int chance = 0;
 
-                if (Caster.Karma < -5000)
-                    chance = 0;
-                else if (Caster.Karma < 0)
-                    chance = (int)Math.Sqrt(20000 + Caster.Karma) - 122;
-                else if (Caster.Karma < 5625)
-                    chance = (int)Math.Sqrt(Caster.Karma) + 25;
-                else
+							 if (Caster.Karma < -5000)
+								 chance = 50;
+							 else if (Caster.Karma < 0)
+								 chance = 50;
+							 //chance = (int)Math.Sqrt(20000 + Caster.Karma) - 122;
+							 else if (Caster.Karma < 5625)
+								 chance = (int)Math.Sqrt(Caster.Karma) + 25; */
+				int chance = 0;
+
+				if (Caster.Int < 50)
+					chance = 25;
+				else if (Caster.Int < 75)
+					chance = 50;
+				else if (Caster.Int < 100)
+					chance = 75;
+
+				else
                     chance = 100;
 
                 if (chance > Utility.Random(100))

@@ -56,10 +56,13 @@ namespace Server.Spells.Necromancy
             m.FixedParticles(0x37C4, 1, 8, 9502, 39, 4, EffectLayer.Head);
             m.PlaySound(0x210);
 
-            double damage = (((GetDamageSkill(Caster) - GetResistSkill(m)) / 10) + (m.Player ? 18 : 30)) * strength;
-            m.CheckSkill(SkillName.MagicResist, 0.0, 120.0);	//Skill check for gain
+			double damageSkill = GetDamageSkill(Caster);
+			double effectiveDamageSkill = damageSkill <= 30 ? Caster.Int : damageSkill;
 
-            if (damage < 1)
+			double damage = (((effectiveDamageSkill - GetResistSkill(m)) / 10) + (m.Player ? 18 : 30)) * strength;
+			m.CheckSkill(SkillName.MagicResist, 0.0, 120.0);    //Skill check for gain
+
+			if (damage < 1)
                 damage = 1;
 
             TimeSpan buffTime = TimeSpan.FromSeconds(10.0 * strength);
