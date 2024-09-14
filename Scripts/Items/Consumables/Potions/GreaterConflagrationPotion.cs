@@ -7,6 +7,7 @@ namespace Server.Items
             : base(PotionEffect.ConflagrationGreater)
         {
 			Name = "Potion incendière majeure";
+			Weight = 1;
 
 		}
 
@@ -17,7 +18,7 @@ namespace Server.Items
 
         public override int MinDamage => 4;
         public override int MaxDamage => 8;
-        public override int LabelNumber => 1072098;// a Greater Conflagration potion
+       // public override int LabelNumber => 1072098;// a Greater Conflagration potion
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

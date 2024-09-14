@@ -94,10 +94,10 @@ namespace Server.Items
 
 		public virtual bool CanDyeItem(Item item)
 		{
-			if (item.Createur == null)
-			{
-				return false;
-			}
+		//	if (item.Createur == null)
+		//	{
+		//		return false;
+		//	}
 
 			return item is IDyable ||
 				   item is BaseClothing ||
@@ -214,7 +214,7 @@ namespace Server.Items
 							from.SendMessage("Votre bac de teinture n'a plus de charge.");
 						}
 					}
-					else
+				/*	else
 					{
 						if (item.Createur == null)
 						{
@@ -225,7 +225,7 @@ namespace Server.Items
 							from.SendLocalizedMessage(m_Tub.FailMessage);
 						}
 					}
-				}
+				}*/
 				else
 				{
 					from.SendLocalizedMessage(m_Tub.FailMessage);
@@ -233,6 +233,7 @@ namespace Server.Items
 
 				m_Tub.m_IsInUse = false;
 			}
+		}
 
 
 

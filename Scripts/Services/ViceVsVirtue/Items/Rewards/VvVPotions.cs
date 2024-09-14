@@ -408,6 +408,7 @@ namespace Server.Engines.VvV
         public SupernovaPotion()
         {
             Hue = 13;
+			Name = "Super Nova Potion";
         }
 
         public override void Use(Mobile m)

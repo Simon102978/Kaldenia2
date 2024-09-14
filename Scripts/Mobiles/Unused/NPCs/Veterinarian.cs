@@ -155,7 +155,7 @@ namespace Server.Mobiles
 
             AddHtmlLocalized(30, 20, 355, 35, 1113193, 0xFFFFFF, false, false); // Ah, thine pet seems to be in dire condition! I can help thee, but must charge a small fee...
             AddHtmlLocalized(30, 72, 345, 40, 1113284, 0x1DB2D, false, false); // Please select the pet you wish to resurrect:
-            AddHtmlLocalized(20, 280, 345, 40, 1113286, 0x1DB2D, false, false); // <CENTER>Your pet will suffer 0.2 points of skill-loss if resurrected in this manner.</CENTER>
+         //   AddHtmlLocalized(20, 280, 345, 40, 1113286, 0x1DB2D, false, false); // <CENTER>Your pet will suffer 0.2 points of skill-loss if resurrected in this manner.</CENTER>
             AddImageTiled(95, 62, 200, 1, 0x23C5);
             AddImageTiled(15, 325, 365, 1, 0x2393);
 
@@ -213,15 +213,15 @@ namespace Server.Mobiles
                                     from.SendLocalizedMessage(500643); // Target is too far away.
                                 else if (pet.ControlMaster != from)
                                     from.SendLocalizedMessage(1113200); // You must be the owner of that pet to have it resurrected.
-                                else if (pet.Corpse != null && !pet.Corpse.Deleted)
-                                    from.SendLocalizedMessage(1113279); // That creature's spirit lacks cohesion. Try again in a few minutes.
+                             //   else if (pet.Corpse != null && !pet.Corpse.Deleted)
+                             //       from.SendLocalizedMessage(1113279); // That creature's spirit lacks cohesion. Try again in a few minutes.
                                 else if (Banker.Withdraw(from, fee))
                                 {
                                     pet.PlaySound(0x214);
                                     pet.ResurrectPet();
 
-                                    for (int j = 0; j < pet.Skills.Length; ++j) // Decrease all skills on pet.
-                                        pet.Skills[j].Base -= 0.2;
+                                 //   for (int j = 0; j < pet.Skills.Length; ++j) // Decrease all skills on pet.
+                                 //       pet.Skills[j].Base -= 0.2;
 
                                     if (pet.Map == Map.Internal)
                                         pet.MoveToWorld(from.Location, from.Map);

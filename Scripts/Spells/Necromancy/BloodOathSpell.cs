@@ -116,7 +116,7 @@ namespace Server.Spells.Necromancy
             m.FixedParticles(0x375A, 1, 17, 9919, 33, 7, EffectLayer.Waist);
             m.FixedParticles(0x3728, 1, 13, 9502, 33, 7, (EffectLayer)255);
 
-            TimeSpan duration = TimeSpan.FromSeconds((((GetModifiedDamageSkill() - GetResistSkill(m)) / 8) + 8) * strength);
+            TimeSpan duration = TimeSpan.FromSeconds(((GetModifiedDamageSkill() / 10) + 5) * strength);
             m.CheckSkill(SkillName.MagicResist, 0.0, 120.0);	//Skill check for gain
 
             timer = new ExpireTimer(Caster, m, duration);

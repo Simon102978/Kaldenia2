@@ -271,8 +271,8 @@ namespace Server.Items
 
         public static SkillName GetPrimarySkill(Mobile healer, Mobile m)
         {
-            if (m is DespiseCreature)
-            {
+            if (m is DespiseCreature || m is BaseHire)
+			{
                 return healer.Skills[SkillName.Healing].Value > healer.Skills[SkillName.Veterinary].Value ? SkillName.Healing : SkillName.Veterinary;
             }
 
@@ -288,8 +288,8 @@ namespace Server.Items
 
         public static SkillName GetSecondarySkill(Mobile healer, Mobile m)
         {
-            if (m is DespiseCreature)
-            {
+            if (m is DespiseCreature || m is BaseHire)
+			{
                 return healer.Skills[SkillName.Healing].Value > healer.Skills[SkillName.Veterinary].Value ? SkillName.Anatomy : SkillName.AnimalLore;
             }
 
@@ -419,7 +419,7 @@ namespace Server.Items
 
                                 for (int i = 0; i < petPatient.Skills.Length; ++i)
                                 {
-                                    petPatient.Skills[i].Base -= 0.1;
+                                //    petPatient.Skills[i].Base -= 0.1;
                                 }
                             }
                             else if (master != null && master.InRange(petPatient, 3))

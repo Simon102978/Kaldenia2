@@ -906,6 +906,9 @@ namespace Server.Items
 				if ((prop = m_AosAttributes.LowerRegCost) != 0)
 					list.Add($"Réduction coût d'essence: {prop}"); // lower reagent cost ~1_val~%      
 
+				if ((prop = Attributes.LowerManaCost) != 0)
+					list.Add($"Réduction coût mana: {prop}"); // lower reagent cost ~1_val~%   
+
 				if ((prop = m_AosAttributes.LowerAmmoCost) != 0)
 					list.Add($"Réduction coût de munition: {prop}");
 

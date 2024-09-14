@@ -1,4 +1,5 @@
 ﻿using Server.Engines.Quests.Hag;
+using Server.Engines.VvV;
 using Server.Items;
 using System;
 using System.Security.Policy;
@@ -262,13 +263,17 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			index = AddCraft(typeof(ConflagrationPotion), "Explosion", "Potion incendière", 55.0, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			index = AddCraft(typeof(ConflagrationPotion), "Explosion", "Potion incendiaire", 55.0, 105.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(GraveDust), "Poussière Blanche", 5, "Vous n'avez pas suffisament de Poussière Blanche");
 
-			index = AddCraft(typeof(GreaterConflagrationPotion), "Explosion", "Potion incendière majeure", 70.0, 120.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			index = AddCraft(typeof(GreaterConflagrationPotion), "Explosion", "Potion incendiaire majeure", 70.0, 120.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
 			AddRes(index, typeof(GraveDust), "Poussière Blanche", 10, "Vous n'avez pas suffisament de Poussière Blanche");
+
+			index = AddCraft(typeof(SupernovaPotion), "Explosion", "Potion Super Nova", 80.0, 120.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
+			AddRes(index, typeof(GraveDust), "Poussière Blanche", 20, "Vous n'avez pas suffisament de Poussière Blanche");
 
 			index = AddCraft(typeof(SmokeBomb), "Autres", "Bombe de Fumée", 90.0, 120.0, typeof(Eggs), "Oeuf", 1, "Vous n'avez pas suffisament d'oeuf");
 			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
