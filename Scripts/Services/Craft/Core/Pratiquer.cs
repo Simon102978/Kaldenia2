@@ -141,7 +141,7 @@ namespace Server.Engines.Craft
 
 					if (SkillCheck.Mobile_SkillCheckLocation(from, skillName, minSkill, maxSkill))
 					{
-						from.SendMessage($"Vous avez amélioré votre compétence en {craftSystem.MainSkill}.");
+						//from.SendMessage($"Vous avez amélioré votre compétence en {craftSystem.MainSkill}.");
 
 						if (from.SkillsTotal >= from.SkillsCap)
 						{
@@ -151,13 +151,13 @@ namespace Server.Engines.Craft
 							{
 								double decrease = 0.1;
 								skillToDecrease.Base -= decrease;
-								from.SendMessage($"Votre compétence en {skillToDecrease.Info.Name} a diminué de {decrease:F1} points pour compenser.");
+							//	from.SendMessage($"Votre compétence en {skillToDecrease.Info.Name} a diminué de {decrease:F1} points pour compenser.");
 							}
 						}
 					}
 					else
 					{
-						from.SendMessage("Vous avez pratiqué, mais n'avez pas amélioré votre compétence cette fois-ci.");
+						//from.SendMessage("Vous avez pratiqué, mais n'avez pas amélioré votre compétence cette fois-ci.");
 					}
 
 					if (toolBroken)

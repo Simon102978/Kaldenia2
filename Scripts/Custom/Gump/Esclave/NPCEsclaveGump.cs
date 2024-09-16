@@ -56,6 +56,12 @@ namespace Server.Gumps
 			AddLabel(x + 200, y + 40 + line++ * 25, bh.YellHue, "*******");
 
 			AddButtonHtlml(x + 5, y + 40 + line++ * 25, 2, "Relacher", "#FFFFFF");
+			AddLabel(x + 5, y + 40 + line++ * 25, 150, $"Force: {bh.RawStr}");
+			AddLabel(x + 5, y + 40 + line++ * 25, 150, $"Dextérité: {bh.RawDex}");
+			AddLabel(x + 5, y + 40 + line++ * 25, 150, $"Intelligence: {bh.RawInt}");
+			AddLabel(x + 5, y + 40 + line++ * 25, 150, $"Vie: {bh.Hits}/{bh.HitsMax}");
+			AddLabel(x + 5, y + 40 + line++ * 25, 150, $"Stamina: {bh.Stam}/{bh.StamMax}");
+			AddLabel(x + 5, y + 40 + line++ * 25, 150, $"Mana: {bh.Mana}/{bh.ManaMax}");
 
 			AddLabel(x + 5, y + 40 + line++ * 25, 150, $"Loyauté: {bh.Loyalty}%");
 

@@ -18,7 +18,7 @@ namespace Server.Mobiles
             SetDex(68, 200);
             SetInt(488, 620);
 
-            SetHits(558, 599);
+            SetHits(900, 1299);
 
             SetDamage(29, 35);
 
@@ -83,6 +83,16 @@ namespace Server.Mobiles
             AddLoot(LootPack.Gems, 5);
 			AddLoot(LootPack.LootItem<EcaillesWyrm>(3, 7));
 			AddLoot(LootPack.Others, Utility.RandomMinMax(6, 12));
+
+		}
+
+		public override void GenerateLootParagon()
+		{
+			AddLoot(LootPack.LootItem<SangEnvouteDragon>(), Utility.RandomMinMax(2, 4));
+			AddLoot(LootPack.LootItem<SangEnvouteDex>(), Utility.RandomMinMax(1, 2));
+			AddLoot(LootPack.LootItem<SangEnvouteInt>(), Utility.RandomMinMax(1, 2));
+
+
 
 		}
 

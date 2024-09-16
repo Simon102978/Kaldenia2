@@ -47,6 +47,7 @@ namespace Server.Items
 			}
 			else if (item is BaseArmor armor)
 			{
+				ResetAttributes(armor.Attributes, item);
 				ResetAttributes(armor.Attributes);
 				ResetAttributes(armor.ArmorAttributes);
 				armor.Enchantement = 0;
@@ -54,6 +55,7 @@ namespace Server.Items
 			}
 			else if (item is BaseJewel jewel)
 			{
+				ResetAttributes(jewel.Attributes, item);
 				ResetAttributes(jewel.Attributes);
 				jewel.Enchantement = 0;
 
@@ -109,7 +111,7 @@ namespace Server.Items
 			}
 		}
 
-		private void ResetAttributes(AosAttributes attributes)
+		private void ResetAttributes(AosAttributes attributes, Item item = null)
 		{
 			attributes.RegenHits = 0;
 			attributes.RegenStam = 0;
@@ -119,9 +121,22 @@ namespace Server.Items
 			attributes.BonusStr = 0;
 			attributes.BonusDex = 0;
 			attributes.BonusInt = 0;
-			attributes.BonusHits = 0;
-			attributes.BonusStam = 0;
-			attributes.BonusMana = 0;
+
+			if (item != null)
+			{
+				if (item.GetType().Name != "CapeOfCourage")
+					attributes.BonusHits = 0;
+				if (item.GetType().Name != "CapeOfDetermination")
+					attributes.BonusStam = 0;
+				if (item.GetType().Name != "CapeOfKnowledge")
+					attributes.BonusMana = 0;
+			}
+			else
+			{
+				attributes.BonusHits = 0;
+				attributes.BonusStam = 0;
+				attributes.BonusMana = 0;
+			}
 			attributes.WeaponDamage = 0;
 			attributes.WeaponSpeed = 0;
 			attributes.SpellDamage = 0;

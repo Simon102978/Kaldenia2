@@ -16,7 +16,15 @@ namespace Server.Items
         StoneOnly,
     }
 
-    public abstract class BaseHarvestTool : Item, IUsesRemaining, ICraftable, IHarvestTool
+	public enum Quality
+	{
+		Normal,
+		Exceptional,
+		Epic,
+		Legendary,
+	}
+
+	public abstract class BaseHarvestTool : Item, IUsesRemaining, ICraftable, IHarvestTool
     {
         private Mobile m_Crafter;
         private ItemQuality m_Quality;
@@ -77,15 +85,19 @@ namespace Server.Items
             m_UsesRemaining = (m_UsesRemaining * 100) / GetUsesScalar();
         }
 
-        public int GetUsesScalar()
-        {
-            if (m_Quality == ItemQuality.Exceptional)
-                return 200;
+		public int GetUsesScalar()
+		{
+			if (m_Quality == ItemQuality.Exceptional)
+				return 3;
+			else if (m_Quality == ItemQuality.Epic)
+				return 6;
+			else if (m_Quality == ItemQuality.Legendary)
+				return 8;
 
-            return 100;
-        }
+			return 1;
+		}
 
-        public bool ShowUsesRemaining
+		public bool ShowUsesRemaining
         {
             get
             {
@@ -114,11 +126,48 @@ namespace Server.Items
 
         public override void AddCraftedProperties(ObjectPropertyList list)
         {
-            if (m_Quality == ItemQuality.Exceptional)
-                list.Add(1060636); // exceptional
-        }
 
-        public override void AddUsesRemainingProperties(ObjectPropertyList list)
+			if (m_Crafter != null)
+				list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
+
+			if (m_Quality == ItemQuality.Exceptional)
+				list.Add("Exceptionnelle");
+			else if (m_Quality == ItemQuality.Epic)
+				list.Add("Épique");
+			else if (m_Quality == ItemQuality.Legendary)
+				list.Add("Légendaire");
+		}
+
+		public override void AddNameProperties(ObjectPropertyList list)
+		{
+			var name = Name ?? String.Empty;
+
+			if (String.IsNullOrWhiteSpace(name))
+				name = System.Text.RegularExpressions.Regex.Replace(GetType().Name, "[A-Z]", " $0");
+
+		
+			 if (Quality == ItemQuality.Legendary)
+				list.Add($"<BASEFONT COLOR=#FFA500>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Epic)
+				list.Add($"<BASEFONT COLOR=#A020F0>{name}</BASEFONT>");
+			else if (Quality == ItemQuality.Exceptional)
+				list.Add($"<BASEFONT COLOR=#0000FF>{name}</BASEFONT>");
+			else
+				list.Add($"<BASEFONT COLOR=#808080>{name}</BASEFONT>");
+
+			var desc = Description ?? String.Empty;
+
+			if (!String.IsNullOrWhiteSpace(desc))
+				list.Add(desc);
+
+			AddCraftedProperties(list);
+			AddLootTypeProperty(list);
+			AddUsesRemainingProperties(list);
+			AddWeightProperty(list);
+
+		}
+
+		public override void AddUsesRemainingProperties(ObjectPropertyList list)
         {
             list.Add(1060584, m_UsesRemaining.ToString()); // uses remaining: ~1_val~
         }

@@ -101,7 +101,7 @@ namespace Server.Items
 		}
 		private PotionEffect m_PotionEffect;
 
-		public static TimeSpan DefaultDuration = TimeSpan.FromMinutes(5.0);
+		public static TimeSpan DefaultDuration = TimeSpan.FromMinutes(30.0);
 		public virtual TimeSpan MinimumDuration => TimeSpan.Zero;
 		public virtual TimeSpan Duration
 		{

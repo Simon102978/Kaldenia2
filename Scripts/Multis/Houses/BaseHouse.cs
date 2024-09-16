@@ -2947,46 +2947,46 @@ namespace Server.Multis
         }
 
 
-        public void RemoveCoOwner(Mobile from, Nom targ, bool fromMessage)
-        {
-            if (!IsOwner(from) || CoOwners == null)
-                return;
+		public void RemoveCoOwner(Mobile from, Nom targ, bool fromMessage)
+		{
+			if (!IsOwner(from) || CoOwners == null || targ == null)
+				return;
 
-            if (CoOwners.Contains(targ))
-            {
-                CoOwners.Remove(targ);
+			if (CoOwners.Contains(targ))
+			{
+				CoOwners.Remove(targ);
 
-                targ.Mobile.Delta(MobileDelta.Noto);
+				if (targ.Mobile != null)
+				{
+					targ.Mobile.Delta(MobileDelta.Noto);
+					targ.Mobile.SendLocalizedMessage(501300); // You have been removed as a house co-owner.
+				}
 
-                if (fromMessage)
-                    from.SendLocalizedMessage(501299); // Co-owner removed from list.
+				if (fromMessage)
+					from.SendLocalizedMessage(501299); // Co-owner removed from list.
 
-                targ.Mobile.SendLocalizedMessage(501300); // You have been removed as a house co-owner.
-
-                List<SecureInfo> infos = GetSecureInfosFor(targ.Mobile);
-
-                foreach (SecureInfo info in infos)
-                {
-                    if (info.Item is StrongBox)
-                    {
-                        StrongBox c = info.Item as StrongBox;
-
-                        c.IsLockedDown = false;
-                        c.IsSecure = false;
-                        c.Destroy();
-
-                        Secures.Remove(info);
-                    }
-                    else
-                    {
-                        info.Owner = from;
-                    }
-                }
-            }
-        }
+				List<SecureInfo> infos = GetSecureInfosFor(targ.Mobile);
+				foreach (SecureInfo info in infos)
+				{
+					if (info.Item is StrongBox)
+					{
+						StrongBox c = info.Item as StrongBox;
+						c.IsLockedDown = false;
+						c.IsSecure = false;
+						c.Destroy();
+						Secures.Remove(info);
+					}
+					else
+					{
+						info.Owner = from;
+					}
+				}
+			}
+		}
 
 
-        public void AddFriend(Mobile from, Mobile targ)
+
+		public void AddFriend(Mobile from, Mobile targ)
         {
             AddFriend(from, new Nom(targ));
         }

@@ -61,47 +61,43 @@ namespace Server.Mobiles
 			}
 		}
 
-       	public void Charge()
+		public void Charge()
 		{
 			if (DelayCharge < DateTime.UtcNow)
 			{
-					if (Combatant is CustomPlayerMobile cp)
+				if (Combatant is CustomPlayerMobile cp && cp != null)
+				{
+					Emote($"*Effectue une charge vers {cp.Name}*");
+
+					if (!cp.Deleted && cp.Alive)
 					{
-
-						Emote($"*Effectue une charge vers {cp.Name}*");
-
 						cp.Damage(15);
-
 						cp.Freeze(TimeSpan.FromSeconds(3));
-
 						this.Location = cp.Location;
 					}
-				
+				}
 
 				DelayCharge = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(30, 50));
 			}
 		}
 
+
 		public void AntiSummon()
 		{
 			if (TuerSummoneur < DateTime.UtcNow)
 			{
-				if (Combatant is BaseCreature bc)
+				if (Combatant is BaseCreature bc && bc != null && bc.Summoned)
 				{
-					if (bc.Summoned)
+					if (bc.ControlMaster is CustomPlayerMobile cp && cp != null)
 					{
-						if (bc.ControlMaster is CustomPlayerMobile cp)
+						Combatant = cp;
+						Emote($"*Effectue une charge vers {cp.Name}*");
+
+						if (!cp.Deleted && cp.Alive)
 						{
-							Combatant = cp;
-
-							Emote($"*Effectue une charge vers {cp.Name}*");
-
 							cp.Damage(15);
-
 							cp.Freeze(TimeSpan.FromSeconds(3));
-
 							this.Location = cp.Location;
-
 						}
 					}
 				}
@@ -109,7 +105,8 @@ namespace Server.Mobiles
 			}
 		}
 
-    	public override void OnDamage(int amount, Mobile from, bool willKill)
+
+		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
             int newAmount = amount;
 

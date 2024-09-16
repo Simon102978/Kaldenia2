@@ -63,9 +63,9 @@ namespace Server.Mobiles
             int fee = (int)(100 + Math.Pow(1.1041, bc.MinTameSkill));
 
             if (fee > 100)
-                fee = 50;
+                fee = 250;
             else if (fee < 100)
-                fee = 50;
+                fee = 250;
 
             return fee;
         }

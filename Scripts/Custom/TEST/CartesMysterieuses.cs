@@ -11,6 +11,7 @@ public class SkillCard : Item
 	{
 		EventSink.WorldSave += OnWorldSave;
 		EventSink.WorldLoad += OnWorldLoad;
+		LoadActiveEffects();
 	}
 
 	private static void OnWorldSave(WorldSaveEventArgs e)
@@ -391,6 +392,49 @@ public class SkillCard : Item
 			}
 		}
 	}
+	public static void OnLogin(LoginEventArgs e)
+	{
+		if (e.Mobile is PlayerMobile player)
+		{
+			ReapplyEffectsOnLogin(player);
+		}
+	}
+
+	public static void ReapplyEffectsOnLogin(Mobile player)
+	{
+		if (s_ActiveEffects.TryGetValue(player, out var effects))
+		{
+			foreach (var effect in effects.Values)
+			{
+				if (effect.ExpireTime > DateTime.UtcNow)
+				{
+					// Réappliquez l'effet
+					SkillMod mod = new DefaultSkillMod(effect.Skill, true, effect.Bonus);
+					player.AddSkillMod(mod);
+
+					BuffInfo buff = new BuffInfo(BuffIcon.ArcaneEmpowerment, 1151394, 1151395, effect.ExpireTime - DateTime.UtcNow, player, $"{effect.Skill}: +{effect.Bonus:F1}%");
+					BuffInfo.AddBuff(player, buff);
+
+					effect.SkillMod = mod;
+					effect.Buff = buff;
+
+					Timer.DelayCall(effect.ExpireTime - DateTime.UtcNow, () => RemoveEffect(effect));
+				}
+				else
+				{
+					// L'effet a expiré, supprimez-le
+					effects.Remove(effect.Skill);
+				}
+			}
+
+			if (effects.Count == 0)
+			{
+				s_ActiveEffects.Remove(player);
+			}
+		}
+	}
+
+	
 	public static void SaveActiveEffects()
 	{
 		using (StreamWriter writer = new StreamWriter("Data/SkillCardEffects.txt"))
@@ -404,6 +448,7 @@ public class SkillCard : Item
 			}
 		}
 	}
+
 
 	public static void LoadActiveEffects()
 	{

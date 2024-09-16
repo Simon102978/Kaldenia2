@@ -1,5 +1,7 @@
 using System;
 using Server;
+using Server.Gumps;
+using Server.Mobiles;
 using Server.Multis;
 
 namespace Server.Items
@@ -38,6 +40,13 @@ namespace Server.Items
 			Movable = false;
 			Visible = true;
 			m_Range = 5; // Default range of 5 tiles (11x11 area)
+			Public = true; 
+			UpdateRegion();
+		}
+
+		public override void OnDoubleClick(Mobile from)
+		{
+			from.SendGump(new PropertiesGump(from, this));
 		}
 		public bool IsInRange(Point3D location)
 		{
@@ -45,8 +54,8 @@ namespace Server.Items
 			int dy = Math.Abs(location.Y - this.Y);
 			return dx <= m_Range && dy <= m_Range;
 		}
-	
-	public override void OnLocationChange(Point3D oldLocation)
+
+		public override void OnLocationChange(Point3D oldLocation)
 		{
 			base.OnLocationChange(oldLocation);
 			UpdateRegion();
@@ -70,6 +79,7 @@ namespace Server.Items
 			base.Serialize(writer);
 			writer.Write((int)0); // version
 			writer.Write(m_Range);
+
 		}
 
 		public override void Deserialize(GenericReader reader)
@@ -85,15 +95,13 @@ namespace Server.Items
 		[Constructable]
 		public PortableGardenScarecrowDeed() : base()
 		{
-			Name = "Epouvantail Deed";
+			Name = "Portable Garden Scarecrow Deed";
 		}
 
 		public override BaseGarden GetGarden(Mobile from)
 		{
 			return new PortableGardenScarecrow(from);
 		}
-
-
 
 		public PortableGardenScarecrowDeed(Serial serial) : base(serial) { }
 
@@ -109,4 +117,5 @@ namespace Server.Items
 			int version = reader.ReadInt();
 		}
 	}
+
 }
