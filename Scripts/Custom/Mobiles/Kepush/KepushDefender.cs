@@ -7,13 +7,13 @@ using System.Collections.Generic;
 namespace Server.Mobiles
 {
 	[CorpseName("Le corps d'un Kepush")]
-	public class KepushDEfender : KepushBase
+	public class KepushDefender : KepushBase
 	{
         public bool BlockReflect { get; set; }
 
 
 		[Constructable]
-        public KepushDEfender()
+        public KepushDefender()
             : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
         {
             Title = "Un Kepush";
@@ -131,7 +131,7 @@ namespace Server.Mobiles
 
 		
 
-		public KepushDEfender(Serial serial)
+		public KepushDefender(Serial serial)
             : base(serial)
         {
         }

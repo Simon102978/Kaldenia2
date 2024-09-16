@@ -232,7 +232,7 @@ namespace Server
 			if (damageable == null)
 			{
 				Console.WriteLine("AOS.Damage: 'damageable' est null");
-				return 0; // Retourne 0 dégâts si damageable est null
+				return 0; // Retourne 0 dï¿½gï¿½ts si damageable est null
 			}
 
 			if (from != null && !from.Deleted && from.Alive && !from.IsDeadBondedPet)
@@ -357,6 +357,10 @@ namespace Server
             if (fromCreature != null && type <= DamageType.Ranged)
             {
                 fromCreature.AlterMeleeDamageTo(m, ref totalDamage);
+            }
+            else if(fromCreature != null && type == DamageType.Ranged )
+            {
+                fromCreature.AlterRangedDamageTo(m, ref totalDamage);
             }
 
             if (toCreature != null && type <= DamageType.Ranged)

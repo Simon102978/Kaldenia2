@@ -2318,6 +2318,11 @@ namespace Server.Mobiles
 			if (m_TempDamageBonus > 0 && TastyTreat.UnderInfluence(this))
 				damage += damage / m_TempDamageBonus;
 		}
+
+		public virtual void AlterRangedDamageTo(Mobile to, ref int damage)
+		{
+
+		}
 		#endregion
 
 		#region SA / High Seas Tasty Treats/Vial of Armor Essense

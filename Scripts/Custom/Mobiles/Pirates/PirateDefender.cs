@@ -7,77 +7,48 @@ using System.Collections.Generic;
 namespace Server.Mobiles
 {
 	[CorpseName("Le corps d'un Pirate")]
-	public class PirateDEfender : PirateBase
+	public class PirateDefender : PirateBase
 	{
         public bool BlockReflect { get; set; }
 
-
-		[Constructable]
-        public PirateDEfender()
-            : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4)
+        [Constructable]
+        public PirateDefender()
+            : this(0)
         {
-            Title = "Un Pirate";
 
-			SpeechHue = Utility.RandomDyedHue();
-			Race = BaseRace.GetRace(7);
-
-			SetStr(200, 250);
-			SetDex(31, 45);
-			SetInt(75, 100);
-
-			SetSkill(SkillName.ArmsLore, 64.0, 80.0);
-            SetSkill(SkillName.Parry, 80.0, 100.0);
-            SetSkill(SkillName.Swords, 80.0, 100.0);
-
-//			Hue = Utility.RandomSkinHue();
-
-			if (Female = Utility.RandomBool())
-			{
-				Body = 0x191;
-				Name = NameList.RandomName("savage");
-
-                AddItem(new LeatherSkirt());
-                AddItem(new LeatherBustierArms());
-			}
-			else
-			{
-				Body = 0x190;
-				Name = NameList.RandomName("savage");
-                  AddItem(new LeatherShorts());
-			}
-
-			switch (Utility.Random(3))
-            {
-                case 0:
-                    AddItem(new Lajatang());
-                    break;
-                case 1:
-                    AddItem(new Wakizashi());
-                    break;
-                case 2:
-                    AddItem(new NoDachi());
-                    break;
-            }
-
-
-            AddItem(new ThighBoots(Utility.RandomNeutralHue()));
-            AddItem(new TribalMask());
-         
-            int hairHue = Utility.RandomNondyedHue();
-
-            Utility.AssignRandomHair(this, hairHue);
-
-            if (Utility.Random(7) != 0)
-                Utility.AssignRandomFacialHair(this, hairHue);
+           
         }
 
-        public override void GenerateLoot()
+		[Constructable]
+        public PirateDefender(int PirateBoatId)
+            : base(AIType.AI_Melee, FightMode.Aggressor, 10, 1, 0.2, 0.4, PirateBoatId)
         {
-			AddLoot(LootPack.Rich);
-			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
+           
+            		
+			SetStr(200, 250);
+			SetDex(61, 85);
+			SetInt(75, 100);
+            SetHits(300,400);
 
-		}
+            SetResistance(ResistanceType.Physical, 50, 60);
+			SetResistance(ResistanceType.Fire, 30, 50);
+			SetResistance(ResistanceType.Cold, 50, 60);
+			SetResistance(ResistanceType.Poison, 50, 60);
+			SetResistance(ResistanceType.Energy, 50, 60);
 
+
+			SetSkill(SkillName.ArmsLore, 80.0, 100.0);
+            SetSkill(SkillName.Parry, 100.0, 120.0);
+            SetSkill(SkillName.Swords, 100.0, 120.0);
+
+
+            AddItem(new Targe());
+            AddItem(new JavelotLuxe());
+             
+        }
+
+           
+        
 
 
 
@@ -114,6 +85,7 @@ namespace Server.Mobiles
             Effects.SendPacket(to.Location, to.Map, new ParticleEffect(EffectType.FixedFrom, to.Serial, Serial.Zero, 0x3728, to.Location, to.Location, 1, 12, false, false, 1963, 0, 0, 9042, 1, to.Serial, 16, 0));
 
 			Parole();
+
 			base.AlterMeleeDamageTo(to, ref damage);
 		}
 
@@ -124,9 +96,19 @@ namespace Server.Mobiles
 
 		}
 
-		
+	
+		public override void ThrowingDetonate (Mobile m)
+		{
+ 				
+                if (m != null)
+                {
+                      DoHarmful(m);
+                      m.Paralyze(TimeSpan.FromSeconds(3));
+                    
+                }
+		}	
 
-		public PirateDEfender(Serial serial)
+		public PirateDefender(Serial serial)
             : base(serial)
         {
         }
