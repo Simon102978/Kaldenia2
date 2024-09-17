@@ -102,183 +102,183 @@ namespace Server.Engines.Craft
 
 			#region Bijoux
 
-			index = AddCraft(typeof(BonusDexRune), "Bijoux", "Dexterité", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusDexRune), "Bijoux", "Dexterité [(0 à 5) + 3]", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDex), "Sang Envouté Dexterité", 3, "Il vous manquent de sang envouté dexterité.");
-			index = AddCraft(typeof(BonusIntRune), "Bijoux", "Intelligence", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusIntRune), "Bijoux", "Intelligence [(0 à 5) + 3]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteInt), "Sang Envouté Intelligence", 3, "Il vous manquent de sang envouté intelligence.");
-			index = AddCraft(typeof(BonusStrRune), "Bijoux", "Force", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusStrRune), "Bijoux", "Force [(0 à 5) + 3]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteForce), "Sang Envouté Force", 3, "Il vous manquent de sang envouté Force.");
 
 
-			index = AddCraft(typeof(BonusHitRune), "Bijoux", "Vie", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusHitRune), "Bijoux", "Vie [(0 à 10) + 5]", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteWyvern), "Sang Envouté de Wvyern", 3, "Il vous manquent de sang envouté de Wvyern.");
 
-			index = AddCraft(typeof(BonusManaRune), "Bijoux", "Mana", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusManaRune), "Bijoux", "Mana [(0 à 10) + 5]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteCentaur), "Sang Envouté de Centaur", 3, "Il vous manquent de sang envouté de Centaur.");
 
-			index = AddCraft(typeof(BonusStamRune), "Bijoux", "Stamina", 80.5, 110.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusStamRune), "Bijoux", "Stamina [(0 à 10) + 5]", 80.5, 110.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteVegetal), "Sang Envouté Végétal", 3, "Il vous manquent de sang envouté Végétal.");
 
-			index = AddCraft( typeof( RegenHitsRune ), "Bijoux", "Regeneration de vie", 80.5, 110.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft( typeof( RegenHitsRune ), "Bijoux", "Regen de vie [(0 à 2) + 1]", 80.5, 110.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDrake), "Sang Envouté de Drake", 3, "Il vous manquent de sang envouté de Drake.");
 
-			index = AddCraft( typeof( RegenManaRune ), "Bijoux", "Regeneration de mana", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft( typeof( RegenManaRune ), "Bijoux", "Regende mana [(0 à 2) + 1]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
 
-			index = AddCraft( typeof( RegenStamRune ), "Bijoux", "Regeneration de stamina", 70.5, 99.5, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft( typeof( RegenStamRune ), "Bijoux", "Regen de stamina [(0 à 2) + 1]", 70.5, 99.5, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteSatyr), "Sang Envouté de Satyr", 3, "Il vous manquent de sang envouté de Satyr.");
 
-			index = AddCraft(typeof(LowerManaCostRune), "Bijoux", "Reduction de mana", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(LowerManaCostRune), "Bijoux", "Red de mana [(0 à 10) + 5]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteWyvern), "Sang Envouté de Wvyern", 3, "Il vous manquent de sang envouté de Wvyern.");
 
-			index = AddCraft(typeof(LowerRegCostRune), "Bijoux", "Reduction de reactifs", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(LowerRegCostRune), "Bijoux", "Red de reactifs [(0 à 10) + 5]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteCentaur), "Sang Envouté de Centaur", 3, "Il vous manquent de sang envouté de Centaur.");
 
-			index = AddCraft(typeof(LowerAmmoCostRune), "Bijoux", "Reduction des munitions", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(LowerAmmoCostRune), "Bijoux", "Red des munitions [(0 à 10) + 5]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteCentaur), "Sang Envouté de Centaur", 3, "Il vous manquent de sang envouté de Centaur.");
 			#endregion
 
 
 			#region Armes
 
-			index = AddCraft(typeof(BonusDexRune), "Armes", "Dexterité", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusDexRune), "Armes", "Dexterité [(0 à 5) + 3]", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDex), "Sang Envouté Dexterité", 3, "Il vous manquent de sang envouté dexterité.");
-			index = AddCraft(typeof(BonusIntRune), "Armes", "Intelligence", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusIntRune), "Armes", "Intelligence [(0 à 5) + 3]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteInt), "Sang Envouté Intelligence", 3, "Il vous manquent de sang envouté intelligence.");
-			index = AddCraft(typeof(BonusStrRune), "Armes", "Force", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusStrRune), "Armes", "Force [(0 à 5) + 3]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteForce), "Sang Envouté Force", 3, "Il vous manquent de sang envouté Force.");
 
 
-			index = AddCraft(typeof(BonusHitRune), "Armes", "Vie", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusHitRune), "Armes", "Vie [(0 à 10) + 5]", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteWyvern), "Sang Envouté de Wvyern", 3, "Il vous manquent de sang envouté de Wvyern.");
 
-			index = AddCraft(typeof(BonusManaRune), "Armes", "Mana", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusManaRune), "Armes", "Mana [(0 à 10) + 5]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteCentaur), "Sang Envouté de Centaur", 3, "Il vous manquent de sang envouté de Centaur.");
 
-			index = AddCraft(typeof(BonusStamRune), "Armes", "Stamina", 80.5, 110.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusStamRune), "Armes", "Stamina [(0 à 10) + 5]", 80.5, 110.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteVegetal), "Sang Envouté Végétal", 3, "Il vous manquent de sang envouté Végétal.");
 
-			index = AddCraft( typeof( HitLeechLifeRune ), "Armes", "Vol de vie", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft( typeof( HitLeechLifeRune ), "Armes", "Vol de vie [(0 à 10) + 5]", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteWyvern), "Sang Envouté de Wvyern", 3, "Il vous manquent de sang envouté de Wvyern.");
-			index = AddCraft( typeof( HitLeechManaRune ), "Armes", "Vol de mana", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft( typeof( HitLeechManaRune ), "Armes", "Vol de mana [(0 à 10) + 5]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteCentaur), "Sang Envouté de Centaur", 3, "Il vous manquent de sang envouté de Centaur.");
-			index = AddCraft( typeof( HitLeechStamRune ), "Armes", "Vol de stamina", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft( typeof( HitLeechStamRune ), "Armes", "Vol de stamina [(0 à 10) + 5]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDrake), "Sang Envouté de Drake", 3, "Il vous manquent de sang envouté de Drake.");
 
-			index = AddCraft( typeof( UseBestWepRune ), "Armes", "Meilleur arme", 65.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft( typeof( UseBestWepRune ), "Armes", "Meilleur arme [1]", 65.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteLezard), "Sang Envouté Lezard", 3, "Il vous manquent de sang envouté de Lezard.");
-			index = AddCraft( typeof( DamageIncRune ), "Armes", "Degat", 75.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft( typeof( DamageIncRune ), "Armes", "Degat [(0 à 10) + 5]", 75.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteLezard), "Sang Envouté Lezard", 3, "Il vous manquent de sang envouté de Lezard.");
-			index = AddCraft( typeof( SwingSpeedRune ), "Armes", "Vitesse de frappe", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft( typeof( SwingSpeedRune ), "Armes", "Vitesse de frappe [(0 à 10) + 5]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteLezard), "Sang Envouté Lezard", 3, "Il vous manquent de sang envouté de Lezard.");
 
-			index = AddCraft(typeof(CastSpeedRune), "Armes", "Vitesse des sorts", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(CastSpeedRune), "Armes", "Vitesse des sorts [(0 à 2) + 1]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDrake), "Sang Envouté de Drake", 3, "Il vous manquent de sang envouté de Drake.");
 
-			index = AddCraft(typeof(CastRecoveryRune), "Armes", "Recuperation après un sort", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(CastRecoveryRune), "Armes", "Recup après un sort [(0 à 2) + 1]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteSatyr), "Sang Envouté de Satyr", 3, "Il vous manquent de sang envouté de Satyr.");
 
-			index = AddCraft(typeof(AttackChanceRune), "Armes", "Chance de touche", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(AttackChanceRune), "Armes", "Chance toucher [(0 à 10) + 5]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
 
-			index = AddCraft(typeof(SpellDamageRune), "Armes", "Puissance des sorts", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(SpellDamageRune), "Armes", "Puissance des sorts [(0 à 10) + 5]", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDrake), "Sang Envouté de Drake", 3, "Il vous manquent de sang envouté de Drake.");
 
 	//		index = AddCraft(typeof(SpellChannelRune), "Armes", "Canalisation Magique", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 	//		AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
 
-			index = AddCraft(typeof(SelfRepairRune), "Armes", "Auto-Réparation", 65.5, 95.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(SelfRepairRune), "Armes", "Auto-Réparation  [(0 à 5) + 3]", 65.5, 95.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteLezard), "Sang Envouté Lezard", 3, "Il vous manquent de sang envouté de Lezard.");
 
 			#endregion
 
 			#region Livre de Sorts
 
-			index = AddCraft(typeof(CastSpeedRune), "Livre de Sorts", "Vitesse des sorts", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(CastSpeedRune), "Livre de Sorts", "Vitesse des sorts [(0 à 2) + 1]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDrake), "Sang Envouté de Drake", 3, "Il vous manquent de sang envouté de Drake.");
 
-			index = AddCraft(typeof(CastRecoveryRune), "Livre de Sorts", "Recuperation après un sort", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(CastRecoveryRune), "Livre de Sorts", "Recup après un sort [(0 à 2) + 1]", 75.5, 115.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteSatyr), "Sang Envouté de Satyr", 3, "Il vous manquent de sang envouté de Satyr.");
 
-			index = AddCraft(typeof(SpellDamageRune), "Livre de Sorts", "Puissance des sorts", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(SpellDamageRune), "Livre de Sorts", "Puissance des sorts [(0 à 10) + 5]", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDrake), "Sang Envouté de Drake", 3, "Il vous manquent de sang envouté de Drake.");
 
 			#endregion
 
 			#region Armures
 
-			index = AddCraft(typeof(BonusDexRune), "Armures", "Dexterité", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusDexRune), "Armures", "Dexterité [(0 à 5) + 3]", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDex), "Sang Envouté Dexterité", 3, "Il vous manquent de sang envouté dexterité.");
-			index = AddCraft(typeof(BonusIntRune), "Armures", "Intelligence", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusIntRune), "Armures", "Intelligence [(0 à 5) + 3]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteInt), "Sang Envouté Intelligence", 3, "Il vous manquent de sang envouté intelligence.");
-			index = AddCraft(typeof(BonusStrRune), "Armures", "Force", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusStrRune), "Armures", "Force [(0 à 5) + 3]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteForce), "Sang Envouté Force", 3, "Il vous manquent de sang envouté Force.");
 
 
-			index = AddCraft(typeof(BonusHitRune), "Armures", "Vie", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusHitRune), "Armures", "Vie [(0 à 10) + 5]", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteWyvern), "Sang Envouté de Wvyern", 3, "Il vous manquent de sang envouté de Wvyern.");
 
-			index = AddCraft(typeof(BonusManaRune), "Armures", "Mana", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusManaRune), "Armures", "Mana [(0 à 10) + 5]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteCentaur), "Sang Envouté de Centaur", 3, "Il vous manquent de sang envouté de Centaur.");
 
-			index = AddCraft(typeof(BonusStamRune), "Armures", "Stamina", 80.5, 110.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusStamRune), "Armures", "Stamina [(0 à 10) + 5]", 80.5, 110.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteVegetal), "Sang Envouté Végétal", 3, "Il vous manquent de sang envouté Végétal.");
 
-			index = AddCraft(typeof(DefenceChanceRune), "Armures", "Defense", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(DefenceChanceRune), "Armures", "Defense [(0 à 10) + 5]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
 
-			index = AddCraft(typeof(SelfRepairRune), "Armures", "Auto-Réparation", 65.5, 95.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(SelfRepairRune), "Armures", "Auto-Réparation [(0 à 5) + 3]", 65.5, 95.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteLezard), "Sang Envouté Lezard", 3, "Il vous manquent de sang envouté de Lezard.");
 
 
-			index = AddCraft(typeof(ResistColdRune), "Armures", "Resistance au froid", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(ResistColdRune), "Armures", "Resist au froid [(0 à 5) + 3]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteFroid), "Sang Envouté Froid", 3, "Il vous manquent de sang envouté Froid.");
-			index = AddCraft(typeof(ResistEnergyRune), "Armures", "Resistance à l'énergie", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(ResistEnergyRune), "Armures", "Resist à l'énergie [(0 à 5) + 3]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteEnergie), "Sang Envouté Energie", 3, "Il vous manquent de sang envouté Energie.");
-			index = AddCraft(typeof(ResistFireRune), "Armures", "Resistance au feu", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(ResistFireRune), "Armures", "Resist au feu [(0 à 5) + 3]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteFeu), "Sang Envouté Feu", 3, "Il vous manquent de sang envouté feu.");
-			index = AddCraft(typeof(ResistPhysRune), "Armures", "Resistance physique", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(ResistPhysRune), "Armures", "Resist physique [(0 à 5) + 3]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvoutePhysique), "Sang Envouté Physique", 3, "Il vous manquent de sang envouté physique.");
-			index = AddCraft(typeof(ResistPoisRune), "Armures", "Resistance au poison", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(ResistPoisRune), "Armures", "Resist au poison [(0 à 5) + 3]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvoutePoison), "Sang Envouté Poison", 3, "Il vous manquent de sang envouté poison.");
 			#endregion
 
 
 			#region Bouclier
 
-			index = AddCraft(typeof(BonusDexRune), "Bouclier", "Dexterité", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusDexRune), "Bouclier", "Dexterité [(0 à 5) + 3]", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDex), "Sang Envouté Dexterité", 3, "Il vous manquent de sang envouté dexterité.");
-			index = AddCraft(typeof(BonusIntRune), "Bouclier", "Intelligence", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusIntRune), "Bouclier", "Intelligence [(0 à 5) + 3]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteInt), "Sang Envouté Intelligence", 3, "Il vous manquent de sang envouté intelligence.");
-			index = AddCraft(typeof(BonusStrRune), "Bouclier", "Force", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusStrRune), "Bouclier", "Force [(0 à 5) + 3]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteForce), "Sang Envouté Force", 3, "Il vous manquent de sang envouté Force.");
 
 
-			index = AddCraft(typeof(BonusHitRune), "Bouclier", "Vie", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusHitRune), "Bouclier", "Vie [(0 à 10) + 5]", 85.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteWyvern), "Sang Envouté de Wvyern", 3, "Il vous manquent de sang envouté de Wvyern.");
 
-			index = AddCraft(typeof(BonusManaRune), "Bouclier", "Mana", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusManaRune), "Bouclier", "Mana [(0 à 10) + 5]", 80.5, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteCentaur), "Sang Envouté de Centaur", 3, "Il vous manquent de sang envouté de Centaur.");
 
-			index = AddCraft(typeof(BonusStamRune), "Bouclier", "Stamina", 80.5, 110.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(BonusStamRune), "Bouclier", "Stamina [(0 à 10) + 5]", 80.5, 110.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteVegetal), "Sang Envouté Végétal", 3, "Il vous manquent de sang envouté Végétal.");
 
-			index = AddCraft(typeof(DefenceChanceRune), "Bouclier", "Defense", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(DefenceChanceRune), "Bouclier", "Defense [(0 à 10) + 5]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
 
 		//	index = AddCraft(typeof(SpellChannelRune), "Bouclier", "Canalisation Magique", 75.0, 120.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 		//	AddRes(index, typeof(SangEnvouteDragon), "Sang Envouté Dragon", 3, "Il vous manquent de sang envouté Dragon.");
 
 
-			index = AddCraft(typeof(ResistColdRune), "Bouclier", "Resistance au froid", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(ResistColdRune), "Bouclier", "Resist au froid [(0 à 5) + 3]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteFroid), "Sang Envouté Froid", 3, "Il vous manquent de sang envouté Froid.");
-			index = AddCraft(typeof(ResistEnergyRune), "Bouclier", "Resistance à l'énergie", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(ResistEnergyRune), "Bouclier", "Resist à l'énergie [(0 à 5) + 3]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteEnergie), "Sang Envouté Energie", 3, "Il vous manquent de sang envouté Energie.");
-			index = AddCraft(typeof(ResistFireRune), "Bouclier", "Resistance au feu", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(ResistFireRune), "Bouclier", "Resist au feu [(0 à 5) + 3]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvouteFeu), "Sang Envouté Feu", 3, "Il vous manquent de sang envouté feu.");
-			index = AddCraft(typeof(ResistPhysRune), "Bouclier", "Resistance physique", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(ResistPhysRune), "Bouclier", "Resist physique [(0 à 5) + 3]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvoutePhysique), "Sang Envouté Physique", 3, "Il vous manquent de sang envouté physique.");
-			index = AddCraft(typeof(ResistPoisRune), "Bouclier", "Resistance au poison", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
+			index = AddCraft(typeof(ResistPoisRune), "Bouclier", "Resist au poison [(0 à 5) + 3]", 70.5, 100.0, typeof(BlankRune), "Rune vierge", 1, "Il vous faut une runes vierge.");
 			AddRes(index, typeof(SangEnvoutePoison), "Sang Envouté Poison", 3, "Il vous manquent de sang envouté Force.");
 			#endregion
 

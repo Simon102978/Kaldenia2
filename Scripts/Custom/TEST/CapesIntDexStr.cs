@@ -119,7 +119,7 @@ public class CapeOfDetermination : BaseArmor
 	public CapeOfDetermination() : base(0x1515)
 	{
 		Weight = 4.0;
-		Name = "Cape De D�termination";
+		Name = "Cape De Détermination";
 		Hue = 2213; // Un vert, vous pouvez ajuster selon vos pr�f�rences
 
 		Attributes.BonusStam = 10;

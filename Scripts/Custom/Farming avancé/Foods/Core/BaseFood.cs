@@ -347,10 +347,10 @@ namespace Server.Items
                 }
 
                 if (m_Poison != null)
-                    from.ApplyPoison(m_Poisoner, m_Poison);
+					from.ApplyPoison(null, m_Poison);       //from.ApplyPoison(m_Poisoner, m_Poison);
 
-                #region Raw Food
-                if (this.m_Raw == true)
+				#region Raw Food
+				if (this.m_Raw == true)
                 {
                     switch (Utility.Random(7))
                     {

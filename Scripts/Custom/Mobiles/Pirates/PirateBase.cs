@@ -70,15 +70,22 @@ namespace Server.Mobiles
 
 		public virtual bool AllowCharge => true;
 
-		
+
 
 		public PirateBoat GetPirateBoat()
 		{
-
-			return PirateBoat.GetPirateBoat(PirateBoatID);
+			var boat = PirateBoat.GetPirateBoat(PirateBoatID);
+			if (boat == null)
+			{
+				Console.WriteLine($"Erreur: PirateBoat non trouvé pour ID {PirateBoatID}");
+				// Retourner un bateau par défaut ou gérer l'erreur d'une autre manière
+				return PirateBoat.GetPirateBoat(0); // Supposons que 0 est toujours un ID valide
+			}
+			return boat;
 		}
-		
-		
+
+
+
 
 
 		public PirateBase(Serial serial)
@@ -226,66 +233,74 @@ namespace Server.Mobiles
 
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
-			Parole();
-
-			if (from == null)
+			try
 			{
-				return;
-			}
+				base.OnDamage(amount, from, willKill);
 
-			if (Utility.Random(10) < 2 && this.InRange(Combatant.Location,3))
-			{
-				Item toDisarm = from.FindItemOnLayer(Layer.OneHanded);
-				if (toDisarm == null || !toDisarm.Movable)
-					toDisarm = from.FindItemOnLayer(Layer.TwoHanded);
+				Parole();
 
-				Container pack = from.Backpack;
-				if (pack == null || (toDisarm != null && !toDisarm.Movable))
+				if (from == null || Combatant == null)
 				{
-					from.SendLocalizedMessage(1004001); // You cannot disarm your opponent.
+					return;
 				}
-				else if (toDisarm == null || toDisarm is BaseShield)
-				{
-					from.SendLocalizedMessage(1060849); // Your target is already unarmed!
-				}
-				else
-				{
-					SendLocalizedMessage(1060092); // You disarm their weapon!
-					from.SendLocalizedMessage(1060093); // Your weapon has been disarmed!
-					from.PlaySound(0x3B9);
-					from.FixedParticles(0x37BE, 232, 25, 9948, EffectLayer.LeftHand);
 
-					if (pack != null)
+				if (Utility.Random(10) < 2 && this.InRange(Combatant.Location, 3))
+				{
+					Item toDisarm = from.FindItemOnLayer(Layer.OneHanded);
+					if (toDisarm == null || !toDisarm.Movable)
+						toDisarm = from.FindItemOnLayer(Layer.TwoHanded);
+
+					Container pack = from.Backpack;
+					if (pack == null || (toDisarm != null && !toDisarm.Movable))
 					{
-						pack.DropItem(toDisarm);
+						from.SendLocalizedMessage(1004001); // You cannot disarm your opponent.
 					}
-
-					BuffInfo.AddBuff(from, new BuffInfo(BuffIcon.NoRearm, 1075637, TimeSpan.FromSeconds(5.0), from));
-					BaseWeapon.BlockEquip(from, TimeSpan.FromSeconds(5.0));
-
-					if (from is BaseCreature)
+					else if (toDisarm == null || toDisarm is BaseShield)
 					{
-						Timer.DelayCall(TimeSpan.FromSeconds(5.0) + TimeSpan.FromSeconds(Utility.RandomMinMax(3, 10)), () =>
+						from.SendLocalizedMessage(1060849); // Your target is already unarmed!
+					}
+					else
+					{
+						SendLocalizedMessage(1060092); // You disarm their weapon!
+						from.SendLocalizedMessage(1060093); // Your weapon has been disarmed!
+						from.PlaySound(0x3B9);
+						from.FixedParticles(0x37BE, 232, 25, 9948, EffectLayer.LeftHand);
+
+						if (pack != null)
 						{
-							if (from != null && !from.Deleted && toDisarm != null && !toDisarm.Deleted && toDisarm.IsChildOf(from.Backpack))
-								from.EquipItem(toDisarm);
-						});
-					}
+							pack.DropItem(toDisarm);
+						}
 
-					try
-					{
-						Disarm.AddImmunity(from, TimeSpan.FromSeconds(10));
-					}
-					catch (Exception ex)
-					{
-						Console.WriteLine($"Erreur lors de l'appel � Disarm.AddImmunity : {ex.Message}");
+						BuffInfo.AddBuff(from, new BuffInfo(BuffIcon.NoRearm, 1075637, TimeSpan.FromSeconds(5.0), from));
+						BaseWeapon.BlockEquip(from, TimeSpan.FromSeconds(5.0));
+
+						if (from is BaseCreature)
+						{
+							Timer.DelayCall(TimeSpan.FromSeconds(5.0) + TimeSpan.FromSeconds(Utility.RandomMinMax(3, 10)), () =>
+							{
+								if (from != null && !from.Deleted && toDisarm != null && !toDisarm.Deleted && toDisarm.IsChildOf(from.Backpack))
+									from.EquipItem(toDisarm);
+							});
+						}
+
+						try
+						{
+							Disarm.AddImmunity(from, TimeSpan.FromSeconds(10));
+						}
+						catch (Exception ex)
+						{
+							Console.WriteLine($"Erreur lors de l'appel à Disarm.AddImmunity : {ex.Message}");
+						}
 					}
 				}
 			}
-
-
-			base.OnDamage(amount, from, willKill);
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Exception dans OnDamage de PirateBase: {ex.Message}");
+				Console.WriteLine($"StackTrace: {ex.StackTrace}");
+			}
 		}
+
 
 		public override void AlterMeleeDamageTo(Mobile to, ref int damage)
 		{
@@ -356,7 +371,7 @@ namespace Server.Mobiles
 
 		public void SpawnHelper(BaseCreature helper, Point3D location)
 		{
-			if (helper == null)
+			if (helper == null || this == null || this.Deleted || this.Map == null)
 				return;
 
 			helper.Home = location;
@@ -368,9 +383,18 @@ namespace Server.Mobiles
 				helper.Combatant = Combatant;
 			}
 
-			BaseCreature.Summon(helper, false, this, this.Location, -1, TimeSpan.FromMinutes(2));
-			helper.MoveToWorld(location, Map);
+			try
+			{
+				BaseCreature.Summon(helper, false, this, location, -1, TimeSpan.FromMinutes(2));
+				helper.MoveToWorld(location, this.Map);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Erreur dans SpawnHelper: {ex.Message}");
+				helper.Delete();
+			}
 		}
+
 
 		public override void DoHarmful(IDamageable target, bool indirect)
 		{

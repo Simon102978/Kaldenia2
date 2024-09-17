@@ -1579,18 +1579,17 @@ namespace Server.Mobiles
 
 			if (Mount is BaseMount mount)
 			{
-
 				mount.Rider = null;
-			mount.Location = oldLocation;
+				mount.Location = oldLocation;
 
-			TileToDontFall = 3;
+				TileToDontFall = 3;
 
-			Timer.DelayCall(TimeSpan.FromSeconds(0.3), new TimerStateCallback(Equitation_Callback), mount);
+				Timer.DelayCall(TimeSpan.FromSeconds(0.3), new TimerStateCallback(Equitation_Callback), mount);
 
-			BeginAction(typeof(BaseMount));
-			double seconds = 12.0 - (Skills[SkillName.Equitation].Value / 10);
+				BeginAction(typeof(BaseMount));
+				double seconds = 12.0 - (Skills[SkillName.Equitation].Value / 10);
 
-			SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(seconds), false);
+				SetMountBlock(BlockMountType.DismountRecovery, TimeSpan.FromSeconds(seconds), false);
 			}
 
 			return false;
@@ -1598,13 +1597,35 @@ namespace Server.Mobiles
 
 		private void Equitation_Callback(object state)
 		{
-			BaseMount mount = (BaseMount)state;
+			if (this == null || this.Deleted)
+				return;
 
-			mount.Animate(5, 5, 1, true, false, 0);
-			Animate(22, 5, 1, true, false, 0);
+			try
+			{
+				BaseMount mount = state as BaseMount;
+				if (mount == null || mount.Deleted)
+					return;
 
-			Damage(Utility.RandomMinMax(10, 20));
+				mount.Animate(5, 5, 1, true, false, 0);
+				this.Animate(22, 5, 1, true, false, 0);
+
+				int damageAmount = Utility.RandomMinMax(10, 20);
+				this.SafeDamage(damageAmount);
+			}
+			catch (Exception ex)
+			{
+				Console.WriteLine($"Erreur dans Equitation_Callback: {ex.Message}");
+			}
 		}
+
+		public void SafeDamage(int amount)
+		{
+			if (this != null && !this.Deleted && amount > 0)
+			{
+				this.Damage(amount);
+			}
+		}
+
 
 		#endregion
 

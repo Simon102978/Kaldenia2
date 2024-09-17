@@ -410,20 +410,20 @@ namespace Server.Mobiles
 			base.Attack(e);
 		}
 
-        public void Spawn()
+		public void Spawn()
 		{
 			if (m_NextSpawn < DateTime.UtcNow)
 			{
-
 				Emote("*Allez les gars !*");
-
 				int Nombre = 0;
-
-				while(Nombre < 2)
+				while (Nombre < 2)
 				{
 					int monstre = Utility.Random(5);
+					BaseCreature creature = null;
+					try
+					{
+						switch (monstre)
 
-					switch(monstre)
 					{
 						case 0:
 						{
@@ -456,17 +456,27 @@ namespace Server.Mobiles
 							break;
 						}
 					}
-					Nombre++;			
+						if (creature != null && !this.Deleted && this.Map != null)
+						{
+							SpawnHelper(creature, this.Location);
+							Nombre++;
+						}
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine($"Erreur lors de la création de la créature: {ex.Message}");
+						if (creature != null)
+							creature.Delete();
+					}
 				}
-
 				m_NextSpawn = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(60, 120));
-
 			}
-
-
 		}
 
-        
+
+
+
+
 
 
 		public void AntiSummon()
