@@ -263,7 +263,7 @@ namespace Server.Mobiles
 
 					foreach (Mobile m in eable)
 					{
-						if (this != m && !(m is Brigand) &&  !(m is BrigandArcher) && !(m is BrigandAmbusher) && !(m is BrigandApprenti) && !(m is Courtisane) &&  !m.IsStaff())
+						if (this != m && !(m is PirateBase) &&  !m.IsStaff())
 						{
 							if (Core.AOS && !InLOS(m))
 								continue;
