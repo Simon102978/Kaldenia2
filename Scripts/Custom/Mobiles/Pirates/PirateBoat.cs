@@ -16,8 +16,9 @@ namespace Server
 			//		Metier.RegisterMetier(new Metier(0, "Aucune",0,0,false, new List<int>(){1,2,3,4}, new Dictionary<SkillName, double>() { },new List<int>(){} )); 
 
 					
-					PirateBoat.RegisterPirateBoat(new PirateBoat(0,"La ","Kerpie",1324, 1328));
-					PirateBoat.RegisterPirateBoat(new PirateBoat(1,"L'","Insoumise",2098, 1785));
+					PirateBoat.RegisterPirateBoat(new PirateBoat(0,"de La ","Kerpie",1324, 1328));
+					PirateBoat.RegisterPirateBoat(new PirateBoat(1,"de L'","Insoumise",2098, 1785));
+					PirateBoat.RegisterPirateBoat(new PirateBoat(2,"du ","Courroux",1940, 1779));
 				}
 		
 

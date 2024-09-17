@@ -451,7 +451,7 @@ namespace Server.Mobiles
 
 			SpeechHue = Utility.RandomDyedHue();
 			Race = BaseRace.GetRace(1);
-			Title = "Un Pirate de " + GetPirateBoat().ToStringWithPronom() ;
+			Title = "Un Pirate " + GetPirateBoat().ToStringWithPronom() ;
 
 			
 			
