@@ -442,7 +442,7 @@ namespace Server.Mobiles
 						}
 						case 3:
 						{
-							SpawnHelper( new PirateCaptain(PirateBoatID	), Location);
+							SpawnHelper( new PirateBarde(PirateBoatID	), Location);
 							break;	
 						}
 						case 4:
