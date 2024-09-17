@@ -779,7 +779,6 @@ namespace Server.Mobiles
 				{
 					int oldAmount = ammo.Amount;
 					ammo.Consume(1);
-					Console.WriteLine($"ConsumeAmmo: {Name} consumed 1 ammo. Old amount: {oldAmount}, New amount: {ammo.Amount}");
 
 					if (ammo.Amount == 0)
 					{
@@ -801,7 +800,6 @@ namespace Server.Mobiles
 				Type ammoType = (ranged is Bow) ? typeof(Arrow) : typeof(Bolt);
 				Item ammo = Backpack?.FindItemByType(ammoType);
 
-				Console.WriteLine($"CheckAmmo: {Name} has {ammo?.Amount ?? 0} {ammoType.Name}");
 
 				if (ammo == null || ammo.Amount == 0)
 				{

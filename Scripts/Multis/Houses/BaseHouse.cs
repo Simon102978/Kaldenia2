@@ -18,7 +18,7 @@ namespace Server.Multis
 {
     public abstract class BaseHouse : BaseMulti
     {
-        public static int AccountHouseLimit { get; } = Config.Get("Housing.AccountHouseLimit", 2);
+        public static int AccountHouseLimit { get; } = Config.Get("Housing.AccountHouseLimit", 1);
 
         public static double GlobalBonusStorageScalar => 1.4;
 
@@ -4189,35 +4189,44 @@ namespace Server.Multis
             return GetAccountHouseCount(m) >= GetAccountHouseLimit(m);
         }
 
-        public static int GetAccountHouseLimit(Mobile m)
-        {
-            int max = AccountHouseLimit;
+		public static int GetAccountHouseLimit(Mobile m)
+		{
+			int max = AccountHouseLimit;
 
-            return max;
-        }
+			// Vérifiez si le joueur a le statut social "équité"
+			if (m is CustomPlayerMobile player && player.StatutSocial == StatutSocialEnum.Equite)
+			{
+				max = 2; // Permet 2 maisons pour les joueurs avec le statut "équité"
+			}
 
-        public static bool CheckAccountHouseLimit(Mobile m, bool message = true)
-        {
-            if (AtAccountHouseLimit(m))
-            {
-                if (message)
-                {
-                    if (AccountHouseLimit == 1)
-                    {
-                        m.SendLocalizedMessage(501271); // You already own a house, you may not place another!
-                    }
-                    else
-                    {
-                        m.SendMessage("You already own {0} houses, you may not place any more!", AccountHouseLimit.ToString());
-                    }
-                }
+			return max;
+		}
 
-                return false;
-            }
+		public static bool CheckAccountHouseLimit(Mobile m, bool message = true)
+		{
+			int limit = GetAccountHouseLimit(m);
+			int count = GetAccountHouseCount(m);
 
-            return true;
-        }
-        public bool IsOwner(Mobile m)
+			if (count >= limit)
+			{
+				if (message)
+				{
+					if (limit == 1)
+					{
+						m.SendLocalizedMessage(501271); // You already own a house, you may not place another!
+					}
+					else
+					{
+						m.SendMessage($"You already own {count} houses, you may not place any more! Your limit is {limit}.");
+					}
+				}
+
+				return false;
+			}
+
+			return true;
+		}
+		public bool IsOwner(Mobile m)
         {
             return IsOwner(new Nom(m));
         }

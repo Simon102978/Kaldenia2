@@ -274,7 +274,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GildedWoodenChest), "Caisses et coffres", "Grand coffre renforcé", 50.0, 100.0, typeof(PalmierBoard), 1044041, 30, 1044351);
 			index = AddCraft(typeof(WoodenFootLocker), "Caisses et coffres", "Coffre à chaussures", 50.0, 100.0, typeof(PalmierBoard), 1044041, 30, 1044351);
 			index = AddCraft(typeof(CoffreMaritime), "Caisses et coffres", "Coffre Maritime", 50.0, 100.0, typeof(PalmierBoard), 1044041, 40, 1044351);
+			AddRecipe(index, (int)CarpRecipes.CoffreMaritime);
+
 			index = AddCraft(typeof(FinishedWoodenChest), "Caisses et coffres", "Grand coffre", 50.0, 100.0, typeof(PalmierBoard), 1044041, 30, 1044351);
+			AddRecipe(index, (int)CarpRecipes.FinishedWoodenChest);
+
 			index = AddCraft(typeof(OrnateElvenChestSouthDeed), "Caisses et coffres", "Coffre elfique orné (S)", 50.0, 120.0, typeof(PalmierBoard), 1044041, 40, 1044351);
 			index = AddCraft(typeof(OrnateElvenChestEastDeed), "Caisses et coffres", "Coffre elfique orné (E)", 50.0, 120.0, typeof(PalmierBoard), 1044041, 40, 1044351);
 			index = AddCraft(typeof(RarewoodChest), "Caisses et coffres", "Coffre en bois", 50.0, 110.0, typeof(PalmierBoard), 1044041, 30, 1044351);

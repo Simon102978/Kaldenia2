@@ -10388,6 +10388,10 @@ namespace Server
 
 		public Item FindItemOnLayer(Layer layer)
 		{
+			if (m_Items == null)
+				return null;
+
+
 			var eq = m_Items;
 			var count = eq.Count;
 

@@ -1247,7 +1247,7 @@ namespace Server.Mobiles
 			{
 				foreach (PlayerMobile f in Friends)
 				{
-					f.SendMessage("L'animal de compagnie {0} de votre ami {1} est mort !", Name, ControlMaster);
+					f.SendMessage("L'animal de compagnie  de votre ami {0} est mort !", ControlMaster);
 				}
 			}
 		}

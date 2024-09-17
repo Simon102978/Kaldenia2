@@ -47,6 +47,7 @@
         {
             Weight = 2.0;
 			Name = "Chandail de banquet";
+			Layer = Layer.MiddleTorso;
 
 		}
 
