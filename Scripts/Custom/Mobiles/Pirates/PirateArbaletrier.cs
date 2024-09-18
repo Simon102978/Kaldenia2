@@ -77,7 +77,7 @@ namespace Server.Mobiles
              
 
 
-			base.AlterMeleeDamageTo(to, ref damage);
+			base.AlterRangedDamageTo(to, ref damage);
 		}
 
 		public override void GenerateLoot()

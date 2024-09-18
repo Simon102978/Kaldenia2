@@ -5572,7 +5572,12 @@ namespace Server
 				{
 					m_LastKiller = from;
 
-					from.OnKill(this);
+					if (this != null && from != null && !Deleted)
+					{
+						from.OnKill(this);
+					}
+
+					
 
 
 

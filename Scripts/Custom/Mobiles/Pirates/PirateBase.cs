@@ -75,6 +75,7 @@ namespace Server.Mobiles
 		public PirateBoat GetPirateBoat()
 		{
 			var boat = PirateBoat.GetPirateBoat(PirateBoatID);
+
 			if (boat == null)
 			{
 				Console.WriteLine($"Erreur: PirateBoat non trouvé pour ID {PirateBoatID}");
@@ -515,25 +516,30 @@ namespace Server.Mobiles
 
 		public void ChangeBoat(int boatID)
 		{
-			Mobile from = this;
 
 			PirateBoat boat =  PirateBoat.GetPirateBoat(boatID);
 
+			if (boat == null || Deleted || this == null)
+				return;
+
+			
+			
+			
 			Title = "Un Pirate de " + boat.ToStringWithPronom() ;
 
-            var items = from.Items;
+            var items = Items;
 
-            for (int i = from.Items.Count - 1; i >= 0; i--)
+            for (int i = Items.Count - 1; i >= 0; i--)
             {
                 Item item = null;
 
                 try
                 {
-                    item = from.Items[i];
+                    item = Items[i];
                 }
                 catch
                 {
-                    from.SendMessage("Erreur dans la recherche de l'item #{0}", i);
+                    SendMessage("Erreur dans la recherche de l'item #{0}", i);
                     continue;
                 }
 
@@ -556,7 +562,7 @@ namespace Server.Mobiles
 				}
                 catch
                 {
-                    from.SendMessage("L'item {0} n'a pas été déplacé dans votre sac à cause d'une erreur.");
+                    SendMessage("L'item {0} n'a pas été déplacé dans votre sac à cause d'une erreur.");
                 }
             }
 		}
@@ -708,6 +714,11 @@ namespace Server.Mobiles
 
 		public virtual void ThrowingDetonate (Mobile m)
 		{
+			if (m == null)
+			{
+				return;
+			}
+
  				DoHarmful(m);
 
                 int damage = Utility.RandomMinMax(20, 30);
@@ -720,6 +731,11 @@ namespace Server.Mobiles
 
         public void ThrowBomb(Mobile m)
         {
+			if (m == null || m.Deleted)
+			{
+				return;
+			}
+
 			if (ThrowingPotion > 0 )
 			{
      	        DoHarmful(m);
