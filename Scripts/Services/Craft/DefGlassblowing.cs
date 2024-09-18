@@ -128,17 +128,29 @@ namespace Server.Engines.Craft
 
             AddCraft(typeof(EmptyOilFlask), 1044050, 1150866, 60.0, 110.0, typeof(Sand), 1044625, 5, 1044627);
 
-   /*         AddCraft(typeof(WorkableGlass), 1044050, 1154170, 55.0, 105.0, typeof(Sand), 1044625, 10, 1044627);
+			/*         AddCraft(typeof(WorkableGlass), 1044050, 1154170, 55.0, 105.0, typeof(Sand), 1044625, 10, 1044627);
 
-            index = AddCraft(typeof(EtherealSoulbinder), 1044050, 1159167, 100.0, 190.0, typeof(Sand), 1044625, 20, 1044627);
-            AddRes(index, typeof(EtherealSand), 1125984, 5, 1159169);
+					 index = AddCraft(typeof(EtherealSoulbinder), 1044050, 1159167, 100.0, 190.0, typeof(Sand), 1044625, 20, 1044627);
+					 AddRes(index, typeof(EtherealSand), 1125984, 5, 1159169);
 
-            //Glass Weapons
-            AddCraft(typeof(GlassSword), 1111745, 1022316, 55.0, 105.0, typeof(Sand), 1044625, 14, 1044627);
+					 //Glass Weapons
+					 AddCraft(typeof(GlassSword), 1111745, 1022316, 55.0, 105.0, typeof(Sand), 1044625, 14, 1044627);
 
-            AddCraft(typeof(GlassStaff), 1111745, 1095368, 53.6, 103.6, typeof(Sand), 1044625, 10, 1044627);
-*/
-            Repair = true;
+					 AddCraft(typeof(GlassStaff), 1111745, 1095368, 53.6, 103.6, typeof(Sand), 1044625, 10, 1044627);
+		 */
+
+			// Fioles Multiples
+			index = AddCraft(typeof(FiolesMultiples), "Fioles", "Fioles Multiples", 40.0, 90.0, typeof(Sand), 1044625, 4, 1044627);
+
+			// Crâne en verre
+			index = AddCraft(typeof(CraneVerre), "Décorations", "Crâne en Verre", 75.0, 125.0, typeof(Sand), 1044625, 10, 1044627);
+
+			// Crystal de Verre
+			index = AddCraft(typeof(CrystalVerre), "Décorations", "Crystal de Verre", 75.0, 125.0, typeof(Sand), 1044625, 10, 1044627);
+
+			index = AddCraft(typeof(PresentoireVerre), "Décorations", "Présentoire de Verre", 80.0, 130.0, typeof(Sand), 1044625, 10, 1044627);
+
+			Repair = true;
             MarkOption = true; Pratiquer = true;
         }
 

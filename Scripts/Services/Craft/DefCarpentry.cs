@@ -328,6 +328,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LongTableEastDeed), "Tables", "Longue table (E)", 50.0, 120.0, typeof(PalmierBoard), 1044041, 80, 1044351);
 			index = AddCraft(typeof(AlchemistTableSouthDeed), "Tables", "Comptoir alchimique (S)", 50.0, 120.0, typeof(PalmierBoard), 1044041, 70, 1044351);
 			index = AddCraft(typeof(AlchemistTableEastDeed), "Tables", "Comptoir alchimique (E)", 50.0, 120.0, typeof(PalmierBoard), 1044041, 70, 1044351);
+			index = AddCraft(typeof(TableRonde), "Tables", "Table Ronde", 60.0, 110.0, typeof(PalmierBoard), 1044041, 10, 1044351);
 
 			#endregion
 
@@ -355,6 +356,10 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(TerMurDresserEastDeed), "Armoires", "Armoire élégante (E)", 50.0, 120.0, typeof(PalmierBoard), 1044041, 60, 1044351);
 			index = AddCraft(typeof(TerMurDresserSouthDeed), "Armoires", "Armoire élégante (S)", 50.0, 120.0, typeof(PalmierBoard), 1044041, 60, 1044351);
 			index = AddCraft(typeof(NormDresser), "Armoires", "Coiffeuse", 50.0, 120.0, typeof(PalmierBoard), 1044041, 40, 1044351);
+			index = AddCraft(typeof(Vaissellier), "Armoires", "Vaissellier", 70.0, 120.0, typeof(PalmierBoard), 1044041, 15, 1044351);
+
+			index = AddCraft(typeof(PetiteArmoire), "Armoires", "Petite Armoire", 70.0, 120.0, typeof(PalmierBoard), 1044041, 15, 1044351);
+			index = AddCraft(typeof(BibliothequeDAlchimie), "Armoires", "Bibliothèque d'Alchimie", 50.0, 100.0, typeof(PalmierBoard), 1044041, 15, 1044351);
 
 			#endregion
 			#region Lits
@@ -398,6 +403,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(PoteauChaine), "Décorations", "Poteau avec Chaine", 50.0, 120.0, typeof(PalmierBoard), 1044041, 10, 1044351);
 			AddRes(index, typeof(IronIngot), "Lingot de fer", 3, "Vous n'avez pas suffisament de lingot de fer");
 			AddRecipe(index, (int)CarpRecipes.PoteauChaine);
+
+			index = AddCraft(typeof(PileDeBois), "Décorations", "Pile de Bois", 30.0, 80.0, typeof(PalmierBoard), 1044041, 10, 1044351);
 
 			#endregion
 

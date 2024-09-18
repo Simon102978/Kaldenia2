@@ -461,7 +461,7 @@ namespace Server.Engines.Craft
 
 			AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles", 10.0, 30.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
 			
-			AddCraft(typeof(Earrings), "Boucles d'oreilles", "Boucles d'oreilles  pendantes", 80.0, 150.0, typeof(IronIngot), "Lingot de fer", 3, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
+			AddCraft(typeof(Earrings), "Boucles d'oreilles", "Boucles d'oreilles  pendantes", 55.0, 120.0, typeof(IronIngot), "Lingot de fer", 3, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
 			AddRes(index, typeof(GoldWire), "Fil d'or", 1, "Vous n'avez pas assez de fil d'or pour fabriquer ces boucles d'oreilles");
 
 			index = AddCraft(typeof(Earrings1), "Boucles d'oreilles", "Boucles d'oreilles serti d'ambre", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer ces boucles d'oreilles.");
@@ -511,40 +511,44 @@ namespace Server.Engines.Craft
 			#endregion
 
 			#region Paniers et boîtes
-			index = AddCraft(typeof(RoundBasket), "Paniers et boîtes", "Panier rond", 10.0, 30.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(RoundBasket), "Paniers et Boîtes", "Panier rond", 10.0, 30.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 3, 1044351);
-			index = AddCraft(typeof(RoundBasketHandles), "Paniers et boîtes", "Panier rond avec poignées", 10.0, 30.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(RoundBasketHandles), "Paniers et Boîtes", "Panier rond avec poignées", 10.0, 30.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 3, 1044351);
-			index = AddCraft(typeof(SmallBushel), "Paniers et boîtes", "Petit panier rond avec poignées", 10.0, 30.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(SmallBushel), "Paniers et Boîtes", "Petit panier rond avec poignées", 10.0, 30.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 2, 1044351);
-			index = AddCraft(typeof(PicnicBasket2), "Paniers et boîtes", "Panier à pique-nique", 25.0, 45.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(PicnicBasket2), "Paniers et Boîtes", "Panier à pique-nique", 25.0, 45.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 2, 1044351);
-			index = AddCraft(typeof(WinnowingBasket), "Paniers et boîtes", "Panier à vanner", 25.0, 45.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(WinnowingBasket), "Paniers et Boîtes", "Panier à vanner", 25.0, 45.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 3, 1044351);
-			index = AddCraft(typeof(SquareBasket), "Paniers et boîtes", "Panier carré", 25.0, 45.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(SquareBasket), "Paniers et Boîtes", "Panier carré", 25.0, 45.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 3, 1044351);
-			index = AddCraft(typeof(BasketCraftable), "Paniers et boîtes", "Panier tressé", 35.0, 50.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(BasketCraftable), "Paniers et Boîtes", "Panier tressé", 35.0, 50.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 3, 1044351);
-			index = AddCraft(typeof(TallRoundBasket), "Paniers et boîtes", "Panier haut tressé", 35.0, 50.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(TallRoundBasket), "Paniers et Boîtes", "Panier haut tressé", 35.0, 50.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 4, 1044351);
-			index = AddCraft(typeof(SmallSquareBasket), "Paniers et boîtes", "Petit panier carré", 35.0, 50.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(SmallSquareBasket), "Paniers et Boîtes", "Petit panier carré", 35.0, 50.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 2, 1044351);
-			index = AddCraft(typeof(TallBasket), "Paniers et boîtes", "Grand panier tressé", 45.0, 65.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(TallBasket), "Paniers et Boîtes", "Grand panier tressé", 45.0, 65.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 4, 1044351);
-			index = AddCraft(typeof(SmallRoundBasket), "Paniers et boîtes", "Panier tressé rond", 45.0, 65.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(SmallRoundBasket), "Paniers et Boîtes", "Panier tressé rond", 45.0, 65.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 2, 1044351);
-			index = AddCraft(typeof(GiftBoxAngel), "Paniers et boîtes", "Boite Cadeau, Ange", 45.0, 65.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(GiftBoxAngel), "Paniers et Boîtes", "Boite Cadeau, Ange", 45.0, 65.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 2, 1044351);
-			index = AddCraft(typeof(GiftBoxCube), "Paniers et boîtes", "Boite Cadeau, Carré", 55.0, 75.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(GiftBoxCube), "Paniers et Boîtes", "Boite Cadeau, Carré", 55.0, 75.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 2, 1044351);
-			index = AddCraft(typeof(GiftBoxCylinder), "Paniers et boîtes", "Boite Cadeau, Cylindre", 55.0, 75.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(GiftBoxCylinder), "Paniers et Boîtes", "Boite Cadeau, Cylindre", 55.0, 75.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 2, 1044351);
-			index = AddCraft(typeof(GiftBoxOctogon), "Paniers et boîtes", "Boite Cadeau, Octogone", 55.0, 75.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(GiftBoxOctogon), "Paniers et Boîtes", "Boite Cadeau, Octogone", 55.0, 75.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 2, 1044351);
-			index = AddCraft(typeof(GiftBoxRectangle), "Paniers et boîtes", "Boite Cadeau, Rectangle", 55.0, 75.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(GiftBoxRectangle), "Paniers et Boîtes", "Boite Cadeau, Rectangle", 55.0, 75.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 2, 1044351);
-			index = AddCraft(typeof(RedVelvetGiftBox), "Paniers et boîtes", "Boite Cadeau, Petite rouge", 55.0, 75.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
+			index = AddCraft(typeof(RedVelvetGiftBox), "Paniers et Boîtes", "Boite Cadeau, Petite rouge", 55.0, 75.0, typeof(Kindling), "Petit Bois", 5, "Vous manquez de petit bois");
 			AddRes(index, typeof(Shaft), 1027125, 2, 1044351);
+
+			// Panier Plein
+			index = AddCraft(typeof(PanierPlein), "Paniers et Boîtes", "Panier Plein", 50.0, 100.0, typeof(PalmierLog), "Buches", 3, "Vous manquez de buches");
+			AddRes(index, typeof(PalmierBoard), "Planches", 3, "Vous manquez de planches");
 
 			#endregion
 
@@ -615,6 +619,17 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Tray), "Ustensiles", "Plateau", 25.0, 75.0, typeof(PalmierBoard), 1044041, 2, 1044351);
 			SetUseSubRes2(index, true);
 			index = AddCraft(typeof(Silverware), "Ustensiles", "Argenterie", 25.0, 75.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
+
+			// Vaisselle
+			index = AddCraft(typeof(Vaisselle), "Ustensiles", "Vaisselle", 50.0, 100.0, typeof(IronIngot), 1044036, 2, 1044037);
+
+			// Chaudrons Multiples
+			index = AddCraft(typeof(ChaudronsMultiples), "Ustensiles", "Chaudrons Multiples", 50.0, 100.0, typeof(IronIngot), 1044036, 2, 1044037);
+
+
+			// Plateau de coupes
+			index = AddCraft(typeof(PlateauDeCoupes), "Ustensiles", "Plateau de Coupes", 50.0, 100.0, typeof(IronIngot), 1044036, 3, 1044037);
+
 			#endregion
 
 			#region Luminaires et décorations
@@ -644,6 +659,18 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(PalmierBoard), 1044041, 5, 1044351);
 			index = AddCraft(typeof(WindChimes), "Luminaires et décorations", "Carillons éoliens", 80.0, 130.0, typeof(IronIngot), "Lingot de fer", 35, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(FancyWindChimes), "Luminaires et décorations", "Carillons", 80.0, 130.0, typeof(IronIngot), "Lingot de fer", 35, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(LivresMultiples), "Luminaires et Décorations", "Livres Multiples", 50.0, 100.0, typeof(IronIngot), 1044036, 2, 1044037);
+
+
+			index = AddCraft(typeof(ClotureDeMetal), "Luminaires et Décorations", "Clôture de Métal", 70.0, 120.0, typeof(IronIngot), 1044036, 10, 1044037);
+
+			// Lampadaire de rue
+			index = AddCraft(typeof(LampadaireDeRue), "Luminaires et Décorations", "Lampadaire de Rue", 70.0, 120.0, typeof(IronIngot), 1044036, 10, 1044037);
+
+			// Four a bois
+			index = AddCraft(typeof(FourABois), "Luminaires et Décorations", "Four à Bois", 75.0, 125.0, typeof(IronIngot), 1044036, 15, 1044037);
+
 			#endregion
 
 
@@ -793,6 +820,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(BaitZombieFish), "Appâts", "Appât à ZombieFish (1)", 0.0, 0.0, typeof(WinterDragonfish), "WinterDragonfish entier", 1, "Vous n'avez pas assez de WinterDragonfish pour faire cet appât.");
 			AddSkill(index, SkillName.Fishing, 80.0, 100.0);
 
+			// Trophé de pêche
+			index = AddCraft(typeof(TropheePeche), "Appâts", "Trophée de Pêche", 75.0, 125.0, typeof(RawFishSteak), "Filet de poisson cru", 30, "Vous n'avez pas suffisament de filet de poisson cru.");
+			AddRes(index, typeof(PalmierBoard), "Planches", 2, "Vous n'avez pas suffisament de planches");
+
+
 			#endregion
 
 
@@ -879,19 +911,21 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(PoussiereNecrotique), "Poussière Nécrotique", 10, "Vous n'avez pas suffisament de Poussière Nécrotique");
 			AddRes(index, typeof(Gold), "Pièce d'or", 100, "Vous n'avez pas suffisament de pièces d'or.");
 
+			index = AddCraft(typeof(SceauEau), "Divers", "Sceau d'Eau", 25.0, 75.0, typeof(PalmierBoard), "Planches", 5, "Vous n'avez pas suffisament de planches");
+
 
 			#endregion
 			#region Canons
 
-		//	index = AddCraft(typeof(Cannonball), "Canons", "Boulet de Canon", 10.0, 60.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
-			
-//			index = AddCraft(typeof(Grapeshot), "Canons", "Boulet Avancé", 15.0, 70.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
-	//		AddRes(index, typeof(Cloth), "Tissus", 2, "Vous n'avez pas suffisament de tissus");
-			
-	//		index = AddCraft(typeof(LightShipCannonDeed), "Canons", "Canon Léger", 65.0, 100.0, typeof(IronIngot), "Lingot de Fer", 300, "Vous n'avez pas suffisament de lingot de fer");
-			
-	//		index = AddCraft(typeof(HeavyShipCannonDeed), "Canons", "Canon Lourd", 75.0, 110.0, typeof(IronIngot), "Lingot de Fer", 500, "Vous n'avez pas suffisament de lingot de fer");
-			
+			//	index = AddCraft(typeof(Cannonball), "Canons", "Boulet de Canon", 10.0, 60.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
+
+			//			index = AddCraft(typeof(Grapeshot), "Canons", "Boulet Avancé", 15.0, 70.0, typeof(IronIngot), "Lingot de Fer", 12, "Vous n'avez pas suffisament de lingot de fer");
+			//		AddRes(index, typeof(Cloth), "Tissus", 2, "Vous n'avez pas suffisament de tissus");
+
+			//		index = AddCraft(typeof(LightShipCannonDeed), "Canons", "Canon Léger", 65.0, 100.0, typeof(IronIngot), "Lingot de Fer", 300, "Vous n'avez pas suffisament de lingot de fer");
+
+			//		index = AddCraft(typeof(HeavyShipCannonDeed), "Canons", "Canon Lourd", 75.0, 110.0, typeof(IronIngot), "Lingot de Fer", 500, "Vous n'avez pas suffisament de lingot de fer");
+
 			index = AddCraft(typeof(Charcoal), "Canons", "Charbon", 30.0, 50.0, typeof(PalmierBoard), "Planches", 1, "Vous n'avez pas suffisament de planches");
 			
 			index = AddCraft(typeof(BlackPowder), "Canons", "Poudre Noire", 50.0, 100.0, typeof(Charcoal), "Charbon", 3, "Vous n'avez pas suffisament de charbon");

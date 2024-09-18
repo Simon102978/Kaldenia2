@@ -19,7 +19,7 @@ namespace Server.Items
         {
             Stackable = true;
             Amount = amount;
-            Hue = 1109;
+            Hue = 2229;
         }
 
         public BlackPowder(Serial serial)

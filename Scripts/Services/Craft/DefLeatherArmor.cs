@@ -338,20 +338,39 @@ namespace Server.Engines.Craft
 			AddRecipe(index, (int)TailorLeatherRecipe.FourreauDore);
 
 
-			index = AddCraft(typeof(BrownBearRugSouthDeed), "Decorations", "Peau Ours Sud", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
+			index = AddCraft(typeof(BrownBearRugSouthDeed), "Décorations", "Peau Ours Sud", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
 			AddRecipe(index, (int)TailorLeatherRecipe.PeauOurs);
 
-			index = AddCraft(typeof(BrownBearRugEastDeed), "Decorations", "Peau Ours Est", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
+			index = AddCraft(typeof(BrownBearRugEastDeed), "Décorations", "Peau Ours Est", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
 			AddRecipe(index, (int)TailorLeatherRecipe.PeauOursEst);
 
-			index = AddCraft(typeof(PolarBearRugSouthDeed), "Decorations", "Peau Ours Polaire Sud", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
+			index = AddCraft(typeof(PolarBearRugSouthDeed), "Décorations", "Peau Ours Polaire Sud", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
 			AddRecipe(index, (int)TailorLeatherRecipe.PeauOursPolaire);
 
-			index = AddCraft(typeof(PolarBearRugEastDeed), "Decorations", "Peau Ours Polaire Est", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
+			index = AddCraft(typeof(PolarBearRugEastDeed), "Décorations", "Peau Ours Polaire Est", 35.0, 115.0, typeof(Leather), 1044462, 10, 1044463);
 			AddRecipe(index, (int)TailorLeatherRecipe.PeauOursPolaireEst);
 
 
 			index = AddCraft(typeof(Rope), "Divers", "Corde", 60.0, 120.0, typeof(Leather), "cuir", 10, "Vous n'avez pas assez de cuir.");
+			#endregion
+
+			#region Décorations
+
+			// Trophé d'ours brun
+			index = AddCraft(typeof(TropheOursBrun), "Décorations", "Trophée d'Ours Brun", 75.0, 125.0, typeof(Leather), 1044462, 10, 1044463);
+
+			// Trophée de cerf
+			index = AddCraft(typeof(TropheeCerf), "Décorations", "Trophée de Cerf", 75.0, 125.0, typeof(Leather), 1044462, 10, 1044463);
+
+			// Trophé de Troll
+			index = AddCraft(typeof(TropheeTroll), "Décorations", "Trophée de Troll", 75.0, 125.0, typeof(Leather), 1044462, 10, 1044463);
+
+			// Trophée de dragon
+			index = AddCraft(typeof(TropheeDragon), "Décorations", "Trophée de Dragon", 80.0, 130.0, typeof(Leather), 1044462, 1, 1044463);
+			AddRes(index, typeof(DragoniqueLeather), "Cuir de Dragon", 10, "Vous n'avez pas sufissament de cuir de Dragon");
+
+			index = AddCraft(typeof(PorteManteau), "Décorations", "Porte Manteau", 50.0, 100.0, typeof(Leather), 1044462, 10, 1044463);
+
 			#endregion
 
 			// Set the overridable material

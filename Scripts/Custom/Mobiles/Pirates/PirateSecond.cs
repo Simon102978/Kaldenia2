@@ -338,57 +338,53 @@ namespace Server.Mobiles
                     }		
 		}
 
-        public virtual void DoDisarm(Mobile to)
-        {
-                 Item toDisarm = to.FindItemOnLayer(Layer.OneHanded);
+		public virtual void DoDisarm(Mobile to)
+		{
+			Item toDisarm = to.FindItemOnLayer(Layer.OneHanded);
 
-                    if (toDisarm == null || !toDisarm.Movable)
-                        toDisarm = to.FindItemOnLayer(Layer.TwoHanded);
+			if (toDisarm == null || !toDisarm.Movable)
+				toDisarm = to.FindItemOnLayer(Layer.TwoHanded);
 
-                    Container pack = to.Backpack;
+			Container pack = to.Backpack;
 
-                    if (pack == null || (toDisarm != null && !toDisarm.Movable))
-                    {
-                        to.SendLocalizedMessage(1004001); // You cannot disarm your opponent.
-                    }
-                    else if (toDisarm == null || toDisarm is BaseShield)
-                    {
-                        to.SendLocalizedMessage(1060849); // Your target is already unarmed!
-                    }
-                
-                SendLocalizedMessage(1060092); // You disarm their weapon!
-                to.SendLocalizedMessage(1060093); // Your weapon has been disarmed!
+			if (pack == null || (toDisarm != null && !toDisarm.Movable))
+			{
+				to.SendLocalizedMessage(1004001); // You cannot disarm your opponent.
+			}
+			else if (toDisarm == null || toDisarm is BaseShield)
+			{
+				to.SendLocalizedMessage(1060849); // Your target is already unarmed!
+			}
+			else
+			{
+				SendLocalizedMessage(1060092); // You disarm their weapon!
+				to.SendLocalizedMessage(1060093); // Your weapon has been disarmed!
 
-                to.PlaySound(0x3B9);
-                to.FixedParticles(0x37BE, 232, 25, 9948, EffectLayer.LeftHand);
+				to.PlaySound(0x3B9);
+				to.FixedParticles(0x37BE, 232, 25, 9948, EffectLayer.LeftHand);
 
-                pack.DropItem(toDisarm);
+				pack.DropItem(toDisarm);
 
-                BuffInfo.AddBuff(to, new BuffInfo(BuffIcon.NoRearm, 1075637, TimeSpan.FromSeconds(5.0), to));
+				BuffInfo.AddBuff(to, new BuffInfo(BuffIcon.NoRearm, 1075637, TimeSpan.FromSeconds(5.0), to));
 
-                BaseWeapon.BlockEquip(to, TimeSpan.FromSeconds(5.0));
+				BaseWeapon.BlockEquip(to, TimeSpan.FromSeconds(5.0));
 
-                if (to is BaseCreature)
-                {
-                    Timer.DelayCall(TimeSpan.FromSeconds(5.0) + TimeSpan.FromSeconds(Utility.RandomMinMax(3, 10)), () =>
-                    {
-                        if (toDisarm != null && !toDisarm.Deleted && toDisarm.IsChildOf(to.Backpack))
-                            to.EquipItem(toDisarm);
-                    });
-                }
-
-                	try
+				if (to is BaseCreature)
+				{
+					Timer.DelayCall(TimeSpan.FromSeconds(5.0) + TimeSpan.FromSeconds(Utility.RandomMinMax(3, 10)), () =>
 					{
-						Disarm.AddImmunity(to, TimeSpan.FromSeconds(10));
-					}
-					catch (Exception ex)
-					{
-						Console.WriteLine($"Erreur lors de l'appel � Disarm.AddImmunity : {ex.Message}");
-					}
-        }
+						if (to != null && !to.Deleted && toDisarm != null && !toDisarm.Deleted && toDisarm.IsChildOf(to.Backpack))
+							to.EquipItem(toDisarm);
+					});
+				}
+
+				Disarm.AddImmunity(to, TimeSpan.FromSeconds(10));
+			}
+		}
 
 
-         public override void OnDamage(int amount, Mobile from, bool willKill)
+
+		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
 			base.OnDamage(amount, from, willKill);
 		
@@ -410,68 +406,47 @@ namespace Server.Mobiles
 			base.Attack(e);
 		}
 
-		public void Spawn()
+	public void Spawn()
+	{
+		if (m_NextSpawn < DateTime.UtcNow)
 		{
-			if (m_NextSpawn < DateTime.UtcNow)
+			Emote("*Allez les gars !*");
+			int nombre = 0;
+			while (nombre < 2)
 			{
-				Emote("*Allez les gars !*");
-				int Nombre = 0;
-				while (Nombre < 2)
+				int monstre = Utility.Random(6); // Changé à 6 pour inclure tous les cas
+				BaseCreature creature = null;
+
+				switch (monstre)
 				{
-					int monstre = Utility.Random(5);
-					BaseCreature creature = null;
-					try
-					{
-						switch (monstre)
-
-					{
-						case 0:
-						{
-							SpawnHelper( new PirateAmbusher (PirateBoatID	), Location);	
-							break;
-						}
-						case 1:
-						{
-							SpawnHelper( new PirateArbaletrier (PirateBoatID	), Location);	
-							break;
-						}
-						case 2:
-						{
-							SpawnHelper( new PirateBarde (PirateBoatID	), Location);
-							break;
-						}
-						case 3:
-						{
-							SpawnHelper( new PirateBarde(PirateBoatID	), Location);
-							break;	
-						}
-						case 4:
-						{
-							SpawnHelper( new PirateChaman	(PirateBoatID), Location);
-							break;	
-						}
-						default:
-						{	
-							SpawnHelper( new PirateDefender (PirateBoatID	), Location);	
-							break;
-						}
-					}
-						if (creature != null && !this.Deleted && this.Map != null)
-						{
-							SpawnHelper(creature, this.Location);
-							Nombre++;
-						}
-					}
-					catch (Exception ex)
-					{
-						Console.WriteLine($"Erreur lors de la création de la créature: {ex.Message}");
-						if (creature != null)
-							creature.Delete();
-					}
+					case 0:
+						creature = new PirateAmbusher(PirateBoatID);
+						break;
+					case 1:
+						creature = new PirateArbaletrier(PirateBoatID);
+						break;
+					case 2:
+					case 3:
+						creature = new PirateBarde(PirateBoatID);
+						break;
+					case 4:
+						creature = new PirateChaman(PirateBoatID);
+						break;
+					default:
+						creature = new PirateDefender(PirateBoatID);
+						break;
 				}
-				m_NextSpawn = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(60, 120));
+
+				if (creature != null && !this.Deleted && this.Map != null)
+				{
+					SpawnHelper(creature, this.Location);
+					nombre++;
+				}
 			}
+
+			m_NextSpawn = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(60, 120));
 		}
+	}
 
 
 
@@ -479,7 +454,8 @@ namespace Server.Mobiles
 
 
 
-		public void AntiSummon()
+
+	public void AntiSummon()
 		{
 			if (TuerSummoneur < DateTime.UtcNow)
 			{
