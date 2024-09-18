@@ -12,12 +12,12 @@ namespace Server.Items
         {
             if (south)
             {
-                AddCraftComponent(new AddonToolComponent(CraftSystem, 39962, 39963, 1156369, uses, this), 0, 0, 0);
+                AddCraftComponent(new AddonToolComponent(CraftSystem, 39962, 39963, "Machine à bois", uses, this), 0, 0, 0);
                 AddComponent(new ToolDropComponent(40006, 1024014), -1, 0, 0);
             }
             else
             {
-                AddCraftComponent(new AddonToolComponent(CraftSystem, 39972, 39973, 1156369, uses, this), 0, 0, 0);
+                AddCraftComponent(new AddonToolComponent(CraftSystem, 39972, 39973, "Machine à bois", uses, this), 0, 0, 0);
                 AddComponent(new ToolDropComponent(40007, 1024014), 0, 1, 0);
             }
         }

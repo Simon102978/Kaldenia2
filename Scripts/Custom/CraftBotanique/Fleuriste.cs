@@ -6,7 +6,7 @@ namespace Server.Items
 	public Potdefleur() : base(0x11C6)
 	{
 		Weight = 1.0;
-		Name = "Pot de fleur";
+		Name = "Plantes en Pot";
 	}
 
 	public Potdefleur(Serial serial) : base(serial) { }

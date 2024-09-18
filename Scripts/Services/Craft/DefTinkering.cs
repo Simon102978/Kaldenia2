@@ -621,55 +621,113 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(Silverware), "Ustensiles", "Argenterie", 25.0, 75.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 
 			// Vaisselle
-			index = AddCraft(typeof(Vaisselle), "Ustensiles", "Vaisselle", 50.0, 100.0, typeof(IronIngot), 1044036, 2, 1044037);
+			index = AddCraft(typeof(Vaisselle), "Ustensiles", "Vaisselle", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 2, " vous n'avez pas suffisament de Lingot de fer");
 
 			// Chaudrons Multiples
-			index = AddCraft(typeof(ChaudronsMultiples), "Ustensiles", "Chaudrons Multiples", 50.0, 100.0, typeof(IronIngot), 1044036, 2, 1044037);
+			index = AddCraft(typeof(ChaudronsMultiples), "Ustensiles", "Chaudrons Multiples", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 2, " vous n'avez pas suffisament de Lingot de fer");
 
 
 			// Plateau de coupes
-			index = AddCraft(typeof(PlateauDeCoupes), "Ustensiles", "Plateau de Coupes", 50.0, 100.0, typeof(IronIngot), 1044036, 3, 1044037);
+			index = AddCraft(typeof(PlateauDeCoupes), "Ustensiles", "Plateau de Coupes", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 3, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(PlateauDeSoupe), "Ustensiles", "Plateau de soupe", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
+
 
 			#endregion
 
 			#region Luminaires et décorations
-			index = AddCraft(typeof(Torch), "Luminaires et décorations", "Torche", 0.0, 50.0, typeof(PalmierBoard), 1044041, 2, 1044253);
+			index = AddCraft(typeof(Torch), "Luminaires et Décorations", "Torche", 0.0, 50.0, typeof(PalmierBoard), 1044041, 2, 1044253);
 			SetUseSubRes2(index, true);
-			index = AddCraft(typeof(CandleLarge), "Luminaires et décorations", "Chandelier Simple", 45.0, 105.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(Candelabra), "Luminaires et décorations", "Chandelier", 55.0, 105.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(CandelabraStand), "Luminaires et décorations", "Grand Chandelier", 65.0, 105.0, typeof(IronIngot), "Lingot de fer", 8, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(WallSconce), "Luminaires et décorations", "Chandelle Murale", 35.0, 105.0, typeof(IronIngot), "Lingot de fer", 3, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(WallTorch), "Luminaires et décorations", "Torche murale", 35.0, 105.0, typeof(IronIngot), "Lingot de fer", 3, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(Lantern), "Luminaires et décorations", "Lanterne", 30.0, 80.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(HeatingStand), "Luminaires et décorations", "Support chauffant", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(ShojiLantern), "Luminaires et décorations", "Lanterne sophistiquée", 65.0, 115.0, typeof(IronIngot), "Lingot de fer", 30, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(CandleLarge), "Luminaires et Décorations", "Chandelier Simple", 45.0, 105.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(Candelabra), "Luminaires et Décorations", "Chandelier", 55.0, 105.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(CandelabraStand), "Luminaires et Décorations", "Grand Chandelier", 65.0, 105.0, typeof(IronIngot), "Lingot de fer", 8, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(WallSconce), "Luminaires et Décorations", "Chandelle Murale", 35.0, 105.0, typeof(IronIngot), "Lingot de fer", 3, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(WallTorch), "Luminaires et Décorations", "Torche murale", 35.0, 105.0, typeof(IronIngot), "Lingot de fer", 3, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(Lantern), "Luminaires et Décorations", "Lanterne", 30.0, 80.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(HeatingStand), "Luminaires et Décorations", "Support chauffant", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(ShojiLantern), "Luminaires et Décorations", "Lanterne sophistiquée", 65.0, 115.0, typeof(IronIngot), "Lingot de fer", 30, " vous n'avez pas suffisament de Lingot de fer");
 			AddRes(index, typeof(PalmierBoard), 1044041, 5, 1044351);
-			index = AddCraft(typeof(Brazier), "Luminaires et décorations", "Brasero", 45.0, 100.0, typeof(IronIngot), "Lingot de fer", 55, 1044253);
-			index = AddCraft(typeof(BrazierTall), "Luminaires et décorations", "Brasero Long", 65.0, 100.0, typeof(IronIngot), "Lingot de fer", 55, 1044253);
-			index = AddCraft(typeof(DragonBrazier), "Luminaires et décorations", "Brasero Cage", 85.0, 100.0, typeof(IronIngot), "Lingot de fer", 55, 1044253);
+			index = AddCraft(typeof(Brazier), "Luminaires et Décorations", "Brasero", 45.0, 100.0, typeof(IronIngot), "Lingot de fer", 55, 1044253);
+			index = AddCraft(typeof(BrazierTall), "Luminaires et Décorations", "Brasero Long", 65.0, 100.0, typeof(IronIngot), "Lingot de fer", 55, 1044253);
+			index = AddCraft(typeof(DragonBrazier), "Luminaires et Décorations", "Brasero Cage", 85.0, 100.0, typeof(IronIngot), "Lingot de fer", 55, 1044253);
 
-			index = AddCraft(typeof(TerMurStyleCandelabra), "Luminaires et décorations", "Chandelier élégant", 55.0, 105.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(TerMurStyleCandelabra), "Luminaires et Décorations", "Chandelier élégant", 55.0, 105.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
 			AddRecipe(index, (int)TinkerRecipes.TerMurStyleCandelabra);
 
 
 
-			index = AddCraft(typeof(PaperLantern), "Luminaires et décorations", "Lanterne en papier", 65.0, 115.0, typeof(IronIngot), "Lingot de fer", 30, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(PaperLantern), "Luminaires et Décorations", "Lanterne en papier", 65.0, 115.0, typeof(IronIngot), "Lingot de fer", 30, " vous n'avez pas suffisament de Lingot de fer");
 			AddRes(index, typeof(PalmierBoard), 1044041, 5, 1044351);
-			index = AddCraft(typeof(RoundPaperLantern), "Luminaires et décorations", "Lanterne en papier ronde", 65.0, 115.0, typeof(IronIngot), "Lingot de fer", 30, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(RoundPaperLantern), "Luminaires et Décorations", "Lanterne en papier ronde", 65.0, 115.0, typeof(IronIngot), "Lingot de fer", 30, " vous n'avez pas suffisament de Lingot de fer");
 			AddRes(index, typeof(PalmierBoard), 1044041, 5, 1044351);
-			index = AddCraft(typeof(WindChimes), "Luminaires et décorations", "Carillons éoliens", 80.0, 130.0, typeof(IronIngot), "Lingot de fer", 35, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(FancyWindChimes), "Luminaires et décorations", "Carillons", 80.0, 130.0, typeof(IronIngot), "Lingot de fer", 35, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(WindChimes), "Luminaires et Décorations", "Carillons éoliens", 80.0, 130.0, typeof(IronIngot), "Lingot de fer", 35, " vous n'avez pas suffisament de Lingot de fer");
+			index = AddCraft(typeof(FancyWindChimes), "Luminaires et Décorations", "Carillons", 80.0, 130.0, typeof(IronIngot), "Lingot de fer", 35, " vous n'avez pas suffisament de Lingot de fer");
 
-			index = AddCraft(typeof(LivresMultiples), "Luminaires et Décorations", "Livres Multiples", 50.0, 100.0, typeof(IronIngot), 1044036, 2, 1044037);
+			index = AddCraft(typeof(LivresMultiples), "Luminaires et Décorations", "Livres Multiples", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 2, " vous n'avez pas suffisament de Lingot de fer");
 
 
-			index = AddCraft(typeof(ClotureDeMetal), "Luminaires et Décorations", "Clôture de Métal", 70.0, 120.0, typeof(IronIngot), 1044036, 10, 1044037);
+			index = AddCraft(typeof(ClotureDeMetal), "Luminaires et Décorations", "Clôture de Métal", 70.0, 120.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
 
-			// Lampadaire de rue
-			index = AddCraft(typeof(LampadaireDeRue), "Luminaires et Décorations", "Lampadaire de Rue", 70.0, 120.0, typeof(IronIngot), 1044036, 10, 1044037);
+			index = AddCraft(typeof(LampPost1), "Luminaires et Décorations", "Lampadaire de Rue", 70.0, 120.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
 
-			// Four a bois
-			index = AddCraft(typeof(FourABois), "Luminaires et Décorations", "Four à Bois", 75.0, 125.0, typeof(IronIngot), 1044036, 15, 1044037);
+			index = AddCraft(typeof(LampPost2), "Luminaires et Décorations", "Lampadaire de Rue", 70.0, 120.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(LampPost3), "Luminaires et Décorations", "Lampadaire de Rue", 70.0, 120.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(FourABois), "Luminaires et Décorations", "Four à Bois", 75.0, 125.0, typeof(IronIngot), "Lingot de fer", 15, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(TabletteEnMetal), "Luminaires et Décorations", "Tablette en métal", 40.0, 90.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(DragonLamp), "Luminaires et Décorations", "Lampe à l'huile avec dragon", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(BlueMarbleFireplaceDeed), "Luminaires et Décorations", "Foyer Marbre Bleu", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 6, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(GoldMarbleFireplaceDeed), "Luminaires et Décorations", "Foyer Marbre Or", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 6, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(GreenMarbleFireplaceDeed), "Luminaires et Décorations", "Foyer Marbre Vert", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 6, " vous n'avez pas suffisament de Lingot de fer");
+
+
+
+
+			index = AddCraft(typeof(SmithingPressDeed), "Luminaires et Décorations", "Machine de forge", 75.0, 125.0, typeof(IronIngot), "Lingot de fer", 25, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(BBQSmokerDeed), "Luminaires et Décorations", "Fumoir", 75.0, 125.0, typeof(IronIngot), "Lingot de fer", 25, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(WritingDeskDeed), "Luminaires et Décorations", "Table d'écriture", 75.0, 125.0, typeof(IronIngot), "Lingot de fer", 25, " vous n'avez pas suffisament de Lingot de fer");
+
+
+			index = AddCraft(typeof(SpinningLatheDeed), "Luminaires et Décorations", "Machine de menuiserie", 75.0, 125.0, typeof(IronIngot), "Lingot de fer", 25, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(FletchingStationDeed), "Luminaires et Décorations", "Machine de créations d'arc", 75.0, 125.0, typeof(IronIngot), "Lingot de fer", 25, " vous n'avez pas suffisament de Lingot de fer");
+
+
+			index = AddCraft(typeof(WeddingFancyCandelabra), "Luminaires et Décorations", "Lumière de Mariage", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(FontaineDeChocolat), "Luminaires et Décorations", "Fontaine de chocolat", 65.0, 115.0, typeof(IronIngot), "Lingot de fer", 15, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(WeddingRegularCandelabra), "Luminaires et Décorations", "Chandelier à 5 chandelles", 65.0, 115.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(BoiteRessourceDecoration), "Luminaires et Décorations", "Boite de ressource décoration", 40.0, 90.0, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
+			AddRes(index, typeof(PalmierBoard), "Planches", 1, "Vous n'avez pas suffisament de planches");
+
+			index = AddCraft(typeof(PuitEau), "Luminaires et Décorations", "Puits", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 15, " vous n'avez pas suffisament de Lingot de fer");
+			AddRes(index, typeof(Rope), "Corde", 1, "Vous n'avez pas suffisament de corde");
+
+			index = AddCraft(typeof(ChevalierDecoratif), "Luminaires et Décorations", "Chevalier décoratif", 70.0, 120.0, typeof(IronIngot), "Lingot de fer", 20, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(FourALaBroche), "Luminaires et Décorations", "Four à la broche", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(FirePitDeed), "Luminaires et Décorations", "Carré de feu de sol", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 15, " vous n'avez pas suffisament de Lingot de fer");
+
+
+			index = AddCraft(typeof(StainedGlassLamp), "Luminaires et Décorations", "Lampe sur table", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 15, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(TableLamp), "Luminaires et Décorations", "Lampe sur table 2", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 15, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(TallDoubleLamp), "Luminaires et Décorations", "Lampe sur pied double", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 15, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(TallLampDeed), "Luminaires et Décorations", "Lampe sur pied ", 50.0, 100.0, typeof(IronIngot), "Lingot de fer", 15, " vous n'avez pas suffisament de Lingot de fer");
+
 
 			#endregion
 
@@ -892,9 +950,9 @@ namespace Server.Engines.Craft
 
 			ForceNonExceptional(index);
 			index = AddCraft(typeof(Spyglass), "Divers", "Longue vue", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(Fouet4), "Divers", "Fouet 4 mètres", 50.0, 70.0, typeof(Leather), 1044462, 3, 1044463);
-			index = AddCraft(typeof(Fouet6), "Divers", "Fouet 6 mètres", 65.0, 85.0, typeof(Leather), 1044462, 4, 1044463);
-			index = AddCraft(typeof(Fouet8), "Divers", "Fouet 8 mètres", 85.0, 105.0, typeof(Leather), 1044462, 5, 1044463);
+			index = AddCraft(typeof(Fouet4), "Divers", "Fouet 4 mètres", 50.0, 70.0, typeof(Leather), "Cuir", 3, 1044463);
+			index = AddCraft(typeof(Fouet6), "Divers", "Fouet 6 mètres", 65.0, 85.0, typeof(Leather), "Cuir", 4, 1044463);
+			index = AddCraft(typeof(Fouet8), "Divers", "Fouet 8 mètres", 85.0, 105.0, typeof(Leather), "Cuir", 5, 1044463);
 			index = AddCraft(typeof(IronWire), "Divers", "Fil de fer", 30.0, 60.0, typeof(IronIngot), "Lingot de fer", 2, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(CopperWire), "Divers", "Fil de cuivre", 30.0, 60.0, typeof(CopperIngot), "Lingot de cuivre", 2, " vous n'avez pas suffisament de Lingot de fer");
 			index = AddCraft(typeof(SilverWire), "Divers", "Fil d'argent", 50.0, 90.0, typeof(IronIngot), "Lingot de fer", 2, " vous n'avez pas suffisament de Lingot de fer");
@@ -907,11 +965,15 @@ namespace Server.Engines.Craft
 			SetUseAllRes(index, true);
 			AddCraft(typeof(EmptyWineBottle), "Divers", "Bouteille de Vin", 22.5, 42.5, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
 			AddCraft(typeof(EmptyAleBottle), "Divers", "Bouteille de Bière", 32.5, 52.5, typeof(IronIngot), "Lingot de fer", 5, " vous n'avez pas suffisament de Lingot de fer");
-			index = AddCraft(typeof(PetLeash), "Divers", "Harnais pour animaux", 80.0, 130.0, typeof(Leather), 1044462, 5, 1044463);
+			index = AddCraft(typeof(PetLeash), "Divers", "Harnais pour animaux", 80.0, 130.0, typeof(Leather), "Cuir", 5, 1044463);
 			AddRes(index, typeof(PoussiereNecrotique), "Poussière Nécrotique", 10, "Vous n'avez pas suffisament de Poussière Nécrotique");
 			AddRes(index, typeof(Gold), "Pièce d'or", 100, "Vous n'avez pas suffisament de pièces d'or.");
 
 			index = AddCraft(typeof(SceauEau), "Divers", "Sceau d'Eau", 25.0, 75.0, typeof(PalmierBoard), "Planches", 5, "Vous n'avez pas suffisament de planches");
+
+			index = AddCraft(typeof(CoffreDore), "Divers", "Coffre doré", 40.0, 90.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
+
+			index = AddCraft(typeof(CoffreEnFer), "Divers", "Coffre en fer", 40.0, 90.0, typeof(IronIngot), "Lingot de fer", 10, " vous n'avez pas suffisament de Lingot de fer");
 
 
 			#endregion

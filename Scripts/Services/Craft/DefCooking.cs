@@ -664,6 +664,20 @@ AddBeverageRes(index, BeverageType.Water, 1, "Vous avez besoin d'un pichet d'eau
 			AddRes(index, typeof(Pumpkin), "Citrouille", 1, 1044253);
 			#endregion
 
+
+			#region Mariage
+			index = AddCraft(typeof(GateauDeMariage), "Mariage", "Gâteau de Mariage", 50.0, 100.0, typeof(SackFlourOpen), "Sac de farine", 1, 1151092);
+			AddBeverageRes(index, BeverageType.Water, 2, "Vous avez besoin d'un pichet d'eau  avec 2 charges");
+			SetNeedOven(index, true);
+
+
+			index = AddCraft(typeof(PartDeGateau), "Mariage", "Part de gâteau", 50.0, 100.0, typeof(SackFlourOpen), "Sac de farine", 1, 1151092);
+			AddBeverageRes(index, BeverageType.Water, 2, "Vous avez besoin d'un pichet d'eau avec 2 charges");
+			SetNeedOven(index, true);
+
+			#endregion
+
+
 			#region Aliments bouillis
 			index = AddCraft(typeof(ChickenNoodleSoup), "Aliments bouillis", "Soupe poulet et nouille", 30.0, 65.0, typeof(RoastChicken), 1153506, 1, 1044253);
 			AddRes(index, typeof(PastaNoodles), "Pasta Noodles", 1, 1044253);

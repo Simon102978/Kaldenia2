@@ -165,7 +165,8 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GargoyleVase), "Décorations", "Vase sculpté", 93.0, 143.0, typeof(Granite), 1044514, 3, 1044513);
 			index = AddCraft(typeof(GargoylePainting), "Décorations", "Sculpture murale", 95.0, 152.0, typeof(Granite), 1044514, 5, 1044513);
 			index = AddCraft(typeof(SmallUrn), "Décorations", "Petite urne", 96.0, 146.0, typeof(Granite), 1044514, 3, 1044513);
-			index = AddCraft(typeof(SmallTowerSculpture), "Décorations", "Monolite", 99.0, 149.0, typeof(Granite), 1044514, 3, 1044513); 
+			index = AddCraft(typeof(SmallTowerSculpture), "Décorations", "Monolite", 99.0, 149.0, typeof(Granite), 1044514, 3, 1044513);
+			index = AddCraft(typeof(PetiteFontaine), "Décorations", "Petite fontaine", 50.0, 100.0, typeof(Granite), 1044514, 5, 1044513);
 			/*
 						index = AddCraft(typeof(AnniversaryVaseTall), 1044501, 1156147, 60.0, 110.0, typeof(Granite), 1044514, 6, 1044513);
 						AddRecipe(index, (int)MasonryRecipes.AnniversaryVaseTall);
@@ -185,6 +186,8 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(Cloth), 1044286, 100, 1044287);
 			index = AddCraft(typeof(LargeGargoyleBedEastDeed), "Mobilier", "Grand lit sculpté (E)", 76.0, 115.0, typeof(Granite), 1044514, 20, 1044513);
 			AddRes(index, typeof(Cloth), 1044286, 100, 1044287);
+
+
 
 			// Statues
 			AddCraft(typeof(StatueGargoyleEast), "Statues", "Statue 5", 30.0, 80.0, typeof(Granite), 1044514, 20, 1044513);
@@ -250,6 +253,13 @@ namespace Server.Engines.Craft
 			ForceNonExceptional(index);
 			AddCraft(typeof(ElvenStoveEastDeed), "Cuisine", "Four élégant (E)", 85.0, 110.0, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			ForceNonExceptional(index);
+
+			index = AddCraft(typeof(EvierEnMarbre), "Cuisine", "Évier en marbre", 50.0, 100.0, typeof(Granite), "Granite", 20, "Vous n'avez pas suffisament de Granite");
+
+			index = AddCraft(typeof(FourDeBriqueEteint), "Cuisine", "Four de brique éteint", 50.0, 100.0, typeof(Granite), "Granite", 20, "Vous n'avez pas suffisament de Granite");
+
+			index = AddCraft(typeof(FourDeBriqueAllume), "Cuisine", "Four de brique allumé", 50.0, 100.0, typeof(Granite), "Granite", 20, "Vous n'avez pas suffisament de Granite");
+
 
 			// Forge
 			AddCraft(typeof(SmallForgeDeed), "Forge", "Petite forge", 73.6, 98.6, typeof(Granite), 1044514, 20, 1044513);

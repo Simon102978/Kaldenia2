@@ -140,15 +140,17 @@ namespace Server.Engines.Craft
 		 */
 
 			// Fioles Multiples
-			index = AddCraft(typeof(FiolesMultiples), "Fioles", "Fioles Multiples", 40.0, 90.0, typeof(Sand), 1044625, 4, 1044627);
+			index = AddCraft(typeof(FiolesMultiples), "Fioles", "Fioles Multiples", 40.0, 90.0, typeof(Sand), "Sable", 4, 1044627);
 
 			// Crâne en verre
-			index = AddCraft(typeof(CraneVerre), "Décorations", "Crâne en Verre", 75.0, 125.0, typeof(Sand), 1044625, 10, 1044627);
+			index = AddCraft(typeof(CraneVerre), "Décorations", "Crâne en Verre", 75.0, 125.0, typeof(Sand), "Sable", 4, 1044627);
 
 			// Crystal de Verre
-			index = AddCraft(typeof(CrystalVerre), "Décorations", "Crystal de Verre", 75.0, 125.0, typeof(Sand), 1044625, 10, 1044627);
+			index = AddCraft(typeof(CrystalVerre), "Décorations", "Crystal de Verre", 75.0, 125.0, typeof(Sand), "Sable", 4, 1044627);
 
-			index = AddCraft(typeof(PresentoireVerre), "Décorations", "Présentoire de Verre", 80.0, 130.0, typeof(Sand), 1044625, 10, 1044627);
+			index = AddCraft(typeof(PresentoireVerre), "Décorations", "Présentoire de Verre", 80.0, 130.0, typeof(Sand), "Sable", 4, 1044627);
+
+			index = AddCraft(typeof(AquariumEnVerre), "Décorations", "Aquarium en verre", 50.0, 100.0, typeof(Sand), "Sable", 4, 1044627);
 
 			Repair = true;
             MarkOption = true; Pratiquer = true;

@@ -12,12 +12,12 @@ namespace Server.Items
         {
             if (south)
             {
-                AddCraftComponent(new AddonToolComponent(CraftSystem, 40344, 40345, 1157071, uses, this), 0, 0, 0);
+                AddCraftComponent(new AddonToolComponent(CraftSystem, 40344, 40345, "Fumoir et Grill", uses, this), 0, 0, 0);
                 AddComponent(new ToolDropComponent(40349, 1157071), -1, 0, 0);
             }
             else
             {
-                AddCraftComponent(new AddonToolComponent(CraftSystem, 40350, 40351, 1157071, uses, this), 0, 0, 0);
+                AddCraftComponent(new AddonToolComponent(CraftSystem, 40350, 40351, "Fumoir et Grill", uses, this), 0, 0, 0);
                 AddComponent(new ToolDropComponent(40355, 1157071), 0, -1, 0);
             }
         }

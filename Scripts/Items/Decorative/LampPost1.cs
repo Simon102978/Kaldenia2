@@ -8,7 +8,7 @@ namespace Server.Items
         public LampPost1()
             : base(0xB21)
         {
-            Movable = false;
+            Movable = true;
             Duration = TimeSpan.Zero; // Never burnt out
             Burning = false;
             Light = LightType.Circle300;

@@ -12,12 +12,12 @@ namespace Server.Items
         {
             if (south)
             {
-                AddCraftComponent(new AddonToolComponent(CraftSystem, 39982, 39983, 1124006, uses, this), 0, 0, 0);
+                AddCraftComponent(new AddonToolComponent(CraftSystem, 39982, 39983, "Station fabrication d'arc", uses, this), 0, 0, 0);
                 AddComponent(new ToolDropComponent(40004, 1124006), -1, 0, 0);
             }
             else
             {
-                AddCraftComponent(new AddonToolComponent(CraftSystem, 39992, 39993, 1124006, uses, this), 0, 0, 0);
+                AddCraftComponent(new AddonToolComponent(CraftSystem, 39992, 39993, "Station fabrication d'arc", uses, this), 0, 0, 0);
                 AddComponent(new ToolDropComponent(40003, 1124006), 1, 0, 0);
             }
         }
