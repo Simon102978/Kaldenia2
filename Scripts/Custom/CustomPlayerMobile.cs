@@ -1679,7 +1679,12 @@ namespace Server.Mobiles
 		{
 			int pts = 0;
 
-			if (Niveau >= 20)
+
+			if (Niveau >= 30)
+			{
+				pts = 3;
+			}
+			else if (Niveau >= 20)
 			{
 				pts = 2;
 			}

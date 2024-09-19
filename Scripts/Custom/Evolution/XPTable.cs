@@ -45,7 +45,17 @@ namespace Server
 			{27, new XPLevel(262,97)},
 			{28, new XPLevel(279,98)},
 			{29, new XPLevel(297,99)},
-			{30, new XPLevel(315,100)} // Classe 5
+			{30, new XPLevel(315,100)}, // Classe 5
+			{31, new XPLevel(333,100)},
+			{32, new XPLevel(351,100)},
+			{33, new XPLevel(369,100)},
+			{34, new XPLevel(387,100)},
+			{35, new XPLevel(405,100)},
+			{36, new XPLevel(423,100)},			
+			{37, new XPLevel(441,100)},
+			{38, new XPLevel(459,100)},
+			{39, new XPLevel(477,100)},
+			{40, new XPLevel(495,100)},			
 		};
 
 		private int m_FeRequis = 0;
@@ -65,9 +75,9 @@ namespace Server
 		{
 			int lvl = niveau;
 
-			if (lvl > 30)
+			if (lvl > 40)
 			{
-				lvl = 30;
+				lvl = 40;
 			}
 			else if(lvl < 0)
 			{
