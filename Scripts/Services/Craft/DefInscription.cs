@@ -1168,6 +1168,10 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GemMiningBook), "Autres", "Conn Gems", 75, 100, typeof(BlankScroll), 1044377, 20, 1044378);
 			AddRecipe(index, (int)InscriptionRecipes.GemMiningBook);
 
+			index = AddCraft(typeof(LivresMultiples), "Autres", "Livres Multiples", 30.0, 80.0, typeof(Leather), "Cuir", 4, 1044463);
+			AddRes(index, typeof(BlankScroll), "Parchemin Vierges", 10, 1044378);
+			AddRes(index, typeof(Beeswax), "Cire d'abeille", 4, 1044253);
+
 
 			#endregion
 

@@ -27,7 +27,7 @@ namespace Server.Mobiles
 
 		public DateTime DelayCharge;
 
-		
+
 		public DateTime DelayChangeOpponent;
 
 		public virtual int StrikingRange => 12;
@@ -38,9 +38,9 @@ namespace Server.Mobiles
 		public override bool CanBeParagon => false;
 
 		public int ThrowingPotion = 3;
-		public virtual int  ExplosifRange => 3;
+		public virtual int ExplosifRange => 3;
 
-		public virtual int  ExplosifItemId => 0x1C19;
+		public virtual int ExplosifItemId => 0x1C19;
 
 		public DateTime m_LastParole = DateTime.MinValue;
 
@@ -59,7 +59,7 @@ namespace Server.Mobiles
 					ChangeBoat(value);
 				}
 
-				m_PirateBoatID = value; 
+				m_PirateBoatID = value;
 			}
 		}
 
@@ -74,17 +74,9 @@ namespace Server.Mobiles
 
 		public PirateBoat GetPirateBoat()
 		{
-			var boat = PirateBoat.GetPirateBoat(PirateBoatID);
 
-			if (boat == null)
-			{
-				Console.WriteLine($"Erreur: PirateBoat non trouvé pour ID {PirateBoatID}");
-				// Retourner un bateau par défaut ou gérer l'erreur d'une autre manière
-				return PirateBoat.GetPirateBoat(0); // Supposons que 0 est toujours un ID valide
-			}
-			return boat;
+			return PirateBoat.GetPirateBoat(PirateBoatID);
 		}
-
 
 
 
@@ -101,13 +93,13 @@ namespace Server.Mobiles
 
 			if (Combatant != null)
 			{
-				
+
 				if (m_GlobalTimer < DateTime.UtcNow)
 				{
 
-                    
 
-					if (!this.InRange(Combatant.Location,3) && InLOS(Combatant))
+
+					if (!this.InRange(Combatant.Location, 3) && InLOS(Combatant))
 					{
 						switch (Utility.Random(3))
 						{
@@ -120,15 +112,15 @@ namespace Server.Mobiles
 							case 2:
 								ChangeOpponent();
 								break;
-							default:							
+							default:
 								break;
 						}
 					}
-						
+
 
 					m_GlobalTimer = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(2, 5));
 				}
-			
+
 
 			}
 
@@ -141,18 +133,18 @@ namespace Server.Mobiles
 		{
 			if (DelayCharge < DateTime.UtcNow && AllowCharge)
 			{
-					if (Combatant is CustomPlayerMobile cp)
-					{
+				if (Combatant is CustomPlayerMobile cp)
+				{
 
-						Emote($"*Effectue une charge vers {cp.Name}*");
+					Emote($"*Effectue une charge vers {cp.Name}*");
 
-						cp.Damage(15);
+					cp.Damage(15);
 
-						cp.Freeze(TimeSpan.FromSeconds(4));
+					cp.Freeze(TimeSpan.FromSeconds(4));
 
-						this.Location = cp.Location;
-					}
-				
+					this.Location = cp.Location;
+				}
+
 
 				DelayCharge = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(20, 30));
 			}
@@ -160,32 +152,32 @@ namespace Server.Mobiles
 
 		public void ChangeOpponent()
 		{
-			if (DelayChangeOpponent < DateTime.UtcNow )
+			if (DelayChangeOpponent < DateTime.UtcNow)
 			{
 
-			
+
 				Mobile agro, best = null;
 				double distance, random = Utility.RandomDouble();
-	
-					int damage = 0;
 
-					// find a player who dealt most damage
-					for (int i = 0; i < DamageEntries.Count; i++)
+				int damage = 0;
+
+				// find a player who dealt most damage
+				for (int i = 0; i < DamageEntries.Count; i++)
+				{
+					agro = Validate(DamageEntries[i].Damager);
+
+					if (agro == null)
+						continue;
+
+					distance = GetDistanceToSqrt(agro);
+
+					if (distance < StrikingRange && DamageEntries[i].DamageGiven > damage && InLOS(agro.Location))
 					{
-						agro = Validate(DamageEntries[i].Damager);
-
-						if (agro == null)
-							continue;
-
-						distance = GetDistanceToSqrt(agro);
-
-						if (distance < StrikingRange && DamageEntries[i].DamageGiven > damage && InLOS(agro.Location))
-						{
-							best = agro;
-							damage = DamageEntries[i].DamageGiven;
-						}
+						best = agro;
+						damage = DamageEntries[i].DamageGiven;
 					}
-				
+				}
+
 
 				if (best != null)
 				{
@@ -201,7 +193,7 @@ namespace Server.Mobiles
 						best.PlaySound(0x474);
 					});
 
-				
+
 				}
 				DelayChangeOpponent = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(20, 30));
 			}
@@ -234,71 +226,54 @@ namespace Server.Mobiles
 
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
-			try
+			base.OnDamage(amount, from, willKill);
+
+			Parole();
+
+			if (from == null || Combatant == null || !this.InRange(Combatant.Location, 3))
 			{
-				base.OnDamage(amount, from, willKill);
-
-				Parole();
-
-				if (from == null || Combatant == null)
-				{
-					return;
-				}
-
-				if (Utility.Random(10) < 2 && this.InRange(Combatant.Location, 3))
-				{
-					Item toDisarm = from.FindItemOnLayer(Layer.OneHanded);
-					if (toDisarm == null || !toDisarm.Movable)
-						toDisarm = from.FindItemOnLayer(Layer.TwoHanded);
-
-					Container pack = from.Backpack;
-					if (pack == null || (toDisarm != null && !toDisarm.Movable))
-					{
-						from.SendLocalizedMessage(1004001); // You cannot disarm your opponent.
-					}
-					else if (toDisarm == null || toDisarm is BaseShield)
-					{
-						from.SendLocalizedMessage(1060849); // Your target is already unarmed!
-					}
-					else
-					{
-						SendLocalizedMessage(1060092); // You disarm their weapon!
-						from.SendLocalizedMessage(1060093); // Your weapon has been disarmed!
-						from.PlaySound(0x3B9);
-						from.FixedParticles(0x37BE, 232, 25, 9948, EffectLayer.LeftHand);
-
-						if (pack != null)
-						{
-							pack.DropItem(toDisarm);
-						}
-
-						BuffInfo.AddBuff(from, new BuffInfo(BuffIcon.NoRearm, 1075637, TimeSpan.FromSeconds(5.0), from));
-						BaseWeapon.BlockEquip(from, TimeSpan.FromSeconds(5.0));
-
-						if (from is BaseCreature)
-						{
-							Timer.DelayCall(TimeSpan.FromSeconds(5.0) + TimeSpan.FromSeconds(Utility.RandomMinMax(3, 10)), () =>
-							{
-								if (from != null && !from.Deleted && toDisarm != null && !toDisarm.Deleted && toDisarm.IsChildOf(from.Backpack))
-									from.EquipItem(toDisarm);
-							});
-						}
-
-						try
-						{
-							Disarm.AddImmunity(from, TimeSpan.FromSeconds(10));
-						}
-						catch (Exception ex)
-						{
-							Console.WriteLine($"Erreur lors de l'appel à Disarm.AddImmunity : {ex.Message}");
-						}
-					}
-				}
+				return;
 			}
-			catch (Exception ex)
+
+			if (Utility.Random(10) < 2)
 			{
-				Console.WriteLine($"Exception dans OnDamage de PirateBase: {ex.Message}");
-				Console.WriteLine($"StackTrace: {ex.StackTrace}");
+				Item toDisarm = from.FindItemOnLayer(Layer.OneHanded);
+				if (toDisarm == null || !toDisarm.Movable)
+					toDisarm = from.FindItemOnLayer(Layer.TwoHanded);
+
+				Container pack = from.Backpack;
+
+				if (pack == null || (toDisarm != null && !toDisarm.Movable))
+				{
+					from.SendLocalizedMessage(1004001); // You cannot disarm your opponent.
+				}
+				else if (toDisarm == null || toDisarm is BaseShield)
+				{
+					from.SendLocalizedMessage(1060849); // Your target is already unarmed!
+				}
+				else
+				{
+					SendLocalizedMessage(1060092); // You disarm their weapon!
+					from.SendLocalizedMessage(1060093); // Your weapon has been disarmed!
+					from.PlaySound(0x3B9);
+					from.FixedParticles(0x37BE, 232, 25, 9948, EffectLayer.LeftHand);
+
+					pack.DropItem(toDisarm);
+
+					BuffInfo.AddBuff(from, new BuffInfo(BuffIcon.NoRearm, 1075637, TimeSpan.FromSeconds(5.0), from));
+					BaseWeapon.BlockEquip(from, TimeSpan.FromSeconds(5.0));
+
+					if (from is BaseCreature)
+					{
+						Timer.DelayCall(TimeSpan.FromSeconds(5.0) + TimeSpan.FromSeconds(Utility.RandomMinMax(3, 10)), () =>
+						{
+							if (from != null && !from.Deleted && toDisarm != null && !toDisarm.Deleted && toDisarm.IsChildOf(from.Backpack))
+								from.EquipItem(toDisarm);
+						});
+					}
+
+					Disarm.AddImmunity(from, TimeSpan.FromSeconds(10));
+				}
 			}
 		}
 
@@ -307,13 +282,13 @@ namespace Server.Mobiles
 		{
 			Parole();
 
-			if (to != null && to is CustomPlayerMobile cp && DelayMortalStrike < DateTime.UtcNow)		
+			if (to != null && to is CustomPlayerMobile cp && DelayMortalStrike < DateTime.UtcNow)
 			{
 				if (Spells.SkillMasteries.ResilienceSpell.UnderEffects(to)) //Halves time
 					MortalStrike.BeginWound(to, to.Player ? TimeSpan.FromSeconds(3.0) : TimeSpan.FromSeconds(6));
 				else
 					MortalStrike.BeginWound(to, TimeSpan.FromSeconds(6));
-				
+
 
 				DelayMortalStrike = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(10, 15));
 			}
@@ -325,13 +300,13 @@ namespace Server.Mobiles
 		{
 			Parole();
 
-			if (to != null && to is CustomPlayerMobile cp && DelayMortalStrike < DateTime.UtcNow)		
+			if (to != null && to is CustomPlayerMobile cp && DelayMortalStrike < DateTime.UtcNow)
 			{
 				if (Spells.SkillMasteries.ResilienceSpell.UnderEffects(to)) //Halves time
 					MortalStrike.BeginWound(to, to.Player ? TimeSpan.FromSeconds(3.0) : TimeSpan.FromSeconds(6));
 				else
 					MortalStrike.BeginWound(to, TimeSpan.FromSeconds(6));
-				
+
 
 				DelayMortalStrike = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(10, 15));
 			}
@@ -341,9 +316,9 @@ namespace Server.Mobiles
 
 
 
-        public override void GenerateLoot()
-        {
-			AddLoot(LootPack.Rich,3);
+		public override void GenerateLoot()
+		{
+			AddLoot(LootPack.Rich, 3);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(1, 2));
 
 			if (ThrowingPotion > 0)
@@ -356,7 +331,7 @@ namespace Server.Mobiles
 
 		public override bool IsEnemy(Mobile m)
 		{
-			if (m is CustomPlayerMobile cp  && cp.TribeRelation.Pirate > 75)
+			if (m is CustomPlayerMobile cp && cp.TribeRelation.Pirate > 75)
 			{
 				return false;
 			}
@@ -372,7 +347,7 @@ namespace Server.Mobiles
 
 		public void SpawnHelper(BaseCreature helper, Point3D location)
 		{
-			if (helper == null || this == null || this.Deleted || this.Map == null)
+			if (helper == null || this == null || this.Deleted)
 				return;
 
 			helper.Home = location;
@@ -383,19 +358,12 @@ namespace Server.Mobiles
 				helper.Warmode = true;
 				helper.Combatant = Combatant;
 			}
-
-			try
+			if (this != null && !this.Deleted) // Ajoutez cette vérification
 			{
-				BaseCreature.Summon(helper, false, this, location, -1, TimeSpan.FromMinutes(2));
-				helper.MoveToWorld(location, this.Map);
-			}
-			catch (Exception ex)
-			{
-				Console.WriteLine($"Erreur dans SpawnHelper: {ex.Message}");
-				helper.Delete();
+				BaseCreature.Summon(helper, false, this, this.Location, -1, TimeSpan.FromMinutes(2));
+				helper.MoveToWorld(location, Map);
 			}
 		}
-
 
 		public override void DoHarmful(IDamageable target, bool indirect)
 		{
@@ -413,7 +381,7 @@ namespace Server.Mobiles
 			if (m_LastParole < DateTime.Now && Combatant != null)
 			{
 				if (Combatant is CustomPlayerMobile cp)
-						Say(ParolePirate[Utility.Random(ParolePirate.Count)]);
+					Say(ParolePirate[Utility.Random(ParolePirate.Count)]);
 
 				m_LastParole = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(60, 90));
 			}
@@ -430,7 +398,7 @@ namespace Server.Mobiles
 		}
 
 
-#region Jail
+		#region Jail
 
 
 		public void JailPerso(CustomPlayerMobile cp)
@@ -438,8 +406,8 @@ namespace Server.Mobiles
 			CustomPersistence.PirateJail(cp);
 			Emote($"*Capture {cp.Name}.*");
 			Timer.DelayCall(TimeSpan.FromSeconds(2), new TimerStateCallback(Ressurect_Callback), cp);
-				
-			
+
+
 		}
 
 		private void Ressurect_Callback(object state)
@@ -450,12 +418,12 @@ namespace Server.Mobiles
 
 			if (this != null && this.Alive)
 			{
-					Delete();
+				Delete();
 			}
 		}
 
 
-#endregion
+		#endregion
 
 
 		public override bool CanRummageCorpses => true;
@@ -476,10 +444,10 @@ namespace Server.Mobiles
 
 			SpeechHue = Utility.RandomDyedHue();
 			Race = BaseRace.GetRace(1);
-			Title = "Un Pirate " + GetPirateBoat().ToStringWithPronom() ;
+			Title = "Un Pirate de " + GetPirateBoat().ToStringWithPronom();
 
-			
-			
+
+
 			if (Female = Utility.RandomBool() || AllFemale)
 			{
 				Female = true;
@@ -494,58 +462,53 @@ namespace Server.Mobiles
 				Body = 0x190;
 				Name = NameList.RandomName("male");
 				MaleCloth();
-                
+
 			}
 
 
-            HairItemID = Race.RandomHair(Female);
-            HairHue = Race.RandomHairHue();
+			HairItemID = Race.RandomHair(Female);
+			HairHue = Race.RandomHairHue();
 
-            FacialHairItemID = Race.RandomFacialHair(Female);
-            if (FacialHairItemID != 0)
-            {
-                FacialHairHue = Race.RandomHairHue();
-            }
-            else
-            {
-                FacialHairHue = 0;
-            }
+			FacialHairItemID = Race.RandomFacialHair(Female);
+			if (FacialHairItemID != 0)
+			{
+				FacialHairHue = Race.RandomHairHue();
+			}
+			else
+			{
+				FacialHairHue = 0;
+			}
 
 
 		}
 
 		public void ChangeBoat(int boatID)
 		{
+			Mobile from = this;
 
-			PirateBoat boat =  PirateBoat.GetPirateBoat(boatID);
+			PirateBoat boat = PirateBoat.GetPirateBoat(boatID);
 
-			if (boat == null || Deleted || this == null)
-				return;
+			Title = "Un Pirate de " + boat.ToStringWithPronom();
 
-			
-			
-			
-			Title = "Un Pirate de " + boat.ToStringWithPronom() ;
+			var items = from.Items;
 
-            var items = Items;
+			for (int i = from.Items.Count - 1; i >= 0; i--)
+			{
+				Item item = null;
 
-            for (int i = Items.Count - 1; i >= 0; i--)
-            {
-                Item item = null;
+				try
+				{
+					item = from.Items[i];
+				}
+				catch
+				{
+					from.SendMessage("Erreur dans la recherche de l'item #{0}", i);
+					continue;
+				}
 
-                try
-                {
-                    item = Items[i];
-                }
-                catch
-                {
-                    SendMessage("Erreur dans la recherche de l'item #{0}", i);
-                    continue;
-                }
-
-                try
-                {
-                    if ((item.Movable))
+				try
+				{
+					if ((item.Movable))
 					{
 
 						if (item.Hue == GetPirateBoat().MainHue)
@@ -557,63 +520,63 @@ namespace Server.Mobiles
 							item.Hue = boat.AltHue;
 						}
 
-						
+
 					}
 				}
-                catch
-                {
-                    SendMessage("L'item {0} n'a pas été déplacé dans votre sac à cause d'une erreur.");
-                }
-            }
+				catch
+				{
+					from.SendMessage("L'item {0} n'a pas été déplacé dans votre sac à cause d'une erreur.");
+				}
+			}
 		}
 
 
 		public virtual void FemaleCloth()
 		{
-			
 
 
-			
-				// haut // robe
-				switch (Utility.Random(6))
-				{
-					case 0:
-						AddItem(new TuniqueCeinture());
-						break;
-					case 1:
-						AddItem(new TuniqueCombat(GetPirateBoat().MainHue));
-						break;
-					case 2:
-						AddItem(new CorsetTissus(GetPirateBoat().MainHue));
-						break;
-					case 3:
-						AddItem(new Robe15(GetPirateBoat().MainHue));
-						break;
-					case 4:
-						AddItem(new CorsetEpaule(GetPirateBoat().MainHue));
-						break;
-					case 5:
-						AddItem(new RobeCourteLacet(GetPirateBoat().MainHue));
-						break;
-					default:
-						AddItem(new RobeCourteLacet(GetPirateBoat().MainHue));
+
+
+			// haut // robe
+			switch (Utility.Random(6))
+			{
+				case 0:
+					AddItem(new TuniqueCeinture());
 					break;
-				}
-
-				// bas 
-				switch (Utility.Random(2))
-				{
-					case 0:
-						AddItem(new Pantalon7(GetPirateBoat().AltHue));
-						break;
-					case 1:
-						AddItem(new ShortPants(GetPirateBoat().AltHue));
-						break;			
-					default:
-						AddItem(new ShortPants(GetPirateBoat().AltHue));
+				case 1:
+					AddItem(new TuniqueCombat(GetPirateBoat().MainHue));
 					break;
-				}
-			
+				case 2:
+					AddItem(new CorsetTissus(GetPirateBoat().MainHue));
+					break;
+				case 3:
+					AddItem(new Robe15(GetPirateBoat().MainHue));
+					break;
+				case 4:
+					AddItem(new CorsetEpaule(GetPirateBoat().MainHue));
+					break;
+				case 5:
+					AddItem(new RobeCourteLacet(GetPirateBoat().MainHue));
+					break;
+				default:
+					AddItem(new RobeCourteLacet(GetPirateBoat().MainHue));
+					break;
+			}
+
+			// bas 
+			switch (Utility.Random(2))
+			{
+				case 0:
+					AddItem(new Pantalon7(GetPirateBoat().AltHue));
+					break;
+				case 1:
+					AddItem(new ShortPants(GetPirateBoat().AltHue));
+					break;
+				default:
+					AddItem(new ShortPants(GetPirateBoat().AltHue));
+					break;
+			}
+
 
 
 			//Chapeau
@@ -639,12 +602,12 @@ namespace Server.Mobiles
 					break;
 				case 2:
 					AddItem(new TuniqueCombat(GetPirateBoat().MainHue));
-					break;	
+					break;
 				case 3:
 					AddItem(new Shirt(GetPirateBoat().MainHue));
-					break;	
+					break;
 				default:
-				break;
+					break;
 			}
 
 			// bas 
@@ -652,10 +615,10 @@ namespace Server.Mobiles
 			{
 				case 0:
 					AddItem(new Pantalon7(GetPirateBoat().AltHue));
-					break;	
+					break;
 				default:
 					AddItem(new ShortPants(GetPirateBoat().AltHue));
-				break;
+					break;
 			}
 			//Chapeau
 			GenerateChapeau();
@@ -678,93 +641,83 @@ namespace Server.Mobiles
 					break;
 				case 2:
 					AddItem(new Bandana(GetPirateBoat().AltHue));
-					break;					
+					break;
 				default:
-				// pas de chapeau.
-				break;
+					// pas de chapeau.
+					break;
 			}
 
 
 		}
 
 
-#region throwing
+		#region throwing
 
 
-        public void Explode( Point3D loc, Map map)
-        {
-            if (Deleted || this == null)
-            {
-                return;
-            }
-
-            ThrowingPotion--;
-
-          	List<Mobile> list = SpellHelper.AcquireIndirectTargets(this, loc, map, ExplosifRange, false).OfType<Mobile>().ToList();
-           
-
-            foreach (Mobile m in list)
-            {
-              ThrowingDetonate(m);
-            }
-
-            list.Clear();
-        }
-
-
-		public virtual void ThrowingDetonate (Mobile m)
+		public void Explode(Point3D loc, Map map)
 		{
-			if (m == null)
+			if (Deleted || this == null)
 			{
 				return;
 			}
 
- 				DoHarmful(m);
+			ThrowingPotion--;
 
-                int damage = Utility.RandomMinMax(20, 30);
+			List<Mobile> list = SpellHelper.AcquireIndirectTargets(this, loc, map, ExplosifRange, false).OfType<Mobile>().ToList();
 
-            
-                AOS.Damage(m, this, damage, 0, 100, 0, 0, 0, Server.DamageType.SpellAOE);
+
+			foreach (Mobile m in list)
+			{
+				ThrowingDetonate(m);
+			}
+
+			list.Clear();
+		}
+
+
+		public virtual void ThrowingDetonate(Mobile m)
+		{
+			DoHarmful(m);
+
+			int damage = Utility.RandomMinMax(20, 30);
+
+
+			AOS.Damage(m, this, damage, 0, 100, 0, 0, 0, Server.DamageType.SpellAOE);
 
 
 		}
 
-        public void ThrowBomb(Mobile m)
-        {
-			if (m == null || m.Deleted)
+		public void ThrowBomb(Mobile m)
+		{
+			if (ThrowingPotion > 0)
 			{
-				return;
-			}
-
-			if (ThrowingPotion > 0 )
-			{
-     	        DoHarmful(m);
+				DoHarmful(m);
 
 				MovingParticles(m, ExplosifItemId, 1, 0, false, true, 0, 0, 9502, 6014, 0x11D, EffectLayer.Waist, 0);
 
 				new ThrowingTimer(m, this).Start();
 			}
-         
-        }
- 		private class ThrowingTimer : Timer
-        {
-            private readonly Mobile m_Mobile;
-            private readonly PirateBase m_From;
-            public ThrowingTimer(Mobile m, PirateBase from)
-                : base(TimeSpan.FromSeconds(1.0))
-            {
-                m_Mobile = m;
-                m_From = from;
-                Priority = TimerPriority.TwoFiftyMS;
-            }
 
-            protected override void OnTick()
-            {
-              m_From.Explode(m_Mobile.Location,m_Mobile.Map);
-        	}
 		}
-      
-#endregion
+		private class ThrowingTimer : Timer
+		{
+			private readonly Mobile m_Mobile;
+			private readonly PirateBase m_From;
+			public ThrowingTimer(Mobile m, PirateBase from)
+				: base(TimeSpan.FromSeconds(1.0))
+			{
+				m_Mobile = m;
+				m_From = from;
+				Priority = TimerPriority.TwoFiftyMS;
+			}
+
+			protected override void OnTick()
+			{
+				m_From.Explode(m_Mobile.Location, m_Mobile.Map);
+			}
+		}
+
+		#endregion
 
 		public override void Serialize(GenericWriter writer)
 		{
@@ -784,17 +737,17 @@ namespace Server.Mobiles
 			switch (version)
 			{
 				case 1:
-				{
-					m_PirateBoatID = reader.ReadInt();
+					{
+						m_PirateBoatID = reader.ReadInt();
 
-					goto case 0;
-				}
+						goto case 0;
+					}
 				case 0:
-				{
-					break;
+					{
+						break;
 
-				}
-				
+					}
+
 			}
 
 

@@ -577,7 +577,7 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(BandagesTaille), "Divers", "Bandages Taille", 40.0, 70.0, typeof(Cloth), "Tissus", 10, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(ElvenQuiver), "Divers", "Petit Carquois", 40.0, 70.0, typeof(Leather), 1044462, 12, 1044463);
 			index = AddCraft(typeof(Draps), "Divers", "Draps", 30.0, 60.0, typeof(Cloth), "Tissus", 25, "Vous n'avez pas assez de tissus.");
-			AddCraftAction(index, CombineCloth);
+
 
 			index = AddCraft(typeof(RideauBlanc), "Tapis / Rideaux", "Rideaux Blanc(flip)", 50.0, 70.0, typeof(Cloth), "Tissus", 30, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(RideauRouge), "Tapis / Rideaux", "Rideaux Rouge(flip)", 50.0, 70.0, typeof(Cloth), "Tissus", 30, "Vous n'avez pas assez de tissus.");
@@ -589,6 +589,13 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(GoldenDecorativeRugDeed), "Tapis / Rideaux", "Tapis Doré", 40.0, 70.0, typeof(Cloth), "Tissus", 50, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(PinkFancyRugDeed), "Tapis / Rideaux", "Tapis Huppé Rose", 50.0, 80.0, typeof(Cloth), "Tissus", 50, "Vous n'avez pas assez de tissus.");
 			index = AddCraft(typeof(RedPlainRugDeed), "Tapis / Rideaux", "Tapis Rouge", 50.0, 80.0, typeof(Cloth), "Tissus", 50, "Vous n'avez pas assez de tissus.");
+
+			index = AddCraft(typeof(DrapeauxMultiples), "Divers", "Drapeaux multiples", 40.0, 90.0, typeof(Cloth), "Tissus", 6, "Vous n'avez pas assez de tissus.");
+
+			index = AddCraft(typeof(DrapeauRouge), "Divers", "Drapeau rouge", 40.0, 90.0, typeof(Cloth), "Tissus", 6, "Vous n'avez pas assez de tissus.");
+
+			index = AddCraft(typeof(PetitLitDeSol), "Lits", "Petit lit de sol", 40.0, 90.0, typeof(Cloth), "Tissus", 14, "Vous n'avez pas assez de tissus.");
+
 			//index = AddCraft(typeof(RoseRugAddonDeed), "Tapis / Rideaux", "Tapis Rose", 50.0, 80.0, typeof(Cloth), "Tissus", 50  ,"Vous n'avez pas assez de tissus.");
 
 

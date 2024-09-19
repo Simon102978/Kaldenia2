@@ -30,11 +30,11 @@ namespace Server.Items
             switch (type)
             {
                 case DirectionType.South:
-                    AddCraftComponent(new AddonToolComponent(CraftSystem, 0xA538, 0xA541, 1157988, 1157987, 1029241, uses, this), 0, 0, 0);
+                    AddCraftComponent(new AddonToolComponent(CraftSystem, 0xA538, 0xA541, 1157988, 1157987, "Enchanted Sculpting Tool", uses, this), 0, 0, 0);
                     AddComponent(new ToolDropComponent(0xA549, 1029241), 0, 1, 0);
                     break;
                 case DirectionType.East:
-                    AddCraftComponent(new AddonToolComponent(CraftSystem, 0xA540, 0xA539, 1157988, 1157987, 1029241, uses, this), 0, 0, 0);
+                    AddCraftComponent(new AddonToolComponent(CraftSystem, 0xA540, 0xA539, 1157988, 1157987, "Enchanted Sculpting Tool", uses, this), 0, 0, 0);
                     AddComponent(new ToolDropComponent(0xA548, 1029241), 1, 0, 0);
                     break;
             }
