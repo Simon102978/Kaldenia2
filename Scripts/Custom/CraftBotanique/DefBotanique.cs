@@ -277,10 +277,10 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(LargePotdeFleur), "Pot de Fleurs", "Grand Pot de Fleur", 30.0, 50.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas assez Terre Fertile");
 			AddRes(index, typeof(Pitcher), 1022544, 1, 1044253);
 			SetBeverageType(index, BeverageType.Water);
-			index = AddCraft(typeof(Arbrenepot), "Pot d'Arbres", "Pot d'Arbre", 25.0, 45.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas assez Terre Fertile");
+			index = AddCraft(typeof(Arbrenepot), "Pots d'Arbre", "Pot d'Arbre", 25.0, 45.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas assez Terre Fertile");
 			AddRes(index, typeof(Pitcher), 1022544, 1, 1044253);
 			SetBeverageType(index, BeverageType.Water);
-			index = AddCraft(typeof(LargeArbreenpot), "Pot d'Arbres", "Grand Pot d'Arbre", 35.0, 55.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas assez Terre Fertile");
+			index = AddCraft(typeof(LargeArbreenpot), "Pots d'Arbre", "Grand Pot d'Arbre", 35.0, 55.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas assez Terre Fertile");
 			AddRes(index, typeof(Pitcher), 1022544, 1, 1044253);
 			SetBeverageType(index, BeverageType.Water);
 			index = AddCraft(typeof(PotdeFleur1), "Pot de Fleurs", "Pot de Fleur 1", 22.0, 42.0, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas assez Terre Fertile");
@@ -420,11 +420,11 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(FleurRose), "Bouquets", "Fleur Rose", 45.0, 95.0, typeof(RedRose), "Rose Rouge", 5, "Vous n'avez pas suffisament de rose rouge");
 
 
-			index = AddCraft(typeof(ImmenseCitrouille), "Bac et terre fertile", "Immense citrouille", 80.0, 130.0, typeof(FertileDirt), "Terre Fertile", 10, "Vous n'avez pas suffisament de Terre Fertile");
+			index = AddCraft(typeof(ImmenseCitrouille), "Bacs et Terre Fertile", "Immense citrouille", 80.0, 130.0, typeof(FertileDirt), "Terre Fertile", 10, "Vous n'avez pas suffisament de Terre Fertile");
 
-			index = AddCraft(typeof(CitrouilleDecorative1), "Bac et terre fertile", "Citrouille décorative", 70.0, 120.0, typeof(FertileDirt), "Terre Fertile", 4, "Vous n'avez pas suffisament de Terre Fertile");
+			index = AddCraft(typeof(CitrouilleDecorative1), "Bacs et Terre Fertile", "Citrouille décorative", 70.0, 120.0, typeof(FertileDirt), "Terre Fertile", 4, "Vous n'avez pas suffisament de Terre Fertile");
 
-			index = AddCraft(typeof(CitrouilleSculptee), "Bac et terre fertile", "Citrouille sculptée", 65.0, 115.0, typeof(FertileDirt), "Terre Fertile", 5, "Vous n'avez pas suffisament de Terre Fertile");
+			index = AddCraft(typeof(CitrouilleSculptee), "Bacs et Terre Fertile", "Citrouille sculptée", 65.0, 115.0, typeof(FertileDirt), "Terre Fertile", 5, "Vous n'avez pas suffisament de Terre Fertile");
 
 			index = AddCraft(typeof(FleurSolitaireEnVase), "Plantes en Vase", "Une fleur solitaire en vase", 45.0, 95.0, typeof(Vase), "Vase", 1, "Vous n'avez pas suffisament de vase");
 			AddRes(index, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas suffisament de Terre Fertile");
@@ -432,22 +432,22 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(PetitBouquetEnVase), "Plantes en Vase", "Un petit bouquet en vase", 45.0, 95.0, typeof(Vase), "Vase", 1, "Vous n'avez pas suffisament de vase");
 			AddRes(index, typeof(FertileDirt), "Terre Fertile", 1, "Vous n'avez pas suffisament de Terre Fertile");
 
-			index = AddCraft(typeof(Feuilles), "Bac et terre fertile", "Feuilles", 20.0, 70.0, typeof(FertileDirt), "Terre Fertile", 4, "Vous n'avez pas suffisament de Terre Fertile");
+			index = AddCraft(typeof(Feuilles), "Bacs et Terre Fertile", "Feuilles", 20.0, 70.0, typeof(FertileDirt), "Terre Fertile", 4, "Vous n'avez pas suffisament de Terre Fertile");
 
-			index = AddCraft(typeof(HaieDeCedre), "Bac et terre fertile", "Haie de cèdre", 20.0, 70.0, typeof(FertileDirt), "Terre Fertile", 4, "Vous n'avez pas suffisament de Terre Fertile");
+			index = AddCraft(typeof(HaieDeCedre), "Bacs et Terre Fertile", "Haie de cèdre", 20.0, 70.0, typeof(FertileDirt), "Terre Fertile", 4, "Vous n'avez pas suffisament de Terre Fertile");
 
-			index = AddCraft(typeof(FleursAuSol), "Bac de terre fertile", "Fleurs au sol", 25.0, 75.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas suffisament de Terre Fertile");
+			index = AddCraft(typeof(FleursAuSol), "Bacs et Terre Fertile", "Fleurs au sol", 25.0, 75.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas suffisament de Terre Fertile");
 
-			index = AddCraft(typeof(FeuillesAuSol), "Bac de terre fertile", "Feuilles au sol", 25.0, 75.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas suffisament de Terre Fertile");
+			index = AddCraft(typeof(FeuillesAuSol), "Bacs et Terre Fertile", "Feuilles au sol", 25.0, 75.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas suffisament de Terre Fertile");
 
 			index = AddCraft(typeof(PlanteCarnivor), "Plantes en Pot", "Plante Carnivore", 50.0, 100.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas suffisament de Terre Fertile");
 			AddRes(index, typeof(PalmierBoard), "Planches", 1, "Vous n'avez pas suffisament de planches");
 
-			index = AddCraft(typeof(FeuillageAuSol), "Bac et terre fertile", "Feuillage au sol", 35.0, 85.0, typeof(FertileDirt), "Terre Fertile", 4, "Vous n'avez pas suffisament de Terre Fertile");
+			index = AddCraft(typeof(FeuillageAuSol), "Bacs et Terre Fertile", "Feuillage au sol", 35.0, 85.0, typeof(FertileDirt), "Terre Fertile", 4, "Vous n'avez pas suffisament de Terre Fertile");
 
-			index = AddCraft(typeof(PetitBonzaiVert), "Bonsai", "Petit bonsai vert", 35.0, 85.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas suffisament de Terre Fertile");
+			index = AddCraft(typeof(PetitBonzaiVert), "Bonsaïs", "Petit bonsai vert", 35.0, 85.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas suffisament de Terre Fertile");
 
-			index = AddCraft(typeof(PetitBonzaiRose), "Bonsai", "Petit bonsai rose", 35.0, 85.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas suffisament de Terre Fertile");
+			index = AddCraft(typeof(PetitBonzaiRose), "Bonsaïs", "Petit bonsai rose", 35.0, 85.0, typeof(FertileDirt), "Terre Fertile", 2, "Vous n'avez pas suffisament de Terre Fertile");
 
 			// Set the overridable material for wood
 			SetSubRes(typeof(PalmierBoard), "Palmier");
