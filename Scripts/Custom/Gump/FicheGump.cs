@@ -168,7 +168,8 @@ namespace Server.Gumps
 			AddHtmlTexte(x + 10, y + 630, 150, "Soif :");
 			AddLabel(x + 130, y + 630, 150, m_From.Thirst * 5 + " / 100".ToString());
 
-			AddSection(x + 241, y, 359, 452, "Talents");
+			AddSection(x + 241, y, 359, 452, "Aptitudes");
+			AddButton(x + 300, y, 2117, 2118, 1000, GumpButtonType.Reply, 0);
 
 			int line = 0;
 
@@ -198,7 +199,12 @@ namespace Server.Gumps
 
 		public override void OnResponse(NetState sender, RelayInfo info)
         {
-			if (info.ButtonID == 1)
+
+			if (info.ButtonID == 1000)
+			{
+				//m_From.SendGump(new FicheAptitudesGump(m_From, m_GM));
+			}
+			else if (info.ButtonID == 1)
 			{		
  				List<int> list = new List<int>();
                 list.Add(m_From.Classe.ClasseID);
