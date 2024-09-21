@@ -160,9 +160,16 @@ namespace Server.Gumps
 				return;
 			}
 
-			if ((target is Item) && (!(target is BaseDoor)))
+			if ((target is Item item) && (!(target is BaseDoor)))
 			{
-				Item item = (Item)target;
+				
+				if(!item.Movable)
+				{
+					from.SendMessage("L'objet se doit d'être déverouillé.");
+					from.SendGump(new DecorationGump(from));
+					return;
+
+				}
 
 				if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
 				{
@@ -204,9 +211,16 @@ namespace Server.Gumps
 				return;
 			}
 
-			if ((target is Item) && (!(target is BaseDoor)))
+			if ((target is Item item) && (!(target is BaseDoor)))
 			{
-				Item item = (Item)target;
+			
+				if(!item.Movable)
+				{
+					from.SendMessage("L'objet se doit d'être déverouillé.");
+					from.SendGump(new DecorationGump(from));
+					return;
+
+				}
 
 				if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
 				{
@@ -334,9 +348,15 @@ namespace Server.Gumps
 		{
 			if (target != null)
 			{
-				if ((target is Item) && (!(target is BaseDoor)))
+				if ((target is Item item) && (!(target is BaseDoor)))
 				{
-					Item item = (Item)target;
+					if(!item.Movable)
+					{
+						from.SendMessage("L'objet se doit d'être déverouillé.");
+						from.SendGump(new DecorationGump(from));
+						return;
+
+					}
 
 					if ((from.GetDistanceToSqrt(item.Location) <= 1) && (from.InLOS(item)))
 					{
