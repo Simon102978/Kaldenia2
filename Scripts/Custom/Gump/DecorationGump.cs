@@ -163,7 +163,7 @@ namespace Server.Gumps
 			if ((target is Item item) && (!(target is BaseDoor)))
 			{
 				
-				if(!item.Movable)
+				if(!item.Movable && !item.LockByPlayer)
 				{
 					from.SendMessage("L'objet se doit d'être déverouillé.");
 					from.SendGump(new DecorationGump(from));
@@ -214,7 +214,7 @@ namespace Server.Gumps
 			if ((target is Item item) && (!(target is BaseDoor)))
 			{
 			
-				if(!item.Movable)
+				if(!item.Movable && !item.LockByPlayer)
 				{
 					from.SendMessage("L'objet se doit d'être déverouillé.");
 					from.SendGump(new DecorationGump(from));
@@ -350,7 +350,7 @@ namespace Server.Gumps
 			{
 				if ((target is Item item) && (!(target is BaseDoor)))
 				{
-					if(!item.Movable)
+					if(!item.Movable && !item.LockByPlayer)
 					{
 						from.SendMessage("L'objet se doit d'être déverouillé.");
 						from.SendGump(new DecorationGump(from));
