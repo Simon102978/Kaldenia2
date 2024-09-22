@@ -160,12 +160,12 @@ namespace Server.Gumps
 				return;
 			}
 
-			if ((target is Item item) && (!(target is BaseDoor)))
+			if (target is Item item)
 			{
 				
-				if(!item.Movable && !item.LockByPlayer)
+				if(!item.CanBeMove())
 				{
-					from.SendMessage("L'objet se doit d'être déverouillé.");
+					from.SendMessage("L'objet ne peut être déplacé.");
 					from.SendGump(new DecorationGump(from));
 					return;
 
@@ -211,12 +211,12 @@ namespace Server.Gumps
 				return;
 			}
 
-			if ((target is Item item) && (!(target is BaseDoor)))
+			if (target is Item item)
 			{
 			
-				if(!item.Movable && !item.LockByPlayer)
+				if(!item.CanBeMove())
 				{
-					from.SendMessage("L'objet se doit d'être déverouillé.");
+					from.SendMessage("L'objet ne peut être déplacé.");
 					from.SendGump(new DecorationGump(from));
 					return;
 
@@ -305,7 +305,7 @@ namespace Server.Gumps
 						if (item.CanBeLock)
 						{
 
-							if (item.LockByPlayer || item.Createur != null)
+							if (item.LockByPlayer)
 							{
 								item.SetLastMoved();
 								item.Movable = true;
@@ -348,11 +348,11 @@ namespace Server.Gumps
 		{
 			if (target != null)
 			{
-				if ((target is Item item) && (!(target is BaseDoor)))
+				if (target is Item item)
 				{
-					if(!item.Movable && !item.LockByPlayer)
+					if(!item.CanBeMove())
 					{
-						from.SendMessage("L'objet se doit d'être déverouillé.");
+						from.SendMessage("L'objet ne peut être déplacé.");
 						from.SendGump(new DecorationGump(from));
 						return;
 

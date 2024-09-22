@@ -96,6 +96,13 @@ namespace Server.Items
             }
         }
 
+
+		public override bool CanBeMove()
+		{
+		
+			return true;
+		}
+
         public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);

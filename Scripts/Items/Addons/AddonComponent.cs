@@ -185,6 +185,13 @@ namespace Server.Items
             : base(serial)
         { }
 
+
+		public override bool CanBeMove()
+		{
+		
+			return true;
+		}
+
         [CommandProperty(AccessLevel.GameMaster)]
         public BaseAddon Addon { get; set; }
 

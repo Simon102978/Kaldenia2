@@ -2335,6 +2335,20 @@ namespace Server
 			}
 		}
 
+		public virtual bool CanBeMove()
+		{
+			if (Movable)
+			{
+				return true;
+			}
+			else if (!Movable && LockByPlayer)
+			{
+				return true;
+			}
+
+			return false;
+		}
+
 		public virtual bool ForceShowProperties => IsLockedDown || IsSecure;
 
 		public virtual int GetPacketFlags()
