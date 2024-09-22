@@ -102,6 +102,9 @@ namespace Server.Items
 
 		public override WeaponAbility PrimaryAbility => WeaponAbility.DoubleStrike;
 		public override WeaponAbility SecondaryAbility => WeaponAbility.ConcussionBlow;
+
+		public override WeaponAnimation DefAnimation => WeaponAnimation.Bash2H;
+
 		public override int StrengthReq => 40;
 		public override int MinDamage => 14;
 		public override int MaxDamage => 18;
