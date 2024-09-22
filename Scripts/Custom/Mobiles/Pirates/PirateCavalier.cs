@@ -97,6 +97,7 @@ namespace Server.Mobiles
         {
         }
 
+
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
 			AdjustSpeeds();
@@ -106,6 +107,10 @@ namespace Server.Mobiles
 		public override int Meat => 1;
         public override bool AlwaysMurderer => true;
         public override bool ShowFameTitle => false;
+		public override bool BardImmune => true;
+		public override bool Unprovokable => true;
+		public override bool Uncalmable => true;
+
 
 
         public override void GenerateLoot()

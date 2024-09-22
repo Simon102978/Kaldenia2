@@ -40,6 +40,8 @@ namespace Server.Mobiles
 			SetSkill(SkillName.ArmsLore, 80.0, 100.0);
             SetSkill(SkillName.Parry, 100.0, 120.0);
             SetSkill(SkillName.Swords, 100.0, 120.0);
+            SetSkill(SkillName.Tactics, 100.0, 120.0);
+            SetSkill(SkillName.Anatomy, 100.0, 120.0);    
 
 
             AddItem(new Targe());

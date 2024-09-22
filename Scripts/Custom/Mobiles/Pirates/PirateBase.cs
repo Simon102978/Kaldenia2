@@ -372,7 +372,7 @@ namespace Server.Mobiles
 			base.DoHarmful(target, indirect);
 		}
 
-		public void Parole()
+		public virtual void Parole()
 		{
 
 			//  Mis la parce que presque tout call ca.

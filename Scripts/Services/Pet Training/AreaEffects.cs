@@ -228,8 +228,8 @@ namespace Server.Mobiles
             }
 
             defender.Animate(32, 5, 1, true, false, 0); // bow animation
-            defender.SendLocalizedMessage(1072068); // Your enemy's putrid presence envelops you, overwhelming you with nausea.
-
+//            defender.SendLocalizedMessage(1072068); // Your enemy's putrid presence envelops you, overwhelming you with nausea.
+            defender.SendMessage("Votre ennemis vous donne la nausée.");
             BuffInfo.AddBuff(defender, new BuffInfo(BuffIcon.AuraOfNausea, 1153792, 1153819, TimeSpan.FromSeconds(30), defender, "60\t60\t60\t5"));
         }
 

@@ -8,6 +8,12 @@ namespace Server.Mobiles
 	    public override bool AllFemale => true;
         public override bool AllowCharge => false;
 
+   		public override bool BardImmune => true;
+		public override bool Unprovokable => true;
+		public override bool Uncalmable => true;
+
+
+
         [Constructable]
         public PirateBarde()
             : this(0)

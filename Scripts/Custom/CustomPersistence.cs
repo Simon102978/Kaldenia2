@@ -89,7 +89,21 @@ namespace Server.Custom
       Point3D loc = GetLocation();
 
  
-      from.MoveToWorld(loc, from.Map);
+      from.MoveToWorld(loc, from.Map);	
+
+	  if (from.BaseName == "Vesper")
+	  {
+			  World.Broadcast(37, false, AccessLevel.Counselor, $"Oui, les pirates ont encore capturé Vesper... Elle se trouve à {loc.X},{loc.Y},{loc.Z}");
+	  }
+	  else
+	  {
+			  World.Broadcast(37, false, AccessLevel.Counselor, $"Les pirates ont capturé {from.BaseName}, {(from.Female ? "Elle" : "Il") } se trouve à {loc.X},{loc.Y},{loc.Z}");
+	  }
+	  
+
+
+
+
 
 
 

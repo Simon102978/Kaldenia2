@@ -17,9 +17,15 @@ namespace Server.Mobiles
 
 		public override Poison HitPoison => Poison.Parasitic;
 
-			    public DateTime LastSprint;
+	    public DateTime LastSprint;
 
 		public bool m_Sprint = false;
+		public override bool BardImmune => true;
+		public override bool Unprovokable => true;
+		public override bool Uncalmable => true;
+
+		public override bool IsScaryToPets => true;
+
 	
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool Sprint
@@ -89,7 +95,7 @@ namespace Server.Mobiles
 
             SetDamage(15, 25);
 
-			SetHits(600);
+			SetHits(3000);
 
             SetDamageType(ResistanceType.Physical, 100);
 
@@ -161,7 +167,7 @@ namespace Server.Mobiles
 
         public override bool AlwaysMurderer => true;
 
-		public override TribeType Tribe => TribeType.Brigand;
+		public override TribeType Tribe => TribeType.Pirate;
 		public bool BlockReflect { get; set; }
 
 
@@ -504,7 +510,7 @@ namespace Server.Mobiles
             AddLoot(LootPack.FilthyRich,4);
             AddLoot(LootPack.Meager);
 			AddLoot(LootPack.Others, Utility.RandomMinMax(5, 6));
-			AddLoot(LootPack.LootItem<Items.Gold>(500, 2000));
+			AddLoot(LootPack.LootItem<Items.Gold>(1000, 2000));
 
 			base.GenerateLoot();
 

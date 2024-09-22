@@ -51,7 +51,7 @@ namespace Server.Mobiles
 		}
 
         public override bool AutoDispel => true;
-        public override double AutoDispelChance => 0.3;
+        public override double AutoDispelChance => 1;
 
 
 
@@ -64,7 +64,7 @@ namespace Server.Mobiles
                 to.Hits -= HalfDmg;
                 damage -= HalfDmg;
 
-                double chance = 0.20;
+                double chance = 0.40;
 
 			
                 if (Utility.RandomDouble() < chance)

@@ -30,7 +30,7 @@ namespace Server.Mobiles
 			SetInt(300, 465);
 
 			SetHits(303, 420);
-			SetMana(600, 800);
+			SetMana(3000, 10000);
 			SetDamage(10, 15);
 
 			SetDamageType(ResistanceType.Physical, 50);
@@ -48,7 +48,7 @@ namespace Server.Mobiles
 			SetSkill(SkillName.Magery, 100, 120);
 			SetSkill(SkillName.EvalInt, 100, 120);
 
-
+			SetAreaEffect(AreaEffect.AuraOfNausea);
 
 
 		}

@@ -16,6 +16,8 @@ namespace Server.Mobiles
 		public DateTime LastFreeze;
         private WallControlerStone m_Stone;
 
+      	public override bool Uncalmable => true;
+
         [CommandProperty(AccessLevel.GameMaster)]
         public WallControlerStone Stone
         {
