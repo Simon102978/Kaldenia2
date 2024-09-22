@@ -128,7 +128,7 @@ namespace Server.Mobiles
 
 		public void CheckRage(Mobile m)
 		{
-			if (LastRage.AddMinutes(5) < DateTime.Now && !Rage && IsEnemy(m))
+			if (LastRage.AddMinutes(5) < DateTime.Now && !Rage )
 			{
 				Combatant = m;
 				Rage = true;
@@ -181,6 +181,7 @@ namespace Server.Mobiles
 
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
+
                 if (this != null && from != null &&  Hits < 150)
                 {
                     CheckRage(from);
