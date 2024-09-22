@@ -169,7 +169,7 @@ namespace Server.Gumps
 			AddLabel(x + 130, y + 630, 150, m_From.Thirst * 5 + " / 100".ToString());
 
 			AddSection(x + 241, y, 359, 452, "Aptitudes");
-			AddButton(x + 300, y, 2117, 2118, 1000, GumpButtonType.Reply, 0);
+			AddButton(x + 500, y + 10, 2117, 2118, 1000, GumpButtonType.Reply, 0);
 
 			int line = 0;
 

@@ -12,6 +12,7 @@ namespace Server.Custom
         public static DateTime Ouverture { get; set; }
 		public static int TaxesMoney { get; set; }
 		public static int Salaire { get; set; }
+		public static int BoatRental { get; set; }
 
 		public static int SlaveSell { get; set; }
 
@@ -220,7 +221,10 @@ namespace Server.Custom
                 FilePath,
                 writer =>
                 {
-                    writer.Write(7);
+                    writer.Write(8);
+
+					writer.Write(BoatRental);
+
 
 					writer.Write(m_PirateJailActive);
 
@@ -263,6 +267,11 @@ namespace Server.Custom
 
 					switch (version)
 					{
+						case 8:
+							{
+								BoatRental = reader.ReadInt();
+								goto case 7;
+							}
 						case 7:
 						{
 							m_PirateJailActive = reader.ReadBool();

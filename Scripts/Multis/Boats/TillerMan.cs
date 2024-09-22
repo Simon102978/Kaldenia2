@@ -1,4 +1,5 @@
 ﻿using Server.ContextMenus;
+using Server.Custom;
 using Server.Mobiles;
 using Server.Multis;
 using Server.Network;
@@ -231,6 +232,8 @@ namespace Server.Items
 			Timer.DelayCall(RentalDuration, EndRental);
 
 			from.SendMessage($"Vous avez loué ce bateau pour {RentalDuration.TotalHours} heures.");
+
+
 		}
 
 		public void EndRental()
@@ -449,6 +452,8 @@ namespace Server.Items
 				{
 					m_From.BankBox.ConsumeTotal(typeof(Gold), m_TillerMan.RentalCost);
 
+
+
 					// Réparer complètement le bateau avant de commencer la location
 					if (m_TillerMan.Boat is BaseBoat boat)
 					{
@@ -457,6 +462,8 @@ namespace Server.Items
 
 					m_TillerMan.StartRental(m_From);
 					m_From.SendMessage($"Vous avez loué ce bateau pour {m_TillerMan.RentalDuration.TotalHours} heures. {m_TillerMan.RentalCost} pièces d'or ont été prélevées de votre compte en banque. Le bateau a été entièrement réparé.");
+					CustomPersistence.BoatRental += m_TillerMan.RentalCost;
+
 				}
 				else
 				{

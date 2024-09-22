@@ -42,8 +42,13 @@ namespace Server.Gumps
 			AddHtmlTexteColored(xAmountColum, y + line * scale, 120, "<p style = \"text-align:right> " + LocationTaxes.ToString("### ### ##0") + "</p>", "#FFFFFF");
 			line++;
 
-			AddHtmlTexteColored(xSecondColum, y + line * scale, 120, "Locations - Jardin:", "#FFFFFF");
+			AddHtmlTexteColored(xSecondColum, y + line * scale, 120, "Locations Jardins:", "#FFFFFF");
 			int LocationJardin = CustomPersistence.LocationJardin;
+			AddHtmlTexteColored(xAmountColum, y + line * scale, 120, "<p style = \"text-align:right> " + LocationJardin.ToString("### ### ##0") + "</p>", "#FFFFFF");
+			line++;
+
+			AddHtmlTexteColored(xSecondColum, y + line * scale, 120, "Locations Bateaux:", "#FFFFFF");
+			int BoatRental = CustomPersistence.BoatRental;
 			AddHtmlTexteColored(xAmountColum, y + line * scale, 120, "<p style = \"text-align:right> " + LocationJardin.ToString("### ### ##0") + "</p>", "#FFFFFF");
 			line++;
 

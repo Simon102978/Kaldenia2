@@ -243,10 +243,7 @@ namespace Server.Items
             {
                 return;
             }
-			if (Owner is BaseHire)
-			{
-				return;
-			}
+			
 			else if (!GetFlag(CorpseFlag.NoBones))
             {
                 TurnToBones();
