@@ -59,8 +59,8 @@ namespace Server.Spells.First
 
                 int toHeal;
 
-                toHeal = Caster.Skills.EvalInt.Fixed / 120;
-                toHeal += Utility.RandomMinMax(1, 4);
+                toHeal = Caster.Skills.EvalInt.Fixed / 20;
+                toHeal += Utility.RandomMinMax(3, 10);
 
                 if (Caster != m)
                     toHeal = (int)(toHeal * 1.5);

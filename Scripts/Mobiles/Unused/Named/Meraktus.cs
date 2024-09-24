@@ -63,9 +63,25 @@ namespace Server.Mobiles
             AddLoot(LootPack.ArcanistScrolls, 1);
 
 			AddLoot(LootPack.LootItem<Items.Gold>(500, 1500));
+		
+			AddLoot(LootPack.Average);
+			AddLoot(LootPack.Meager);
+			AddLoot(LootPack.MedScrolls);
+			AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
+			AddLoot(LootPack.LootItem<Items.GemmePoison>(), (double)5);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(7, 14));
+			AddLoot(LootPack.LootItem<DragonBlood>(4, true));
+			AddLoot(LootPack.LootItem<Items.Gold>(3000, 15000));
+			AddLoot(LootPack.LootItem<Items.GreaterManaPotion>(), Utility.RandomMinMax(7, 14));
+			AddLoot(LootPack.LootItem<Items.WhitePearl>(10, 30));
+
+
+
+
 		}
 
-        public override int GetAngerSound()
+
+		public override int GetAngerSound()
         {
             return 0x597;
         }

@@ -15,14 +15,16 @@ namespace Server.Items
             TrapType = TrapType.ExplosionTrap;
             TrapPower = 1 * Utility.Random(35, 45);
 
-					//      DropItem(new Gold(30, 100));
+					     DropItem(new Gold(30, 100));
 					DropItem(new Bolt(Utility.RandomMinMax(5, 15)));
 					DropItem(new Arrow(Utility.RandomMinMax(5, 15)));
 					DropItem(new Tourmaline(Utility.RandomMinMax(1, 4)));
 					DropItem(new Ambre(Utility.RandomMinMax(1, 3)));
 					DropItem(new Citrine(Utility.RandomMinMax(2, 6)));
+					DropItem(new WhitePearl(Utility.RandomMinMax(2, 6)));
 
-				
+
+
 			int itemCount = Utility.RandomMinMax(4, 8);
 			for (int i = 0; i < itemCount; i++)
 			{
@@ -80,14 +82,15 @@ namespace Server.Items
             TrapType = TrapType.ExplosionTrap;
             TrapPower = 2 * Utility.Random(30, 50);
 
-			//		DropItem(new Gold(50, 75));
+					DropItem(new Gold(50, 200));
 					DropItem(new Tourmaline(Utility.Random(3)));
 					DropItem(new Ambre(Utility.Random(2)));
 					DropItem(new Citrine(Utility.Random(5)));
 					DropItem(new DragonBlood(Utility.Random(0, 1)));
 
+				DropItem(new WhitePearl(Utility.RandomMinMax(2, 6)));
 
-					DropItem(new Bolt(Utility.RandomMinMax(10, 25)));
+			DropItem(new Bolt(Utility.RandomMinMax(10, 25)));
 					DropItem(new Arrow(Utility.RandomMinMax(10, 25)));
 
 
@@ -167,7 +170,7 @@ namespace Server.Items
             TrapPower = 3 * Utility.Random(30, 40);
 			DropItem(new DragonBlood(Utility.Random(1, 2)));
 
-				//		DropItem(new Gold(200, 500));
+						DropItem(new Gold(200, 500));
 
 
 
@@ -253,7 +256,7 @@ namespace Server.Items
             TrapType = TrapType.ExplosionTrap;
             TrapPower = 4 * Utility.Random(25, 35);
 
-			 //       DropItem(new Gold(350, 700));
+			        DropItem(new Gold(350, 700));
 					DropItem(new BlankScroll(Utility.Random(1, 4)));
 					DropItem(new DragonBlood(Utility.Random(1, 3)));
 
@@ -300,10 +303,10 @@ namespace Server.Items
 			}
 
 			// 10% de chance d'obtenir un item Stealable
-			if (Utility.RandomDouble() < 0.10)
+			if (Utility.RandomDouble() < 0.20)
 				DropItem(Loot.RandomStealableArtifact());
 
-			if (Utility.RandomDouble() < 0.01) // 0.5% de chance
+			if (Utility.RandomDouble() < 0.05) // 0.5% de chance
 				DropItem(Loot.RandomRecipes1());
 		}
 

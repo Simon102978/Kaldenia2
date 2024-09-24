@@ -19,6 +19,11 @@ namespace Server.Engines.Craft
 		{
 			try
 			{
+				if (tool == null || tool.Deleted)
+				{
+					from.SendMessage("Vous n'avez plus d'outil valide pour pratiquer.");
+					return;
+				}
 				if (NextAllowedTime > DateTime.UtcNow)
 				{
 					from.SendGump(new CraftGump(from, craftSystem, tool, "Vous devez attendre avant de pratiquer à nouveau."));
@@ -95,6 +100,12 @@ namespace Server.Engines.Craft
 
 			timer = Timer.DelayCall(TimeSpan.FromSeconds(1.4), TimeSpan.FromSeconds(1.4), () =>
 			{
+				if (tool == null || tool.Deleted)
+				{
+					from.SendMessage("Votre outil s'est brisé pendant la pratique.");
+					timer.Stop();
+					return;
+				}
 				if (craftSystem is DefBlacksmithy)
 				{
 					bool anvil, forge;

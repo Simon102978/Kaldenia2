@@ -540,10 +540,20 @@ namespace Server.Mobiles
         public override Poison HitPoison => Poison.Lethal;
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.Rich, 3);
-        }
+			AddLoot(LootPack.Average);
+			AddLoot(LootPack.Meager);
+			AddLoot(LootPack.MedScrolls);
+			AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
+			AddLoot(LootPack.LootItem<Items.GemmePoison>(), (double)5);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(15, 30));
+			AddLoot(LootPack.LootItem<DragonBlood>(4, true));
+			AddLoot(LootPack.LootItem<Items.Gold>(1000, 5000));
+			AddLoot(LootPack.LootItem<Items.GreaterManaPotion>(), Utility.RandomMinMax(5, 10));
+			AddLoot(LootPack.LootItem<Items.WhitePearl>(5, 15));
 
-        public override void Serialize(GenericWriter writer)
+		}
+
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
             writer.Write(1); // version

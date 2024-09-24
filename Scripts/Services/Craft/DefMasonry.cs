@@ -254,11 +254,11 @@ namespace Server.Engines.Craft
 			AddCraft(typeof(ElvenStoveEastDeed), "Cuisine", "Four élégant (E)", 85.0, 110.0, typeof(Granite), "Granite", 40, "Vous n'avez pas suffisament de Granite");
 			ForceNonExceptional(index);
 
-			index = AddCraft(typeof(EvierEnMarbre), "Cuisine", "Évier en marbre", 50.0, 100.0, typeof(Granite), "Granite", 20, "Vous n'avez pas suffisament de Granite");
+			AddCraft(typeof(EvierEnMarbre), "Cuisine", "Évier en marbre", 50.0, 100.0, typeof(Granite), "Granite", 20, "Vous n'avez pas suffisament de Granite");
 
-			index = AddCraft(typeof(FourDeBriqueEteint), "Cuisine", "Four de brique éteint", 50.0, 100.0, typeof(Granite), "Granite", 20, "Vous n'avez pas suffisament de Granite");
+			 AddCraft(typeof(FourDeBriqueEteint), "Cuisine", "Four de brique éteint", 50.0, 100.0, typeof(Granite), "Granite", 20, "Vous n'avez pas suffisament de Granite");
 
-			index = AddCraft(typeof(FourDeBriqueAllume), "Cuisine", "Four de brique allumé", 50.0, 100.0, typeof(Granite), "Granite", 20, "Vous n'avez pas suffisament de Granite");
+			 AddCraft(typeof(FourDeBriqueAllume), "Cuisine", "Four de brique allumé", 50.0, 100.0, typeof(Granite), "Granite", 20, "Vous n'avez pas suffisament de Granite");
 
 
 			// Forge

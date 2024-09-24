@@ -1098,7 +1098,7 @@ namespace Server.Mobiles
 		public virtual bool AreaPeaceImmune => BardImmune || m_IsDeadPet;
 
 		public virtual bool BleedImmune => false;
-		public virtual double BonusPetDamageScalar => 1.0;
+		public virtual double BonusPetDamageScalar => 0.5;
 		public virtual bool AllureImmune => false;
 
 		public virtual bool DeathAdderCharmable => false;
@@ -7009,7 +7009,13 @@ namespace Server.Mobiles
 			if (StatLossAfterTame && Owners.Count == 0)
 			{
 				AnimalTaming.ScaleStats(this, 0.5);
+
 			}
+			RawStr /= 3;
+			RawDex /= 3;
+			RawInt /= 3;
+			Hits /= 3;
+
 		}
 
 		public override void OnRegionChange(Region Old, Region New)

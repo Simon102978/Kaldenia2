@@ -59,7 +59,7 @@ namespace Server.Gumps
 			AddHorizontalLigne(xAmountColum - 20, y + line * scale + 15, 120);
 			line++;
 
-			int Revenue = TaxesGold + LocationTaxes + SlaveSell + LocationJardin;
+			int Revenue = TaxesGold + LocationTaxes + SlaveSell + LocationJardin + BoatRental;
 			AddHtmlTexteColored(xSecondColum, y + line * scale, 200, "Total des revenues :", "#FFFFFF");
 			AddHtmlTexteColored(xAmountColum, y + line * scale, 120, "<p style = \"text-align:right> " + Revenue.ToString("### ### ##0") + "</p>", "#FFFFFF");
 

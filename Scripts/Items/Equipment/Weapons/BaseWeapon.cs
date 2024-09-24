@@ -1077,67 +1077,74 @@ namespace Server.Items
             }
         }
 
-        public virtual SkillName GetUsedSkill(Mobile m, bool checkSkillAttrs)
-        {
-            SkillName sk;
+		public virtual SkillName GetUsedSkill(Mobile m, bool checkSkillAttrs)
+		{
+			SkillName sk;
 
-            if (checkSkillAttrs && m_AosWeaponAttributes.UseBestSkill != 0)
-            {
-                double swrd = m.Skills[SkillName.Swords].Value;
-                double fenc = m.Skills[SkillName.Fencing].Value;
-                double mcng = m.Skills[SkillName.Macing].Value;
-                double val;
+			if (checkSkillAttrs && m_AosWeaponAttributes.UseBestSkill != 0)
+			{
+				double swrd = m.Skills[SkillName.Swords].Value;
+				double fenc = m.Skills[SkillName.Fencing].Value;
+				double mcng = m.Skills[SkillName.Macing].Value;
+				double wrst = m.Skills[SkillName.Wrestling].Value;
+				double val;
 
-                sk = SkillName.Swords;
-                val = swrd;
+				sk = SkillName.Swords;
+				val = swrd;
 
-                if (fenc > val)
-                {
-                    sk = SkillName.Fencing;
-                    val = fenc;
-                }
-                if (mcng > val)
-                {
-                    sk = SkillName.Macing;
-                }
-            }
-            else if (m_AosWeaponAttributes.MageWeapon != 0)
-            {
-                if (m.Skills[SkillName.Magery].Value > m.Skills[Skill].Value)
-                {
-                    sk = SkillName.Magery;
-                }
-                else
-                {
-                    sk = Skill;
-                }
-            }
-            else if (m_ExtendedWeaponAttributes.MysticWeapon != 0 || Enhancement.GetValue(m, ExtendedWeaponAttribute.MysticWeapon) > 0)
-            {
-                if (m.Skills[SkillName.Mysticism].Value > m.Skills[Skill].Value)
-                {
-                    sk = SkillName.Mysticism;
-                }
-                else
-                {
-                    sk = Skill;
-                }
-            }
-            else
-            {
-                sk = Skill;
+				if (fenc > val)
+				{
+					sk = SkillName.Fencing;
+					val = fenc;
+				}
+				if (mcng > val)
+				{
+					sk = SkillName.Macing;
+					val = mcng;
+				}
+				if (wrst > val)
+				{
+					sk = SkillName.Wrestling;
+				}
+			}
+			else if (m_AosWeaponAttributes.MageWeapon != 0)
+			{
+				if (m.Skills[SkillName.Magery].Value > m.Skills[Skill].Value)
+				{
+					sk = SkillName.Magery;
+				}
+				else
+				{
+					sk = Skill;
+				}
+			}
+			else if (m_ExtendedWeaponAttributes.MysticWeapon != 0 || Enhancement.GetValue(m, ExtendedWeaponAttribute.MysticWeapon) > 0)
+			{
+				if (m.Skills[SkillName.Mysticism].Value > m.Skills[Skill].Value)
+				{
+					sk = SkillName.Mysticism;
+				}
+				else
+				{
+					sk = Skill;
+				}
+			}
+			else
+			{
+				sk = Skill;
 
-                if (sk != SkillName.Wrestling && !m.Player && !m.Body.IsHuman &&
-                    m.Skills[SkillName.Wrestling].Value > m.Skills[sk].Value)
-                {
-                    sk = SkillName.Wrestling;
-                }
-            }
+				if (sk != SkillName.Wrestling && !m.Player && !m.Body.IsHuman &&
+					m.Skills[SkillName.Wrestling].Value > m.Skills[sk].Value)
+				{
+					sk = SkillName.Wrestling;
+				}
+			}
 
-            return sk;
-        }
+			return sk;
+		}
 
-        public virtual double GetAttackSkillValue(Mobile attacker, Mobile defender)
+
+		public virtual double GetAttackSkillValue(Mobile attacker, Mobile defender)
         {
             return attacker.Skills[GetUsedSkill(attacker, true)].Value;
         }

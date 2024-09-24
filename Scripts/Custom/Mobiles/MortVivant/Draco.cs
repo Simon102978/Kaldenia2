@@ -108,6 +108,16 @@ namespace Server.Mobiles
 			AddLoot(LootPack.RandomLootItem(new System.Type[] { typeof(SilverRing), typeof(Necklace), typeof(SilverNecklace), typeof(Collier), typeof(Collier2),  typeof(Collier3), typeof(Couronne3),  typeof(Collier4), typeof(Tiare), }, 10.0, 1, false, true));
 			AddLoot(LootPack.LootItem<Items.Gemme>(), (double) 5);
 
+			AddLoot(LootPack.Average);
+			AddLoot(LootPack.Meager);
+			AddLoot(LootPack.MedScrolls);
+			AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
+			AddLoot(LootPack.LootItem<Items.GemmePoison>(), (double)5);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(5, 12));
+			AddLoot(LootPack.LootItem<Items.Gold>(300, 1000));
+			AddLoot(LootPack.LootItem<Items.ManaPotion>(), Utility.RandomMinMax(3, 15));
+			AddLoot(LootPack.LootItem<Items.WhitePearl>(5, 10));
+
 
 
 		}

@@ -119,15 +119,18 @@ namespace Server.Mobiles
 		public override bool CanFly => true;
         public override void GenerateLoot()
         {
-            AddLoot(LootPack.Average);
-            AddLoot(LootPack.Meager);
-            AddLoot(LootPack.MedScrolls);
-            AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
+			AddLoot(LootPack.Average);
+			AddLoot(LootPack.Meager);
+			AddLoot(LootPack.MedScrolls);
+			AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
 			AddLoot(LootPack.LootItem<Items.GemmePoison>(), (double)5);
-			AddLoot(LootPack.Others, Utility.RandomMinMax(7, 14));
+			AddLoot(LootPack.Others, Utility.RandomMinMax(15, 30));
 			AddLoot(LootPack.LootItem<DragonBlood>(4, true));
-            AddLoot(LootPack.LootItem<Items.Gold>(100,200));
-        
+			AddLoot(LootPack.LootItem<Items.Gold>(1000, 5000));
+			AddLoot(LootPack.LootItem<Items.GreaterManaPotion>(), Utility.RandomMinMax(3, 5));
+			AddLoot(LootPack.LootItem<Items.WhitePearl>(5, 15));
+
+
 
 
 		}

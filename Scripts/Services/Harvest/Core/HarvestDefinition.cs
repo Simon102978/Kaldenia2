@@ -154,10 +154,10 @@ namespace Server.Engines.Harvest
 				{
 					if (tile == tileID)
 						return true;
-				Console.WriteLine(tileID);
+				//Console.WriteLine(tileID);
 
 				}
-				Console.WriteLine(tileID);
+				//Console.WriteLine(tileID);
 
 				return false;
 
