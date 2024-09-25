@@ -601,6 +601,7 @@ namespace Server.Multis
                     item.IsLockedDown = false;
                     item.IsSecure = false;
                     item.Movable = true;
+                    item.LockByPlayer = false;
 
                     if (item.Parent == null)
                         DropToMovingCrate(item);
@@ -616,6 +617,7 @@ namespace Server.Multis
                     item.IsLockedDown = false;
                     item.IsSecure = false;
                     item.Movable = true;
+                    item.LockByPlayer = false;
 
                     if (item.Parent == null)
                         DropToMovingCrate(item);
@@ -636,6 +638,7 @@ namespace Server.Multis
                     item.IsLockedDown = false;
                     item.IsSecure = false;
                     item.Movable = true;
+                    item.LockByPlayer = false;
 
                     if (item.Parent == null)
                         DropToMovingCrate(item);
@@ -842,6 +845,7 @@ namespace Server.Multis
                             SetLockdown(relocEntity.Owner, item, false);
                             item.IsSecure = false;
                             item.Movable = true;
+                            item.LockByPlayer = false;
 
                             Item relocateItem = item;
 
@@ -1399,6 +1403,7 @@ namespace Server.Multis
             }
 
             Movable = false;
+
         }
 
         public BaseHouse(Serial serial)
@@ -1917,7 +1922,8 @@ namespace Server.Multis
             {
                 m_Trash = new TrashBarrel
                 {
-                    Movable = false
+                    Movable = false,
+                    LockByPlayer = true
                 };
                 m_Trash.MoveToWorld(from.Location, from.Map);
 
@@ -1950,9 +1956,16 @@ namespace Server.Multis
             }
 
             if (i is BaseAddonContainer)
+            {
                 i.Movable = false;
-            else
-                i.Movable = !locked;
+                i.LockByPlayer = true;
+            }
+                
+            else       
+            {
+              i.Movable = !locked;
+              i.LockByPlayer = locked;
+            }
 
             i.IsLockedDown = locked;
 
@@ -2501,6 +2514,7 @@ namespace Server.Multis
                         LockDowns.Remove(item);
 
                     item.Movable = false;
+                    item.LockByPlayer = true;
 
                     if (item is GardenShedAddon)
                     {
@@ -2625,9 +2639,18 @@ namespace Server.Multis
                     item.IsSecure = false;
 
                     if (item is BaseAddonContainer)
+                    {
                         item.Movable = false;
+                        item.LockByPlayer = true;
+
+                    }
+                       
                     else
+                    {
                         item.Movable = true;
+                        item.LockByPlayer = false;
+                    }
+                       
 
                     item.SetLastMoved();
                     item.PublicOverheadMessage(MessageType.Label, 0x3B2, 501656); // [no longer secure]
@@ -4012,6 +4035,7 @@ namespace Server.Multis
                         item.IsLockedDown = false;
                         item.IsSecure = false;
                         item.Movable = true;
+                        item.LockByPlayer = false;
                         item.SetLastMoved();
 
                         item.SendLocalizedMessage(501657, ""); // [no longer locked down]
@@ -4032,6 +4056,7 @@ namespace Server.Multis
                         item.IsLockedDown = false;
                         item.IsSecure = false;
                         item.Movable = true;
+                        item.LockByPlayer = false;
                         item.SetLastMoved();
 
                         item.SendLocalizedMessage(501657, ""); // [no longer locked down]
@@ -4056,6 +4081,7 @@ namespace Server.Multis
                         info.Item.IsLockedDown = false;
                         info.Item.IsSecure = false;
                         info.Item.Movable = true;
+                        info.Item.LockByPlayer = false;
                         info.Item.SetLastMoved();
 
                         info.Item.SendLocalizedMessage(501718, ""); // no longer secure!
@@ -4119,6 +4145,7 @@ namespace Server.Multis
                     if (carpet != null)
                     {
                         carpet.Movable = true;
+                        carpet.LockByPlayer = false;
                         carpet.SetLastMoved();
                         carpet.InvalidateProperties();
                     }
@@ -5032,6 +5059,7 @@ namespace Server.Multis
                     {
                         Item.MoveToWorld(point, from.Map);
                         Item.Movable = true;
+                        Item.LockByPlayer = false;
 
                         from.SendLocalizedMessage(1159159); // This container has been released and is no longer secure.
                     }
@@ -5081,6 +5109,7 @@ namespace Server.Multis
                     {
                         Item.IsLockedDown = false;
                         Item.Movable = true;
+                        Item.LockByPlayer = false;
                     }
                 }
             }
