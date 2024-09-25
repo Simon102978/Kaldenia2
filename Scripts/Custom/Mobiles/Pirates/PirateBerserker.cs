@@ -16,7 +16,19 @@ namespace Server.Mobiles
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool Rage
 		{
-			get => m_Rage;
+			get 
+			{
+				if (m_Rage && LastRage.AddMinutes(1) < DateTime.Now )
+				{
+					m_Rage = false;
+					DesactiverRage();
+				}
+
+
+				return m_Rage;
+
+			
+			} 
 			set
 			{
 				if (value && !m_Rage)
@@ -58,6 +70,7 @@ namespace Server.Mobiles
 			SetDex(61, 85);
 			SetInt(75, 100);
             SetHits(300,400);
+			SetDamage(15, 25);
 
             SetResistance(ResistanceType.Physical, 50, 60);
 			SetResistance(ResistanceType.Fire, 30, 50);
@@ -84,6 +97,7 @@ namespace Server.Mobiles
 			SetResistance(ResistanceType.Cold, 10, 20);
 			SetResistance(ResistanceType.Poison, 10, 20);
 			SetResistance(ResistanceType.Energy, 10, 20);
+			LastRage = DateTime.Now;
 
 
 			AdjustSpeeds();
@@ -145,7 +159,7 @@ namespace Server.Mobiles
 
             if (Rage)
             {
-                Hits += 5;
+                Hits += 2;
             }
 
 
@@ -159,10 +173,7 @@ namespace Server.Mobiles
 
 			//  Mis la parce que presque tout call ca.
 
-			if (Rage && LastRage.AddMinutes(1) > DateTime.Now )
-			{
-				Rage = false;
-			}
+			
 
 			base.Parole();
 
