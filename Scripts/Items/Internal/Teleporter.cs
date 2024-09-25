@@ -205,7 +205,7 @@ namespace Server.Items
                 return false;
             }
 
-            if (m.Holding != null)
+            if (!(this is ConditionTeleporter) && m.Holding != null ) // Pour que la condition Denied Holding fonctionne 
             {
                 m.SendLocalizedMessage(1071955); // You cannot teleport while dragging an object.
                 return false;
@@ -1256,7 +1256,11 @@ namespace Server.Items
                             }
                         default:
                             {
-                                if (!DisableMessage)
+                                if (item is BaseRaceGumps)
+                                {
+                                    continue; // ignore aussi
+                                }
+                                else if (!DisableMessage)
                                     m.SendMessage("You must remove all of your equipment before proceeding.");
                                 return false;
                             }
