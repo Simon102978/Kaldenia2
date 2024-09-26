@@ -71,7 +71,10 @@ namespace Server.Items
 		Mana,
 		ManaGreater,
 		ManaSuperior,
-		Keprish
+		Keprish,
+		CelesteHealPotion,
+		CelesteManaPotion,
+		SleepPotion
 
 
 

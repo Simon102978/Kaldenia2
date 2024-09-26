@@ -226,6 +226,9 @@ namespace Server.Mobiles
 
 		public override void OnDamage(int amount, Mobile from, bool willKill)
 		{
+			if (Deleted || !Alive)
+				return;
+
 			base.OnDamage(amount, from, willKill);
 
 			Parole();
@@ -272,7 +275,14 @@ namespace Server.Mobiles
 						});
 					}
 
-					Disarm.AddImmunity(from, TimeSpan.FromSeconds(10));
+					try
+					{
+						Disarm.AddImmunity(from, TimeSpan.FromSeconds(10));
+					}
+					catch (Exception ex)
+					{
+						Console.WriteLine($"Error in PirateBase.OnDamage: {ex.Message}");
+					}
 				}
 			}
 		}

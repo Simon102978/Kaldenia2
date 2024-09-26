@@ -42,44 +42,51 @@ namespace Server.Mobiles
 
         }
 
-        public override void OnThink()
+		public override void OnThink()
 		{
 			base.OnThink();
 
+			if (Deleted || Map == null)
+				return;
+
 			if (Combatant != null)
 			{
-
-					if (!this.InRange(Combatant.Location, 3) && this.InRange(Combatant.Location, 10))
-					{
-						Charge();
-					}
-					else
-					{
-						AntiSummon();
-					}	
-
+				if (!this.InRange(Combatant.Location, 3) && this.InRange(Combatant.Location, 10))
+				{
+					Charge();
+				}
+				else
+				{
+					AntiSummon();
+				}
 			}
 		}
 
+
 		public void Charge()
 		{
-			if (DelayCharge < DateTime.UtcNow)
+			if (DelayCharge < DateTime.UtcNow && Combatant != null)
 			{
-				if (Combatant is CustomPlayerMobile cp && cp != null)
+				if (Combatant is CustomPlayerMobile cp)
 				{
-					Emote($"*Effectue une charge vers {cp.Name}*");
-
 					if (!cp.Deleted && cp.Alive)
 					{
+						Emote($"*Effectue une charge vers {cp.Name}*");
+
 						cp.Damage(15);
 						cp.Freeze(TimeSpan.FromSeconds(3));
-						this.Location = cp.Location;
+
+						if (Map != null)
+						{
+							this.MoveToWorld(cp.Location, Map);
+						}
 					}
 				}
 
 				DelayCharge = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(30, 50));
 			}
 		}
+
 
 
 		public void AntiSummon()

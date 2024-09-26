@@ -307,56 +307,60 @@ namespace Server.Commands
 				controlItem.Delete();
 			}
 		}
-		
-		public static void EndControl( ControlItem controlItem, bool stats, bool skills, bool items )
+
+		public static void EndControl(ControlItem controlItem, bool stats, bool skills, bool items)
 		{
-			Mobile from							= controlItem.Owner;
-			PlayerMobile oldPlayer 	= controlItem.Player;
-			Mobile oldNPC 				 	= controlItem.NPC;
-			
-			if ( from == null )
+			if (controlItem == null)
+			{
 				return;
-			
+			}
+
+			Mobile from = controlItem.Owner;
+			PlayerMobile oldPlayer = controlItem.Player;
+			Mobile oldNPC = controlItem.NPC;
+
+			if (from == null)
+			{
+				return;
+			}
+
 			from.SendMessage("Vous reprenez votre corps");
 
-			
-
-			//"You are in your original Body"
-
-			//NPC wiederherstellen
-			if ( oldNPC != null && !oldNPC.Deleted )
+			// NPC wiederherstellen
+			if (oldNPC != null && !oldNPC.Deleted)
 			{
+				// Props from -> oldNPC
+				CopyProps(oldNPC, from, stats, skills);
 
-				//Props from -> oldNPC
-				CopyProps( oldNPC, from, stats, skills );
+				// Equip from -> oldNPC
+				MoveEquip(from, oldNPC, items);
 
-				//if ( oldNPC.Map == Map.Internal )
-				//	oldNPC.MoveToWorld(from.Location, from.Map);
-				
-				
-				//Equip from -> oldNPC
-				MoveEquip( from, oldNPC, items );
-
-				oldNPC.Race.AddRace(oldNPC, oldNPC.Hue);
-
-
+				if (oldNPC.Race != null)
+				{
+					oldNPC.Race.AddRace(oldNPC, oldNPC.Hue);
+				}
 			}
 			else
 			{
-				from.SendMessage("Le NPC a été supprimé peu être à cause d'un respawn manuel");	
-				//"The original NPC was deleted. Maybe because a manual respawn"
-				oldNPC.Delete();
+				from.SendMessage("Le NPC a été supprimé peu être à cause d'un respawn manuel");
+				if (oldNPC != null)
+				{
+					oldNPC.Delete();
+				}
 			}
-			
-			if ( oldPlayer != null && !oldPlayer.Deleted )
-			{
-				//Spieler Wiederherstellen (100%)
-				//Props: oldPlayer -> player
-				CopyProps( from, oldPlayer, true, true );
-				//Equip: oldPlayer -> player
-				MoveEquip( oldPlayer, from, true );
 
-				oldPlayer.Race.AddRace(from, oldPlayer.Hue);
+			if (oldPlayer != null && !oldPlayer.Deleted)
+			{
+				// Spieler Wiederherstellen (100%)
+				// Props: oldPlayer -> player
+				CopyProps(from, oldPlayer, true, true);
+				// Equip: oldPlayer -> player
+				MoveEquip(oldPlayer, from, true);
+
+				if (oldPlayer.Race != null)
+				{
+					oldPlayer.Race.AddRace(from, oldPlayer.Hue);
+				}
 
 				if (from is CustomPlayerMobile bh && oldPlayer is CustomPlayerMobile cp)
 				{
@@ -365,23 +369,21 @@ namespace Server.Commands
 					bh.Grandeur = cp.Grandeur;
 				}
 
-				if (from.Account == null && oldNPC.Account != null)
+				if (from.Account == null && oldNPC != null && oldNPC.Account != null)
 				{
 					from.Account = oldNPC.Account;
 				}
 
 				oldPlayer.Delete();
 				from.Hidden = true;
-
 			}
 
 			from.SendPropertiesTo(from);
-
-            from.SendIncomingPacket();
-
+			from.SendIncomingPacket();
 		}
 
-    //Return true if the base.OnBeforeDeath should be executed and false if not.
+
+		//Return true if the base.OnBeforeDeath should be executed and false if not.
 		public static bool UncontrolDeath( Mobile from )
 		{
 			if ( from.AccessLevel < accessLevel )

@@ -16,7 +16,7 @@ namespace Server.Items
         }
 
         public override Poison Poison => Poison.DarkGlow;/*  MUST be restored when prerequisites are done */
-        public override double MinPoisoningSkill => 95.0;
+        public override double MinPoisoningSkill => 75.0;
         public override double MaxPoisoningSkill => 100.0;
         public override int LabelNumber => 1072849;// Darkglow Poison
         public override void Serialize(GenericWriter writer)

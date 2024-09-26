@@ -26,7 +26,22 @@ namespace Server.Items
             }
         }
 
-        public override bool IsDecoContainer => false;
+		public override int DefaultMaxItems
+		{
+			get
+			{
+				if (Galleon is BritannianShip)
+					return 2000;
+				else if (Galleon is Galleon)
+					return 1000;
+				else if (Galleon is OrcishGalleon)
+					return 500;
+				else
+					return 250;
+			}
+		}
+
+		public override bool IsDecoContainer => false;
 
         public override Rectangle2D Bounds => new Rectangle2D(46, 74, 150, 110);
         public override int DefaultGumpID => 0x4C;

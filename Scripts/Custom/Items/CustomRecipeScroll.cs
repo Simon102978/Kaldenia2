@@ -418,6 +418,42 @@ public class CustomRecipeScrolls
 		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
 	}
 
+	public class CelesteHealPotionScroll : RecipeScroll
+	{
+		[Constructable]
+		public CelesteHealPotionScroll() : base(70012) { }
+		public CelesteHealPotionScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class CelesteManaPotionScroll : RecipeScroll
+	{
+		[Constructable]
+		public CelesteManaPotionScroll() : base(70013) { }
+		public CelesteManaPotionScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class SleepPotionScroll : RecipeScroll
+	{
+		[Constructable]
+		public SleepPotionScroll() : base(70014) { }
+		public SleepPotionScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
+	public class OrangePetalsScroll : RecipeScroll
+	{
+		[Constructable]
+		public OrangePetalsScroll() : base(70015) { }
+		public OrangePetalsScroll(Serial serial) : base(serial) { }
+		public override void Serialize(GenericWriter writer) { base.Serialize(writer); writer.Write(0); }
+		public override void Deserialize(GenericReader reader) { base.Deserialize(reader); reader.ReadInt(); }
+	}
+
 	public class SuperiorStrengthPotionRecipeScroll : RecipeScroll
 	{
 		[Constructable]

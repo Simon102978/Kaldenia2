@@ -141,7 +141,7 @@ namespace Server.Items
                 return true;
 
             /* <UBWS> */
-            if (weapon.WeaponAttributes.UseBestSkill > 0 && (from.Skills[SkillName.Swords].Base >= reqSkill || from.Skills[SkillName.Macing].Base >= reqSkill || from.Skills[SkillName.Fencing].Base >= reqSkill))
+            if (weapon.WeaponAttributes.UseBestSkill > 0 && (from.Skills[SkillName.Swords].Base >= reqSkill || from.Skills[SkillName.Macing].Base >= reqSkill || from.Skills[SkillName.Fencing].Base >= reqSkill || from.Skills[SkillName.Wrestling].Base >= reqSkill))
                 return true;
 			/* </UBWS> */
 

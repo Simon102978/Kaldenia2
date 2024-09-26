@@ -143,11 +143,14 @@ namespace Server.Mobiles
 		public override void OnThink()
 		{
 			base.OnThink();
+
+			if (Deleted || Map == null)
+				return;
+
 			Parole();
 
 			if (m_GlobalTimer < DateTime.UtcNow && Warmode)
 			{
-
 				if (EnArmure)
 				{
 					Hits += 5;
@@ -155,37 +158,30 @@ namespace Server.Mobiles
 					switch (Utility.Random(2))
 					{
 						case 0:
-							WarCrie();		
+							WarCrie();
 							break;
 						case 1:
 							Spawn();
 							break;
-						default:
-							break;
-					}				
-
-
+					}
 				}
-
-				else if (Combatant != null) 
+				else if (Combatant != null)
 				{
 					if (Combatant is BaseCreature bc)
 					{
 						AntiSummon();
 					}
-					
+
 					if (!this.InRange(Combatant.Location, 3) && this.InRange(Combatant.Location, 10))
 					{
 						Charge();
 					}
-
-									
 				}
 
-			
 				m_GlobalTimer = DateTime.UtcNow + TimeSpan.FromSeconds(Utility.RandomMinMax(2, 5));
 			}
 		}
+
 
 
 		public void Charge()
@@ -754,6 +750,16 @@ namespace Server.Mobiles
             AddLoot(LootPack.PeculiarSeed1);
             AddLoot(LootPack.LootItem<Items.RoastPig>(10.0));
 			AddLoot(LootPack.LootItem<Items.Gold>(5000,10000));
+			AddLoot(LootPack.Average);
+			AddLoot(LootPack.Meager);
+			AddLoot(LootPack.MedScrolls);
+			AddLoot(LootPack.LootItem<LesserPoisonPotion>(true));
+			AddLoot(LootPack.LootItem<Items.GemmePoison>(), (double)5);
+			AddLoot(LootPack.Others, Utility.RandomMinMax(15, 30));
+			AddLoot(LootPack.LootItem<DragonBlood>(4, true));
+			AddLoot(LootPack.LootItem<Items.Gold>(1000, 5000));
+			AddLoot(LootPack.LootItem<Items.GreaterManaPotion>(), Utility.RandomMinMax(5, 10));
+			AddLoot(LootPack.LootItem<Items.WhitePearl>(5, 15));
 		}
 
         public override void Serialize(GenericWriter writer)

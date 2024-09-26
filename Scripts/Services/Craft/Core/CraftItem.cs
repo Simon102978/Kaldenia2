@@ -1439,7 +1439,7 @@ namespace Server.Engines.Craft
 		{
 			int hours, minutes;
 			Clock.GetTime(null, 0, 0, out hours, out minutes);
-			return hours >= 17 && hours < 18;
+			return hours >= 16 && hours < 19;
 		}
 
 
@@ -1792,13 +1792,66 @@ namespace Server.Engines.Craft
             if (WoodworkersBench.HasBonus(from, craftSystem.MainSkill))
                 chance += .5;
 
-            if (allRequiredSkills && valMainSkill == maxMainSkill)
-                chance = 1.0;
+				if (allRequiredSkills && valMainSkill == maxMainSkill)
+					chance = 1.0;
 
-            return chance;
-        }
+				// Ajout du bonus basé sur la qualité de l'outil
+				BaseTool tool = FindCraftTool(from, craftSystem);
 
-        private void MultipleSkillCheck(Mobile from, int amount)
+				if (tool != null)
+				{
+					switch (tool.Quality)
+					{
+						case ItemQuality.Exceptional:
+							chance += 0.05; // +5% pour Exceptional
+							break;
+						case ItemQuality.Epic:
+							chance += 0.10; // +10% pour Epic
+							break;
+						case ItemQuality.Legendary:
+							chance += 0.25; // +25% pour Legendary
+							break;
+					}
+				}
+
+				// Assurez-vous que la chance ne dépasse pas 100%
+				return Math.Min(chance, 1.0);
+			}
+
+			private BaseTool FindCraftTool(Mobile from, CraftSystem craftSystem)
+			{
+				// Vérifier d'abord les mains du joueur
+				BaseTool tool = from.FindItemOnLayer(Layer.OneHanded) as BaseTool;
+				if (tool == null)
+					tool = from.FindItemOnLayer(Layer.TwoHanded) as BaseTool;
+
+				// Si l'outil n'est pas dans les mains, vérifier le sac à dos
+				if (tool == null || !IsValidCraftTool(tool, craftSystem))
+				{
+					if (from.Backpack != null)
+					{
+						for (int i = 0; i < from.Backpack.Items.Count; i++)
+						{
+							BaseTool item = from.Backpack.Items[i] as BaseTool;
+							if (item != null && IsValidCraftTool(item, craftSystem))
+							{
+								tool = item;
+								break;
+							}
+						}
+					}
+				}
+
+				return tool;
+			}
+
+		private bool IsValidCraftTool(BaseTool tool, CraftSystem craftSystem)
+		{
+			return true;
+		}
+
+
+		private void MultipleSkillCheck(Mobile from, int amount)
         {
             for (int i = 0; i < Skills.Count; i++)
             {

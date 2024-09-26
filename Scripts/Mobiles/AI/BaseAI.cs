@@ -1877,66 +1877,68 @@ namespace Server.Mobiles
             return true;
         }
 
-        public virtual bool DoOrderRelease()
-        {
-            m_Mobile.DebugSay("I have been released");
+		public virtual bool DoOrderRelease()
+		{
+			if (m_Mobile == null)
+			{
+				return false;
+			}
 
-            m_Mobile.PlaySound(m_Mobile.GetAngerSound());
-            Mobile master = m_Mobile.ControlMaster;
+			m_Mobile.DebugSay("I have been released");
 
-            if (m_Mobile.DeleteOnRelease)
-            {
-                m_Mobile.PrivateOverheadMessage(
-                    MessageType.Regular,
-                    0x3B2,
-                    1043255,
-                    string.Format("{0}", m_Mobile.Name),
-                    master.NetState); // ~1_NAME~ appears to have decided that it is better off without a master!
-            }
+			m_Mobile.PlaySound(m_Mobile.GetAngerSound());
+			Mobile master = m_Mobile.ControlMaster;
 
-            m_Mobile.SetControlMaster(null);
-            m_Mobile.SummonMaster = null;
+			if (m_Mobile.DeleteOnRelease && master != null && master.NetState != null)
+			{
+				m_Mobile.PrivateOverheadMessage(
+					MessageType.Regular,
+					0x3B2,
+					1043255,
+					string.Format("{0}", m_Mobile.Name),
+					master.NetState);
+			}
 
-            m_Mobile.BondingBegin = DateTime.MinValue;
-            m_Mobile.OwnerAbandonTime = DateTime.MinValue;
-            m_Mobile.IsBonded = false;
+			m_Mobile.SetControlMaster(null);
+			m_Mobile.SummonMaster = null;
 
-            SpawnEntry se = m_Mobile.Spawner as SpawnEntry;
-            if (se != null && se.HomeLocation != Point3D.Zero)
-            {
-                m_Mobile.Home = se.HomeLocation;
-                m_Mobile.RangeHome = se.HomeRange;
-            }
+			m_Mobile.BondingBegin = DateTime.MinValue;
+			m_Mobile.OwnerAbandonTime = DateTime.MinValue;
+			m_Mobile.IsBonded = false;
 
-            if (m_Mobile.DeleteOnRelease || m_Mobile.IsDeadPet)
-            {
-                Timer.DelayCall(TimeSpan.FromSeconds(1), m_Mobile.Delete);
-            }
-            else
-            {
-                m_Mobile.BeginDeleteTimer();
-            }
+			SpawnEntry se = m_Mobile.Spawner as SpawnEntry;
+			if (se != null && se.HomeLocation != Point3D.Zero)
+			{
+				m_Mobile.Home = se.HomeLocation;
+				m_Mobile.RangeHome = se.HomeRange;
+			}
 
-            if (m_Mobile is BaseHire)
-            {
-                if (master != null)
-                {
-					if (master is CustomPlayerMobile cp)
-					{
-						cp.RemoveEsclave(m_Mobile);
-					}
+			if (m_Mobile.DeleteOnRelease || m_Mobile.IsDeadPet)
+			{
+				Timer.DelayCall(TimeSpan.FromSeconds(1), () => { if (m_Mobile != null) m_Mobile.Delete(); });
+			}
+			else
+			{
+				m_Mobile.BeginDeleteTimer();
+			}
 
-                }
-            }
-            else
-            {
-                m_Mobile.DropBackpack();
-            }
+			if (m_Mobile is BaseHire)
+			{
+				if (master != null && master is CustomPlayerMobile cp)
+				{
+					cp.RemoveEsclave(m_Mobile);
+				}
+			}
+			else
+			{
+				m_Mobile.DropBackpack();
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        public virtual bool DoOrderStay()
+
+		public virtual bool DoOrderStay()
         {
             if (CheckHerding())
             {

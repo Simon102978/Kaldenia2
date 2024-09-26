@@ -122,6 +122,8 @@ namespace Server.Engines.Craft
 			{
 				case BeverageType.Milk: return "lait";
 				case BeverageType.Water: return "eau";
+				case BeverageType.Wine: return "vin";
+
 				// Ajoutez d'autres types de boissons ici
 				default: return type.ToString().ToLower();
 			}

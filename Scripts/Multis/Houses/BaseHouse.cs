@@ -601,7 +601,6 @@ namespace Server.Multis
                     item.IsLockedDown = false;
                     item.IsSecure = false;
                     item.Movable = true;
-                    item.LockByPlayer = false;
 
                     if (item.Parent == null)
                         DropToMovingCrate(item);
@@ -617,7 +616,6 @@ namespace Server.Multis
                     item.IsLockedDown = false;
                     item.IsSecure = false;
                     item.Movable = true;
-                    item.LockByPlayer = false;
 
                     if (item.Parent == null)
                         DropToMovingCrate(item);
@@ -638,7 +636,6 @@ namespace Server.Multis
                     item.IsLockedDown = false;
                     item.IsSecure = false;
                     item.Movable = true;
-                    item.LockByPlayer = false;
 
                     if (item.Parent == null)
                         DropToMovingCrate(item);
@@ -845,7 +842,6 @@ namespace Server.Multis
                             SetLockdown(relocEntity.Owner, item, false);
                             item.IsSecure = false;
                             item.Movable = true;
-                            item.LockByPlayer = false;
 
                             Item relocateItem = item;
 
@@ -1403,7 +1399,6 @@ namespace Server.Multis
             }
 
             Movable = false;
-
         }
 
         public BaseHouse(Serial serial)
@@ -1922,8 +1917,7 @@ namespace Server.Multis
             {
                 m_Trash = new TrashBarrel
                 {
-                    Movable = false,
-                    LockByPlayer = true
+                    Movable = false
                 };
                 m_Trash.MoveToWorld(from.Location, from.Map);
 
@@ -1956,16 +1950,9 @@ namespace Server.Multis
             }
 
             if (i is BaseAddonContainer)
-            {
                 i.Movable = false;
-                i.LockByPlayer = true;
-            }
-                
-            else       
-            {
-              i.Movable = !locked;
-              i.LockByPlayer = locked;
-            }
+            else
+                i.Movable = !locked;
 
             i.IsLockedDown = locked;
 
@@ -2514,7 +2501,6 @@ namespace Server.Multis
                         LockDowns.Remove(item);
 
                     item.Movable = false;
-                    item.LockByPlayer = true;
 
                     if (item is GardenShedAddon)
                     {
@@ -2608,71 +2594,71 @@ namespace Server.Multis
             return SecureLevel.Anyone;
         }
 
-        public SecureInfo GetSecureInfoFor(Item item)
-        {
-            return Secures.FirstOrDefault(info => info.Item == item);
-        }
+		public SecureInfo GetSecureInfoFor(Item item)
+		{
+			if (Secures == null || item == null)
+				return null;
 
-        public SecureInfo GetSecureInfoFor(Mobile from, Item item)
-        {
-            return Secures.FirstOrDefault(info => info.Item == item && (info.Owner == from || IsOwner(from)));
-        }
+			return Secures.FirstOrDefault(info => info != null && info.Item == item);
+		}
 
-        public List<SecureInfo> GetSecureInfosFor(Mobile from)
-        {
-            return Secures.Where(s => s.Owner == from).ToList();
-        }
+		public SecureInfo GetSecureInfoFor(Mobile from, Item item)
+		{
+			if (Secures == null || from == null || item == null)
+				return null;
 
-        public bool ReleaseSecure(Mobile m, Item item)
-        {
-            if (Secures == null || item is StrongBox || !IsActive || !CanRelease(m, item))
-                return false;
+			return Secures.FirstOrDefault(info => info != null && info.Item == item && (info.Owner == from || IsOwner(from)));
+		}
 
-            SecureInfo info = GetSecureInfoFor(item);
+		public List<SecureInfo> GetSecureInfosFor(Mobile from)
+		{
+			if (Secures == null || from == null)
+				return new List<SecureInfo>();
 
-            if (info != null)
-            {
-       //         if ((IsOwner(m) || info.Owner == m) /*&& HasSecureAccess(m, info.Level)*/)
-				if(IsCoOwner(m))
-                {
-                    item.IsLockedDown = false;
-                    item.IsSecure = false;
+			return Secures.Where(s => s != null && s.Owner == from).ToList();
+		}
 
-                    if (item is BaseAddonContainer)
-                    {
-                        item.Movable = false;
-                        item.LockByPlayer = true;
+		public bool ReleaseSecure(Mobile m, Item item)
+		{
+			if (Secures == null || m == null || item == null || item is StrongBox || !IsActive || !CanRelease(m, item))
+				return false;
 
-                    }
-                       
-                    else
-                    {
-                        item.Movable = true;
-                        item.LockByPlayer = false;
-                    }
-                       
+			SecureInfo info = GetSecureInfoFor(item);
 
-                    item.SetLastMoved();
-                    item.PublicOverheadMessage(MessageType.Label, 0x3B2, 501656); // [no longer secure]
+			if (info != null)
+			{
+				if (IsCoOwner(m))
+				{
+					item.IsLockedDown = false;
+					item.IsSecure = false;
 
-                    Secures.Remove(info);
+					if (item is BaseAddonContainer)
+						item.Movable = false;
+					else
+						item.Movable = true;
 
-                    return true;
-                }
-                else
-                {
-                    m.LocalOverheadMessage(MessageType.Regular, 0x3E9, 1010418); // You did not lock this down, and you are not able to release this.
-                }
+					item.SetLastMoved();
+					item.PublicOverheadMessage(MessageType.Label, 0x3B2, 501656); // [no longer secure]
 
-                return false;
-            }
+					Secures.Remove(info);
 
-            m.SendLocalizedMessage(501717); //This isn't secure...
+					return true;
+				}
+				else
+				{
+					m.LocalOverheadMessage(MessageType.Regular, 0x3E9, 1010418); // You did not lock this down, and you are not able to release this.
+				}
 
-            return false;
-        }
+				return false;
+			}
 
-        private bool CanRelease(Mobile from, Item item)
+			m.SendLocalizedMessage(501717); //This isn't secure...
+
+			return false;
+		}
+
+
+		private bool CanRelease(Mobile from, Item item)
         {
             if (item is Container && item.Items.Any(i => i is CraftableHouseItem || i is CraftableMetalHouseDoor || i is CraftableStoneHouseDoor))
             {
@@ -2972,7 +2958,7 @@ namespace Server.Multis
 
 		public void RemoveCoOwner(Mobile from, Nom targ, bool fromMessage)
 		{
-			if (!IsOwner(from) || CoOwners == null || targ == null)
+			if (from == null || !IsOwner(from) || CoOwners == null || targ == null)
 				return;
 
 			if (CoOwners.Contains(targ))
@@ -2988,16 +2974,14 @@ namespace Server.Multis
 				if (fromMessage)
 					from.SendLocalizedMessage(501299); // Co-owner removed from list.
 
-				List<SecureInfo> infos = GetSecureInfosFor(targ.Mobile);
-				foreach (SecureInfo info in infos)
+				foreach (SecureInfo info in GetSecureInfosFor(targ.Mobile))
 				{
-					if (info.Item is StrongBox)
+					if (info.Item is StrongBox box)
 					{
-						StrongBox c = info.Item as StrongBox;
-						c.IsLockedDown = false;
-						c.IsSecure = false;
-						c.Destroy();
-						Secures.Remove(info);
+						box.IsLockedDown = false;
+						box.IsSecure = false;
+						box.Destroy();
+						Secures?.Remove(info);
 					}
 					else
 					{
@@ -3006,6 +2990,7 @@ namespace Server.Multis
 				}
 			}
 		}
+
 
 
 
@@ -4035,7 +4020,6 @@ namespace Server.Multis
                         item.IsLockedDown = false;
                         item.IsSecure = false;
                         item.Movable = true;
-                        item.LockByPlayer = false;
                         item.SetLastMoved();
 
                         item.SendLocalizedMessage(501657, ""); // [no longer locked down]
@@ -4056,7 +4040,6 @@ namespace Server.Multis
                         item.IsLockedDown = false;
                         item.IsSecure = false;
                         item.Movable = true;
-                        item.LockByPlayer = false;
                         item.SetLastMoved();
 
                         item.SendLocalizedMessage(501657, ""); // [no longer locked down]
@@ -4081,7 +4064,6 @@ namespace Server.Multis
                         info.Item.IsLockedDown = false;
                         info.Item.IsSecure = false;
                         info.Item.Movable = true;
-                        info.Item.LockByPlayer = false;
                         info.Item.SetLastMoved();
 
                         info.Item.SendLocalizedMessage(501718, ""); // no longer secure!
@@ -4145,7 +4127,6 @@ namespace Server.Multis
                     if (carpet != null)
                     {
                         carpet.Movable = true;
-                        carpet.LockByPlayer = false;
                         carpet.SetLastMoved();
                         carpet.InvalidateProperties();
                     }
@@ -5059,7 +5040,6 @@ namespace Server.Multis
                     {
                         Item.MoveToWorld(point, from.Map);
                         Item.Movable = true;
-                        Item.LockByPlayer = false;
 
                         from.SendLocalizedMessage(1159159); // This container has been released and is no longer secure.
                     }
@@ -5109,7 +5089,6 @@ namespace Server.Multis
                     {
                         Item.IsLockedDown = false;
                         Item.Movable = true;
-                        Item.LockByPlayer = false;
                     }
                 }
             }

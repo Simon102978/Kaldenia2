@@ -947,6 +947,12 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(MannequinDeed), "Divers", "Mannequin (M)", 60.0, 100.0, typeof(Materiaux), "Matériaux", 35, "Vous n'avez pas assez de matériaux");
 			AddRes(index, typeof(Cloth), "Tissus", 20, "Vous n'avez pas suffisament de tissus");
 
+			index = AddCraft(typeof(ItemChangerSiren), "Divers", "Création unique", 70.0, 120.0, typeof(Materiaux), "Matériaux", 150, "Vous n'avez pas assez de matériaux");
+			AddRes(index, typeof(Gold), "Or", 250, "Vous n'avez pas suffisament d'or");
+	
+
+
+
 
 			ForceNonExceptional(index);
 			index = AddCraft(typeof(Spyglass), "Divers", "Longue vue", 60.0, 110.0, typeof(IronIngot), "Lingot de fer", 4, " vous n'avez pas suffisament de Lingot de fer");

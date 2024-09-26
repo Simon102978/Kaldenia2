@@ -102,6 +102,9 @@ namespace Xanthos.ShrinkSystem
 			else if (target is GolemZyX)
 				from.SendMessage("Vous ne pouvez pas Shrinker un Golem!");
 
+			else if (target is BaseHire)
+				from.SendMessage("Vous ne pouvez pas Shrinker un Esclave!");
+
 			else if ( target is PlayerMobile )
 				from.SendMessage( "That person gives you a dirty look!" );
 

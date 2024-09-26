@@ -7713,55 +7713,57 @@ namespace Server.Mobiles
 			int tracking = base.GetDetectionBonus(mobile);
 			int Tactic = (int)Skills[SkillName.Tactics].Value;
 
-			if (tracking > Tactic)
-			{
-				bonus = tracking;
-			}
-			else
-			{
-				bonus = Tactic;
-			}
+			// Utiliser la valeur la plus basse entre Tracking et Tactics
+			bonus = Math.Min(tracking, Tactic);
 
+			// Réduire le bonus en fonction de la compétence Hiding du joueur
+			int hidingSkill = mobile.Skills[SkillName.Hiding].Fixed;
+			bonus -= hidingSkill / 10; // Réduction significative basée sur Hiding
+
+			// Ajuster les modificateurs de distance
 			double Range = GetDistanceToSqrt(mobile.Location);
-
 			if (Range >= 8)
 			{
-				bonus -= 20;
+				bonus -= 40;
 			}
 			else if (Range >= 6)
 			{
-				bonus -= 10;
+				bonus -= 30;
 			}
 			else if (Range >= 4)
 			{
-				bonus += 5;
+				bonus -= 20;
 			}
 			else if (Range >= 3)
 			{
-				bonus += 25;
-
+				bonus -= 10;
 			}
-
-			ComputeLightLevels(out int global, out int personal);
-
-			int lightLevel = global + personal;
-
-			if (lightLevel >= 20)
-			{
-				bonus -= 20;
-			}
-			else if (lightLevel >= 10)
-			{
-				//   bonus -= 0;
-			}
-			else
+			else if (Range >= 2)
+				{
+					bonus += 10;
+				}
+			else if (Range >= 1)
 			{
 				bonus += 20;
 			}
+			ComputeLightLevels(out int global, out int personal);
+			int lightLevel = global + personal;
+			if (lightLevel >= 20)
+			{
+				bonus -= 30;
+			}
+			else if (lightLevel >= 10)
+			{
+				bonus -= 15;
+			}
+			else
+			{
+				bonus += 10;
+			}
 
-			return bonus;
+			// Assurer que le bonus ne descend pas en dessous d'une certaine valeur
+			return Math.Max(bonus, -50);
 		}
-
 
 		public override void Detection(Mobile mobile, int boni)
 		{
