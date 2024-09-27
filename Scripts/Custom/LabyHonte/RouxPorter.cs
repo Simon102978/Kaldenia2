@@ -43,8 +43,8 @@ namespace Server.Items
                 if (!cp.CheckRoux())
                 {
                     cp.SendMessage("MOUAHAHAHA ! Te voila un roux-volutionnaire !! ");
-                    cp.HairHue = 1530;
-                    cp.FacialHairHue = 1530;
+                    cp.HairHue = 1533;
+                    cp.FacialHairHue = 1533;
                 }
             }
         }
