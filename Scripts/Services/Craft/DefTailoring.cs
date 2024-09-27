@@ -121,7 +121,7 @@ namespace Server.Engines.Craft
 			typeof(SquareGozaMatEastDeed), typeof(SquareGozaMatSouthDeed),
 			typeof(BrocadeGozaMatEastDeed), typeof(BrocadeGozaMatSouthDeed),
 			typeof(BrocadeSquareGozaMatEastDeed), typeof(BrocadeSquareGozaMatSouthDeed),
-			typeof(SquareGozaMatDeed)
+			typeof(SquareGozaMatDeed), typeof(RideauBlanc),typeof(RideauRouge)
    		};
 
 		private static readonly Type[] m_TailorClothNonColorables = new Type[]

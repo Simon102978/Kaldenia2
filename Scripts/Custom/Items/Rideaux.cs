@@ -1,7 +1,7 @@
 namespace Server.Items
 {
 	[Flipable(0x0980, 0x0981, 0x0982, 0x0983, 0x0984, 0x0985, 0x0986, 0x0987, 0x0988, 0x0989, 0x098A, 0x098B)]
-	public class RideauRouge : Item
+	public class RideauRouge : Item, IDyable
 	{
 		[Constructable]
 		public RideauRouge()
@@ -15,7 +15,17 @@ namespace Server.Items
 			: base(serial)
 		{
 		}
+		public virtual bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+			{
+				return false;
+			}
 
+			Hue = sender.DyedHue;
+
+			return true;
+		}
 		public override void Serialize(GenericWriter writer)
 		{
 			base.Serialize(writer);
@@ -32,7 +42,7 @@ namespace Server.Items
 	}
 
 	[Flipable(0x12DA, 0x12DB, 0x12DC, 0x12DD, 0x12DE, 0x12DF, 0x12E0, 0x12E1, 0x12E2, 0x12E3, 0x12E4, 0x12E5, 0x12E6, 0x12E7, 0x12E8, 0x12E9, 0x12EA, 0x12EB, 0x12EC, 0x12ED)]
-	public class RideauBlanc : Item
+	public class RideauBlanc : Item, IDyable
 	{
 		[Constructable]
 		public RideauBlanc()
@@ -41,7 +51,17 @@ namespace Server.Items
 			Name = "Rideau Blanc";
 			Weight = 0.5;
 		}
+		public virtual bool Dye(Mobile from, DyeTub sender)
+		{
+			if (Deleted)
+			{
+				return false;
+			}
 
+			Hue = sender.DyedHue;
+
+			return true;
+		}
 		public RideauBlanc(Serial serial)
 			: base(serial)
 		{

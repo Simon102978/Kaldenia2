@@ -1893,9 +1893,9 @@ namespace Server.Mobiles
 				strBase = Str; //Str already includes GetStatOffset/str
 				strOffs = AosAttributes.GetValue(this, AosAttribute.BonusHits);
 
-				if (strOffs > 25 && IsPlayer())
+				if (strOffs > 150 && IsPlayer())
 				{
-					strOffs = 25;
+					strOffs = 150;
 				}
 
 				if (AnimalForm.UnderTransformation(this, typeof(BakeKitsune)) ||

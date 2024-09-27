@@ -2,45 +2,50 @@ using Server.Engines.Craft;
 
 namespace Server.Items
 {
-    [Flipable(0x13E3, 0x13E4)]
-    public class SmithHammer : BaseTool
-    {
-        [Constructable]
-        public SmithHammer()
-            : base(0x13E3)
-        {
-            Weight = 8.0;
-            Layer = Layer.OneHanded;
-			Name = "Marteau de Forgeron";
-        }
-
-        [Constructable]
-        public SmithHammer(int uses)
-            : base(uses, 0x13E3)
-        {
-            Weight = 8.0;
-            Layer = Layer.OneHanded;
+	[Flipable(0x13E3, 0x13E4)]
+	public class SmithHammer : BaseTool
+	{
+		[Constructable]
+		public SmithHammer()
+			: base(0x13E3)
+		{
+			Weight = 8.0;
+			Layer = Layer.OneHanded;
 			Name = "Marteau de Forgeron";
 		}
 
-        public SmithHammer(Serial serial)
-            : base(serial)
-        {
-        }
+		[Constructable]
+		public SmithHammer(int uses)
+			: base(uses, 0x13E3)
+		{
+			Weight = 8.0;
+			Layer = Layer.OneHanded;
+			Name = "Marteau de Forgeron";
+		}
 
-        public override CraftSystem CraftSystem => DefBlacksmithy.CraftSystem;
-        public override void Serialize(GenericWriter writer)
-        {
-            base.Serialize(writer);
-            writer.Write(0); // version
-        }
+		public SmithHammer(Serial serial)
+			: base(serial)
+		{
+		}
 
-        public override void Deserialize(GenericReader reader)
-        {
-            base.Deserialize(reader);
-            int version = reader.ReadInt();
-        }
-    }
+		public override CraftSystem CraftSystem => DefBlacksmithy.CraftSystem;
+
+	
+
+
+		public override void Serialize(GenericWriter writer)
+		{
+			base.Serialize(writer);
+			writer.Write(0); // version
+		}
+
+		public override void Deserialize(GenericReader reader)
+		{
+			base.Deserialize(reader);
+			int version = reader.ReadInt();
+		}
+	}
+
 
     public class SmithyHammer : BaseBashing, ITool
     {
