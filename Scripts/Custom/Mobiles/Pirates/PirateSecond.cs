@@ -15,7 +15,7 @@ namespace Server.Mobiles
 
         public DateTime m_GlobalTimer;
 
-		public override Poison HitPoison => Poison.Parasitic;
+		public override Poison HitPoison => Poison.Lethal;
 
 	    public DateTime LastSprint;
 
@@ -30,7 +30,19 @@ namespace Server.Mobiles
 		[CommandProperty(AccessLevel.GameMaster)]
 		public bool Sprint
 		{
-			get => m_Sprint;
+			get
+			{
+				if (m_Sprint && LastSprint.AddSeconds(30) < DateTime.Now )
+				{
+					m_Sprint = false;
+					DesactiverSprint();
+				}
+
+
+				return m_Sprint;
+
+			
+			} 
 			set
 			{
 				if (value && !m_Sprint)
@@ -107,7 +119,7 @@ namespace Server.Mobiles
 
             SetSkill(SkillName.Anatomy, 100.0);
             SetSkill(SkillName.MagicResist, 83.5, 92.5);
-            SetSkill(SkillName.Swords, 120);
+            SetSkill(SkillName.Fencing, 120);
             SetSkill(SkillName.Tactics, 100.0);
 
 
@@ -176,9 +188,9 @@ namespace Server.Mobiles
 			base.OnThink();
             Parole();
 
-			if (Sprint && LastSprint.AddSeconds(20) > DateTime.Now )
+			if (Sprint)
 			{
-				Sprint = false;
+				// checker la fin du sprint.
 			}
 
             if (m_GlobalTimer < DateTime.UtcNow && Warmode)
@@ -191,7 +203,7 @@ namespace Server.Mobiles
                             	if (Combatant != null)
                                 {
 
-                                        if (Combatant is BaseCreature bc)
+                                        if (Combatant is BaseCreature bc && bc.GetMaster() != null)
                                         {
                                             AntiSummon();
                                         }
@@ -232,6 +244,7 @@ namespace Server.Mobiles
 
 		public void ActiverSprint()
 		{
+			LastSprint = DateTime.Now;
 			AdjustSpeeds();
 			Emote("*Se met à courrir.*");
 
@@ -243,6 +256,27 @@ namespace Server.Mobiles
 			AdjustSpeeds();
 			Emote("*Se calme*");
 
+		}
+
+
+		public override void AdjustSpeeds()
+		{
+			double activeSpeed = 0.0;
+			double passiveSpeed = 0.0;
+
+
+			if (Sprint)
+			{
+				SpeedInfo.GetCustomSpeeds(this, ref activeSpeed, ref passiveSpeed);
+			}
+			else
+			{
+				SpeedInfo.GetSpeeds(this, ref activeSpeed, ref passiveSpeed);
+			}
+
+			ActiveSpeed = activeSpeed;
+			PassiveSpeed = passiveSpeed;
+			CurrentSpeed = passiveSpeed;
 		}
 
 		public override void ThrowingDetonate (Mobile m)
@@ -269,7 +303,7 @@ namespace Server.Mobiles
 
 					foreach (Mobile m in eable)
 					{
-						if (this != m && !(m is PirateBase) &&  !m.IsStaff())
+						if (this != m && !(m is PirateBase) &&  !m.IsStaff() && !(m is BaseCreature bc && bc.GetMaster() == null))
 						{
 							if (Core.AOS && !InLOS(m))
 								continue;
@@ -398,6 +432,7 @@ namespace Server.Mobiles
 
 			Parole();
 		}
+
         public override void AlterMeleeDamageTo(Mobile to, ref int damage)
 		{
 
@@ -432,6 +467,8 @@ namespace Server.Mobiles
 						creature = new PirateArbaletrier(PirateBoatID);
 						break;
 					case 2:
+						creature = new PirateBerserker(PirateBoatID);
+						break;
 					case 3:
 						creature = new PirateBarde(PirateBoatID);
 						break;
