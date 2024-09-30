@@ -318,7 +318,7 @@ namespace Server.Gumps
 								CustomPlayerMobile pm = focus as CustomPlayerMobile;
 								int q = (int)pm.QuiOptions;
 								bool cantBeDelivered = (q & 0x100) != 0 || (name == "Anonyme" && (q & 0x001) != 0) || (name == "Identite Cachee" && (q & 0x010) != 0);
-								Console.WriteLine("q = {0:X}, canBeDelivered = {1}, q & 0x100 = {2}, name == \"Anonyme\" = {3}", q, cantBeDelivered, q & 0x100, name == "Anonyme");
+								//Console.WriteLine("q = {0:X}, canBeDelivered = {1}, q & 0x100 = {2}, name == \"Anonyme\" = {3}", q, cantBeDelivered, q & 0x100, name == "Anonyme");
 								if (from.AccessLevel > AccessLevel.Player || !cantBeDelivered)
 								{
 									focus.SendGump(new ClientGump(focus, state, from.Name, "", text.Text));

@@ -8426,7 +8426,7 @@ namespace Server
 		///     </c>
 		/// </summary>
 		[CommandProperty(AccessLevel.GameMaster)]
-		public virtual int HitsMax => 50 + (Str / 2);
+		public virtual int HitsMax => 200 + (Str / 2);
 
 		/// <summary>
 		///     Gets or sets the current stamina of the Mobile. This value ranges from 0 to <see cref="StamMax" />, inclusive.
