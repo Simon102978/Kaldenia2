@@ -612,7 +612,7 @@ namespace Server.Engines.Craft
 			AddSubRes(typeof(ArachnideLeather), "Arachnide", 70.0, "Vous ne savez pas travailler le cuir Arachnide");
 			AddSubRes(typeof(DragoniqueLeather), "Dragonique", 80.0, "Vous ne savez pas travailler le cuir Dragonique");
 			AddSubRes(typeof(DemoniaqueLeather), "Demoniaque", 90.0, "Vous ne savez pas travailler le cuir Demoniaque");
-			AddSubRes(typeof(AncienLeather), "Ancien", 95.0, "Vous ne savez pas travailler le cuir Ancien");
+			AddSubRes(typeof(AncienLeather), "Ancien", 90.0, "Vous ne savez pas travailler le cuir Ancien");
 
 			MarkOption = true; Pratiquer = true;
 			Repair = true;

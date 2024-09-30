@@ -74,7 +74,8 @@ namespace Server.Items
 		Keprish,
 		CelesteHealPotion,
 		CelesteManaPotion,
-		SleepPotion
+		SleepPotion,
+		ExtremeStrength
 
 
 

@@ -206,7 +206,7 @@ namespace Server.Engines.Craft
 							difficulty = 80.0;
 							break;
 						case CraftResource.Nostalgium:
-							difficulty = 100.0;
+							difficulty = 90.0;
 							break;
 					}
 

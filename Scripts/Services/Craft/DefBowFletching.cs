@@ -173,6 +173,17 @@ namespace Server.Engines.Craft
 			SetUseAllRes(index, true);
 			index = index = AddCraft(typeof(FukiyaDarts), "Munitions", 1030246, 50.0, 73.8, typeof(PalmierBoard), 1044041, 1, 1044351);
 						SetUseAllRes(index, true);
+
+
+			index = AddCraft(typeof(Bolt), "Munitions", "Flèches Vers Carreaux (Max)", 10.0, 30.0, typeof(Arrow), "Flèches", 2, "Vous n'avez pas suffisament de flèches");
+			SetUseAllRes(index, true);
+			index = AddCraft(typeof(Arrow), "Munitions", "Carreaux Vers Flèches (Max)", 10.0, 30.0, typeof(Bolt), "Carreaux", 2, "Vous n'avez pas suffisament de Carreaux");
+			SetUseAllRes(index, true);
+
+
+			index = AddCraft(typeof(Arrow), "Munitions", "Flèche (Max)", 10.0, 30.0, typeof(Shaft), 1044560, 1, 1044561);
+			AddRes(index, typeof(Feather), 1044562, 1, 1044563);
+			SetUseAllRes(index, true);
 			#endregion
 
 			#region Munitions par Archery
@@ -342,8 +353,7 @@ namespace Server.Engines.Craft
 			AddSubRes(typeof(EbeneBoard), "Ébène", 60.0, "Vous ne savez pas travailler le bois Ébène");
 			AddSubRes(typeof(AmaranteBoard), "Amarante", 80.0, "Vous ne savez pas travailler le bois Amarante");
 			AddSubRes(typeof(PinBoard), "Pin", 80.0, "Vous ne savez pas travailler le bois Pin");
-			AddSubRes(typeof(AncienBoard), "Ancien", 100.0, "Vous ne savez pas travailler le bois ancien");
-
+			AddSubRes(typeof(AncienBoard), "Ancien", 90.0, "Vous ne savez pas travailler le bois ancien");
 
 
 			Resmelt = true;

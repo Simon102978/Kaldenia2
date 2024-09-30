@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 
 namespace Server.Engines.Craft
 {
@@ -50,5 +51,36 @@ namespace Server.Engines.Craft
             }
             return null;
         }
-    }
+    
+	public CraftItem GetPrevCraftItem(CraftItem currentItem)
+	{
+		int index = List.IndexOf(currentItem);
+		if (index > 0)
+		{
+			return (CraftItem)List[index - 1];
+		}
+		else if (index == 0)
+		{
+			// Retourner le dernier élément si on est au début
+			return (CraftItem)List[List.Count - 1];
+		}
+		return null;
+	}
+
+	public CraftItem GetNextCraftItem(CraftItem currentItem)
+	{
+		int index = List.IndexOf(currentItem);
+		if (index < List.Count - 1)
+		{
+			return (CraftItem)List[index + 1];
+		}
+		else if (index == List.Count - 1)
+		{
+			// Retourner le premier élément si on est à la fin
+			return (CraftItem)List[0];
+		}
+		return null;
+	}
 }
+}
+

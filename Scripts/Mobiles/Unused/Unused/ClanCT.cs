@@ -56,7 +56,8 @@ namespace Server.Mobiles
         {
             AddLoot(LootPack.Rich, 2);
             AddLoot(LootPack.LootItem<Arrow>(Utility.RandomMinMax(50, 70)));
-        }
+		}
+		
 
         public override void Serialize(GenericWriter writer)
         {

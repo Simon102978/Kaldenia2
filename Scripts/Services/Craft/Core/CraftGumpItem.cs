@@ -62,9 +62,16 @@ namespace Server.Engines.Craft
             AddHtmlLocalized(10, 217, 150, 22, 1044055, LabelColor, false, false); // <CENTER>MATERIALS</CENTER>
             AddHtmlLocalized(10, 302, 150, 22, 1044056, LabelColor, false, false); // <CENTER>OTHER</CENTER>
 
-            AddHtml(10, 12, 510, 20, "<h3><basefont color=#FFFFFF><center>" + craftSystem.GumpTitleString+ "</center><basefont></h3>", false, false);
+			// Ajouter flèche gauche
+			AddButton(10, 12, 4014, 4015, 4, GumpButtonType.Reply, 0);
 
-            bool needsRecipe = (craftItem.Recipe != null && from is PlayerMobile && !((PlayerMobile)from).HasRecipe(craftItem.Recipe));
+			AddButton(10, 12, 4014, 4015, 4, GumpButtonType.Reply, 0);
+			AddHtml(10, 12, 510, 20, "<h3><basefont color=#FFFFFF><center>" + craftSystem.GumpTitleString+ "</center><basefont></h3>", false, false);
+
+			// Ajouter flèche droite  
+			AddButton(490, 12, 4005, 4006, 5, GumpButtonType.Reply, 0);
+
+			bool needsRecipe = (craftItem.Recipe != null && from is PlayerMobile && !((PlayerMobile)from).HasRecipe(craftItem.Recipe));
 
             if (needsRecipe)
             {
@@ -156,8 +163,25 @@ namespace Server.Engines.Craft
                     AutoCraftTimer.EndTimer(m_From);
                     new AutoCraftTimer(m_From, m_CraftSystem, m_CraftItem, m_Tool, 9999, TimeSpan.FromSeconds(m_CraftSystem.Delay * m_CraftSystem.MaxCraftEffect + 1.0), TimeSpan.FromSeconds(m_CraftSystem.Delay * m_CraftSystem.MaxCraftEffect + 1.0));
                     break;
-            }
-        }
+				case 4: // Flèche gauche
+					CraftItem prevItem = m_CraftSystem.CraftItems.GetPrevCraftItem(m_CraftItem);
+					if (prevItem != null)
+					{
+						m_From.SendGump(new CraftGumpItem(m_From, m_CraftSystem, prevItem, m_Tool));
+					}
+					break;
+
+				case 5: // Flèche droite
+					CraftItem nextItem = m_CraftSystem.CraftItems.GetNextCraftItem(m_CraftItem);
+					if (nextItem != null)
+					{
+						m_From.SendGump(new CraftGumpItem(m_From, m_CraftSystem, nextItem, m_Tool));
+					}
+					break;
+			}
+		}
+	
+        
         #endregion
 
         #region Methods

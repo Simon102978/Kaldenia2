@@ -323,7 +323,7 @@ namespace Server.Engines.Craft
 
 			index = AddCraft(typeof(SleepPotion), "Autres", "Potion de Sommeil", 70.0, 120.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 			AddRes(index, typeof(CopperIngot), "Lingot de cuivre", 1, "Vous n'avez pas suffisament de lingot de cuivre");
-			AddRes(index, typeof(BottleOfWine), "Bouteille de vin", 2, "Vous n'avez pas suffisament de bouteille de vin");
+			AddRes(index, typeof(SceauEau), "Sceau d'eau", 2, "Vous n'avez pas suffisament de Sceau d'eau");
 			AddRecipe(index, (int)AlchemyRecipes.SleepPotion);
 
 
@@ -348,9 +348,9 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(DentAlligator), "Dent Alligator", 5, "Vous n'avez pas suffisament de dents d'alligator");
 
 
-			index = AddCraft(typeof(EodonianPotion), "Autres", "Brassage de Barako", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
-			AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
-			AddRes(index, typeof(WhitePearl), "Perle Blanche", 5, "Vous n'avez pas suffisament de perle blanche");
+		//	index = AddCraft(typeof(EodonianPotion), "Autres", "Brassage de Barako", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);
+		//	AddRes(index, typeof(PoudreCoquillages), "Poudre de Coquillage", 1, "Vous n'avez pas suffisament de poudre de coquillage");
+		//	AddRes(index, typeof(WhitePearl), "Perle Blanche", 5, "Vous n'avez pas suffisament de perle blanche");
 			
 
 			index = AddCraft(typeof(UraliTranceTonic), "Autres", "Tonic de Urali", 51.0, 151.0, typeof(Bottle), 1044529, 1, 500315);

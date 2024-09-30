@@ -89,14 +89,69 @@ namespace Server.Mobiles
 
         public override FoodType FavoriteFood => FoodType.Meat;
 
-        public override bool CanAutoStable => (Backpack == null || Backpack.Items.Count == 0) && base.CanAutoStable;
+      //  public override bool CanAutoStable => (Backpack == null || Backpack.Items.Count == 0) && base.CanAutoStable;
 
         public Beetle(Serial serial)
             : base(serial)
         {
         }
+		#region Pack Animal Methods
+		public override DeathMoveResult GetInventoryMoveResultFor(Item item)
+		{
+			return DeathMoveResult.MoveToCorpse;
+		}
 
-        public override void OnHarmfulSpell(Mobile from)
+		public override bool IsSnoop(Mobile from)
+		{
+			if (PackAnimal.CheckAccess(this, from))
+				return false;
+
+			return base.IsSnoop(from);
+		}
+
+		public override bool OnDragDrop(Mobile from, Item item)
+		{
+			if (CheckFeed(from, item))
+				return true;
+
+			if (!PackAnimal.CheckDrop(from, item))
+			{
+				return false;
+			}
+
+			if (PackAnimal.CheckAccess(this, from))
+			{
+				AddToBackpack(item);
+				return true;
+			}
+
+			return base.OnDragDrop(from, item);
+		}
+
+		public override bool CheckNonlocalDrop(Mobile from, Item item, Item target)
+		{
+			return PackAnimal.CheckAccess(this, from);
+		}
+
+		public override bool CheckNonlocalLift(Mobile from, Item item)
+		{
+			return PackAnimal.CheckAccess(this, from);
+		}
+
+		public override void OnDoubleClick(Mobile from)
+		{
+			PackAnimal.TryPackOpen(this, from);
+		}
+
+		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
+		{
+			base.GetContextMenuEntries(from, list);
+
+			PackAnimal.GetContextMenuEntries(this, from, list);
+		}
+
+		#endregion
+		public override void OnHarmfulSpell(Mobile from)
         {
             if (!Controlled && ControlMaster == null)
                 CurrentSpeed = BoostedSpeed;

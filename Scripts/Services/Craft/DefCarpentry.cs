@@ -570,7 +570,7 @@ namespace Server.Engines.Craft
 			AddSubRes(typeof(EbeneBoard), "Ébène", 60.0, "Vous ne savez pas travailler le bois Ébène");
 			AddSubRes(typeof(AmaranteBoard), "Amarante", 80.0, "Vous ne savez pas travailler le bois Amarante");
 			AddSubRes(typeof(PinBoard), "Pin", 80.0, "Vous ne savez pas travailler le bois Pin");
-			AddSubRes(typeof(AncienBoard), "Ancien", 100.0, "Vous ne savez pas travailler le bois ancien");
+			AddSubRes(typeof(AncienBoard), "Ancien", 90.0, "Vous ne savez pas travailler le bois ancien");
 		}
 	}
 }

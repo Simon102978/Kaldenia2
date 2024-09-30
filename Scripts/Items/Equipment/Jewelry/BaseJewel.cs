@@ -711,14 +711,13 @@ namespace Server.Items
 
 			//AddWeightProperty(list);
 
-			
+			list.Add($"Enchantement: {Enchantement}/1");
+
 
 			if (GemType != GemType.None)
 			{
 				list.Add("Pierre précieuse: {0}", GemType.ToString());
 
-			if (this is BaseBracelet || this is BaseRing || this is BaseNecklace || this is BaseEarrings || this is BaseCouronne)
-					list.Add($"Enchantement: {Enchantement}/1");
 
 
 				if (m_ReforgedPrefix != ReforgedPrefix.None || m_ReforgedSuffix != ReforgedSuffix.None)

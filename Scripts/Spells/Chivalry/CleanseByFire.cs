@@ -18,7 +18,7 @@ namespace Server.Spells.Chivalry
 		public override TimeSpan CastDelayBase => TimeSpan.FromSeconds(1.0);
         public override double RequiredSkill => 5.0;
         public override int RequiredMana => 10;
-        public override int RequiredTithing => 10;
+        public override int RequiredTithing => 0;
         public override int MantraNumber => 1060718;// Expor Flamus
 
         public override void OnCast()
@@ -50,7 +50,7 @@ namespace Server.Spells.Chivalry
                 if (p != null)
                 {
                     // Cleanse by fire is now difficulty based 
-                    int chanceToCure = 10000 + (int)(Caster.Skills[SkillName.Magery].Value * 50) - ((p.RealLevel + 1) * 2000);
+                    int chanceToCure = 10000 + (int)(Caster.Int * 50) - ((p.RealLevel + 1) * 2000);
                     chanceToCure /= 100;
 
                     if (chanceToCure > Utility.Random(100))

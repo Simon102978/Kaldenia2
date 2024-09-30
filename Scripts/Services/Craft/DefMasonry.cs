@@ -380,7 +380,7 @@ namespace Server.Engines.Craft
 			AddSubRes(typeof(BraziumGranite), "Granite de Brazium", 80.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
 			AddSubRes(typeof(LuneriumGranite), "Granite de Lunerium", 80.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
 			AddSubRes(typeof(MarinarGranite), "Granite de Marinar", 80.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
-			AddSubRes(typeof(NostalgiumGranite), "Granite de Nostalgium", 100.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
+			AddSubRes(typeof(NostalgiumGranite), "Granite de Nostalgium", 90.0, "Vous n'avez pas les compétences requises pour travailler ce granite.");
 		
 		}
 	}

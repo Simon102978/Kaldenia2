@@ -509,7 +509,7 @@ namespace Server.Items
                 double anatomy = m_Healer.Skills[secondarySkill].Value;
                 double chance = ((healing - 30.0) / 50.0) - (m_Patient.Poison.RealLevel * 0.1) - (m_Slips * 0.02);
 
-                if ((checkSkills = (healing >= 60.0 && anatomy >= 60.0)) && chance > Utility.RandomDouble())
+                if ((checkSkills = (healing >= 50.0 && anatomy >= 50.0)) && chance > Utility.RandomDouble())
                 {
                     if (m_Patient.CurePoison(m_Healer))
                     {

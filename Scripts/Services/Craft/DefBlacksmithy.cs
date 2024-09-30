@@ -741,7 +741,7 @@ namespace Server.Engines.Craft
 			AddSubRes(typeof(BraziumIngot), "Brazium", 80.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
 			AddSubRes(typeof(LuneriumIngot), "Lunerium", 80.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
 			AddSubRes(typeof(MarinarIngot), "Marinar", 80.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
-			AddSubRes(typeof(NostalgiumIngot), "Nostalgium", 100.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
+			AddSubRes(typeof(NostalgiumIngot), "Nostalgium", 90.0, "Vous n'avez pas les compétences requises pour forger ce métal.");
 
 			Resmelt = true;
 			Repair = true;

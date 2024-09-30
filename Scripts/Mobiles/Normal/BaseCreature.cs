@@ -1130,7 +1130,7 @@ namespace Server.Mobiles
 				if (this is IMount && ((IMount)this).Rider != null)
 					return false;
 
-				if (this is PackHorse || this is PackLlama )
+				if (this is PackHorse || this is PackLlama || this is Beetle)
 					return false;
 
 				return true;
