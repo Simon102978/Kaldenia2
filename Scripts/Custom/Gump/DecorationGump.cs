@@ -162,7 +162,7 @@ namespace Server.Gumps
 
 			if (target is Item item)
 			{
-				BaseHouse House = BaseHouse.FindHouseAt(from);
+				BaseHouse House = BaseHouse.FindHouseAt(item);
 
 					if (House != null )
 					{
@@ -224,7 +224,7 @@ namespace Server.Gumps
 
 			if (target is Item item)
 			{
-					BaseHouse House = BaseHouse.FindHouseAt(from);
+					BaseHouse House = BaseHouse.FindHouseAt(item);
 
 					if (House != null )
 					{
@@ -372,7 +372,7 @@ namespace Server.Gumps
 			{
 				if (target is Item item)
 				{
-					BaseHouse House = BaseHouse.FindHouseAt(from);
+					BaseHouse House = BaseHouse.FindHouseAt(item);
 
 					if (House != null )
 					{
