@@ -162,8 +162,19 @@ namespace Server.Gumps
 
 			if (target is Item item)
 			{
+				BaseHouse House = BaseHouse.FindHouseAt(from);
+
+					if (House != null )
+					{
+						if (!House.IsLockedDown(item) && !item.Movable && House.IsSecure(item))
+						{
+							from.SendMessage("L'objet ne peut être déplacé.");
+							from.SendGump(new DecorationGump(from));
+							return;
+						}
+					}
 				
-				if(!item.CanBeMove())
+				else if(!item.CanBeMove())
 				{
 					from.SendMessage("L'objet ne peut être déplacé.");
 					from.SendGump(new DecorationGump(from));
@@ -213,8 +224,19 @@ namespace Server.Gumps
 
 			if (target is Item item)
 			{
+					BaseHouse House = BaseHouse.FindHouseAt(from);
+
+					if (House != null )
+					{
+						if (!House.IsLockedDown(item) && !item.Movable && House.IsSecure(item))
+						{
+							from.SendMessage("L'objet ne peut être déplacé.");
+							from.SendGump(new DecorationGump(from));
+							return;
+						}
+					}
 			
-				if(!item.CanBeMove())
+				else if(!item.CanBeMove())
 				{
 					from.SendMessage("L'objet ne peut être déplacé.");
 					from.SendGump(new DecorationGump(from));
@@ -350,7 +372,18 @@ namespace Server.Gumps
 			{
 				if (target is Item item)
 				{
-					if(!item.CanBeMove())
+					BaseHouse House = BaseHouse.FindHouseAt(from);
+
+					if (House != null )
+					{
+						if (!House.IsLockedDown(item) && !item.Movable && House.IsSecure(item))
+						{
+							from.SendMessage("L'objet ne peut être déplacé.");
+							from.SendGump(new DecorationGump(from));
+							return;
+						}
+					}
+					else if(!item.CanBeMove())
 					{
 						from.SendMessage("L'objet ne peut être déplacé.");
 						from.SendGump(new DecorationGump(from));
