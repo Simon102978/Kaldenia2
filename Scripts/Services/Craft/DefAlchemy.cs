@@ -178,13 +178,13 @@ namespace Server.Engines.Craft
 			AddRecipe(index, (int)AlchemyRecipes.CelesteHealPotion);
 
 
-			index = AddCraft(typeof(LesserManaPotion), "Soin", "Potion de mana mineure", 0.0, 25.0, typeof(GraveDust), "Grave Dust", 1, "Vous n'avez pas suffisament de Grave Dust");
+			index = AddCraft(typeof(LesserManaPotion), "Soin", "Potion de mana mineure", 0.0, 25.0, typeof(WhitePearl), "Perle Blanche", 1, "Vous n'avez pas suffisament de Perle Blanche");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			index = AddCraft(typeof(ManaPotion), "Soin", "Potion de mana", 25.0, 50.0, typeof(GraveDust), "GraveDust", 3, "Vous n'avez pas suffisament de GraveDust");
+			index = AddCraft(typeof(ManaPotion), "Soin", "Potion de mana", 25.0, 50.0, typeof(WhitePearl), "WhitePearl", 3, "Vous n'avez pas suffisament de WhitePearl");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
-			index = AddCraft(typeof(GreaterManaPotion), "Soin", "Potion de mana majeure", 50.0, 75.0, typeof(GraveDust), "Grave Dust", 5, "Vous n'avez pas suffisament de Grave Dust");
+			index = AddCraft(typeof(GreaterManaPotion), "Soin", "Potion de mana majeure", 50.0, 75.0, typeof(WhitePearl), "Perle Blanche", 5, "Vous n'avez pas suffisament de Perle Blanche");
 			AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
 
 			index = AddCraft(typeof(CelestialManaPotion), "Soin", "Pot. mana céleste", 75.0, 100.0, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
@@ -192,9 +192,9 @@ namespace Server.Engines.Craft
 			AddRes(index, typeof(GraveDust), "Grave Dust", 5, "Vous n'avez pas suffisament de Grave Dust");
 			AddRecipe(index, (int)AlchemyRecipes.CelesteManaPotion);
 
-			//	index = AddCraft(typeof(SuperiorManaPotion), "Soin", "Pot. mana supérieure", 75.0, 100.0, typeof(GraveDust), "Grave Dust", 7, "Vous n'avez pas suffisament de Grave Dust");
-			//	AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
-			//AddRecipe(index, (int)AlchemyRecipes.SuperiorManaPotion);
+				index = AddCraft(typeof(SuperiorManaPotion), "Soin", "Pot. mana supérieure", 75.0, 100.0, typeof(WhitePearl), "Grave Dust", 7, "Vous n'avez pas suffisament de Perle Blanche");
+				AddRes(index, typeof(Bottle), "Bouteille Vide", 1, "Vous n'avez pas de Bouteille Vide");
+			AddRecipe(index, (int)AlchemyRecipes.SuperiorManaPotion);
 
 
 			index = AddCraft(typeof(LesserCurePotion), "Antidote", "Potion d'antidote mineure", 0.0, 25.0, typeof(Garlic), "Ail", 1, "Vous n'avez pas suffisament d'Ail");
