@@ -11,10 +11,10 @@ namespace Server.Items
 {
 	public enum GemType
 	{
-		None,
+		Aucune,
 		SaphirEtoile,
 		Emeraude,
-		Sapphire,
+		Saphire,
 		Rubis,
 		Citrine,
 		Amethyste,
@@ -369,7 +369,7 @@ namespace Server.Items
 		{
 			get
 			{
-				if (m_GemType == GemType.None)
+				if (m_GemType == GemType.Aucune)
 					return base.LabelNumber;
 
 				return BaseGemTypeNumber + (int)m_GemType - 1;
@@ -476,7 +476,7 @@ namespace Server.Items
 			m_AosResistances = new AosElementAttributes(this);
 			m_AosSkillBonuses = new AosSkillBonuses(this);
 			m_Resource = CraftResource.Iron;
-			m_GemType = GemType.None;
+			m_GemType = GemType.Aucune;
 
 			Layer = layer;
 
@@ -672,6 +672,8 @@ namespace Server.Items
 		{
 
 			var name = Name ?? String.Empty;
+			var desc = Description ?? String.Empty;
+
 
 			if (String.IsNullOrWhiteSpace(name))
 				name = System.Text.RegularExpressions.Regex.Replace(GetType().Name, "[A-Z]", " $0");
@@ -691,17 +693,21 @@ namespace Server.Items
 			if (m_Quality == ItemQuality.Exceptional)
 				list.Add("Exceptionnelle");
 			else if (m_Quality == ItemQuality.Epic)
-				list.Add("épique");
+				list.Add("Épique");
 			else if (m_Quality == ItemQuality.Legendary)
 				list.Add("Légendaire");
 
-			if (m_Crafter != null)
-				list.Add(1050043, m_Crafter.RawName); // crafted by ~1_NAME~
 
-			var desc = Description ?? String.Empty;
+			
+
+
+			if (m_Crafter != null)
+				list.Add($"Créateur: {m_Crafter.RawName}"); // crafted by ~1_NAME~
+
 
 			if (!String.IsNullOrWhiteSpace(desc))
 				list.Add(desc);
+
 
 
 			//AddCraftedProperties(list);
@@ -709,18 +715,20 @@ namespace Server.Items
 
 			list.Add("Ressource: " + CraftResources.GetDescription(Resource));
 
-			//AddWeightProperty(list);
 
-			list.Add($"Enchantement: {Enchantement}/1");
+		//	if (GemType != GemType.Aucune)
+		//	{
+					list.Add("Pierre précieuse: {0}", GemType.ToString());
+
+					//AddWeightProperty(list);
+
+					list.Add($"Enchantement: {Enchantement}/1");
+
+		}
 
 
-			if (GemType != GemType.None)
-			{
-				list.Add("Pierre précieuse: {0}", GemType.ToString());
 
-
-
-				if (m_ReforgedPrefix != ReforgedPrefix.None || m_ReforgedSuffix != ReforgedSuffix.None)
+		/*		if (m_ReforgedPrefix != ReforgedPrefix.None || m_ReforgedSuffix != ReforgedSuffix.None)
 			{
 				if (m_ReforgedPrefix != ReforgedPrefix.None)
 				{
@@ -741,19 +749,20 @@ namespace Server.Items
 				//base.AddNameProperty(list);
 			}
 		}
-	}
 	
+			*/
 
 
-		private string GetNameString()
-		{
-			string name = Name;
 
-			if (name == null)
-				name = string.Format("#{0}", LabelNumber);
+		/*private string GetNameString()
+				{
+					string name = Name;
 
-			return name;
-		}
+					if (name == null)
+						name = string.Format("#{0}", LabelNumber);
+
+					return name;
+				}*/
 
 		public override void AddCraftedProperties(ObjectPropertyList list)
 		{
@@ -962,10 +971,10 @@ namespace Server.Items
 			switch (m_GemType)
 			{
 				default:
-				case GemType.None: return 0;
+				case GemType.Aucune: return 0;
 				case GemType.SaphirEtoile: return 1023867;
 				case GemType.Emeraude: return 1023887;
-				case GemType.Sapphire: return 1023887;
+				case GemType.Saphire: return 1023887;
 				case GemType.Rubis: return 1023868;
 				case GemType.Citrine: return 1023875;
 				case GemType.Amethyste: return 1023863;
@@ -1229,7 +1238,7 @@ namespace Server.Items
 			if (version < 2)
 			{
 				//m_Resource = CraftResource.Iron;
-				m_GemType = GemType.None;
+				m_GemType = GemType.Aucune;
 			}
 
 			if (version < 15)
@@ -1276,7 +1285,7 @@ namespace Server.Items
 				else if (resourceType == typeof(Emeraude))
 					GemType = GemType.Emeraude;
 				else if (resourceType == typeof(Sapphire))
-					GemType = GemType.Sapphire;
+					GemType = GemType.Saphire;
 				else if (resourceType == typeof(Rubis))
 					GemType = GemType.Rubis;
 				else if (resourceType == typeof(Citrine))

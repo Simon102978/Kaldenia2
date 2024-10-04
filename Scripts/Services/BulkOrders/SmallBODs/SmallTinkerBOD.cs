@@ -235,7 +235,7 @@ namespace Server.Engines.BulkOrders
 
         public override bool CheckType(Item item)
         {
-            if (_GemType != GemType.None && (!(item is BaseJewel) || ((BaseJewel)item).GemType != _GemType))
+            if (_GemType != GemType.Aucune && (!(item is BaseJewel) || ((BaseJewel)item).GemType != _GemType))
             {
                 return false;
             }

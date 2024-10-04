@@ -197,10 +197,10 @@ namespace Server.Items
             switch (GemType)
             {
                 default:
-                case GemType.None: Hue = 0; break;
+                case GemType.Aucune: Hue = 0; break;
                 case GemType.SaphirEtoile: Hue = 1928; break;
                 case GemType.Emeraude: Hue = 1914; break;
-                case GemType.Sapphire: Hue = 1926; break;
+                case GemType.Saphire: Hue = 1926; break;
                 case GemType.Rubis: Hue = 1911; break;
                 case GemType.Citrine: Hue = 1955; break;
                 case GemType.Amethyste: Hue = 1919; break;
@@ -212,7 +212,7 @@ namespace Server.Items
 
         public override void AddNameProperty(ObjectPropertyList list)
         {
-            if (GemType != GemType.None)
+            if (GemType != GemType.Aucune)
             {
                 list.Add(1159018, string.Format("#{0}", GemLocalization())); // ~1_type~ octopus necklace
             }

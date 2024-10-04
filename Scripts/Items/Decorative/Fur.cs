@@ -3,7 +3,8 @@ using Server.Mobiles;
 namespace Server.Items
 {
     [TypeAlias("Server.Items.BouraFur", "Server.Items.KepetchFur")]
-    public class Fur : Item
+	[Flipable(0x11F4, 0x11F5, 0x11F6, 0x11F7, 0x11F8, 0x11F9, 0x11FA, 0x11FB)]
+	public class Fur : Item
     {
         [Constructable]
         public Fur()
@@ -13,10 +14,11 @@ namespace Server.Items
 
         [Constructable]
         public Fur(FurType type, int amount)
-            : base(0x1875)
+            : base(0x11F4)
         {
             Stackable = true;
             Amount = amount;
+			Name = "Fourrure";
 
             switch (type)
             {

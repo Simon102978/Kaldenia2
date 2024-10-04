@@ -6043,9 +6043,9 @@ namespace Server
 							m_StrCap = Config.Get("PlayerCaps.StrCap", 125);
 							m_DexCap = Config.Get("PlayerCaps.DexCap", 125);
 							m_IntCap = Config.Get("PlayerCaps.IntCap", 125);
-							m_StrMaxCap = Config.Get("PlayerCaps.StrMaxCap", 150);
-							m_DexMaxCap = Config.Get("PlayerCaps.DexMaxCap", 150);
-							m_IntMaxCap = Config.Get("PlayerCaps.IntMaxCap", 150);
+							m_StrMaxCap = Config.Get("PlayerCaps.StrMaxCap", 250);
+							m_DexMaxCap = Config.Get("PlayerCaps.DexMaxCap", 250);
+							m_IntMaxCap = Config.Get("PlayerCaps.IntMaxCap", 250);
 						}
 
 						if (version < 21)

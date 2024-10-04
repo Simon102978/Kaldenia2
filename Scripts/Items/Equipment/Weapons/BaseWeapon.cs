@@ -850,9 +850,14 @@ namespace Server.Items
                     from.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
                     return false;
                 }
-            }
+				if (this is BaseRanged && from.Skills.Magery.Base >= 10.0)
+				{
+					from.SendMessage("There is no cow level.");
+					return false;
+				}
+			}
 
-            if (!from.Race.ValidateEquipment(this))
+			if (!from.Race.ValidateEquipment(this))
             {
                 return false;
             }
@@ -1292,8 +1297,9 @@ namespace Server.Items
 
             return attacker.CheckSkill(atkSkill.SkillName, chance);
         }
-
-        public virtual TimeSpan GetDelay(Mobile m)
+	
+	
+	public virtual TimeSpan GetDelay(Mobile m)
         {
             double speed = Speed;
 

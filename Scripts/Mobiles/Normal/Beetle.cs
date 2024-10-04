@@ -138,11 +138,7 @@ namespace Server.Mobiles
 			return PackAnimal.CheckAccess(this, from);
 		}
 
-		public override void OnDoubleClick(Mobile from)
-		{
-			PackAnimal.TryPackOpen(this, from);
-		}
-
+	
 		public override void GetContextMenuEntries(Mobile from, List<ContextMenuEntry> list)
 		{
 			base.GetContextMenuEntries(from, list);

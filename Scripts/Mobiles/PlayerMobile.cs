@@ -1893,9 +1893,9 @@ namespace Server.Mobiles
 				strBase = Str; //Str already includes GetStatOffset/str
 				strOffs = AosAttributes.GetValue(this, AosAttribute.BonusHits);
 
-				if (strOffs > 150 && IsPlayer())
+				if (strOffs > 300 && IsPlayer())
 				{
-					strOffs = 150;
+					strOffs = 300;
 				}
 
 				if (AnimalForm.UnderTransformation(this, typeof(BakeKitsune)) ||
@@ -6406,7 +6406,7 @@ namespace Server.Mobiles
 						if (pet is IMount && ((IMount)pet).Rider != null)
 							continue;
 
-						if ((pet is PackHorse || pet is PackLlama) && (pet.Backpack != null && pet.Backpack.Items.Count > 0))
+						if ((pet is PackHorse || pet is PackLlama || pet is Beetle) && (pet.Backpack != null && pet.Backpack.Items.Count > 0))
 							continue;
 
 						pet.ControlTarget = null;

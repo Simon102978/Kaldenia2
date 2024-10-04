@@ -5,6 +5,7 @@ using Server.Commands;
 using Server.Items;
 using Server.Mobiles;
 using Server.Network;
+using Server.Engines.Quests;
 
 namespace Scripts.Custom
 {
@@ -42,12 +43,13 @@ namespace Scripts.Custom
 				if (m != null && m.Player)
 				{
 					CheckPlayerEquipment(m);
+					CheckPlayerHires(m);
 				}
 			}
 		}
 
 		[Usage("durabilite")]
-		[Description("Affiche la durabilité de l'équipement du joueur.")]
+		[Description("Affiche la durabilité de l'équipement du joueur et de ses BaseHire.")]
 		public static void OnCommand(CommandEventArgs e)
 		{
 			Mobile from = e.Mobile;
@@ -63,24 +65,49 @@ namespace Scripts.Custom
 
 			foreach (Item item in player.Items)
 			{
-				if (item is IWearableDurability || item is BaseWeapon || item is BaseArmor || item is BaseClothing)
-				{
-					double durabilityPercentage = GetDurabilityPercentage(item);
+				CheckItemDurability(player, item, player.Serial);
+			}
+		}
 
-					if (durabilityPercentage <= DurabilityThreshold)
+		private static void CheckPlayerHires(Mobile player)
+		{
+			foreach (Mobile m in World.Mobiles.Values)
+			{
+				if (m is BaseHire hire && hire.ControlMaster == player)
+				{
+					if (!lastNotifiedDurability.ContainsKey(hire.Serial))
 					{
-						if (!lastNotifiedDurability[player.Serial].ContainsKey(item.Serial) ||
-							durabilityPercentage < lastNotifiedDurability[player.Serial][item.Serial])
-						{
-							string message = $"{item.Name} est à {durabilityPercentage:P0} de durabilité!";
-							player.PrivateOverheadMessage(MessageType.Regular, 0x22, false, message);
-							lastNotifiedDurability[player.Serial][item.Serial] = durabilityPercentage;
-						}
+						lastNotifiedDurability[hire.Serial] = new Dictionary<Serial, double>();
 					}
-					else if (lastNotifiedDurability[player.Serial].ContainsKey(item.Serial))
+
+					foreach (Item item in hire.Items)
 					{
-						lastNotifiedDurability[player.Serial].Remove(item.Serial);
+						CheckItemDurability(player, item, hire.Serial, hire.Name);
 					}
+				}
+			}
+		}
+
+		private static void CheckItemDurability(Mobile player, Item item, Serial ownerSerial, string ownerName = null)
+		{
+			if (item is IWearableDurability || item is BaseWeapon || item is BaseArmor || item is BaseClothing)
+			{
+				double durabilityPercentage = GetDurabilityPercentage(item);
+				if (durabilityPercentage <= DurabilityThreshold)
+				{
+					if (!lastNotifiedDurability[ownerSerial].ContainsKey(item.Serial) ||
+						durabilityPercentage < lastNotifiedDurability[ownerSerial][item.Serial])
+					{
+						string message = ownerName == null
+							? $"{item.Name} est à {durabilityPercentage:P0} de durabilité!"
+							: $"L'équipement {item.Name} de {ownerName} est à {durabilityPercentage:P0} de durabilité!";
+						player.PrivateOverheadMessage(MessageType.Regular, 0x22, false, message);
+						lastNotifiedDurability[ownerSerial][item.Serial] = durabilityPercentage;
+					}
+				}
+				else if (lastNotifiedDurability[ownerSerial].ContainsKey(item.Serial))
+				{
+					lastNotifiedDurability[ownerSerial].Remove(item.Serial);
 				}
 			}
 		}
@@ -88,8 +115,21 @@ namespace Scripts.Custom
 		private static void ListEquipmentDurability(Mobile player)
 		{
 			player.SendMessage("Liste de l'équipement et sa durabilité :");
+			ListMobileEquipmentDurability(player, player);
 
-			foreach (Item item in player.Items)
+			foreach (Mobile m in World.Mobiles.Values)
+			{
+				if (m is BaseHire hire && hire.ControlMaster == player)
+				{
+					player.SendMessage($"Équipement de {hire.Name} :");
+					ListMobileEquipmentDurability(player, hire);
+				}
+			}
+		}
+
+		private static void ListMobileEquipmentDurability(Mobile player, Mobile target)
+		{
+			foreach (Item item in target.Items)
 			{
 				if (item is IWearableDurability || item is BaseWeapon || item is BaseArmor || item is BaseClothing)
 				{
@@ -97,7 +137,6 @@ namespace Scripts.Custom
 					int currentHitPoints = GetCurrentHitPoints(item);
 					int maxHitPoints = GetMaxHitPoints(item);
 					string message = $"{item.Name}: {currentHitPoints}/{maxHitPoints} ({durabilityPercentage:P0})";
-
 					if (durabilityPercentage <= DurabilityThreshold)
 					{
 						player.SendMessage(0x22, message); // Rouge pour les items à 20% ou moins
@@ -128,7 +167,6 @@ namespace Scripts.Custom
 			{
 				return (double)clothing.HitPoints / clothing.MaxHitPoints;
 			}
-
 			return 1.0; // Si l'item n'a pas de durabilité, on considère qu'il est à 100%
 		}
 
@@ -150,7 +188,6 @@ namespace Scripts.Custom
 			{
 				return clothing.HitPoints;
 			}
-
 			return 0;
 		}
 
@@ -172,7 +209,6 @@ namespace Scripts.Custom
 			{
 				return clothing.MaxHitPoints;
 			}
-
 			return 0;
 		}
 	}

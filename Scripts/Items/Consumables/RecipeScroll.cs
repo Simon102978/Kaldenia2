@@ -87,44 +87,33 @@ namespace Server.Items
                 list.Add(1049644, r.TextDefinition.ToString()); // [~1_stuff~]
         }
 
-        public override void OnDoubleClick(Mobile from)
-        {
-            if (!from.InRange(GetWorldLocation(), 2))
-            {
-                from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
-                return;
-            }
+		public override void OnDoubleClick(Mobile from)
+		{
+			if (!from.InRange(GetWorldLocation(), 2))
+			{
+				from.LocalOverheadMessage(MessageType.Regular, 0x3B2, 1019045); // I can't reach that.
+				return;
+			}
 
-            Recipe r = Recipe;
+			Recipe r = Recipe;
 
-            if (r != null && from is PlayerMobile)
-            {
-                PlayerMobile pm = from as PlayerMobile;
+			if (r != null && from is PlayerMobile pm)
+			{
+				if (!pm.HasRecipe(r))
+				{
+					pm.SendMessage("Vous venez d'apprendre la recette : " + r.TextDefinition.ToString());
+					pm.AcquireRecipe(r);
+					Delete();
+				}
+				else
+				{
+					pm.SendLocalizedMessage(1073427); // You already know this recipe.
+				}
+			}
+		}
 
-                if (!pm.HasRecipe(r))
-                {
-                    bool allRequiredSkills = true;
-                    double chance = r.CraftItem.GetSuccessChance(from, null, r.CraftSystem, false, ref allRequiredSkills);
 
-                    if (allRequiredSkills && chance >= 0.0)
-                    {
-                        pm.SendMessage("Vous venez d'apprendre la recette : " +  r.TextDefinition.ToString()); // You have learned a new recipe: ~1_RECIPE~
-                        pm.AcquireRecipe(r);
-                        Delete();
-                    }
-                    else
-                    {
-                        pm.SendLocalizedMessage(1044153); // You don't have the required skills to attempt this item.
-                    }
-                }
-                else
-                {
-                    pm.SendLocalizedMessage(1073427); // You already know this recipe.
-                }
-            }
-        }
-
-        public override void Serialize(GenericWriter writer)
+		public override void Serialize(GenericWriter writer)
         {
             base.Serialize(writer);
 

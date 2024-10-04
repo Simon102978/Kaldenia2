@@ -102,7 +102,7 @@ namespace Server.Engines.BulkOrders
 
         public override bool CheckType(SmallBOD small, Type type)
         {
-            if (_GemType != GemType.None && (!(small is SmallTinkerBOD) || ((SmallTinkerBOD)small).GemType != _GemType))
+            if (_GemType != GemType.Aucune && (!(small is SmallTinkerBOD) || ((SmallTinkerBOD)small).GemType != _GemType))
             {
                 return false;
             }

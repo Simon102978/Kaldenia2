@@ -267,7 +267,32 @@ namespace Server
 	typeof(GlassblowingBookRecipeScroll),
 	typeof(EpauletteDoreeRecipeScroll),
 	typeof(Pantalon3RecipeScroll),
-	typeof(GreaterManaMaxBuffFoodRecipeScroll)
+	typeof(GreaterManaMaxBuffFoodRecipeScroll),
+
+				typeof(KeprishPotionScroll),
+	typeof(GemMiningBookRecipeScroll),
+typeof(TerMurStyleCandelabraRecipeScroll),
+typeof(AutoResPotionRecipeScroll),
+typeof(CoffreMetalDoreRecipeScroll),
+typeof(FourreauDoreeRecipeScroll),
+typeof(Jupe8RecipeScroll),
+typeof(CapePaonRecipeScroll),
+typeof(PeauOursRecipeScroll),
+typeof(PeauOursEstRecipeScroll),
+typeof(DiademeFeuilleOrRecipeScroll),
+typeof(CoffreMetalVisqueuxRecipeScroll),
+typeof(SuperiorRefreshPotionRecipeScroll),
+typeof(GreaterStamMaxBuffFoodRecipeScroll),
+typeof(FoliereRecipeScroll),
+typeof(ManteauDoreRecipeScroll),
+typeof(SuperiorStrengthPotionRecipeScroll),
+typeof(ChickenCoopRecipeScroll),
+typeof(GreaterHitsMaxBuffFoodRecipeScroll),
+typeof(CoffreFortRecipeScroll),
+typeof(SuperiorHealPotionRecipeScroll),
+typeof(LargeForgeEastRecipeScroll),
+typeof(LargeForgeSouthRecipeScroll),
+
 };
 
 		public static Type[] CustomRecipeScrollTypes2 => m_CustomRecipeScroll2;
