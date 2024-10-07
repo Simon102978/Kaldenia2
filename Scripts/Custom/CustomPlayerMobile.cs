@@ -1650,37 +1650,46 @@ namespace Server.Mobiles
 
 		#region Classe
 		public void CheckLevel()
-        {
-            if (Niveau + 1 > 30)
-            {
-                return;
-            }
+		{
+			if (Niveau >= 40)
+			{
+				return; 
+			}
 
 			int NewLvl = Niveau;
- 	
-			while ( FETotal>= XPLevel.GetLevel(NewLvl).FeRequis && NewLvl <= 30)
-            {
-               NewLvl++;              
-            }
 
-	 		if (NewLvl - 1 > Niveau)
-            {
-                 SendMessage("Félicitation ! Vous venez de gagner un niveau !");
-                 Niveau = NewLvl - 1;
-	
-                 if (Niveau == 10 || Niveau == 20)
-                 {
-                    SendMessage("Vous venez de gagner un point d'évolution !");
-                 }
-            }         
-        }
+			while (FETotal >= XPLevel.GetLevel(NewLvl).FeRequis && NewLvl < 40)
+			{
+				NewLvl++;
+			}
+
+			if (NewLvl > Niveau)
+			{
+				SendMessage("Félicitation ! Vous venez de gagner un niveau !");
+				Niveau = NewLvl;
+
+				if (Niveau == 10 || Niveau == 20)
+				{
+					SendMessage("Vous venez de gagner un point d'évolution !");
+				}
+
+				if (Niveau == 40)
+				{
+					SendMessage("Vous avez atteint le niveau maximum !");
+				}
+			}
+		}
+
 
 		public int CalculePtsEvolution()
 		{
 			int pts = 0;
 
-
-			if (Niveau >= 30)
+			if (Niveau >= 40)
+			{
+				pts = 3;
+			}
+			else if (Niveau >= 30)
 			{
 				pts = 3;
 			}
