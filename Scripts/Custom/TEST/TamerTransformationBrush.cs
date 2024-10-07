@@ -31,7 +31,7 @@ namespace Server.Items
 			{ "G2", new int[] { 242, 251, 61, 244 } },
 			{ "G3", new int[] { 273, 786, 62, 715 } },
 			{ "G4", new int[] { 720, 788, 104, 787 } },
-			{ "G5", new int[] { 730, 293, 265, 832 } },
+			{ "G5", new int[] { 730, 293, 265, 832, 715 } },
 			{ "TG1", new int[] { 832, 12, 173, 798 } },
 			{ "TG2", new int[] { 244, 59, 735, 197 } },
 			{ "TG3", new int[] { 104, 103, 796, 198 } },
@@ -40,7 +40,7 @@ namespace Server.Items
 
 		private static HashSet<int> NonTransformableBodyValues = new HashSet<int>
 		{
-			203, 254, 269, 715, 734
+			203, 254, 269, 734
 		};
 
 		[Constructable]
@@ -165,7 +165,7 @@ namespace Server.Items
 		{733, "Lézard ailé"}, {734, "Basilic"}, {735, "Araignée velue gigantesque"}, {736, "Araignée loup"},
 		{737, "Tarentule dodue"}, {738, "Mythe"}, {739, "Chien du désert"}, {786, "Lion"}, {787, "Fourmillon"},
 		{788, "Husky"}, {796, "Giga bleu"}, {798, "Wyrm"}, {826, "Dragon légendaire"}, {831, "Perroquet"},
-		{832, "Phoenix"}
+		{832, "Phoenix"}, {715, "Boura"}
 	};
 		private Mobile m_From;
 		private BaseCreature m_Creature;
@@ -337,6 +337,7 @@ namespace Server.Items
 			m_Table[798] = 0x20D6;  // Humain
 			m_Table[826] = 0x42A6;  // Créature spéciale
 			m_Table[832] = 0x211A;  // Aigle
+			m_Table[715] = 0x4289;  // Boura
 		}
 
 		public static int Lookup(int bodyValue)

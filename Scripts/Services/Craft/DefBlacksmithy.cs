@@ -551,11 +551,11 @@ namespace Server.Engines.Craft
 
 			#region Hallebarde
 			index = AddCraft(typeof(Pitchfork), "Hallebardes", "Fourche", 10.0, 35.0, typeof(IronIngot), "Iron ingot", 10, "You do not have enough iron ingots to make that.");
-			AddCraft(typeof(Bardiche), "Hallebardes", "Bardiche", 40.0, 60.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(Hellebarde), "Hallebardes", "Hallebarde simple", 50.0, 70.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(BladedStaff), "Hallebardes", "Bardiche Simple", 55.0, 75.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(DoubleBladedStaff), "Hallebardes", "Bardiche double lames", 80.0, 100.0, typeof(IronIngot), "Fer", 16, "Vous n'avez pas suffisament de lingot de Fer");
-			AddCraft(typeof(Halberd), "Hallebardes", "Hallebarde", 85.0, 105.0, typeof(IronIngot), "Fer", 20, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Bardiche), "Hallebardes", "Bardiche", 30.0, 60.0, typeof(IronIngot), "Fer", 18, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Hellebarde), "Hallebardes", "Hallebarde simple", 40.0, 70.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(BladedStaff), "Hallebardes", "Bardiche Simple", 45.0, 75.0, typeof(IronIngot), "Fer", 12, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(DoubleBladedStaff), "Hallebardes", "Bardiche double lames", 50.0, 120.0, typeof(IronIngot), "Fer", 16, "Vous n'avez pas suffisament de lingot de Fer");
+			AddCraft(typeof(Halberd), "Hallebardes", "Hallebarde", 50.0, 120.0, typeof(IronIngot), "Fer", 20, "Vous n'avez pas suffisament de lingot de Fer");
 			#endregion
 
 			#region "Lancer"

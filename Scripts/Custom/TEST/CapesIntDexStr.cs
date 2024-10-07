@@ -2,6 +2,7 @@ using System;
 using Server;
 using Server.Items;
 
+[Flipable(0x1515, 0xA491, 0xA36C, 0xA36D, 0xA36A, 0xA36B)]
 public class CapeOfKnowledge : BaseArmor
 {
 	public override int BasePhysicalResistance => 0;
@@ -51,7 +52,7 @@ public class CapeOfKnowledge : BaseArmor
 		int version = reader.ReadInt();
 	}
 }
-
+[Flipable(0x1515, 0xA491, 0xA36C, 0xA36D, 0xA36A, 0xA36B)]
 public class CapeOfCourage : BaseArmor
 {
 	public override int BasePhysicalResistance => 2;
@@ -98,7 +99,7 @@ public class CapeOfCourage : BaseArmor
 		int version = reader.ReadInt();
 	}
 }
-
+[Flipable(0x1515, 0xA491, 0xA36C, 0xA36D, 0xA36A, 0xA36B)]
 public class CapeOfDetermination : BaseArmor
 {
 	public override int BasePhysicalResistance => 2;

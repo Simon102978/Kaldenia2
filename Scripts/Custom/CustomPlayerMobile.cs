@@ -297,8 +297,8 @@ namespace Server.Mobiles
             { 
                 int newValue = value;
 
-                if (newValue > 30 )          
-                     newValue = 30;        
+                if (newValue > 40 )          
+                     newValue = 40;        
 
 				if (IsPlayer())
 				{

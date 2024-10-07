@@ -5,7 +5,7 @@ using Server.Mobiles;
 
 namespace Server.Mobiles
 {
-	[CorpseName("le corps d'un {0}")]
+	[CorpseName("le corps d'un lezard de pierre")]
 	public class wolfspider : BaseCreature
 	{
 		[Constructable]

@@ -507,6 +507,34 @@ namespace Server.Engines.Craft
 			index = AddCraft(typeof(MenotteDoree), "Bijoux Divers", "Menotte dorée", 40.0, 90.0, typeof(IronIngot), "lingots", 5, "Vous n'avez pas assez de lingots.");
 			AddRecipe(index, (int)TinkerRecipes.MenotteDoree);
 
+			index = AddCraft(typeof(Couronne4), "Couronnes", "Couronne serti d'ambre", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cette Couronne.");
+			AddRes(index, typeof(Ambre), "Ambre", 1, "Vous n'avez pas assez d'ambre pour fabriquer cette Couronne.");
+
+			index = AddCraft(typeof(Couronne4), "Couronnes", "Couronne serti de citrine", 15.0, 35.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cette Couronne.");
+			AddRes(index, typeof(Citrine), "Citrine", 1, "Vous n'avez pas assez de citrine pour fabriquer cette Couronne.");
+
+			index = AddCraft(typeof(Couronne4), "Couronnes", "Couronne serti d'améthyste", 20.0, 40.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cette Couronne.");
+			AddRes(index, typeof(Amethyste), "Améthyste", 1, "Vous n'avez pas assez d'améthyste pour fabriquer cette Couronne.");
+
+			index = AddCraft(typeof(Couronne4), "Couronnes", "Couronne serti de tourmaline", 20.0, 40.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cette Couronne.");
+			AddRes(index, typeof(Tourmaline), "Tourmaline", 1, "Vous n'avez pas assez de tourmaline pour fabriquer cette Couronne.");
+
+			index = AddCraft(typeof(Couronne4), "Couronnes", "Couronne serti d'émeraude", 25.0, 45.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cette Couronne.");
+			AddRes(index, typeof(Emeraude), "Émeraude", 1, "Vous n'avez pas assez d'émeraude pour fabriquer cette Couronne.");
+
+			index = AddCraft(typeof(Couronne4), "Couronnes", "Couronne serti de saphir", 25.0, 45.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cette Couronne.");
+			AddRes(index, typeof(Sapphire), "Saphir", 1, "Vous n'avez pas assez de saphir pour fabriquer cette Couronne.");
+
+			index = AddCraft(typeof(Couronne4), "Couronnes", "Couronne serti de rubis", 30.0, 50.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cette Couronne.");
+			AddRes(index, typeof(Rubis), "Rubis", 1, "Vous n'avez pas assez de rubis pour fabriquer cette Couronne.");
+
+			index = AddCraft(typeof(Couronne4), "Couronnes", "Couronne serti de saphir étoilé", 35.0, 55.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cette Couronne.");
+			AddRes(index, typeof(SaphirEtoile), "Saphir étoilé", 1, "Vous n'avez pas assez de saphir étoilé pour fabriquer cette Couronne.");
+
+			index = AddCraft(typeof(Couronne4), "Couronnes", "Couronne serti de diamant", 40.0, 60.0, typeof(IronIngot), "Lingot de fer", 4, "Vous n'avez pas assez de lingots pour fabriquer cette Couronne.");
+			AddRes(index, typeof(Diamant), "Diamant", 1, "Vous n'avez pas assez de diamant pour fabriquer cette Couronne.");
+
+
 
 			#endregion
 

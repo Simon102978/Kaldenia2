@@ -19,7 +19,7 @@ namespace Server.Items.Crops
 		{
 			Stackable = true;
 			Weight = .1;
-			Hue = 2393;
+			Hue = 1980;
 			Movable = true;
 			Amount = amount;
 			Name = "Black Rose Seed";
@@ -79,7 +79,7 @@ namespace Server.Items.Crops
 		{
 			Movable = false;
 			Name = "Plant de rose noire";
-			Hue = 1109;
+			Hue = 1980;
 			Sower = sower;
 			Init(this, 1, 0x234C, 0x234D, false);
 		}

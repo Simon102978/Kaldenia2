@@ -45,6 +45,7 @@ namespace Server.Items.Crops
 			Movable = false;
 			Name = "White Rose Seedling";
 			Sower = sower;
+			Hue = 2093;
 			Init(this, typeof(WhiteRoseCrop));
 		}
 		
@@ -79,7 +80,7 @@ namespace Server.Items.Crops
 		{
 			Movable = false;
 			Name = "Plant de rose blanche";
-			Hue = 1972;
+			Hue = 2093;
 			Sower = sower;
 			Init(this, 1, 0x234C, 0x234D, false);
 		}

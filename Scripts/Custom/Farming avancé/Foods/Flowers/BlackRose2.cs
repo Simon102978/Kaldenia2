@@ -9,7 +9,7 @@ namespace Server.Items
 		public BlackRose2( int amount ) : base( 0x234B )
 		{
 			Name = "Black Rose";
-			Hue = 1109;
+			Hue = 1980;
 			Stackable = true;
 		}
 

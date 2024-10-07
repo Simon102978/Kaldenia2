@@ -18,7 +18,7 @@ namespace Server.Items
 		{
 		}
 
-		public override int StrOffset => 100;
+		public override int StrOffset => 200;
 		public override TimeSpan Duration => TimeSpan.FromMinutes(5.0);
 
 		private double _originalMagicResist;
@@ -50,11 +50,11 @@ namespace Server.Items
 		{
 			ResistanceMod[] mods = new ResistanceMod[]
 			{
-				new ResistanceMod(ResistanceType.Physical, -80),
-				new ResistanceMod(ResistanceType.Fire, -50),
-				new ResistanceMod(ResistanceType.Cold, -50),
-				new ResistanceMod(ResistanceType.Poison, -50),
-				new ResistanceMod(ResistanceType.Energy, -50)
+				new ResistanceMod(ResistanceType.Physical, -40),
+				new ResistanceMod(ResistanceType.Fire, -35),
+				new ResistanceMod(ResistanceType.Cold, -35),
+				new ResistanceMod(ResistanceType.Poison, -35),
+				new ResistanceMod(ResistanceType.Energy, -35)
 			};
 
 			foreach (var mod in mods)

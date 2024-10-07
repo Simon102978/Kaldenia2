@@ -35,7 +35,7 @@ namespace Server.Items
 		{
 			var toHeal = Utility.RandomMinMax(Scale(from, MinManaHeal), Scale(from, MaxManaHeal));
 			from.Mana += toHeal;
-			from.SendLocalizedMessage(1010193, toHeal.ToString()); // You have had ~1_MANA_RESTORED~ mana restored.
+			from.SendMessage($"Vous avez régénérez {0} mana.", toHeal.ToString()); // You have had ~1_MANA_RESTORED~ mana restored.
 		}
 
 		public override void Drink(Mobile from)

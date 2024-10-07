@@ -65,11 +65,11 @@ namespace Server.Spells.Chivalry
 				int chance = 0;
 
 				if (Caster.Int < 50)
-					chance = 25;
-				else if (Caster.Int < 75)
 					chance = 50;
-				else if (Caster.Int < 100)
+				else if (Caster.Int < 75)
 					chance = 75;
+				else if (Caster.Int < 100)
+					chance = 100;
 
 				else
                     chance = 100;

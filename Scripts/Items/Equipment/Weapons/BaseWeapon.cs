@@ -850,7 +850,8 @@ namespace Server.Items
                     from.SendLocalizedMessage(1155496); // This item can only be used by VvV participants!
                     return false;
                 }
-				if (this is BaseRanged && from.Skills.Magery.Base >= 10.0)
+
+				if (from is CustomPlayerMobile && this is BaseRanged && from.Skills.Magery.Base >= 50.0)
 				{
 					from.SendMessage("There is no cow level.");
 					return false;
@@ -892,6 +893,7 @@ namespace Server.Items
                 return base.CanEquip(from);
             }
         }
+	
 
 		public override void OnDoubleClick(Mobile from)
 		{

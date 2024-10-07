@@ -10,6 +10,9 @@ namespace Server.Items
 			: base(itemID, Layer.Helm)
 		{
 		}
+		public CraftSystem RepairSystem => DefTinkering.CraftSystem;
+		public override int BaseGemTypeNumber => 1044221;// star sapphire bracelet
+
 
 		public BaseCouronne(Serial serial)
 			: base(serial)
