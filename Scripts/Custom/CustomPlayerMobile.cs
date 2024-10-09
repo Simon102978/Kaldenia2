@@ -300,16 +300,16 @@ namespace Server.Mobiles
                 if (newValue > 40 )          
                      newValue = 40;        
 
-				if (IsPlayer())
+				if (m_Niveau != newValue)
 				{
-					if (m_Niveau != newValue)
-					{
-						m_Niveau = newValue; 
-						AdjustLvl();
-					}   
-				}	        
+				   m_Niveau = newValue; 
 
-           
+					if (IsPlayer())
+					{
+						AdjustLvl();
+					}	    
+						
+				}        
             } 
         }
 
@@ -1651,23 +1651,23 @@ namespace Server.Mobiles
 		#region Classe
 		public void CheckLevel()
 		{
-			if (Niveau >= 40)
+			if (Niveau + 1 > 40)
 			{
 				return; 
 			}
 
 			int NewLvl = Niveau;
 
-			while (FETotal >= XPLevel.GetLevel(NewLvl).FeRequis && NewLvl < 40)
+			while (FETotal >= XPLevel.GetLevel(NewLvl).FeRequis && NewLvl <= 40)
 			{
 				NewLvl++;
 			}
 
-			if (NewLvl > Niveau)
+			if (NewLvl - 1 > Niveau)
 			{
 				SendMessage("Félicitation ! Vous venez de gagner un niveau !");
-				Niveau = NewLvl;
-
+				Niveau = NewLvl - 1;
+  
 				if (Niveau == 10 || Niveau == 20)
 				{
 					SendMessage("Vous venez de gagner un point d'évolution !");

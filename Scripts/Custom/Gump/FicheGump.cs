@@ -78,7 +78,7 @@ namespace Server.Gumps
 
 
 			AddHtmlTexte(x + 10, y + 281, 100, "Niveau:");
-			AddHtmlTexte(x + 125, y +281, 150, XPLevel.CalculateLevel(from.FETotal).ToString());
+			AddHtmlTexte(x + 125, y +281, 150, from.Niveau.ToString());
 
 			AddHtmlTexte(x + 10, y + 301, 150, "Armure: ");
 			AddHtmlTexte(x + 125, y + 301, 100, m_From.Armure.ToString());

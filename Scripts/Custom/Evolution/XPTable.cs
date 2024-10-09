@@ -70,22 +70,6 @@ namespace Server
 				m_MaxSkill = maxSkill;
 		}
 
-		public static int CalculateLevel(int feTotal)
-		{
-			int level = 0;
-			foreach (var entry in XpTable)
-			{
-				if (feTotal >= entry.Value.FeRequis)
-				{
-					level = entry.Key;
-				}
-				else
-				{
-					break;
-				}
-			}
-			return level;
-		}
 
 		public static XPLevel GetLevel(int niveau)
 		{
